@@ -60,6 +60,8 @@ class TestAkomaNtosoParser(unittest.TestCase):
 
     def test_get_formula(self):
         """Test extraction of formula text within the preamble."""
+        self.parser.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
+
         formula_data = self.parser.get_formula()
         self.assertIn("THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION", formula_data)
 
@@ -107,7 +109,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
     def test_get_chapters(self):
         """Test retrieval and content of chapter headings."""
         self.parser.get_body(body_xpath='.//akn:body')
-        self.parser.get_chapters(chapter_xpath='.//akn:chapter', num_xpath='.//akn:num', heading_xpath='.//akn:heading')
+        self.parser.get_chapters()
 
         expected_chapters = [
             {'eId': 'chp_I', 'chapter_num': 'CHAPTER I', 'chapter_heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS'},

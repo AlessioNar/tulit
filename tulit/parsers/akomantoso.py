@@ -231,7 +231,7 @@ class AkomaNtosoParser(XMLParser):
             Concatenated text from all paragraphs within the formula element.
             Returns None if no formula is found.
         """
-        formula = self.root.find('.//akn:preamble/akn:formula', namespaces=self.namespaces)
+        formula = self.preamble.find('.//akn:formula', namespaces=self.namespaces)
         if formula is None:
             return None
 
@@ -305,18 +305,9 @@ class AkomaNtosoParser(XMLParser):
             # Fallback: try without namespace
             self.act = self.root.find('.//act')
         
-    def get_chapters(self, chapter_xpath, num_xpath, heading_xpath) -> None:        
+    def get_chapters(self) -> None:
         """
         Extracts chapter information from the document.
-        
-        Parameters
-        ----------
-        chapter_xpath : str
-            XPath expression to locate the chapter elements.
-        num_xpath : str
-            XPath expression to locate the chapter number within each chapter element.
-        heading_xpath : str
-            XPath expression to locate the chapter heading within each chapter element.
 
         Returns
         -------
@@ -325,19 +316,16 @@ class AkomaNtosoParser(XMLParser):
             - 'eId': Chapter identifier
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text
-        """        
-        # Find all <chapter> elements in the body
-        for chapter in self.body.findall(chapter_xpath, namespaces=self.namespaces):
-            eId = chapter.get('eId')
-            chapter_num = chapter.find(num_xpath, namespaces=self.namespaces)
-            chapter_heading = chapter.find(heading_xpath, namespaces=self.namespaces)
-            
-            # Add chapter data to chapters list
-            self.chapters.append({
-                'eId': eId,
-                'chapter_num': chapter_num.text if chapter_num is not None else None,
-                'chapter_heading': ''.join(chapter_heading.itertext()).strip() if chapter_heading is not None else None
-            })
+        """
+        def extract_eId(chapter, index):
+            return chapter.get('eId')
+
+        return super().get_chapters(
+            chapter_xpath='.//akn:chapter',
+            num_xpath='.//akn:num',
+            heading_xpath='.//akn:heading',
+            extract_eId=extract_eId
+        )
 
     
     def get_articles(self) -> None:

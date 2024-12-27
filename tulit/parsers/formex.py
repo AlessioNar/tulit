@@ -153,7 +153,6 @@ class Formex4Parser(XMLParser):
                 if len(chapter.findall('.//HT')) > 1:      
                     chapter_heading = chapter.findall('.//HT')[1]
                     self.chapters.append({
-            
                         "eId": index,
                         "chapter_num" : "".join(chapter_num.itertext()).strip(),
                         "chapter_heading": "".join(chapter_heading.itertext()).strip()

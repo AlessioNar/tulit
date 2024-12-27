@@ -351,6 +351,42 @@ class XMLParser(Parser):
             # Fallback: try without namespace
             self.body = self.root.find(body_xpath)
 
+    def get_chapters(self, chapter_xpath: str, num_xpath: str, heading_xpath: str, extract_eId=None) -> None:
+        """
+        Extracts chapter information from the document.
+
+        Parameters
+        ----------
+        chapter_xpath : str
+            XPath expression to locate the chapter elements.
+        num_xpath : str
+            XPath expression to locate the chapter number within each chapter element.
+        heading_xpath : str
+            XPath expression to locate the chapter heading within each chapter element.
+        extract_eId : function, optional
+            Function to handle the extraction or generation of eId.
+
+        Returns
+        -------
+        list
+            List of dictionaries containing chapter data with keys:
+            - 'eId': Chapter identifier
+            - 'chapter_num': Chapter number
+            - 'chapter_heading': Chapter heading text
+        """
+        self.chapters = []
+        chapters = self.body.findall(chapter_xpath, namespaces=self.namespaces)
+        for index, chapter in enumerate(chapters):
+            eId = extract_eId(chapter, index) if extract_eId else index
+            chapter_num = chapter.find(num_xpath, namespaces=self.namespaces)
+            chapter_heading = chapter.find(heading_xpath, namespaces=self.namespaces)
+            
+            self.chapters.append({
+                'eId': eId,
+                'chapter_num': chapter_num.text if chapter_num is not None else None,
+                'chapter_heading': ''.join(chapter_heading.itertext()).strip() if chapter_heading is not None else None
+            })
+    
     @abstractmethod
     def parse(self):
         """

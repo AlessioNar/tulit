@@ -291,18 +291,13 @@ class AkomaNtosoParser(XMLParser):
                     print("Root element loaded successfully.")
                 except Exception as e:
                     print(f"Error in get_root: {e}")
-
+                    
                 try:
-                    self.get_metadata()
-                    print("Metadata parsed successfully.")
-                except Exception as e:
-                    print(f"Error in get_meta: {e}")
-
-                try:
-                    self.get_preface(preface_xpath='.//akn:preface', paragraph_xpath='akn:p')
+                    self.get_preface()
                     print(f"Preface parsed successfully.")
                 except Exception as e:
                     print(f"Error in get_preface: {e}")
+                
                 try:
                     self.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath=".//akn:authorialNote")
                     print(f"Preamble parsed successfully.")
@@ -314,23 +309,26 @@ class AkomaNtosoParser(XMLParser):
                 except Exception as e:
                     print(f"Error in get_citations: {e}")
                 try:
+                    self.get_recitals()
+                    print(f"Recitals parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_recitals: {e}")
+                
+                try:
                     self.get_body()
                     print("Body parsed successfully.")
                 except Exception as e:
                     print(f"Error in get_body: {e}")
-
                 try:
                     self.get_chapters(chapter_xpath='.//akn:chapter', num_xpath='.//akn:num', heading_xpath='.//akn:heading')
                     print(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
                 except Exception as e:
                     print(f"Error in get_chapters: {e}")
-
                 try:
                     self.get_articles()
                     print(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
                 except Exception as e:
                     print(f"Error in get_articles: {e}")
-
                 try:
                     self.get_conclusions()                    
                     print(f"Conclusions parsed successfully. ")

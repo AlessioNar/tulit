@@ -93,6 +93,9 @@ class Formex4Parser(XMLParser):
             extract_eId=extract_eId
         )
     
+    def get_body(self):
+        return super().get_body('.//ENACTING.TERMS')
+    
     def get_chapters(self) -> None:
         """
         Extracts chapter information from the document.
@@ -160,6 +163,6 @@ class Formex4Parser(XMLParser):
         self.get_metadata()
         self.get_preface(preface_xpath='.//TITLE', paragraph_xpath='.//P')
         self.get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
-        self.get_body(body_xpath='.//ENACTING.TERMS')
+        self.get_body()
         self.get_chapters()
         self.get_articles()

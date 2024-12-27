@@ -23,8 +23,6 @@ class AkomaNtosoParser(XMLParser):
         super().__init__()
         
         self.act = None
-        self.debug_info = {}
-
         
         # Define the namespace mapping
         self.namespaces = {
@@ -84,7 +82,6 @@ class AkomaNtosoParser(XMLParser):
         """
         
         def extract_intro(recitals_section):
-            # Intro - different implementation
             recitals_intro = recitals_section.find('.//akn:intro', namespaces=self.namespaces)
             intro_eId = recitals_intro.get('eId')
             intro_text = ''.join(p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text)
@@ -117,6 +114,9 @@ class AkomaNtosoParser(XMLParser):
         if self.act is None:
             # Fallback: try without namespace
             self.act = self.root.find('.//act')
+    
+    def get_body(self):
+        return super().get_body('.//akn:body')
         
     def get_chapters(self) -> None:
         """
@@ -273,15 +273,12 @@ class AkomaNtosoParser(XMLParser):
 
         This method sequentially calls various parsing functions to extract metadata,
         preface, preamble, body, chapters, articles, and conclusions from the XML file.
-        It logs errors encountered during parsing and provides debug information about
-        the structure of the document.
 
         Args:
             file (str): The path to the Akoma Ntoso XML file.
 
 
         """
-        debug_info = {}
         try:
             self.load_schema('akomantoso30.xsd')
             self.validate(file, format='Akoma Ntoso')
@@ -294,14 +291,12 @@ class AkomaNtosoParser(XMLParser):
 
                 try:
                     self.get_metadata()
-                    debug_info['meta'] = self.metadata if hasattr(self, 'metadata') else "Meta not parsed."
                     print("Metadata parsed successfully.")
                 except Exception as e:
                     print(f"Error in get_meta: {e}")
 
                 try:
                     self.get_preface(preface_xpath='.//akn:preface', paragraph_xpath='akn:p')
-                    debug_info['preface'] = self.preface if hasattr(self, 'preface') else 0
                     print(f"Preface parsed successfully.")
                 except Exception as e:
                     print(f"Error in get_preface: {e}")
@@ -316,31 +311,28 @@ class AkomaNtosoParser(XMLParser):
                 except Exception as e:
                     print(f"Error in get_citations: {e}")
                 try:
-                    self.get_body(body_xpath='.//akn:body')
+                    self.get_body()
                     print("Body parsed successfully.")
                 except Exception as e:
                     print(f"Error in get_body: {e}")
 
                 try:
                     self.get_chapters(chapter_xpath='.//akn:chapter', num_xpath='.//akn:num', heading_xpath='.//akn:heading')
-                    debug_info['chapters'] = len(self.chapters) if hasattr(self, 'chapters') else 0
-                    print(f"Chapters parsed successfully. Number of chapters: {debug_info['chapters']}")
+                    print(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
                 except Exception as e:
                     print(f"Error in get_chapters: {e}")
 
                 try:
                     self.get_articles()
-                    debug_info['articles'] = len(self.articles) if hasattr(self, 'articles') else 0
-                    print(f"Articles parsed successfully. Number of articles: {debug_info['articles']}")
+                    print(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
                 except Exception as e:
                     print(f"Error in get_articles: {e}")
 
                 try:
-                    self.get_conclusions()
-                    debug_info['conclusions'] = self.conclusions if hasattr(self, 'conclusions') else "Conclusions not parsed."
+                    self.get_conclusions()                    
                     print(f"Conclusions parsed successfully. ")
                 except Exception as e:
                     print(f"Error in get_conclusions: {e}")
                 
         except Exception as e:
-            print(f'Invalid Akoma Ntoso file: parsing may not work or work only partially: {e}')
+            print(f'Invalid {self.format} file: parsing may not work or work only partially: {e}')

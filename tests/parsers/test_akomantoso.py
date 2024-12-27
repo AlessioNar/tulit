@@ -84,12 +84,12 @@ class TestAkomaNtosoParser(unittest.TestCase):
 
     def test_get_body(self):
         """Test retrieval of the body element."""
-        self.parser.get_body(body_xpath='.//akn:body')
+        self.parser.get_body()
         self.assertIsInstance(self.parser.body, etree._Element, "Body element should be an etree._Element")
 
     def test_get_chapters(self):
         """Test retrieval and content of chapter headings."""
-        self.parser.get_body(body_xpath='.//akn:body')
+        self.parser.get_body()
         self.parser.get_chapters()
 
         expected_chapters = [
@@ -105,7 +105,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
 
     def test_get_articles(self):
         """Test retrieval of articles within the body."""
-        self.parser.get_body(body_xpath='.//akn:body')
+        self.parser.get_body()
         self.parser.get_articles()
         
         self.assertEqual(len(self.parser.articles), 31, "Incorrect number of articles extracted")

@@ -330,7 +330,6 @@ class XMLParser(Parser):
             
         self.recitals = recitals
     
-    ### Enacting terms block
     def get_body(self, body_xpath) -> None:
         """
         Extracts the body element from the document.

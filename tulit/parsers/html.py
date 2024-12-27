@@ -32,7 +32,7 @@ class HTMLParser(Parser):
         except Exception as e:
             print(f"Error loading HTML: {e}")
 
-    def get_meta(self):
+    def get_metadata(self):
         """
         Extracts metadata from the HTML.
         

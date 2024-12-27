@@ -33,131 +33,7 @@ class AkomaNtosoParser(XMLParser):
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
 
         }
-        self.metadata = {}
-    
-        self.meta_identification = None    
-        self.meta_proprietary = None
-        self.meta_references = None
-
-
-    ### Metadata block
-    def get_metadata(self):
-        """
-        Extracts metadata from the document.
-        """
-        metadata = {
-            "meta_identification" : self.get_meta_identification(),
-            "meta_proprietary" : self.get_meta_proprietary(),
-            "meta_references" : self.get_meta_references()
-        }
-
-        self.metadata = metadata
-                
-    def get_meta_identification(self):
-        """
-        Extracts identification metadata from the XML document.
-
-        Retrieves data from the <identification> element within <meta>,
-        including FRBR Work, Expression, and Manifestation information.
-
-        Returns
-        -------
-        dict or None
-            Dictionary containing FRBR metadata with keys 'work', 'expression',
-            and 'manifestation'. Returns None if no identification data is found.
-        """
-        identification = self.root.find('.//akn:meta/akn:identification', namespaces=self.namespaces)
-        if identification is None:
-            return None
-
-        meta_identification = {
-            'work': self._get_frbr_metadata(identification, 'FRBRWork', ['FRBRthis', 'FRBRuri', 'FRBRalias', 'FRBRdate', 'FRBRauthor', 'FRBRcountry', 'FRBRnumber']),
-            'expression': self._get_frbr_metadata(identification, 'FRBRExpression', ['FRBRthis', 'FRBRuri', 'FRBRalias', 'FRBRdate', 'FRBRauthor', 'FRBRlanguage']),
-            'manifestation': self._get_frbr_metadata(identification, 'FRBRManifestation', ['FRBRthis', 'FRBRuri', 'FRBRdate', 'FRBRauthor'])
-        }
-        return meta_identification
-    
-    def _get_frbr_metadata(self, identification, element_name, attributes):
-        """
-        Extracts FRBR metadata from the identification element.
-
-        Parameters
-        ----------
-        identification : lxml.etree._Element
-            The identification element containing FRBR data.
-        element_name : str
-            The name of the FRBR element to extract (e.g., 'FRBRWork', 'FRBRExpression', 'FRBRManifestation').
-        attributes : list
-            List of attribute names to extract from the FRBR element.
-
-        Returns
-        -------
-        dict or None
-            Dictionary containing FRBR metadata including specified attributes.
-            Returns None if no data is found.
-        """
-        frbr_element = identification.find(f'akn:{element_name}', namespaces=self.namespaces)
-        if frbr_element is None:
-            return None
-
-        return {attr: (frbr_element.find(f'akn:{attr}', namespaces=self.namespaces).get('value') if frbr_element.find(f'akn:{attr}', namespaces=self.namespaces) is not None else None) for attr in attributes}
-    
-    def get_meta_references(self):
-        """
-        Extracts reference metadata from the XML document.
-
-        Retrieves data from the <references> element within <meta>,
-        specifically focusing on TLCOrganization elements.
-
-        Returns
-        -------
-        dict or None
-            Dictionary containing reference metadata including eId, href,
-            and showAs attributes. Returns None if no reference data is found.
-        """
-        references = self.root.find('.//akn:meta/akn:references/akn:TLCOrganization', namespaces=self.namespaces)
-        if references is None:
-            return None
-
-        meta_references = {
-            'eId': references.get('eId'),
-            'href': references.get('href'),
-            'showAs': references.get('showAs')
-        }
-        return meta_references
-    
-    def get_meta_proprietary(self):
-        """
-        Extracts proprietary metadata from the XML document.
-
-        Retrieves data from the <proprietary> element within <meta>,
-        including document reference information.
-
-        Returns
-        -------
-        dict or None
-            Dictionary containing proprietary metadata including file, collection,
-            year, language, and sequence number. Returns None if no proprietary
-            data is found.
-        """
-        proprietary = self.root.find('.//akn:meta/akn:proprietary', namespaces=self.namespaces)
-        if proprietary is None:
-            return None
-
-        document_ref = proprietary.find('fmx:DOCUMENT.REF', namespaces=self.namespaces)
-        if document_ref is None:
-            return None
-
-        meta_proprietary = {
-            'file': document_ref.get('FILE'),
-            'coll': document_ref.find('fmx:COLL', namespaces=self.namespaces).text,
-            'year': document_ref.find('fmx:YEAR', namespaces=self.namespaces).text,
-            'lg_doc': proprietary.find('fmx:LG.DOC', namespaces=self.namespaces).text,
-            'no_seq': proprietary.find('fmx:NO.SEQ', namespaces=self.namespaces).text
-        }
-
-        return meta_proprietary
-    
+        
     def get_formula(self):
         """
         Extracts formula text from the preamble.
@@ -310,7 +186,6 @@ class AkomaNtosoParser(XMLParser):
                 'article_text': article_text
             })
 
-        return self.articles
     
     def get_text_by_eId(self, node):
         """

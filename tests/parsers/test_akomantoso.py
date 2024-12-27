@@ -22,26 +22,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
         """Test parsing and root element retrieval from the Akoma Ntoso file."""
         self.assertTrue(os.path.exists(file_path), f"Test file not found at {file_path}")
         self.assertIsNotNone(self.parser.root, "Root element should not be None")
-
-    def test_get_meta_identification(self):
-        """Test extraction of meta-identification from the root."""
-        meta_identification = self.parser.get_meta_identification()
-        self.assertIsNotNone(meta_identification)
-        self.assertIn('work', meta_identification)
-        self.assertEqual(meta_identification['work']['FRBRalias'], "32014L0092")
-
-    def test_get_meta_references(self):
-        """Test extraction of meta references data from the file."""
-        references = self.parser.get_meta_references()
-        self.assertIsNotNone(references)
-        self.assertEqual(references.get('eId'), "cirsfid")
-
-    def test_get_meta_proprietary(self):
-        """Test extraction of proprietary metadata."""
-        proprietary = self.parser.get_meta_proprietary()
-        self.assertIsNotNone(proprietary)
-        self.assertEqual(proprietary.get('file'), "L_2014257EN.01021401.doc.xml")
-
+        
     def test_get_preface(self):
         """Test the content extracted from the preface section."""
         self.parser.get_preface(preface_xpath='.//akn:preface', paragraph_xpath='.//akn:p')

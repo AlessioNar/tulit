@@ -19,30 +19,6 @@ class TestFormex4Parser(unittest.TestCase):
         """Test parsing and root element retrieval from the Akoma Ntoso file."""
         self.assertTrue(os.path.exists(file_path), f"Test file not found at {file_path}")
         self.assertIsNotNone(self.parser.root, "Root element should not be None")
-        
-    def test_get_metadata(self):
-        self.maxDiff = None  # Allow the full diff to be displayed
-        
-        self.parser.get_root(file_path)
-
-        result = self.parser.get_metadata()
-        expected = {
-            "file": "L_2011334EN.01002501.doc.xml",
-            "collection": "L",
-            "oj_number": "334",
-            "year": "2011",
-            "language": "EN",
-            "page_first": "25",
-            "page_seq": "1",
-            "document_language": "EN",
-            "sequence_number": "0009",
-            "total_pages": "1",
-            "volume_ref": "01",
-            "doc_format": "NY",
-            "doc_type": "OJ",
-            "doc_number": "1319"
-        }
-        self.assertEqual(result, expected)
     
     def test_get_preface(self):
         self.maxDiff = None  # Allow full diff if needed

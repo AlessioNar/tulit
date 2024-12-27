@@ -30,45 +30,6 @@ class Formex4Parser(XMLParser):
         self.namespaces = {
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
         }
-
-        self.metadata = {}
-
-    def get_metadata(self):
-        """
-        Extracts metadata information from the BIB.INSTANCE section.
-
-        Returns
-        -------
-        dict
-            Extracted metadata.
-        """
-        metadata = {}
-        bib_instance = self.root.find('BIB.INSTANCE')
-        
-        if bib_instance is not None:
-            doc_ref = bib_instance.find('DOCUMENT.REF')
-            if doc_ref is not None:
-                metadata["file"] = doc_ref.get("FILE")
-                metadata["collection"] = doc_ref.findtext('COLL')
-                metadata["oj_number"] = doc_ref.findtext('NO.OJ')
-                metadata["year"] = doc_ref.findtext('YEAR')
-                metadata["language"] = doc_ref.findtext('LG.OJ')
-                metadata["page_first"] = doc_ref.findtext('PAGE.FIRST')
-                metadata["page_seq"] = doc_ref.findtext('PAGE.SEQ')
-                metadata["volume_ref"] = doc_ref.findtext('VOLUME.REF')
-
-            metadata["document_language"] = bib_instance.findtext('LG.DOC')
-            metadata["sequence_number"] = bib_instance.findtext('NO.SEQ')
-            metadata["total_pages"] = bib_instance.findtext('PAGE.TOTAL')
-
-            no_doc = bib_instance.find('NO.DOC')
-            if no_doc is not None:
-                metadata["doc_format"] = no_doc.get("FORMAT")
-                metadata["doc_type"] = no_doc.get("TYPE")
-                metadata["doc_number"] = no_doc.findtext('NO.CURRENT')
-        
-        return metadata
-    
         
     def get_formula(self):
         """

@@ -362,11 +362,6 @@ class AkomaNtosoParser(XMLParser):
             # Get the title text 
             article_title_text = article_title_element.text if article_title_element is not None else None
 
-            # So I need to find another parsing strategy as the non-normative nature of Akoma Ntoso makes it more complicated to parse it.
-            # This function first finds all of the p tags
-            # Then Identifies the closest parent of the p tag containing an attribute eId
-            # Then it concatenates p tags based on common eIds
-            # And finally creates a list of dictionaries composed by the eId and the text of each element
             article_text = self.get_text_by_eId(article)
         
             # Append the article data to the articles list

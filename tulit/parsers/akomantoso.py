@@ -21,15 +21,8 @@ class AkomaNtosoParser(XMLParser):
         Initializes the parser.
         """
         super().__init__()
-        self.meta = None
-    
-        self.meta_identification = None    
-        self.meta_proprietary = None
-        self.meta_references = None
         
         self.act = None
-    
-        
         self.debug_info = {}
 
         
@@ -39,21 +32,26 @@ class AkomaNtosoParser(XMLParser):
             'an': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0',
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
 
-
         }
+        self.metadata = {}
+    
+        self.meta_identification = None    
+        self.meta_proprietary = None
+        self.meta_references = None
+
 
     ### Metadata block
-    def get_meta(self):
+    def get_metadata(self):
         """
         Extracts metadata from the document.
         """
-        meta_data = {
+        metadata = {
             "meta_identification" : self.get_meta_identification(),
             "meta_proprietary" : self.get_meta_proprietary(),
             "meta_references" : self.get_meta_references()
         }
 
-        self.meta = meta_data
+        self.metadata = metadata
                 
     def get_meta_identification(self):
         """
@@ -73,96 +71,36 @@ class AkomaNtosoParser(XMLParser):
             return None
 
         meta_identification = {
-            'work': self._get_frbr_work(identification),
-            'expression': self._get_frbr_expression(identification),
-            'manifestation': self._get_frbr_manifestation(identification)
+            'work': self._get_frbr_metadata(identification, 'FRBRWork', ['FRBRthis', 'FRBRuri', 'FRBRalias', 'FRBRdate', 'FRBRauthor', 'FRBRcountry', 'FRBRnumber']),
+            'expression': self._get_frbr_metadata(identification, 'FRBRExpression', ['FRBRthis', 'FRBRuri', 'FRBRalias', 'FRBRdate', 'FRBRauthor', 'FRBRlanguage']),
+            'manifestation': self._get_frbr_metadata(identification, 'FRBRManifestation', ['FRBRthis', 'FRBRuri', 'FRBRdate', 'FRBRauthor'])
         }
         return meta_identification
     
-    def _get_frbr_work(self, identification):
+    def _get_frbr_metadata(self, identification, element_name, attributes):
         """
-        Extracts FRBR Work metadata from the identification element.
+        Extracts FRBR metadata from the identification element.
 
         Parameters
         ----------
         identification : lxml.etree._Element
-            The identification element containing FRBR Work data.
+            The identification element containing FRBR data.
+        element_name : str
+            The name of the FRBR element to extract (e.g., 'FRBRWork', 'FRBRExpression', 'FRBRManifestation').
+        attributes : list
+            List of attribute names to extract from the FRBR element.
 
         Returns
         -------
         dict or None
-            Dictionary containing FRBR Work metadata including URIs, dates,
-            and other work-level identifiers. Returns None if no work data is found.
+            Dictionary containing FRBR metadata including specified attributes.
+            Returns None if no data is found.
         """
-        frbr_work = identification.find('akn:FRBRWork', namespaces=self.namespaces)
-        if frbr_work is None:
+        frbr_element = identification.find(f'akn:{element_name}', namespaces=self.namespaces)
+        if frbr_element is None:
             return None
 
-        return {
-            'FRBRthis': frbr_work.find('akn:FRBRthis', namespaces=self.namespaces).get('value'),
-            'FRBRuri': frbr_work.find('akn:FRBRuri', namespaces=self.namespaces).get('value'),
-            'FRBRalias': frbr_work.find('akn:FRBRalias', namespaces=self.namespaces).get('value'),
-            'FRBRdate': frbr_work.find('akn:FRBRdate', namespaces=self.namespaces).get('date'),
-            'FRBRauthor': frbr_work.find('akn:FRBRauthor', namespaces=self.namespaces).get('href'),
-            'FRBRcountry': frbr_work.find('akn:FRBRcountry', namespaces=self.namespaces).get('value'),
-            'FRBRnumber': frbr_work.find('akn:FRBRnumber', namespaces=self.namespaces).get('value')
-        }
-    
-    def _get_frbr_expression(self, identification):
-        """
-        Extracts FRBR Expression metadata from the identification element.
-
-        Parameters
-        ----------
-        identification : lxml.etree._Element
-            The identification element containing FRBR Expression data.
-        
-        Returns
-        -------
-        dict or None
-            Dictionary containing FRBR Expression metadata including URIs, dates,
-            language, and other expression-level identifiers. Returns None if no
-            expression data is found.
-        """
-
-        frbr_expression = identification.find('akn:FRBRExpression', namespaces=self.namespaces)
-        if frbr_expression is None:
-            return None
-
-        return {
-            'FRBRthis': frbr_expression.find('akn:FRBRthis', namespaces=self.namespaces).get('value'),
-            'FRBRuri': frbr_expression.find('akn:FRBRuri', namespaces=self.namespaces).get('value'),
-            'FRBRdate': frbr_expression.find('akn:FRBRdate', namespaces=self.namespaces).get('date'),
-            'FRBRauthor': frbr_expression.find('akn:FRBRauthor', namespaces=self.namespaces).get('href'),
-            'FRBRlanguage': frbr_expression.find('akn:FRBRlanguage', namespaces=self.namespaces).get('language')
-        }
-    
-    def _get_frbr_manifestation(self, identification):
-        """
-        Extracts FRBR Manifestation metadata from the identification element.
-
-        Parameters
-        ----------
-        identification : lxml.etree._Element
-            The identification element containing FRBR Manifestation data.
-
-        Returns
-        -------
-        dict or None
-            Dictionary containing FRBR Manifestation metadata including URIs,
-            dates, and other manifestation-level identifiers. Returns None if
-            no manifestation data is found.
-        """
-        frbr_manifestation = identification.find('akn:FRBRManifestation', namespaces=self.namespaces)
-        if frbr_manifestation is None:
-            return None
-
-        return {
-            'FRBRthis': frbr_manifestation.find('akn:FRBRthis', namespaces=self.namespaces).get('value'),
-            'FRBRuri': frbr_manifestation.find('akn:FRBRuri', namespaces=self.namespaces).get('value'),
-            'FRBRdate': frbr_manifestation.find('akn:FRBRdate', namespaces=self.namespaces).get('date'),
-            'FRBRauthor': frbr_manifestation.find('akn:FRBRauthor', namespaces=self.namespaces).get('href')
-        }
+        return {attr: (frbr_element.find(f'akn:{attr}', namespaces=self.namespaces).get('value') if frbr_element.find(f'akn:{attr}', namespaces=self.namespaces) is not None else None) for attr in attributes}
     
     def get_meta_references(self):
         """
@@ -216,7 +154,6 @@ class AkomaNtosoParser(XMLParser):
             'year': document_ref.find('fmx:YEAR', namespaces=self.namespaces).text,
             'lg_doc': proprietary.find('fmx:LG.DOC', namespaces=self.namespaces).text,
             'no_seq': proprietary.find('fmx:NO.SEQ', namespaces=self.namespaces).text
-            # Add other elements as needed
         }
 
         return meta_proprietary
@@ -481,9 +418,9 @@ class AkomaNtosoParser(XMLParser):
                     print(f"Error in get_root: {e}")
 
                 try:
-                    self.get_meta()
-                    debug_info['meta'] = self.meta if hasattr(self, 'meta') else "Meta not parsed."
-                    print("Meta parsed successfully.")
+                    self.get_metadata()
+                    debug_info['meta'] = self.metadata if hasattr(self, 'metadata') else "Meta not parsed."
+                    print("Metadata parsed successfully.")
                 except Exception as e:
                     print(f"Error in get_meta: {e}")
 

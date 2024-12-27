@@ -33,6 +33,7 @@ templates_path = ['_templates']
 
 # -- Options for HTML output
 autodocs_mock_imports = ['tulit']
+autodoc_member_order = 'bysource'
 
 html_theme = 'sphinx_rtd_theme'
 

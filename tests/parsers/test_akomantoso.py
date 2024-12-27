@@ -91,7 +91,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
             with self.subTest(recital=index):
                 self.assertEqual(self.parser.recitals[index]['eId'], expected_values['eId'], 
                                  f"Recital {index} ID does not match expected value")
-                self.assertIn(expected_values['text'], self.parser.recitals[index]['recital_text'], 
+                self.assertIn(expected_values['text'], self.parser.recitals[index]['text'], 
                               f"Recital {index} text does not match expected content")
 
     def test_get_act(self):

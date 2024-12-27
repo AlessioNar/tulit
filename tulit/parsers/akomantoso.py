@@ -269,42 +269,26 @@ class AkomaNtosoParser(XMLParser):
             List of dictionaries containing recital text and eId for each
             recital. Returns None if no recitals are found.
         """
-        recitals_section = self.preamble.find('.//akn:recitals', namespaces=self.namespaces)
-        if recitals_section is None:
-            return None
-
-        recitals = []
-                
-        # Intro
-        recitals_intro = recitals_section.find('.//akn:intro', namespaces=self.namespaces)
-        recitals_intro_eId = recitals_intro.get('eId')
-        recitals_intro_text = ' '.join(p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text)
-        recitals.append({
-            'recital_text': recitals_intro_text,
-            'eId': recitals_intro_eId
-        })
-
-        # Removing all authorialNote nodes
-        recitals_section = self.remove_node(recitals_section, './/akn:authorialNote')
-
-        # Step 2: Process each <recital> element in the recitals_section without the <authorialNote> elements
-        for recital in recitals_section.findall('.//akn:recital', namespaces=self.namespaces):
-            eId = str(recital.get('eId'))
-
-            # Extract text from remaining <akn:p> elements
-            recital_text = ' '.join(' '.join(p.itertext()).strip() for p in recital.findall('.//akn:p', namespaces=self.namespaces))
-
-            # Remove any double spaces in the concatenated recital text
-            recital_text = re.sub(r'\s+', ' ', recital_text)
-
-            # Append the cleaned recital text and eId to the list
-            recitals.append({
-                'recital_text': recital_text,
-                'eId': eId
-            })
-
-        self.recitals = recitals
-    
+        
+        def extract_intro(recitals_section):
+            # Intro - different implementation
+            recitals_intro = recitals_section.find('.//akn:intro', namespaces=self.namespaces)
+            intro_eId = recitals_intro.get('eId')
+            intro_text = ''.join(p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text)
+            return intro_eId, intro_text
+        
+        def extract_eId(recital):
+            return str(recital.get('eId'))
+        
+        return super().get_recitals(
+            recitals_xpath='.//akn:recitals', 
+            recital_xpath='.//akn:recital',
+            text_xpath='.//akn:p',
+            extract_intro=extract_intro,
+            extract_eId=extract_eId,
+            
+        )
+            
     ### Act block
     def get_act(self) -> None:
         """

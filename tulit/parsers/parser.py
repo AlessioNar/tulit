@@ -3,34 +3,26 @@ from lxml import etree
 import os
 import re
 
-class XMLParser(ABC):
+class Parser(ABC):
     """
-    Abstract base class for XML parsers.
+    Abstract base class for parsers
     
     Attributes
     ----------
-    schema : lxml.etree.XMLSchema or None
-        The XML schema used for validation.
-    valid : bool or None
-        Indicates whether the XML file is valid against the schema.
-    validation_errors : lxml.etree._LogEntry or None
-        Validation errors if the XML file is invalid.
-    root : lxml.etree._Element
-        Root element of the XML document.
-    namespaces : dict
-        Dictionary containing XML namespaces.
+    root : lxml.etree._Element or bs4.BeautifulSoup
+        Root element of the XML or HTML document.
     preface : str or None
-        Extracted preface text from the XML document.
-    preamble : lxml.etree.Element or None
-        The preamble section of the XML document.
+        Extracted preface text from the document.
+    preamble : lxml.etree.Element or bs4.Tag or None
+        The preamble section of the document.
     formula : str or None
         The formula element extracted from the preamble.
     citations : list or None
         List of extracted citations from the preamble.
     recitals : list or None
         List of extracted recitals from the preamble.
-    body : lxml.etree.Element or None
-        The body section of the XML document.
+    body : lxml.etree.Element or bs4.Tag or None
+        The body section of the document.
     chapters : list or None
         List of extracted chapters from the body.
     articles : list or None
@@ -49,12 +41,8 @@ class XMLParser(ABC):
         ----------
         None
         """
-        self.schema = None
-        self.valid = None
-        self.validation_errors = None
-        self.root = None
-        self.namespaces = {}
-        
+       
+        self.root = None 
         self.preface = None
 
         self.preamble = None
@@ -68,13 +56,38 @@ class XMLParser(ABC):
         self.conclusions = None
         
         self.articles_text = []
+
+class XMLParser(Parser):
+    """
+    Base class for XML parsers.
+    
+    Attributes
+    ----------
+    schema : lxml.etree.XMLSchema or None
+        The XML schema used for validation.
+    valid : bool or None
+        Indicates whether the XML file is valid against the schema.
+    validation_errors : lxml.etree._LogEntry or None
+        Validation errors if the XML file is invalid.
+    namespaces : dict
+        Dictionary containing XML namespaces.
+    """
+    
+    def __init__(self):
+        """
+        Initializes the Parser object.
+
+        Parameters
+        ----------
+        None
+        """
+        super().__init__()
         
-    @abstractmethod
-    def parse(self):
-        """
-        Abstract method to parse the data. This method must be implemented by the subclass.
-        """
-        pass
+        self.schema = None
+        self.valid = None
+        self.validation_errors = None
+        
+        self.namespaces = {}
     
     def load_schema(self, schema):
         """
@@ -135,25 +148,6 @@ class XMLParser(ABC):
         except Exception as e:
             print(f"An error occurred during validation: {e}")
             self.valid = False
-    
-    def get_root(self, file: str):
-        """
-        Parses an XML file and returns its root element.
-
-        Parameters
-        ----------
-        file : str
-            Path to the XML file.
-
-            
-        Returns
-        -------
-        None
-        """
-        with open(file, 'r', encoding='utf-8') as f:
-            tree = etree.parse(f)
-            self.root = tree.getroot()
-
         
     def remove_node(self, tree, node):
         """
@@ -192,6 +186,24 @@ class XMLParser(ABC):
                         parent.text = (parent.text or '') + tail_text
         
         return tree
+    
+    def get_root(self, file: str):
+        """
+        Parses an XML file and returns its root element.
+
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
+
+        Returns
+        -------
+        None
+        """
+        with open(file, 'r', encoding='utf-8') as f:
+            tree = etree.parse(f)
+            self.root = tree.getroot()
+
     
     def get_preface(self, preface_xpath, paragraph_xpath) -> None:
         """
@@ -241,9 +253,9 @@ class XMLParser(ABC):
         if self.preamble is not None:            
             self.preamble = self.remove_node(self.preamble, notes_xpath)
             self.formula = self.get_formula()
-    
-            #self.recitals = self.get_recitals()
-    
+            #preamble_data["preamble_final"] = self.preamble.findtext('PREAMBLE.FINAL')
+
+        
     def get_citations(self, citations_xpath, citation_xpath, extract_eId=None):
         """
         Extracts citations from the preamble.
@@ -284,6 +296,40 @@ class XMLParser(ABC):
         
         self.citations = citations
 
+    def get_recitals(self, recitals_xpath, recital_xpath, text_xpath, extract_intro=None, extract_eId=None):
+        """
+        Extracts recitals from the preamble.
+
+        Returns
+        -------
+        list or None
+            List of dictionaries containing recital text and eId for each
+            recital. Returns None if no recitals are found.
+        """
+        recitals_section = self.preamble.find(recitals_xpath, namespaces=self.namespaces)
+        if recitals_section is None:
+            return None
+        
+        recitals = []
+        # Get an eId for the citation, depending on the XML format
+        intro_eId, intro_text = extract_intro(recitals_section) if extract_intro else (None, None)
+        
+        recitals.append({
+            "eId": intro_eId,
+            "text": intro_text
+            })
+        
+        
+        for recital in recitals_section.findall(recital_xpath, namespaces=self.namespaces):
+            eId = extract_eId(recital) if extract_eId else None
+            text = ''.join(''.join(p.itertext()).strip() for p in recital.findall(text_xpath, namespaces=self.namespaces))
+            recitals.append({
+                    "eId": eId, 
+                    "text": text
+                })
+            
+        self.recitals = recitals
+    
     ### Enacting terms block
     def get_body(self, body_xpath) -> None:
         """
@@ -304,3 +350,10 @@ class XMLParser(ABC):
         if self.body is None:
             # Fallback: try without namespace
             self.body = self.root.find(body_xpath)
+
+    @abstractmethod
+    def parse(self):
+        """
+        Abstract method to parse the data. This method must be implemented by the subclass.
+        """
+        pass

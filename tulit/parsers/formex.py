@@ -103,34 +103,34 @@ class Formex4Parser(XMLParser):
             extract_eId=extract_eId
         )
     
-    def get_recitals(self, recitals_xpath='.//GR.CONSID', recital_xpath='.//CONSID') -> None:
+    def get_recitals(self) -> None:
         """
         Extracts recitals from the preamble.
 
         Returns
         -------
-        list
-            List of dictionaries containing recital text and eId for each recital.
+        list or None
+            List of dictionaries containing recital text and eId for each
+            recital. Returns None if no recitals are found.
         """
-
-        recitals = []
-        recitals.append({
-            "eId": 'rec_0',
-            "recital_text": self.preamble.findtext('.//GR.CONSID/GR.CONSID.INIT')
-            })
-
-        for recital in self.preamble.findall(recital_xpath):
-            recital_num = recital.findtext('.//NO.P')
-            recital_text = "".join(recital.find('.//TXT').itertext()).strip()
-            recitals.append({
-                    "eId": recital_num, 
-                    "recital_text": recital_text
-                })
-        #preamble_data["preamble_final"] = self.preamble.findtext('PREAMBLE.FINAL')
-            
-        self.recitals = recitals
         
-   
+        def extract_intro(recitals_section):        
+            # Intro - different implementation
+            intro_eId = 'rec_0'
+            intro_text = self.preamble.findtext('.//GR.CONSID.INIT')
+
+            return intro_eId, intro_text
+        
+        def extract_eId(recital):
+            return recital.findtext('.//NO.P')
+            
+        return super().get_recitals(
+            recitals_xpath='.//GR.CONSID', 
+            recital_xpath='.//CONSID',
+            text_xpath='.//TXT',
+            extract_intro=extract_intro,
+            extract_eId=extract_eId
+        )
     
     def get_chapters(self) -> None:
         """

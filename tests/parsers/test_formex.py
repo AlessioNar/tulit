@@ -93,11 +93,11 @@ class TestFormex4Parser(unittest.TestCase):
         self.parser.get_recitals()
         
         recitals = [
-                {"eId": "rec_0", "recital_text": "Whereas:"},
-                {"eId": "(1)", "recital_text": "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."}, 
-                {"eId": "(2)", "recital_text": "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products and for egg albumin shows that the representative import prices for certain products should be amended to take account of variations in price according to origin. The representative prices should therefore be published."},
-                {"eId": "(3)", "recital_text": "In view of the situation on the market, this amendment should be applied as soon as possible."},
-                {"eId": "(4)", "recital_text": "The measures provided for in this Regulation are in accordance with the opinion of the Management Committee for the Common Organisation of Agricultural Markets,"},
+                {"eId": "rec_0", "text": "Whereas:"},
+                {"eId": "(1)", "text": "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."}, 
+                {"eId": "(2)", "text": "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products and for egg albumin shows that the representative import prices for certain products should be amended to take account of variations in price according to origin. The representative prices should therefore be published."},
+                {"eId": "(3)", "text": "In view of the situation on the market, this amendment should be applied as soon as possible."},
+                {"eId": "(4)", "text": "The measures provided for in this Regulation are in accordance with the opinion of the Management Committee for the Common Organisation of Agricultural Markets,"},
         ]
         
         preamble_final = {

@@ -34,6 +34,9 @@ class Formex4Parser(XMLParser):
     def get_preface(self):
         return super().get_preface(preface_xpath='.//TITLE', paragraph_xpath='.//P')
     
+    def get_preamble(self):
+        return super().get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
+    
     def get_formula(self):
         """
         Extracts the formula from the preamble.
@@ -163,9 +166,8 @@ class Formex4Parser(XMLParser):
         self.load_schema('formex4.xsd')
         self.validate(file, format = 'Formex 4')
         self.get_root(file)
-        self.get_metadata()
         self.get_preface()
-        self.get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
+        self.get_preamble()
         self.get_body()
         self.get_chapters()
         self.get_articles()

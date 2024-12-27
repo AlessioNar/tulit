@@ -21,9 +21,7 @@ class TestFormex4Parser(unittest.TestCase):
         self.assertIsNotNone(self.parser.root, "Root element should not be None")
     
     def test_get_preface(self):
-        self.maxDiff = None  # Allow full diff if needed
-    
-    
+        
         self.parser.get_preface()
         expected = (
             "Commission Implementing Regulation (EU) No 1319/2011 of 15 December 2011 "
@@ -34,9 +32,8 @@ class TestFormex4Parser(unittest.TestCase):
     
     def test_get_preamble(self):
         """Test parsing the preamble section with quotations and numbered considerations in Formex4Parser."""
-        self.maxDiff = None  # Allow full diff if needed
-        self.parser.get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
         
+        self.parser.get_preamble()
         self.assertIsNotNone(self.parser.preamble)
         
     def test_get_formula(self):
@@ -46,13 +43,10 @@ class TestFormex4Parser(unittest.TestCase):
         pass
 
     def test_get_citations(self):
-        
-        self.maxDiff = None  # Allow full diff if needed
-        self.parser.get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
-        
+    
+        self.parser.get_preamble()    
         self.parser.get_citations()
         
-       
         citations =  [
                 {'eId': 0, 'text': "Having regard to the Treaty on the Functioning of the European Union,"},
                 {"eId": 1, 'text':"Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common organisation of agricultural markets and on specific provisions for certain agricultural products (Single CMO Regulation) , and in particular Article 143 thereof,"},
@@ -64,8 +58,8 @@ class TestFormex4Parser(unittest.TestCase):
     
     def test_get_recitals(self):
         """Test parsing the preamble section with quotations and numbered considerations in Formex4Parser."""
-        self.maxDiff = None  # Allow full diff if needed
-        self.parser.get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
+        
+        self.parser.get_preamble()
         self.parser.get_recitals()
         
         recitals = [

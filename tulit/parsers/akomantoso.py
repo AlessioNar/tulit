@@ -31,7 +31,10 @@ class AkomaNtosoParser(XMLParser):
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
 
         }
-        
+    
+    def get_preface(self):
+        return super().get_preface(preface_xpath='.//akn:preface', paragraph_xpath='.//akn:p')
+    
     def get_formula(self):
         """
         Extracts formula text from the preamble.

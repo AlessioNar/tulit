@@ -25,7 +25,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
         
     def test_get_preface(self):
         """Test the content extracted from the preface section."""
-        self.parser.get_preface(preface_xpath='.//akn:preface', paragraph_xpath='.//akn:p')
+        self.parser.get_preface()
         self.assertIsNotNone(self.parser.preface, "Preface element not found")
         
         expected_preface = "Directive 2014/92/EU of the European Parliament and of the Council of 23 July 2014 on the comparability of fees related to payment accounts, payment account switching and access to payment accounts with basic features (Text with EEA relevance)"

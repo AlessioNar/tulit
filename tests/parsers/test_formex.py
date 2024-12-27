@@ -24,7 +24,7 @@ class TestFormex4Parser(unittest.TestCase):
         self.maxDiff = None  # Allow full diff if needed
     
     
-        self.parser.get_preface(preface_xpath='.//TITLE', paragraph_xpath='.//P')
+        self.parser.get_preface()
         expected = (
             "Commission Implementing Regulation (EU) No 1319/2011 of 15 December 2011 "
             "fixing representative prices in the poultrymeat and egg sectors and for egg "

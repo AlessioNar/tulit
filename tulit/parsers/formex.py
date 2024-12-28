@@ -100,18 +100,7 @@ class Formex4Parser(XMLParser):
         )
     
     def get_preamble_final(self):
-        """
-        Extracts the final preamble text from the document.
-
-        Returns
-        -------
-        str or None
-            Concatenated text from the final preamble element.
-            Returns None if no final preamble is found.
-        """
-        self.preamble_final = self.preamble.findtext('PREAMBLE.FINAL')
-
-        return self.preamble_final
+        return super().get_preamble_final(preamble_final_xpath='.//PREAMBLE.FINAL')
 
     def get_body(self):
         return super().get_body('.//ENACTING.TERMS')

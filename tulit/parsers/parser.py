@@ -356,14 +356,9 @@ class XMLParser(Parser):
             
         self.recitals = recitals
     
-    def get_preamble_final(self) -> str:
+    def get_preamble_final(self, preamble_final_xpath) -> str:
         """
         Extracts the final preamble text from the document.
-
-        Parameters
-        ----------
-        preamble_final_xpath : str
-            XPath expression to locate the final preamble element.
 
         Returns
         -------
@@ -371,10 +366,7 @@ class XMLParser(Parser):
             Concatenated text from the final preamble element.
             Returns None if no final preamble is found.
         """
-        preamble_final = self.preamble.findtext('.//block', namespaces=self.namespaces)
-        if preamble_final is None:
-            return None
-
+        preamble_final = self.preamble.findtext(preamble_final_xpath, namespaces=self.namespaces)
         self.preamble_final = preamble_final
         return self.preamble_final
     

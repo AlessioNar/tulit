@@ -108,11 +108,8 @@ class AkomaNtosoParser(XMLParser):
             Concatenated text from the final preamble element.
             Returns None if no final preamble is found.
         """
-        preamble_final = self.preamble.find(".//akn:block", namespaces=self.namespaces).text
-        self.preamble_final = preamble_final
-        return self.preamble_final
+        return super().get_preamble_final(preamble_final_xpath='.//akn:block[@name="preamble.final"]')
     
-        #return super().get_preamble_final(preamble_final_xpath='.//block[@name="preamble.final"]')    
     
     def get_body(self):
         return super().get_body('.//akn:body')

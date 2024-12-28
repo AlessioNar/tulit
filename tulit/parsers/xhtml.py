@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-from .parser import Parser
+from tulit.parsers.parser import Parser
+import json
 
 class HTMLParser(Parser):
     def __init__(self):
@@ -339,3 +340,27 @@ class HTMLParser(Parser):
         self.get_chapters()
         self.get_articles()
         self.get_conclusions()
+        
+
+def main():
+    parser = HTMLParser()
+    file_to_parse = 'tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html'
+    
+    output_file = 'tests/data/json/iopa_html.json'
+    
+
+    parser.parse(file_to_parse)
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        # Get the parser's attributes as a dictionary
+        parser_dict = parser.__dict__
+    
+        # Filter out non-serializable attributes
+        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
+    
+        # Write to a JSON file
+        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
+
+if __name__ == "__main__":
+    main()
+

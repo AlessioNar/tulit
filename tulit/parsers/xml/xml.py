@@ -13,6 +13,8 @@ class XMLParser(Parser):
         The XML schema used for validation.
     valid : bool or None
         Indicates whether the XML file is valid against the schema.
+    format : str or None
+        The format of the XML file (e.g., 'Akoma Ntoso', 'Formex 4').
     validation_errors : lxml.etree._LogEntry or None
         Validation errors if the XML file is invalid.
     namespaces : dict
@@ -21,8 +23,8 @@ class XMLParser(Parser):
     
     def __init__(self):
         """
-        Initializes the Parser object.
-
+        Initializes the Parser object with default attributes.
+        
         Parameters
         ----------
         None
@@ -38,7 +40,7 @@ class XMLParser(Parser):
     
     def load_schema(self, schema):
         """
-        Loads the XSD schema for XML validation using an absolute path.
+        Loads the XSD schema for XML validation using a relative path. Schemas are stored in the 'assets' directory relative to the xml module.
         
         Parameters
         ----------
@@ -159,15 +161,14 @@ class XMLParser(Parser):
         Parameters
         ----
         preface_xpath : str
-            XPath expression to locate the preface element. For Akoma Ntoso, this is usually './/akn:preface', while for Formex it is './/TITLE'.
+            XPath expression to locate the preface element.
         paragraph_xpath : str
-            XPath expression to locate the paragraphs within the preface. For Akoma Ntoso, this is usually './/akn:p', while for Formex it is './/P'.
+            XPath expression to locate the paragraphs within the preface.
         
         Returns
         -------
-        list or None
-            List of strings containing the text content of each paragraph
-            in the preface. Returns None if no preface is found.
+        None
+            Updates the instance's preface attribute with the found preface element.
         """
         preface = self.root.find(preface_xpath, namespaces=self.namespaces)
         if preface is not None:
@@ -189,14 +190,14 @@ class XMLParser(Parser):
         Parameters
         ----------
         preamble_xpath : str
-            XPath expression to locate the preamble element. For Akoma Ntoso, this is usually './/akn:preamble', while for Formex it is './/PREAMBLE'.
+            XPath expression to locate the preamble element. 
         notes_xpath : str
-            XPath expression to locate notes within the preamble. For Akoma Ntoso, this is usually './/akn:authorialNote', while for Formex it is './/NOTE'.
+            XPath expression to locate notes within the preamble.
         
         Returns
         -------
         None
-            Updates the instance's preamble attribute with the found preamble element, as well as the formula, citations, and recitals.
+            Updates the instance's preamble attribute with the found preamble element
         """
         self.preamble = self.root.find(preamble_xpath, namespaces=self.namespaces)
         
@@ -244,8 +245,8 @@ class XMLParser(Parser):
 
         Returns
         -------
-        list
-            List of dictionaries containing citation text.
+        None
+            Updates the instance's citations attribute with the found citations.
         """
         citations_section = self.preamble.find(citations_xpath, namespaces=self.namespaces)
         if citations_section is None:
@@ -271,12 +272,24 @@ class XMLParser(Parser):
     def get_recitals(self, recitals_xpath, recital_xpath, text_xpath, extract_intro=None, extract_eId=None):
         """
         Extracts recitals from the preamble.
+        
+        Parameters
+        ----------
+        recitals_xpath : str
+            XPath expression to locate the recitals section.
+        recital_xpath : str
+            XPath expression to locate individual recitals.
+        text_xpath : str
+            XPath expression to locate the text within each recital.
+        extract_intro : function, optional
+            Function to handle the extraction of the introductory recital.
+        extract_eId : function, optional
+            Function to handle the extraction or generation of eId.
 
         Returns
         -------
-        list or None
-            List of dictionaries containing recital text and eId for each
-            recital. Returns None if no recitals are found.
+        None
+            Updates the instance's recitals attribute with the found recitals.
         """
         recitals_section = self.preamble.find(recitals_xpath, namespaces=self.namespaces)
         if recitals_section is None:
@@ -308,16 +321,19 @@ class XMLParser(Parser):
     def get_preamble_final(self, preamble_final_xpath) -> str:
         """
         Extracts the final preamble text from the document.
+        
+        Parameters
+        ----------
+        preamble_final_xpath : str
+            XPath expression to locate the final preamble element.
 
         Returns
         -------
-        str or None
-            Concatenated text from the final preamble element.
-            Returns None if no final preamble is found.
+        None
+            Updates the instance's preamble_final attribute with the found final preamble text.
         """
         preamble_final = self.preamble.findtext(preamble_final_xpath, namespaces=self.namespaces)
         self.preamble_final = preamble_final
-        return self.preamble_final
     
     def get_body(self, body_xpath) -> None:
         """
@@ -356,11 +372,12 @@ class XMLParser(Parser):
 
         Returns
         -------
-        list
-            List of dictionaries containing chapter data with keys:
+        None
+            Updates the instance's chapters attribute with the found chapter data. Each chapter is a dictionary with keys:
             - 'eId': Chapter identifier
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text
+            
         """
         
         chapters = self.body.findall(chapter_xpath, namespaces=self.namespaces)
@@ -389,28 +406,27 @@ class XMLParser(Parser):
     
     def get_conclusions(self):
         """
-        Extracts conclusions from the body section. 
+        Extracts conclusions from the body section. It is implemented in the subclass.
         """
+        pass
         
     
     def parse(self, file: str, schema, format) -> None:
         """
-        Parses an Akoma Ntoso file to extract provisions as individual sentences.
-        This method sequentially calls various parsing functions to extract metadata,
-        preface, preamble, body, chapters, articles, and conclusions from the XML file.
-
+        Parses an XML file and extracts relevant sections based on the format.
+        
         Parameters
         ----------
-        file (str): 
-            The path to the file to parse
-        schema (str):
-            The schema file to use for validation
-        format (str):
-            The format of the file to parse
+        file : str
+            Path to the XML file to parse.
+        schema : str
+            Path to the XSD schema file.
+        format : str
+            The format of the XML file (e.g., 'Akoma Ntoso', 'Formex 4').
         
         Returns
         -------
-        None
+        A XMLParser object with the parsed data stored in its attributes.
         """
         try:
             self.load_schema(schema)
@@ -477,6 +493,8 @@ class XMLParser(Parser):
                     print(f"Conclusions parsed successfully. ")
                 except Exception as e:
                     print(f"Error in get_conclusions: {e}")
+                
+            return self
                 
         except Exception as e:
             print(f'Invalid {self.format} file: parsing may not work or work only partially: {e}')

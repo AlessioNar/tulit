@@ -17,13 +17,17 @@ This package contains modules for parsing various types of legal documents. Belo
     :members:
     :undoc-members:
     :show-inheritance:
+    :exclude-members: main
 
 .. automodule:: tulit.parsers.xml.akomantoso
     :members:
     :undoc-members:
     :show-inheritance:
+    :exclude-members: main
 
-.. automodule:: tulit.parsers.xhtml
+
+.. automodule:: tulit.parsers.html.xhtml
     :members:
     :undoc-members:
     :show-inheritance:
+    :exclude-members: main

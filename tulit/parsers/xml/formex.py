@@ -7,21 +7,14 @@ class Formex4Parser(XMLParser):
     """
     A parser for processing and extracting content from Formex XML files.
 
-    The parser handles XML documents following the Formex schema for legal documents,
-    providing methods to extract various components like metadata, preface, preamble,
-    and articles.
-
-    Attributes
-    ----------
-
-    metadata : dict
-        Extracted metadata from the XML document.
-
+    The parser handles XML documents following the Formex schema for legal documents.
+    It inherits from the XMLParser class and provides methods to extract various components
+    like preface, preamble, chapters, articles, and conclusions.
     """
 
     def __init__(self):
         """
-        Initializes the parser.
+        Initializes the Formex4Parser object with the Formex namespace.
         """
         # Define the namespace mapping
         super().__init__()
@@ -31,15 +24,28 @@ class Formex4Parser(XMLParser):
         }
     
     def get_preface(self):
+        """
+        Extracts the preface from the document. It is assumed that the preface is contained within
+        the TITLE and P elements.
+        
+        """
+        
         return super().get_preface(preface_xpath='.//TITLE', paragraph_xpath='.//P')
     
     def get_preamble(self):
+        """
+        Extracts the preamble from the document. It is assumed that the preamble is contained within
+        the PREAMBLE element, while notes are contained within the NOTE elements.
+        
+        """
+        
         return super().get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
     
     def get_formula(self):
         """
-        Extracts the formula from the preamble.
-
+        Extracts the formula from the preamble. The formula is assumed to be contained within the
+        PREAMBLE.INIT element.
+        
         Returns
         -------
         str
@@ -51,7 +57,8 @@ class Formex4Parser(XMLParser):
     
     def get_citations(self):
         """
-        Extracts citations from the preamble.
+        Extracts citations from the preamble. Citations are assumed to be contained within the GR.VISA
+        and VISA elements. The citation identifier is set as the index of the citation in the preamble.
 
         Returns
         -------
@@ -71,7 +78,9 @@ class Formex4Parser(XMLParser):
     
     def get_recitals(self) -> None:
         """
-        Extracts recitals from the preamble.
+        Extracts recitals from the preamble. Recitals are assumed to be contained within the GR.CONSID
+        and CONSID elements. The introductory recital is extracted separately. The recital identifier
+        is set as the index of the recital in the preamble.
 
         Returns
         -------
@@ -98,14 +107,25 @@ class Formex4Parser(XMLParser):
         )
     
     def get_preamble_final(self):
+        """
+        Extracts the final preamble text from the document. The final preamble text is assumed to be
+        contained within the PREAMBLE.FINAL element.
+        """
+        
         return super().get_preamble_final(preamble_final_xpath='.//PREAMBLE.FINAL')
 
     def get_body(self):
+        """
+        Extracts the body section from the document. The body is assumed to be contained within the
+        ENACTING.TERMS element.
+        """
         return super().get_body('.//ENACTING.TERMS')
     
     def get_chapters(self) -> None:
         """
-        Extracts chapter information from the document.
+        Extracts chapter information from the document. Chapter numbers and headings are assumed to be
+        contained within the TITLE element. The chapter identifier is set as the index of the chapter
+        in the document.
 
         Returns
         -------
@@ -144,7 +164,11 @@ class Formex4Parser(XMLParser):
 
     def get_articles(self):
         """
-        Extracts articles from the ENACTING.TERMS section.
+        Extracts articles from the ENACTING.TERMS section. Articles are assumed to be contained within the
+        ARTICLE elements. The article identifier is assumed to be the IDENTIFIER attribute of the ARTICLE element.
+        The article number is extracted from the TI.ART element. The article text is extracted from the PARAG
+        elements within the ARTICLE element or from LIST//ITEM elements, or from the ALINEA elements if PARAG elements
+        are absent.
 
         Returns
         -------
@@ -214,7 +238,9 @@ class Formex4Parser(XMLParser):
     
     def get_conclusions(self):
         """
-        Extracts conclusions from the FINAL section.
+        Extracts conclusions from the document. The conclusion text is assumed to be contained within the FINAL
+        section of the document. The signature details are assumed to be contained within the SIGNATURE element.
+        
 
         Returns
         -------
@@ -245,7 +271,7 @@ class Formex4Parser(XMLParser):
 
     def parse(self, file):
         """
-        Parses a FORMEX XML document to extract metadata, title, preamble, and enacting terms.
+        Parses a FORMEX XML document to extract its components, which are inherited from the XMLParser class.
 
         Args:
             file (str): Path to the FORMEX XML file.

@@ -3,12 +3,12 @@ import json
 
 class AkomaNtosoParser(XMLParser):
     """
-    A parser for processing and extracting content from Akoma Ntoso XML files.
+    A parser for processing and extracting content from AkomaNtoso files.
 
-    The parser handles XML documents following the Akoma Ntoso schema for legal documents,
-    providing methods to extract various components like metadata, preamble, articles,
-    and chapters.
-
+    The parser handles XML documents following the Akoma Ntoso 3.0 schema for legal documents.
+    It inherits from the XMLParser class and provides methods to extract various components
+    like preface, preamble, chapters, articles, and conclusions.
+    
     Attributes
     ----------
     namespaces : dict
@@ -29,14 +29,24 @@ class AkomaNtosoParser(XMLParser):
         }
     
     def get_preface(self):
+        """	
+        Extracts preface information from the document. It is assumed that the preface
+        is contained within the 'preface' element in the XML file.
+        """
         return super().get_preface(preface_xpath='.//akn:preface', paragraph_xpath='.//akn:p')
     
     def get_preamble(self):
+        """
+        Extracts preamble information from the document. It is assumed that the preamble
+        is contained within the 'preamble' element in the XML file.
+        """
         return super().get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
     
     def get_formula(self):
         """
-        Extracts formula text from the preamble.
+        Extracts formula text from the preamble. The formula is assumed to be contained
+        within the 'formula' element in the XML file. The formula text is extracted from
+        all paragraphs within the formula element.
 
         Returns
         -------
@@ -48,14 +58,11 @@ class AkomaNtosoParser(XMLParser):
     
     def get_citations(self) -> list:
         """
-        Extracts citations from the preamble.
+        Extracts citations from the preamble. The citations are assumed to be contained
+        within the 'citations' element in the XML file. Each citation is extracted from
+        the 'citation' element within the citations element. The citation text is extracted
+        from all paragraphs within the citation element. 
 
-        Returns
-        -------
-        list
-            List of dictionaries containing citation data with keys:
-            - 'eId': Citation identifier, which is retrieved from the 'eId' attribute
-            - 'text': Citation text
         """
         def extract_eId(citation, index):
             return citation.get('eId')
@@ -68,7 +75,10 @@ class AkomaNtosoParser(XMLParser):
     
     def get_recitals(self):
         """
-        Extracts recitals from the preamble.
+        Extracts recitals from the preamble. The recitals are assumed to be contained
+        within the 'recitals' element in the XML file. Each recital is extracted from
+        the 'recital' element within the recitals element. The recital text is extracted
+        from all paragraphs within the recital element.
 
         Returns
         -------
@@ -97,7 +107,8 @@ class AkomaNtosoParser(XMLParser):
     
     def get_preamble_final(self):
         """
-        Extracts the final preamble text from the document.
+        Extracts the final preamble text from the document. The final preamble is assumed
+        to be contained within the 'preamble.final' element in the XML file. 
 
         Returns
         -------
@@ -109,11 +120,19 @@ class AkomaNtosoParser(XMLParser):
     
     
     def get_body(self):
+        """
+        Extracts the body section from the document. The body is assumed to be contained
+        within the 'body' element in the XML file.
+        """
         return super().get_body('.//akn:body')
         
     def get_chapters(self) -> None:
         """
-        Extracts chapter information from the document.
+        Extracts chapter information from the document. The chapters are assumed to be
+        contained within the 'chapter' element in the XML file. Each chapter is extracted
+        from the 'chapter' element. The chapter number and heading are extracted from the
+        'num' and 'heading' elements within the chapter element. The chapter identifier
+        is extracted from the 'eId' attribute of the chapter element.
 
         Returns
         -------
@@ -136,8 +155,13 @@ class AkomaNtosoParser(XMLParser):
     
     def get_articles(self) -> None:
         """
-        Extracts article information from the document.
-
+        Extracts article information from the document. The articles are assumed to be
+        contained within the 'article' element in the XML file. Each article is extracted
+        from the 'article' element. The article number and title are extracted from the
+        'num' and 'heading' elements within the article element. The article identifier
+        is extracted from the 'eId' attribute of the article element. The article is further
+        divided into child elements.
+    
         Returns
         -------
         list
@@ -218,7 +242,11 @@ class AkomaNtosoParser(XMLParser):
     
     def get_conclusions(self):
         """
-        Extracts conclusions information from the document.
+        Extracts conclusions information from the document. The conclusions are assumed to be
+        contained within the 'conclusions' element in the XML file. The conclusions section
+        may contain multiple <p> elements, each containing one or more <signature> elements.
+        The signature elements contain the signature text and metadata. The date is extracted
+        from the first <signature> element.
 
         Returns
         -------
@@ -259,15 +287,7 @@ class AkomaNtosoParser(XMLParser):
     
     def parse(self, file: str) -> None:
         """
-        Parses an Akoma Ntoso file to extract provisions as individual sentences.
-
-        This method sequentially calls various parsing functions to extract metadata,
-        preface, preamble, body, chapters, articles, and conclusions from the XML file.
-
-        Args:
-            file (str): The path to the Akoma Ntoso XML file.
-
-
+        Parses an Akoma Ntoso 3.0 document to extract its components, which are inherited from the XMLParser class
         """
         return super().parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')
 

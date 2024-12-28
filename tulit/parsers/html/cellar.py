@@ -79,11 +79,11 @@ class CellarHTMLParser(HTMLParser):
         citations = self.preamble.find_all('div', class_='eli-subdivision', id=lambda x: x and x.startswith('cit_'))
         self.citations = []
         for citation in citations:
-            citation_id = citation.get('id')
-            citation_text = citation.get_text(strip=True)
+            eId = citation.get('id')
+            text = citation.get_text(strip=True)
             self.citations.append({
-                    'eId' : citation_id,
-                    'citation_text' : citation_text
+                    'eId' : eId,
+                    'text' : text
                 }
             )
 
@@ -103,11 +103,11 @@ class CellarHTMLParser(HTMLParser):
         recitals = self.preamble.find_all('div', class_='eli-subdivision', id=lambda x: x and x.startswith('rct_'))
         self.recitals = []
         for recital in recitals:
-            recital_id = recital.get('id')
-            recital_text = recital.get_text(strip=True)
+            eId = recital.get('id')
+            text = recital.get_text(strip=True)
             self.recitals.append({
-                    'eId' : recital_id,
-                    'recital_text' : recital_text
+                    'eId' : eId,
+                    'text' : text
                 }
             )
     def get_preamble_final(self):
@@ -149,11 +149,11 @@ class CellarHTMLParser(HTMLParser):
         chapters = self.body.find_all('div', id=lambda x: x and x.startswith('cpt_') and '.' not in x)
         self.chapters = []
         for chapter in chapters:
-            chapter_id = chapter.get('id')
+            eId = chapter.get('id')
             chapter_num = chapter.find('p', class_="oj-ti-section-1").get_text(strip=True)
             chapter_title = chapter.find('div', class_="eli-title").get_text(strip=True)
             self.chapters.append({
-                'eId': chapter_id,
+                'eId': eId,
                 'chapter_num': chapter_num,
                 'chapter_heading': chapter_title
             })
@@ -258,7 +258,7 @@ class CellarHTMLParser(HTMLParser):
                 'eId': eId,
                 'article_num': article_num,
                 'article_title': article_title,
-                'article_text': subdivisions
+                'children': subdivisions
             })
 
 

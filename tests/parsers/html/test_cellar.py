@@ -75,6 +75,7 @@ class TestCellarHTMLParser(unittest.TestCase):
         self.parser.get_preamble()
         self.parser.get_recitals()
         
+        
         self.assertIsNotNone(self.parser.recitals, "Recitals element should not be None")
         
 
@@ -96,17 +97,6 @@ class TestCellarHTMLParser(unittest.TestCase):
         self.parser.get_body()
         self.parser.get_articles()
         
-        # Save output file to directory
-        #with open(os.path.join(DATA_DIR, 'json', 'articles_html.json'), 'w+', encoding='utf-8') as f:
-        #    json.dump(self.parser.articles, f)
-        #    
-        ## Load the expected structure of parsed articles
-        #with open(os.path.join(DATA_DIR, 'json', 'articles_html.json'), encoding='utf-8') as f:
-        #    expected = json.load(f)
-        
-        # Assert the parsed articles match the expected structure
-        #self.assertEqual(self.parser.articles, expected)
-
         
     def test_get_conclusions(self):
         self.parser.get_conclusions()

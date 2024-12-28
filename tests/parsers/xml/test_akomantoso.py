@@ -114,7 +114,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
     
     def test_get_conclusions(self):
         # Expected output
-        expected_conclusions = {
+        conclusions = {
             'date': '23 July 2014',
             'signatures': [
                 ["Done at Brussels, 23 July 2014."],
@@ -122,9 +122,8 @@ class TestAkomaNtosoParser(unittest.TestCase):
                 ['For the Council', 'The President', 'S. Gozi']
             ]
         }
-        # Test get_conclusions method
         self.parser.get_conclusions()
-        self.assertEqual(self.parser.conclusions, expected_conclusions, "Parsed conclusions do not match expected output")
+        self.assertEqual(self.parser.conclusions, conclusions, "Parsed conclusions do not match expected output")
 
 if __name__ == '__main__':
     unittest.main()

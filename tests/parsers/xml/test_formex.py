@@ -123,8 +123,20 @@ class TestFormex4Parser(unittest.TestCase):
         self.assertEqual(self.parser.articles, expected)
 
     def test_get_conclusions(self):
-        pass
-
+        self.parser = Formex4Parser()
+        self.parser.get_root(iopa)
+        self.parser.get_body()
+        self.parser.get_conclusions()
+        conclusions = {
+                "conclusion_text": "This Regulation shall be binding in its entirety and directly applicable in all Member States.",
+                "signature": {
+                    "place": "Done at Strasbourg,",
+                    "date": "13 March 2024",
+                    "signatory": "For the European Parliament",
+                    "title": "The President"
+                }
+            }
+        self.assertEqual(self.parser.conclusions, conclusions)
 
 # Run the tests
 if __name__ == "__main__":

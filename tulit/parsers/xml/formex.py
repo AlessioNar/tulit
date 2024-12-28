@@ -213,7 +213,34 @@ class Formex4Parser(XMLParser):
             children.append(child)
     
     def get_conclusions(self):
-        return super().get_conclusions()
+        """
+        Extracts conclusions from the FINAL section.
+
+        Returns
+        -------
+        dict
+            Dictionary containing the conclusion text and signature details.
+        """
+        self.conclusions = {}
+        final_section = self.root.find('.//FINAL')
+        if final_section is not None:
+            conclusion_text = "".join(final_section.findtext('.//P')).strip()
+            self.conclusions['conclusion_text'] = conclusion_text
+
+            signature_section = final_section.find('.//SIGNATURE')
+            if signature_section is not None:
+                place = signature_section.findtext('.//PL.DATE/P').strip()
+                date = signature_section.findtext('.//PL.DATE/P/DATE')
+                signatory = signature_section.findtext('.//SIGNATORY/P/HT')
+                title = signature_section.findtext('.//SIGNATORY/P[2]/HT')
+
+                self.conclusions['signature'] = {
+                    'place': place,
+                    'date': date,
+                    'signatory': signatory,
+                    'title': title
+                }
+        return self.conclusions
         
 
     def parse(self, file):

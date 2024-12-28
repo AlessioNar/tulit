@@ -8,12 +8,17 @@ This package contains modules for parsing various types of legal documents. Belo
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.formex
+.. automodule:: tulit.parsers.xml.xml
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.akomantoso
+.. automodule:: tulit.parsers.xml.formex
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: tulit.parsers.xml.akomantoso
     :members:
     :undoc-members:
     :show-inheritance:

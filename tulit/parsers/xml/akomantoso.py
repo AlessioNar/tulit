@@ -1,7 +1,4 @@
-from tulit.parsers.parser import XMLParser
-import re
-from lxml import etree
-import os
+from tulit.parsers.xml.xml import XMLParser
 import json
 
 class AkomaNtosoParser(XMLParser):
@@ -148,7 +145,7 @@ class AkomaNtosoParser(XMLParser):
             - 'eId': Article identifier
             - 'article_num': Article number
             - 'article_title': Article title
-            - 'article_text': List of dictionaries with eId and text content
+            - 'children': List of dictionaries with eId and text content
         """        
         # Removing all authorialNote nodes
         self.body = self.remove_node(self.body, './/akn:authorialNote')
@@ -169,14 +166,14 @@ class AkomaNtosoParser(XMLParser):
             # Get the title text 
             article_title_text = article_title_element.text if article_title_element is not None else None
 
-            childrens = self.get_text_by_eId(article)
+            children = self.get_text_by_eId(article)
         
             # Append the article data to the articles list
             self.articles.append({
                 'eId': eId,
                 'article_num': article_num_text,
                 'article_title': article_title_text,
-                'childrens': childrens
+                'children': children
             })
 
     

@@ -1,9 +1,7 @@
 import re
-import os
 import json
 
-from lxml import etree
-from tulit.parsers.parser import XMLParser
+from tulit.parsers.xml.xml import XMLParser
 
 class Formex4Parser(XMLParser):
     """

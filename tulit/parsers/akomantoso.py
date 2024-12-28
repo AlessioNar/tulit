@@ -35,6 +35,9 @@ class AkomaNtosoParser(XMLParser):
     def get_preface(self):
         return super().get_preface(preface_xpath='.//akn:preface', paragraph_xpath='.//akn:p')
     
+    def get_preamble(self):
+        return super().get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
+    
     def get_formula(self):
         """
         Extracts formula text from the preamble.
@@ -156,9 +159,7 @@ class AkomaNtosoParser(XMLParser):
             - 'article_num': Article number
             - 'article_title': Article title
             - 'article_text': List of dictionaries with eId and text content
-        """
-        self.articles = []  # Reset articles list
-
+        """        
         # Removing all authorialNote nodes
         self.body = self.remove_node(self.body, './/akn:authorialNote')
 
@@ -270,7 +271,7 @@ class AkomaNtosoParser(XMLParser):
             'signatures': signatures
         }
     
-    def parse(self, file: str) -> list[dict]:
+    def parse(self, file: str) -> None:
         """
         Parses an Akoma Ntoso file to extract provisions as individual sentences.
 
@@ -282,58 +283,4 @@ class AkomaNtosoParser(XMLParser):
 
 
         """
-        try:
-            self.load_schema('akomantoso30.xsd')
-            self.validate(file, format='Akoma Ntoso')
-            if self.valid == True:
-                try:
-                    self.get_root(file)
-                    print("Root element loaded successfully.")
-                except Exception as e:
-                    print(f"Error in get_root: {e}")
-                    
-                try:
-                    self.get_preface()
-                    print(f"Preface parsed successfully.")
-                except Exception as e:
-                    print(f"Error in get_preface: {e}")
-                
-                try:
-                    self.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath=".//akn:authorialNote")
-                    print(f"Preamble parsed successfully.")
-                except Exception as e:
-                    print(f"Error in get_preamble: {e}")
-                try:
-                    self.get_citations(citations_xpath='.//akn:citations', citation_xpath='.//akn:citation')
-                    print(f"Citations parsed successfully.")
-                except Exception as e:
-                    print(f"Error in get_citations: {e}")
-                try:
-                    self.get_recitals()
-                    print(f"Recitals parsed successfully.")
-                except Exception as e:
-                    print(f"Error in get_recitals: {e}")
-                
-                try:
-                    self.get_body()
-                    print("Body parsed successfully.")
-                except Exception as e:
-                    print(f"Error in get_body: {e}")
-                try:
-                    self.get_chapters(chapter_xpath='.//akn:chapter', num_xpath='.//akn:num', heading_xpath='.//akn:heading')
-                    print(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
-                except Exception as e:
-                    print(f"Error in get_chapters: {e}")
-                try:
-                    self.get_articles()
-                    print(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-                except Exception as e:
-                    print(f"Error in get_articles: {e}")
-                try:
-                    self.get_conclusions()                    
-                    print(f"Conclusions parsed successfully. ")
-                except Exception as e:
-                    print(f"Error in get_conclusions: {e}")
-                
-        except Exception as e:
-            print(f'Invalid {self.format} file: parsing may not work or work only partially: {e}')
+        return super.parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')

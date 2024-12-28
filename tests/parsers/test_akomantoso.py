@@ -34,21 +34,21 @@ class TestAkomaNtosoParser(unittest.TestCase):
 
     def test_get_preamble(self):
         """Test retrieval of preamble data from the XML file."""
-        self.parser.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
+        self.parser.get_preamble()
         self.assertIsNotNone(self.parser.preamble, "Preamble element not found")
         self.assertIsNotNone(self.parser.formula, "Formula not found")
         
 
     def test_get_formula(self):
         """Test extraction of formula text within the preamble."""
-        self.parser.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
+        self.parser.get_preamble()
 
         formula_data = self.parser.get_formula()
         self.assertIn("THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION", formula_data)
 
     def test_get_citations(self):
         """Test citation extraction in the preamble section."""
-        self.parser.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
+        self.parser.get_preamble()
         self.parser.get_citations()
         
         self.assertIsNotNone(self.parser.citations, "Citations data not found")
@@ -59,7 +59,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
 
     def test_get_recitals(self):
         """Test retrieval and content verification of recitals in the preamble."""
-        self.parser.get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
+        self.parser.get_preamble()
         self.parser.get_recitals()
         self.assertIsNotNone(self.parser.recitals, "Recitals section not found in <preamble>")
         self.assertEqual(len(self.parser.recitals), 59, "Incorrect number of recitals extracted")

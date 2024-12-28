@@ -1,0 +1,2875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subdivisions table.id="subdivision"
+              original.entries.date="2015-05-07"
+              current.entries.date="2024-11-24"
+              ref.administration="cat.admin.xml"
+              table.structure.version="01-02.94-20241202"
+              version="20241211-0">
+   <record id="SDV001"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>ALN</authority-code>
+      <comments>
+         <comment date="2024-05-22">
+            <lg.version lg="eng">Subdivision of an article which does not have a distinctive sign (number, letter or dash).</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">неномериран параграф</lg.version>
+         <lg.version lg="ces">pododstavec</lg.version>
+         <lg.version lg="dan">unummererede afsnit</lg.version>
+         <lg.version lg="deu">nicht nummerierter Absatz</lg.version>
+         <lg.version lg="ell" script="Greek">εδάφιο</lg.version>
+         <lg.version lg="eng">unnumbered paragraph</lg.version>
+         <lg.version lg="est">lõik</lg.version>
+         <lg.version lg="fin">numeroimaton kohta</lg.version>
+         <lg.version lg="fra">alinéa</lg.version>
+         <lg.version lg="gle">mír neamhuimhrithe</lg.version>
+         <lg.version lg="hrv">nenumerirani podstavak</lg.version>
+         <lg.version lg="hun">számozatlan bekezdés</lg.version>
+         <lg.version lg="ita">comma</lg.version>
+         <lg.version lg="lav">nenumurēts punkts</lg.version>
+         <lg.version lg="lit">pastraipa</lg.version>
+         <lg.version lg="mlt">paragrafu mhux numerat</lg.version>
+         <lg.version lg="nld">alinea</lg.version>
+         <lg.version lg="pol">nienumerowane akapity</lg.version>
+         <lg.version lg="por">parágrafo</lg.version>
+         <lg.version lg="ron">paragraf</lg.version>
+         <lg.version lg="slk">neočíslovaný odsek</lg.version>
+         <lg.version lg="slv">neoštevilčeni odstavek</lg.version>
+         <lg.version lg="spa">párrafo</lg.version>
+         <lg.version lg="swe">stycke</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="bul" script="Cyrillic">алинея</lg.version>
+            <lg.version lg="dan">afsnit</lg.version>
+            <lg.version lg="deu">Unterabsatz</lg.version>
+            <lg.version lg="eng">sub-paragraph</lg.version>
+            <lg.version lg="fin">alakohta</lg.version>
+            <lg.version lg="gle">fomhír</lg.version>
+            <lg.version lg="hrv">podstavak</lg.version>
+            <lg.version lg="hun">albekezdés</lg.version>
+            <lg.version lg="mlt">subparagrafu</lg.version>
+            <lg.version lg="pol">akapit</lg.version>
+            <lg.version lg="slk">pododsek</lg.version>
+            <lg.version lg="slv">pododstavek</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="CJ">L</op-mapped-code>
+      <op-mapped-code source="FORMEX">AL</op-mapped-code>
+      <sources>
+         <source date="2014-02-12" lg="eng">
+            <description>sole element or a non-independent element of an article (JPG 15.4, table) or exceptionally an element of an annex</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV002"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>ANX</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">приложение</lg.version>
+         <lg.version lg="ces">příloha</lg.version>
+         <lg.version lg="dan">bilag</lg.version>
+         <lg.version lg="deu">Anhang</lg.version>
+         <lg.version lg="ell" script="Greek">παράρτημα</lg.version>
+         <lg.version lg="eng">annex</lg.version>
+         <lg.version lg="est">lisa</lg.version>
+         <lg.version lg="fin">liite</lg.version>
+         <lg.version lg="fra">annexe</lg.version>
+         <lg.version lg="gle">iarscríbhinn</lg.version>
+         <lg.version lg="hrv">prilog</lg.version>
+         <lg.version lg="hun">melléklet</lg.version>
+         <lg.version lg="ita">allegato</lg.version>
+         <lg.version lg="lav">pielikums</lg.version>
+         <lg.version lg="lit">priedas</lg.version>
+         <lg.version lg="mlt">anness</lg.version>
+         <lg.version lg="nld">bijlage</lg.version>
+         <lg.version lg="pol">załącznik</lg.version>
+         <lg.version lg="por">anexo</lg.version>
+         <lg.version lg="ron">anexă</lg.version>
+         <lg.version lg="slk">príloha</lg.version>
+         <lg.version lg="slv">priloga</lg.version>
+         <lg.version lg="spa">anexo</lg.version>
+         <lg.version lg="swe">bilaga</lg.version>
+      </label>
+      <op-mapped-code source="CJ">N</op-mapped-code>
+      <op-mapped-code source="FORMEX">AX</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>distinct part of an act that generally contains rules or technical data which, for practical reasons, do not appear in the enacting terms, and frequently take the form of a list or table</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV003"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>APP</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">допълнение</lg.version>
+         <lg.version lg="ces">dodatek</lg.version>
+         <lg.version lg="dan">tillæg</lg.version>
+         <lg.version lg="deu">Anlage</lg.version>
+         <lg.version lg="ell" script="Greek">προσάρτημα</lg.version>
+         <lg.version lg="eng">appendix</lg.version>
+         <lg.version lg="est">liide</lg.version>
+         <lg.version lg="fin">lisäys</lg.version>
+         <lg.version lg="fra">appendice</lg.version>
+         <lg.version lg="gle">foscríbhinn</lg.version>
+         <lg.version lg="hrv">dodatak</lg.version>
+         <lg.version lg="hun">függelék</lg.version>
+         <lg.version lg="ita">appendice</lg.version>
+         <lg.version lg="lav">papildinājums</lg.version>
+         <lg.version lg="lit">priedėlis</lg.version>
+         <lg.version lg="mlt">appendiċi</lg.version>
+         <lg.version lg="nld">aanhangsel</lg.version>
+         <lg.version lg="pol">dodatek</lg.version>
+         <lg.version lg="por">apêndice</lg.version>
+         <lg.version lg="ron">apendice</lg.version>
+         <lg.version lg="slk">dodatok</lg.version>
+         <lg.version lg="slv">dodatek</lg.version>
+         <lg.version lg="spa">apéndice</lg.version>
+         <lg.version lg="swe">tillägg</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">AP</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>An appendix is a distinct supplementary part of an act which generally contains explanatory or statistical information, and which frequently take the form of a list or table.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV004"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>ART</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">Distinguishable by the standardised title, which consists of the expression ‘Article’ followed by a sequential number or preceded by ‘sole’.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">член</lg.version>
+         <lg.version lg="ces">článek</lg.version>
+         <lg.version lg="dan">artikel</lg.version>
+         <lg.version lg="deu">Artikel</lg.version>
+         <lg.version lg="ell" script="Greek">άρθρο</lg.version>
+         <lg.version lg="eng">article</lg.version>
+         <lg.version lg="est">artikkel</lg.version>
+         <lg.version lg="fin">artikla</lg.version>
+         <lg.version lg="fra">article</lg.version>
+         <lg.version lg="gle">airteagal</lg.version>
+         <lg.version lg="hrv">članak</lg.version>
+         <lg.version lg="hun">cikk</lg.version>
+         <lg.version lg="ita">articolo</lg.version>
+         <lg.version lg="lav">pants</lg.version>
+         <lg.version lg="lit">straipsnis</lg.version>
+         <lg.version lg="mlt">artikolu</lg.version>
+         <lg.version lg="nld">artikel</lg.version>
+         <lg.version lg="pol">artykuł</lg.version>
+         <lg.version lg="por">artigo</lg.version>
+         <lg.version lg="ron">articol</lg.version>
+         <lg.version lg="slk">článok</lg.version>
+         <lg.version lg="slv">člen</lg.version>
+         <lg.version lg="spa">artículo</lg.version>
+         <lg.version lg="swe">artikel</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">AR</op-mapped-code>
+      <op-mapped-code source="CJ">A</op-mapped-code>
+      <sources>
+         <source date="2014-02-12" lg="eng">
+            <description>basic component of the enacting terms of a legal act</description>
+            <provenance>Formex</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV005"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>CIT</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">In the hierarchy, citations are elements of the preamble.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">позоваване</lg.version>
+         <lg.version lg="ces">právní východisko</lg.version>
+         <lg.version lg="dan">henvisning</lg.version>
+         <lg.version lg="deu">Bezugsvermerk</lg.version>
+         <lg.version lg="ell" script="Greek">σημείο αναφοράς</lg.version>
+         <lg.version lg="eng">citation</lg.version>
+         <lg.version lg="est">volitus</lg.version>
+         <lg.version lg="fin">viite</lg.version>
+         <lg.version lg="fra">visa</lg.version>
+         <lg.version lg="gle">lua</lg.version>
+         <lg.version lg="hrv">pozivanje</lg.version>
+         <lg.version lg="hun">bevezető hivatkozás</lg.version>
+         <lg.version lg="ita">visto</lg.version>
+         <lg.version lg="lav">pamatojums</lg.version>
+         <lg.version lg="lit">nurodomoji dalis</lg.version>
+         <lg.version lg="mlt">konsiderazzjoni</lg.version>
+         <lg.version lg="nld">aanhaling</lg.version>
+         <lg.version lg="pol">umocowania</lg.version>
+         <lg.version lg="por">citação</lg.version>
+         <lg.version lg="ron">referire</lg.version>
+         <lg.version lg="slk">citácia</lg.version>
+         <lg.version lg="slv">sklicevanje</lg.version>
+         <lg.version lg="spa">visto</lg.version>
+         <lg.version lg="swe">beaktandeled</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">VI</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>legal basis for an act or a preparatory act and in the case of a legislative act also the procedure followed and the transmission of a draft legislative act to national parliaments</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV006"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>CPT</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">Chapters have distinctive signs of type Arab numerals 1, 2, 3 etc. or uppercase Roman numbers I, II, III etc.</lg.version>
+            <lg.version lg="eng">In the hierarchy of subdivisions, chapter is between title and section.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">глава</lg.version>
+         <lg.version lg="ces">kapitola</lg.version>
+         <lg.version lg="dan">kapitel</lg.version>
+         <lg.version lg="deu">Kapitel</lg.version>
+         <lg.version lg="ell" script="Greek">κεφάλαιο</lg.version>
+         <lg.version lg="eng">chapter</lg.version>
+         <lg.version lg="est">peatükk</lg.version>
+         <lg.version lg="fin">luku</lg.version>
+         <lg.version lg="fra">chapitre</lg.version>
+         <lg.version lg="gle">caibidil</lg.version>
+         <lg.version lg="hrv">poglavlje</lg.version>
+         <lg.version lg="hun">fejezet</lg.version>
+         <lg.version lg="ita">capo</lg.version>
+         <lg.version lg="lav">nodaļa</lg.version>
+         <lg.version lg="lit">skyrius</lg.version>
+         <lg.version lg="mlt">kapitolu</lg.version>
+         <lg.version lg="nld">hoofdstuk</lg.version>
+         <lg.version lg="pol">rozdział</lg.version>
+         <lg.version lg="por">capítulo</lg.version>
+         <lg.version lg="ron">capitol</lg.version>
+         <lg.version lg="slk">kapitola</lg.version>
+         <lg.version lg="slv">poglavje</lg.version>
+         <lg.version lg="spa">capítulo</lg.version>
+         <lg.version lg="swe">kapitel</lg.version>
+      </label>
+      <op-mapped-code source="CJ">CH</op-mapped-code>
+      <op-mapped-code source="FORMEX">CH</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>higher subdivision within a legal act used to introduce a group of articles in the enacting terms</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV007"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>IDT</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">As indents have no figure nor other sign of identification, ordinal numbers written by letters are used to refer to them: first indent, second indent, third indent etc.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">тире</lg.version>
+         <lg.version lg="ces">odrážka</lg.version>
+         <lg.version lg="dan">led</lg.version>
+         <lg.version lg="deu">Gedankenstrich</lg.version>
+         <lg.version lg="ell" script="Greek">περίπτωση</lg.version>
+         <lg.version lg="eng">indent</lg.version>
+         <lg.version lg="est">taane</lg.version>
+         <lg.version lg="fin">luetelmakohta</lg.version>
+         <lg.version lg="fra">tiret</lg.version>
+         <lg.version lg="gle">fleasc</lg.version>
+         <lg.version lg="hrv">alineja</lg.version>
+         <lg.version lg="hun">franciabekezdés</lg.version>
+         <lg.version lg="ita">trattino</lg.version>
+         <lg.version lg="lav">ievilkums</lg.version>
+         <lg.version lg="lit">įtrauka</lg.version>
+         <lg.version lg="mlt">inċiż</lg.version>
+         <lg.version lg="nld">streepje</lg.version>
+         <lg.version lg="pol">tiret</lg.version>
+         <lg.version lg="por">travessão</lg.version>
+         <lg.version lg="ron">liniuță</lg.version>
+         <lg.version lg="slk">zarážka</lg.version>
+         <lg.version lg="slv">alinea</lg.version>
+         <lg.version lg="spa">guion</lg.version>
+         <lg.version lg="swe">strecksats</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">DA</op-mapped-code>
+      <op-mapped-code source="CJ">T</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>element of an enumeration preceded by a dash</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV008"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>PAR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">параграф</lg.version>
+         <lg.version lg="ces">odstavec</lg.version>
+         <lg.version lg="dan">stykke</lg.version>
+         <lg.version lg="deu">Absatz</lg.version>
+         <lg.version lg="ell" script="Greek">παράγραφος</lg.version>
+         <lg.version lg="eng">paragraph</lg.version>
+         <lg.version lg="est">lõige</lg.version>
+         <lg.version lg="fin">kohta</lg.version>
+         <lg.version lg="fra">paragraphe</lg.version>
+         <lg.version lg="gle">mír</lg.version>
+         <lg.version lg="hrv">stavak</lg.version>
+         <lg.version lg="hun">bekezdés</lg.version>
+         <lg.version lg="ita">paragrafo</lg.version>
+         <lg.version lg="lav">punkts</lg.version>
+         <lg.version lg="lit">dalis</lg.version>
+         <lg.version lg="mlt">paragrafu</lg.version>
+         <lg.version lg="nld">lid</lg.version>
+         <lg.version lg="pol">ustęp</lg.version>
+         <lg.version lg="por">número</lg.version>
+         <lg.version lg="ron">alineat</lg.version>
+         <lg.version lg="slk">očíslovaný odsek</lg.version>
+         <lg.version lg="slv">odstavek</lg.version>
+         <lg.version lg="spa">apartado</lg.version>
+         <lg.version lg="swe">punkt</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="eng">numbered paragraph</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="CJ">P</op-mapped-code>
+      <op-mapped-code source="FORMEX">PA</op-mapped-code>
+      <sources>
+         <source date="2014-02-12" lg="eng">
+            <description>The PAR element is used to mark up a subdivision of an article numbered using Arab numerals within a European legal text. It is made up of at least one alinea or quoted text.</description>
+            <provenance>Formex</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV009"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>PNT</authority-code>
+      <comments>
+         <comment date="2024-10-23">
+            <lg.version lg="eng">Indicates either each element of an enumeration inside a paragraph, a subparagraph or a point (this enumeration being generally preceded by an introductory phrase); or is possibly used independently as a basic unit, e.g. in annexes or preparatory documents.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">точка</lg.version>
+         <lg.version lg="ces">bod</lg.version>
+         <lg.version lg="dan">nummer</lg.version>
+         <lg.version lg="deu">Nummer</lg.version>
+         <lg.version lg="ell" script="Greek">σημείο</lg.version>
+         <lg.version lg="eng">point</lg.version>
+         <lg.version lg="est">punkt</lg.version>
+         <lg.version lg="fin">alakohta</lg.version>
+         <lg.version lg="fra">point</lg.version>
+         <lg.version lg="gle">pointe</lg.version>
+         <lg.version lg="hrv">točka</lg.version>
+         <lg.version lg="hun">pont</lg.version>
+         <lg.version lg="ita">punto</lg.version>
+         <lg.version lg="lav">punkts</lg.version>
+         <lg.version lg="lit">punktas</lg.version>
+         <lg.version lg="mlt">punt</lg.version>
+         <lg.version lg="nld">punt</lg.version>
+         <lg.version lg="pol">punkt</lg.version>
+         <lg.version lg="por">ponto</lg.version>
+         <lg.version lg="ron">punct</lg.version>
+         <lg.version lg="slk">bod</lg.version>
+         <lg.version lg="slv">točka</lg.version>
+         <lg.version lg="spa">punto</lg.version>
+         <lg.version lg="swe">led</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="lav">apakšpunkts</lg.version>
+            <lg.version lg="ron">subpunct</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">PT</op-mapped-code>
+      <op-mapped-code source="CJ">PT</op-mapped-code>
+      <sources>
+         <source lg="eng">
+            <description>structure component of a legal article that has a distinctive sign of the type Arabic numbers: (1), (2), (3) etc.</description>
+            <provenance>Formex</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV010"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>RCT</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">съображение</lg.version>
+         <lg.version lg="ces">bod odůvodnění</lg.version>
+         <lg.version lg="dan">betragtning</lg.version>
+         <lg.version lg="deu">Erwägungsgrund</lg.version>
+         <lg.version lg="ell" script="Greek">αιτιολογική σκέψη</lg.version>
+         <lg.version lg="eng">recital</lg.version>
+         <lg.version lg="est">põhjendus</lg.version>
+         <lg.version lg="fin">johdanto-osan kappale</lg.version>
+         <lg.version lg="fra">considérant</lg.version>
+         <lg.version lg="gle">aithris</lg.version>
+         <lg.version lg="hrv">uvodna izjava</lg.version>
+         <lg.version lg="hun">preambulumbekezdés</lg.version>
+         <lg.version lg="ita">considerando</lg.version>
+         <lg.version lg="lav">apsvērums</lg.version>
+         <lg.version lg="lit">konstatuojamoji dalis</lg.version>
+         <lg.version lg="mlt">premessa</lg.version>
+         <lg.version lg="nld">overweging</lg.version>
+         <lg.version lg="pol">motyw</lg.version>
+         <lg.version lg="por">considerando</lg.version>
+         <lg.version lg="ron">considerent</lg.version>
+         <lg.version lg="slk">odôvodnenie</lg.version>
+         <lg.version lg="slv">uvodna izjava</lg.version>
+         <lg.version lg="spa">considerando</lg.version>
+         <lg.version lg="swe">skäl</lg.version>
+      </label>
+      <op-mapped-code source="CJ">C</op-mapped-code>
+      <op-mapped-code source="FORMEX">CO</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>element in the preamble that sets out the reasoning for the chief provisions of the enacting terms</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV011"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>RUL</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">правило</lg.version>
+         <lg.version lg="ces">pravidlo</lg.version>
+         <lg.version lg="dan">regel</lg.version>
+         <lg.version lg="deu">Regel</lg.version>
+         <lg.version lg="ell" script="Greek">κανόνας</lg.version>
+         <lg.version lg="eng">rule</lg.version>
+         <lg.version lg="est">eeskiri</lg.version>
+         <lg.version lg="fin">sääntö</lg.version>
+         <lg.version lg="fra">règle</lg.version>
+         <lg.version lg="gle">riail</lg.version>
+         <lg.version lg="hrv">pravilo</lg.version>
+         <lg.version lg="hun">szabály</lg.version>
+         <lg.version lg="ita">regola</lg.version>
+         <lg.version lg="lav">noteikums</lg.version>
+         <lg.version lg="lit">taisyklė</lg.version>
+         <lg.version lg="mlt">regola</lg.version>
+         <lg.version lg="nld">regel</lg.version>
+         <lg.version lg="pol">zasada</lg.version>
+         <lg.version lg="por">regra</lg.version>
+         <lg.version lg="ron">regulă</lg.version>
+         <lg.version lg="slk">pravidlo</lg.version>
+         <lg.version lg="slv">pravilo</lg.version>
+         <lg.version lg="spa">regla</lg.version>
+         <lg.version lg="swe">regel</lg.version>
+      </label>
+      <op-mapped-code source="CJ">R</op-mapped-code>
+      <sources>
+         <source date="2015-03-16" lg="eng">
+            <description>The RULE element is used in some acts, such as in Commission Regulation (EC) No 2868/95 of 13 December 1995.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+         <source date="2015-03-16" lg="fra">
+            <description>L'élément RÈGLE est utilisé dans certains actes, comme dans le règlement (CE) n° 2868/95 de la Commission du 13 décembre 1995.</description>
+            <provenance>Office des Publications</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV012"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>CLS</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">клауза</lg.version>
+         <lg.version lg="ces">ustanovení</lg.version>
+         <lg.version lg="dan">klausul</lg.version>
+         <lg.version lg="deu">Klausel</lg.version>
+         <lg.version lg="ell" script="Greek">ρήτρα</lg.version>
+         <lg.version lg="eng">clause</lg.version>
+         <lg.version lg="est">klausel</lg.version>
+         <lg.version lg="fin">lauseke</lg.version>
+         <lg.version lg="fra">clause</lg.version>
+         <lg.version lg="gle">clásal</lg.version>
+         <lg.version lg="hrv">odredba</lg.version>
+         <lg.version lg="hun">záradék</lg.version>
+         <lg.version lg="ita">clausola</lg.version>
+         <lg.version lg="lav">klauzula</lg.version>
+         <lg.version lg="lit">nuostata</lg.version>
+         <lg.version lg="mlt">klawżola</lg.version>
+         <lg.version lg="nld">clausule</lg.version>
+         <lg.version lg="pol">klauzula</lg.version>
+         <lg.version lg="por">cláusula</lg.version>
+         <lg.version lg="ron">clauză</lg.version>
+         <lg.version lg="slk">doložka</lg.version>
+         <lg.version lg="slv">klavzula</lg.version>
+         <lg.version lg="spa">cláusula</lg.version>
+         <lg.version lg="swe">klausul</lg.version>
+      </label>
+      <op-mapped-code source="CJ">CL</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>A clause is a distinct provision at the end of an agreement, a treaty or another act.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV013"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>SCT</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">Sections have distinctive signs of type Arab numerals 1, 2, 3 etc.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">раздел</lg.version>
+         <lg.version lg="ces">oddíl</lg.version>
+         <lg.version lg="dan">afdeling</lg.version>
+         <lg.version lg="deu">Abschnitt</lg.version>
+         <lg.version lg="ell" script="Greek">τμήμα</lg.version>
+         <lg.version lg="eng">section</lg.version>
+         <lg.version lg="est">jagu</lg.version>
+         <lg.version lg="fin">jakso</lg.version>
+         <lg.version lg="fra">section</lg.version>
+         <lg.version lg="gle">roinn</lg.version>
+         <lg.version lg="hrv">odjeljak</lg.version>
+         <lg.version lg="hun">szakasz</lg.version>
+         <lg.version lg="ita">sezione</lg.version>
+         <lg.version lg="lav">iedaļa</lg.version>
+         <lg.version lg="lit">skirsnis</lg.version>
+         <lg.version lg="mlt">taqsima</lg.version>
+         <lg.version lg="nld">afdeling</lg.version>
+         <lg.version lg="pol">sekcja</lg.version>
+         <lg.version lg="por">secção</lg.version>
+         <lg.version lg="ron">secțiune</lg.version>
+         <lg.version lg="slk">oddiel</lg.version>
+         <lg.version lg="slv">oddelek</lg.version>
+         <lg.version lg="spa">sección</lg.version>
+         <lg.version lg="swe">avsnitt</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">SE</op-mapped-code>
+      <op-mapped-code source="CJ">S</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>lowest of the four higher subdivisions of an act (others are parts, titles and chapters) used to introduce a group of articles in the enacting terms</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV014"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>PBL</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">преамбюл</lg.version>
+         <lg.version lg="ces">preambule</lg.version>
+         <lg.version lg="dan">præambel</lg.version>
+         <lg.version lg="deu">Präambel</lg.version>
+         <lg.version lg="ell" script="Greek">προοίμιο</lg.version>
+         <lg.version lg="eng">preamble</lg.version>
+         <lg.version lg="est">preambul</lg.version>
+         <lg.version lg="fin">johdanto-osa</lg.version>
+         <lg.version lg="fra">préambule</lg.version>
+         <lg.version lg="gle">brollach</lg.version>
+         <lg.version lg="hrv">preambula</lg.version>
+         <lg.version lg="hun">preambulum</lg.version>
+         <lg.version lg="ita">preambolo</lg.version>
+         <lg.version lg="lav">preambula</lg.version>
+         <lg.version lg="lit">preambulė</lg.version>
+         <lg.version lg="mlt">preambolu</lg.version>
+         <lg.version lg="nld">preambule</lg.version>
+         <lg.version lg="pol">preambuła</lg.version>
+         <lg.version lg="por">preâmbulo</lg.version>
+         <lg.version lg="ron">preambul</lg.version>
+         <lg.version lg="slk">preambula</lg.version>
+         <lg.version lg="slv">preambula</lg.version>
+         <lg.version lg="spa">preámbulo</lg.version>
+         <lg.version lg="swe">ingress</lg.version>
+      </label>
+      <op-mapped-code source="CJ">PR</op-mapped-code>
+      <op-mapped-code source="FORMEX">PB</op-mapped-code>
+      <sources>
+         <source date="2014-02-12" lg="eng">
+            <description>part of an act positioned after the title of the act that includes the citations, the recitals and the solemn forms preceding the enacting terms</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV015"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-11">
+      <authority-code>TIT</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">The complete title of an act comprises type of act, number of act, name of the author of the act, date of adoption and subject matter. In the case of subdivisions, the title contains the subject matter.</lg.version>
+         </comment>
+         <comment date="2024-02-23">
+            <lg.version lg="eng">The Common Vocabulary (CoV) definition ‘The title of the document comprises all the information in the heading of the document which serves to identify it’ is referring to the same.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">заглавие</lg.version>
+         <lg.version lg="ces">název</lg.version>
+         <lg.version lg="dan">titel</lg.version>
+         <lg.version lg="deu">Titel</lg.version>
+         <lg.version lg="ell" script="Greek">τίτλος</lg.version>
+         <lg.version lg="eng">title</lg.version>
+         <lg.version lg="est">pealkiri</lg.version>
+         <lg.version lg="fin">nimi</lg.version>
+         <lg.version lg="fra">titre</lg.version>
+         <lg.version lg="gle">teideal</lg.version>
+         <lg.version lg="hrv">naslov</lg.version>
+         <lg.version lg="hun">cím</lg.version>
+         <lg.version lg="ita">titolo</lg.version>
+         <lg.version lg="lav">virsraksts</lg.version>
+         <lg.version lg="lit">pavadinimas</lg.version>
+         <lg.version lg="mlt">titolu</lg.version>
+         <lg.version lg="nld">titel</lg.version>
+         <lg.version lg="pol">tytuł</lg.version>
+         <lg.version lg="por">título</lg.version>
+         <lg.version lg="ron">titlu</lg.version>
+         <lg.version lg="slk">názov</lg.version>
+         <lg.version lg="slv">naslov</lg.version>
+         <lg.version lg="spa">título</lg.version>
+         <lg.version lg="swe">titel</lg.version>
+      </label>
+      <op-mapped-code source="CJ">TIT</op-mapped-code>
+      <op-mapped-code source="FORMEX">TI</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>designation of an act or the designation of a subdivision (e.g. article, chapter, part) of an act</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV016"
+           deprecated="false"
+           IMMC.approval.date="2015-06-05"
+           IMMC.proposal.date="2015-06-05"
+           adm.status="current"
+           date.creation="2015-03-16">
+      <authority-code>PRT</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">In the hierarchy of subdivisions, part is above title.</lg.version>
+            <lg.version lg="eng">Parts have distinctive signs of type uppercase Roman numbers I, II, III etc. or numbers written by letters, Part One, Part Two, Part Three etc. which can also be referenced as first part, second part, third part etc.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">част</lg.version>
+         <lg.version lg="ces">část</lg.version>
+         <lg.version lg="dan">del</lg.version>
+         <lg.version lg="deu">Teil</lg.version>
+         <lg.version lg="ell" script="Greek">μέρος</lg.version>
+         <lg.version lg="eng">part</lg.version>
+         <lg.version lg="est">osa</lg.version>
+         <lg.version lg="fin">osa</lg.version>
+         <lg.version lg="fra">partie</lg.version>
+         <lg.version lg="gle">cuid</lg.version>
+         <lg.version lg="hrv">dio</lg.version>
+         <lg.version lg="hun">rész</lg.version>
+         <lg.version lg="ita">parte</lg.version>
+         <lg.version lg="lav">daļa</lg.version>
+         <lg.version lg="lit">dalis</lg.version>
+         <lg.version lg="mlt">parti</lg.version>
+         <lg.version lg="nld">deel</lg.version>
+         <lg.version lg="pol">część</lg.version>
+         <lg.version lg="por">parte</lg.version>
+         <lg.version lg="ron">parte</lg.version>
+         <lg.version lg="slk">časť</lg.version>
+         <lg.version lg="slv">del</lg.version>
+         <lg.version lg="spa">parte</lg.version>
+         <lg.version lg="swe">del</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">PR</op-mapped-code>
+      <op-mapped-code source="CJ">PART</op-mapped-code>
+      <sources>
+         <source date="2016-11-24" lg="eng">
+            <description>subdivision of a legal document used to introduce a group of articles in the enacting terms</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2015-03-18</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV017"
+           deprecated="false"
+           IMMC.approval.date="2018-06-06"
+           IMMC.proposal.date="2018-05-23"
+           adm.status="current"
+           date.creation="2018-05-15">
+      <authority-code>AGR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">споразумение</lg.version>
+         <lg.version lg="ces">dohoda</lg.version>
+         <lg.version lg="dan">aftale</lg.version>
+         <lg.version lg="deu">Abkommen</lg.version>
+         <lg.version lg="ell" script="Greek">συμφωνία</lg.version>
+         <lg.version lg="eng">agreement</lg.version>
+         <lg.version lg="est">leping</lg.version>
+         <lg.version lg="fin">sopimus</lg.version>
+         <lg.version lg="fra">accord</lg.version>
+         <lg.version lg="gle">comhaontú</lg.version>
+         <lg.version lg="hrv">sporazum</lg.version>
+         <lg.version lg="hun">megállapodás</lg.version>
+         <lg.version lg="ita">accordo</lg.version>
+         <lg.version lg="lav">nolīgums</lg.version>
+         <lg.version lg="lit">susitarimas</lg.version>
+         <lg.version lg="mlt">ftehim</lg.version>
+         <lg.version lg="nld">overeenkomst</lg.version>
+         <lg.version lg="pol">umowa</lg.version>
+         <lg.version lg="por">acordo</lg.version>
+         <lg.version lg="ron">acord</lg.version>
+         <lg.version lg="slk">dohoda</lg.version>
+         <lg.version lg="slv">sporazum</lg.version>
+         <lg.version lg="spa">acuerdo</lg.version>
+         <lg.version lg="swe">avtal</lg.version>
+      </label>
+      <sources>
+         <source date="2018-05-15" lg="eng">
+            <description>This element indicates an agreement as part of an act.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-07-24</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV018"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>ENC</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">Comprising for example the legal definitions.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">постановителна част</lg.version>
+         <lg.version lg="ces">normativní text</lg.version>
+         <lg.version lg="dan">dispositiv del</lg.version>
+         <lg.version lg="deu">verfügender Teil</lg.version>
+         <lg.version lg="ell" script="Greek">διατακτικό</lg.version>
+         <lg.version lg="eng">enacting terms</lg.version>
+         <lg.version lg="est">regulatiivosa</lg.version>
+         <lg.version lg="fin">artiklaosa</lg.version>
+         <lg.version lg="fra">dispositif</lg.version>
+         <lg.version lg="gle">téarmaí achtúcháin</lg.version>
+         <lg.version lg="hrv">normativni dio</lg.version>
+         <lg.version lg="hun">rendelkező rész</lg.version>
+         <lg.version lg="ita">articolato</lg.version>
+         <lg.version lg="lav">pamatdaļa</lg.version>
+         <lg.version lg="lit">dėstomoji dalis</lg.version>
+         <lg.version lg="mlt">termini ta’ promulgazzjoni</lg.version>
+         <lg.version lg="nld">dispositief</lg.version>
+         <lg.version lg="pol">część normatywna</lg.version>
+         <lg.version lg="por">dispositivo</lg.version>
+         <lg.version lg="ron">partea dispozitivă</lg.version>
+         <lg.version lg="slk">normatívna časť</lg.version>
+         <lg.version lg="slv">normativni del</lg.version>
+         <lg.version lg="spa">parte dispositiva</lg.version>
+         <lg.version lg="swe">artikeldel</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="bul" script="Cyrillic">диспозитив</lg.version>
+            <lg.version lg="bul" script="Cyrillic">разпоредителна част</lg.version>
+            <lg.version lg="ces">normativní část</lg.version>
+            <lg.version lg="dan">dispositive bestemmelser</lg.version>
+            <lg.version lg="dan">dispositive tekst</lg.version>
+            <lg.version lg="deu">Inhaltsteil</lg.version>
+            <lg.version lg="ita">dispositivo</lg.version>
+            <lg.version lg="lav">normatīvā daļa</lg.version>
+            <lg.version lg="mlt">termini normattivi</lg.version>
+            <lg.version lg="nld">regelgevend gedeelte</lg.version>
+            <lg.version lg="pol">część artykułowana</lg.version>
+            <lg.version lg="por">articulado</lg.version>
+            <lg.version lg="slk">normatívne ustanovenia</lg.version>
+            <lg.version lg="slv">besedilo členov</lg.version>
+            <lg.version lg="spa">articulado</lg.version>
+            <lg.version lg="swe">normativ del</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">DI</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>operative part of a legal document which follows the preamble</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV019"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>FNP</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">заключителна част</lg.version>
+         <lg.version lg="ces">závěrečná část</lg.version>
+         <lg.version lg="dan">afsluttende del</lg.version>
+         <lg.version lg="deu">Schlussteil</lg.version>
+         <lg.version lg="ell" script="Greek">τελικό μέρος</lg.version>
+         <lg.version lg="eng">final part</lg.version>
+         <lg.version lg="est">lõpposa</lg.version>
+         <lg.version lg="fin">loppuosa</lg.version>
+         <lg.version lg="fra">partie finale</lg.version>
+         <lg.version lg="gle">cuid deiridh</lg.version>
+         <lg.version lg="hrv">završni dio</lg.version>
+         <lg.version lg="hun">befejező rész</lg.version>
+         <lg.version lg="ita">parte finale</lg.version>
+         <lg.version lg="lav">nobeiguma daļa</lg.version>
+         <lg.version lg="lit">baigiamoji dalis</lg.version>
+         <lg.version lg="mlt">parti finali</lg.version>
+         <lg.version lg="nld">afsluitend deel</lg.version>
+         <lg.version lg="pol">część końcowa</lg.version>
+         <lg.version lg="por">parte final</lg.version>
+         <lg.version lg="ron">partea finală</lg.version>
+         <lg.version lg="slk">záverečná časť</lg.version>
+         <lg.version lg="slv">sklepni del</lg.version>
+         <lg.version lg="spa">parte final</lg.version>
+         <lg.version lg="swe">avslutande del</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">FI</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates the final part of a legal act which follows the enacting terms. The final part contains the place, date and signatures and sometimes also the rule of application.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV020"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>FNA</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">заключителен акт</lg.version>
+         <lg.version lg="ces">závěrečný akt</lg.version>
+         <lg.version lg="dan">slutakt</lg.version>
+         <lg.version lg="deu">Schlussakte</lg.version>
+         <lg.version lg="ell" script="Greek">τελική πράξη</lg.version>
+         <lg.version lg="eng">final act</lg.version>
+         <lg.version lg="est">lõppakt</lg.version>
+         <lg.version lg="fin">päätösasiakirja</lg.version>
+         <lg.version lg="fra">acte final</lg.version>
+         <lg.version lg="gle">ionstraim chríochnaitheach</lg.version>
+         <lg.version lg="hrv">završni akt</lg.version>
+         <lg.version lg="hun">záróokmány</lg.version>
+         <lg.version lg="ita">atto finale</lg.version>
+         <lg.version lg="lav">nobeiguma akts</lg.version>
+         <lg.version lg="lit">baigiamasis aktas</lg.version>
+         <lg.version lg="mlt">att finali</lg.version>
+         <lg.version lg="nld">slotakte</lg.version>
+         <lg.version lg="pol">akt końcowy</lg.version>
+         <lg.version lg="por">ato final</lg.version>
+         <lg.version lg="ron">act final</lg.version>
+         <lg.version lg="slk">záverečný akt</lg.version>
+         <lg.version lg="slv">sklepna listina</lg.version>
+         <lg.version lg="spa">acta final</lg.version>
+         <lg.version lg="swe">slutakt</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">FA</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a final act, a specific part of a document, in general in international agreements.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV021"
+           deprecated="false"
+           IMMC.approval.date="2016-11-29"
+           IMMC.proposal.date="2016-11-15"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>TOC</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">съдържание</lg.version>
+         <lg.version lg="ces">obsah</lg.version>
+         <lg.version lg="dan">indholdsfortegnelse</lg.version>
+         <lg.version lg="deu">Inhaltsverzeichnis</lg.version>
+         <lg.version lg="ell" script="Greek">πίνακας περιεχομένων</lg.version>
+         <lg.version lg="eng">table of contents</lg.version>
+         <lg.version lg="est">sisukord</lg.version>
+         <lg.version lg="fin">sisällysluettelo</lg.version>
+         <lg.version lg="fra">table des matières</lg.version>
+         <lg.version lg="gle">clár na n-ábhar</lg.version>
+         <lg.version lg="hrv">sadržaj</lg.version>
+         <lg.version lg="hun">tartalomjegyzék</lg.version>
+         <lg.version lg="ita">indice</lg.version>
+         <lg.version lg="lav">satura rādītājs</lg.version>
+         <lg.version lg="lit">turinys</lg.version>
+         <lg.version lg="mlt">werrej</lg.version>
+         <lg.version lg="nld">inhoudsopgave</lg.version>
+         <lg.version lg="pol">spis treści</lg.version>
+         <lg.version lg="por">índice</lg.version>
+         <lg.version lg="ron">cuprins</lg.version>
+         <lg.version lg="slk">obsah</lg.version>
+         <lg.version lg="slv">kazalo</lg.version>
+         <lg.version lg="spa">índice</lg.version>
+         <lg.version lg="swe">innehållsförteckning</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">SU</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>list of headings and subjects of a document, presented in the order in which they appear</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV022"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>DCL</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">декларация</lg.version>
+         <lg.version lg="ces">prohlášení</lg.version>
+         <lg.version lg="dan">erklæring</lg.version>
+         <lg.version lg="deu">Erklärung</lg.version>
+         <lg.version lg="ell" script="Greek">δήλωση</lg.version>
+         <lg.version lg="eng">declaration</lg.version>
+         <lg.version lg="est">deklaratsioon</lg.version>
+         <lg.version lg="fin">selitys</lg.version>
+         <lg.version lg="fra">déclaration</lg.version>
+         <lg.version lg="gle">dearbhú</lg.version>
+         <lg.version lg="hrv">deklaracija</lg.version>
+         <lg.version lg="hun">nyilatkozat</lg.version>
+         <lg.version lg="ita">dichiarazione</lg.version>
+         <lg.version lg="lav">deklarācija</lg.version>
+         <lg.version lg="lit">deklaracija</lg.version>
+         <lg.version lg="mlt">dikjarazzjoni</lg.version>
+         <lg.version lg="nld">verklaring</lg.version>
+         <lg.version lg="pol">deklaracja</lg.version>
+         <lg.version lg="por">declaração</lg.version>
+         <lg.version lg="ron">declarație</lg.version>
+         <lg.version lg="slk">vyhlásenie</lg.version>
+         <lg.version lg="slv">izjava</lg.version>
+         <lg.version lg="spa">declaración</lg.version>
+         <lg.version lg="swe">förklaring</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="pol">oświadczenie</lg.version>
+            <lg.version lg="slk">deklarácia</lg.version>
+            <lg.version lg="slv">deklaracija</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">DC</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a common declaration, a specific part of a document, in general in international agreements.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV023"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>PRO</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">протокол</lg.version>
+         <lg.version lg="ces">protokol</lg.version>
+         <lg.version lg="dan">protokol</lg.version>
+         <lg.version lg="deu">Protokoll</lg.version>
+         <lg.version lg="ell" script="Greek">πρωτόκολλο</lg.version>
+         <lg.version lg="eng">protocol</lg.version>
+         <lg.version lg="est">protokoll</lg.version>
+         <lg.version lg="fin">pöytäkirja</lg.version>
+         <lg.version lg="fra">protocole</lg.version>
+         <lg.version lg="gle">prótacal</lg.version>
+         <lg.version lg="hrv">protokol</lg.version>
+         <lg.version lg="hun">jegyzőkönyv</lg.version>
+         <lg.version lg="ita">protocollo</lg.version>
+         <lg.version lg="lav">protokols</lg.version>
+         <lg.version lg="lit">protokolas</lg.version>
+         <lg.version lg="mlt">protokoll</lg.version>
+         <lg.version lg="nld">protocol</lg.version>
+         <lg.version lg="pol">protokół</lg.version>
+         <lg.version lg="por">protocolo</lg.version>
+         <lg.version lg="ron">protocol</lg.version>
+         <lg.version lg="slk">protokol</lg.version>
+         <lg.version lg="slv">protokol</lg.version>
+         <lg.version lg="spa">protocolo</lg.version>
+         <lg.version lg="swe">protokoll</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">PC</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a protocol, a specific part of a legal document.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV024"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>LTR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">писмо</lg.version>
+         <lg.version lg="ces">dopis</lg.version>
+         <lg.version lg="dan">brev</lg.version>
+         <lg.version lg="deu">Schreiben</lg.version>
+         <lg.version lg="ell" script="Greek">επιστολή</lg.version>
+         <lg.version lg="eng">letter</lg.version>
+         <lg.version lg="est">kiri</lg.version>
+         <lg.version lg="fin">kirje</lg.version>
+         <lg.version lg="fra">lettre</lg.version>
+         <lg.version lg="gle">litir</lg.version>
+         <lg.version lg="hrv">pismo</lg.version>
+         <lg.version lg="hun">levél</lg.version>
+         <lg.version lg="ita">lettera</lg.version>
+         <lg.version lg="lav">vēstule</lg.version>
+         <lg.version lg="lit">raštas</lg.version>
+         <lg.version lg="mlt">ittra</lg.version>
+         <lg.version lg="nld">brief</lg.version>
+         <lg.version lg="pol">list</lg.version>
+         <lg.version lg="por">carta</lg.version>
+         <lg.version lg="ron">scrisoare</lg.version>
+         <lg.version lg="slk">list</lg.version>
+         <lg.version lg="slv">pismo</lg.version>
+         <lg.version lg="spa">carta</lg.version>
+         <lg.version lg="swe">skrivelse</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">LT</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a letter integrated into a document, in general in international agreements.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV025"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>LST</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">списък</lg.version>
+         <lg.version lg="ces">seznam</lg.version>
+         <lg.version lg="dan">liste</lg.version>
+         <lg.version lg="deu">Liste</lg.version>
+         <lg.version lg="ell" script="Greek">κατάλογος</lg.version>
+         <lg.version lg="eng">list</lg.version>
+         <lg.version lg="est">nimekiri</lg.version>
+         <lg.version lg="fin">luettelo</lg.version>
+         <lg.version lg="fra">liste</lg.version>
+         <lg.version lg="gle">liostaigh</lg.version>
+         <lg.version lg="hrv">popis</lg.version>
+         <lg.version lg="hun">lista</lg.version>
+         <lg.version lg="ita">elenco</lg.version>
+         <lg.version lg="lav">saraksts</lg.version>
+         <lg.version lg="lit">sąrašas</lg.version>
+         <lg.version lg="mlt">lista</lg.version>
+         <lg.version lg="nld">lijst</lg.version>
+         <lg.version lg="pol">wykaz</lg.version>
+         <lg.version lg="por">lista</lg.version>
+         <lg.version lg="ron">listă</lg.version>
+         <lg.version lg="slk">zoznam</lg.version>
+         <lg.version lg="slv">seznam</lg.version>
+         <lg.version lg="spa">lista</lg.version>
+         <lg.version lg="swe">förteckning</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">LI</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates information structured by means of a list in a legal document.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV026"
+           deprecated="false"
+           IMMC.approval.date="2017-11-20"
+           IMMC.proposal.date="2017-11-13"
+           adm.status="current"
+           date.creation="2017-11-06">
+      <authority-code>COL</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">колона на таблица</lg.version>
+         <lg.version lg="ces">sloupec tabulky</lg.version>
+         <lg.version lg="dan">tabelkolonne</lg.version>
+         <lg.version lg="deu">Tabellenspalte</lg.version>
+         <lg.version lg="ell" script="Greek">στήλη πίνακα</lg.version>
+         <lg.version lg="eng">table column</lg.version>
+         <lg.version lg="est">tabeli veerg</lg.version>
+         <lg.version lg="fin">taulukon sarake</lg.version>
+         <lg.version lg="fra">colonne de tableau</lg.version>
+         <lg.version lg="gle">colún tábla</lg.version>
+         <lg.version lg="hrv">stupac tablice</lg.version>
+         <lg.version lg="hun">táblázatoszlop</lg.version>
+         <lg.version lg="ita">colonna della tabella</lg.version>
+         <lg.version lg="lav">tabulas sleja</lg.version>
+         <lg.version lg="lit">lentelės skiltis</lg.version>
+         <lg.version lg="mlt">kolonna tat-tabella</lg.version>
+         <lg.version lg="nld">tabelkolom</lg.version>
+         <lg.version lg="pol">kolumna tabeli</lg.version>
+         <lg.version lg="por">coluna de quadro</lg.version>
+         <lg.version lg="ron">coloană de tabel</lg.version>
+         <lg.version lg="slk">stĺpec tabuľky</lg.version>
+         <lg.version lg="slv">stolpec tabele</lg.version>
+         <lg.version lg="spa">columna de cuadro</lg.version>
+         <lg.version lg="swe">tabellkolumn</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="fra">colonne de table</lg.version>
+            <lg.version lg="spa">columna de tabla</lg.version>
+         </alternative.name>
+      </name>
+      <sources>
+         <source date="2017-11-06" lg="eng">
+            <description>vertical arrangement of data in a table</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV027"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>TAB</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">таблица</lg.version>
+         <lg.version lg="ces">tabulka</lg.version>
+         <lg.version lg="dan">tabel</lg.version>
+         <lg.version lg="deu">Tabelle</lg.version>
+         <lg.version lg="ell" script="Greek">πίνακας</lg.version>
+         <lg.version lg="eng">table</lg.version>
+         <lg.version lg="est">tabel</lg.version>
+         <lg.version lg="fin">taulukko</lg.version>
+         <lg.version lg="fra">tableau</lg.version>
+         <lg.version lg="gle">tábla</lg.version>
+         <lg.version lg="hrv">tablica</lg.version>
+         <lg.version lg="hun">táblázat</lg.version>
+         <lg.version lg="ita">tabella</lg.version>
+         <lg.version lg="lav">tabula</lg.version>
+         <lg.version lg="lit">lentelė</lg.version>
+         <lg.version lg="mlt">tabella</lg.version>
+         <lg.version lg="nld">tabel</lg.version>
+         <lg.version lg="pol">tabela</lg.version>
+         <lg.version lg="por">tabela</lg.version>
+         <lg.version lg="ron">tabel</lg.version>
+         <lg.version lg="slk">tabuľka</lg.version>
+         <lg.version lg="slv">tabela</lg.version>
+         <lg.version lg="spa">cuadro</lg.version>
+         <lg.version lg="swe">tabell</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="fra">table</lg.version>
+            <lg.version lg="spa">tabla</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">TA</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a table in a legal document containing text structured in rows and columns with the related data.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>ELI</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV028"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>ROW</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">ред на таблица</lg.version>
+         <lg.version lg="ces">řádek tabulky</lg.version>
+         <lg.version lg="dan">tabelrække</lg.version>
+         <lg.version lg="deu">Tabellenzeile</lg.version>
+         <lg.version lg="ell" script="Greek">σειρά πίνακα</lg.version>
+         <lg.version lg="eng">table row</lg.version>
+         <lg.version lg="est">tabeli rida</lg.version>
+         <lg.version lg="fin">taulukon rivi</lg.version>
+         <lg.version lg="fra">ligne de tableau</lg.version>
+         <lg.version lg="gle">ró tábla</lg.version>
+         <lg.version lg="hrv">red tablice</lg.version>
+         <lg.version lg="hun">táblázatsor</lg.version>
+         <lg.version lg="ita">riga della tabella</lg.version>
+         <lg.version lg="lav">tabulas rinda</lg.version>
+         <lg.version lg="lit">lentelės eilutė</lg.version>
+         <lg.version lg="mlt">ringiela tat-tabella</lg.version>
+         <lg.version lg="nld">tabelrij</lg.version>
+         <lg.version lg="pol">wiersz tabeli</lg.version>
+         <lg.version lg="por">linha de quadro</lg.version>
+         <lg.version lg="ron">rând de tabel</lg.version>
+         <lg.version lg="slk">riadok tabuľky</lg.version>
+         <lg.version lg="slv">vrstica tabele</lg.version>
+         <lg.version lg="spa">línea de cuadro</lg.version>
+         <lg.version lg="swe">tabellrad</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="fra">ligne de table</lg.version>
+            <lg.version lg="spa">fila de tabla</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">RO</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>horizontal arrangement of data in a table</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV029"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>FGR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">фигура</lg.version>
+         <lg.version lg="ces">obrázek</lg.version>
+         <lg.version lg="dan">figur</lg.version>
+         <lg.version lg="deu">Abbildung</lg.version>
+         <lg.version lg="ell" script="Greek">εικόνα</lg.version>
+         <lg.version lg="eng">figure</lg.version>
+         <lg.version lg="est">joonis</lg.version>
+         <lg.version lg="fin">kaavio</lg.version>
+         <lg.version lg="fra">illustration</lg.version>
+         <lg.version lg="gle">figiúr</lg.version>
+         <lg.version lg="hrv">slika</lg.version>
+         <lg.version lg="hun">ábra</lg.version>
+         <lg.version lg="ita">illustrazione</lg.version>
+         <lg.version lg="lav">attēls</lg.version>
+         <lg.version lg="lit">iliustracija</lg.version>
+         <lg.version lg="mlt">illustrazzjoni</lg.version>
+         <lg.version lg="nld">figuur</lg.version>
+         <lg.version lg="pol">rysunek</lg.version>
+         <lg.version lg="por">ilustração</lg.version>
+         <lg.version lg="ron">figură</lg.version>
+         <lg.version lg="slk">ilustrácia</lg.version>
+         <lg.version lg="slv">slika</lg.version>
+         <lg.version lg="spa">ilustración</lg.version>
+         <lg.version lg="swe">figur</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="eng">image</lg.version>
+            <lg.version lg="fra">image</lg.version>
+            <lg.version lg="slk">obrázok</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">FG</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>image supplemented by related text</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV030"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>FTN</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">бележка под линия</lg.version>
+         <lg.version lg="ces">poznámka pod čarou</lg.version>
+         <lg.version lg="dan">fodnote</lg.version>
+         <lg.version lg="deu">Fußnote</lg.version>
+         <lg.version lg="ell" script="Greek">υποσημείωση</lg.version>
+         <lg.version lg="eng">footnote</lg.version>
+         <lg.version lg="est">joonealune märkus</lg.version>
+         <lg.version lg="fin">alaviite</lg.version>
+         <lg.version lg="fra">note de bas de page</lg.version>
+         <lg.version lg="gle">fonóta</lg.version>
+         <lg.version lg="hrv">bilješka</lg.version>
+         <lg.version lg="hun">lábjegyzet</lg.version>
+         <lg.version lg="ita">nota a piè di pagina</lg.version>
+         <lg.version lg="lav">zemsvītras piezīme</lg.version>
+         <lg.version lg="lit">išnaša</lg.version>
+         <lg.version lg="mlt">nota f'qiegħ il-paġna</lg.version>
+         <lg.version lg="nld">voetnoot</lg.version>
+         <lg.version lg="pol">przypis</lg.version>
+         <lg.version lg="por">nota de rodapé</lg.version>
+         <lg.version lg="ron">notă de subsol</lg.version>
+         <lg.version lg="slk">poznámka pod čiarou</lg.version>
+         <lg.version lg="slv">sprotna opomba</lg.version>
+         <lg.version lg="spa">nota a pie de página</lg.version>
+         <lg.version lg="swe">fotnot</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="ita">nota in calce</lg.version>
+            <lg.version lg="por">nota de pé de página</lg.version>
+         </alternative.name>
+      </name>
+      <op-mapped-code source="FORMEX">FN</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>reference included in a legal document which is specified at the bottom of the same page</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV031"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>TIS</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">Indicates in long and highly structured texts the grouping of higher subdivisions (JPG 15.4, p. 28).</lg.version>
+            <lg.version lg="eng">Titles have distinctive signs of type uppercase Roman numbers I, II, III etc.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">дял (структурен елемент)</lg.version>
+         <lg.version lg="ces">hlava (členění textu)</lg.version>
+         <lg.version lg="dan">afsnit (underopdeling)</lg.version>
+         <lg.version lg="deu">Titel (Gliederungsteil)</lg.version>
+         <lg.version lg="ell" script="Greek">τίτλος (υποδιαίρεση)</lg.version>
+         <lg.version lg="eng">title (subdivision)</lg.version>
+         <lg.version lg="est">jaotis (alajaotis)</lg.version>
+         <lg.version lg="fin">osasto (jaottelu)</lg.version>
+         <lg.version lg="fra">titre (sous-division)</lg.version>
+         <lg.version lg="gle">teideal (forannán)</lg.version>
+         <lg.version lg="hrv">glava (potpodjela)</lg.version>
+         <lg.version lg="hun">cím (szerkezeti egység)</lg.version>
+         <lg.version lg="ita">titolo (suddivisione)</lg.version>
+         <lg.version lg="lav">sadaļa (pamatiedalījums)</lg.version>
+         <lg.version lg="lit">antraštinė dalis (sudedamoji dalis)</lg.version>
+         <lg.version lg="mlt">titolu (suddiviżjoni)</lg.version>
+         <lg.version lg="nld">titel (onderverdeling)</lg.version>
+         <lg.version lg="pol">tytuł (podział)</lg.version>
+         <lg.version lg="por">título (subdivisão)</lg.version>
+         <lg.version lg="ron">titlu (subdiviziune)</lg.version>
+         <lg.version lg="slk">hlava (jednotlivý prvok)</lg.version>
+         <lg.version lg="slv">naslov (členitev)</lg.version>
+         <lg.version lg="spa">título (subdivisión)</lg.version>
+         <lg.version lg="swe">avdelning (del)</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">TT</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>higher subdivision of an act positioned between part and chapter used to introduce a group of articles in the enacting terms</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV032"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>SBS</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">подраздел</lg.version>
+         <lg.version lg="ces">pododdíl</lg.version>
+         <lg.version lg="dan">hovedafdeling</lg.version>
+         <lg.version lg="deu">Unterabschnitt</lg.version>
+         <lg.version lg="ell" script="Greek">υποτμήμα</lg.version>
+         <lg.version lg="eng">subsection</lg.version>
+         <lg.version lg="est">alajagu</lg.version>
+         <lg.version lg="fin">alajakso</lg.version>
+         <lg.version lg="fra">sous-section</lg.version>
+         <lg.version lg="gle">foroinn</lg.version>
+         <lg.version lg="hrv">pododjeljak</lg.version>
+         <lg.version lg="hun">alszakasz</lg.version>
+         <lg.version lg="ita">sottosezione</lg.version>
+         <lg.version lg="lav">apakšiedaļa</lg.version>
+         <lg.version lg="lit">poskirsnis</lg.version>
+         <lg.version lg="mlt">sottotaqsima</lg.version>
+         <lg.version lg="nld">onderafdeling</lg.version>
+         <lg.version lg="pol">podsekcja</lg.version>
+         <lg.version lg="por">subsecção</lg.version>
+         <lg.version lg="ron">subsecțiune</lg.version>
+         <lg.version lg="slk">pododdiel</lg.version>
+         <lg.version lg="slv">pododdelek</lg.version>
+         <lg.version lg="spa">subsección</lg.version>
+         <lg.version lg="swe">underavsnitt</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">SD</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a subclause in the regular structure of a legal document below the level of a section. Example: Council Regulation (EC) No 491/2009 of 25 May 2009.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV033"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>SNT</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">изречение</lg.version>
+         <lg.version lg="ces">věta</lg.version>
+         <lg.version lg="dan">punktum</lg.version>
+         <lg.version lg="deu">Satz</lg.version>
+         <lg.version lg="ell" script="Greek">πρόταση</lg.version>
+         <lg.version lg="eng">sentence</lg.version>
+         <lg.version lg="est">lause</lg.version>
+         <lg.version lg="fin">virke</lg.version>
+         <lg.version lg="fra">phrase</lg.version>
+         <lg.version lg="gle">abairt</lg.version>
+         <lg.version lg="hrv">rečenica</lg.version>
+         <lg.version lg="hun">mondat</lg.version>
+         <lg.version lg="ita">frase</lg.version>
+         <lg.version lg="lav">teikums</lg.version>
+         <lg.version lg="lit">sakinys</lg.version>
+         <lg.version lg="mlt">sentenza</lg.version>
+         <lg.version lg="nld">zin</lg.version>
+         <lg.version lg="pol">zdanie</lg.version>
+         <lg.version lg="por">período</lg.version>
+         <lg.version lg="ron">teză</lg.version>
+         <lg.version lg="slk">veta</lg.version>
+         <lg.version lg="slv">stavek</lg.version>
+         <lg.version lg="spa">frase</lg.version>
+         <lg.version lg="swe">mening</lg.version>
+      </label>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>A sentence is a linguistic unit of grammatically linked words. This subdivision can be cited.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV034"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>END</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">бележка</lg.version>
+         <lg.version lg="ces">poznámka</lg.version>
+         <lg.version lg="dan">slutnote</lg.version>
+         <lg.version lg="deu">Endnote</lg.version>
+         <lg.version lg="ell" script="Greek">υποσημείωση</lg.version>
+         <lg.version lg="eng">endnote</lg.version>
+         <lg.version lg="est">järelmärkus</lg.version>
+         <lg.version lg="fin">loppuviite</lg.version>
+         <lg.version lg="fra">note de fin</lg.version>
+         <lg.version lg="gle">críochnóta</lg.version>
+         <lg.version lg="hrv">bilješka</lg.version>
+         <lg.version lg="hun">lábjegyzet</lg.version>
+         <lg.version lg="ita">nota</lg.version>
+         <lg.version lg="lav">beigu piezīme</lg.version>
+         <lg.version lg="lit">išnaša</lg.version>
+         <lg.version lg="mlt">nota tat-tmiem</lg.version>
+         <lg.version lg="nld">eindnoot</lg.version>
+         <lg.version lg="pol">przypis</lg.version>
+         <lg.version lg="por">nota final</lg.version>
+         <lg.version lg="ron">notă finală</lg.version>
+         <lg.version lg="slk">poznámka na konci textu</lg.version>
+         <lg.version lg="slv">končna opomba</lg.version>
+         <lg.version lg="spa">nota final</lg.version>
+         <lg.version lg="swe">slutnot</lg.version>
+      </label>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>reference included in a legal document which is specified in the end of a subdivision of an act</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV035"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>NOT</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">забележка</lg.version>
+         <lg.version lg="ces">poznámka</lg.version>
+         <lg.version lg="dan">note</lg.version>
+         <lg.version lg="deu">Anmerkung</lg.version>
+         <lg.version lg="ell" script="Greek">σημείωση</lg.version>
+         <lg.version lg="eng">note</lg.version>
+         <lg.version lg="est">märkus</lg.version>
+         <lg.version lg="fin">huomautus</lg.version>
+         <lg.version lg="fra">note</lg.version>
+         <lg.version lg="gle">nóta</lg.version>
+         <lg.version lg="hrv">napomena</lg.version>
+         <lg.version lg="hun">megjegyzés</lg.version>
+         <lg.version lg="ita">nota</lg.version>
+         <lg.version lg="lav">piezīme</lg.version>
+         <lg.version lg="lit">pastaba</lg.version>
+         <lg.version lg="mlt">nota</lg.version>
+         <lg.version lg="nld">opmerking</lg.version>
+         <lg.version lg="pol">uwaga</lg.version>
+         <lg.version lg="por">nota</lg.version>
+         <lg.version lg="ron">notă</lg.version>
+         <lg.version lg="slk">poznámka</lg.version>
+         <lg.version lg="slv">opomba</lg.version>
+         <lg.version lg="spa">nota</lg.version>
+         <lg.version lg="swe">anmärkning</lg.version>
+      </label>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>specific additional explanatory part of a legal document</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV036"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>PTA</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">буква</lg.version>
+         <lg.version lg="ces">písmeno</lg.version>
+         <lg.version lg="dan">litra</lg.version>
+         <lg.version lg="deu">Buchstabe</lg.version>
+         <lg.version lg="ell" script="Greek">στοιχείο</lg.version>
+         <lg.version lg="eng">point</lg.version>
+         <lg.version lg="est">punkt</lg.version>
+         <lg.version lg="fin">alakohta</lg.version>
+         <lg.version lg="fra">point</lg.version>
+         <lg.version lg="gle">pointe</lg.version>
+         <lg.version lg="hrv">točka</lg.version>
+         <lg.version lg="hun">pont</lg.version>
+         <lg.version lg="ita">lettera</lg.version>
+         <lg.version lg="lav">punkts</lg.version>
+         <lg.version lg="lit">punktas</lg.version>
+         <lg.version lg="mlt">punt</lg.version>
+         <lg.version lg="nld">punt</lg.version>
+         <lg.version lg="pol">litera</lg.version>
+         <lg.version lg="por">alínea</lg.version>
+         <lg.version lg="ron">literă</lg.version>
+         <lg.version lg="slk">písmeno</lg.version>
+         <lg.version lg="slv">točka</lg.version>
+         <lg.version lg="spa">letra</lg.version>
+         <lg.version lg="swe">led</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="est">alapunkt</lg.version>
+            <lg.version lg="lav">apakšpunkts</lg.version>
+         </alternative.name>
+      </name>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>structure component of a legal article that has a distinctive sign of the type lowercase letters: (a), (b), (c) etc.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV037"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>PTI</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">подточка</lg.version>
+         <lg.version lg="ces">podbod</lg.version>
+         <lg.version lg="dan">nummer</lg.version>
+         <lg.version lg="deu">Ziffer</lg.version>
+         <lg.version lg="ell" script="Greek">σημείο</lg.version>
+         <lg.version lg="eng">point</lg.version>
+         <lg.version lg="est">alapunkt</lg.version>
+         <lg.version lg="fin">alakohta</lg.version>
+         <lg.version lg="fra">point</lg.version>
+         <lg.version lg="gle">pointe</lg.version>
+         <lg.version lg="hrv">točka</lg.version>
+         <lg.version lg="hun">alpont</lg.version>
+         <lg.version lg="ita">punto</lg.version>
+         <lg.version lg="lav">apakšpunkts</lg.version>
+         <lg.version lg="lit">papunktis</lg.version>
+         <lg.version lg="mlt">punt</lg.version>
+         <lg.version lg="nld">punt</lg.version>
+         <lg.version lg="pol">podpunkt</lg.version>
+         <lg.version lg="por">subalínea</lg.version>
+         <lg.version lg="ron">subpunct</lg.version>
+         <lg.version lg="slk">bod</lg.version>
+         <lg.version lg="slv">točka</lg.version>
+         <lg.version lg="spa">inciso</lg.version>
+         <lg.version lg="swe">led</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="ces">bod</lg.version>
+            <lg.version lg="est">punkt</lg.version>
+            <lg.version lg="lav">punkts</lg.version>
+            <lg.version lg="lit">punktas</lg.version>
+            <lg.version lg="ron">punct</lg.version>
+         </alternative.name>
+      </name>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>structure component of a legal article that has a distinctive sign of the type lowercase Roman numbers: (i), (ii), (iii) etc.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV038"
+           deprecated="false"
+           IMMC.approval.date="2016-09-09"
+           IMMC.proposal.date="2016-08-22"
+           adm.status="current"
+           date.creation="2016-08-18">
+      <authority-code>PAG</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">страница</lg.version>
+         <lg.version lg="ces">stránka</lg.version>
+         <lg.version lg="dan">side</lg.version>
+         <lg.version lg="deu">Seite</lg.version>
+         <lg.version lg="ell" script="Greek">σελίδα</lg.version>
+         <lg.version lg="eng">page</lg.version>
+         <lg.version lg="est">lehekülg</lg.version>
+         <lg.version lg="fin">sivu</lg.version>
+         <lg.version lg="fra">page</lg.version>
+         <lg.version lg="gle">leathanach</lg.version>
+         <lg.version lg="hrv">stranica</lg.version>
+         <lg.version lg="hun">oldal</lg.version>
+         <lg.version lg="ita">pagina</lg.version>
+         <lg.version lg="lav">lappuse</lg.version>
+         <lg.version lg="lit">puslapis</lg.version>
+         <lg.version lg="mlt">paġna</lg.version>
+         <lg.version lg="nld">bladzijde</lg.version>
+         <lg.version lg="pol">strona</lg.version>
+         <lg.version lg="por">página</lg.version>
+         <lg.version lg="ron">pagină</lg.version>
+         <lg.version lg="slk">strana</lg.version>
+         <lg.version lg="slv">stran</lg.version>
+         <lg.version lg="spa">página</lg.version>
+         <lg.version lg="swe">sida</lg.version>
+      </label>
+      <op-mapped-code source="FORMEX">PG</op-mapped-code>
+      <sources>
+         <source date="2016-08-18" lg="eng">
+            <description>This element indicates a subdivision of the basic act of a consolidation, specified by page number as given in the original publication in the Official Journal (OJ). The figure added to the subdivision indicates the page number in the original publication of the basic act in the OJ.Example: PG:40 indicates a position on page 40 in the original publication of the basic act in the OJ.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV039"
+           deprecated="false"
+           IMMC.approval.date="2018-06-06"
+           IMMC.proposal.date="2018-05-23"
+           adm.status="current"
+           date.creation="2018-05-15">
+      <authority-code>OTH</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">друг</lg.version>
+         <lg.version lg="ces">ostatní</lg.version>
+         <lg.version lg="dan">andre</lg.version>
+         <lg.version lg="deu">andere</lg.version>
+         <lg.version lg="ell" script="Greek">άλλο</lg.version>
+         <lg.version lg="eng">other</lg.version>
+         <lg.version lg="est">muu</lg.version>
+         <lg.version lg="fin">muut</lg.version>
+         <lg.version lg="fra">autre</lg.version>
+         <lg.version lg="gle">eile</lg.version>
+         <lg.version lg="hrv">drugi</lg.version>
+         <lg.version lg="hun">egyéb</lg.version>
+         <lg.version lg="ita">altro</lg.version>
+         <lg.version lg="lav">citi</lg.version>
+         <lg.version lg="lit">kita</lg.version>
+         <lg.version lg="mlt">oħra</lg.version>
+         <lg.version lg="nld">overige</lg.version>
+         <lg.version lg="pol">inne</lg.version>
+         <lg.version lg="por">outro</lg.version>
+         <lg.version lg="ron">altele</lg.version>
+         <lg.version lg="slk">ostatné</lg.version>
+         <lg.version lg="slv">drugo</lg.version>
+         <lg.version lg="spa">otro</lg.version>
+         <lg.version lg="swe">andra</lg.version>
+      </label>
+      <sources>
+         <source date="2018-05-15" lg="eng">
+            <description>This element indicates any non specified subdivision.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-07-24</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>CJ</use.context>
+      <use.context>EurLex</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV040"
+           deprecated="false"
+           IMMC.approval.date="2018-11-28"
+           IMMC.proposal.date="2018-11-14"
+           adm.status="current"
+           date.creation="2018-10-10">
+      <authority-code>CGR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">група поправки</lg.version>
+         <lg.version lg="ces">skupina oprav</lg.version>
+         <lg.version lg="dan">gruppe af rettelser</lg.version>
+         <lg.version lg="deu">Gruppen von Berichtigungen</lg.version>
+         <lg.version lg="ell" script="Greek">ομάδα διορθώσεων</lg.version>
+         <lg.version lg="eng">group of corrections</lg.version>
+         <lg.version lg="est">paranduste rühm</lg.version>
+         <lg.version lg="fin">oikaisuryhmä</lg.version>
+         <lg.version lg="fra">groupe de corrections</lg.version>
+         <lg.version lg="gle">grúpa ceartuithe</lg.version>
+         <lg.version lg="hrv">skup ispravaka</lg.version>
+         <lg.version lg="hun">korrekciócsoport</lg.version>
+         <lg.version lg="ita">gruppo di correzioni</lg.version>
+         <lg.version lg="lav">labojumu grupa</lg.version>
+         <lg.version lg="lit">pataisų grupė</lg.version>
+         <lg.version lg="mlt">grupp ta’ rettifiki</lg.version>
+         <lg.version lg="nld">groep correcties</lg.version>
+         <lg.version lg="pol">grupa sprostowań</lg.version>
+         <lg.version lg="por">grupo de correções</lg.version>
+         <lg.version lg="ron">grup de modificări</lg.version>
+         <lg.version lg="slk">skupina opráv</lg.version>
+         <lg.version lg="slv">skupina popravkov</lg.version>
+         <lg.version lg="spa">grupo de correcciones</lg.version>
+         <lg.version lg="swe">grupp av rättelser</lg.version>
+      </label>
+      <sources>
+         <source date="2018-10-10" lg="eng">
+            <description>This element is specific to the corrigendum type of document. It is used to mark up two or more corrections that have a common introductory sentence.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2004-05-01</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV041"
+           deprecated="false"
+           IMMC.approval.date="2018-11-28"
+           IMMC.proposal.date="2018-11-14"
+           adm.status="current"
+           date.creation="2018-10-10">
+      <authority-code>COR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">поправка</lg.version>
+         <lg.version lg="ces">oprava</lg.version>
+         <lg.version lg="dan">rettelse</lg.version>
+         <lg.version lg="deu">Berichtigung</lg.version>
+         <lg.version lg="ell" script="Greek">διόρθωση</lg.version>
+         <lg.version lg="eng">correction</lg.version>
+         <lg.version lg="est">parandus</lg.version>
+         <lg.version lg="fin">oikaisu</lg.version>
+         <lg.version lg="fra">correction</lg.version>
+         <lg.version lg="gle">ceartú</lg.version>
+         <lg.version lg="hrv">ispravak</lg.version>
+         <lg.version lg="hun">korrekció</lg.version>
+         <lg.version lg="ita">correzione</lg.version>
+         <lg.version lg="lav">labojums</lg.version>
+         <lg.version lg="lit">pataisa</lg.version>
+         <lg.version lg="mlt">rettifika</lg.version>
+         <lg.version lg="nld">correctie</lg.version>
+         <lg.version lg="pol">sprostowanie</lg.version>
+         <lg.version lg="por">correção</lg.version>
+         <lg.version lg="ron">modificare</lg.version>
+         <lg.version lg="slk">oprava</lg.version>
+         <lg.version lg="slv">popravek</lg.version>
+         <lg.version lg="spa">corrección</lg.version>
+         <lg.version lg="swe">rättelse</lg.version>
+      </label>
+      <sources>
+         <source date="2018-10-10" lg="eng">
+            <description>This element is specific to the corrigendum type of document. It is used to mark up the details about the correction/modification asked for a legal document after its publication.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2004-05-01</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV042"
+           deprecated="false"
+           IMMC.approval.date="2018-11-28"
+           IMMC.proposal.date="2018-11-14"
+           adm.status="current"
+           date.creation="2018-10-10">
+      <authority-code>DES</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">описание</lg.version>
+         <lg.version lg="ces">popis</lg.version>
+         <lg.version lg="dan">beskrivelse</lg.version>
+         <lg.version lg="deu">Beschreibung</lg.version>
+         <lg.version lg="ell" script="Greek">περιγραφή</lg.version>
+         <lg.version lg="eng">description</lg.version>
+         <lg.version lg="est">kirjeldus</lg.version>
+         <lg.version lg="fin">kuvaus</lg.version>
+         <lg.version lg="fra">description</lg.version>
+         <lg.version lg="gle">tuairisc</lg.version>
+         <lg.version lg="hrv">opis</lg.version>
+         <lg.version lg="hun">leírás</lg.version>
+         <lg.version lg="ita">descrizione</lg.version>
+         <lg.version lg="lav">apraksts</lg.version>
+         <lg.version lg="lit">aprašas</lg.version>
+         <lg.version lg="mlt">deskrizzjoni</lg.version>
+         <lg.version lg="nld">beschrijving</lg.version>
+         <lg.version lg="pol">opis</lg.version>
+         <lg.version lg="por">descrição</lg.version>
+         <lg.version lg="ron">descriere</lg.version>
+         <lg.version lg="slk">opis</lg.version>
+         <lg.version lg="slv">opis</lg.version>
+         <lg.version lg="spa">descripción</lg.version>
+         <lg.version lg="swe">beskrivning</lg.version>
+      </label>
+      <sources>
+         <source date="2018-10-10" lg="eng">
+            <description>This element is specific to the corrigendum type of document. It is a subdivision of the correction and is used to mark up the details (subject, location) where the modification should be implemented in a legal document.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2004-05-01</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV043"
+           deprecated="false"
+           IMMC.approval.date="2018-11-28"
+           IMMC.proposal.date="2018-11-14"
+           adm.status="current"
+           date.creation="2018-10-10">
+      <authority-code>TXO</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">стар текст</lg.version>
+         <lg.version lg="ces">staré znění</lg.version>
+         <lg.version lg="dan">gammel tekst</lg.version>
+         <lg.version lg="deu">alte Fassung</lg.version>
+         <lg.version lg="ell" script="Greek">παλαιό κείμενο</lg.version>
+         <lg.version lg="eng">old text</lg.version>
+         <lg.version lg="est">vana tekst</lg.version>
+         <lg.version lg="fin">vanha teksti</lg.version>
+         <lg.version lg="fra">ancien texte</lg.version>
+         <lg.version lg="gle">an sean-téacs</lg.version>
+         <lg.version lg="hrv">stari tekst</lg.version>
+         <lg.version lg="hun">korábbi szöveg</lg.version>
+         <lg.version lg="ita">testo precedente</lg.version>
+         <lg.version lg="lav">agrākais teksts</lg.version>
+         <lg.version lg="lit">ankstesnis tekstas</lg.version>
+         <lg.version lg="mlt">test antik</lg.version>
+         <lg.version lg="nld">oude tekst</lg.version>
+         <lg.version lg="pol">poprzedni tekst</lg.version>
+         <lg.version lg="por">texto antigo</lg.version>
+         <lg.version lg="ron">textul vechi</lg.version>
+         <lg.version lg="slk">pôvodné znenie</lg.version>
+         <lg.version lg="slv">staro besedilo</lg.version>
+         <lg.version lg="spa">texto anterior</lg.version>
+         <lg.version lg="swe">gammal text</lg.version>
+      </label>
+      <sources>
+         <source date="2018-10-10" lg="eng">
+            <description>This element is specific to the corrigendum type of document. It is a subdivision of the correction and is used to mark up the original text that was published in a document and should be modified by the corrigendum.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2004-05-01</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV044"
+           deprecated="false"
+           IMMC.approval.date="2018-11-28"
+           IMMC.proposal.date="2018-11-14"
+           adm.status="current"
+           date.creation="2018-10-10">
+      <authority-code>TXN</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">нов текст</lg.version>
+         <lg.version lg="ces">nové znění</lg.version>
+         <lg.version lg="dan">ny tekst</lg.version>
+         <lg.version lg="deu">neue Fassung</lg.version>
+         <lg.version lg="ell" script="Greek">νέο κείμενο</lg.version>
+         <lg.version lg="eng">new text</lg.version>
+         <lg.version lg="est">uus tekst</lg.version>
+         <lg.version lg="fin">uusi teksti</lg.version>
+         <lg.version lg="fra">nouveau texte</lg.version>
+         <lg.version lg="gle">an téacs nua</lg.version>
+         <lg.version lg="hrv">novi tekst</lg.version>
+         <lg.version lg="hun">új szöveg</lg.version>
+         <lg.version lg="ita">nuovo testo</lg.version>
+         <lg.version lg="lav">jaunais teksts</lg.version>
+         <lg.version lg="lit">naujas tekstas</lg.version>
+         <lg.version lg="mlt">test ġdid</lg.version>
+         <lg.version lg="nld">nieuwe tekst</lg.version>
+         <lg.version lg="pol">nowy tekst</lg.version>
+         <lg.version lg="por">texto novo</lg.version>
+         <lg.version lg="ron">textul nou</lg.version>
+         <lg.version lg="slk">nové znenie</lg.version>
+         <lg.version lg="slv">novo besedilo</lg.version>
+         <lg.version lg="spa">texto nuevo</lg.version>
+         <lg.version lg="swe">ny text</lg.version>
+      </label>
+      <sources>
+         <source date="2018-10-10" lg="eng">
+            <description>This element is specific to the corrigendum type of document. It is a subdivision of the correction and is used to mark up the new text that should replace the old one in a legal document.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2004-05-01</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV045"
+           deprecated="false"
+           IMMC.approval.date="2018-11-28"
+           IMMC.proposal.date="2018-11-14"
+           adm.status="current"
+           date.creation="2018-10-10">
+      <authority-code>TBG</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">група таблици</lg.version>
+         <lg.version lg="ces">skupina tabulek</lg.version>
+         <lg.version lg="dan">gruppe af tabeller</lg.version>
+         <lg.version lg="deu">Gruppen von Tabellen</lg.version>
+         <lg.version lg="ell" script="Greek">οlμάδα πινάκων</lg.version>
+         <lg.version lg="eng">group of tables</lg.version>
+         <lg.version lg="est">tabelite rühm</lg.version>
+         <lg.version lg="fin">taulukkoryhmä</lg.version>
+         <lg.version lg="fra">groupe de tableaux</lg.version>
+         <lg.version lg="gle">grúpa táblaí</lg.version>
+         <lg.version lg="hrv">skup tablica</lg.version>
+         <lg.version lg="hun">táblázatcsoport</lg.version>
+         <lg.version lg="ita">gruppo di tabelle</lg.version>
+         <lg.version lg="lav">tabulu grupa</lg.version>
+         <lg.version lg="lit">lentelių grupė</lg.version>
+         <lg.version lg="mlt">grupp ta’ tabelli</lg.version>
+         <lg.version lg="nld">groep tabellen</lg.version>
+         <lg.version lg="pol">grupa tabel</lg.version>
+         <lg.version lg="por">grupo de quadros</lg.version>
+         <lg.version lg="ron">grup de tabele</lg.version>
+         <lg.version lg="slk">skupina tabuliek</lg.version>
+         <lg.version lg="slv">skupina tabel</lg.version>
+         <lg.version lg="spa">grupo de cuadros</lg.version>
+         <lg.version lg="swe">grupp av tabeller</lg.version>
+      </label>
+      <sources>
+         <source date="2018-10-10" lg="eng">
+            <description>This element is used to group tables together that share a common title or a common note.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>2004-05-01</start.use>
+      <use.context>CELLAR</use.context>
+      <use.context>FORMEX</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV046"
+           deprecated="false"
+           IMMC.approval.date="2019-02-07"
+           IMMC.proposal.date="2019-01-23"
+           adm.status="current"
+           date.creation="2019-01-15">
+      <authority-code>CNV</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">конвенция</lg.version>
+         <lg.version lg="ces">úmluva</lg.version>
+         <lg.version lg="dan">konvention</lg.version>
+         <lg.version lg="deu">Übereinkommen</lg.version>
+         <lg.version lg="ell" script="Greek">σύμβαση</lg.version>
+         <lg.version lg="eng">convention</lg.version>
+         <lg.version lg="est">konventsioon</lg.version>
+         <lg.version lg="fin">yleissopimus</lg.version>
+         <lg.version lg="fra">convention</lg.version>
+         <lg.version lg="gle">coinbhinsiún</lg.version>
+         <lg.version lg="hrv">konvencija</lg.version>
+         <lg.version lg="hun">egyezmény</lg.version>
+         <lg.version lg="ita">convenzione</lg.version>
+         <lg.version lg="lav">konvencija</lg.version>
+         <lg.version lg="lit">konvencija</lg.version>
+         <lg.version lg="mlt">konvenzjoni</lg.version>
+         <lg.version lg="nld">verdrag</lg.version>
+         <lg.version lg="pol">konwencja</lg.version>
+         <lg.version lg="por">convenção</lg.version>
+         <lg.version lg="ron">convenție</lg.version>
+         <lg.version lg="slk">dohovor</lg.version>
+         <lg.version lg="slv">konvencija</lg.version>
+         <lg.version lg="spa">convenio</lg.version>
+         <lg.version lg="swe">konvention</lg.version>
+      </label>
+      <sources>
+         <source date="2019-01-15" lg="eng">
+            <description>This element indicates a convention, a specific part of a document, e.g. in a treaty.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV047"
+           deprecated="false"
+           IMMC.approval.date="2019-02-07"
+           IMMC.proposal.date="2019-01-23"
+           adm.status="current"
+           date.creation="2019-01-15">
+      <authority-code>EXL</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">размяна на писма</lg.version>
+         <lg.version lg="ces">výměna dopisů</lg.version>
+         <lg.version lg="dan">brevveksling</lg.version>
+         <lg.version lg="deu">Briefwechsel</lg.version>
+         <lg.version lg="ell" script="Greek">ανταλλαγή επιστολών</lg.version>
+         <lg.version lg="eng">exchange of letters</lg.version>
+         <lg.version lg="est">kirjade vahetamine</lg.version>
+         <lg.version lg="fin">kirjeenvaihto</lg.version>
+         <lg.version lg="fra">échange de lettres</lg.version>
+         <lg.version lg="gle">malartú litreacha</lg.version>
+         <lg.version lg="hrv">razmjena nota</lg.version>
+         <lg.version lg="hun">levélváltás</lg.version>
+         <lg.version lg="ita">scambio di lettere</lg.version>
+         <lg.version lg="lav">vēstuļu apmaiņa</lg.version>
+         <lg.version lg="lit">pasikeitimas raštais</lg.version>
+         <lg.version lg="mlt">skambju ta’ ittri</lg.version>
+         <lg.version lg="nld">briefwisseling</lg.version>
+         <lg.version lg="pol">wymiana listów</lg.version>
+         <lg.version lg="por">troca de cartas</lg.version>
+         <lg.version lg="ron">schimb de scrisori</lg.version>
+         <lg.version lg="slk">výmena listov</lg.version>
+         <lg.version lg="slv">izmenjava pisem</lg.version>
+         <lg.version lg="spa">canje de letras</lg.version>
+         <lg.version lg="swe">skriftväxling</lg.version>
+      </label>
+      <name>
+         <alternative.name>
+            <lg.version lg="lit">pasikeitimas laiškais</lg.version>
+         </alternative.name>
+      </name>
+      <sources>
+         <source date="2019-01-15" lg="eng">
+            <description>This element indicates an exchange of letters, a specific part of a document, e.g. in a treaty.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV048"
+           deprecated="false"
+           IMMC.approval.date="2019-02-07"
+           IMMC.proposal.date="2019-01-23"
+           adm.status="current"
+           date.creation="2019-01-15">
+      <authority-code>PCD</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">процедура</lg.version>
+         <lg.version lg="ces">postup</lg.version>
+         <lg.version lg="dan">procedure</lg.version>
+         <lg.version lg="deu">Verfahren</lg.version>
+         <lg.version lg="ell" script="Greek">διαδικασία</lg.version>
+         <lg.version lg="eng">procedure</lg.version>
+         <lg.version lg="est">menetlus</lg.version>
+         <lg.version lg="fin">menettely</lg.version>
+         <lg.version lg="fra">procédure</lg.version>
+         <lg.version lg="gle">nós imeachta</lg.version>
+         <lg.version lg="hrv">postupak</lg.version>
+         <lg.version lg="hun">eljárás</lg.version>
+         <lg.version lg="ita">procedura</lg.version>
+         <lg.version lg="lav">procedūra</lg.version>
+         <lg.version lg="lit">procedūra</lg.version>
+         <lg.version lg="mlt">proċedura</lg.version>
+         <lg.version lg="nld">procedure</lg.version>
+         <lg.version lg="pol">procedura</lg.version>
+         <lg.version lg="por">procedimento</lg.version>
+         <lg.version lg="ron">procedură</lg.version>
+         <lg.version lg="slk">postup</lg.version>
+         <lg.version lg="slv">postopek</lg.version>
+         <lg.version lg="spa">procedimiento</lg.version>
+         <lg.version lg="swe">förfarande</lg.version>
+      </label>
+      <sources>
+         <source date="2019-01-15" lg="eng">
+            <description>This element indicates a procedure, a specific part of a document, e.g. in a treaty.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV049"
+           deprecated="false"
+           IMMC.approval.date="2019-02-07"
+           IMMC.proposal.date="2019-01-23"
+           adm.status="current"
+           date.creation="2019-01-15">
+      <authority-code>MNT</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">протокол</lg.version>
+         <lg.version lg="ces">zápis</lg.version>
+         <lg.version lg="dan">protokol</lg.version>
+         <lg.version lg="deu">Protokoll</lg.version>
+         <lg.version lg="ell" script="Greek">συνοπτικά πρακτικά</lg.version>
+         <lg.version lg="eng">minutes</lg.version>
+         <lg.version lg="est">protokoll</lg.version>
+         <lg.version lg="fin">pöytäkirja</lg.version>
+         <lg.version lg="fra">procès-verbal</lg.version>
+         <lg.version lg="gle">miontuairiscí</lg.version>
+         <lg.version lg="hrv">zapisnik</lg.version>
+         <lg.version lg="hun">jegyzőkönyv</lg.version>
+         <lg.version lg="ita">processo verbale</lg.version>
+         <lg.version lg="lav">protokols</lg.version>
+         <lg.version lg="lit">posėdžio protokolas</lg.version>
+         <lg.version lg="mlt">minuti</lg.version>
+         <lg.version lg="nld">notulen</lg.version>
+         <lg.version lg="pol">protokół</lg.version>
+         <lg.version lg="por">ata</lg.version>
+         <lg.version lg="ron">proces-verbal</lg.version>
+         <lg.version lg="slk">zápisnica</lg.version>
+         <lg.version lg="slv">zapisnik</lg.version>
+         <lg.version lg="spa">acta</lg.version>
+         <lg.version lg="swe">protokoll</lg.version>
+      </label>
+      <sources>
+         <source date="2019-01-15" lg="eng">
+            <description>This element indicates minutes, a specific part of a document, e.g. in a treaty.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV050"
+           deprecated="false"
+           IMMC.approval.date="2019-06-04"
+           IMMC.proposal.date="2019-05-20"
+           adm.status="current"
+           date.creation="2019-02-25">
+      <authority-code>ACT</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">акт</lg.version>
+         <lg.version lg="ces">akt</lg.version>
+         <lg.version lg="dan">akt</lg.version>
+         <lg.version lg="deu">Akte</lg.version>
+         <lg.version lg="ell" script="Greek">πράξη</lg.version>
+         <lg.version lg="eng">act</lg.version>
+         <lg.version lg="est">akt</lg.version>
+         <lg.version lg="fin">asiakirja</lg.version>
+         <lg.version lg="fra">acte</lg.version>
+         <lg.version lg="gle">ionstraim</lg.version>
+         <lg.version lg="hrv">akt</lg.version>
+         <lg.version lg="hun">okmány</lg.version>
+         <lg.version lg="ita">atto</lg.version>
+         <lg.version lg="lav">akts</lg.version>
+         <lg.version lg="lit">aktas</lg.version>
+         <lg.version lg="mlt">att</lg.version>
+         <lg.version lg="nld">akte</lg.version>
+         <lg.version lg="pol">akt</lg.version>
+         <lg.version lg="por">ato</lg.version>
+         <lg.version lg="ron">act</lg.version>
+         <lg.version lg="slk">akt</lg.version>
+         <lg.version lg="slv">akt</lg.version>
+         <lg.version lg="spa">acta</lg.version>
+         <lg.version lg="swe">akt</lg.version>
+      </label>
+      <sources>
+         <source date="2019-02-25" lg="eng">
+            <description>This element indicates a differentiated legal act, e.g. in the context of an accession treaty.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV051"
+           deprecated="false"
+           IMMC.approval.date="2020-06-04"
+           IMMC.proposal.date="2020-05-19"
+           adm.status="current"
+           date.creation="2020-05-08">
+      <authority-code>INP</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">уводна част</lg.version>
+         <lg.version lg="ces">úvodní část</lg.version>
+         <lg.version lg="dan">indledende del</lg.version>
+         <lg.version lg="deu">Einleitung</lg.version>
+         <lg.version lg="ell" script="Greek">εισαγωγικό μέρος</lg.version>
+         <lg.version lg="eng">introductory part</lg.version>
+         <lg.version lg="est">sissejuhatav osa</lg.version>
+         <lg.version lg="fin">johdantokappale</lg.version>
+         <lg.version lg="fra">partie introductive</lg.version>
+         <lg.version lg="gle">an chuid réamhráiteach</lg.version>
+         <lg.version lg="hrv">uvodni dio</lg.version>
+         <lg.version lg="hun">bevezető rész</lg.version>
+         <lg.version lg="ita">parte introduttiva</lg.version>
+         <lg.version lg="lav">ievaddaļa</lg.version>
+         <lg.version lg="lit">įžanginė dalis</lg.version>
+         <lg.version lg="mlt">parti introduttorja</lg.version>
+         <lg.version lg="nld">inleiding</lg.version>
+         <lg.version lg="pol">formuła wprowadzająca</lg.version>
+         <lg.version lg="por">parte introdutória</lg.version>
+         <lg.version lg="ron">partea introductivă</lg.version>
+         <lg.version lg="slk">úvodná časť</lg.version>
+         <lg.version lg="slv">uvodni del</lg.version>
+         <lg.version lg="spa">parte introductoria</lg.version>
+         <lg.version lg="swe">inledande del</lg.version>
+      </label>
+      <sources>
+         <source date="2020-05-08" lg="eng">
+            <description>one or more sentences or phrases in the beginning of a paragraph, or of a subparagraph, or of a point, preceding an enumeration (of points or indents) and ending with a colon ‘:’</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV052"
+           deprecated="false"
+           IMMC.approval.date="2020-06-04"
+           IMMC.proposal.date="2020-05-19"
+           adm.status="current"
+           date.creation="2020-05-08">
+      <authority-code>WRP</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">финална част</lg.version>
+         <lg.version lg="ces">uzavírající část</lg.version>
+         <lg.version lg="dan">afsluttende del</lg.version>
+         <lg.version lg="deu">Abschluss</lg.version>
+         <lg.version lg="ell" script="Greek">τελικό μέρος</lg.version>
+         <lg.version lg="eng">closing part</lg.version>
+         <lg.version lg="est">lõpetav osa</lg.version>
+         <lg.version lg="fin">loppukappale</lg.version>
+         <lg.version lg="fra">partie conclusive</lg.version>
+         <lg.version lg="gle">an chuid dheireanach</lg.version>
+         <lg.version lg="hrv">zaključni dio</lg.version>
+         <lg.version lg="hun">záró rész</lg.version>
+         <lg.version lg="ita">parte conclusiva</lg.version>
+         <lg.version lg="lav">noslēguma daļa</lg.version>
+         <lg.version lg="lit">baigiamoji dalis</lg.version>
+         <lg.version lg="mlt">parti tal-għeluq</lg.version>
+         <lg.version lg="nld">slot</lg.version>
+         <lg.version lg="pol">formuła zamykająca</lg.version>
+         <lg.version lg="por">último período</lg.version>
+         <lg.version lg="ron">partea finală</lg.version>
+         <lg.version lg="slk">záverečná časť</lg.version>
+         <lg.version lg="slv">zaključni del</lg.version>
+         <lg.version lg="spa">parte conclusiva</lg.version>
+         <lg.version lg="swe">slutdel</lg.version>
+      </label>
+      <sources>
+         <source date="2020-05-08" lg="eng">
+            <description>part that follows the enumeration in a sentence that includes an enumeration of points or indents</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV053"
+           deprecated="false"
+           IMMC.approval.date="2020-06-04"
+           IMMC.proposal.date="2020-05-19"
+           adm.status="current"
+           date.creation="2020-05-08">
+      <authority-code>IMG</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">изображение</lg.version>
+         <lg.version lg="ces">vyobrazení</lg.version>
+         <lg.version lg="dan">billede</lg.version>
+         <lg.version lg="deu">Bild</lg.version>
+         <lg.version lg="ell" script="Greek">εικόνα</lg.version>
+         <lg.version lg="eng">image</lg.version>
+         <lg.version lg="est">kujutis</lg.version>
+         <lg.version lg="fin">kuva</lg.version>
+         <lg.version lg="fra">image</lg.version>
+         <lg.version lg="gle">íomhá</lg.version>
+         <lg.version lg="hrv">prikaz</lg.version>
+         <lg.version lg="hun">kép</lg.version>
+         <lg.version lg="ita">immagine</lg.version>
+         <lg.version lg="lav">attēls</lg.version>
+         <lg.version lg="lit">paveikslėlis</lg.version>
+         <lg.version lg="mlt">immaġni</lg.version>
+         <lg.version lg="nld">afbeelding</lg.version>
+         <lg.version lg="pol">grafika</lg.version>
+         <lg.version lg="por">imagem</lg.version>
+         <lg.version lg="ron">imagine</lg.version>
+         <lg.version lg="slk">obrázok</lg.version>
+         <lg.version lg="slv">slika</lg.version>
+         <lg.version lg="spa">imagen</lg.version>
+         <lg.version lg="swe">bild</lg.version>
+      </label>
+      <sources>
+         <source date="2020-05-08" lg="eng">
+            <description>graphical element depicting an object which may contain alphanumeric data</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV054"
+           deprecated="false"
+           IMMC.approval.date="2020-06-04"
+           IMMC.proposal.date="2020-05-19"
+           adm.status="current"
+           date.creation="2020-05-11">
+      <authority-code>UNP</authority-code>
+      <comments>
+         <comment date="2024-02-19">
+            <lg.version lg="eng">If an article is not subdivided, i.e. has only one paragraph, it is an unnumbered paragraph.</lg.version>
+         </comment>
+      </comments>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">неномериран параграф</lg.version>
+         <lg.version lg="ces">pododstavec</lg.version>
+         <lg.version lg="dan">afsnit</lg.version>
+         <lg.version lg="deu">nicht nummerierter Absatz</lg.version>
+         <lg.version lg="ell" script="Greek">εδάφιο</lg.version>
+         <lg.version lg="eng">unnumbered paragraph</lg.version>
+         <lg.version lg="est">lõik</lg.version>
+         <lg.version lg="fin">numeroimaton kohta</lg.version>
+         <lg.version lg="fra">alinéa</lg.version>
+         <lg.version lg="gle">mír neamhuimhrithe</lg.version>
+         <lg.version lg="hrv">podstavak</lg.version>
+         <lg.version lg="hun">számozatlan bekezdés</lg.version>
+         <lg.version lg="ita">comma</lg.version>
+         <lg.version lg="lav">nenumurēts punkts</lg.version>
+         <lg.version lg="lit">pastraipa</lg.version>
+         <lg.version lg="mlt">paragrafu mhux numerat</lg.version>
+         <lg.version lg="nld">alinea</lg.version>
+         <lg.version lg="pol">akapit</lg.version>
+         <lg.version lg="por">parágrafo</lg.version>
+         <lg.version lg="ron">paragraf</lg.version>
+         <lg.version lg="slk">neočíslovaný odsek</lg.version>
+         <lg.version lg="slv">neoštevilčeni odstavek</lg.version>
+         <lg.version lg="spa">párrafo</lg.version>
+         <lg.version lg="swe">stycke</lg.version>
+      </label>
+      <sources>
+         <source date="2020-05-11" lg="eng">
+            <description>unnumbered subdivision of an article or, exceptionally an element of an annex</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV055"
+           deprecated="false"
+           IMMC.approval.date="2020-06-04"
+           IMMC.proposal.date="2020-05-19"
+           adm.status="current"
+           date.creation="2020-05-11">
+      <authority-code>SUB</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">алинея</lg.version>
+         <lg.version lg="ces">pododstavec</lg.version>
+         <lg.version lg="dan">afsnit</lg.version>
+         <lg.version lg="deu">Unterabsatz</lg.version>
+         <lg.version lg="ell" script="Greek">εδάφιο</lg.version>
+         <lg.version lg="eng">subparagraph</lg.version>
+         <lg.version lg="est">lõik</lg.version>
+         <lg.version lg="fin">alakohta</lg.version>
+         <lg.version lg="fra">alinéa</lg.version>
+         <lg.version lg="gle">fomhír</lg.version>
+         <lg.version lg="hrv">podstavak</lg.version>
+         <lg.version lg="hun">albekezdés</lg.version>
+         <lg.version lg="ita">comma</lg.version>
+         <lg.version lg="lav">daļa</lg.version>
+         <lg.version lg="lit">pastraipa</lg.version>
+         <lg.version lg="mlt">subparagrafu</lg.version>
+         <lg.version lg="nld">alinea</lg.version>
+         <lg.version lg="pol">akapit</lg.version>
+         <lg.version lg="por">parágrafo</lg.version>
+         <lg.version lg="ron">paragraf</lg.version>
+         <lg.version lg="slk">pododsek</lg.version>
+         <lg.version lg="slv">pododstavek</lg.version>
+         <lg.version lg="spa">párrafo</lg.version>
+         <lg.version lg="swe">stycke</lg.version>
+      </label>
+      <sources>
+         <source date="2020-05-11" lg="eng">
+            <description>first level of an unnumbered subdivision of a numbered paragraph, point or indent, where there are at least two of such elements of subdivision</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>ELI</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV056"
+           deprecated="false"
+           IMMC.approval.date="2020-10-13"
+           IMMC.proposal.date="2020-10-05"
+           adm.status="current"
+           date.creation="2020-10-01">
+      <authority-code>SFR</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">научна формула</lg.version>
+         <lg.version lg="ces">vědecký vzorec</lg.version>
+         <lg.version lg="dan">videnskabelig formel</lg.version>
+         <lg.version lg="deu">Wissenschaftliche Formel</lg.version>
+         <lg.version lg="ell" script="Greek">επιστημονικός τύπος</lg.version>
+         <lg.version lg="eng">scientific formula</lg.version>
+         <lg.version lg="est">teaduslik valem</lg.version>
+         <lg.version lg="fin">tieteellinen kaava</lg.version>
+         <lg.version lg="fra">formule scientifique</lg.version>
+         <lg.version lg="gle">foirmle eolaíoch</lg.version>
+         <lg.version lg="hrv">znanstvena formula</lg.version>
+         <lg.version lg="hun">tudományos képlet</lg.version>
+         <lg.version lg="ita">formula scientifica</lg.version>
+         <lg.version lg="lav">zinātniska formula</lg.version>
+         <lg.version lg="lit">mokslinė formulė</lg.version>
+         <lg.version lg="mlt">formula xjentifika</lg.version>
+         <lg.version lg="nld">wetenschappelijke formule</lg.version>
+         <lg.version lg="pol">wzór naukowy</lg.version>
+         <lg.version lg="por">fórmula científica</lg.version>
+         <lg.version lg="ron">formulă științifică</lg.version>
+         <lg.version lg="slk">vedecký vzorec</lg.version>
+         <lg.version lg="slv">znanstvena formula</lg.version>
+         <lg.version lg="spa">fórmula científica</lg.version>
+         <lg.version lg="swe">vetenskaplig formel</lg.version>
+      </label>
+      <sources>
+         <source date="2020-10-01" lg="eng">
+            <description>complex technical or scientific expression</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV057"
+           deprecated="false"
+           IMMC.approval.date="2020-10-13"
+           IMMC.proposal.date="2020-10-05"
+           adm.status="current"
+           date.creation="2020-10-01">
+      <authority-code>LGD</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">легенда</lg.version>
+         <lg.version lg="ces">legenda</lg.version>
+         <lg.version lg="dan">forklaring</lg.version>
+         <lg.version lg="deu">Legende</lg.version>
+         <lg.version lg="ell" script="Greek">λεζάντα</lg.version>
+         <lg.version lg="eng">legend</lg.version>
+         <lg.version lg="est">selgitus</lg.version>
+         <lg.version lg="fin">seliteteksti</lg.version>
+         <lg.version lg="fra">légende</lg.version>
+         <lg.version lg="gle">eochair</lg.version>
+         <lg.version lg="hrv">legenda</lg.version>
+         <lg.version lg="hun">magyarázat</lg.version>
+         <lg.version lg="ita">legenda</lg.version>
+         <lg.version lg="lav">apzīmējumi</lg.version>
+         <lg.version lg="lit">legenda</lg.version>
+         <lg.version lg="mlt">leġġenda</lg.version>
+         <lg.version lg="nld">legenda</lg.version>
+         <lg.version lg="pol">objaśnienia</lg.version>
+         <lg.version lg="por">legenda</lg.version>
+         <lg.version lg="ron">legendă</lg.version>
+         <lg.version lg="slk">vysvetlivky</lg.version>
+         <lg.version lg="slv">legenda</lg.version>
+         <lg.version lg="spa">leyenda</lg.version>
+         <lg.version lg="swe">förklaring</lg.version>
+      </label>
+      <sources>
+         <source date="2020-10-01" lg="eng">
+            <description>text detailing the meaning of the elements of an image, a table or a scientific formula it relates to</description>
+            <provenance>Common Vocabulary (CoV)</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV058"
+           deprecated="false"
+           IMMC.approval.date="2020-10-13"
+           IMMC.proposal.date="2020-10-05"
+           adm.status="current"
+           date.creation="2020-10-01">
+      <authority-code>LLG</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">ред на легенда</lg.version>
+         <lg.version lg="ces">řádek legenda</lg.version>
+         <lg.version lg="dan">forklaring af element</lg.version>
+         <lg.version lg="deu">Legendenzeile</lg.version>
+         <lg.version lg="ell" script="Greek">γραμμή λεζάντας</lg.version>
+         <lg.version lg="eng">line of legend</lg.version>
+         <lg.version lg="est">selgituse rida</lg.version>
+         <lg.version lg="fin">selitetekstin rivi</lg.version>
+         <lg.version lg="fra">ligne de légende</lg.version>
+         <lg.version lg="gle">líne na heochrach</lg.version>
+         <lg.version lg="hrv">red legende</lg.version>
+         <lg.version lg="hun">magyarázatsor</lg.version>
+         <lg.version lg="ita">riga di legenda</lg.version>
+         <lg.version lg="lav">apzīmējuma rindiņa</lg.version>
+         <lg.version lg="lit">legendos eilutė</lg.version>
+         <lg.version lg="mlt">linja tal-leġġenda</lg.version>
+         <lg.version lg="nld">legendaregel</lg.version>
+         <lg.version lg="pol">wiersz objaśnień</lg.version>
+         <lg.version lg="por">linha de legenda</lg.version>
+         <lg.version lg="ron">descrierea unui element din legend</lg.version>
+         <lg.version lg="slk">riadok vysvetliviek</lg.version>
+         <lg.version lg="slv">vrstica legend</lg.version>
+         <lg.version lg="spa">línea de leyenda</lg.version>
+         <lg.version lg="swe">rad i förklaring</lg.version>
+      </label>
+      <sources>
+         <source date="2020-10-01" lg="eng">
+            <description>In a legend, a line of legend is a description of an individual element.</description>
+            <provenance>Publications Office</provenance>
+         </source>
+      </sources>
+      <start.use>1952-12-30</start.use>
+      <use.context>AKN4EU</use.context>
+      <use.context>IMMC</use.context>
+   </record>
+   <record id="SDV059"
+           deprecated="false"
+           adm.status="current"
+           date.creation="2023-10-04">
+      <authority-code>ITM</authority-code>
+      <label>
+         <lg.version lg="bul" script="Cyrillic">позиция</lg.version>
+         <lg.version lg="ces">bod</lg.version>
+         <lg.version lg="dan">punkt</lg.version>
+         <lg.version lg="deu">punkt</lg.version>
+         <lg.version lg="ell" script="Greek">στοιχείο</lg.version>
+         <lg.version lg="eng">item</lg.version>
+         <lg.version lg="est">punkt</lg.version>
+         <lg.version lg="fin">kohta</lg.version>
+         <lg.version lg="fra">item</lg.version>
+         <lg.version lg="gle">item</lg.version>
+         <lg.version lg="hrv">točka</lg.version>
+         <lg.version lg="hun">szövegrész</lg.version>
+         <lg.version lg="ita">punto</lg.version>
+         <lg.version lg="lav">punkts</lg.version>
+         <lg.version lg="lit">punktas</lg.version>
+         <lg.version lg="mlt">punt</lg.version>
+         <lg.version lg="nld">item</lg.version>
+         <lg.version lg="pol">punkt</lg.version>
+         <lg.version lg="por">ponto</lg.version>
+         <lg.version lg="ron">postul</lg.version>
+         <lg.version lg="slk">položka</lg.version>
+         <lg.version lg="slv">točka</lg.version>
+         <lg.version lg="spa">punto</lg.version>
+         <lg.version lg="swe">punkt</lg.version>
+      </label>
+      <sources>
+         <source date="2023-10-04" lg="eng">
+            <description>subdivision of a bigger text, presented in the form of a list of interventions</description>
+            <provenance>European Parliament</provenance>
+         </source>
+      </sources>
+      <start.use>1979-07-01</start.use>
+      <use.context>EP</use.context>
+      <use.context>JLP</use.context>
+   </record>
+</subdivisions>

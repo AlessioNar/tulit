@@ -82,7 +82,6 @@ class Formex4Parser(XMLParser):
         """
         
         def extract_intro(recitals_section):        
-            # Intro - different implementation
             intro_eId = 'rec_0'
             intro_text = self.preamble.findtext('.//GR.CONSID.INIT')
 
@@ -114,19 +113,32 @@ class Formex4Parser(XMLParser):
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text
         """
-        self.chapters = []
-        chapters = self.body.findall('.//TITLE', namespaces=self.namespaces)
-        for index, chapter in enumerate(chapters):
-            
+        def extract_eId(chapter, index):
+            return index
+        
+        def get_headings(chapter):
             if len(chapter.findall('.//HT')) > 0:
                 chapter_num = chapter.findall('.//HT')[0]
+                chapter_num = "".join(chapter_num.itertext()).strip()  # Ensure chapter_num is a string
                 if len(chapter.findall('.//HT')) > 1:      
                     chapter_heading = chapter.findall('.//HT')[1]
-                    self.chapters.append({
-                        "eId": index,
-                        "chapter_num" : "".join(chapter_num.itertext()).strip(),
-                        "chapter_heading": "".join(chapter_heading.itertext()).strip()
-                    })
+                    chapter_heading = "".join(chapter_heading.itertext()).strip()
+                else:
+                    return None, None
+            else: 
+                return None, None
+                                
+            return chapter_num, chapter_heading
+        
+        
+        return super().get_chapters(
+            chapter_xpath='.//TITLE',
+            num_xpath='.//HT',
+            heading_xpath='.//HT',
+            extract_eId=extract_eId,
+            get_headings=get_headings
+        )
+            
         
 
     def get_articles(self):
@@ -163,11 +175,4 @@ class Formex4Parser(XMLParser):
         dict
             Parsed data containing metadata, title, preamble, and articles.
         """
-        self.load_schema('formex4.xsd')
-        self.validate(file, format = 'Formex 4')
-        self.get_root(file)
-        self.get_preface()
-        self.get_preamble()
-        self.get_body()
-        self.get_chapters()
-        self.get_articles()
+        super().parse(file, schema='formex4.xsd', format='Formex 4')

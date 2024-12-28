@@ -254,7 +254,9 @@ class XMLParser(Parser):
             self.preamble = self.remove_node(self.preamble, notes_xpath)
             self.formula = self.get_formula()
             #preamble_data["preamble_final"] = self.preamble.findtext('PREAMBLE.FINAL')
-
+    
+    def get_formula(self):
+        pass
         
     def get_citations(self, citations_xpath, citation_xpath, extract_eId=None):
         """
@@ -350,7 +352,7 @@ class XMLParser(Parser):
             # Fallback: try without namespace
             self.body = self.root.find(body_xpath)
 
-    def get_chapters(self, chapter_xpath: str, num_xpath: str, heading_xpath: str, extract_eId=None) -> None:
+    def get_chapters(self, chapter_xpath: str, num_xpath: str, heading_xpath: str, extract_eId=None, get_headings=None) -> None:
         """
         Extracts chapter information from the document.
 
@@ -373,22 +375,125 @@ class XMLParser(Parser):
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text
         """
-        self.chapters = []
+        
         chapters = self.body.findall(chapter_xpath, namespaces=self.namespaces)
+        
         for index, chapter in enumerate(chapters):
             eId = extract_eId(chapter, index) if extract_eId else index
-            chapter_num = chapter.find(num_xpath, namespaces=self.namespaces)
-            chapter_heading = chapter.find(heading_xpath, namespaces=self.namespaces)
+            if get_headings:
+                chapter_num, chapter_heading = get_headings(chapter)
+            else:
+                chapter_num = chapter.find(num_xpath, namespaces=self.namespaces)
+                chapter_num = chapter_num.text if chapter_num is not None else None
+                chapter_heading = chapter.find(heading_xpath, namespaces=self.namespaces)
+                chapter_heading = ''.join(chapter_heading.itertext()).strip() if chapter_heading is not None else None
             
             self.chapters.append({
                 'eId': eId,
-                'chapter_num': chapter_num.text if chapter_num is not None else None,
-                'chapter_heading': ''.join(chapter_heading.itertext()).strip() if chapter_heading is not None else None
+                'chapter_num': chapter_num,
+                'chapter_heading': chapter_heading 
+            })
+
+    def get_articles(self, article_xpath, extract_eId=None) -> None:
+        """
+        Extracts articles from the body section.
+
+        Parameters
+        ----------
+        article_xpath : str
+            XPath expression to locate the article elements.
+        extract_eId : function, optional
+            Function to handle the extraction or generation of eId.
+
+        Returns
+        -------
+        list
+            Articles with identifier and content.
+        """
+        # Find all <article> elements in the XML
+        for article in self.body.findall(article_xpath, namespaces=self.namespaces):
+            return
+            eId = extract_eId(article) if extract_eId else None            
+            self.articles.append({
+                "eId": eId,
+                "article_num": article_num,
+                "article_text": article_text
             })
     
-    @abstractmethod
-    def parse(self):
-        """
-        Abstract method to parse the data. This method must be implemented by the subclass.
-        """
+    def get_subdivisions(self, subdivision_xpath, extract_eId=None) -> None:
         pass
+    
+    def parse(self, file: str, schema, format) -> None:
+        """
+        Parses an Akoma Ntoso file to extract provisions as individual sentences.
+        This method sequentially calls various parsing functions to extract metadata,
+        preface, preamble, body, chapters, articles, and conclusions from the XML file.
+
+        Parameters
+        ----------
+        file (str): 
+            The path to the file to parse
+        schema (str):
+            The schema file to use for validation
+        format (str):
+            The format of the file to parse
+        
+        Returns
+        -------
+        None
+        """
+        try:
+            self.load_schema(schema)
+            self.validate(file, format)
+            if self.valid == True:
+                try:
+                    self.get_root(file)
+                    print("Root element loaded successfully.")
+                except Exception as e:
+                    print(f"Error in get_root: {e}")
+                    
+                try:
+                    self.get_preface()
+                    print(f"Preface parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_preface: {e}")
+                
+                try:
+                    self.get_preamble()
+                    print(f"Preamble parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_preamble: {e}")
+                try:
+                    self.get_citations()
+                    print(f"Citations parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_citations: {e}")
+                try:
+                    self.get_recitals()
+                    print(f"Recitals parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_recitals: {e}")
+                
+                try:
+                    self.get_body()
+                    print("Body parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_body: {e}")
+                try:
+                    self.get_chapters()
+                    print(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
+                except Exception as e:
+                    print(f"Error in get_chapters: {e}")
+                try:
+                    self.get_articles()
+                    print(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
+                except Exception as e:
+                    print(f"Error in get_articles: {e}")
+                try:
+                    self.get_conclusions()                    
+                    print(f"Conclusions parsed successfully. ")
+                except Exception as e:
+                    print(f"Error in get_conclusions: {e}")
+                
+        except Exception as e:
+            print(f'Invalid {self.format} file: parsing may not work or work only partially: {e}')

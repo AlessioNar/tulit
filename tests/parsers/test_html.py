@@ -1,6 +1,6 @@
 import unittest
 import os
-from tulit.parsers.html import HTMLParser
+from tulit.parsers.xhtml import HTMLParser
 import json
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\data\\html")

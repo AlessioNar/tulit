@@ -169,15 +169,14 @@ class AkomaNtosoParser(XMLParser):
             # Get the title text 
             article_title_text = article_title_element.text if article_title_element is not None else None
 
-            article_text = self.get_text_by_eId(article)
+            childrens = self.get_text_by_eId(article)
         
             # Append the article data to the articles list
             self.articles.append({
                 'eId': eId,
                 'article_num': article_num_text,
                 'article_title': article_title_text,
-                # This is not really text - rather a list of dictionaries composed by the eId and the text of each element
-                'article_text': article_text
+                'childrens': childrens
             })
 
     

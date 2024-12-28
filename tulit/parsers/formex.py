@@ -143,7 +143,6 @@ class Formex4Parser(XMLParser):
             get_headings=get_headings
         )
             
-        
 
     def get_articles(self):
         """
@@ -154,17 +153,65 @@ class Formex4Parser(XMLParser):
         list
             Articles with identifier and content.
         """
+        self.body = self.remove_node(self.body, './/NOTE')  # Remove notes from the body
+
         self.articles = []
         if self.body is not None:
             for article in self.body.findall('.//ARTICLE'):
-                article_data = {
+                children = []
+
+                # Extract text and metadata from all relevant elements within the article
+                if article.findall('.//PARAG'):
+                    self._extract_elements(article, './/PARAG', children)
+                else:
+                    # If no PARAG elements, check for ALINEA elements
+                    alineas = article.findall('.//ALINEA')
+                    for alinea in alineas:
+                        p_elements = alinea.findall('.//P')
+                        self._extract_elements(alinea, './/P', children)
+                        self._extract_elements(alinea, './/LIST//ITEM', children, is_list=True, start_index=len(p_elements))
+                
+                self.articles.append({
                     "eId": article.get("IDENTIFIER"),
                     "article_num": article.findtext('.//TI.ART'),
-                    "article_text": " ".join("".join(alinea.itertext()).strip() for alinea in article.findall('.//ALINEA'))
-                }
-                self.articles.append(article_data)
+                    "children": children
+                })
+            
+            return self.articles
         else:
             print('No enacting terms XML tag has been found')
+            return []
+
+    def _extract_elements(self, parent, xpath, children, is_list=False, start_index=0):
+        """
+        Helper method to extract text and metadata from elements.
+
+        Parameters
+        ----------
+        parent : lxml.etree._Element
+            The parent element to search within.
+        xpath : str
+            The XPath expression to locate the elements.
+        children : list
+            The list to append the extracted elements to.
+        is_list : bool, optional
+            Whether the elements are part of a list (default is False).
+        start_index : int, optional
+            The starting index for the elements (default is 0).
+        """
+        elements = parent.findall(xpath)
+        for index, element in enumerate(elements, start=start_index):
+            text = "".join(element.itertext()).strip()
+            text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
+            text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
+            
+            child = {
+                "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,
+                "text": text
+            }
+            if is_list:
+                child["is_list"] = True
+            children.append(child)
     
     def get_conclusions(self):
         return super().get_conclusions()

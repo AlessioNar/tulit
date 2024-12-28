@@ -348,7 +348,11 @@ class XMLParser(Parser):
         
         for recital in recitals_section.findall(recital_xpath, namespaces=self.namespaces):
             eId = extract_eId(recital) if extract_eId else None
-            text = ''.join(''.join(p.itertext()).strip() for p in recital.findall(text_xpath, namespaces=self.namespaces))
+            
+            text = ''.join(''.join(p.itertext()).strip() for p in recital.findall(text_xpath, namespaces=self.namespaces))                        
+            text = text.replace('\n', '').replace('\t', '').replace('\r', '')            
+            text = re.sub(' +', ' ', text)
+            
             recitals.append({
                     "eId": eId, 
                     "text": text

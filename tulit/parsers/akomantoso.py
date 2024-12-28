@@ -22,9 +22,7 @@ class AkomaNtosoParser(XMLParser):
         Initializes the parser.
         """
         super().__init__()
-        
-        self.act = None
-        
+                
         # Define the namespace mapping
         self.namespaces = {
             'akn': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0',
@@ -111,21 +109,6 @@ class AkomaNtosoParser(XMLParser):
     def get_preamble_final(self):
         return super().get_preamble_final()
             
-    ### Act block
-    def get_act(self) -> None:
-        """
-        Extracts the act element from the document.
-
-        Returns
-        -------
-        None
-            Updates the instance's act attribute with the found act element.
-        """
-        # Use the namespace-aware find
-        self.act = self.root.find('.//akn:act', namespaces=self.namespaces)
-        if self.act is None:
-            # Fallback: try without namespace
-            self.act = self.root.find('.//act')
     
     def get_body(self):
         return super().get_body('.//akn:body')

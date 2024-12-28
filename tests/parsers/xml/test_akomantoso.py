@@ -1,10 +1,10 @@
 import unittest
-from tulit.parsers.akomantoso import AkomaNtosoParser
+from tulit.parsers.xml.akomantoso import AkomaNtosoParser
 import os
 import lxml.etree as etree
 
 # Define constants for file paths and directories
-file_path = os.path.join(os.path.dirname(__file__), '..\\data\\akn\\eu', '32014L0092.akn')
+file_path = os.path.join(os.path.dirname(__file__), '..\\..\\data\\akn\\eu', '32014L0092.akn')
 
 class TestAkomaNtosoParser(unittest.TestCase):
     maxDiff = None

@@ -381,37 +381,17 @@ class XMLParser(Parser):
                 'chapter_heading': chapter_heading 
             })
 
-    def get_articles(self, article_xpath, extract_eId=None) -> None:
+    def get_articles(self) -> None:
         """
-        Extracts articles from the body section.
-
-        Parameters
-        ----------
-        article_xpath : str
-            XPath expression to locate the article elements.
-        extract_eId : function, optional
-            Function to handle the extraction or generation of eId.
-
-        Returns
-        -------
-        list
-            Articles with identifier and content.
+        Extracts articles from the body section. It is implemented in the subclass.
         """
-        # Find all <article> elements in the XML
-        for article in self.body.findall(article_xpath, namespaces=self.namespaces):
-            return
-            eId = extract_eId(article) if extract_eId else None            
-            self.articles.append({
-                "eId": eId,
-                "article_num": article_num,
-                "article_text": article_text
-            })
-    
-    def get_subdivisions(self, subdivision_xpath, extract_eId=None) -> None:
         pass
     
     def get_conclusions(self):
-        pass
+        """
+        Extracts conclusions from the body section. 
+        """
+        
     
     def parse(self, file: str, schema, format) -> None:
         """

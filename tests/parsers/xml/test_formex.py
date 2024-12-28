@@ -1,10 +1,10 @@
 import unittest
-from tulit.parsers.formex import Formex4Parser
+from tulit.parsers.xml.formex import Formex4Parser
 import xml.etree.ElementTree as ET
 
 import os 
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\data\\formex")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\formex")
 file_path = os.path.join(DATA_DIR, "L_2011334EN.01002501.xml")
 
 iopa = ".\\tests\\data\\formex\\c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02\\DOC_1\\L_202400903EN.000101.fmx.xml"

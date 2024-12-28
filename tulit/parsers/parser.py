@@ -49,6 +49,7 @@ class Parser(ABC):
         self.formula = None    
         self.citations = None
         self.recitals = None
+        self.preamble_final = None
     
         self.body = None
         self.chapters = []
@@ -256,10 +257,32 @@ class XMLParser(Parser):
         
         if self.preamble is not None:            
             self.preamble = self.remove_node(self.preamble, notes_xpath)
-            #preamble_data["preamble_final"] = self.preamble.findtext('PREAMBLE.FINAL')
     
-    def get_formula(self):
-        pass
+    def get_formula(self, formula_xpath: str, paragraph_xpath: str) -> str:
+        """
+        Extracts formula text from the preamble.
+
+        Parameters
+        ----------
+        formula_xpath : str
+            XPath expression to locate the formula element.
+        paragraph_xpath : str
+            XPath expression to locate the paragraphs within the formula.
+
+        Returns
+        -------
+        str or None
+            Concatenated text from all paragraphs within the formula element.
+            Returns None if no formula is found.
+        """
+        formula = self.preamble.find(formula_xpath, namespaces=self.namespaces)
+        if formula is None:
+            return None
+
+        # Extract text from <p> within <formula>
+        formula_text = ' '.join(p.text.strip() for p in formula.findall(paragraph_xpath, namespaces=self.namespaces) if p.text)
+        self.formula = formula_text
+        return self.formula
         
     def get_citations(self, citations_xpath, citation_xpath, extract_eId=None):
         """
@@ -333,8 +356,27 @@ class XMLParser(Parser):
             
         self.recitals = recitals
     
-    def get_preamble_final(self):
-        pass
+    def get_preamble_final(self) -> str:
+        """
+        Extracts the final preamble text from the document.
+
+        Parameters
+        ----------
+        preamble_final_xpath : str
+            XPath expression to locate the final preamble element.
+
+        Returns
+        -------
+        str or None
+            Concatenated text from the final preamble element.
+            Returns None if no final preamble is found.
+        """
+        preamble_final = self.preamble.findtext('.//block', namespaces=self.namespaces)
+        if preamble_final is None:
+            return None
+
+        self.preamble_final = preamble_final
+        return self.preamble_final
     
     def get_body(self, body_xpath) -> None:
         """
@@ -485,6 +527,12 @@ class XMLParser(Parser):
                     print(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
                 except Exception as e:
                     print(f"Error in get_recitals: {e}")
+                
+                try:
+                    self.get_preamble_final()
+                    print(f"Preamble final parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_preamble_final: {e}")
                 
                 try:
                     self.get_body()

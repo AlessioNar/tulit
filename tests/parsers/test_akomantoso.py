@@ -36,15 +36,14 @@ class TestAkomaNtosoParser(unittest.TestCase):
         """Test retrieval of preamble data from the XML file."""
         self.parser.get_preamble()
         self.assertIsNotNone(self.parser.preamble, "Preamble element not found")
-        self.assertIsNotNone(self.parser.formula, "Formula not found")
         
 
     def test_get_formula(self):
         """Test extraction of formula text within the preamble."""
         self.parser.get_preamble()
 
-        formula_data = self.parser.get_formula()
-        self.assertIn("THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION", formula_data)
+        self.parser.get_formula()
+        self.assertEqual(self.parser.formula, "THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,")
 
     def test_get_citations(self):
         """Test citation extraction in the preamble section."""
@@ -77,11 +76,14 @@ class TestAkomaNtosoParser(unittest.TestCase):
                 self.assertIn(expected_values['text'], self.parser.recitals[index]['text'], 
                               f"Recital {index} text does not match expected content")
 
-    def test_get_act(self):
-        """Test retrieval of the act element."""
-        self.parser.get_act()
-        self.assertIsInstance(self.parser.act, etree._Element, "Act element should be an lxml.etree._Element")
-
+    def test_get_preamble_final(self):
+        """Test extraction of the final preamble text."""
+        self.parser.get_preamble()
+        self.parser.get_preamble_final()
+        preamble_final = "HAVE ADOPTED THIS DIRECTIVE:"
+        self.assertEqual(self.parser.preamble_final, preamble_final, "Final preamble text does not match expected content")
+    
+    
     def test_get_body(self):
         """Test retrieval of the body element."""
         self.parser.get_body()

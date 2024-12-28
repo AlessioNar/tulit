@@ -23,24 +23,22 @@ class TestFormex4Parser(unittest.TestCase):
     def test_get_preface(self):
         
         self.parser.get_preface()
-        expected = (
-            "Commission Implementing Regulation (EU) No 1319/2011 of 15 December 2011 "
-            "fixing representative prices in the poultrymeat and egg sectors and for egg "
-            "albumin, and amending Regulation (EC) No 1484/95"
-        )
-        self.assertEqual(self.parser.preface, expected)
+        preface = "Commission Implementing Regulation (EU) No 1319/2011 of 15 December 2011 fixing representative prices in the poultrymeat and egg sectors and for egg albumin, and amending Regulation (EC) No 1484/95"        
+        self.assertEqual(self.parser.preface, preface)
     
-    def test_get_preamble(self):
-        """Test parsing the preamble section with quotations and numbered considerations in Formex4Parser."""
-        
+    def test_get_preamble(self):        
         self.parser.get_preamble()
         self.assertIsNotNone(self.parser.preamble)
         
     def test_get_formula(self):
-        initial_statement = {
-            "initial_statement": "THE EUROPEAN COMMISSION,",
-        }
-        pass
+        
+        self.parser.get_preamble()
+        self.parser.get_formula()
+                
+        formula = "THE EUROPEAN COMMISSION,"
+        
+        self.assertEqual(self.parser.formula, formula)
+        
 
     def test_get_citations(self):
     
@@ -57,7 +55,6 @@ class TestFormex4Parser(unittest.TestCase):
    
     
     def test_get_recitals(self):
-        """Test parsing the preamble section with quotations and numbered considerations in Formex4Parser."""
         
         self.parser.get_preamble()
         self.parser.get_recitals()
@@ -70,18 +67,21 @@ class TestFormex4Parser(unittest.TestCase):
                 {"eId": "(4)", "text": "The measures provided for in this Regulation are in accordance with the opinion of the Management Committee for the Common Organisation of Agricultural Markets,"},
         ]
         
-        preamble_final = {
-            "preamble_final": "HAS ADOPTED THIS REGULATION:"
-        }
-        
         self.assertEqual(self.parser.recitals, recitals)      
+    
+    def test_get_preamble_final(self):
+        self.parser.get_preamble()
+
+        self.parser.get_preamble_final()
+        preamble_final = "HAS ADOPTED THIS REGULATION:"
+        
+        self.assertEqual(self.parser.preamble_final, preamble_final)
     
     def test_get_body(self):
         self.parser.get_body()
         self.assertIsNotNone(self.parser.body, "Body element should not be None")    
     
     def test_get_chapters(self):
-        """Test retrieval and content of chapter headings."""
         self.parser = Formex4Parser()
         self.parser.get_root(iopa)
         self.parser.get_body()

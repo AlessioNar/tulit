@@ -47,15 +47,7 @@ class AkomaNtosoParser(XMLParser):
             Concatenated text from all paragraphs within the formula element.
             Returns None if no formula is found.
         """
-        formula = self.preamble.find('.//akn:formula', namespaces=self.namespaces)
-        # Extract text from <p> within <formula>
-        formula_text = ' '.join(p.text.strip() for p in formula.findall('akn:p', namespaces=self.namespaces) if p.text)
-        if formula is None:
-            return None
-
-        self.formula = formula_text
-        return self.formula
-
+        return super().get_formula(formula_xpath='.//akn:formula', paragraph_xpath='akn:p')
     
     def get_citations(self) -> list:
         """
@@ -107,8 +99,20 @@ class AkomaNtosoParser(XMLParser):
         )
     
     def get_preamble_final(self):
-        return super().get_preamble_final()
-            
+        """
+        Extracts the final preamble text from the document.
+
+        Returns
+        -------
+        str or None
+            Concatenated text from the final preamble element.
+            Returns None if no final preamble is found.
+        """
+        preamble_final = self.preamble.find(".//akn:block", namespaces=self.namespaces).text
+        self.preamble_final = preamble_final
+        return self.preamble_final
+    
+        #return super().get_preamble_final(preamble_final_xpath='.//block[@name="preamble.final"]')    
     
     def get_body(self):
         return super().get_body('.//akn:body')

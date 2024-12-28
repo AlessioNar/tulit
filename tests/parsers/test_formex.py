@@ -107,12 +107,16 @@ class TestFormex4Parser(unittest.TestCase):
             {
                 "eId": "001",
                 "article_num": "Article 1",
-                "article_text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation."
+                "children": [
+                    {"eId": 0, "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation."}
+                ]
             },
             {
                 "eId": "002",
                 "article_num": "Article 2",
-                "article_text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union."
+                "children": [
+                    {"eId": 0, "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union."}
+                ]
             }
         ]
         

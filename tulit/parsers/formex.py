@@ -163,13 +163,16 @@ class Formex4Parser(XMLParser):
                 # Extract text and metadata from all relevant elements within the article
                 if article.findall('.//PARAG'):
                     self._extract_elements(article, './/PARAG', children)
-                else:
+                elif article.findall('.//ALINEA'):
                     # If no PARAG elements, check for ALINEA elements
                     alineas = article.findall('.//ALINEA')
                     for alinea in alineas:
+                        # if there are P elements within the ALINEA, extract them first, then extract LIST//ITEM elements, if they are still absent, extract the text from the ALINEA
                         p_elements = alinea.findall('.//P')
                         self._extract_elements(alinea, './/P', children)
-                        self._extract_elements(alinea, './/LIST//ITEM', children, is_list=True, start_index=len(p_elements))
+                        self._extract_elements(alinea, './/LIST//ITEM', children, start_index=len(p_elements))
+                        if not p_elements:
+                            self._extract_elements(alinea, '.', children)                        
                 
                 self.articles.append({
                     "eId": article.get("IDENTIFIER"),
@@ -182,7 +185,7 @@ class Formex4Parser(XMLParser):
             print('No enacting terms XML tag has been found')
             return []
 
-    def _extract_elements(self, parent, xpath, children, is_list=False, start_index=0):
+    def _extract_elements(self, parent, xpath, children, start_index=0):
         """
         Helper method to extract text and metadata from elements.
 
@@ -209,8 +212,6 @@ class Formex4Parser(XMLParser):
                 "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,
                 "text": text
             }
-            if is_list:
-                child["is_list"] = True
             children.append(child)
     
     def get_conclusions(self):

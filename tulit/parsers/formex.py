@@ -47,7 +47,12 @@ class Formex4Parser(XMLParser):
         str
             Formula text from the preamble.
         """
-        self.formula = self.preamble.findtext('PREAMBLE.INIT')
+        formula = self.preamble.findtext('PREAMBLE.INIT')
+        
+        if formula is None:
+            return None
+        
+        self.formula = formula
         
         return self.formula
     
@@ -99,6 +104,9 @@ class Formex4Parser(XMLParser):
             extract_eId=extract_eId
         )
     
+    def get_preamble_final(self):
+        return super().get_preamble_final()
+
     def get_body(self):
         return super().get_body('.//ENACTING.TERMS')
     
@@ -162,6 +170,9 @@ class Formex4Parser(XMLParser):
                 self.articles.append(article_data)
         else:
             print('No enacting terms XML tag has been found')
+    
+    def get_conclusions(self):
+        return super().get_conclusions()
         
 
     def parse(self, file):

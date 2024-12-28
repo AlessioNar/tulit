@@ -50,12 +50,14 @@ class AkomaNtosoParser(XMLParser):
             Returns None if no formula is found.
         """
         formula = self.preamble.find('.//akn:formula', namespaces=self.namespaces)
+        # Extract text from <p> within <formula>
+        formula_text = ' '.join(p.text.strip() for p in formula.findall('akn:p', namespaces=self.namespaces) if p.text)
         if formula is None:
             return None
 
-        # Extract text from <p> within <formula>
-        formula_text = ' '.join(p.text.strip() for p in formula.findall('akn:p', namespaces=self.namespaces) if p.text)
-        return formula_text
+        self.formula = formula_text
+        return self.formula
+
     
     def get_citations(self) -> list:
         """
@@ -105,6 +107,9 @@ class AkomaNtosoParser(XMLParser):
             extract_eId=extract_eId,
             
         )
+    
+    def get_preamble_final(self):
+        return super().get_preamble_final()
             
     ### Act block
     def get_act(self) -> None:

@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from lxml import etree
 import os
 import re
@@ -146,9 +146,9 @@ class XMLParser(Parser):
             print(f"{file} is not a valid {format} file. Validation errors: {e}")
             self.valid = False
             self.validation_errors = e.error_log
-        #except Exception as e:
-        #    print(f"An error occurred during validation: {e}")
-        #    self.valid = False
+        except Exception as e:
+            print(f"An error occurred during validation: {e}")
+            self.valid = False
         
     def remove_node(self, tree, node):
         """
@@ -231,7 +231,10 @@ class XMLParser(Parser):
                 paragraph_text = ''.join(p.itertext()).strip()
                 paragraphs.append(paragraph_text)
 
-        self.preface = ' '.join(paragraphs)
+        # Join all paragraphs into a single string and remove duplicate spaces or newlines
+        self.preface = ' '.join(paragraphs).replace('\n', '').replace('\t', '').replace('\r', '')
+        self.preface = re.sub(' +', ' ', self.preface)
+        
     
     def get_preamble(self, preamble_xpath, notes_xpath) -> None:
         """
@@ -253,7 +256,6 @@ class XMLParser(Parser):
         
         if self.preamble is not None:            
             self.preamble = self.remove_node(self.preamble, notes_xpath)
-            self.formula = self.get_formula()
             #preamble_data["preamble_final"] = self.preamble.findtext('PREAMBLE.FINAL')
     
     def get_formula(self):
@@ -330,6 +332,9 @@ class XMLParser(Parser):
                 })
             
         self.recitals = recitals
+    
+    def get_preamble_final(self):
+        pass
     
     def get_body(self, body_xpath) -> None:
         """
@@ -422,6 +427,9 @@ class XMLParser(Parser):
     def get_subdivisions(self, subdivision_xpath, extract_eId=None) -> None:
         pass
     
+    def get_conclusions(self):
+        pass
+    
     def parse(self, file: str, schema, format) -> None:
         """
         Parses an Akoma Ntoso file to extract provisions as individual sentences.
@@ -453,29 +461,34 @@ class XMLParser(Parser):
                     
                 try:
                     self.get_preface()
-                    print(f"Preface parsed successfully.")
+                    print(f"Preface parsed successfully. Preface: {self.preface}")
                 except Exception as e:
                     print(f"Error in get_preface: {e}")
                 
                 try:
                     self.get_preamble()
-                    print(f"Preamble parsed successfully.")
+                    print(f"Preamble element found.")
                 except Exception as e:
                     print(f"Error in get_preamble: {e}")
                 try:
+                    self.get_formula()
+                    print(f"Formula parsed successfully.")
+                except Exception as e:
+                    print(f"Error in get_formula: {e}")
+                try:
                     self.get_citations()
-                    print(f"Citations parsed successfully.")
+                    print(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
                 except Exception as e:
                     print(f"Error in get_citations: {e}")
                 try:
                     self.get_recitals()
-                    print(f"Recitals parsed successfully.")
+                    print(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
                 except Exception as e:
                     print(f"Error in get_recitals: {e}")
                 
                 try:
                     self.get_body()
-                    print("Body parsed successfully.")
+                    print("Body element found.")
                 except Exception as e:
                     print(f"Error in get_body: {e}")
                 try:

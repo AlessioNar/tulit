@@ -411,7 +411,7 @@ class XMLParser(Parser):
         pass
         
     
-    def parse(self, file: str, schema, format) -> None:
+    def parse(self, file: str, schema, format) -> Parser:
         """
         Parses an XML file and extracts relevant sections based on the format.
         

@@ -1,8 +1,9 @@
 import re
 import os
+import json
 
 from lxml import etree
-from .parser import XMLParser
+from tulit.parsers.parser import XMLParser
 
 class Formex4Parser(XMLParser):
     """
@@ -175,4 +176,26 @@ class Formex4Parser(XMLParser):
         dict
             Parsed data containing metadata, title, preamble, and articles.
         """
-        super().parse(file, schema='formex4.xsd', format='Formex 4')
+        super().parse(file, schema='./formex4.xsd', format='Formex 4')
+
+def main():
+    parser = Formex4Parser()
+    file_to_parse = 'tests/data/formex/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml'
+    output_file = 'tests/data/json/iopa.json'
+    
+
+    parser.parse(file_to_parse)
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        # Get the parser's attributes as a dictionary
+        parser_dict = parser.__dict__
+    
+        # Filter out non-serializable attributes
+        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
+    
+        # Write to a JSON file
+        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
+
+if __name__ == "__main__":
+    main()
+

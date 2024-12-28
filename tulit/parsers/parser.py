@@ -85,6 +85,7 @@ class XMLParser(Parser):
         
         self.schema = None
         self.valid = None
+        self.format = None
         self.validation_errors = None
         
         self.namespaces = {}
@@ -115,7 +116,7 @@ class XMLParser(Parser):
         except Exception as e:
             print(f"Error loading schema: {e}")
 
-    def validate(self, format, file: str) -> bool:
+    def validate(self, file: str,  format: str) -> bool:
         """
         Validates an XML file against the loaded XSD schema.
         
@@ -145,9 +146,9 @@ class XMLParser(Parser):
             print(f"{file} is not a valid {format} file. Validation errors: {e}")
             self.valid = False
             self.validation_errors = e.error_log
-        except Exception as e:
-            print(f"An error occurred during validation: {e}")
-            self.valid = False
+        #except Exception as e:
+        #    print(f"An error occurred during validation: {e}")
+        #    self.valid = False
         
     def remove_node(self, tree, node):
         """
@@ -288,7 +289,6 @@ class XMLParser(Parser):
             text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
             text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
             
-            # Get an eId for the citation, depending on the XML format
             eId = extract_eId(citation, index) if extract_eId else index
             
             citations.append({
@@ -313,7 +313,6 @@ class XMLParser(Parser):
             return None
         
         recitals = []
-        # Get an eId for the citation, depending on the XML format
         intro_eId, intro_text = extract_intro(recitals_section) if extract_intro else (None, None)
         
         recitals.append({
@@ -444,7 +443,7 @@ class XMLParser(Parser):
         """
         try:
             self.load_schema(schema)
-            self.validate(file, format)
+            self.validate(file=file, format=format)
             if self.valid == True:
                 try:
                     self.get_root(file)

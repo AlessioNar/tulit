@@ -1,7 +1,8 @@
-from .parser import XMLParser
+from tulit.parsers.parser import XMLParser
 import re
 from lxml import etree
 import os
+import json
 
 class AkomaNtosoParser(XMLParser):
     """
@@ -283,4 +284,26 @@ class AkomaNtosoParser(XMLParser):
 
 
         """
-        return super.parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')
+        return super().parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')
+
+def main():
+    parser = AkomaNtosoParser()
+    
+    file_to_parse = 'tests/data/akn/eu/32014L0092.akn'
+    output_file = 'tests/data/json/akn.json'
+    
+    parser.parse(file_to_parse)
+    
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        # Get the parser's attributes as a dictionary
+        parser_dict = parser.__dict__
+    
+        # Filter out non-serializable attributes
+        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
+    
+        # Write to a JSON file
+        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
+
+if __name__ == "__main__":
+    main()

@@ -4,7 +4,7 @@ import logging
 import zipfile
 import requests
 
-class DocumentDownloader:
+class Client:
     """	
     A generic document downloader class.
     """	

@@ -1,10 +1,10 @@
-from tulit.download.download import DocumentDownloader
+from tulit.download.download import Client
 import requests
 import logging
 from datetime import datetime
 
 
-class NormattivaDownloader(DocumentDownloader):
+class NormattivaClient(Client):
     def __init__(self, download_dir, log_dir):
         super().__init__(download_dir, log_dir)
         self.endpoint = "https://www.normattiva.it/do/atto/caricaAKN"
@@ -89,7 +89,7 @@ class NormattivaDownloader(DocumentDownloader):
 # Example usage
 if __name__ == "__main__":
     
-    downloader = NormattivaDownloader(download_dir='./tests/data/akn/italy', log_dir='./tests/logs')
+    downloader = NormattivaClient(download_dir='./tests/data/akn/italy', log_dir='./tests/logs')
     #documents = downloader.download(dataGU='19410716', codiceRedaz='041U0633')
     documents = downloader.download(dataGU='19410716', codiceRedaz='041U0633', dataVigenza='20211231')
 

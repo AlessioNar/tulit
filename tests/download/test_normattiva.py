@@ -1,11 +1,11 @@
 import unittest
 
 from unittest.mock import patch, Mock
-from tulit.download.normattiva import NormattivaDownloader
+from tulit.download.normattiva import NormattivaClient
 
 class TestNormattivaDownloader(unittest.TestCase):
     def setUp(self):
-        self.downloader = NormattivaDownloader(download_dir='./tests/data/akn/italy', log_dir='./tests/logs')
+        self.downloader = NormattivaClient(download_dir='./tests/data/akn/italy', log_dir='./tests/logs')
     
     @patch('tulit.download.normattiva.requests.get')
     def test_build_request_url(self, mock_get):
@@ -35,7 +35,7 @@ class TestNormattivaDownloader(unittest.TestCase):
         self.assertEqual(response, mock_response)
     
     @patch('tulit.download.normattiva.requests.get')
-    @patch('tulit.download.normattiva.NormattivaDownloader.handle_response')
+    @patch('tulit.download.normattiva.NormattivaClient.handle_response')
     def test_download(self, mock_handle_response, mock_get):
         mock_response = Mock()
         mock_response.raise_for_status = Mock()

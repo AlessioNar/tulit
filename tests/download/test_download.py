@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
-from tulit.download.download import DocumentDownloader
+from tulit.download.download import Client
 
 
 class TestDocumentDownloader(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = DocumentDownloader(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = Client(download_dir='./tests/data', log_dir='./tests/logs')
         
     def test_get_extension_from_content_type(self):
         content_type_mapping = {
@@ -38,7 +38,7 @@ class TestDocumentDownloader(unittest.TestCase):
         self.assertEqual(args[0].getvalue(), response.content)
         mock_zip.extractall.assert_called_once_with(folder_path)
     
-    @patch('tulit.download.download.DocumentDownloader.extract_zip')
+    @patch('tulit.download.download.Client.extract_zip')
     @patch('tulit.download.download.os.makedirs')
     def test_handle_response(self, mock_makedirs, mock_extract_zip):
         # Mock response object

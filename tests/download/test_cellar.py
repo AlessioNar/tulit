@@ -1,15 +1,15 @@
 import unittest
 import json
-from tulit.download.cellar import CellarDownloader
+from tulit.download.cellar import CellarClient
 import os
 from unittest.mock import patch, Mock
 import requests
 import io
 
-class TestCellarDownloader(unittest.TestCase):
+class TestCellarClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = CellarDownloader(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs')
                 
     def test_download_documents(self):
         
@@ -29,7 +29,7 @@ class TestCellarDownloader(unittest.TestCase):
         with open('./tests/metadata/query_results/query_results.json', 'r') as f:
             cellar_results = json.loads(f.read())
         
-        self.downloader = CellarDownloader(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs')
         
         # Test for formex format
         extracted_ids = self.downloader.get_cellar_ids_from_json_results(cellar_results, 'fmx4')

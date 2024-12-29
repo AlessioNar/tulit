@@ -2,9 +2,9 @@ import logging
 
 import requests
 import json
-from tulit.download.download import DocumentDownloader
+from tulit.download.download import Client
 
-class CellarDownloader(DocumentDownloader):
+class CellarClient(Client):
     
     def __init__(self, download_dir, log_dir):
         super().__init__(download_dir, log_dir)
@@ -155,7 +155,7 @@ class CellarDownloader(DocumentDownloader):
     
 # Example usage
 if __name__ == "__main__":
-    downloader = CellarDownloader(download_dir='./tests/data/formex', log_dir='./tests/logs')
+    downloader = CellarClient(download_dir='./tests/data/formex', log_dir='./tests/logs')
     with open('./tests/metadata/query_results/ai_act.json', 'r') as f:
         results = json.loads(f.read())
     documents = downloader.download(results, format='fmx4')

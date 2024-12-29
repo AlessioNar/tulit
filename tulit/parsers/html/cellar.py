@@ -248,7 +248,7 @@ class CellarHTMLParser(HTMLParser):
         Extracts conclusions from the HTML, if present.
         """
         conclusions_element = self.root.find('div', class_='oj-final')
-        self.conclusions = conclusions_element.get_text(strip=True)
+        self.conclusions = conclusions_element.get_text(separator=' ', strip=True)
 
     def parse(self, file):
         return super().parse(file)

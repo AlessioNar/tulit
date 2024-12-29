@@ -94,13 +94,13 @@ class TestAkomaNtosoParser(unittest.TestCase):
         self.parser.get_chapters()
 
         expected_chapters = [
-            {'eId': 'chp_I', 'chapter_num': 'CHAPTER I', 'chapter_heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS'},
-            {'eId': 'chp_II', 'chapter_num': 'CHAPTER II', 'chapter_heading': 'COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS'},
-            {'eId': 'chp_III', 'chapter_num': 'CHAPTER III', 'chapter_heading': 'SWITCHING'},
-            {'eId': 'chp_IV', 'chapter_num': 'CHAPTER IV', 'chapter_heading': 'ACCESS TO PAYMENT ACCOUNTS'},
-            {'eId': 'chp_V', 'chapter_num': 'CHAPTER V', 'chapter_heading': 'COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION'},
-            {'eId': 'chp_VI', 'chapter_num': 'CHAPTER VI', 'chapter_heading': 'SANCTIONS'},
-            {'eId': 'chp_VII', 'chapter_num': 'CHAPTER VII', 'chapter_heading': 'FINAL PROVISIONS'}
+            {'eId': 'chp_I',   'num': 'CHAPTER I',   'heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS'},
+            {'eId': 'chp_II',  'num': 'CHAPTER II',  'heading': 'COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS'},
+            {'eId': 'chp_III', 'num': 'CHAPTER III', 'heading': 'SWITCHING'},
+            {'eId': 'chp_IV',  'num': 'CHAPTER IV',  'heading': 'ACCESS TO PAYMENT ACCOUNTS'},
+            {'eId': 'chp_V',   'num': 'CHAPTER V',   'heading': 'COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION'},
+            {'eId': 'chp_VI',  'num': 'CHAPTER VI',  'heading': 'SANCTIONS'},
+            {'eId': 'chp_VII', 'num': 'CHAPTER VII', 'heading': 'FINAL PROVISIONS'}
         ]
         self.assertEqual(self.parser.chapters, expected_chapters, "Chapters data does not match expected content")
 

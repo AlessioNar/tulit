@@ -1,6 +1,7 @@
 from tulit.parsers.html.xhtml import HTMLParser
 import json
 import re
+import argparse
 
 class CellarHTMLParser(HTMLParser):
     def __init__(self):
@@ -165,8 +166,8 @@ class CellarHTMLParser(HTMLParser):
             chapter_title = chapter.find('div', class_="eli-title").get_text(strip=True)
             self.chapters.append({
                 'eId': eId,
-                'chapter_num': chapter_num,
-                'chapter_heading': chapter_title
+                'num': chapter_num,
+                'heading': chapter_title
             })
 
     def get_articles(self):
@@ -236,8 +237,8 @@ class CellarHTMLParser(HTMLParser):
             # Store the article with its eId and subdivisions
             self.articles.append({
                 'eId': eId,
-                'article_num': article_num,
-                'article_title': article_title,
+                'num': article_num,
+                'heading': article_title,
                 'children': children
             })
 
@@ -254,17 +255,17 @@ class CellarHTMLParser(HTMLParser):
         
 
 def main():
-    parser = CellarHTMLParser()
-    file_to_parse = 'tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html'
+    parser = argparse.ArgumentParser(description='Parse an Cellar XHTML document and output the results to a JSON file.')
+    parser.add_argument('--input', type=str, default='tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html', help='Path to the Cellar XHTML file to parse.')
+    parser.add_argument('--output', type=str, default='tests/data/json/iopa_html.json', help='Path to the output JSON file.')
+    args = parser.parse_args()
     
-    output_file = 'tests/data/json/iopa_html.json'
+    html_parser = CellarHTMLParser()
+    html_parser.parse(args.input)
     
-
-    parser.parse(file_to_parse)
-    
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open(args.output, 'w', encoding='utf-8') as f:
         # Get the parser's attributes as a dictionary
-        parser_dict = parser.__dict__
+        parser_dict = html_parser.__dict__
     
         # Filter out non-serializable attributes
         serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}

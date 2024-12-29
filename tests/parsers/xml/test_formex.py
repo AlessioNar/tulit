@@ -87,12 +87,12 @@ class TestFormex4Parser(unittest.TestCase):
         self.parser.get_chapters()
 
         expected_chapters = [
-            {'eId': 0,  'chapter_num': 'Chapter 1', 'chapter_heading': 'General provisions'},
-            {'eId': 1,  'chapter_num': 'Chapter 2', 'chapter_heading': 'European Interoperability enablers' }, 
-            {'eId': 2,  'chapter_heading': 'Interoperable Europe support measures', 'chapter_num': 'Chapter 3'},
-            {'eId': 3,  'chapter_heading': 'Governance of cross-border interoperability', 'chapter_num': 'Chapter 4'},
-            {'eId': 4, 'chapter_heading': 'Interoperable Europe planning and monitoring', 'chapter_num': 'Chapter 5'},
-            {'eId': 5, 'chapter_heading': 'Final provisions', 'chapter_num': 'Chapter 6'},
+            {'eId': 0,  'num': 'Chapter 1', 'heading': 'General provisions'},
+            {'eId': 1,  'num': 'Chapter 2', 'heading': 'European Interoperability enablers'}, 
+            {'eId': 2,  'num': 'Chapter 3', 'heading': 'Interoperable Europe support measures'},
+            {'eId': 3,  'num': 'Chapter 4', 'heading': 'Governance of cross-border interoperability'},
+            {'eId': 4,  'num': 'Chapter 5', 'heading': 'Interoperable Europe planning and monitoring'},
+            {'eId': 5,  'num': 'Chapter 6', 'heading': 'Final provisions'},
         ]
         
         self.assertEqual(self.parser.chapters[0], expected_chapters[0], "Chapters data does not match expected content")
@@ -105,16 +105,16 @@ class TestFormex4Parser(unittest.TestCase):
         expected = [
             {
                 "eId": "001",
-                "article_num": "Article 1",
-                "article_title": None,
+                "num": "Article 1",
+                "heading": None,
                 "children": [
                     {"eId": 0, "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation."}
                 ]
             },
             {
                 "eId": "002",
-                "article_num": "Article 2",
-                "article_title": None,
+                "num": "Article 2",
+                "heading": None,
                 "children": [
                     {"eId": 0, "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union."}
                 ]

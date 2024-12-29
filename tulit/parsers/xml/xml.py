@@ -397,8 +397,8 @@ class XMLParser(Parser):
             
             self.chapters.append({
                 'eId': eId,
-                'chapter_num': chapter_num,
-                'chapter_heading': chapter_heading 
+                'num': chapter_num,
+                'heading': chapter_heading 
             })
 
     def get_articles(self) -> None:

@@ -1,5 +1,6 @@
 from tulit.parsers.xml.xml import XMLParser
 import json
+import argparse
 
 class AkomaNtosoParser(XMLParser):
     """
@@ -195,8 +196,8 @@ class AkomaNtosoParser(XMLParser):
             # Append the article data to the articles list
             self.articles.append({
                 'eId': eId,
-                'article_num': article_num_text,
-                'article_title': article_title_text,
+                'num': article_num_text,
+                'heading': article_title_text,
                 'children': children
             })
 
@@ -292,21 +293,17 @@ class AkomaNtosoParser(XMLParser):
         return super().parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')
 
 def main():
-    parser = AkomaNtosoParser()
-    
-    file_to_parse = 'tests/data/akn/eu/32014L0092.akn'
-    output_file = 'tests/data/json/akn.json'
-    
-    parser.parse(file_to_parse)
-    
-    
-    with open(output_file, 'w', encoding='utf-8') as f:
+    parser = argparse.ArgumentParser(description='Parse an Akoma Ntoso XML document and output the results to a JSON file.')
+    parser.add_argument('--input', type=str, default='tests/data/akn/eu/32014L0092.akn', help='Path to the Akoma Ntoso XML file to parse.')
+    parser.add_argument('--output', type=str, default='tests/data/json/akn.json', help='Path to the output JSON file.')
+    args = parser.parse_args()
+    akoma_parser = AkomaNtosoParser()
+    akoma_parser.parse(args.input)
+    with open(args.output, 'w', encoding='utf-8') as f:
         # Get the parser's attributes as a dictionary
-        parser_dict = parser.__dict__
-    
+        parser_dict = akoma_parser.__dict__
         # Filter out non-serializable attributes
         serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
-    
         # Write to a JSON file
         json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
 

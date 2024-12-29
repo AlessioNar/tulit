@@ -8,8 +8,8 @@ import sys
 project = 'tulit'
 author = 'AlessioNar'
 
-release = '0.0.5'
-version = '0.0.5'
+release = '0.0.6'
+version = '0.0.6'
 
 # -- General configuration
 sys.path.insert(0, os.path.abspath('../../tulit'))
@@ -21,6 +21,8 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',  # Ensure napoleon extension is included for Google style docstrings
+    'sphinx.ext.inheritance_diagram',
+
 ]
 
 intersphinx_mapping = {

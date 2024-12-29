@@ -1,7 +1,13 @@
 Parsers
 ===============
 
-This package contains modules for parsing various types of legal documents. Below are the details for each module.
+This subpackage contains modules for parsing documents of type act in various formats into a JSON representation.
+
+The formats currently supported are:
+
+* Formex 4
+* Akoma Ntoso
+* XHTML as published in Cellar Semantic Repository of the Publications Office
 
 .. automodule:: tulit.parsers.parser
     :members:
@@ -27,6 +33,12 @@ This package contains modules for parsing various types of legal documents. Belo
 
 
 .. automodule:: tulit.parsers.html.xhtml
+    :members:
+    :undoc-members:
+    :show-inheritance:
+    :exclude-members: main
+
+.. automodule:: tulit.parsers.html.cellar
     :members:
     :undoc-members:
     :show-inheritance:

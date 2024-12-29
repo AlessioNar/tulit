@@ -87,3 +87,10 @@ A similar approach can be used to parse a legal document in FORMEX and XHTML for
 
     parser = HTMLParser()
     parser.parse(html_file)
+
+Alternatively, the `tulit` parsers can also be called via command line by providing input and output paths of the file to be parsed, for example:
+
+.. code-block:: bash
+
+    python ./tulit/parsers/xml/formex.py --input input/file/path.xml --output output/file/path.json
+

@@ -156,7 +156,7 @@ class CellarDownloader(DocumentDownloader):
 # Example usage
 if __name__ == "__main__":
     downloader = CellarDownloader(download_dir='./tests/data/formex', log_dir='./tests/logs')
-    with open('./tests/metadata/query_results/query_results.json', 'r') as f:
+    with open('./tests/metadata/query_results/ai_act.json', 'r') as f:
         results = json.loads(f.read())
     documents = downloader.download(results, format='fmx4')
     print(documents)

@@ -1,0 +1,36 @@
+{
+    "head": {
+        "link": [],
+        "vars": [
+            "cellarURIs",
+            "manif",
+            "format",
+            "expr"
+        ]
+    },
+    "results": {
+        "distinct": false,
+        "ordered": true,
+        "bindings": [
+            {
+                "cellarURIs": {
+                    "type": "uri",
+                    "value": "http://publications.europa.eu/resource/cellar/dc8116a1-3fe6-11ef-865a-01aa75ed71a1.0006.02/DOC_1"
+                },
+                "manif": {
+                    "type": "uri",
+                    "value": "http://publications.europa.eu/resource/cellar/dc8116a1-3fe6-11ef-865a-01aa75ed71a1.0006.02"
+                },
+                "format": {
+                    "type": "typed-literal",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#string",
+                    "value": "fmx4"
+                },
+                "expr": {
+                    "type": "uri",
+                    "value": "http://publications.europa.eu/resource/cellar/dc8116a1-3fe6-11ef-865a-01aa75ed71a1.0006"
+                }
+            }
+        ]
+    }
+}

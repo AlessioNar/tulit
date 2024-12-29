@@ -296,12 +296,7 @@ class XMLParser(Parser):
             return None
         
         recitals = []
-        intro_eId, intro_text = extract_intro(recitals_section) if extract_intro else (None, None)
-        
-        recitals.append({
-            "eId": intro_eId,
-            "text": intro_text
-            })
+        extract_intro(recitals_section) if extract_intro else None
         
         
         for recital in recitals_section.findall(recital_xpath, namespaces=self.namespaces):

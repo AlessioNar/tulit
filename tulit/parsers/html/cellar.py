@@ -1,5 +1,6 @@
 from tulit.parsers.html.xhtml import HTMLParser
 import json
+import re
 
 class CellarHTMLParser(HTMLParser):
     def __init__(self):
@@ -45,6 +46,10 @@ class CellarHTMLParser(HTMLParser):
         """
         
         self.preamble = self.root.find('div', class_='eli-subdivision', id='pbl_1')
+        # Remove all a tags from the preamble
+        for a in self.preamble.find_all('a'):
+            a.decompose()
+            
     
     def get_formula(self):
         """
@@ -104,7 +109,11 @@ class CellarHTMLParser(HTMLParser):
         self.recitals = []
         for recital in recitals:
             eId = recital.get('id')
-            text = recital.get_text(strip=True)
+            
+            text = recital.get_text()            
+            text = re.sub(r'\s+', ' ', text).strip()
+            text = re.sub(r'^\(\d+\)', '', text).strip()
+            
             self.recitals.append({
                     'eId' : eId,
                     'text' : text
@@ -140,6 +149,8 @@ class CellarHTMLParser(HTMLParser):
         """
         
         self.body = self.root.find('div', id=lambda x: x and x.startswith('enc_'))
+        for a in self.body.find_all('a'):
+            a.replace_with(' ')
 
     def get_chapters(self):
         """
@@ -157,59 +168,6 @@ class CellarHTMLParser(HTMLParser):
                 'chapter_num': chapter_num,
                 'chapter_heading': chapter_title
             })
-            
-
-    def get_lists(self, parent_id: str, container):
-        """
-        Parses HTML tables representing lists and generates Akoma Ntoso-style eIds.
-
-        Args:
-            parent_id (str): The eId of the parent element (e.g., article or subdivision).
-            container (BeautifulSoup Tag): The container holding the <table> elements.
-
-        Returns:
-            list[dict]: List of list elements with eIds and corresponding text content.
-        """
-        lists = []
-        list_counter = 0
-
-        # Find all <table> elements within the container
-        tables = container.find_all('table')
-
-        for table in tables:
-            list_counter += 1
-            list_eId = f"{parent_id}__list_{list_counter}"
-
-            # Process each row (<tr>) within the table
-            points = []
-            point_counter = 0
-
-            for row in table.find_all('tr'):
-                cols = row.find_all('td')
-                if len(cols) >= 2:
-                    # Extract point number (e.g., (a)) and content
-                    point_counter += 1
-                    point_eId = f"{list_eId}__point_{point_counter}"
-                    point_num = cols[0].get_text(strip=True)  # First column: point number
-                    point_text = cols[1].get_text(" ", strip=True)  # Second column: point text
-
-                    # Clean text
-                    point_text = self._clean_text(point_text)
-
-                    points.append({
-                        'eId': point_eId,
-                        'num': point_num,
-                        'text': point_text
-                    })
-
-            # Add the list with its points
-            lists.append({
-                'eId': list_eId,
-                'points': points
-            })
-
-        return lists
-
 
     def get_articles(self):
         """
@@ -230,35 +188,57 @@ class CellarHTMLParser(HTMLParser):
                 article_title = article_title_element.get_text(strip=True)
             else:
                 article_title = None
-            # Group <p> tags by their closest parent with an id
-            content_map = {}
-            for p in article.find_all('p', class_='oj-normal'):  # Filter <p> with class 'oj-normal'
-                current_element = p
-                parent_eId = None
-                # Traverse upward to find the closest parent with an id
-                while current_element:
-                    parent_eId = current_element.get('id')
-                    if parent_eId:
-                        break
-                    current_element = current_element.parent
-                if parent_eId:
-                    # Add text from the <p> to the appropriate parent_eId group
-                    if parent_eId not in content_map:
-                        content_map[parent_eId] = []
-                    content_map[parent_eId].append(p.get_text(strip=True))
-            # Combine grouped content into structured output
-            subdivisions = []
-            for sub_eId, texts in content_map.items():
-                subdivisions.append({
-                    'eId': sub_eId,
-                    'text': ' '.join(texts)  # Combine all <p> texts for the subdivision
+            
+            # Extract paragraphs and lists within the article
+            children = []
+            
+            # Handle articles with only paragraphs
+            paragraphs = article.find_all('p', class_='oj-normal')            
+            if paragraphs and len(article.find_all('table')) == 0:
+                for paragraph in paragraphs:
+                    text = ' '.join(paragraph.get_text(separator= ' ', strip=True).split())
+                    
+                    children.append({
+                        # Get parent of the paragraph: Use the id of the parent div as the eId
+                        'eId': paragraph.find_parent('div').get('id'),
+                        'text': text
+                    })
+            # Handle articles with only tables as first child:
+            elif article.find_all('table') and article.find_all('table')[0].find_parent('div') == article:
+                intro = article.find('p', class_='oj-normal')
+                children.append({
+                    'eId': 0,
+                    'text': intro.get_text(strip=True)
                 })
+                tables = article.find_all('table')
+                for table in tables:
+                    rows = table.find_all('tr')
+                    for row in rows:
+                        cols = row.find_all('td')
+                        if len(cols) == 2:
+                            number = cols[0].get_text(strip=True)
+                            text = ' '.join(cols[1].get_text(separator = ' ', strip=True).split())
+                            
+                            children.append({
+                                'eId': number,
+                                'text': text
+                            })
+            # Handle articles with paragraphs and tables by treating tables as part of the same paragraph
+            elif article.find_all('div', id=lambda x: x and '.' in x):
+                paragraphs = article.find_all('div', id=lambda x: x and '.' in x)
+                for paragraph in paragraphs:
+                    if not paragraph.get('class'):
+                        children.append({
+                                'eId': paragraph.get('id'),
+                                'text': ' '.join(paragraph.get_text(separator = ' ', strip=True).split())
+                        })
+            
             # Store the article with its eId and subdivisions
             self.articles.append({
                 'eId': eId,
                 'article_num': article_num,
                 'article_title': article_title,
-                'children': subdivisions
+                'children': children
             })
 
 

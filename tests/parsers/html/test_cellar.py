@@ -46,27 +46,27 @@ class TestCellarHTMLParser(unittest.TestCase):
         citations =  [
             {
                 "eId": "cit_1",
-                "citation_text": "Having regard to the Treaty on the Functioning of the European Union, and in particular Article 172 thereof,"
+                "text": "Having regard to the Treaty on the Functioning of the European Union, and in particular Article 172 thereof,"
             },
             {
                 "eId": "cit_2",
-                "citation_text": "Having regard to the proposal from the European Commission,"
+                "text": "Having regard to the proposal from the European Commission,"
             },
             {
                 "eId": "cit_3",
-                "citation_text": "After transmission of the draft legislative act to the national parliaments,"
+                "text": "After transmission of the draft legislative act to the national parliaments,"
             },
             {
                 "eId": "cit_4",
-                "citation_text": "Having regard to the opinion of the European Economic and Social Committee(1),"
+                "text": "Having regard to the opinion of the European Economic and Social Committee,"
             },
             {
                 "eId": "cit_5",
-                "citation_text": "Having regard to the opinion of the Committee of the Regions(2),"
+                "text": "Having regard to the opinion of the Committee of the Regions,"
             },
             {
                 "eId": "cit_6",
-                "citation_text": "Acting in accordance with the ordinary legislative procedure(3),"
+                "text": "Acting in accordance with the ordinary legislative procedure,"
             }
         ]
         self.assertEqual(self.parser.citations, citations, "Citations should match expected values")

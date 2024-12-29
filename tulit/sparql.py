@@ -113,6 +113,6 @@ def get_results_table(sparql_query):
 # Main function
 if __name__ == "__main__":
 
-    document_paths = send_sparql_query('./tests/query.rq', celex='32011R0182')# 32024R0903')
-    with open('./tests/metadata/query_results.json', "w") as f:
+    document_paths = send_sparql_query('./tests/metadata/queries/formex_query.rq', celex='32024R1689')# 32024R0903')
+    with open('./tests/metadata/ai_act.json', "w") as f:
         json.dump(document_paths, f, indent=4) 

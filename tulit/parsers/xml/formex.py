@@ -90,10 +90,8 @@ class Formex4Parser(XMLParser):
         """
         
         def extract_intro(recitals_section):        
-            intro_eId = 'rec_0'
             intro_text = self.preamble.findtext('.//GR.CONSID.INIT')
-
-            return intro_eId, intro_text
+            self.recitals_intro = intro_text            
         
         def extract_eId(recital):
             return recital.findtext('.//NO.P')
@@ -199,6 +197,7 @@ class Formex4Parser(XMLParser):
                 self.articles.append({
                     "eId": article.get("IDENTIFIER"),
                     "article_num": article.findtext('.//TI.ART'),
+                    "article_title": article.findtext('.//STI.ART'),
                     "children": children
                 })
             
@@ -228,11 +227,12 @@ class Formex4Parser(XMLParser):
         for index, element in enumerate(elements, start=start_index):
             text = "".join(element.itertext()).strip()
             text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
+            text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
             text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
             
             child = {
-                "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,
-                "text": text
+            "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,
+            "text": text
             }
             children.append(child)
     
@@ -286,6 +286,7 @@ class Formex4Parser(XMLParser):
 def main():
     parser = Formex4Parser()
     file_to_parse = 'tests/data/formex/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml'
+    
     output_file = 'tests/data/json/iopa.json'
     
 

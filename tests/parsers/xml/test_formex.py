@@ -60,7 +60,6 @@ class TestFormex4Parser(unittest.TestCase):
         self.parser.get_recitals()
         
         recitals = [
-                {"eId": "rec_0", "text": "Whereas:"},
                 {"eId": "(1)", "text": "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."}, 
                 {"eId": "(2)", "text": "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products and for egg albumin shows that the representative import prices for certain products should be amended to take account of variations in price according to origin. The representative prices should therefore be published."},
                 {"eId": "(3)", "text": "In view of the situation on the market, this amendment should be applied as soon as possible."},
@@ -107,6 +106,7 @@ class TestFormex4Parser(unittest.TestCase):
             {
                 "eId": "001",
                 "article_num": "Article 1",
+                "article_title": None,
                 "children": [
                     {"eId": 0, "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation."}
                 ]
@@ -114,6 +114,7 @@ class TestFormex4Parser(unittest.TestCase):
             {
                 "eId": "002",
                 "article_num": "Article 2",
+                "article_title": None,
                 "children": [
                     {"eId": 0, "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union."}
                 ]

@@ -114,25 +114,33 @@ class XMLParser(Parser):
         lxml.etree._Element
             The modified XML tree with specified nodes removed.
         """
-        if tree.findall(node, namespaces=self.namespaces) is not None:
+        
+        if tree.findall(node, namespaces=self.namespaces) is not None: 
             for item in tree.findall(node, namespaces=self.namespaces):
                 text = ' '.join(item.itertext()).strip()
                 
-                # Find the parent and remove the <node> element
-                parent = item.getparent()
-                tail_text = item.tail
-                if parent is not None:
-                    parent.remove(item)
+                if item.getprevious() is not None:
+                    item.getprevious().tail = (item.getprevious().tail or '') + (item.tail or '')
+                else:
+                    item.getparent().text = (item.getparent().text or '') + (item.tail or '')
+                
+                item.getparent().remove(item)
+                
+                    # Find the parent and remove the <node> element
+                    #parent = item.getparent()
+                    #tail_text = item.tail
+                    #if parent is not None:
+                    #    parent.remove(item)
 
-                # Preserve tail text if present
-                if tail_text:
-                    if parent.getchildren():
-                        # If there's a previous sibling, add the tail to the last child
-                        previous_sibling = parent.getchildren()[-1]
-                        previous_sibling.tail = (previous_sibling.tail or '') + tail_text
-                    else:
-                        # If no siblings, add the tail text to the parent's text
-                        parent.text = (parent.text or '') + tail_text
+                    # Preserve tail text if present, 
+                    #if tail_text:
+                    #    if parent.getchildren():
+                            # If there's a previous sibling, add the tail text just after it
+                    #        previous_sibling = parent.getchildren()[-1]
+                    #        previous_sibling.tail = (previous_sibling.tail or '') + tail_text
+                    #    else:
+                            # If no siblings, add the tail text to the parent's text
+                    #        parent.text = (parent.text or '') + tail_text
         
         return tree
     

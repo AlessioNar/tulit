@@ -23,7 +23,7 @@ class CellarHTMLParser(HTMLParser):
         try:
             preface_element = self.root.find('div', class_='eli-main-title')
             if preface_element:
-                self.preface = preface_element.get_text(strip=True)
+                self.preface = preface_element.get_text(separator=' ', strip=True)
                 print("Preface extracted successfully.")
             else:
                 self.preface = None

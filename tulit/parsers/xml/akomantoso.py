@@ -189,7 +189,7 @@ class AkomaNtosoParser(XMLParser):
                 # If <heading> is not found, use the second <num> as the title if it exists
                 article_title_element = article.findall('akn:num', namespaces=self.namespaces)[1] if len(article.findall('akn:num', namespaces=self.namespaces)) > 1 else None
             # Get the title text 
-            article_title_text = article_title_element.text if article_title_element is not None else None
+            article_title_text = ''.join(article_title_element.itertext()).strip() if article_title_element is not None else None
 
             children = self.get_text_by_eId(article)
         

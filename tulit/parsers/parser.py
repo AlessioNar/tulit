@@ -45,9 +45,10 @@ class Parser(ABC):
         self.root = None 
         self.preface = None
 
-        self.preamble = None
+        self.preamble = None        
         self.formula = None    
         self.citations = []
+        self.recitals_init = None
         self.recitals = []
         self.preamble_final = None
     

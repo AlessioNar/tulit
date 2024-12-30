@@ -28,7 +28,7 @@ poetry add tulit
 
 The `tulit` package main components are:
 * a client to query and retrieve data from a variety of legal data sources. Currently the package supports the Cellar, LegiLux and Normattiva.
-* a parser to convert legal documents from a variety of formats to a json representation.
+* a parser to convert legal documents from a variety of formats to a standardised json representation.
 
 #### Retrieving legal documents
 
@@ -69,7 +69,7 @@ print(parser.preface)
 print(parser.citations)
 print(parser.recitals)
 print(parser.chapters)
-print(parser.articles
+print(parser.articles)
 
 ```
 

@@ -181,7 +181,7 @@ class AkomaNtosoParser(XMLParser):
             
             # Find the main <num> element representing the article number
             article_num = article.find('akn:num', namespaces=self.namespaces)
-            article_num_text = article_num.text if article_num is not None else None
+            article_num_text = ''.join(article_num.itertext()).strip() if article_num is not None else None
 
             # Find a secondary <num> or <heading> to represent the article title or subtitle, if present
             article_title_element = article.find('akn:heading', namespaces=self.namespaces)

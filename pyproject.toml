@@ -36,5 +36,5 @@ build-backend = "poetry.core.masonry.api"
 
 
 [project.urls]
-Homepage = "https://github.com/AlessioNar/ulit"
-Issues = "https://github.com/AlessioNar/ulit/issues"
+Homepage = "https://github.com/AlessioNar/tulit"
+Issues = "https://github.com/AlessioNar/tulit/issues"

@@ -1,7 +1,7 @@
 import requests
-from tulit.download.download import DocumentDownloader
+from tulit.download.download import Client
 
-class LegiluxDownloader(DocumentDownloader):
+class LegiluxDownloader(Client):
     def __init__(self, download_dir, log_dir):
         super().__init__(download_dir, log_dir)
         #self.endpoint = "https://legilux.public.lu/eli/etat/leg/loi"

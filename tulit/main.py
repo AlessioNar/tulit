@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from tulit.download.download import download_documents
+from tulit.download.client import download_documents
 from sparql import send_sparql_query
 from parsers.html import HTMLParser
 from parsers.formex import Formex4Parser

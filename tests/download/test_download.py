@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
-from tulit.download.download import Client
+from tulit.download.client import Client
 
 
 class TestDocumentDownloader(unittest.TestCase):

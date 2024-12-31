@@ -1,4 +1,4 @@
-from tulit.download.download import Client
+from tulit.download.client import Client
 import requests
 import logging
 from datetime import datetime

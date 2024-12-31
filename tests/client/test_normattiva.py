@@ -1,5 +1,4 @@
 import unittest
-
 from unittest.mock import patch, Mock
 from tulit.client.normattiva import NormattivaClient
 

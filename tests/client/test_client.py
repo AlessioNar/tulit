@@ -3,7 +3,6 @@ from unittest.mock import patch, Mock
 import os
 from tulit.client.client import Client
 
-
 class TestClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
@@ -30,7 +29,7 @@ class TestClient(unittest.TestCase):
         response = Mock()
         response.content = b'fake zip content'
 
-        folder_path = './downloads/test_folder'
+        folder_path = './tests/data'
         self.downloader.extract_zip(response, folder_path)
 
         # Check that the zipfile was opened and extracted

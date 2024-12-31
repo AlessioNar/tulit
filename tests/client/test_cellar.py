@@ -1,6 +1,6 @@
 import unittest
 import json
-from tulit.download.cellar import CellarClient
+from tulit.client.cellar import CellarClient
 import os
 from unittest.mock import patch, Mock
 import requests
@@ -46,7 +46,7 @@ class TestCellarClient(unittest.TestCase):
         actual_url = self.downloader.build_request_url(params)
         self.assertEqual(actual_url, expected_url)
     
-    @patch('tulit.download.download.requests.request')
+    @patch('tulit.client.client.requests.request')
     def test_fetch_content(self, mock_request):
         mock_response = Mock()
         mock_response.status_code = 200
@@ -68,7 +68,7 @@ class TestCellarClient(unittest.TestCase):
         # Check that the response is as expected
         self.assertEqual(response, mock_response)
 
-    @patch('tulit.download.download.requests.request')
+    @patch('tulit.client.client.requests.request')
     def test_fetch_content_request_exception(self, mock_request):
         # Mock request to raise a RequestException
         mock_request.side_effect = requests.RequestException("Error sending GET request")

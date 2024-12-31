@@ -1,5 +1,5 @@
 import requests
-from tulit.download.client import Client
+from tulit.client.client import Client
 
 class LegiluxClient(Client):
     def __init__(self, download_dir, log_dir):

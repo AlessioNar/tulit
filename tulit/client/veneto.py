@@ -1,5 +1,5 @@
 import requests
-from tulit.download.client import Client
+from tulit.client.client import Client
 import argparse
 import os
 

@@ -2,7 +2,7 @@ import logging
 
 import requests
 import json
-from tulit.download.client import Client
+from tulit.client.client import Client
 
 class CellarClient(Client):
     

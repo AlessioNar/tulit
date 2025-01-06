@@ -1,4 +1,4 @@
-Download
+Client
 ===============
 
 This module contains the following submodules:
@@ -6,22 +6,22 @@ This module contains the following submodules:
 .. toctree::
     :maxdepth: 2
 
-.. automodule:: tulit.download.download
+.. automodule:: tulit.client.client
      :members:
      :undoc-members:
      :show-inheritance:
 
-.. automodule:: tulit.download.cellar
+.. automodule:: tulit.client.cellar
      :members:
      :undoc-members:
      :show-inheritance:
 
-.. automodule:: tulit.download.normattiva
+.. automodule:: tulit.client.normattiva
      :members:
      :undoc-members:
      :show-inheritance:
 
-.. automodule:: tulit.download.legilux
+.. automodule:: tulit.client.legilux
      :members:
      :undoc-members:
      :show-inheritance:

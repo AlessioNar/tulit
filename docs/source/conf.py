@@ -9,7 +9,7 @@ project = 'tulit'
 author = 'AlessioNar'
 
 release = '0.1.0'
-version = '0.1.0'
+version = '1.0.1'
 
 # -- General configuration
 sys.path.insert(0, os.path.abspath('../../tulit'))

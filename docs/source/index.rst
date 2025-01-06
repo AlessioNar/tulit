@@ -21,7 +21,7 @@ Contents
 .. toctree::
    :maxdepth: 3
 
-   download
+   client
 
 .. toctree::
    :maxdepth: 3

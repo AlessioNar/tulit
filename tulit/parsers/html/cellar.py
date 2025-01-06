@@ -198,7 +198,7 @@ class CellarHTMLParser(HTMLParser):
             if paragraphs and len(article.find_all('table')) == 0:
                 for paragraph in paragraphs:
                     text = ' '.join(paragraph.get_text(separator= ' ', strip=True).split())
-                    
+                    text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
                     children.append({
                         # Get parent of the paragraph: Use the id of the parent div as the eId
                         'eId': paragraph.find_parent('div').get('id'),
@@ -218,8 +218,11 @@ class CellarHTMLParser(HTMLParser):
                         cols = row.find_all('td')
                         if len(cols) == 2:
                             number = cols[0].get_text(strip=True)
+                            number = number.strip('()')  # Remove parentheses
+                            number = int(number)
                             text = ' '.join(cols[1].get_text(separator = ' ', strip=True).split())
-                            
+                            text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+
                             children.append({
                                 'eId': number,
                                 'text': text
@@ -229,9 +232,11 @@ class CellarHTMLParser(HTMLParser):
                 paragraphs = article.find_all('div', id=lambda x: x and '.' in x)
                 for paragraph in paragraphs:
                     if not paragraph.get('class'):
+                        text = ' '.join(paragraph.get_text(separator = ' ', strip=True).split())
+                        text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
                         children.append({
                                 'eId': paragraph.get('id'),
-                                'text': ' '.join(paragraph.get_text(separator = ' ', strip=True).split())
+                                'text': text
                         })
             
             # Store the article with its eId and subdivisions

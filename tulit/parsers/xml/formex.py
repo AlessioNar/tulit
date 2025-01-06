@@ -69,7 +69,8 @@ class Formex4Parser(XMLParser):
             - 'text': Citation text
         """
         def extract_eId(citation, index):
-            return index
+            return f'cit_{index + 1}'
+            
         
         return super().get_citations(
             citations_xpath='.//GR.VISA',
@@ -95,7 +96,10 @@ class Formex4Parser(XMLParser):
             self.recitals_intro = intro_text            
         
         def extract_eId(recital):
-            return recital.findtext('.//NO.P')
+            eId = recital.findtext('.//NO.P')
+            # Remove () and return eId in the format rct_{number}
+            eId = eId.strip('()')  # Remove parentheses
+            return f'rct_{eId}'
             
         return super().get_recitals(
             recitals_xpath='.//GR.CONSID', 
@@ -135,7 +139,7 @@ class Formex4Parser(XMLParser):
             - 'chapter_heading': Chapter heading text
         """
         def extract_eId(chapter, index):
-            return index
+            return f'cpt_{index+1}'
         
         def get_headings(chapter):
             if len(chapter.findall('.//HT')) > 0:
@@ -179,6 +183,9 @@ class Formex4Parser(XMLParser):
         self.articles = []
         if self.body is not None:
             for article in self.body.findall('.//ARTICLE'):
+                article_eId = article.get("IDENTIFIER")
+                article_eId = article_eId.lstrip('0')
+                article_eId = f'art_{article_eId}'
                 children = []
 
                 # Extract text and metadata from all relevant elements within the article
@@ -196,7 +203,7 @@ class Formex4Parser(XMLParser):
                             self._extract_elements(alinea, '.', children)                        
                 
                 self.articles.append({
-                    "eId": article.get("IDENTIFIER"),
+                    "eId": article_eId,
                     "num": article.findtext('.//TI.ART'),
                     "heading": article.findtext('.//STI.ART'),
                     "children": children
@@ -226,10 +233,18 @@ class Formex4Parser(XMLParser):
         """
         elements = parent.findall(xpath)
         for index, element in enumerate(elements, start=start_index):
+            for sub_element in element.iter():
+                if sub_element.tag == 'QUOT.START':                    
+                    sub_element.text = "‘"                    
+                elif sub_element.tag == 'QUOT.END':                    
+                    sub_element.text = "’"
+    
             text = "".join(element.itertext()).strip()
+            text = re.sub(r'^\(\d+\)', '', text).strip()
             text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
             text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
             text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
+            text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
             
             child = {
             "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,

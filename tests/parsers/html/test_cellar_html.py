@@ -159,75 +159,75 @@ class TestCellarHTMLParser(unittest.TestCase):
         }
         
         article_2 = {
-                "eId": "art_2",
-                "num": "Article 2",
-                "heading": "Definitions",
-                "children": [
-                    {
-                        "eId": 0,
-                        "text": "For the purposes of this Regulation, the following definitions apply:"
-                    },
-                    {
-                        "eId": "(1)",
-                        "text": "‘cross-border interoperability’ means the ability of Union entities and public sector bodies of Member States to interact with each other across borders by sharing data, information and knowledge through digital processes in line with the legal, organisational, semantic and technical requirements related to such cross-border interaction;"
-                    },
-                    {
-                        "eId": "(2)",
-                        "text": "‘trans-European digital public services’ means digital services provided by Union entities or public sector bodies to one another or to natural or legal persons in the Union, and requiring interaction across Member State borders, among Union entities or between Union entities and public sector bodies, by means of their network and information systems;"
-                    },
-                    {
-                        "eId": "(3)",
-                        "text": "‘network and information system’ means a network and information system as defined in Article 6, point (1), of Directive (EU) 2022/2555 of the European Parliament and of the Council ;"
-                    },
-                    {
-                        "eId": "(4)",
-                        "text": "‘interoperability solution’ means a reusable asset concerning legal, organisational, semantic or technical requirements to enable cross-border interoperability, such as conceptual frameworks, guidelines, reference architectures, technical specifications, standards, services and applications, as well as documented technical components, such as source code;"
-                    },
-                    {
-                        "eId": "(5)",
-                        "text": "‘Union entities’ means the Union institutions, bodies, offices and agencies set up by, or on the basis of, the TEU, the Treaty on the functioning of European Union or the Treaty establishing the European Atomic Energy Community;"
-                    },
-                    {
-                        "eId": "(6)",
-                        "text": "‘public sector body’ means a public sector body as defined in Article 2, point (1), of Directive (EU) 2019/1024 of the European Parliament and of the Council ;"
-                    },
-                    {
-                        "eId": "(7)",
-                        "text": "‘data’ means data as defined in Article 2, point (1), of Regulation (EU) 2022/868 of the European Parliament and of the Council ;"
-                    },
-                    {
-                        "eId": "(8)",
-                        "text": "‘machine-readable format’ means a machine-readable format as defined in Article 2, point (13), of Directive (EU) 2019/1024;"
-                    },
-                    {
-                        "eId": "(9)",
-                        "text": "‘GovTech’ means technology-based cooperation between public and private sector actors supporting public sector digital transformation;"
-                    },
-                    {
-                        "eId": "(10)",
-                        "text": "‘standard’ means a standard as defined in Article 2, point (1), of Regulation (EU) No 1025/2012 of the European Parliament and of the Council ;"
-                    },
-                    {
-                        "eId": "(11)",
-                        "text": "‘ICT technical specification’ means ICT technical specification as defined in Article 2, point (5), of Regulation (EU) No 1025/2012;"
-                    },
-                    {
-                        "eId": "(12)",
-                        "text": "‘open source licence’ means a licence whereby the reuse, redistribution and modification of software is permitted for all uses on the basis of a unilateral declaration by the right holder that may be subject to certain conditions, and where the source code of the software is made available to users indiscriminately;"
-                    },
-                    {
-                        "eId": "(13)",
-                        "text": "‘highest level of management’ means a manager, management or coordination and oversight body at the most senior administrative level, taking account of the high-level governance arrangements in each Union entity;"
-                    },
-                    {
-                        "eId": "(14)",
-                        "text": "‘interoperability regulatory sandbox’ means a controlled environment set up by a Union entity or a public sector body for the development, training, testing and validation of innovative interoperability solutions, where appropriate in real world conditions, supporting the cross-border interoperability of trans-European digital public services for a limited period of time under regulatory supervision;"
-                    },
-                    {
-                        "eId": "(15)",
-                        "text": "‘binding requirement’ means an obligation, prohibition, condition, criterion or limit of a legal, organisational, semantic or technical nature, which is set by a Union entity or a public sector body concerning one or more trans-European digital public services and which has an effect on cross-border interoperability."
-                    }
-                ]
+            "eId": "art_2",
+            "num": "Article 2",
+            "heading": "Definitions",
+            "children": [
+                {
+                    "eId": 0,
+                    "text": "For the purposes of this Regulation, the following definitions apply:"
+                },
+                {
+                    "eId": 1,
+                    "text": "‘cross-border interoperability’ means the ability of Union entities and public sector bodies of Member States to interact with each other across borders by sharing data, information and knowledge through digital processes in line with the legal, organisational, semantic and technical requirements related to such cross-border interaction;"
+                },
+                {
+                    "eId": 2,
+                    "text": "‘trans-European digital public services’ means digital services provided by Union entities or public sector bodies to one another or to natural or legal persons in the Union, and requiring interaction across Member State borders, among Union entities or between Union entities and public sector bodies, by means of their network and information systems;"
+                },
+                {
+                    "eId": 3,
+                    "text": "‘network and information system’ means a network and information system as defined in Article 6, point (1), of Directive (EU) 2022/2555 of the European Parliament and of the Council;"
+                },
+                {
+                    "eId": 4,
+                    "text": "‘interoperability solution’ means a reusable asset concerning legal, organisational, semantic or technical requirements to enable cross-border interoperability, such as conceptual frameworks, guidelines, reference architectures, technical specifications, standards, services and applications, as well as documented technical components, such as source code;"
+                },
+                {
+                    "eId": 5,
+                    "text": "‘Union entities’ means the Union institutions, bodies, offices and agencies set up by, or on the basis of, the TEU, the Treaty on the functioning of European Union or the Treaty establishing the European Atomic Energy Community;"
+                },
+                {
+                    "eId": 6,
+                    "text": "‘public sector body’ means a public sector body as defined in Article 2, point (1), of Directive (EU) 2019/1024 of the European Parliament and of the Council;"
+                },
+                {
+                    "eId": 7,
+                    "text": "‘data’ means data as defined in Article 2, point (1), of Regulation (EU) 2022/868 of the European Parliament and of the Council;"
+                },
+                {
+                    "eId": 8,
+                    "text": "‘machine-readable format’ means a machine-readable format as defined in Article 2, point (13), of Directive (EU) 2019/1024;"
+                },
+                {
+                    "eId": 9,
+                    "text": "‘GovTech’ means technology-based cooperation between public and private sector actors supporting public sector digital transformation;"
+                },
+                {
+                    "eId": 10,
+                    "text": "‘standard’ means a standard as defined in Article 2, point (1), of Regulation (EU) No 1025/2012 of the European Parliament and of the Council;"
+                },
+                {
+                    "eId": 11,
+                    "text": "‘ICT technical specification’ means ICT technical specification as defined in Article 2, point (5), of Regulation (EU) No 1025/2012;"
+                },
+                {
+                    "eId": 12,
+                    "text": "‘open source licence’ means a licence whereby the reuse, redistribution and modification of software is permitted for all uses on the basis of a unilateral declaration by the right holder that may be subject to certain conditions, and where the source code of the software is made available to users indiscriminately;"
+                },
+                {
+                    "eId": 13,
+                    "text": "‘highest level of management’ means a manager, management or coordination and oversight body at the most senior administrative level, taking account of the high-level governance arrangements in each Union entity;"
+                },
+                {
+                    "eId": 14,
+                    "text": "‘interoperability regulatory sandbox’ means a controlled environment set up by a Union entity or a public sector body for the development, training, testing and validation of innovative interoperability solutions, where appropriate in real world conditions, supporting the cross-border interoperability of trans-European digital public services for a limited period of time under regulatory supervision;"
+                },
+                {
+                    "eId": 15,
+                    "text": "‘binding requirement’ means an obligation, prohibition, condition, criterion or limit of a legal, organisational, semantic or technical nature, which is set by a Union entity or a public sector body concerning one or more trans-European digital public services and which has an effect on cross-border interoperability."
+                }
+            ]
             }
         
         article_3 = {

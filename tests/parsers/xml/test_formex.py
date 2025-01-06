@@ -46,9 +46,9 @@ class TestFormex4Parser(unittest.TestCase):
         self.parser.get_citations()
         
         citations =  [
-                {'eId': 0, 'text': "Having regard to the Treaty on the Functioning of the European Union,"},
-                {"eId": 1, 'text':"Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common organisation of agricultural markets and on specific provisions for certain agricultural products (Single CMO Regulation) , and in particular Article 143 thereof,"},
-                {"eId": 2, 'text':"Having regard to Council Regulation (EC) No 614/2009 of 7 July 2009 on the common system of trade for ovalbumin and lactalbumin , and in particular Article 3(4) thereof,"},
+                {'eId': "cit_1", 'text': "Having regard to the Treaty on the Functioning of the European Union,"},
+                {"eId": "cit_2", 'text':"Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common organisation of agricultural markets and on specific provisions for certain agricultural products (Single CMO Regulation) , and in particular Article 143 thereof,"},
+                {"eId": "cit_3", 'text':"Having regard to Council Regulation (EC) No 614/2009 of 7 July 2009 on the common system of trade for ovalbumin and lactalbumin , and in particular Article 3(4) thereof,"},
             ]
         
         self.assertEqual(self.parser.citations, citations)
@@ -60,10 +60,10 @@ class TestFormex4Parser(unittest.TestCase):
         self.parser.get_recitals()
         
         recitals = [
-                {"eId": "(1)", "text": "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."}, 
-                {"eId": "(2)", "text": "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products and for egg albumin shows that the representative import prices for certain products should be amended to take account of variations in price according to origin. The representative prices should therefore be published."},
-                {"eId": "(3)", "text": "In view of the situation on the market, this amendment should be applied as soon as possible."},
-                {"eId": "(4)", "text": "The measures provided for in this Regulation are in accordance with the opinion of the Management Committee for the Common Organisation of Agricultural Markets,"},
+                {"eId": "rct_1", "text": "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."}, 
+                {"eId": "rct_2", "text": "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products and for egg albumin shows that the representative import prices for certain products should be amended to take account of variations in price according to origin. The representative prices should therefore be published."},
+                {"eId": "rct_3", "text": "In view of the situation on the market, this amendment should be applied as soon as possible."},
+                {"eId": "rct_4", "text": "The measures provided for in this Regulation are in accordance with the opinion of the Management Committee for the Common Organisation of Agricultural Markets,"},
         ]
         
         self.assertEqual(self.parser.recitals, recitals)      
@@ -87,12 +87,12 @@ class TestFormex4Parser(unittest.TestCase):
         self.parser.get_chapters()
 
         expected_chapters = [
-            {'eId': 0,  'num': 'Chapter 1', 'heading': 'General provisions'},
-            {'eId': 1,  'num': 'Chapter 2', 'heading': 'European Interoperability enablers'}, 
-            {'eId': 2,  'num': 'Chapter 3', 'heading': 'Interoperable Europe support measures'},
-            {'eId': 3,  'num': 'Chapter 4', 'heading': 'Governance of cross-border interoperability'},
-            {'eId': 4,  'num': 'Chapter 5', 'heading': 'Interoperable Europe planning and monitoring'},
-            {'eId': 5,  'num': 'Chapter 6', 'heading': 'Final provisions'},
+            {'eId': "cpt_1",  'num': 'Chapter 1', 'heading': 'General provisions'},
+            {'eId': "cpt_2",  'num': 'Chapter 2', 'heading': 'European Interoperability enablers'}, 
+            {'eId': "cpt_3",  'num': 'Chapter 3', 'heading': 'Interoperable Europe support measures'},
+            {'eId': "cpt_4",  'num': 'Chapter 4', 'heading': 'Governance of cross-border interoperability'},
+            {'eId': "cpt_5",  'num': 'Chapter 5', 'heading': 'Interoperable Europe planning and monitoring'},
+            {'eId': "cpt_6",  'num': 'Chapter 6', 'heading': 'Final provisions'},
         ]
         
         self.assertEqual(self.parser.chapters[0], expected_chapters[0], "Chapters data does not match expected content")
@@ -104,7 +104,7 @@ class TestFormex4Parser(unittest.TestCase):
         # Expected articles based on sample data in XML file
         expected = [
             {
-                "eId": "001",
+                "eId": "art_1",
                 "num": "Article 1",
                 "heading": None,
                 "children": [
@@ -112,7 +112,7 @@ class TestFormex4Parser(unittest.TestCase):
                 ]
             },
             {
-                "eId": "002",
+                "eId": "art_2",
                 "num": "Article 2",
                 "heading": None,
                 "children": [

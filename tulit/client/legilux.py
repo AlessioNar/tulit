@@ -35,5 +35,5 @@ class LegiluxClient(Client):
             return None
 
 if __name__ == "__main__":
-    downloader = LegiluxDownloader(download_dir='./tests/data/legilux', log_dir='./tests/metadata/logs')
+    downloader = LegiluxClient(download_dir='./tests/data/legilux', log_dir='./tests/metadata/logs')
     downloader.download(eli='http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo')

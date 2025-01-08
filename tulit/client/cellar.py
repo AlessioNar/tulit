@@ -1,8 +1,9 @@
 import logging
-
+import argparse
 import requests
 import json
 from tulit.client.client import Client
+from tulit.sparql import send_sparql_query
 
 class CellarClient(Client):
     
@@ -151,13 +152,33 @@ class CellarClient(Client):
             logging.error(f"Error processing range: {e}")
         
         return document_paths
-      
+
+def main():
+    parser = argparse.ArgumentParser(description='Download a Cellar document to a folder')
+    parser.add_argument('--celex', type=str, default='32024R0903', help='CELEX identifier of the document')
+    parser.add_argument('--format', type=str, default='fmx4', help='Format of the document, either fmx4 or xhtml')
+    parser.add_argument('--dir', type=str, default='tests/data/formex', help='Path to the directory')
+    
+    args = parser.parse_args()
+    
+    client = CellarClient(download_dir=args.dir, log_dir='./tests/logs')
+    
+    if args.format == 'fmx4':
+        sparql_query = './tests/metadata/queries/formex_query.rq'
+    elif args.format == 'xhtml':
+        sparql_query = './tests/metadata/queries/html_query.rq'
+    else:
+        print('No valid format')
+        return None
+        
+    results = send_sparql_query(sparql_query_filepath=sparql_query, celex=args.celex)
+        
+    documents = client.download(results, format=args.format)
+    
+    print(documents)
+
     
 # Example usage
 if __name__ == "__main__":
-    downloader = CellarClient(download_dir='./tests/data/formex', log_dir='./tests/logs')
-    with open('./tests/metadata/query_results/ai_act.json', 'r') as f:
-        results = json.loads(f.read())
-    documents = downloader.download(results, format='fmx4')
-    print(documents)
+    main()
     

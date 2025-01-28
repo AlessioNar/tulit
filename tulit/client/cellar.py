@@ -7,8 +7,8 @@ from tulit.sparql import send_sparql_query
 
 class CellarClient(Client):
     
-    def __init__(self, download_dir, log_dir):
-        super().__init__(download_dir, log_dir)
+    def __init__(self, download_dir, log_dir, proxies=None):
+        super().__init__(download_dir, log_dir, proxies)
         self.endpoint = 'http://publications.europa.eu/resource/cellar/'
    
 
@@ -51,7 +51,7 @@ class CellarClient(Client):
                 'Content-Type': "application/x-www-form-urlencoded",
                 'Host': "publications.europa.eu"
             }
-            response = requests.request("GET", url, headers=headers)
+            response = requests.request("GET", url, headers=headers, proxies=self.proxies)
             response.raise_for_status()
             return response
         except requests.RequestException as e:

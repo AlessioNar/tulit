@@ -8,7 +8,7 @@ class Client:
     """	
     A generic document downloader class.
     """	
-    def __init__(self, download_dir, log_dir):
+    def __init__(self, download_dir, log_dir, proxies=None):
         """
         Initializes the downloader with directories for downloads and logs.
         
@@ -21,6 +21,7 @@ class Client:
         """
         self.download_dir = download_dir
         self.log_dir = log_dir
+        self.proxies = proxies
         self._ensure_directories()
 
     def _ensure_directories(self):

@@ -8,8 +8,8 @@ import sys
 project = 'tulit'
 author = 'AlessioNar'
 
-release = '0.1.1'
-version = '0.1.1'
+release = '0.1.2'
+version = '0.1.2'
 
 # -- General configuration
 sys.path.insert(0, os.path.abspath('../../tulit'))

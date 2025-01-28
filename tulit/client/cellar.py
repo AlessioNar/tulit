@@ -51,7 +51,10 @@ class CellarClient(Client):
                 'Content-Type': "application/x-www-form-urlencoded",
                 'Host': "publications.europa.eu"
             }
-            response = requests.request("GET", url, headers=headers, proxies=self.proxies)
+            if self.proxies is not None:
+                response = requests.request("GET", url, headers=headers, proxies=self.proxies)
+            else:
+                response = requests.request("GET", url, headers=headers)
             response.raise_for_status()
             return response
         except requests.RequestException as e:

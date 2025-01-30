@@ -1,6 +1,8 @@
 Getting Started
 ===============
 
+tulit is hosted on PyPi, and documentation is published on readthedocs.io.
+
 Installation
 ------------
 
@@ -34,13 +36,23 @@ The `tulit` package provides a client to query and retrieve data from a variety 
 
 .. code-block:: python
 
-    from tulit.download.cellar import CellarDownloader
+    from tulit.client.cellar import CellarClient
+    
+    client = CellarClient(download_dir='./database', log_dir='./logs')
+    
+    format = 'fmx4'
 
-    client = CellarDownloader()
-    downloader = CellarDownloader(download_dir='./tests/data/formex', log_dir='./tests/logs')
-    with open('./tests/metadata/query_results/query_results.json', 'r') as f:
-        results = json.loads(f.read())
-    documents = downloader.download(results, format='fmx4')
+    if format == 'fmx4':
+        sparql_query = './tests/metadata/queries/formex_query.rq'
+    elif format == 'xhtml':
+        sparql_query = './tests/metadata/queries/html_query.rq'
+    else:
+        print('No valid format')
+    
+    
+    results = send_sparql_query(sparql_query_filepath=sparql_query, celex=celex)
+        
+    documents = client.download(results, format=format)
 
     print(documents)
 
@@ -63,13 +75,6 @@ The following code snippet shows how to use the `tulit` package to parse a legal
     file_to_parse = 'tests/data/akn/eu/32014L0092.akn'
     parser.parse(file_to_parse)
 
-    # The various attributes of the parser can be accessed as follows
-    print(parser.preface)
-    print(parser.citations)
-    print(parser.recitals)
-    print(parser.chapters)
-    print(parser.articles)
-
 A similar approach can be used to parse a legal document in FORMEX and XHTML format:
 
 .. code-block:: python
@@ -88,7 +93,19 @@ A similar approach can be used to parse a legal document in FORMEX and XHTML for
     parser = HTMLParser()
     parser.parse(html_file)
 
-Alternatively, the `tulit` parsers can also be called via command line by providing input and output paths of the file to be parsed, for example:
+
+After parsing the document, the various attributes of the parser can be accessed as follows:
+
+.. code-block:: python
+    
+    print(parser.preface)
+    print(parser.citations)
+    print(parser.recitals)
+    print(parser.chapters)
+    print(parser.articles)
+
+
+`tulit` clients and parsers can also be called via command line by providing input and output paths of the file to be parsed, for example:
 
 .. code-block:: bash
 

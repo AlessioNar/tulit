@@ -9,7 +9,7 @@ import io
 class TestCellarClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs', proxies=None)
                 
     def test_download_documents(self):
         

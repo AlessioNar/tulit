@@ -187,7 +187,21 @@ class Formex4Parser(XMLParser):
                 article_eId = article_eId.lstrip('0')
                 article_eId = f'art_{article_eId}'
                 children = []
+                
+                # Check if the article contains <QUOT.S> tag
+                if article.findall('.//QUOT.S'):
+                    article, amendments = self._handle_amendments(article)
+                    print('Amendment article found!')
+                    print('\n')
 
+                    print('Amendments:', amendments)
+                    print('\n')
+
+                    #children.append({
+                    #    "eId": article_eId,
+                    #    "text": amendment_text
+                    #})
+                
                 # Extract text and metadata from all relevant elements within the article
                 if article.findall('.//PARAG'):
                     self._extract_elements(article, './/PARAG', children)
@@ -214,7 +228,7 @@ class Formex4Parser(XMLParser):
             print('No enacting terms XML tag has been found')
             return []
 
-    def _extract_elements(self, parent, xpath, children, start_index=0):
+    def _extract_elements(self, parent, xpath, children, start_index=0, amendments=False):
         """
         Helper method to extract text and metadata from elements.
 
@@ -251,6 +265,26 @@ class Formex4Parser(XMLParser):
             "text": text
             }
             children.append(child)
+
+    def _handle_amendments(self, article):
+        """
+        Handles amendments made in the ACT using the <QUOT.S> tag.
+
+        Parameters
+        ----------
+        article : lxml.etree._Element
+            The article element to process.
+        """
+        amendments = []
+        for quot_s in article.findall('.//QUOT.S'):
+            amendment_text = " ".join(quot_s.itertext()).strip()
+            # Process the amendment text as needed
+            # For example, you could store it in a list or apply it to the article text            
+            amendments.append(amendment_text)
+        # Remove the QUOT.S tags from the article using the self.remove_node method
+        article = self.remove_node(article, './/QUOT.S')
+        return article, amendments
+        
     
     def get_conclusions(self):
         """

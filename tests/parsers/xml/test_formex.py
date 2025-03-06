@@ -104,19 +104,19 @@ class TestFormex4Parser(unittest.TestCase):
         # Expected articles based on sample data in XML file
         expected = [
             {
-                "eId": "art_1",
+                "eId": "art_001",
                 "num": "Article 1",
                 "heading": None,
                 "children": [
-                    {"eId": 0, "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.", "contains_amendment": False, "amendment": None}
+                    {"eId": 0, "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation."}
                 ]
             },
             {
-                "eId": "art_2",
+                "eId": "art_002",
                 "num": "Article 2",
                 "heading": None,
                 "children": [
-                    {"eId": 0, "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "contains_amendment": False, "amendment": None}
+                    {"eId": 0, "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union."}
                 ]
             }
         ]

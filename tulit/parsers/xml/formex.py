@@ -163,8 +163,8 @@ class Formex4Parser(XMLParser):
             extract_eId=extract_eId,
             get_headings=get_headings
         )
+        
             
-
     def get_articles(self):
         """
         Extracts articles from the ENACTING.TERMS section. Articles are assumed to be contained within the
@@ -182,35 +182,26 @@ class Formex4Parser(XMLParser):
 
         self.articles = []
         if self.body is not None:
-            for article in self.body.findall('.//ARTICLE'):
+            articles = self.body.xpath(".//ARTICLE[@IDENTIFIER][not(ancestor::ARTICLE[@IDENTIFIER])]")
+            for article in articles:
                 article_eId = article.get("IDENTIFIER")
-                article_eId = article_eId.lstrip('0')
+                article_eId = article_eId.lstrip('3')
                 article_eId = f'art_{article_eId}'
                 children = []
-                amendments = []
-
-                # Check if the article contains <QUOT.S> tag
-                if article.findall('.//QUOT.S'):
-                    article, amendments = self._handle_amendments(article)
-                    print('Amendment article found!')
-                    print('\n')
-
-                    print('Amendments:', amendments)
-                    print('\n')
-
+                
                 # Extract text and metadata from all relevant elements within the article
                 if article.findall('.//PARAG'):
-                    self._extract_elements(article, './/PARAG', children, amendments)
+                    self._extract_elements(article, './/PARAG', children)
                 elif article.findall('.//ALINEA'):
                     # If no PARAG elements, check for ALINEA elements
                     alineas = article.findall('.//ALINEA')
                     for alinea in alineas:
                         # if there are P elements within the ALINEA, extract them first, then extract LIST//ITEM elements, if they are still absent, extract the text from the ALINEA
                         p_elements = alinea.findall('.//P')
-                        self._extract_elements(alinea, './/P', children, amendments)
-                        self._extract_elements(alinea, './/LIST//ITEM', children, amendments, start_index=len(p_elements))
+                        self._extract_elements(alinea, './/P', children)
+                        self._extract_elements(alinea, './/LIST//ITEM', children)
                         if not p_elements:
-                            self._extract_elements(alinea, '.', children, amendments)                        
+                            self._extract_elements(alinea, '.', children)                        
                 
                 self.articles.append({
                     "eId": article_eId,
@@ -224,7 +215,7 @@ class Formex4Parser(XMLParser):
             print('No enacting terms XML tag has been found')
             return []
 
-    def _extract_elements(self, parent, xpath, children, amendments, start_index=0):
+    def _extract_elements(self, parent, xpath, children):
         """
         Helper method to extract text and metadata from elements.
 
@@ -236,14 +227,9 @@ class Formex4Parser(XMLParser):
             The XPath expression to locate the elements.
         children : list
             The list to append the extracted elements to.
-        amendments : list
-            List of amendments extracted from the article.
-        start_index : int, optional
-            The starting index for the elements (default is 0).
         """
         elements = parent.findall(xpath)
-        amendment_index = 0
-        for index, element in enumerate(elements, start=start_index):
+        for index, element in enumerate(elements):
             for sub_element in element.iter():
                 if sub_element.tag == 'QUOT.START':                    
                     sub_element.text = "‘"                    
@@ -256,35 +242,13 @@ class Formex4Parser(XMLParser):
             text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
             text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
             text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+            
             if text is not None and text != '' and text != ';':
                 child = {
                     "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,
-                    "text": text,
-                    "contains_amendment": amendment_index < len(amendments),
-                    "amendment": amendments[amendment_index] if amendment_index < len(amendments) else None
+                    "text": text,                    
                 }
-                children.append(child)
-                amendment_index += 1
-
-    def _handle_amendments(self, article):
-        """
-        Handles amendments made in the ACT using the <QUOT.S> tag.
-
-        Parameters
-        ----------
-        article : lxml.etree._Element
-            The article element to process.
-        """
-        amendments = []
-        for quot_s in article.findall('.//QUOT.S'):
-            amendment_text = " ".join(quot_s.itertext()).strip()
-            # Process the amendment text as needed
-            # For example, you could store it in a list or apply it to the article text            
-            amendments.append(amendment_text)
-        # Remove the QUOT.S tags from the article using the self.remove_node method
-        article = self.remove_node(article, './/QUOT.S')
-        return article, amendments
-        
+                children.append(child)        
     
     def get_conclusions(self):
         """

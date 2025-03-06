@@ -4,8 +4,7 @@ import xml.etree.ElementTree as ET
 
 import os 
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\formex")
-file_path = os.path.join(DATA_DIR, "L_2011334EN.01002501.xml")
+file_path = os.path.join(".\\tests\\data\\formex\\5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05\\DOC_2.xml")
 
 iopa = ".\\tests\\data\\formex\\c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02\\DOC_1\\L_202400903EN.000101.fmx.xml"
 
@@ -47,8 +46,8 @@ class TestFormex4Parser(unittest.TestCase):
         
         citations =  [
                 {'eId': "cit_1", 'text': "Having regard to the Treaty on the Functioning of the European Union,"},
-                {"eId": "cit_2", 'text':"Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common organisation of agricultural markets and on specific provisions for certain agricultural products (Single CMO Regulation) , and in particular Article 143 thereof,"},
-                {"eId": "cit_3", 'text':"Having regard to Council Regulation (EC) No 614/2009 of 7 July 2009 on the common system of trade for ovalbumin and lactalbumin , and in particular Article 3(4) thereof,"},
+                {"eId": "cit_2", 'text':"Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common organisation of agricultural markets and on specific provisions for certain agricultural products (Single CMO Regulation), and in particular Article 143 thereof,"},
+                {"eId": "cit_3", 'text':"Having regard to Council Regulation (EC) No 614/2009 of 7 July 2009 on the common system of trade for ovalbumin and lactalbumin, and in particular Article 3(4) thereof,"},
             ]
         
         self.assertEqual(self.parser.citations, citations)

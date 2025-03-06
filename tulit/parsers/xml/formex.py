@@ -182,26 +182,58 @@ class Formex4Parser(XMLParser):
 
         self.articles = []
         if self.body is not None:
-            articles = self.body.xpath(".//ARTICLE[@IDENTIFIER][not(ancestor::ARTICLE[@IDENTIFIER])]")
+            # The usage of xpath() method is to exclude nested ARTICLE elements
+            articles = self.body.xpath(".//ARTICLE[@IDENTIFIER][not(ancestor::ARTICLE)]")
             for article in articles:
                 article_eId = article.get("IDENTIFIER")
                 article_eId = article_eId.lstrip('3')
                 article_eId = f'art_{article_eId}'
+                
                 children = []
                 
-                # Extract text and metadata from all relevant elements within the article
-                if article.findall('.//PARAG'):
+                # Check whether within the ARTICLE element there are 
+                # QUOT.S elements, that mark the presence of amendments
+                if article.findall('.//QUOT.S'):
+                    print('Amendments found')
+                    # Get all flat text from the top level of the ALINEA element
+                    # and add it to the children list
+                    for alinea in article.xpath('.//ALINEA[not(ancestor::QUOT.S)]'):
+                        children.append({
+                            "eId": 0,
+                            "text": self.clean_text(alinea)
+                        })
+                        
+                    #article.xpath('.//ALINEA')
+                    
+                    
+                    # Treat amendments. First extract the text contained within the
+                    # a P element that is outside of a LIST element
+                    #for p in article.xpath('.//P[not(ancestor::LIST)]'):
+                    #    self._extract_elements(p, '.', children)
+                    
+                    # Treat all the rest of the content of the ARTICLE element
+                    # as a unique child
+                    #children
+                    
+                
+                # Extract text and metadata from PARAG elements that are not descendants of QUOT.S elements (exclude amendments)
+                elif article.xpath('.//PARAG'):
                     self._extract_elements(article, './/PARAG', children)
                 elif article.findall('.//ALINEA'):
                     # If no PARAG elements, check for ALINEA elements
-                    alineas = article.findall('.//ALINEA')
+                    alineas = article.xpath('.//ALINEA')
                     for alinea in alineas:
-                        # if there are P elements within the ALINEA, extract them first, then extract LIST//ITEM elements, if they are still absent, extract the text from the ALINEA
-                        p_elements = alinea.findall('.//P')
-                        self._extract_elements(alinea, './/P', children)
-                        self._extract_elements(alinea, './/LIST//ITEM', children)
-                        if not p_elements:
-                            self._extract_elements(alinea, '.', children)                        
+                        p_elements = alinea.xpath('.//P')
+                        if p_elements:
+                            for p in p_elements:
+                                self._extract_elements(p, '.', children)
+                            for item in alinea.findall('.//LIST//ITEM'):
+                                self._extract_elements(item, '.', children)                                
+                        else:
+                            self._extract_elements(alinea, '.', children)
+                
+                                    
+                    
                 
                 self.articles.append({
                     "eId": article_eId,
@@ -214,7 +246,21 @@ class Formex4Parser(XMLParser):
         else:
             print('No enacting terms XML tag has been found')
             return []
-
+        
+    def clean_text(self, element):
+        for sub_element in element.iter():
+            if sub_element.tag == 'QUOT.START':                    
+                sub_element.text = "‘"                    
+            elif sub_element.tag == 'QUOT.END':                    
+                sub_element.text = "’"
+        text = "".join(element.itertext()).strip()
+        text = re.sub(r'^\(\d+\)', '', text).strip()
+        text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
+        text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
+        text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
+        text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+        return text
+    
     def _extract_elements(self, parent, xpath, children):
         """
         Helper method to extract text and metadata from elements.
@@ -230,18 +276,8 @@ class Formex4Parser(XMLParser):
         """
         elements = parent.findall(xpath)
         for index, element in enumerate(elements):
-            for sub_element in element.iter():
-                if sub_element.tag == 'QUOT.START':                    
-                    sub_element.text = "‘"                    
-                elif sub_element.tag == 'QUOT.END':                    
-                    sub_element.text = "’"
-    
-            text = "".join(element.itertext()).strip()
-            text = re.sub(r'^\(\d+\)', '', text).strip()
-            text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
-            text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
-            text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
-            text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+            
+            text = self.clean_text(element)
             
             if text is not None and text != '' and text != ';':
                 child = {

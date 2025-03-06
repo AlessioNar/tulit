@@ -191,49 +191,40 @@ class Formex4Parser(XMLParser):
                 
                 children = []
                 
+                index = 0
+                
                 # Check whether within the ARTICLE element there are 
                 # QUOT.S elements, that mark the presence of amendments
                 if article.findall('.//QUOT.S'):
-                    print('Amendments found')
-                    # Get all flat text from the top level of the ALINEA element
-                    # and add it to the children list
                     for alinea in article.xpath('.//ALINEA[not(ancestor::QUOT.S)]'):
                         children.append({
-                            "eId": 0,
-                            "text": self.clean_text(alinea)
+                            "eId": index,
+                            "text": self.clean_text(alinea),
+                            "amendment": True
                         })
-                        
-                    #article.xpath('.//ALINEA')
-                    
-                    
-                    # Treat amendments. First extract the text contained within the
-                    # a P element that is outside of a LIST element
-                    #for p in article.xpath('.//P[not(ancestor::LIST)]'):
-                    #    self._extract_elements(p, '.', children)
-                    
-                    # Treat all the rest of the content of the ARTICLE element
-                    # as a unique child
-                    #children
-                    
+                                            
                 
-                # Extract text and metadata from PARAG elements that are not descendants of QUOT.S elements (exclude amendments)
+                # Extract text and metadata from PARAG elements 
+                # that are not descendants of QUOT.S elements (exclude amendments)
                 elif article.xpath('.//PARAG'):
                     self._extract_elements(article, './/PARAG', children)
                 elif article.findall('.//ALINEA'):
                     # If no PARAG elements, check for ALINEA elements
                     alineas = article.xpath('.//ALINEA')
                     for alinea in alineas:
+                        
                         p_elements = alinea.xpath('.//P')
-                        if p_elements:
+                        if p_elements:                            
                             for p in p_elements:
-                                self._extract_elements(p, '.', children)
-                            for item in alinea.findall('.//LIST//ITEM'):
-                                self._extract_elements(item, '.', children)                                
+                                if not p.xpath('ancestor::ITEM'):                            
+                                    self._extract_elements(p, '.', children)
+                            # Extract text and metadata from LIST/ITEM elements that are a direct child of ALINEA
+                            # And exclude those that are descendants of other LIST/ITEM elements
+                            for item in alinea.xpath('./LIST/ITEM'):
+                                # Check if this is a top-level item (its parent LIST is a direct child of ALINEA)
+                                self._extract_elements(item, '.', children)
                         else:
                             self._extract_elements(alinea, '.', children)
-                
-                                    
-                    
                 
                 self.articles.append({
                     "eId": article_eId,
@@ -246,21 +237,7 @@ class Formex4Parser(XMLParser):
         else:
             print('No enacting terms XML tag has been found')
             return []
-        
-    def clean_text(self, element):
-        for sub_element in element.iter():
-            if sub_element.tag == 'QUOT.START':                    
-                sub_element.text = "‘"                    
-            elif sub_element.tag == 'QUOT.END':                    
-                sub_element.text = "’"
-        text = "".join(element.itertext()).strip()
-        text = re.sub(r'^\(\d+\)', '', text).strip()
-        text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
-        text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
-        text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
-        text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
-        return text
-    
+            
     def _extract_elements(self, parent, xpath, children):
         """
         Helper method to extract text and metadata from elements.
@@ -282,7 +259,8 @@ class Formex4Parser(XMLParser):
             if text is not None and text != '' and text != ';':
                 child = {
                     "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or index,
-                    "text": text,                    
+                    "text": text, 
+                    "amendment": False                  
                 }
                 children.append(child)        
     
@@ -319,6 +297,23 @@ class Formex4Parser(XMLParser):
         return self.conclusions
         
 
+    def clean_text(self, element):
+        for sub_element in element.iter(): # Replace QUOT.START and QUOT.END elements with proper quotes
+            if sub_element.tag == 'QUOT.START':                    
+                sub_element.text = "‘"                    
+            elif sub_element.tag == 'QUOT.END':                    
+                sub_element.text = "’"
+                
+        text = "".join(element.itertext()).strip() # Join text content of element and its descendants
+        text = re.sub(r'^\(\d+\)', '', text).strip() # Remove leading numbers in parentheses`
+        text = text.replace('\n', '').replace('\t', '').replace('\r', '') # remove newline and tab characters
+        text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
+        text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
+        text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+        
+        return text
+
+    
     def parse(self, file):
         """
         Parses a FORMEX XML document to extract its components, which are inherited from the XMLParser class.

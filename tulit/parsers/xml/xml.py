@@ -3,6 +3,10 @@ import os
 import re
 from tulit.parsers.parser import Parser
 
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 class XMLParser(Parser):
     """
     Base class for XML parsers.
@@ -437,67 +441,79 @@ class XMLParser(Parser):
             if self.valid == True:
                 try:
                     self.get_root(file)
-                    print("Root element loaded successfully.")
+                    logger.info(f"Root element loaded successfully.")                    
                 except Exception as e:
-                    print(f"Error in get_root: {e}")
+                    logger.error(f"Error in get_root: {e}")
+                    
                     
                 try:
                     self.get_preface()
-                    print(f"Preface parsed successfully. Preface: {self.preface}")
+                    logger.info(f"Preface element found. Preface: {self.preface}")                    
                 except Exception as e:
-                    print(f"Error in get_preface: {e}")
+                    logger.error(f"Error in get_preface: {e}")                    
                 
                 try:
                     self.get_preamble()
-                    print(f"Preamble element found.")
+                    logger.info(f"Preamble element found.")                    
                 except Exception as e:
-                    print(f"Error in get_preamble: {e}")
+                    logger.error(f"Error in get_preamble: {e}")                    
                 try:
                     self.get_formula()
-                    print(f"Formula parsed successfully.")
+                    logger.info(f"Formula element found. Formula: {self.formula}")                    
                 except Exception as e:
-                    print(f"Error in get_formula: {e}")
+                    logger.error(f"Error in get_formula: {e}")                    
                 try:
                     self.get_citations()
-                    print(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
+                    logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
+                    
                 except Exception as e:
-                    print(f"Error in get_citations: {e}")
+                    logger.error(f"Error in get_citations: {e}")
+                    
                 try:
                     self.get_recitals()
-                    print(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
+                    logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
+                    
                 except Exception as e:
-                    print(f"Error in get_recitals: {e}")
+                    logger.error(f"Error in get_recitals: {e}")
+                    
                 
                 try:
                     self.get_preamble_final()
-                    print(f"Preamble final parsed successfully.")
+                    logger.info(f"Preamble final parsed successfully.")
+                    
                 except Exception as e:
-                    print(f"Error in get_preamble_final: {e}")
+                    logger.error(f"Error in get_preamble_final: {e}")
+                    
                 
                 try:
                     self.get_body()
-                    print("Body element found.")
+                    logger.info(f"Body element found.")                    
                 except Exception as e:
-                    print(f"Error in get_body: {e}")
+                    logger.error(f"Error in get_body: {e}")
+                    
                 try:
                     self.get_chapters()
-                    print(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
-                except Exception as e:
-                    print(f"Error in get_chapters: {e}")
-                try:
-                    self.get_articles()
-                    print(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-                    print(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                        
+                    logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
                     
                 except Exception as e:
-                    print(f"Error in get_articles: {e}")
+                    logger.error(f"Error in get_chapters: {e}")
+                    
+                try:
+                    self.get_articles()
+                    logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
+                    logger.info(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                    
+                    
+                except Exception as e:
+                    logger.error(f"Error in get_articles: {e}")
+                                        
                 try:
                     self.get_conclusions()                    
-                    print(f"Conclusions parsed successfully. ")
+                    logger.info(f"Conclusions parsed successfully.")
+                    
                 except Exception as e:
-                    print(f"Error in get_conclusions: {e}")
+                    logger.error(f"Error in get_conclusions: {e}")                    
                 
             return self
                 
         except Exception as e:
-            print(f'Invalid {self.format} file: parsing may not work or work only partially: {e}')
+            logger.warn(f"Invalid {format} file: parsing may not work or work only partially: {e}")

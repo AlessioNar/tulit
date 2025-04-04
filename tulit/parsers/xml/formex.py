@@ -214,17 +214,17 @@ class Formex4Parser(XMLParser):
                     for alinea in alineas:
                         
                         p_elements = alinea.xpath('.//P')
-                        if p_elements:                            
-                            for p in p_elements:
-                                if not p.xpath('ancestor::ITEM'):                            
-                                    self._extract_elements(p, '.', children)
+                        #if p_elements:                            
+                            #for p in p_elements:
+                            #    if not p.xpath('ancestor::ITEM'):                            
+                            #        self._extract_elements(p, '.', children)
                             # Extract text and metadata from LIST/ITEM elements that are a direct child of ALINEA
-                            # And exclude those that are descendants of other LIST/ITEM elements
-                            for item in alinea.xpath('./LIST/ITEM'):
-                                # Check if this is a top-level item (its parent LIST is a direct child of ALINEA)
-                                self._extract_elements(item, '.', children)
-                        else:
-                            self._extract_elements(alinea, '.', children)
+                            # And exclude those that are descendants of other LIST/ITEM elements                            
+                            #for item in alinea.xpath('./LIST/ITEM'):
+                            #    # Check if this is a top-level item (its parent LIST is a direct child of ALINEA)
+                            #    self._extract_elements(item, '.', children)
+                        #else:
+                        self._extract_elements(alinea, '.', children)
                 
                 self.articles.append({
                     "eId": article_eId,

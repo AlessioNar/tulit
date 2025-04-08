@@ -258,7 +258,7 @@ class Formex4Parser(XMLParser):
             
             if text is not None and text != '' and text != ';':
                 child = {
-                    "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or (str(len(children))) or index,
+                    "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or (str(len(children)+1).zfill(3)) or str(index).zfill(3),
                     "text": text, 
                     "amendment": False                  
                 }

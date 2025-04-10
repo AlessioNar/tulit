@@ -107,7 +107,7 @@ class TestFormex4Parser(unittest.TestCase):
                 "num": "Article 1",
                 "heading": None,
                 "children": [
-                    {"eId": 0, "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.", "amendment": False}
+                    {"eId": '001', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.", "amendment": False}
                 ]
             },
             {
@@ -115,7 +115,7 @@ class TestFormex4Parser(unittest.TestCase):
                 "num": "Article 2",
                 "heading": None,
                 "children": [
-                    {"eId": 0, "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": False}
+                    {"eId": "001", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": False}
                 ]
             }
         ]

@@ -65,13 +65,12 @@ class AkomaNtosoParser(XMLParser):
         from all paragraphs within the citation element. 
 
         """
-        def extract_eId(citation, index):
-            return citation.get('eId')
+        
 
         return super().get_citations(
             citations_xpath='.//akn:citations',
             citation_xpath='.//akn:citation',
-            extract_eId=extract_eId
+            extract_eId=self.extract_eId
         )
     
     def get_recitals(self):
@@ -90,19 +89,19 @@ class AkomaNtosoParser(XMLParser):
         
         def extract_intro(recitals_section):
             recitals_intro = recitals_section.find('.//akn:intro', namespaces=self.namespaces)
-            intro_eId = recitals_intro.get('eId')
+            intro_eId = self.extract_eId(recitals_intro, 'eId')
             intro_text = ''.join(p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text)
             return intro_eId, intro_text
         
-        def extract_eId(recital):
-            return str(recital.get('eId'))
+        #def extract_eId(recital):
+        #    return str(recital.get('eId'))
         
         return super().get_recitals(
             recitals_xpath='.//akn:recitals', 
             recital_xpath='.//akn:recital',
             text_xpath='.//akn:p',
             extract_intro=extract_intro,
-            extract_eId=extract_eId,
+            extract_eId=self.extract_eId,
             
         )
     
@@ -126,6 +125,9 @@ class AkomaNtosoParser(XMLParser):
         within the 'body' element in the XML file.
         """
         return super().get_body('.//akn:body')
+    
+    def extract_eId(self, element, index=None):
+        return element.get('eId')
         
     def get_chapters(self) -> None:
         """
@@ -143,14 +145,13 @@ class AkomaNtosoParser(XMLParser):
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text
         """
-        def extract_eId(chapter, index):
-            return chapter.get('eId')
+        
 
         return super().get_chapters(
             chapter_xpath='.//akn:chapter',
             num_xpath='.//akn:num',
             heading_xpath='.//akn:heading',
-            extract_eId=extract_eId
+            extract_eId=self.extract_eId
         )
 
     
@@ -177,7 +178,7 @@ class AkomaNtosoParser(XMLParser):
 
         # Find all <article> elements in the XML
         for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
-            eId = article.get('eId')
+            eId = self.extract_eId(article, 'eId')
             
             # Find the main <num> element representing the article number
             article_num = article.find('akn:num', namespaces=self.namespaces)
@@ -225,7 +226,7 @@ class AkomaNtosoParser(XMLParser):
             current_element = p
             eId = None
             while current_element is not None:
-                eId = current_element.get('eId')
+                eId = self.extract_eId(current_element, 'eId')                
                 if eId:
                     break
                 current_element = current_element.getparent()  # Traverse up
@@ -292,12 +293,64 @@ class AkomaNtosoParser(XMLParser):
         """
         return super().parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')
 
+class AKN4EUParser(AkomaNtosoParser):
+    """
+    A parser for processing and extracting content from AAKN4EU files.
+    
+    This class is a subclass of the AkomaNtosoParser class and is specifically designed to handle
+    AKN4EU documents. It inherits all methods and attributes from the parent class.
+    
+    Attributes
+    ----------
+    namespaces : dict
+        Dictionary mapping namespace prefixes to their URIs.
+    """
+    def __init__(self):
+        super().__init__()
+
+    def extract_eId(self, element, index=None):
+        return element.get('{http://www.w3.org/XML/1998/namespace}id')
+    
+    def get_text_by_eId(self, node):
+        """
+        Groups paragraph text by their nearest parent element with an eId attribute.
+
+        Parameters
+        ----------
+        node : lxml.etree._Element
+            XML node to process for text extraction.
+
+        Returns
+        -------
+        list
+            List of dictionaries containing:
+            - 'eId': Identifier of the nearest parent with an eId
+            - 'text': Concatenated text content
+        """
+        elements = []
+        # Find all <p> elements
+        for p in node.findall('.//akn:p', namespaces=self.namespaces):
+            # Traverse up to find the nearest parent with an eId                        
+            eId = self.extract_eId(p, 'xml:id')                                
+            import re
+            p_text = re.sub(r'\s+', ' ', ''.join(p.itertext()).replace('\n', '').replace('\r', '').strip())
+            element = {
+                    'eId': eId,
+                    'text': p_text
+            }
+            elements.append(element)
+        return elements
+
 def main():
     parser = argparse.ArgumentParser(description='Parse an Akoma Ntoso XML document and output the results to a JSON file.')
     parser.add_argument('--input', type=str, default='tests/data/akn/eu/32014L0092.akn', help='Path to the Akoma Ntoso XML file to parse.')
     parser.add_argument('--output', type=str, default='tests/data/json/akn.json', help='Path to the output JSON file.')
+    parser.add_argument('--format', type=str, default='akn', help='Dialect of Akoma Ntoso to parse.')
     args = parser.parse_args()
-    akoma_parser = AkomaNtosoParser()
+    if args.format == 'akn':
+        akoma_parser = AkomaNtosoParser()
+    elif args.format == 'akn4eu':
+        akoma_parser = AKN4EUParser()
     akoma_parser.parse(args.input)
     with open(args.output, 'w', encoding='utf-8') as f:
         # Get the parser's attributes as a dictionary
@@ -309,3 +362,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

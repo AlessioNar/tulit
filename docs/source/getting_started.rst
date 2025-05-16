@@ -39,7 +39,7 @@ The `tulit` package provides a client to query and retrieve data from a variety 
     from tulit.client.cellar import CellarClient
     
     client = CellarClient(download_dir='./database', log_dir='./logs')
-    
+
     format = 'fmx4'
 
     if format == 'fmx4':
@@ -49,9 +49,7 @@ The `tulit` package provides a client to query and retrieve data from a variety 
     else:
         print('No valid format')
     
-    
-    results = send_sparql_query(sparql_query_filepath=sparql_query, celex=celex)
-        
+    results = client.send_sparql_query(sparql_query_filepath=sparql_query, celex=celex)
     documents = client.download(results, format=format)
 
     print(documents)

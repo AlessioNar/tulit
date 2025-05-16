@@ -271,7 +271,7 @@ def main():
         return None
         
     results = client.send_sparql_query(sparql_query_filepath=sparql_query, celex=args.celex)
-        
+    
     documents = client.download(results, format=args.format)
     
     print(documents)

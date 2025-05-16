@@ -40,18 +40,12 @@ The `tulit` package provides a client to query and retrieve data from a variety 
     
     client = CellarClient(download_dir='./database', log_dir='./logs')
 
-    format = 'fmx4'
+    file_format = 'fmx4' # Or xhtml
+    celex = "32024R0903"
 
-    if format == 'fmx4':
-        sparql_query = './tests/metadata/queries/formex_query.rq'
-    elif format == 'xhtml':
-        sparql_query = './tests/metadata/queries/html_query.rq'
-    else:
-        print('No valid format')
-    
-    results = client.send_sparql_query(sparql_query_filepath=sparql_query, celex=celex)
-    documents = client.download(results, format=format)
+    documents = client.download(celex=celex, format=file_format)
 
+    # Location of the documents
     print(documents)
 
 Parsing legal documents

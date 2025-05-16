@@ -4,6 +4,10 @@ import requests
 from tulit.client.client import Client
 from SPARQLWrapper import SPARQLWrapper, JSON, POST
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class CellarClient(Client):
     
     def __init__(self, download_dir, log_dir, proxies=None):
@@ -105,7 +109,7 @@ class CellarClient(Client):
 
             return results
         except Exception as e:
-            print(f"An error occurred: {e}")
+            logger.error(f"An error occurred: {e}")
             raise e
     
     def fetch_content(self, url) -> requests.Response:
@@ -154,7 +158,7 @@ class CellarClient(Client):
             response.raise_for_status()
             return response
         except requests.RequestException as e:
-            logging.error(f"Error sending GET request: {e}")
+            logger.error(f"Error sending GET request: {e}")
             return None
              
     def build_request_url(self, params):
@@ -211,7 +215,7 @@ class CellarClient(Client):
 
         return cellar_ids
 
-    def download(self, results, format=None):
+    def download(self, celex, format=None):
         """
         Sends a REST query to the specified source APIs and downloads the documents
         corresponding to the given results.
@@ -228,7 +232,15 @@ class CellarClient(Client):
         list
             A list of paths to the downloaded documents.
         """
-        
+        if format == 'fmx4':
+            sparql_query = './tests/metadata/queries/formex_query.rq'
+        elif format == 'xhtml':
+            sparql_query = './tests/metadata/queries/html_query.rq'
+        else:
+            logger.error('No valid format provided. Please choose one between fmx4 or xhtml')
+            return None
+            
+        results = self.send_sparql_query(sparql_query, celex)                
         cellar_ids = self.get_cellar_ids_from_json_results(results, format=format)
         
         try:
@@ -260,19 +272,9 @@ def main():
     
     args = parser.parse_args()
     
-    client = CellarClient(download_dir=args.dir, log_dir='./tests/logs')
+    client = CellarClient(download_dir=args.dir, log_dir='./tests/logs')    
     
-    if args.format == 'fmx4':
-        sparql_query = './tests/metadata/queries/formex_query.rq'
-    elif args.format == 'xhtml':
-        sparql_query = './tests/metadata/queries/html_query.rq'
-    else:
-        print('No valid format')
-        return None
-        
-    results = client.send_sparql_query(sparql_query_filepath=sparql_query, celex=args.celex)
-    
-    documents = client.download(results, format=args.format)
+    documents = client.download(celex=args.celex, format=args.format)
     
     print(documents)
 

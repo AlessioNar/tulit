@@ -79,7 +79,13 @@ class TestCellarClient(unittest.TestCase):
         # Check that the response is None when an exception is raised
         self.assertIsNone(response)
 
-
+    def test_send_sparql_query(self):        
+        sparql_file_path = os.path.join("./tests/metadata/queries", "formex_query.rq")
+        celex = "32024R0903"
+        # Send query
+        response = self.downloader.send_sparql_query(sparql_query_filepath=sparql_file_path, celex=celex)        
+        expected_results = json.loads('''{"head": {"link": [], "vars": ["cellarURIs", "manif", "format", "expr"]}, "results": {"distinct": false, "ordered": true, "bindings": [{"cellarURIs": {"type": "uri", "value": "http://publications.europa.eu/resource/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1"}, "manif": {"type": "uri", "value": "http://publications.europa.eu/resource/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02"}, "format": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#string", "value": "fmx4"}, "expr": {"type": "uri", "value": "http://publications.europa.eu/resource/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006"}}]}}''')        
+        self.assertEqual(response, expected_results)
 
 if __name__ == "__main__":
     unittest.main()

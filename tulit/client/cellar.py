@@ -4,6 +4,10 @@ import requests
 from tulit.client.client import Client
 from SPARQLWrapper import SPARQLWrapper, JSON, POST
 
+from importlib.resources import files
+
+
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -15,7 +19,7 @@ class CellarClient(Client):
         self.endpoint = 'http://publications.europa.eu/resource/cellar/'
         self.sparql_endpoint = "http://publications.europa.eu/webapi/rdf/sparql"
     
-    def send_sparql_query(self, sparql_query_filepath, celex=None):
+    def send_sparql_query(self, sparql_query, celex=None):
         """
         Sends a SPARQL query to the EU SPARQL endpoint and stores the results in a JSON file.
 
@@ -45,9 +49,7 @@ class CellarClient(Client):
         """
 
         # Open SPARQL QUERY and print it to screen
-        try:
-            with open(sparql_query_filepath, 'r') as file:
-                sparql_query = file.read()
+        try:            
             
             if celex is not None:
                 # Option 1: If you want to use format()
@@ -233,9 +235,10 @@ class CellarClient(Client):
             A list of paths to the downloaded documents.
         """
         if format == 'fmx4':
-            sparql_query = './tests/metadata/queries/formex_query.rq'
+            
+            sparql_query = files("tulit.client.queries").joinpath("formex_query.rq").read_text()
         elif format == 'xhtml':
-            sparql_query = './tests/metadata/queries/html_query.rq'
+            sparql_query = files("tulit.client.queries").joinpath("html_query.rq").read_text()
         else:
             logger.error('No valid format provided. Please choose one between fmx4 or xhtml')
             return None

@@ -1,0 +1,4 @@
+# SPARQL query content goes here
+SELECT ?s ?p ?o WHERE {
+  ?s ?p ?o.
+}

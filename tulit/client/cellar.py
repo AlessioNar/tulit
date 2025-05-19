@@ -61,7 +61,7 @@ class CellarClient(Client):
             return results
     
         except FileNotFoundError as e:
-            print(f"Error: The file {sparql_query_filepath} was not found.")
+            print(f"Error: The sparql query was not found.")
             raise e
         except Exception as e:
             print(f"An error occurred: {e}")
@@ -234,8 +234,7 @@ class CellarClient(Client):
         list
             A list of paths to the downloaded documents.
         """
-        if format == 'fmx4':
-            
+        if format == 'fmx4':            
             sparql_query = files("tulit.client.queries").joinpath("formex_query.rq").read_text()
         elif format == 'xhtml':
             sparql_query = files("tulit.client.queries").joinpath("html_query.rq").read_text()
@@ -243,7 +242,7 @@ class CellarClient(Client):
             logger.error('No valid format provided. Please choose one between fmx4 or xhtml')
             return None
             
-        results = self.send_sparql_query(sparql_query, celex)                
+        results = self.send_sparql_query(sparql_query, celex)
         cellar_ids = self.get_cellar_ids_from_json_results(results, format=format)
         
         try:
@@ -251,8 +250,7 @@ class CellarClient(Client):
             
             for id in cellar_ids:
                 # Build the request URL
-                url = self.build_request_url(params={'cellar': id})
-                
+                url = self.build_request_url(params={'cellar': id})                
                 # Send the GET request
                 response = self.fetch_content(url)
                 # Handle the response

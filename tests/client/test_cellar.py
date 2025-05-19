@@ -11,14 +11,11 @@ class TestCellarClient(unittest.TestCase):
         self.maxDiff = None
         self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs', proxies=None)
                 
-    def test_download_documents(self):
+    def test_download(self):
+        celex = "32008R1137"
         
-        # Load the JSON data
-        with open('./tests/metadata/query_results/query_results.json', 'r') as f:
-            results = json.loads(f.read())  # Load the JSON data 
-                
         # Download the documents                           
-        document_paths = self.downloader.download(results, format='fmx4')
+        document_paths = self.downloader.download(celex, format='fmx4')
 
         expected = ['tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_1.xml', 'tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_2.xml', 'tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_3.xml', 'tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_4.xml']
         
@@ -79,11 +76,28 @@ class TestCellarClient(unittest.TestCase):
         # Check that the response is None when an exception is raised
         self.assertIsNone(response)
 
-    def test_send_sparql_query(self):        
-        sparql_file_path = os.path.join("./tests/metadata/queries", "formex_query.rq")
+    def test_send_sparql_query(self):    
+        sparql_query = """
+        PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
+        PREFIX purl: <http://purl.org/dc/elements/1.1/>
+
+        SELECT DISTINCT ?cellarURIs, ?manif, ?format, ?expr
+        WHERE {
+                ?work owl:sameAs <http://publications.europa.eu/resource/celex/{CELEX}> .
+                ?expr cdm:expression_belongs_to_work ?work ;
+                cdm:expression_uses_language ?lang .
+                ?lang purl:identifier ?langCode .
+                ?manif cdm:manifestation_manifests_expression ?expr;
+                cdm:manifestation_type ?format.
+                ?cellarURIs cdm:item_belongs_to_manifestation ?manif.
+        FILTER(str(?format)="fmx4" && str(?langCode)="ENG")
+        }
+        ORDER BY ?cellarURIs
+        LIMIT 10
+        """    
         celex = "32024R0903"
         # Send query
-        response = self.downloader.send_sparql_query(sparql_query_filepath=sparql_file_path, celex=celex)        
+        response = self.downloader.send_sparql_query(sparql_query=sparql_query, celex=celex)        
         expected_results = json.loads('''{"head": {"link": [], "vars": ["cellarURIs", "manif", "format", "expr"]}, "results": {"distinct": false, "ordered": true, "bindings": [{"cellarURIs": {"type": "uri", "value": "http://publications.europa.eu/resource/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1"}, "manif": {"type": "uri", "value": "http://publications.europa.eu/resource/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02"}, "format": {"type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#string", "value": "fmx4"}, "expr": {"type": "uri", "value": "http://publications.europa.eu/resource/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006"}}]}}''')        
         self.assertEqual(response, expected_results)
 

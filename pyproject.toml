@@ -1,12 +1,7 @@
-[project]
-name = "tulit"
-version = "0.2.11"
-description = "TULIT - The Universal Legal Informatics Toolkit, is set of legal informatics utilities collected in a Python package that focuses on the retrieval of legal data and metadata from official sources in the EU, and their transformation in legalJSON, a pythonic data structure for legal documents"
-
 [tool.poetry]
 name = "tulit"
 version = "0.2.11"
-description = "TULIT - The Universal Legal Informatics Toolkit, is set of legal informatics utilities collected in a Python package that focuses on the retrieval of legal data and metadata from official sources in the EU, and their transformation in legalJSON, a pythonic data structure for legal documents"
+description = "TULIT - The Universal Legal Informatics Toolkit, is a set of legal informatics utilities collected in a Python package that focuses on the retrieval of legal data and metadata from official sources in the EU, and their transformation in legalJSON, a pythonic data structure for legal documents"
 authors = ["AlessioNar <alessio.nardin@gmail.com>"]
 license = "EUPL 1.2"
 readme = "README.md"
@@ -14,7 +9,6 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -27,16 +21,13 @@ chardet = "^5.2.0"
 pytest = "^8.3.3"
 pygments = "^2.19.1"
 
+[[tool.poetry.include]]
+path = "tulit/client/queries/*.rq"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
-[project.urls]
+[tool.poetry.urls]
 Homepage = "https://github.com/AlessioNar/tulit"
 Issues = "https://github.com/AlessioNar/tulit/issues"
-
-[tool.poetry.include]
-path = "tulit/client/queries/*.rq"
-format = "file"

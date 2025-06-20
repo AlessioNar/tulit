@@ -1,8 +1,8 @@
+import logging
 import requests
 from tulit.client.client import Client
 import argparse
 import os
-import logging
 
 class MaltaLegislationClient(Client):
     """
@@ -16,6 +16,7 @@ class MaltaLegislationClient(Client):
         self.session = requests.Session()
         if proxies:
             self.session.proxies.update(proxies)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def get_document(self, eli_path, lang=None, fmt=None):
         """
@@ -30,19 +31,33 @@ class MaltaLegislationClient(Client):
         if fmt:
             url += f"/{fmt}"
         try:
+            self.logger.info(f"Requesting Malta legislation: eli_path={eli_path}, lang={lang}, fmt={fmt}")
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
+            content_type = response.headers.get('Content-Type', '')
             ext = fmt if fmt else 'pdf' if 'pdf' in url else 'html'
             filename = f"malta_{eli_path.replace('/', '_')}{'_' + lang if lang else ''}.{ext}"
+            if fmt == 'pdf':
+                if 'pdf' in content_type:
+                    file_path = os.path.join(self.download_dir, filename)
+                    with open(file_path, "wb") as f:
+                        f.write(response.content)
+                    self.logger.info(f"PDF downloaded successfully: {file_path}")
+                    return file_path
+                else:
+                    self.logger.error(f"Expected PDF but got {content_type}. Not saving file.")
+                    return None
+            # For non-PDF, save as usual
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)
+            self.logger.info(f"File downloaded successfully: {file_path}")
             return file_path
         except requests.HTTPError as e:
-            logging.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
+            self.logger.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None
         except Exception as e:
-            logging.error(f"Error downloading Malta legislation: {e}")
+            self.logger.error(f"Error downloading Malta legislation: {e}")
             return None
 
 
@@ -60,9 +75,9 @@ def main():
     client = MaltaLegislationClient(download_dir=args.dir, log_dir=args.logdir)
     file_path = client.get_document(eli_path=args.eli_path, lang=args.lang, fmt=args.fmt)
     if file_path:
-        print(f"Downloaded to {file_path}")
+        logging.info(f"Downloaded to {file_path}")
     else:
-        print("Download failed.")
+        logging.error("Download failed.")
 
 if __name__ == "__main__":
     main()

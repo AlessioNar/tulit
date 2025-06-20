@@ -1,3 +1,4 @@
+import logging
 import requests
 from tulit.client.client import Client
 import argparse
@@ -6,14 +7,17 @@ import os
 class VenetoClient(Client):
     def __init__(self, download_dir, log_dir):
         super().__init__(download_dir=download_dir, log_dir=log_dir)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def get_html(self, url):
         try:
+            self.logger.info(f"Requesting Veneto HTML from URL: {url}")
             response = requests.get(url)
             response.raise_for_status()
+            self.logger.info(f"Successfully retrieved Veneto HTML from {url}")
             return response.text
         except requests.RequestException as e:
-            print(f"An error occurred: {e}")
+            self.logger.error(f"An error occurred: {e}")
             return None
     
 def main():
@@ -34,13 +38,13 @@ def main():
         try:
             with open(os.path.join(output_dir, os.path.basename(args.file)), 'w', encoding='utf-8') as f:
                 f.write(html_content)
-            print(f"File saved successfully to {os.path.join(output_dir, os.path.basename(args.file))}")
+            logging.info(f"File saved successfully to {os.path.join(output_dir, os.path.basename(args.file))}")
         except PermissionError as e:
-            print(f"Permission error: {e}")
+            logging.error(f"Permission error: {e}")
         except Exception as e:
-            print(f"An error occurred while writing the file: {e}")
+            logging.error(f"An error occurred while writing the file: {e}")
     else:
-        print("Failed to retrieve HTML content.")
+        logging.error("Failed to retrieve HTML content.")
 
 if __name__ == "__main__":
     main()

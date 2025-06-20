@@ -22,7 +22,18 @@ class Client:
         self.download_dir = download_dir
         self.log_dir = log_dir
         self.proxies = proxies
+        self.logger = logging.getLogger(self.__class__.__name__)
         self._ensure_directories()
+        # Set up logging to file and console if not already set
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s %(levelname)s %(name)s %(message)s',
+            handlers=[
+                logging.FileHandler(os.path.join(self.log_dir, 'client.log'), encoding='utf-8'),
+                logging.StreamHandler()
+            ]
+        )
+        self.logger.info('Client initialized with download_dir=%s, log_dir=%s', self.download_dir, self.log_dir)
 
     def _ensure_directories(self):
         """
@@ -30,8 +41,10 @@ class Client:
         """
         if not os.path.exists(self.download_dir):
             os.makedirs(self.download_dir)
+            self.logger.info('Created download directory: %s', self.download_dir)
         if not os.path.exists(self.log_dir):
             os.makedirs(self.log_dir)
+            self.logger.info('Created log directory: %s', self.log_dir)
     
     def handle_response(self, response, filename):
         """
@@ -52,28 +65,31 @@ class Client:
             Path to the saved file or None if the response couldn't be processed.
         """
         content_type = response.headers.get('Content-Type', '')
-        
-        # The return file is usually either a zip file, or a file with the name DOC_* inside a folder named as the cellar_id
         target_path = os.path.join(self.download_dir, filename)
         os.makedirs(os.path.dirname(target_path), exist_ok=True)
 
         if 'zip' in content_type:
+            self.logger.info('ZIP file detected in response for %s', filename)
             self.extract_zip(response, target_path)
+            self.logger.info(f"ZIP file extracted: {target_path}")
             return target_path
         else:
             extension = self.get_extension_from_content_type(content_type)
             if not extension:
-                logging.warning(f"Unknown content type for ID {filename}: {content_type}")
+                self.logger.warning(f"Unknown content type for ID {filename}: {content_type}")
                 return None
 
             file_path = f"{target_path}.{extension}"
             file_path = os.path.normpath(file_path)
-            
-            with open(file_path, mode='wb+') as f:
-                f.write(response.content)            
-                
-            return file_path
-        
+            try:
+                with open(file_path, mode='wb+') as f:
+                    f.write(response.content)
+                self.logger.info(f"File saved: {file_path}")
+                return file_path
+            except Exception as e:
+                self.logger.error(f"Failed to save file {file_path}: {e}")
+                return None
+
     def get_extension_from_content_type(self, content_type):
         """
         Map Content-Type to a file extension.
@@ -100,9 +116,11 @@ class Client:
         for ext, mapped_ext in content_type_mapping.items():
             if ext in content_type:
                 return mapped_ext
+        self.logger.warning(f"No extension mapping found for content type: {content_type}")
+        return None
 
     # Function to download a zip file and extract it
-    def extract_zip(self, response: requests.Response, folder_path: str):
+    def extract_zip(self, response, folder_path):
         """
         Extracts the content of a zip file.
         
@@ -114,8 +132,9 @@ class Client:
             Directory where the zip file will be extracted.
         """
         try:
-            z = zipfile.ZipFile(io.BytesIO(response.content))
-            z.extractall(folder_path)
+            with zipfile.ZipFile(io.BytesIO(response.content)) as z:
+                z.extractall(folder_path)
+            self.logger.info(f"Extracted ZIP to {folder_path}")
         except Exception as e:
-            logging.error(f"Error downloading zip: {e}")
+            self.logger.error(f"Failed to extract ZIP file to {folder_path}: {e}")
 

@@ -7,23 +7,27 @@ The documentation for the BOE API can be found at https://www.boe.es/datosabiert
 
 """
 
+import logging
+import os
 import requests
 from tulit.client.client import Client
 import argparse
-import os
 
 class BOEClient(Client):
     def __init__(self, download_dir, log_dir):
         super().__init__(download_dir=download_dir, log_dir=log_dir)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def get_html(self, id):
         try:
             url = 'https://www.boe.es/diario_boe/xml.php?id='
+            self.logger.info(f"Requesting BOE document with id: {id}")
             response = requests.get(url + id)
             response.raise_for_status()
+            self.logger.info(f"Successfully retrieved BOE document: {id}")
             return response.text
         except requests.RequestException as e:
-            print(f"An error occurred: {e}")
+            self.logger.error(f"An error occurred: {e}")
             return None
 
 
@@ -45,13 +49,13 @@ def main():
         try:
             with open(os.path.join(output_dir, os.path.basename(args.file)), 'w', encoding='utf-8') as f:
                 f.write(html_content)
-            print(f"File saved successfully to {os.path.join(output_dir, os.path.basename(args.file))}")
+            logging.info(f"File saved successfully to {os.path.join(output_dir, os.path.basename(args.file))}")
         except PermissionError as e:
-            print(f"Permission error: {e}")
+            logging.error(f"Permission error: {e}")
         except Exception as e:
-            print(f"An error occurred while writing the file: {e}")
+            logging.error(f"An error occurred while writing the file: {e}")
     else:
-        print("Failed to retrieve HTML content.")
+        logging.error("Failed to retrieve HTML content.")
 
 if __name__ == "__main__":
     main()

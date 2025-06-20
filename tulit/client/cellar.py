@@ -8,8 +8,6 @@ from importlib.resources import files
 
 
 
-import logging
-
 logger = logging.getLogger(__name__)
 
 class CellarClient(Client):
@@ -18,6 +16,7 @@ class CellarClient(Client):
         super().__init__(download_dir, log_dir, proxies)
         self.endpoint = 'http://publications.europa.eu/resource/cellar/'
         self.sparql_endpoint = "http://publications.europa.eu/webapi/rdf/sparql"
+        self.logger = logging.getLogger(self.__class__.__name__)
     
     def send_sparql_query(self, sparql_query, celex=None):
         """
@@ -61,10 +60,10 @@ class CellarClient(Client):
             return results
     
         except FileNotFoundError as e:
-            print(f"Error: The sparql query was not found.")
+            self.logger.error(f"SPARQL query file not found: {e}")
             raise e
         except Exception as e:
-            print(f"An error occurred: {e}")
+            self.logger.error(f"Error sending SPARQL query: {e}")
             raise e
 
     def get_results_table(self, sparql_query):
@@ -94,6 +93,7 @@ class CellarClient(Client):
         """        
 
         try:
+            self.logger.info("Getting results table from SPARQL query")
             # Create a SPARQLWrapper object with the endpoint URL
             sparql = SPARQLWrapper(self.sparql_endpoint)
 
@@ -111,7 +111,7 @@ class CellarClient(Client):
 
             return results
         except Exception as e:
-            logger.error(f"An error occurred: {e}")
+            self.logger.error(f"Error retrieving SPARQL results: {e}")
             raise e
     
     def fetch_content(self, url) -> requests.Response:
@@ -147,6 +147,7 @@ class CellarClient(Client):
 
         """
         try:
+            self.logger.info(f"Fetching content from URL: {url}")
             headers = {
                 'Accept': "*, application/zip, application/zip;mtype=fmx4, application/xml;mtype=fmx4, application/xhtml+xml, text/html, text/html;type=simplified, application/msword, text/plain, application/xml, application/xml;notice=object",
                 'Accept-Language': "eng",
@@ -160,13 +161,14 @@ class CellarClient(Client):
             response.raise_for_status()
             return response
         except requests.RequestException as e:
-            logger.error(f"Error sending GET request: {e}")
+            self.logger.error(f"Error sending GET request: {e}")
             return None
              
     def build_request_url(self, params):
         """
         Build the request URL based on the source and parameters.
         """
+        self.logger.info(f"Building request URL with params: {params}")
         url = f"{self.endpoint}{params['cellar']}"
         
         return url
@@ -209,6 +211,7 @@ class CellarClient(Client):
         >>> print(cellar_ids)
         ['some_id', 'another_id']
         """
+        self.logger.info(f"Extracting cellar IDs from results for format: {format}")
         cellar_ids = []
         results_list = results["results"]["bindings"]
         for i, file in enumerate(results_list):
@@ -234,12 +237,13 @@ class CellarClient(Client):
         list
             A list of paths to the downloaded documents.
         """
+        self.logger.info(f"Downloading document for celex: {celex}, format: {format}")
         if format == 'fmx4':            
             sparql_query = files("tulit.client.queries").joinpath("formex_query.rq").read_text()
         elif format == 'xhtml':
             sparql_query = files("tulit.client.queries").joinpath("html_query.rq").read_text()
         else:
-            logger.error('No valid format provided. Please choose one between fmx4 or xhtml')
+            self.logger.error('No valid format provided. Please choose one between fmx4 or xhtml')
             return None
             
         results = self.send_sparql_query(sparql_query, celex)
@@ -261,7 +265,7 @@ class CellarClient(Client):
             return document_paths
 
         except Exception as e:
-            logging.error(f"Error processing range: {e}")
+            self.logger.error(f"Error processing range: {e}")
         
         return document_paths
 
@@ -277,8 +281,11 @@ def main():
     
     documents = client.download(celex=args.celex, format=args.format)
     
+    if documents:
+        logger.info(f"Downloaded documents: {documents}")
+    else:
+        logger.error("No documents downloaded.")
     print(documents)
 
 if __name__ == "__main__":
     main()
-    

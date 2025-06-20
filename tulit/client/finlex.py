@@ -1,8 +1,8 @@
+import logging
 import requests
 from tulit.client.client import Client
 import argparse
 import os
-import logging
 
 class FinlexClient(Client):
     """
@@ -20,6 +20,7 @@ class FinlexClient(Client):
         })
         if proxies:
             self.session.proxies.update(proxies)
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def get_statute(self, year, number, lang="fi", doc_type="act"):
         """
@@ -29,18 +30,20 @@ class FinlexClient(Client):
         """
         url = f"{self.BASE_URL}/akn/{lang}/{doc_type}/statute/{year}/{number}/fin%40"
         try:
+            self.logger.info(f"Requesting Finlex statute: year={year}, number={number}, lang={lang}, doc_type={doc_type}")
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
             filename = f"finlex_{year}_{number}.xml"
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)
+            self.logger.info(f"Downloaded Finlex statute to {file_path}")
             return file_path
         except requests.HTTPError as e:
-            logging.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
+            self.logger.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None
         except Exception as e:
-            logging.error(f"Error downloading Finlex statute: {e}")
+            self.logger.error(f"Error downloading Finlex statute: {e}")
             return None
 
 
@@ -57,9 +60,9 @@ def main():
     client = FinlexClient(download_dir=args.dir, log_dir=args.logdir)
     file_path = client.get_statute(year=args.year, number=args.number)
     if file_path:
-        print(f"Downloaded to {file_path}")
+        logging.info(f"Downloaded to {file_path}")
     else:
-        print("Download failed.")
+        logging.error("Download failed.")
 
 if __name__ == "__main__":
     main()

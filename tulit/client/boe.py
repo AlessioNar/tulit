@@ -12,6 +12,7 @@ import os
 import requests
 from tulit.client.client import Client
 import argparse
+import sys
 
 class BOEClient(Client):
     def __init__(self, download_dir, log_dir):
@@ -52,10 +53,13 @@ def main():
             logging.info(f"File saved successfully to {os.path.join(output_dir, os.path.basename(args.file))}")
         except PermissionError as e:
             logging.error(f"Permission error: {e}")
+            sys.exit(1)
         except Exception as e:
             logging.error(f"An error occurred while writing the file: {e}")
+            sys.exit(1)
     else:
         logging.error("Failed to retrieve HTML content.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

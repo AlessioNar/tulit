@@ -3,6 +3,7 @@ from tulit.client.client import Client
 import argparse
 import os
 import logging
+import sys
 
 class PortugalDREClient(Client):
     """
@@ -85,11 +86,9 @@ class PortugalDREClient(Client):
             return file_path
         except requests.HTTPError as e:
             logging.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
-            print(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None
         except Exception as e:
             logging.error(f"Error downloading from DRE: {e}")
-            print(f"Error downloading from DRE: {e}")
             return None
 
 
@@ -151,7 +150,7 @@ def main():
         print(f"Downloaded to {file_path}")
     else:
         logging.error("Download failed.")
-        print("Download failed.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

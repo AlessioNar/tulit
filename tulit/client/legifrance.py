@@ -2,6 +2,7 @@ import logging
 import requests
 from tulit.client.client import Client
 import argparse
+import sys
 
 class LegifranceClient(Client):
     def __init__(self, client_id, client_secret, download_dir='./data/france/legifrance', log_dir='./data/logs'):
@@ -66,6 +67,7 @@ def main():
     except Exception as e:
         logging.error(f"Error in main: {e}")
         print(f"Error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

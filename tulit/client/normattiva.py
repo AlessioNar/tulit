@@ -2,6 +2,7 @@ from tulit.client.client import Client
 import requests
 import logging
 from datetime import datetime
+import sys
 
 
 class NormattivaClient(Client):
@@ -101,3 +102,4 @@ if __name__ == "__main__":
         logging.info(f"Downloaded documents: {documents}")
     else:
         logging.error("No documents downloaded.")
+        sys.exit(1)

@@ -3,6 +3,7 @@ import requests
 from tulit.client.client import Client
 import argparse
 import os
+import sys
 
 class MaltaLegislationClient(Client):
     """
@@ -78,6 +79,7 @@ def main():
         logging.info(f"Downloaded to {file_path}")
     else:
         logging.error("Download failed.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

@@ -3,6 +3,7 @@ import argparse
 import requests
 from tulit.client.client import Client
 from SPARQLWrapper import SPARQLWrapper, JSON, POST
+import sys
 
 from importlib.resources import files
 
@@ -285,6 +286,7 @@ def main():
         logger.info(f"Downloaded documents: {documents}")
     else:
         logger.error("No documents downloaded.")
+        sys.exit(1)
     print(documents)
 
 if __name__ == "__main__":

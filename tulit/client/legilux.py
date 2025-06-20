@@ -1,5 +1,6 @@
 import logging
 import requests
+import sys
 from tulit.client.client import Client
 
 class LegiluxClient(Client):
@@ -32,6 +33,7 @@ class LegiluxClient(Client):
         else:
             self.logger.error(f"Failed to download document. Status code: {response.status_code}")
             print(f"Failed to download document. Status code: {response.status_code}")
+            sys.exit(1)
             return None
 
 if __name__ == "__main__":

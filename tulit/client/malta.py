@@ -36,6 +36,15 @@ class MaltaLegislationClient(Client):
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
+            if fmt == 'pdf' and 'pdf' not in content_type:
+                self.logger.error(f"Expected PDF response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'xml' and 'xml' not in content_type:
+                self.logger.error(f"Expected XML response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'html' and 'html' not in content_type:
+                self.logger.error(f"Expected HTML response but got: {content_type}")
+                sys.exit(1)
             ext = fmt if fmt else 'pdf' if 'pdf' in url else 'html'
             filename = f"malta_{eli_path.replace('/', '_')}{'_' + lang if lang else ''}.{ext}"
             if fmt == 'pdf':
@@ -47,7 +56,7 @@ class MaltaLegislationClient(Client):
                     return file_path
                 else:
                     self.logger.error(f"Expected PDF but got {content_type}. Not saving file.")
-                    return None
+                    sys.exit(1)
             # For non-PDF, save as usual
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:

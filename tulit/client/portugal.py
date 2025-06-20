@@ -68,18 +68,27 @@ class PortugalDREClient(Client):
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
-            if fmt == 'pdf':
-                if 'pdf' in content_type:
-                    file_path = os.path.join(self.download_dir, filename)
-                    with open(file_path, "wb") as f:
-                        f.write(response.content)
-                    return file_path
-                else:
-                    # Print the error response to the screen for user
-                    print("Error: Expected PDF but got:")
-                    print(response.text)
-                    return None
-            # For non-PDF, save as usual
+            if fmt == 'pdf' and 'pdf' not in content_type:
+                self.logger.error(f"Expected PDF response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'xml' and 'xml' not in content_type:
+                self.logger.error(f"Expected XML response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'html' and 'html' not in content_type:
+                self.logger.error(f"Expected HTML response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'json' and 'json' not in content_type:
+                self.logger.error(f"Expected JSON response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'txt' and 'plain' not in content_type:
+                self.logger.error(f"Expected TXT response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'xhtml' and 'xhtml' not in content_type:
+                self.logger.error(f"Expected XHTML response but got: {content_type}")
+                sys.exit(1)
+            if fmt == 'zip' and 'zip' not in content_type:
+                self.logger.error(f"Expected ZIP response but got: {content_type}")
+                sys.exit(1)
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)

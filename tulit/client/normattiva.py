@@ -61,7 +61,7 @@ class NormattivaClient(Client):
             self.logger.error(f"Error sending GET request: {e}")
             return None    
         
-    def download(self, dataGU, codiceRedaz, dataVigenza = datetime.today().strftime('%Y%m%d')):     
+    def download(self, dataGU, codiceRedaz, dataVigenza = datetime.today().strftime('%Y%m%d'), fmt="xml"):     
         document_paths = []
         
         # Convert the dataGU to a datetime object
@@ -78,14 +78,19 @@ class NormattivaClient(Client):
         self.logger.info(f"Downloading Normattiva document with params: {params}")
         uri, url = self.build_request_url(params)
         response = self.fetch_content(uri, url)
-        
         if response is None:
             self.logger.error("No response received from server.")
             return None
-        # If the response in HTML, raise an error saying that the date or codiceRedaz is wrong
-        if 'text/html' in response.headers.get('Content-Type', ''):
-            self.logger.error(f"Error downloading document: there is not an XML file with the following parameters: {params}")
-            return None
+        content_type = response.headers.get('Content-Type', '')
+        if fmt == 'xml' and 'xml' not in content_type:
+            self.logger.error(f"Expected XML response but got: {content_type}")
+            sys.exit(1)
+        if fmt == 'pdf' and 'pdf' not in content_type:
+            self.logger.error(f"Expected PDF response but got: {content_type}")
+            sys.exit(1)
+        if fmt == 'html' and 'html' not in content_type:
+            self.logger.error(f"Expected HTML response but got: {content_type}")
+            sys.exit(1)
         
         file_path = self.handle_response(response=response, filename=f"{params['dataGU']}_{params['codiceRedaz']}_VIGENZA_{params['dataVigenza']}")
         document_paths.append(file_path)

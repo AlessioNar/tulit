@@ -46,6 +46,10 @@ class LegifranceClient(Client):
             self.logger.info(f"Requesting dossier legislatif for dossier_id: {dossier_id}")
             response = requests.post(url, json=payload, headers=headers)
             response.raise_for_status()
+            content_type = response.headers.get('Content-Type', '')
+            if 'json' not in content_type:
+                self.logger.error(f"Expected JSON response but got: {content_type}")
+                sys.exit(1)
             self.logger.info(f"Successfully retrieved dossier legislatif for dossier_id: {dossier_id}")
             return response.json()
         except Exception as e:

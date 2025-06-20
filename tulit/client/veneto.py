@@ -10,11 +10,22 @@ class VenetoClient(Client):
         super().__init__(download_dir=download_dir, log_dir=log_dir)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def get_html(self, url):
+    def get_html(self, url, fmt=None):
         try:
             self.logger.info(f"Requesting Veneto HTML from URL: {url}")
             response = requests.get(url)
             response.raise_for_status()
+            content_type = response.headers.get('Content-Type', '')
+            if fmt:
+                if fmt == 'html' and 'html' not in content_type:
+                    self.logger.error(f"Expected HTML response but got: {content_type}")
+                    sys.exit(1)
+                if fmt == 'xml' and 'xml' not in content_type:
+                    self.logger.error(f"Expected XML response but got: {content_type}")
+                    sys.exit(1)
+                if fmt == 'pdf' and 'pdf' not in content_type:
+                    self.logger.error(f"Expected PDF response but got: {content_type}")
+                    sys.exit(1)
             self.logger.info(f"Successfully retrieved Veneto HTML from {url}")
             return response.text
         except requests.RequestException as e:
@@ -28,7 +39,7 @@ def main():
     args = parser.parse_args()
     
     client = VenetoClient(download_dir=args.file, log_dir='../tests/metadata/logs')
-    html_content = client.get_html(args.url)
+    html_content = client.get_html(args.url, fmt=os.path.splitext(args.file)[1][1:])
 
     if html_content:
         # Ensure the directory exists

@@ -57,6 +57,11 @@ run_client('Cellar', [
     sys.executable, '-m', 'tulit.client.cellar', '--celex', '32024R0903', '--format', 'fmx4', '--dir', './tests/data/formex'
 ])
 
+# Germany ELI
+run_client('Germany ELI', [
+    sys.executable, '-m', 'tulit.client.germany', '--eli_url', 'https://testphase.rechtsinformationen.bund.de/norms/eli/bund/banz-at/2025/130/2025-05-05/1/deu/regelungstext-1', '--file', 'germany_eli.html', '--dir', './tests/data/html/germany', '--logdir', './tests/logs'
+])
+
 if failed_clients:
     logging.error(f"The following clients failed: {', '.join(failed_clients)}")
 else:

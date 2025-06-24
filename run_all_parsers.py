@@ -40,8 +40,29 @@ run_parser('Cellar HTML', [
 # Veneto HTML
 run_parser('Veneto HTML', [
     sys.executable, 'tulit/parsers/html/veneto.py',
-    '--input', 'tests/data/html/veneto/legge.html',
-    '--output', 'tests/data/json/veneto_html.json'
+    '--input', 'tests/data/html/veneto/esg.html',
+    '--output', 'tests/data/json/esg.json'
+])
+
+# Veneto HTML (biogas)
+run_parser('Veneto HTML (biogas)', [
+    sys.executable, 'tulit/parsers/html/veneto.py',
+    '--input', 'tests/data/html/veneto/biogas.html',
+    '--output', 'tests/data/json/biogas.json'
+])
+
+# Veneto HTML (pbc)
+run_parser('Veneto HTML (pbc)', [
+    sys.executable, 'tulit/parsers/html/veneto.py',
+    '--input', 'tests/data/html/veneto/pbc.html',
+    '--output', 'tests/data/json/pbc.json'
+])
+
+# Veneto JSON (fontane)
+run_parser('Veneto HTML (fontane)', [
+    sys.executable, 'tulit/parsers/html/veneto.py',
+    '--input', 'tests/data/html/veneto/fontane.html',
+    '--output', 'tests/data/json/fontane.json'
 ])
 
 if failed_parsers:

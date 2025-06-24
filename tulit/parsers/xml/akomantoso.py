@@ -1,6 +1,9 @@
 from tulit.parsers.xml.xml import XMLParser
 import json
 import argparse
+# LegalJSON validation
+from tulit.parsers.parser import LegalJSONValidator
+import logging
 
 class AkomaNtosoParser(XMLParser):
     """
@@ -359,6 +362,17 @@ def main():
         serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
         # Write to a JSON file
         json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
+    
+    logging.basicConfig(level=logging.INFO)
+    validator = LegalJSONValidator()
+    with open(args.output, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    valid = validator.validate(data)
+    if valid:
+        print('LegalJSON validation: SUCCESS')
+    else:
+        print('LegalJSON validation: FAILED')
+        exit(1)
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup
 from tulit.parsers.parser import Parser
 import json
+import argparse
+import logging
+from tulit.parsers.parser import LegalJSONValidator
 
 class HTMLParser(Parser):
     def __init__(self):
@@ -108,6 +111,3 @@ class HTMLParser(Parser):
             print(f"Conclusions parsed successfully. ")
         except Exception as e:
             print(f"Error in get_conclusions: {e}")
-                
-        return self
-    

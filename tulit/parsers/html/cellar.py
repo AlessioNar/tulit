@@ -2,6 +2,10 @@ from tulit.parsers.html.xhtml import HTMLParser
 import json
 import re
 import argparse
+# LegalJSON validation
+from tulit.parsers.parser import LegalJSONValidator
+import logging
+
 
 class CellarHTMLParser(HTMLParser):
     def __init__(self):
@@ -277,6 +281,17 @@ def main():
     
         # Write to a JSON file
         json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
+    
+    logging.basicConfig(level=logging.INFO)
+    validator = LegalJSONValidator()
+    with open(args.output, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    valid = validator.validate(data)
+    if valid:
+        print('LegalJSON validation: SUCCESS')
+    else:
+        print('LegalJSON validation: FAILED')
+        exit(1)
 
 if __name__ == "__main__":
     main()

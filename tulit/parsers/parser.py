@@ -1,4 +1,7 @@
 from abc import ABC
+import jsonschema
+import json
+import logging
 
 class Parser(ABC):
     """
@@ -56,3 +59,31 @@ class Parser(ABC):
         self.chapters = []
         self.articles = []
         self.conclusions = None
+
+class LegalJSONValidator:
+    """
+    Validator for LegalJSON output using the LegalJSON schema.
+    """
+    def __init__(self, schema_path=None):
+        if schema_path is None:
+            import os
+            schema_path = os.path.join(os.path.dirname(__file__), 'legaljson_schema.json')
+        with open(schema_path, 'r', encoding='utf-8') as f:
+            self.schema = json.load(f)
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+    def validate(self, data):
+        """
+        Validate a LegalJSON object against the LegalJSON schema.
+        Returns True if valid, False otherwise.
+        """
+        try:
+            jsonschema.validate(instance=data, schema=self.schema)
+            self.logger.info("LegalJSON validation successful.")
+            return True
+        except jsonschema.ValidationError as e:
+            self.logger.error(f"LegalJSON validation error: {e.message}")
+            return False
+        except Exception as e:
+            self.logger.error(f"Unexpected error during LegalJSON validation: {e}")
+            return False

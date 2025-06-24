@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LegalJSON",
+  "type": "object",
+  "properties": {
+    "preface": {"type": ["string", "null"]},
+    "preamble": {"type": ["string", "null"]},
+    "formula": {"type": ["string", "null"]},
+    "citations": {
+      "type": "array",
+      "items": {"type": ["object", "string"]}
+    },
+    "recitals": {
+      "type": "array",
+      "items": {"type": ["object", "string"]}
+    },
+    "preamble_final": {"type": ["string", "null"]},
+    "chapters": {
+      "type": "array",
+      "items": {"type": ["object", "string"]}
+    },
+    "articles": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "conclusions": {"type": ["object", "null"]}
+  },
+  "required": ["preface", "formula", "citations", "recitals", "preamble_final", "chapters", "articles", "conclusions"]
+}

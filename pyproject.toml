@@ -21,6 +21,7 @@ chardet = "^5.2.0"
 pytest = "^8.3.3"
 pygments = "^2.19.1"
 
+jsonschema = "^4.24.0"
 [[tool.poetry.include]]
 path = "tulit/client/queries/*.rq"
 

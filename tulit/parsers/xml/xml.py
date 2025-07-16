@@ -64,9 +64,9 @@ class XMLParser(Parser):
             with open(schema_path, 'r') as f:
                 schema_doc = etree.parse(f)
                 self.schema = etree.XMLSchema(schema_doc)
-            print("Schema loaded successfully.")
+            logger.info("Schema loaded successfully.")
         except Exception as e:
-            print(f"Error loading schema: {e}")
+            logger.error(f"Error loading schema: {e}")
 
     def validate(self, file: str,  format: str) -> bool:
         """

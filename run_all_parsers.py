@@ -24,60 +24,64 @@ def run_parser(name, args):
         logging.error(f"Exception while running {name}: {e}")
         failed_parsers.append(name)
 
-# Formex XML
-run_parser('Formex XML', [
-    sys.executable, 'tulit/parsers/xml/formex.py',
-    '--input', 'tests/data/formex/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml',
-    '--output', 'tests/data/json/xml/iopa.json'
-])
 
-# Akoma Ntoso XML
-run_parser('Akoma Ntoso XML', [
+# Akoma Ntoso XML (EU)
+run_parser('Akoma Ntoso XML (EU)', [
     sys.executable, 'tulit/parsers/xml/akomantoso.py',
     '--input', 'tests/data/akn/eu/32014L0092.akn',
-    '--output', 'tests/data/json/xml/akn.json'
+    '--output', 'tests/data/json/xml/akn_eu.json'
 ])
 
-# Cellar HTML
-run_parser('Cellar HTML', [
-    sys.executable, 'tulit/parsers/html/cellar.py',
-    '--input', 'tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html',
-    '--output', 'tests/data/json/html/iopa_html.json'
+# Akoma Ntoso XML (France)
+run_parser('Akoma Ntoso XML (France)', [
+    sys.executable, 'tulit/parsers/xml/akomantoso.py',
+    '--input', 'tests/data/akn/france/tas24-021.akn.xml',
+    '--output', 'tests/data/json/xml/akn_france.json'
 ])
 
-# Veneto HTML
-run_parser('Veneto HTML', [
-    sys.executable, 'tulit/parsers/html/veneto.py',
-    '--input', 'tests/data/html/veneto/esg.html',
-    '--output', 'tests/data/json/html/esg.json'
-])
 
-# Veneto HTML (biogas)
-run_parser('Veneto HTML (biogas)', [
-    sys.executable, 'tulit/parsers/html/veneto.py',
-    '--input', 'tests/data/html/veneto/biogas.html',
-    '--output', 'tests/data/json/html/biogas.json'
-])
+# === CLIENT-DOWNLOADED FILES ===
 
-# Veneto HTML (pbc)
-run_parser('Veneto HTML (pbc)', [
-    sys.executable, 'tulit/parsers/html/veneto.py',
-    '--input', 'tests/data/html/veneto/pbc.html',
-    '--output', 'tests/data/json/html/pbc.json'
-])
-
-# Veneto JSON (fontane)
-run_parser('Veneto HTML (fontane)', [
-    sys.executable, 'tulit/parsers/html/veneto.py',
-    '--input', 'tests/data/html/veneto/fontane.html',
-    '--output', 'tests/data/json/html/fontane.json'
-])
-
-# BOE XML
-run_parser('BOE XML', [
+# BOE XML (from client)
+run_parser('BOE XML (client)', [
     sys.executable, 'tulit/parsers/xml/boe.py',
-    'tests/data/xml/spain/BOE-A-1942-2205.xml',
-    'tests/data/json/xml/boe.json'
+    'tests/data/clients/boe/BOE-A-1942-2205.xml',
+    'tests/data/json/clients/boe.json'
+])
+
+# Formex XML (from Cellar client)
+run_parser('Formex XML (Cellar client)', [
+    sys.executable, 'tulit/parsers/xml/formex.py',
+    '--input', 'tests/data/clients/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml',
+    '--output', 'tests/data/json/xml/cellar_formex.json'
+])
+
+# Finlex XML (from client)
+run_parser('Finlex XML (client)', [
+    sys.executable, 'tulit/parsers/xml/akomantoso.py',
+    '--input', 'tests/data/clients/finlex/finlex_2024_123.xml',
+    '--output', 'tests/data/json/xml/finlex.json'
+])
+
+# Germany HTML (from client)
+run_parser('Germany HTML (client)', [
+    sys.executable, 'tulit/parsers/html/xhtml.py',
+    '--input', 'tests/data/clients/germany/germany_eli.html',
+    '--output', 'tests/data/json/html/germany.json'
+])
+
+# Portugal HTML (from client)
+run_parser('Portugal HTML (client)', [
+    sys.executable, 'tulit/parsers/html/xhtml.py',
+    '--input', 'tests/data/clients/portugal/dre_act_lei_39_2016_12_19_p_pt.html',
+    '--output', 'tests/data/json/html/portugal.json'
+])
+
+# Veneto HTML (from client)
+run_parser('Veneto HTML (client)', [
+    sys.executable, 'tulit/parsers/html/veneto.py',
+    '--input', 'tests/data/clients/veneto/esg.html',
+    '--output', 'tests/data/json/html/veneto.json'
 ])
 
 if failed_parsers:

@@ -64,9 +64,9 @@ class XMLParser(Parser):
             with open(schema_path, 'r') as f:
                 schema_doc = etree.parse(f)
                 self.schema = etree.XMLSchema(schema_doc)
-            print("Schema loaded successfully.")
+            logger.info("Schema loaded successfully.")
         except Exception as e:
-            print(f"Error loading schema: {e}")
+            logger.error(f"Error loading schema: {e}")
 
     def validate(self, file: str,  format: str) -> bool:
         """
@@ -85,21 +85,21 @@ class XMLParser(Parser):
             Sets the valid attribute to True if the file is valid, False otherwise.
         """
         if not self.schema:
-            print("No schema loaded. Please load an XSD schema first.")
+            logger.error("No schema loaded. Please load an XSD schema first.")
             return None
 
         try:
             with open(file, 'r', encoding='utf-8') as f:
                 xml_doc = etree.parse(f)
                 self.schema.assertValid(xml_doc)
-            print(f"{file} is a valid {format} file.")
+            logger.info(f"{file} is a valid {format} file.")
             self.valid = True
         except etree.DocumentInvalid as e:
-            print(f"{file} is not a valid {format} file. Validation errors: {e}")
+            logger.warning(f"{file} is not a valid {format} file. Validation errors: {e}")
             self.valid = False
             self.validation_errors = e.error_log
         except Exception as e:
-            print(f"An error occurred during validation: {e}")
+            logger.error(f"An error occurred during validation: {e}")
             self.valid = False
         
     def remove_node(self, tree, node):

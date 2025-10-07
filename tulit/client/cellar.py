@@ -221,7 +221,7 @@ class CellarClient(Client):
 
         return cellar_ids
 
-    def download(self, celex, format=None):
+    def download(self, celex, format=None, type_id='celex'):
         """
         Sends a REST query to the specified source APIs and downloads the documents
         corresponding to the given results.
@@ -239,8 +239,13 @@ class CellarClient(Client):
             A list of paths to the downloaded documents.
         """
         self.logger.info(f"Downloading document for celex: {celex}, format: {format}")
-        if format == 'fmx4':            
-            sparql_query = files("tulit.client.queries").joinpath("formex_query.rq").read_text()
+        if format == 'fmx4':
+            if type_id == 'eli':
+                sparql_query = files("tulit.client.queries").joinpath("formex_eli_query.rq").read_text()
+                sparql_query = sparql_query.replace("{ELI}", celex)            
+            elif type_id == 'celex':
+                sparql_query = files("tulit.client.queries").joinpath("formex_query.rq").read_text()
+                sparql_query = sparql_query.replace("{CELEX}", celex)                
         elif format == 'xhtml':
             sparql_query = files("tulit.client.queries").joinpath("html_query.rq").read_text()
         else:

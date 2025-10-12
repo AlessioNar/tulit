@@ -1,0 +1,540 @@
+{
+    "preface": "2025/0144 (NLE) Proposal for aDIRECTIVE OF THE EUROPEAN PARLIAMENT AND OF THE COUNCILon the registration documents for vehicles and vehicle registration data recorded in national vehicle registers and repealing Council Directive 1999/37/EC",
+    "formula": "THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,",
+    "citations": [
+        {
+            "eId": "ecR3oPcEyCG4UstqH",
+            "text": "Having regard to the Treaty on the Functioning of the European Union, and in particular Article 91(1) thereof,"
+        },
+        {
+            "eId": "ecYlEd8jLtO2DEsIj",
+            "text": "Having regard to the proposal from the European Commission,"
+        },
+        {
+            "eId": "ec13TLkwTTxcsmZS8",
+            "text": "After transmission of the draft legislative act to the national Parliaments,"
+        },
+        {
+            "eId": "ec9Ibn24LjRuiElW0",
+            "text": "Having regard to the opinion of the European Economic and Social Committee,"
+        },
+        {
+            "eId": "ecdR9k3rjoFWTp38o",
+            "text": "Having regard to the opinion of the Committee of the Regions,"
+        },
+        {
+            "eId": "ec9SwlIuf0qt3aus7",
+            "text": "Acting in accordance with the ordinary legislative procedure,"
+        }
+    ],
+    "recitals_init": null,
+    "recitals": [
+        {
+            "eId": "ecE4C8bnGx87GQkRK",
+            "text": "The registration of a vehicle provides the administrative authorisation for its entry into service in road traffic."
+        },
+        {
+            "eId": "ecMSiOc19oific5QT",
+            "text": "Council Directive 1999/37/EC lays down common standards for vehicle registration documents for Member States. It also requires that Member States help each other implement the Directive and indicates that this may be done by exchanging vehicle-related information by electronic means, but does not actually require such a data exchange, hindering communication and information exchange among Member States."
+        },
+        {
+            "eId": "ecPCLFazWAL6mStGa",
+            "text": "To facilitate the checking and verification of vehicle registration certificates, further harmonisation of the form and content of those certificates is required."
+        },
+        {
+            "eId": "ecZcsZD7u9OwO6lrA",
+            "text": "Harmonisation of the registration certificates and the sharing of information recorded in the vehicle register will also facilitate the re-registering of vehicles that have previously been registered in another Member State, and will contribute to the proper functioning of the internal market."
+        },
+        {
+            "eId": "eccL61WaiQZYxRJwV",
+            "text": "To take account of the need for digitalisation, to strengthen Union competitiveness and to reduce administrative burdens, both physical and mobile registration certificates should be harmonised. Such certificates should be fully equivalent and contain exactly the same information."
+        },
+        {
+            "eId": "ec2guvaKdd5eWINE2",
+            "text": "To make it easier and faster to check information on physical certificates, Member States should be able to include a QR code on registration certificates, including those in smart card formats. It should also be possible to issue physical registration certificates in smart card format with a microchip, provided that certain technical specifications are followed."
+        },
+        {
+            "eId": "ec0eJUJ59Bai6mAGq",
+            "text": "The digital transformation is one of the Union’s priorities. It is important to remove the remaining barriers, including the administrative burden associated with the re-registration of vehicles. This can impede the free movement of people, and their right to circulate freely within the Union and to take up residence in a Member State other than the one where their vehicle is currently registered. Therefore, as from [date of entry into force + 4 years], mobile registration certificates should be issued by default without affecting the applicant’s right to also request a physical registration certificate. To ensure interoperability of mobile registration certificates across the Union, technical specifications for those certificates should be set out. This will also make it possible to ensure vehicle registration certificates can be checked and verified."
+        },
+        {
+            "eId": "ech4ksqJyvh4yLdx4",
+            "text": "To reduce costs for citizens and businesses, mobile registration certificates should be issued free of charge to the European Digital Identity Wallets issued in accordance with Regulation (EU) No 910/2014 of the European Parliament and of the Council."
+        },
+        {
+            "eId": "ecz1rOfFlk9C3KedS",
+            "text": "To facilitate cross-border movements, in particular the re-registration of vehicles, Member States should electronically record all required data on all vehicles registered in their territory and keep that data up to date at all times. That data will help: improve the accuracy of vehicle registers; ensure better law enforcement; combat vehicle fraud and theft; improve the exchange of information between Member States; and facilitate checking the status of vehicles due for export."
+        },
+        {
+            "eId": "ecpFSkOVGm4JU5Bdf",
+            "text": "It should be ensured that personal data processing for the implementation of thisDirective complies with the data protection framework of the Union. In particular, any personal data used in the verification of a vehicle’s registration data should not retained by the verifier, unless such retention is authorised by Union or national law."
+        },
+        {
+            "eId": "ecvMjclqMMEbsyP0C",
+            "text": "Roadworthiness testing is a part of a wider regime that ensures vehicles are kept in a safe and environmentally acceptable condition during their use. That roadworthiness regime requires that a vehicle’s authorisation to be used in road traffic be suspended where the vehicle constitutes a risk to road safety. To reduce the administrative burden resulting from suspension, it is not necessary to go through a new registration process when the suspension is lifted. In order to ensure that registers are accurate and up to date, where the authorisation of a vehicle for use on public roads has been suspended following a roadworthiness test, the suspension should also be recorded electronically in the register until the vehicle has passed a new roadworthiness test."
+        },
+        {
+            "eId": "ecb2ta0BJKK3BuSwC",
+            "text": "To ensure that vehicle registers are accurate and up to date, when a vehicle has been treated as an end-of-life vehicle in accordance with Directive 2000/53/EC of the European Parliament and of the Council, the registration of that vehicle should be cancelled permanently and that information added to the electronic register."
+        },
+        {
+            "eId": "eccNTtepeSVweNuzj",
+            "text": "For the purpose of identifying a vehicle in road traffic, for a transitional period, Member States should be able to require the driver to carry Part I of the physical registration certificate. Thereafter, Member States should accept both physical and mobile registration certificates for that purpose."
+        },
+        {
+            "eId": "ecU7BVHrFYkkl0Oh0",
+            "text": "When re-registering a vehicle previously registered in another Member State, the competent authorities should, during a transitional period, require Part I of the physical registration certificate to be submitted. However, to facilitate free movement of people and to reduce the administrative burden, the competent authorities should also be allowed to accept the presentation of the mobile registration certificate during that period, if it was issued. After the transitional period, when re-registering a vehicle previously registered in another Member State, the competent authorities should accept both Part I of the physical registration certificate and the presentation of the mobile registration certificate."
+        },
+        {
+            "eId": "ecmh350v4hbhQqRnH",
+            "text": "To ensure that vehicle registers are accurate and up to date, when re-registering a vehicle, the competent authorities should verify with the Member State of registration which format(s) of the registration certificate were issued. Where a physical registration certificate was issued, the competent authorities should withdraw the part(s) of that certificate submitted, and should, without undue delay, inform the authorities of the issuing Member State of the withdrawal.  Where a mobile registration certificate is presented, the competent authorities should, also without undue delay, inform the authorities of the issuing Member State, and the latter should immediately revoke that certificate. Information on the previous certificate in the vehicle register should be retained for 12 months."
+        },
+        {
+            "eId": "ecNUsbHpdld09FBaq",
+            "text": "To facilitate the smooth operation of the regime introduced by this Directive, particularly in a cross-border context, Member States should designate a national contact point responsible for exchanging information in a timely manner with the other Member States and with the Commission."
+        },
+        {
+            "eId": "ecWvud47QC6zRE5ax",
+            "text": "In order to ensure the Annexes remain up to date, the power to adopt acts in accordance with Article 290 TFEU should be delegated to the Commission in respect of the amendment of certain parts of Annexes I, II and III in the event of enlargement of the Union, in relation to non-mandatory elements in the event of changes in the content of certificates of conformity in the relevant Union type-approval legislation, or in order to take account of technical, operational or scientific developments.  It is of particular importance that the Commission carry out appropriate consultations during its preparatory work, including at expert level, and that those consultations be conducted in accordance with the principles laid down in the Interinstitutional Agreement of 13 April 2016 on Better Law-Making. In particular, to ensure equal participation in the preparation of delegated acts, the European Parliament and the Council should receive all documents at the same time as Member States' experts, and their experts systematically have access to meetings of Commission expert groups dealing with the preparation of delegated acts."
+        },
+        {
+            "eId": "ec6uCPN4hUpGTjWmr",
+            "text": "In order to ensure uniform conditions for the implementation of this Directive, implementing powers should be conferred on the Commission to specify: interoperability features and security measures applicable to the QR codes introduced on physical registration certificates; the interoperability, security and testing of mobile registration certificates; including verification features and the interface with national systems; relevant data from the certificate of conformity in electronic format as provided for in Article 37 of Regulation (EU) 2018/858 of the European Parliament and of the Council; the necessary arrangements for implementing the functionalities of the MOVE-HUB electronic system; and the format of data to be communicated by Member States to the Commission through the e-platform. Those powers should be exercised in accordance with Regulation (EU) No 182/2011 of the European Parliament and of the Council."
+        },
+        {
+            "eId": "echmChph3muetSUQo",
+            "text": "To combat fraud and the illegal trade in stolen vehicles, Member States should assist one another in the implementation of this Directive. This should include providing access to relevant registration data and roadworthiness information, including suspensions, to the registration authorities in other Member States."
+        },
+        {
+            "eId": "ecqcC0upbVdgeTKp0",
+            "text": "To facilitate the exchange of data, Member States should interconnect their vehicle registers and electronic systems on roadworthiness certificates with the Commission’s MOVE-HUB system, so that competent authorities are able to consult the register of another Member State in real time."
+        },
+        {
+            "eId": "ecwt0MrnsttY67DR5",
+            "text": "To enable the Commission to analyse the state of play in the Member States and to propose initiatives on a sound factual basis, Member States should communicate data to the Commission on the vehicles registered in their territory, including the number of physical and mobile registration certificates issued, the number of re-registrations of vehicles previously registered in another Member State, and the number of vehicle registrations suspended. The Commission should transmit the data collected to the European Parliament and to the Council"
+        },
+        {
+            "eId": "ecb41HDFqN8RR4dx5",
+            "text": "The objectives of this Directive, namely the achievement of a harmonised Union vehicle registration framework, cannot be sufficiently achieved by the Member States acting alone. This is because national rules governing registration documents, registration data and cooperation with other Member States would lead to requirements so diverse that the level of road safety and free movement of people intended by those harmonised rules could not be achieved. Consequently, such objectives are better achieved at Union level. Therefore, the Union may adopt measures, in accordance with the principle of subsidiarity set out in Article 5 of the Treaty. In accordance with the principle of proportionality as set out in that Article, this Directive does not go beyond what is necessary to achieve those objectives."
+        },
+        {
+            "eId": "ecU8NkgZVj7b4HiZO",
+            "text": "In accordance with the Joint Political Declaration of 28 September 2011 of Member States and the Commission on explanatory documents, Member States have undertaken to accompany, in justified cases, the notification of their transposition measures with one or more documents explaining the relationship between the components of a directive and the corresponding parts of national transposition instruments. With regard to this Directive, the legislator considers the transmission of such documents to be justified."
+        },
+        {
+            "eId": "ecVtS941eYYSFJNvr",
+            "text": "Directive 1999/37/EC should be repealed,"
+        }
+    ],
+    "preamble_final": null,
+    "chapters": [
+        {
+            "eId": "ec61UIIpKK5Hd5rsG",
+            "num": "Chapter I",
+            "heading": "General provisions"
+        },
+        {
+            "eId": "ec3Wk9h4O2bsesUiG",
+            "num": "Chapter II",
+            "heading": "Registration certificates"
+        },
+        {
+            "eId": "ec0joR9NYhhAw8B5n",
+            "num": "Chapter III",
+            "heading": "General obligations"
+        },
+        {
+            "eId": "ecd9fuxbFjmwJDJ5C",
+            "num": "Chapter IV",
+            "heading": "Implementing acts and delegated acts"
+        },
+        {
+            "eId": "eckF72WsjiMjTgBfK",
+            "num": "Chapter V",
+            "heading": "Final provisions"
+        }
+    ],
+    "articles": [
+        {
+            "eId": "ecE7tn1HSmpax3EFQ",
+            "num": "Article 1",
+            "heading": "Subject matter and scope",
+            "children": [
+                {
+                    "eId": "ecRnIdFmPihdokjod",
+                    "text": "1. This Directive lays down common rules on the following: (a) the vehicle registration documents issued by the Member States; (b) certain data to be recorded in national vehicle registers; (c) the exchange of such data between Member States."
+                },
+                {
+                    "eId": "ecSidr8Pe5fjNgfrV",
+                    "text": "2. This Directive shall not apply to documents for the temporary registration of vehicles, unless such documents meet the requirements of this Directive, in which case, they shall be mutually recognised by Member States in accordance with Article 9 ."
+                }
+            ]
+        },
+        {
+            "eId": "ecdShBh4ie8NqdSx9",
+            "num": "Article 2",
+            "heading": "Definitions",
+            "children": [
+                {
+                    "eId": "ecFLv6I45jv0gP0hH",
+                    "text": "For the purposes of this Directive, the following definitions apply: (1) ‘vehicle’ means any vehicle as defined in Article 3, point 15 of Regulation (EU) 2018/858 or in Article 3, point 11 of Regulation (EU) No 167/2013 of the European Parliament and of the Council, and any vehicle referred to in Article 4 of Regulation (EU) No 168/2013 of the European Parliament and of the Council; (2) ‘registration’ means the administrative authorisation for the entry into service in road traffic of a vehicle, involving the identification of the latter and the issuing to it of a serial number, to be known as the registration number; (3) ‘registration certificate’ means the document which certifies that the vehicle is registered in a Member State, whether in a physical format, a digital format, or both; (4) ‘physical registration certificate’ means a registration certificate in its paper or smart card format; (5) ‘mobile registration certificate’ means a registration certificate in its digital format; (6) ‘holder of the registration certificate’ means the legal or natural person in whose name a vehicle is registered; (7) ‘suspension’ means a limited period of time in which a vehicle is not authorised by a Member State to be used in road traffic following which – provided the reasons for suspension have ceased to apply – it may be authorised to be used again without involving a new process of registration."
+                }
+            ]
+        },
+        {
+            "eId": "ecuMl3c1vtGKzxRyP",
+            "num": "Article 3",
+            "heading": "General requirements for registration certificates",
+            "children": [
+                {
+                    "eId": "ecFTibBw0ZA8D6BpW",
+                    "text": "1. Member States shall issue registration certificates for vehicles which are subject to registration under their national legislation. The certificates shall comply with the requirements laid down in Article 4 , as regards physical registration certificates, and Article 5 as regards mobile registration certificates."
+                },
+                {
+                    "eId": "ec3Sw47muttFTqmya",
+                    "text": "2. A vehicle shall not be the subject of more than one registration certificate, except as set out in paragraphs 4 and 5. However, a mobile registration certificate may be displayed on several mobile devices."
+                },
+                {
+                    "eId": "ecAdn7fIuiUAbYcVv",
+                    "text": "3. Until [entry into force + 4 years], Member States shall issue physical registration certificates. They may also issue mobile registration certificates in addition to the physical certificates."
+                },
+                {
+                    "eId": "ecBiJCISl5OfcEKt8",
+                    "text": "4. With effect from [entry into force + 4 years + 1 day], Member States shall only issue mobile registration certificates. However, upon request of the applicant, Member States shall also issue a physical registration certificate."
+                },
+                {
+                    "eId": "ecb8ez333tqWjskL1",
+                    "text": "5. Member States shall ensure that physical and mobile registration certificates issued for the same vehicle are issued to the same person and contain identical information, as set out in Annexes I and II."
+                },
+                {
+                    "eId": "ecBuzB3UeE0vpB5h3",
+                    "text": "6. Member States shall communicate any new specimen of the physical vehicle registration certificate and the description of the set of data of mobile vehicle registration certificates to the Commission and to the other Member States without undue delay. The Commission shall publish those specimens and descriptions of sets of data on its dedicated webpage."
+                }
+            ]
+        },
+        {
+            "eId": "ecHZlDu68sJ8OIURE",
+            "num": "Article 4",
+            "heading": "Physical registration certificates",
+            "children": [
+                {
+                    "eId": "eciwe2zhNUchWsRaQ",
+                    "text": "1. Physical registration certificates shall consist of either a single part as set out in Annex I or two parts as set out in Annexes I and II. Member States may authorise the appropriate services they appoint, in particular those of the manufacturers, to complete the technical parts of the registration certificate."
+                },
+                {
+                    "eId": "ecnIE8Fi7epoIvvI3",
+                    "text": "2. Where a new physical registration certificate is issued for a vehicle registered prior to the implementation of Directive 1999/37/EC, Member States may limit the particulars shown therein to those for which the required data are available."
+                },
+                {
+                    "eId": "eclddahCOThJ76INs",
+                    "text": "3. The data given in the physical registration certificate, as set out in Annexes I and II, shall be represented by the harmonised Union codes as set out in those Annexes."
+                },
+                {
+                    "eId": "ec9opxREdjh7gY3Ty",
+                    "text": "4. Member States may decide to print a QR code on the physical registration certificates in paper format which they issue. The QR code shall allow the verification of the authenticity of the information reported on the physical registration certificate."
+                },
+                {
+                    "eId": "ec4u9fyGOseCS2NjI",
+                    "text": "5. Physical registration certificates issued in a smart card format may contain a microchip in accordance with the requirements set out in Annexes I and II. If this is not the case Member States may decide to print or engrave, in the space reserved for that purpose, a QR code on the registration certificates issued by them."
+                },
+                {
+                    "eId": "ecNxCWcM0QnN0OstU",
+                    "text": "6. The Commission shall adopt implementing acts laying down detailed provisions concerning the interoperability features for QR codes printed on physical registration certificates, and the security measures with which those codes are to comply. Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 14(2) ."
+                },
+                {
+                    "eId": "ecefJoMveVpeetgSl",
+                    "text": "7. Member States shall inform the Commission of any measure aimed at the introduction of a QR code on their registration certificates, or of any change of such measure, within three months of its adoption."
+                }
+            ]
+        },
+        {
+            "eId": "ecu5Ekjw514TT1Lc3",
+            "num": "Article 5",
+            "heading": "Mobile registration certificates",
+            "children": [
+                {
+                    "eId": "ecS6oA8Qtrbyv2eKQ",
+                    "text": "1. Mobile registration certificates shall comply with the specifications in Annex III."
+                },
+                {
+                    "eId": "ecjQp5HF2WaaqcJja",
+                    "text": "2. Member States shall ensure that mobile registration certificates are issued free of charge as electronic attestations of attributes to the European Digital Identity Wallets in accordance with The wallets shall provide authorised persons with the possibility to do at least the following: (a) to retrieve and store data to verify the authorisation of the vehicle to be used in road traffic; (b) to display and transfer the data referred to in point (a)."
+                },
+                {
+                    "eId": "ecBPC9m7QRBiRxyS7",
+                    "text": "3. Member States shall provide the Commission with a list of trusted issuers of mobile vehicle registration certificates. They shall keep that list up to date. The Commission shall make those lists available to the public through a secure channel and in an electronically signed or sealed form suitable for automated processing."
+                },
+                {
+                    "eId": "eclrtVtSQW2pwaZTG",
+                    "text": "4. By [entry into force + 2 years], the Commission shall adopt implementing acts laying down detailed provisions concerning the technical specifications of mobile registration certificates, including verification features and the interface with national systems, and procedures for notifying trusted issuers of mobile registration certificates. Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 14(2) ."
+                }
+            ]
+        },
+        {
+            "eId": "ecLuL0lbzYPmG3t8r",
+            "num": "Article 6",
+            "heading": "Data recorded in vehicle registers",
+            "children": [
+                {
+                    "eId": "ecdVJ67jPEmda3HbD",
+                    "text": "1. Member States shall record electronically, in vehicle registers, all data listed in Annex I, points 2(e), (f) and (g), on all vehicles registered on their territory. In addition, the vehicle registers shall include: (a) relevant data from the certificate of conformity in electronic format as provided for in Article 37 of Regulation (EU) 2018/858. (b) the outcome of mandatory periodic roadworthiness tests in accordance with Directive 2014/45/EU of the European Parliament and of the Council and the period of validity of the roadworthiness certificate, including the outcome of periodic roadworthiness tests carried out in, and the validity of the certificate issued by, a Member State other than the Member State of registration in accordance with Article 4(3) and (4) of Directive 2014/45/EU. (c) information on any significant modification of the safety or environmental systems and components of the vehicle; (d) information on the previous holder and, where available, the previous owner of the vehicle; (e) information on any change to the ownership of vehicles, including vehicles which are not authorised to be used in road traffic due to suspension in accordance with Article 8 , or due to the temporary de-registration of the vehicle; (f) the country where the vehicle was registered for the first time; (g) information on reasons for cancellation of a registration of the vehicle, where that vehicle: (i) has been treated as an end-of-life vehicle and a certificate of destruction has been issued in accordance with Article 5(3) of Directive 2000/53/EC; (ii) has been re-registered in a different Member State, upon confirmation by the new Member State of registration; (iii) has been exported outside the Union, upon presentation of customs documents; (iv) has been stolen or otherwise unlawfully taken over, as confirmed by a police report issued to the last vehicle owner; (v) has been registered in breach of the requirements on vehicle registration under Union or national law; (vi) has been registered under an incorrect Vehicle Identification Number; and (vii) has been subject to cancellation of its registration for any other reasons. The information referred to in the first and second subparagraphs shall be kept up to date."
+                },
+                {
+                    "eId": "ecwiAYDRPdYlsOReH",
+                    "text": "2. The Commission may adopt implementing acts specifying the relevant data referred to in paragraph 1, second subparagraph, point (a). Those implementing acts shall be adopted in accordance with the examination procedure laid down in Article 14(2)."
+                }
+            ]
+        },
+        {
+            "eId": "ec10ZDDFLMeg2rd6T",
+            "num": "Article 7",
+            "heading": "Verification of vehicle registration data",
+            "children": [
+                {
+                    "eId": "ec5BWBrqjkapTFvnm",
+                    "text": "Member States shall ensure that the personal data necessary for the verification of the information reported on the physical registration certificate or mobile registration certificate are not retained by the verifier, unless retention is authorised by Union or national law. They shall also ensure that the issuing authority of the registration certificate is not notified about the verification process of physical vehicle registration certificates, and that it processes the information received through the notification only for the purpose of responding to the verification request for mobile vehicle registration certificates."
+                }
+            ]
+        },
+        {
+            "eId": "ec8ar9hqf3s02dMUp",
+            "num": "Article 8",
+            "heading": null,
+            "children": [
+                {
+                    "eId": "ecrkjakzl46Vd62Nl",
+                    "text": "1. Where the competent authority of a Member State receives notification of a periodic roadworthiness test showing that the authorisation to use a particular vehicle in road traffic has been suspended in accordance with Article 9 of Directive 2014/45/EU, the suspension shall be recorded electronically in the vehicle register."
+                },
+                {
+                    "eId": "ecBOGTuDwdIQiEKVw",
+                    "text": "2. The suspension shall be effective until the vehicle has passed a new roadworthiness test. On successful completion of the roadworthiness test, the competent authority shall without delay re-authorise the use of the vehicle in road traffic, and the end of the suspension shall be electronically recorded in the vehicle register. No new process of registration shall be necessary."
+                },
+                {
+                    "eId": "ecig6VTIzICeiUJpg",
+                    "text": "3. Member States may adopt measures to facilitate the retesting of a vehicle the authorisation of which for use in road traffic has been suspended. Those measures may include the grant of permission to travel on public roads between a place of repair and a test centre for the purpose of a roadworthiness test."
+                },
+                {
+                    "eId": "ecZxKQA4WklxNEw70",
+                    "text": "4. Where the competent authority of a Member State receives notification that a vehicle has been treated as an end-of-life vehicle in accordance with Article 5 of Directive 2000/53/EC the registration of that vehicle shall be cancelled permanently and information to that effect shall be added to the vehicle register."
+                }
+            ]
+        },
+        {
+            "eId": "ec8THgKucye6Dhuiy",
+            "num": "Article 9",
+            "heading": "Mutual recognition",
+            "children": [
+                {
+                    "eId": "ecvC4gGovOdAQh00B",
+                    "text": "1. A physical registration certificate issued by a Member State in accordance with Article 4 shall be recognised by the other Member States for the identification of the vehicle in international traffic or for its re-registration in another Member State."
+                },
+                {
+                    "eId": "ecyoOuPUEAKLzgkbC",
+                    "text": "2. A mobile registration certificate issued by a Member State in accordance with Article 5 shall be recognised by the other Member States for the identification of the vehicle in international traffic or for its re-registration in another Member State with effect from [entry into force + 4 years + 1 day]."
+                }
+            ]
+        },
+        {
+            "eId": "ec7Ub6PQuLnOjGYGs",
+            "num": "Article 10",
+            "heading": "Identification and re-registration of vehicles",
+            "children": [
+                {
+                    "eId": "ecYajxk2KpS4cGU3h",
+                    "text": "1. Until [date of entry into force + 4 years], Member States may require that the driver carry Part I of the physical registration certificate to identify a vehicle in road traffic. After that date, Member States shall accept both physical and mobile registration certificates for that purpose."
+                },
+                {
+                    "eId": "ecJaTI01Cmu4JER9e",
+                    "text": "2. Until [date of entry into force + 4 years] the competent authorities shall require the submission of only Part I of the physical registration certificate when re-registering a vehicle previously registered in another Member State. Until that date, they may also accept the presentation of a mobile registration certificate, if any."
+                },
+                {
+                    "eId": "ec5L560V7ANTQTdfh",
+                    "text": "3. From [entry into force + 4 years +1 day], Member States shall accept both Part I of the physical registration certificate and the presentation of the mobile registration certificate for the purposes of re-registering a vehicle previously registered in another Member State. The re-registering Member State shall verify with the Member State of registration which format(s) of the registration certificates have been issued."
+                },
+                {
+                    "eId": "ecrZIUZvD0Hi36YIU",
+                    "text": "4. Where only a physical registration certificate was issued, the competent authorities of the re-registering Member State shall withdraw the part(s) of the registration certificate submitted and shall keep the withdrawn part(s) for 12 months. They shall, without undue delay: (a) inform the authorities of the Member State which issued the certificate of such withdrawal; (b) return the relevant part(s) to those authorities if they so request."
+                },
+                {
+                    "eId": "ecJs3QkwedjSpsaF0",
+                    "text": "5. Where only a mobile registration certificate was issued, the competent authorities of the re-registering Member State shall, without undue delay, inform the authorities of the Member State which issued that certificate. The competent authorities of that Member State shall immediately revoke the previous mobile registration certificate and shall keep the information contained in the previous registration in the vehicle register for 12 months."
+                },
+                {
+                    "eId": "ec0VwHf0Ew8SgVe03",
+                    "text": "6. Where both a physical and a mobile registration certificate were issued, the steps in both paragraphs 4 and 5 shall be followed."
+                }
+            ]
+        },
+        {
+            "eId": "ecb6HSC3NZhYw7PsP",
+            "num": "Article 11",
+            "heading": "Administrative cooperation between Member States",
+            "children": [
+                {
+                    "eId": "ecZ61gRO0hEh1UNbi",
+                    "text": "1. Member States shall designate a national contact point responsible for exchanging information with the other Member States and the Commission with regard to the implementation of this Directive. Member States shall ensure that their respective national contact points cooperate with each other in order to ensure that all necessary information is shared in due time."
+                },
+                {
+                    "eId": "ecDCNmfOtCgI5W0Hd",
+                    "text": "2. Member States shall forward to the Commission the names and contact details of their national contact point by [date of transposition], and shall inform it without delay of any changes thereto. The Commission shall draw up a list of all contact points and forward it to the Member States."
+                }
+            ]
+        },
+        {
+            "eId": "ec21HW2tZohxZxKbs",
+            "num": "Article 12",
+            "heading": "Delegated acts",
+            "children": [
+                {
+                    "eId": "eceFoyi3RQo9LnsCQ",
+                    "text": "The Commission shall be empowered to adopt delegated acts in accordance with Article 13 in order to amend: (a) point 2(d)(ii) and point 3(a)(i)(2) of Annex I and point 2(d)(ii) and point 3(a)(i)(2) of Annex II, in the event of enlargement of the Union, (b) point 2(f) of Annex I and Annex II in relation to non-mandatory elements in the event of changes of the content or definitions of certificates of conformity in the relevant Union type-approval legislation, as well as in order to take account of technical, operational or scientific developments, (c) Tables 2 and 3 in both Annex I and Annex II, in order to list the tags identifying the data objects corresponding to the mandatory and optional registration data. (d) Annex III, in order to take account of technical, operational or scientific developments."
+                }
+            ]
+        },
+        {
+            "eId": "eccs5CQgoaR6rRSPN",
+            "num": "Article 13",
+            "heading": "Exercise of the delegation",
+            "children": [
+                {
+                    "eId": "ecEuiCwEqtH235ITc",
+                    "text": "1. The power to adopt delegated acts is conferred on the Commission subject to the conditions laid down in this Article."
+                },
+                {
+                    "eId": "ecMUx0WK9OK0ipEAK",
+                    "text": "2. The power to adopt delegated acts referred to in Article 12 shall be conferred on the Commission for a period of five years from [date of entry into forc e]. The Commission shall draw up a report in respect of the delegation of power not later than nine months before the end of the five-year period. The delegation of power shall be tacitly extended for periods of an identical duration, unless the European Parliament or the Council opposes such extension not later than three months before the end of each period."
+                },
+                {
+                    "eId": "ecNHzZVhuEtqYOQKt",
+                    "text": "3. The delegation of powers referred to in Article 12 may be revoked at any time by the European Parliament or by the Council. A decision to revoke shall put an end to the delegation of the power specified in that decision. It shall take effect the day following the publication of the decision in the Official Journal of the European Union or at a later date specified therein. It shall not affect the validity of any delegated acts already in force."
+                },
+                {
+                    "eId": "ecHwixegIP52x2tLM",
+                    "text": "4. Before adopting a delegated act, the Commission shall consult experts designated by each Member State in accordance with the principles laid down in the Interinstitutional Agreement of 13 April 2016 on Better Law-Making."
+                },
+                {
+                    "eId": "ecAMR55l0jc6npBJ0",
+                    "text": "5. As soon as it adopts a delegated act, the Commission shall notify it simultaneously to the European Parliament and to the Council."
+                },
+                {
+                    "eId": "ecUt3reLkMubLiIm4",
+                    "text": "6. A delegated act adopted pursuant to Article 12 shall enter into force only if no objection has been expressed by either the European Parliament or the Council within a period of two months of notification of that act to the European Parliament and the Council or if, before the expiry of that period, the European Parliament and the Council have both informed the Commission that they will not object. That period shall be extended by two months at the initiative of the European Parliament or of the Council."
+                }
+            ]
+        },
+        {
+            "eId": "ecPRr22jOtHf8Mgoi",
+            "num": "Article 14",
+            "heading": "Committee procedure",
+            "children": [
+                {
+                    "eId": "ecp1K0C1ghLWLzAgZ",
+                    "text": "1. The Commission shall be assisted by a Committee. That committee shall be a committee within the meaning of Regulation (EU) No 182/2011."
+                },
+                {
+                    "eId": "ecaU0mTolIDCqc58b",
+                    "text": "2. Where reference is made to this paragraph, Article 5 of Regulation (EU) No 182/2011 shall apply. Where the opinion of the committee is to be obtained by written procedure, that procedure shall be terminated without result when, within the time limit for delivery of the opinion, the chair of the committee so decides or a simple majority of committee members so request. Where the committee delivers no opinion, the Commission shall not adopt the implementing act and Article 5(4), third subparagraph, of Regulation (EU) No 182/2011 shall apply."
+                }
+            ]
+        },
+        {
+            "eId": "ecDrsLvWtiiUMVQjj",
+            "num": "Article 15",
+            "heading": "Exchange of data",
+            "children": [
+                {
+                    "eId": "ecOaRtNyYJWesK2Jr",
+                    "text": "1. Member States shall assist one another in the implementation of this Directive. They shall exchange information relating to vehicle registration data, data on the last roadworthiness certificate, any technical roadside inspection report, and the odometer history of the vehicle stored in national databases, in particular so as to check, before any registration of a vehicle, that vehicle's legal status, where necessary in the Member State in which it was previously registered. In particular, Member States shall provide access to relevant registration data in accordance with Article 6 , including the information contained in the latest roadworthiness certificate issued in accordance with Directive 2014/45/EU, suspensions under Article 8 , and any available information on restrictions affecting re-registration, stored in national vehicle registers, to the registration authorities in other Member States."
+                },
+                {
+                    "eId": "ec0ZvxragacvnJ2g4",
+                    "text": "2. Member States shall interconnect their national vehicle registers and electronic systems on roadworthiness certificates via the MOVE-HUB electronic system developed by the Commission in such a way that a competent authority of any Member State is able to consult the vehicle register of any other Member State in real time. That interconnection shall be operational within one year after the adoption of the implementing act referred to in paragraph 4 ."
+                },
+                {
+                    "eId": "ecGxJphpkSeFIIBIQ",
+                    "text": "3. Access to the MOVE-HUB network shall be secured. Member States may connect only the authorities competent for the purposes referred to in paragraphs 1."
+                },
+                {
+                    "eId": "ecpA4BTzhMJiasUv5",
+                    "text": "4. By [date of entry into force + 2 years], the Commission shall adopt implementing acts laying down the necessary arrangements for the implementation of the functionalities of the electronic system referred to in paragraph 2 , and specifying the minimum requirements for the format and content of the message to be used by Member States. It shall specify which authority is responsible for access to data and further use. Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 14(2) ."
+                }
+            ]
+        },
+        {
+            "eId": "ecYfqe75Zznt1LWbH",
+            "num": "Article 16",
+            "heading": "Communication of information to the Commission",
+            "children": [
+                {
+                    "eId": "ecqh8OZhSztL242LV",
+                    "text": "1. By 31 March 2030, and by 31 March of each third year thereafter, Member States shall communicate to the Commission through the online reporting platform referred to in Article 28 of Regulation (EU) 2018/1999 of the European Parliament and of the Council (‘e-platform’), the data relating to the vehicles registered in their territory during each of the previous three calendar years. The data shall comprise (per calendar year): (a) the number of physical registration certificates issued, per vehicle category; (b) the number of mobile registration certificates issued, per vehicle category; (c) the number of re-registrations of vehicles previously registered in another Member State, per vehicle category; (d) the number of vehicle registrations suspended, per vehicle category; The first report shall cover the years 2027, 2028, and 2029, separately. The Commission shall transmit the data collected to the European Parliament and to the Council."
+                },
+                {
+                    "eId": "ecTdSsoZL8McYPlBv",
+                    "text": "2. Commission shall adopt implementing acts specifying the format in which the data referred to in paragraph 1 are to be communicated through the e-platform. Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 14(2) ."
+                }
+            ]
+        },
+        {
+            "eId": "ecs1pO1R7b1hpeS0A",
+            "num": "Article 17",
+            "heading": "Transposition",
+            "children": [
+                {
+                    "eId": "ecEfs51ql93L9trdC",
+                    "text": "1. Member States shall bring into force the laws, regulations and administrative provisions necessary to comply with this Directive by [date-of-entry into force + 2 years] at the latest. They shall forthwith communicate to the Commission the text of those provisions. When Member States adopt those provisions, they shall contain a reference to this Directive or be accompanied by such a reference on the occasion of their official publication. Member States shall determine how such reference is to be made."
+                },
+                {
+                    "eId": "ecx1QuxnKTPnocZaS",
+                    "text": "2. Member States shall communicate to the Commission the text of the main provisions of national law which they adopt in the field covered by this Directive."
+                }
+            ]
+        },
+        {
+            "eId": "eckc98Jx8PiCfAErI",
+            "num": "Article 18",
+            "heading": "Repeal",
+            "children": [
+                {
+                    "eId": "ecHUckqgSr1Cn0dCZ",
+                    "text": "1. Directive 1999/37/EC is repealed with effect from [date of entry into force + 2 years]."
+                },
+                {
+                    "eId": "ecMk7ln0wkjRDOLBy",
+                    "text": "2. References to Directive 1999/37/EC shall be construed as references to this Directive and be read in accordance with the correlation table in Annex IV."
+                }
+            ]
+        },
+        {
+            "eId": "ecbFHc5yUw3zH6cvb",
+            "num": "Article 19",
+            "heading": "Entry into force",
+            "children": [
+                {
+                    "eId": "ec9LikjpPaseAG0dK",
+                    "text": "This Directive shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union."
+                }
+            ]
+        },
+        {
+            "eId": "ecnisd46v5Hm4oVTA",
+            "num": "Article 20",
+            "heading": "Addressees",
+            "children": [
+                {
+                    "eId": "ecSUO0AU8W0Tvy9jm",
+                    "text": "This Directive is addressed to the Member States."
+                }
+            ]
+        }
+    ],
+    "conclusions": null,
+    "valid": true,
+    "format": null,
+    "validation_errors": null,
+    "namespaces": {
+        "akn": "http://docs.oasis-open.org/legaldocml/ns/akn/3.0",
+        "an": "http://docs.oasis-open.org/legaldocml/ns/akn/3.0",
+        "fmx": "http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd"
+    }
+}

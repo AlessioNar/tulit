@@ -40,10 +40,10 @@ class TestNormattivaClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_response.headers = {'Content-Type': 'application/xml'}
         mock_get.return_value = mock_response
-        mock_handle_response.return_value = './tests/data/akn/italy/20210101_12345_VIGENZA_20211231.xml'
+        mock_handle_response.return_value = './tests/data/sources/member_states/italy/normattiva/akn/20210101_12345_VIGENZA_20211231.xml'
         
         document_paths = self.downloader.download(dataGU='20210101', codiceRedaz='12345', dataVigenza='20211231')
-        expected_paths = ['./tests/data/akn/italy/20210101_12345_VIGENZA_20211231.xml']
+        expected_paths = ['./tests/data/sources/member_states/italy/normattiva/akn/20210101_12345_VIGENZA_20211231.xml']
         self.assertEqual(document_paths, expected_paths)
 
 if __name__ == "__main__":

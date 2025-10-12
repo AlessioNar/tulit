@@ -1,7 +1,7 @@
 from tulit.parsers.html.proposal import ProposalHTMLParser
 import json
 
-file_path = 'tests/data/eurlex/commission_proposals_html/COM(2025)100.html'
+file_path = 'tests/data/sources/eu/eurlex/commission_proposals/COM(2025)100.html'
 parser = ProposalHTMLParser()
 parser.parse(file_path)
 
@@ -44,7 +44,7 @@ output_data = {
     'conclusions': parser.conclusions if hasattr(parser, 'conclusions') else None
 }
 
-with open('tests/data/json/proposals/COM(2025)100.json', 'w', encoding='utf-8') as f:
+with open('tests/data/results/eu/proposals/COM(2025)100.json', 'w', encoding='utf-8') as f:
     json.dump(output_data, f, indent=2, ensure_ascii=False)
     
-print("\n\nJSON file updated: tests/data/json/proposals/COM(2025)100.json")
+print("\n\nJSON file updated: tests/data/results/eu/proposals/COM(2025)100.json")

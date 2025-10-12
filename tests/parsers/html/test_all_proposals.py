@@ -12,7 +12,7 @@ from pathlib import Path
 from tulit.parsers.html.proposal import ProposalHTMLParser
 
 # Path to the commission proposals directory
-PROPOSALS_DIR = Path(__file__).parent.parent.parent / "data" / "eurlex" / "commission_proposals_html"
+PROPOSALS_DIR = Path(__file__).parent.parent.parent / "data" / "sources" / "eu" / "eurlex" / "commission_proposals"
 
 # Representative files for unit testing (instead of all 251 files)
 SAMPLE_FILES = [

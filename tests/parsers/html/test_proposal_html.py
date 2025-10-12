@@ -3,7 +3,7 @@ import os
 from tulit.parsers.html.proposal import ProposalHTMLParser
 import json
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\eurlex\\commission_proposals_html")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\sources\\eu\\eurlex\\commission_proposals")
 file_path_com6 = os.path.join(DATA_DIR, "COM(2025)6.html")
 file_path_com43 = os.path.join(DATA_DIR, "COM(2025)43.html")
 file_path_com1 = os.path.join(DATA_DIR, "COM(2025)1.html")

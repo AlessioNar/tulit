@@ -1,7 +1,9 @@
 """
 Test script to parse all commission proposal HTML files and report statistics.
-This script can run in two modes:
-1. Unit test mode (default): Tests only a few representative files
+This script can run in two modes:    print("\n" + "=" * 50)
+    
+    # Use assertion instead of return for pytest compatibility
+    assert error_count == 0, f"Found {error_count} errors during proposal parsing" Unit test mode (default): Tests only a few representative files
 2. Full analysis mode: Tests all files when FULL_ANALYSIS environment variable is set
 """
 import os
@@ -20,13 +22,7 @@ SAMPLE_FILES = [
 ]
 
 def test_sample_proposals():
-    """Test parsing a sample of proposal files for unit testing."""
-    
-    # Check if we should run full analysis
-    run_full_analysis = os.environ.get("FULL_ANALYSIS", "").lower() in ("true", "1", "yes")
-    
-    if run_full_analysis:
-        return run_full_analysis_mode()
+    """Test parsing all proposal files and report statistics."""
     
     # Unit test mode: only test sample files
     html_files = []
@@ -39,7 +35,7 @@ def test_sample_proposals():
     
     if not html_files:
         print(f"No sample files found in {PROPOSALS_DIR}")
-        return False
+        assert False, "No sample files found for testing"
     
     print(f"Testing {len(html_files)} sample proposal files\n")
     print("=" * 50)
@@ -238,5 +234,9 @@ def run_full_analysis_mode():
 
 
 if __name__ == "__main__":
-    success = test_sample_proposals()
-    sys.exit(0 if success else 1)
+    try:
+        test_sample_proposals()
+        sys.exit(0)
+    except AssertionError as e:
+        print(f"Test failed: {e}")
+        sys.exit(1)

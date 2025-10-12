@@ -1,0 +1,21 @@
+{
+    "root": null,
+    "preface": null,
+    "preamble": null,
+    "formula": null,
+    "citations": [],
+    "recitals_init": null,
+    "recitals": [],
+    "preamble_final": null,
+    "body": null,
+    "chapters": [],
+    "articles": [],
+    "conclusions": null,
+    "valid": false,
+    "format": null,
+    "namespaces": {
+        "akn": "http://docs.oasis-open.org/legaldocml/ns/akn/3.0",
+        "an": "http://docs.oasis-open.org/legaldocml/ns/akn/3.0",
+        "fmx": "http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd"
+    }
+}

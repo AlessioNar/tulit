@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?><akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13" xmlns:scl="http://www.scl.lu">
+<act contains="originalVersion" name="">
+<meta>
+<identification source="#casemates">
+<FRBRWork>
+<FRBRthis value="http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo"/>
+<FRBRuri value=""/>
+<FRBRdate date="2006-07-31" name="document"/>
+<FRBRauthor as="#author" href="http://data.legilux.public.lu/resource/authority/legal-institution/MT"/>
+<FRBRcountry value="http://publications.europa.eu/resource/authority/country/LUX"/>
+</FRBRWork>
+<FRBRExpression>
+<FRBRthis value="http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr"/>
+<FRBRuri value=""/>
+<FRBRdate date="2006-07-31" name="document"/>
+<FRBRauthor as="#author" href=""/>
+<FRBRlanguage language="http://publications.europa.eu/resource/authority/language/FRA"/>
+</FRBRExpression>
+<FRBRManifestation>
+<FRBRthis value="http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr/xml"/>
+<FRBRuri value=""/>
+<FRBRdate date="2006-07-31" name="document"/>
+<FRBRauthor as="#author" href=""/>
+</FRBRManifestation>
+<scl:JOLUXWork>
+<scl:JOLUXComplexWork>
+<scl:jolux scl:name="uriThis">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2</scl:jolux>
+</scl:JOLUXComplexWork>
+<scl:JOLUXLegalResource><scl:jolux scl:name="uriThis">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo</scl:jolux><scl:jolux scl:name="dateDocument">2006-07-31</scl:jolux><scl:jolux scl:name="responsibilityOf">http://data.legilux.public.lu/resource/authority/legal-institution/MT</scl:jolux><scl:jolux scl:name="subjectLevel2">http://data.legilux.public.lu/resource/authority/legal-subject/1385</scl:jolux><scl:jolux scl:name="subjectLevel1">http://data.legilux.public.lu/resource/authority/legal-subject/1499</scl:jolux><scl:jolux scl:name="subjectLevel1">http://data.legilux.public.lu/resource/authority/legal-subject/3092</scl:jolux><scl:jolux scl:name="isRealizedBy">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr</scl:jolux><scl:jolux scl:name="transpositionProcess">http://data.legilux.public.lu/event/etat/trans/2002/14</scl:jolux><scl:jolux scl:name="dateEntryInForce">2006-09-02</scl:jolux><scl:jolux scl:name="isPartOf">http://data.legilux.public.lu/eli/etat/leg/memorial/2006/a149</scl:jolux><scl:jolux scl:name="historicalLegalId">2006A2456A</scl:jolux><scl:jolux scl:name="isMemberOf">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2</scl:jolux><scl:jolux scl:name="typeDocument">http://data.legilux.public.lu/resource/authority/resource-type/LOI</scl:jolux><scl:jolux scl:name="publicationDate">2006-08-29</scl:jolux><scl:jolux scl:name="initiatedBy">http://data.legilux.public.lu/resource/authority/legal-institution/MT</scl:jolux><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#Act</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#BaseAct</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#LegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#NationalLegalResource</scl:rdf><scl:rdf scl:name="type">http://data.legilux.public.lu/resource/ontology/jolux#Work</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf><scl:rdf scl:name="type">http://www.w3.org/2004/02/skos/core#Concept</scl:rdf></scl:JOLUXLegalResource>
+</scl:JOLUXWork>
+<scl:JOLUXExpression>
+<scl:jolux scl:name="uriThis">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr</scl:jolux>
+<scl:jolux scl:name="isEmbodiedBy">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr/pdf</scl:jolux>
+<scl:jolux scl:name="isEmbodiedBy">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr/xml</scl:jolux>
+<scl:jolux scl:name="isEmbodiedBy">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr/html</scl:jolux>
+<scl:jolux scl:name="transposes">/eli/dir_ue/2002/14/jo</scl:jolux>
+<scl:jolux scl:name="draft">/eli/etat/proj/pl/20040122</scl:jolux>
+<scl:jolux scl:name="draft">/eli/etat/proj/pl/20040190</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1897/05/28/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1912/08/10/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1970/11/11/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1973/10/04/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1976/03/26/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1982/04/08/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1983/12/19/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1988/03/14/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1994/06/15/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/dir_ue/1991/533/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/dir_ue/1996/71/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1804/03/21/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1915/08/10/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1929/01/05/n2/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1963/06/22/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1967/12/04/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1977/06/20/n4/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1979/04/16/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1981/03/11/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1985/06/19/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1986/03/27/n2/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1988/12/28/n2/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1990/11/09/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1992/03/26/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1994/04/25/n2/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1994/07/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1996/01/06/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1996/12/24/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1998/09/08/n4/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1999/04/29/n11/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1999/06/08/n2/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1999/06/10/n5/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1999/07/30/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/2003/09/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/rgd/1998/08/03/n4/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/reg_ue/1989/4064/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1950/02/25/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1962/06/02/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1975/08/26/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1984/06/28/n2/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1985/12/24/n3/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/etat/leg/loi/1987/07/16/n1/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/dir_ue/1994/45/jo</scl:jolux>
+<scl:jolux scl:name="cites">/eli/dir_ue/1997/74/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1987/03/09/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/agd/1945/10/08/n5/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1972/03/28/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1974/04/04/n2/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1976/02/21/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1976/06/30/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1977/12/24/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1993/07/27/n2/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1994/06/17/n2/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1995/07/31/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1998/04/28/n2/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1999/02/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1999/02/12/n3/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/2002/08/02/n2/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1991/07/05/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1990/09/04/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1993/07/23/n1/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1998/07/10/n6/jo</scl:jolux>
+<scl:jolux scl:name="modifies">/eli/etat/leg/loi/1999/06/22/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/agd/1946/01/04/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1906/08/07/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1949/01/04/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1970/12/09/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1975/07/26/n3/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1976/08/14/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1977/08/03/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1980/04/03/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1981/03/27/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1982/07/22/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1991/04/24/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1993/02/26/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1995/04/25/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1996/08/11/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1997/01/06/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1998/03/06/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1998/03/26/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1998/07/07/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1998/12/23/n7/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1999/02/12/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2001/08/01/n6/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2002/01/13/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2002/12/20/n11/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1937/06/07/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1973/03/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1974/05/06/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1975/05/27/n3/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1976/04/10/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1979/05/18/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1988/08/01/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1989/05/24/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1990/12/24/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1993/02/26/n4/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1994/05/19/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1994/06/17/n3/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2000/07/28/n8/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2002/07/25/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2003/12/19/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2004/12/21/n5/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1962/04/20/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1971/11/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1979/09/20/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1980/01/21/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1981/10/22/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1989/12/05/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/1998/07/01/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/tc/2003/05/19/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/trep/2001/10/09/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1895/07/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1966/04/22/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1971/11/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1974/12/23/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1976/12/23/n3/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1981/12/08/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1986/03/28/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1988/05/20/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1988/12/28/n4/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1991/07/19/n3/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1994/12/23/n5/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/1995/05/15/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2000/05/26/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2000/12/22/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2001/03/23/n2/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2001/06/28/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2002/03/08/n6/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2002/12/20/n14/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2002/12/20/n9/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/loi/2004/06/30/n1/jo</scl:jolux>
+<scl:jolux scl:name="repeals">/eli/etat/leg/rect/1971/11/12/n1/jo</scl:jolux>
+<scl:jolux scl:name="language">http://publications.europa.eu/resource/authority/language/FRA</scl:jolux>
+<scl:jolux scl:name="title">Loi du 31 juillet 2006 portant introduction d'un Code du Travail.</scl:jolux>
+</scl:JOLUXExpression>
+<scl:JOLUXManifestation>
+<scl:jolux scl:name="uriThis">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr/xml</scl:jolux>
+<scl:jolux scl:lg="fra" scl:name="rights">Copyright : Ministère d’Etat – Service central de législation – du Grand-Duché de Luxembourg</scl:jolux>
+<scl:jolux scl:name="userFormat">http://data.legilux.public.lu/resource/authority/user-format/xml-akomantoso</scl:jolux>
+<scl:jolux scl:name="previousIsExemplifiedBy">http://data.legilux.public.lu/file/eli-etat-leg-memorial-2006-149-fr-pdf.pdf</scl:jolux>
+<scl:jolux scl:name="rightsHolder">http://data.legilux.public.lu/resource/authority/legal-institution/ME</scl:jolux>
+<scl:jolux scl:name="license">http://data.legilux.public.lu/resource/authority/license/licenceSCL</scl:jolux>
+<scl:jolux scl:name="userFormat">http://data.legilux.public.lu/resource/authority/user-format/pdf</scl:jolux>
+<scl:jolux scl:name="publishedIn">http://data.legilux.public.lu/eli/etat/leg/memorial/2006/a149/fr/pdf</scl:jolux>
+<scl:jolux scl:name="format">http://publications.europa.eu/resource/authority/file-type/XML</scl:jolux>
+<scl:jolux scl:name="isExemplifiedBy">http://data.legilux.public.lu/file/eli-etat-leg-loi-2006-07-31-n2-jo-fr-xml.xml</scl:jolux>
+<scl:jolux scl:name="publisher">http://data.legilux.public.lu/resource/authority/legal-institution/ME</scl:jolux>
+<scl:jolux scl:name="legalValue">http://data.legilux.public.lu/resource/authority/statut-version/officiel</scl:jolux>
+</scl:JOLUXManifestation>
+<scl:JOLUXManifestation>
+<scl:jolux scl:name="uriThis">http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/fr/pdf</scl:jolux>
+<scl:jolux scl:lg="fra" scl:name="rights">Copyright : Ministère d’Etat – Service central de législation – du Grand-Duché de Luxembourg</scl:jolux>
+<scl:jolux scl:name="userFormat">http://data.legilux.public.lu/resource/authority/user-format/pdf</scl:jolux>
+<scl:jolux scl:name="previousIsExemplifiedBy">http://data.legilux.public.lu/file/eli-etat-leg-memorial-2006-149-fr-pdf.pdf</scl:jolux>
+<scl:jolux scl:name="rightsHolder">http://data.legilux.public.lu/resource/authority/legal-institution/ME</scl:jolux>
+<scl:jolux scl:name="license">http://data.legilux.public.lu/resource/authority/license/licenceSCL</scl:jolux>
+<scl:jolux scl:name="userFormat">http://data.legilux.public.lu/resource/authority/user-format/pdf</scl:jolux>
+<scl:jolux scl:name="publishedIn">http://data.legilux.public.lu/eli/etat/leg/memorial/2006/a149/fr/pdf</scl:jolux>
+<scl:jolux scl:name="format">http://publications.europa.eu/resource/authority/file-type/PDF</scl:jolux>
+<scl:jolux scl:name="isExemplifiedBy">http://data.legilux.public.lu/filestore/eli/etat/leg/memorial/2006/a149/fr/pdf/eli-etat-leg-memorial-2006-a149-fr-pdf.pdf</scl:jolux>
+<scl:jolux scl:name="publisher">http://data.legilux.public.lu/resource/authority/legal-institution/ME</scl:jolux>
+<scl:jolux scl:name="legalValue">http://data.legilux.public.lu/resource/authority/statut-version/officiel</scl:jolux>
+</scl:JOLUXManifestation>
+</identification>
+</meta>
+<preface>
+<longTitle>
+<p>Loi du 31 juillet 2006 portant introduction d'un Code du Travail.</p>
+</longTitle>
+</preface>
+<preamble>
+<container name="preamble">
+<p>Nous Henri, Grand-Duc de Luxembourg, Duc de Nassau,</p>
+<p>Notre Conseil d'Etat entendu;</p>
+<p>De l'assentiment de la Chambre des Députés;</p>
+</container>
+<container name="considerando">
+<p>Vu la décision de la Chambre des Députés du 13 juillet 2006 et celle du Conseil d'Etat du 14 juillet 2006 portant qu'il n'y a pas lieu à second vote;</p>
+</container>
+<formula name="">
+<p>Avons ordonné et ordonnons:</p>
+</formula>
+</preamble>
+<body>
+<article id="art_1er">
+<num>Art. 1<sup>er</sup>.</num>
+<alinea>
+<content>
+<p>Les dispositions annexées à la présente loi constituent le Code du travail.</p>
+</content>
+</alinea>
+</article>
+<article id="art_2">
+<num>Art. 2.</num>
+<alinea>
+<content>
+<p>Sont abrogés:</p>
+<ol scl:symbol="1.">
+<li>la <ref href="???" scl:verify="true">loi du 12 juillet 1895</ref> concernant le paiement des salaires des ouvriers, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 7 juin 1937</ref> ayant pour objet la réforme de la <ref href="???" scl:verify="true">loi du 31 octobre 1919</ref>, portant règlement légal du louage de service des employés privés, telle qu'elle a été modifiée par la suite;</li>
+<li>l'arrêté grand-ducal du 8 octobre 1945 portant révision de la <ref href="???" scl:verify="true">loi du 5 janvier 1929</ref> sur l'apprentissage, tel qu'il a été modifié par la suite, à l'exception de son article 26, alinéa 2;</li>
+<li>la <ref href="???" scl:verify="true">loi du 22 avril 1966</ref> portant réglementation du congé annuel payé des salariés, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 9 décembre 1970</ref> portant réduction et réglementation de la durée de travail des ouvriers occupés dans les secteurs public et privé de l'économie, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 24 à 30, ainsi que les articles 34 et 34-1 de la <ref href="???" scl:verify="true">loi modifiée du 28 mars 1972</ref> concernant <ol>
+<li>l'entrée et le séjour des étrangers;</li>
+<li>le contrôle médical des étrangers;</li>
+<li>l'emploi de la main-d'oeuvre étrangère, tels qu'ils ont été modifiés par la suite;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 12 mars 1973</ref> portant réforme du salaire social minimum, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1<sup>er</sup> à 3, ainsi que les articles 13 à 31 de la <ref href="???" scl:verify="true">loi du 4 avril 1974</ref> portant réorganisation de l'Inspection du travail et des mines, tels qu'ils ont été modifiés par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 6 mai 1974</ref> instituant des comités mixtes dans les entreprises du secteur privé et organisant la représentation des salariés dans les sociétés anonymes, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 27 mai 1975</ref> portant généralisation de l'échelle mobile des salaires et traitements, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 26 juillet 1975</ref> autorisant le Gouvernement à prendre des mesures destinées à prévenir des licenciements pour des causes conjoncturelles et à assurer le maintien de l'emploi, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1<sup>er</sup> à 10, 12 à 32 et 41 de la <ref href="???" scl:verify="true">loi modifiée du 21 février 1976</ref> concernant l'organisation et le fonctionnement de l'Administration de l'emploi et portant création d'une Commission nationale de l'Emploi, tels qu'ils ont été modifiés par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 10 avril 1976</ref> portant réforme de la réglementation des jours fériés légaux, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1<sup>er</sup> et 2, paragraphes (1) et (2), alinéas 1 à 5, les articles 11 à 16, 18 à 28 et 30 à 48 de la <ref href="???" scl:verify="true">loi modifiée du 30 juin 1976</ref> portant. <ol>
+<li>création d'un fonds de chômage;</li>
+<li>réglementation de l'octroi des indemnités de chômage complet, tels qu'ils ont été modifiés par la suite;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 3 août 1977</ref> ayant pour objet: I. d'interdire le travail clandestin; II. de modifier l'article 26 de la <ref href="???" scl:verify="true">loi du 2 juin 1962</ref> déterminant les conditions d'accès et d'exercice de certaines professions ainsi que celles de la constitution et de la gestion d'entreprises, modifiée et complétée par la <ref href="???" scl:verify="true">loi du 26 août 1975</ref>, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1er à 3, 6, 8, paragraphes (2) à 10, 15 à 21, 23, ainsi que l'article 24, paragraphes (1) à 3) de la <ref href="???" scl:verify="true">loi modifiée du 24 décembre 1977</ref> autorisant le gouvernement à prendre les mesures destinées à stimuler la croissance économique et à maintenir le plein emploi, tels qu'ils ont été modifiés par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 18 mai 1979</ref> portant réforme des délégations du personnel, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 8 décembre 1981</ref> relative à l'égalité de traitement entre hommes et femmes en ce qui concerne l'accès à l'emploi, à la formation et à la promotion professionnelle et les conditions de travail, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 22 juillet 1982</ref> concernant l'occupation d'élèves et d'étudiants pendant les vacances scolaires;</li>
+<li>l'article 13 paragraphe (2) de la <ref href="???" scl:verify="true">loi modifiée du 9 mars 1987</ref> ayant pour objet<ol>
+<li>l'organisation de la recherche et du développement technologique dans le secteur public;</li>
+<li>le transfert de technologie et la coopération scientifique et technique entre les entreprises et le secteur public, tel qu'il a été modifié par la suite;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 20 mai 1988</ref> concernant la protection des travailleurs contre les risques liés à une exposition à des agents chimiques, physiques et biologiques pendant le travail;</li>
+<li>la <ref href="???" scl:verify="true">loi du 1<sup>er</sup> août 1988</ref> concernant le repos hebdomadaire des employés et ouvriers, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 24 mai 1989</ref> sur le contrat de travail, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 46 à 51 de la <ref href="???" scl:verify="true">loi modifiée du 4 septembre 1990</ref> portant réforme de l'enseignement secondaire technique et de la formation professionnelle continue, tels qu'ils ont été modifiés par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 24 décembre 1990</ref> sur la préretraite, telle qu'elle a été modifiée par la suite;</li>
+<li>l'article 17 de la <ref href="???" scl:verify="true">loi modifiée du 5 juillet 1991</ref> portant <ol scl:symbol="a)">
+<li>fixation des modalités d'une formation préparant transitoirement à la fonction d'instituteur;</li>
+<li>fixation des modalités d'une formation préparant transitoirement au certificat de qualification de chargé de direction;</li>
+<li>création d'un pool de remplaçants pour l'éducation préscolaire et l'enseignement primaire;</li>
+<li>dérogation à la <ref href="???" scl:verify="true">loi du 24 mai 1989</ref> sur le contrat de travail;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 26 février 1993</ref> concernant le travail volontaire à temps partiel, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1<sup>er</sup> à 4 et 6 à 10, ainsi que les articles 12 et 13 de la <ref href="???" scl:verify="true">loi modifiée du 23 juillet 1993</ref> portant diverses mesures en faveur de l'emploi, tels qu'ils ont été modifiés par la suite;</li>
+<li>l'article 16, paragraphe (3) de la <ref href="???" scl:verify="true">loi modifiée du 27 juillet 1993</ref> ayant pour objet <ol>
+<li>le développement et la diversification économiques;</li>
+<li>l'amélioration de la structure générale et de l'équilibre régional de l'économie, tel qu'il a été modifié par la suite;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 19 mai 1994</ref> portant réglementation du travail intérimaire et du prêt temporaire de main-d'oeuvre, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1<sup>er</sup> à 6 et 9 à 25 de la <ref href="???" scl:verify="true">loi modifiée du 17 juin 1994</ref> concernant les services de santé au travail, tels qu'ils ont été modifiés par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 17 juin 1994</ref> concernant la sécurité et la santé des travailleurs, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 25 avril 1995</ref> ayant trait à l'octroi d'une indemnité compensatoire de rémunération en cas de chômage involontaire dû aux intempéries et en cas de chômage accidentel ou technique involontaire, telle qu'elle a été modifiée par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 15 mai 1995</ref> portant <ol scl:symbol="1)">
+<li>modification de la <ref href="???" scl:verify="true">loi du 24 mai 1989</ref> sur le contrat de travail;</li>
+<li>modification de la <ref href="???" scl:verify="true">loi du 23 juillet 1993</ref> portant diverses mesures en faveur de l'emploi;</li>
+</ol> </li>
+<li>les articles III et VIII de la <ref href="???" scl:verify="true">loi modifiée du 31 juillet 1995</ref> relative à l'emploi et à la formation professionnelle, tels qu'ils ont été modifiés par la suite;</li>
+<li>l'article 14 de la <ref href="???" scl:verify="true">loi modifiée du 28 avril 1998</ref> portant<ol scl:symbol="a)">
+<li>harmonisation de l'enseignement musical dans le secteur communal;</li>
+<li>modification de l'article 5 de la <ref href="???" scl:verify="true">loi du 24 mai 1989</ref> sur le contrat de travail;</li>
+<li>modification de la <ref href="???" scl:verify="true">loi modifiée du 22 juin 1963</ref> fixant le régime des traitements des fonctionnaires de l'Etat;</li>
+</ol> </li>
+<li>l'article 7 de la <ref href="???" scl:verify="true">loi modifiée du 10 juillet 1998</ref> portant approbation de la Convention du 31 octobre 1997 entre le Gouvernement, d'une part, et l'Archevêché, d'autre part, concernant l'organisation de l'enseignement religieux dans l'enseignement primaire;</li>
+<li>les articles I, IIbis, XXIV et XXVII de la <ref href="???" scl:verify="true">loi modifiée du 12 février 1999</ref> concernant la mise en oeuvre du plan d'action national en faveur de l'emploi 1998, tels qu'ils ont été modifiés par la suite;</li>
+<li>la <ref href="???" scl:verify="true">loi du 12 février 1999</ref> portant diverses mesures en faveur de l'emploi des jeunes, telle qu'elle a été modifiée par la suite;</li>
+<li>les articles 1<sup>er</sup> et 2, paragraphes (1) et (3), ainsi que les articles 3 à 13 de la <ref href="???" scl:verify="true">loi modifiée du 22 juin 1999</ref> ayant pour objet <ol>
+<li>le soutien et le développement de la formation professionnelle continue;</li>
+<li>la modification de la <ref href="???" scl:verify="true">loi modifiée du 28 décembre 1988</ref> réglementant l'accès aux professions d'artisan, de commerçant, d'industriel ainsi qu'à certaines professions libérales, tels qu'ils ont été modifiés par la suite;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 26 mai 2000</ref> concernant la protection contre le harcèlement sexuel à l'occasion des relations de travail et portant modification de différentes autres lois;</li>
+<li>la <ref href="???" scl:verify="true">loi du 28 juillet 2000</ref> concernant l'institution d'un comité d'entreprise européen ou d'une procédure dans les entreprises de dimension communautaire et les groupes d'entreprises de dimension communautaire en vue d'informer et de consulter les travailleurs;</li>
+<li>la <ref href="???" scl:verify="true">loi du 23 mars 2001</ref> concernant la protection des jeunes travailleurs;</li>
+<li>la <ref href="???" scl:verify="true">loi du 28 juin 2001</ref> relative à la charge de la preuve dans les cas de discrimination fondée sur le sexe;</li>
+<li>la <ref href="???" scl:verify="true">loi du 1<sup>er</sup> août 2001</ref> concernant la protection des travailleuses enceintes, accouchées et allaitantes;</li>
+<li>la <ref href="???" scl:verify="true">loi du 25 juillet 2002</ref> concernant l'incapacité de travail et la réinsertion professionnelle telle qu'elle a été modifiée par la suite;</li>
+<li>l'article 11 de la <ref href="???" scl:verify="true">loi du 2 août 2002</ref> relative à la protection des personnes à l'égard du traitement des données à caractère personnel;</li>
+<li>la <ref href="???" scl:verify="true">loi du 20 décembre 2002</ref> portant <ol>
+<li>réglementation de la durée de travail des ouvriers, apprentis et stagiaires occupés dans l'hôtellerie et la restauration;</li>
+<li>modification <ol scl:symbol="a)">
+<li>de l'article 6 de la <ref href="???" scl:verify="true">loi modifiée du 7 juin 1937</ref> ayant pour objet la réforme de la <ref href="???" scl:verify="true">loi du 31 octobre 1919</ref> portant réglementation du louage de service des employés privés,</li>
+<li>de l'article 5bis de la <ref href="???" scl:verify="true">loi modifiée du 9 décembre 1970</ref> portant réduction et réglementation de la durée de travail des ouvriers occupés dans les secteurs public et privé de l'économie et</li>
+<li>de l'article 1<sup>er</sup> de la <ref href="???" scl:verify="true">loi modifiée du 26 février 1993</ref> concernant le travail volontaire à temps partiel;</li>
+</ol> </li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 20 décembre 2002</ref> portant <ol>
+<li>transposition de la<ref href="???" scl:verify="true"> directive 96/71/CE</ref> du Parlement européen et du Conseil du 16 décembre 1996 concernant le détachement des travailleurs effectué dans le cadre d'une prestation de services;</li>
+<li>réglementation du contrôle de l'application du droit du travail;</li>
+</ol> </li>
+<li>la <ref href="???" scl:verify="true">loi du 19 décembre 2003</ref> portant réglementation du maintien des droits des travailleurs en cas de transfert d'entreprise, d'établissement et de partie d'entreprise ou d'établissement;</li>
+<li>la <ref href="???" scl:verify="true">loi du 30 juin 2004</ref> concernant les relations collectives de travail, le règlement des conflits collectifs de travail ainsi que l'Office national de conciliation et modifiant<ol>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 7 juin 1937</ref> ayant pour objet la réforme de la <ref href="???" scl:verify="true">loi du 31 octobre 1919</ref> portant réglementation du louage de service des employés privés;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 9 décembre 1970</ref> portant réduction et réglementation de la durée de travail des ouvriers occupés dans les secteurs public et privé de l'économie;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 16 avril 1979</ref> fixant le statut général des fonctionnaires de l'Etat;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 24 décembre 1985</ref> fixant le statut général des fonctionnaires communaux;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 23 juillet 1993</ref> portant diverses mesures en faveur de l'emploi.</li>
+</ol> </li>
+</ol>
+</content>
+</alinea>
+</article>
+<article id="art_3">
+<num>Art. 3.</num>
+<alinea>
+<content>
+<p>Les références à des dispositions abrogées par la présente loi sont remplacées par les références aux dispositions correspondantes du Code du travail.</p>
+</content>
+</alinea>
+</article>
+<article id="art_4">
+<num>Art. 4.</num>
+<alinea>
+<content>
+<p>Sont modifiées de plein droit par l'effet de leur modification subséquente, les dispositions du présent Code qui citent en les reproduisant des articles ou parties d'articles des lois suivantes: </p>
+<ol scl:symbol="a)">
+<li>la <ref href="???" scl:verify="true">loi modifiée du 11 novembre 1970</ref> sur les cessions et saisies des rémunérations de travail ainsi que des pensions et rentes;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 4 octobre 1973</ref> concernant l'institution d'un congé-éducation;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 26 mars 1976</ref> concernant l'éducation physique et le sport;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 14 mars 1988</ref> portant création d'un congé d'accueil pour les salariés du secteur privé;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 25 avril 1994</ref> instituant un congé spécial dans l'intérêt des volontaires assurant les services d'incendie, de secours et de sauvetage;</li>
+<li>la <ref href="???" scl:verify="true">loi du 12 juillet 1994</ref> portant institution d'un congé culturel;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 6 janvier 1996</ref> sur la coopération au développement;</li>
+<li>la <ref href="???" scl:verify="true">loi modifiée du 12 février 1999</ref> portant création d'un congé parental et d'un congé pour raisons familiales.</li>
+</ol>
+</content>
+</alinea>
+</article>
+<article id="art_5">
+<num>Art. 5.</num>
+<alinea>
+<content>
+<p>Un règlement grand-ducal, à prendre sur avis du Conseil d'Etat, peut procéder à l'insertion dans le Code institué par la présente loi des dispositions légales en matière de droit du travail adoptées avant l'entrée en vigueur du présent Code et qui n'y ont pas été reprises.</p>
+<p>Ce règlement peut encore procéder à l'abrogation desdites lois en complétant la liste figurant à l'article 2.</p>
+</content>
+</alinea>
+</article>
+<article id="art_6">
+<num>Art. 6.</num>
+<alinea>
+<content>
+<p>La présente loi entre en vigueur le 1<sup>er</sup> septembre 2006.</p>
+</content>
+</alinea>
+</article>
+<clause>
+<content>
+<p>Mandons et ordonnons que la présente loi soit insérée au Mémorial pour être exécutée et observée par tous ceux que la chose concerne.</p>
+</content>
+</clause>
+</body>
+<conclusions>
+<p> <signature> <shortTitle>Le Ministre du Travail et de l'Emploi,</shortTitle> <person refersTo="">François Biltgen</person> </signature> </p>
+<p> <signature> <docDate date="2999-01-01">Cabasson, le 31 juillet 2006.</docDate> <person refersTo="">Henri</person> </signature> </p>
+</conclusions>
+<attachments>
+<attachment>
+<doc name="">
+<meta>
+<identification source="">
+<FRBRWork>
+<FRBRthis value=""/>
+<FRBRuri value=""/>
+<FRBRdate date="2024-04-30" name=""/>
+<FRBRauthor href=""/>
+<FRBRcountry value=""/>
+</FRBRWork>
+<FRBRExpression>
+<FRBRthis value=""/>
+<FRBRuri value=""/>
+<FRBRdate date="2024-04-30" name=""/>
+<FRBRauthor href=""/>
+<FRBRlanguage language=""/>
+</FRBRExpression>
+<FRBRManifestation>
+<FRBRthis value=""/>
+<FRBRuri value=""/>
+<FRBRdate date="2024-04-30" name=""/>
+<FRBRauthor href=""/>
+</FRBRManifestation>
+</identification>
+</meta>
+<preface>
+<longTitle>
+<p scl:align="center">ANNEXE</p>
+</longTitle>
+</preface>
+<mainBody>
+<alinea>
+<content>
+<p>Pour visualiser l'annexe, veuillez consulter la <ref href="https://legilux.public.lu/filestore/eli/etat/leg/memorial/2006/a149/fr/pdf/eli-etat-leg-memorial-2006-a149-fr-pdf.pdf" id="18d461aa-6ab8-43c8-8acf-417060454ecb">version pdf du Journal officiel</ref>.</p>
+</content>
+</alinea>
+</mainBody>
+</doc>
+</attachment>
+</attachments>
+<components>
+<component>
+<interstitial>
+<p>Doc. parl. 5346, sess. ord. 2003-2004, 2<sup>e</sup> sess. extraord. 2004, sess. ord. 2004-2005 et 2005-2006;</p>
+<p>Doc. parl. 5420, sess. ord. 2004-2005 et 2005-2006</p>
+</interstitial>
+</component>
+</components>
+</act>
+</akomaNtoso>

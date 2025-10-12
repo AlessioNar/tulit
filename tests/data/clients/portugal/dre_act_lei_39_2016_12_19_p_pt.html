@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <script type='text/javascript'>window.OutSystemsApp = { basePath: '/dr/' };</script>
+        
+        
+        <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1" />
+<script type="text/javascript">
+(function () {
+    function appendMetaTagAttributes(metaTag, attribute, values) {
+        var elem = document.querySelector("meta[name=" + metaTag + "]");
+
+        if (elem) {
+            var attrContent = elem.getAttribute(attribute);
+            elem.setAttribute(attribute, (attrContent ? attrContent + "," : "") + values.join(","));
+        }
+    }
+
+    if (navigator && /OutSystemsApp/i.test(navigator.userAgent)) {
+        // If this app is running on the native shell, we want to disable the zoom
+        appendMetaTagAttributes("viewport", "content", ["user-scalable=no", "minimum-scale=1.0"]);
+    }
+})();</script>
+
+        <script type="text/javascript" src="/dr/scripts/OutSystemsManifestLoader.js?3F3fZzzNKkqKoP2DsjtxFw"></script>
+<script type="text/javascript" src="/dr/scripts/OutSystems.js?JWdAeayonf8Q0Kxiy0oKKw"></script>
+<script type="text/javascript" src="/dr/scripts/OutSystemsSettings.js?X0VX5GKsC2rhbQjvVhFBJQ"></script>
+<script type="text/javascript" src="/dr/scripts/OutSystemsReactView.js?tTCmnaKIcodV2b7hkfqZug"></script>
+<script type="text/javascript" src="/dr/scripts/NullDebugger.js?EFHUwpdgPH0iMeddx1gYjA"></script>
+<script type="text/javascript" src="/dr/scripts/dr.appDefinition.js?ao4bSI69y9NR_cKkHV5chA"></script>
+<script type="text/javascript" src="/dr/scripts/OutSystemsReactWidgets.js?JJ3HMAa6vv2p99ezZWdwzQ"></script>
+<link type="text/css" rel="stylesheet" href="/dr/css/_Basic.css?EqGzAe81QbZLXJyfY3oLwA"></link>
+
+        <script type="text/javascript">OSManifestLoader.indexVersionToken = "9Ao6VOJb5BhOFbjDFf4emA";
+</script>
+    </head>
+    <body>
+        <div id="reactContainer"></div>
+        <noscript><span>JavaScript is required</span></noscript>
+
+        <script type="text/javascript" src="/dr/scripts/dr.index.js?wRCRrmcLmexIAUK2_NxpCQ"></script>
+
+    </body>
+</html>

@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:data="http://data.parlement.fr/v1" xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0 akomantoso30.xsd">
+    <bill contains="singleVersion" name="ppl">
+        <meta>
+            <identification source="#senat">
+                <FRBRWork>
+                    <FRBRthis value="/akn/fr/ppl/SENA0002166L/main"/>
+                    <FRBRuri value="/akn/fr/ppl/SENA0002166L"/>
+                    <FRBRalias name="intitule-court" value="Individus condamnés pour des infractions sexuelles, violentes ou terroristes (PPL)"/>
+                    <FRBRalias name="signet-dossier-legislatif-senat" value="ppl23-756"/>
+                    <FRBRalias name="url-senat" value="https://www.senat.fr/dossier-legislatif/ppl23-756.html"/>
+                    <FRBRalias name="url-AN" value="http://www.assemblee-nationale.fr/17/dossiers/DLR5L17N50351.asp"/>
+                    <FRBRdate name="#presentation" date="2024-09-11"/>
+                    <FRBRauthor href="#marie-mercier-et-aln" as="#auteur"/>
+                    <FRBRcountry value="fr"/>
+                </FRBRWork>
+                <FRBRExpression>
+                    <FRBRthis value="/akn/fr/ppl/2024-2025/TA21/fr@/main"/>
+                    <FRBRuri value="/akn/fr/ppl/2024-2025/TA21/fr@"/>
+                    <FRBRdate name="#adoption" date="2024-11-05"/>
+                    <FRBRauthor href="#senat" as="#legislateur"/>
+                    <FRBRauthoritative value="true"/>
+                    <FRBRlanguage language="fr"/>
+                </FRBRExpression>
+                <FRBRManifestation>
+                    <FRBRthis value="/akn/fr/ppl/2024-2025/TA21/fr@/main.xml"/>
+                    <FRBRuri value="/akn/fr/ppl/2024-2025/TA21/fr@"/>
+                    <FRBRdate name="#publication-xml" date="2024-11-07"/>
+                    <FRBRauthor href="#div-lois" as="#editeur"/>
+                </FRBRManifestation>
+            </identification>
+            <workflow source="#senat">
+                <step date="2024-09-11" outcome="déposé au Sénat" by="#senat" refersTo="#lecture_1" eId="etape_01" href="/akn/fr/ppl/2023/756/fr@"/>
+                <step date="2024-10-30" outcome="de la commission" by="#commission-senat" refersTo="#lecture_1" eId="etape_02" href="/akn/fr/ppl/2024/99/fr@"/>
+                <step date="2024-11-05" outcome="adopté par le Sénat" by="#senat" refersTo="#lecture_1" eId="etape_03" href="/akn/fr/ppl/2024/TA21/fr@"/>
+            </workflow>
+            <references source="#senat">
+                <TLCOrganization showAs="Gouvernement" eId="gouvernement" href="/akn/ontology/organizations/fr/gouvernement"/>
+                <TLCOrganization showAs="Assemblée nationale" eId="assemblee-nationale" href="/akn/ontology/organizations/fr/assemblee-nationale"/>
+                <TLCOrganization showAs="Commission" eId="commission-assemblee-nationale" href="/akn/ontology/organizations/fr/assemblee-nationale/commission"/>
+                <TLCOrganization showAs="Division des lois de l'Assemblée nationale" eId="div-lois-assemblee-nationale" href="/akn/ontology/organizations/fr/assemblee-nationale/div-lois"/>
+                <TLCOrganization showAs="Sénat" eId="senat" href="/akn/ontology/organizations/fr/senat"/>
+                <TLCOrganization showAs="Commission des lois constitutionnelles, de législation, du suffrage universel, du Règlement et d'administration générale" eId="commission-senat" href="/akn/ontology/organizations/fr/senat/commission/lois"/>
+                <TLCOrganization showAs="Division des lois du Sénat" eId="div-lois-senat" href="/akn/ontology/organizations/fr/senat/div-lois"/>
+                <TLCRole showAs="Auteur" eId="auteur" href="/akn/ontology/role/author"/>
+                <TLCRole showAs="Législateur" eId="legislateur" href="/akn/ontology/role/legislator"/>
+                <TLCRole showAs="Transmetteur" eId="transmetteur" href="/akn/ontology/role/transmitter"/>
+                <TLCRole showAs="Récepteur" eId="recepteur" href="/akn/ontology/role/receiver"/>
+                <TLCRole showAs="Editeur" eId="editeur" href="/akn/ontology/role/publisher"/>
+                <TLCPerson showAs="Par Mmes Marie MERCIER, Marie-Do AESCHLIMANN, M. Pascal ALLIZARD, Mme Jocelyne ANTOINE, MM. Philippe BAS, Bruno BELIN, Mmes Nadine BELLUROT, Catherine BELRHITI, Martine BERTHET, Annick BILLON, MM. Étienne BLANC, François BONHOMME, Mme Alexandra BORCHIO FONTIMP, MM. Gilbert BOUCHET, Max BRISSON, Christian BRUYEN, Laurent BURGOA, Alain CADEC, Mme Anne CHAIN-LARCHÉ, MM. Patrick CHAIZE, Daniel CHASSEING, Cédric CHEVALIER, Mme Marie-Carole CIUNTU, MM. Édouard COURTIAL, Pierre CUYPERS, Mme Laure DARCOS, MM. Mathieu DARNAUD, Marc-Philippe DAUBRESSE, Mme Sonia de LA PROVÔTÉ, MM. Dominique de LEGGE, Albéric de MONTGOLFIER, Louis-Jean de NICOLAŸ, Mmes Chantal DESEYNE, Catherine DI FOLCO, Élisabeth DOINEAU, Sabine DREXLER, Catherine DUMAS, Françoise DUMONT, M. Laurent DUPLOMB, Mmes Jacqueline EUSTACHE-BRINIO, Agnès EVREN, MM. Christophe-André FRASSA, Fabien GENET, Mmes Frédérique GERBAUD, Béatrice GOSSELIN, Nathalie GOULET, M. Jacques GROSPERRIN, Mmes Pascale GRUNY, Jocelyne GUIDEZ, Christine HERZOG, M. Jean-Raymond HUGONET, Mmes Corinne IMBERT, Micheline JACQUES, Lauriane JOSENDE, Else JOSEPH, MM. Roger KAROUTCHI, Khalifé KHALIFÉ, Christian KLINGER, Mme Florence LASSARADE, M. Daniel LAURENT, Mme Christine LAVARDE, MM. Antoine LEFÈVRE, Ronan LE GLEUT, Henri LEROY, Stéphane LE RUDULIER, Jean-François LONGEOT, Mmes Vivette LOPEZ, Viviane MALET, M. Didier MANDELLI, Mme Pauline MARTIN, MM. Hervé MAUREY, Thierry MEIGNEN, Franck MENONVILLE, Mme Brigitte MICOULEAU, M. Alain MILON, Mmes Laurence MULLER-BRONN, Anne-Marie NÉDÉLEC, Sylviane NOËL, M. Jean-Jacques PANUNZI, Mme Vanina PAOLI-GAGIN, MM. Jean-Gérard PAUMIER, Cédric PERRIN, Mme Évelyne PERROT, M. Stéphane PIEDNOIR, Mme Kristina PLUCHET, M. Rémy POINTEREAU, Mme Frédérique PUISSAT, MM. Jean-François RAPIN, André REICHARDT, Mmes Olivia RICHARD, Marie-Pierre RICHER, M. Olivier RIETMANN, Mmes Anne-Sophie ROMAGNY, Denise SAINT-PÉ, MM. Hugues SAURY, Michel SAVIN, Mme Elsa SCHALCK, MM. Bruno SIDO, Jean SOL, Mme Nadia SOLLOGOUB, MM. Laurent SOMON, Philippe TABAROT, Mmes Lana TETUANUI, Sylvie VALENTE LE HIR, Anne VENTALON, Dominique VÉRIEN, MM. Cédric VIAL et Dany WATTEBLED, Sénateurs et Sénatrices" eId="marie-mercier-et-aln" href="/akn/ontology/persons/fr/marie-mercier-et-aln"/>
+                <TLCProcess showAs="1re lecture" eId="lecture_1" href="/akn/ontology/process/lecture/premiere"/>
+                <TLCProcess showAs="2e lecture" eId="lecture_2" href="/akn/ontology/process/lecture/deuxieme"/>
+                <TLCProcess showAs="3e lecture" eId="lecture_3" href="/akn/ontology/process/lecture/troisieme"/>
+                <TLCProcess showAs="4e lecture" eId="lecture_7" href="/akn/ontology/process/lecture/quatrieme"/>
+                <TLCProcess showAs="Commission mixte paritaire" eId="lecture_4" href="/akn/ontology/process/lecture/cmp"/>
+                <TLCProcess showAs="Nouvelle lecture" eId="lecture_5" href="/akn/ontology/process/lecture/nouvelle"/>
+                <TLCProcess showAs="Lecture définitive" eId="lecture_6" href="/akn/ontology/process/lecture/definitive"/>
+                <TLCEvent showAs="Présentation" eId="presentation" href="/akn/ontology/event/presentation"/>
+                <TLCEvent showAs="Dépôt" eId="depot" href="/akn/ontology/event/depot"/>
+                <TLCEvent showAs="Adoption" eId="adoption" href="/akn/ontology/event/adoption"/>
+                <TLCEvent showAs="Publication XML" eId="publication-xml" href="/akn/ontology/event/publication-xml"/>
+            </references>
+        </meta>
+        <preamble>
+            <docTitle>Proposition de loi tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes</docTitle>
+        </preamble>
+        <body>
+            <article eId="art_1er_A" GUID="fc3bc16e-a6cf-410e-b28e-a42485335d6d" data:mention="(nouveau)">
+                <num>Article 1er A</num>
+                <alinea eId="al_1__art_1er_A" GUID="9c11cbb3-889a-493d-9771-a04bf9685d62">
+                    <content>
+                        <p>Au premier alinéa des articles 138‑2 et 712‑22‑1 du code de procédure pénale, après la référence : « 706‑47 », sont insérés les mots : « ou pour une infraction mentionnée au titre II du livre IV du code pénal ou aux articles L. 224‑1 et L. 225‑7 du code de la sécurité intérieure ».</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_1er" GUID="f798794d-76e7-4cbf-9879-5350a286351d">
+                <num>Article 1er</num>
+                <alinea eId="al_1__art_1er" GUID="d06a5c5f-ce4c-4614-b554-7b638da02a4e" data:pastille="1">
+                    <num>I. –</num>
+                    <alinea eId="al_2__art_1er" GUID="4db7dcc8-6cd3-46f6-bea0-3c1b19f27e84" data:pastille="2">
+                        <num>1°</num>
+                        <alinea eId="al_3__art_1er" GUID="14581c39-400d-431d-a5d5-98946d4f3846" data:mention="(Supprimé)" data:pastille="3">
+                            <num>a)</num>
+                            <content>
+<p>
+    <i>a)</i> <i>(Supprimé)</i></p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_4__art_1er" GUID="f4f5d3f2-ba4c-4224-b7ed-40a0bed5cf37" data:mention="(nouveau)" data:pastille="4">
+                            <num>a bis)</num>
+                            <alinea eId="al_5__art_1er" GUID="e2e28ee3-1147-426c-b46d-2d1f838f523e" data:amdts="n° 18" data:pastille="5">
+<content>
+    <p>« Lorsque la demande concerne un majeur ou un mineur de plus de treize ans, elle comprend le bulletin n° 2 mentionné à l’article 775 du code de procédure pénale et un document faisant état de l’inscription ou de l’absence d’inscription du demandeur au fichier judiciaire national automatisé des auteurs d’infractions terroristes et au fichier judiciaire national automatisé des auteurs d’infractions sexuelles ou violentes. » ;</p>
+</content>
+                            </alinea>
+                            <content>
+<p>
+    <i>a</i> bis<i>)</i>
+    <i>(nouveau)</i> Après le premier alinéa, il est inséré un alinéa ainsi rédigé :</p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_6__art_1er" GUID="84cf3b27-3d48-44bc-9249-c720c9ea38f6" data:pastille="6">
+                            <num>b)</num>
+                            <content>
+<p>
+    <i>b)</i> La dernière phrase du dernier alinéa est supprimée ;</p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_7__art_1er" GUID="57e6a8bb-fa73-4845-9453-e32de12d594f" data:pastille="7">
+                            <num>c)</num>
+                            <alinea eId="al_8__art_1er" GUID="6fc37741-ba30-46eb-86a9-4cbe5bbf5db3" data:pastille="8">
+<content>
+    <p>« Lorsque le changement de prénom demandé est susceptible de constituer une menace pour l’ordre public en raison de la condamnation du demandeur pour l’une des infractions mentionnées au titre II du livre IV du code pénal, aux articles L. 224‑1 et L. 225‑7 du code de la sécurité intérieure ainsi qu’à l’article 706‑47 du code de procédure pénale, ou en raison de l’inscription du demandeur sur l’un des fichiers mentionnés au premier alinéa du présent article, l’officier de l’état civil saisit sans délai le procureur de la République.</p>
+</content>
+                            </alinea>
+                            <alinea eId="al_9__art_1er" GUID="cd5ea818-1898-434e-8dd8-639b6d9dd2ec" data:pastille="9">
+<content>
+    <p>« L’officier de l’état civil informe le demandeur de la saisine du procureur de la République. Si celui‑ci s’oppose au changement de prénom, le demandeur, ou son représentant légal, peut saisir le juge aux affaires familiales. » ;</p>
+</content>
+                            </alinea>
+                            <content>
+<p>
+    <i>c)</i> Sont ajoutés deux alinéas ainsi rédigés :</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>1° L’article 60 est ainsi modifié :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_10__art_1er" GUID="a62e9aff-40e9-4457-a680-a030b04f368a" data:pastille="10">
+                        <num>2°</num>
+                        <alinea eId="al_11__art_1er" GUID="f5e7bf88-57e2-4ac0-b4a1-e87d0d78be7e" data:mention="(Supprimé)" data:pastille="11">
+                            <num>a)</num>
+                            <content>
+<p>
+    <i>a)</i> <i>(Supprimé)</i></p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_12__art_1er" GUID="2a852227-51e6-4156-aec1-55d4638bc553" data:mention="(nouveau)" data:pastille="12">
+                            <num>a bis)</num>
+                            <alinea eId="al_13__art_1er" GUID="491b47a4-9bb3-49c8-ad8d-fd4c71ac9408" data:amdts="n° 18" data:pastille="13">
+<content>
+    <p>« La demande comprend le bulletin n° 2 mentionné à l’article 775 du code de procédure pénale et un document faisant état de l’inscription ou de l’absence d’inscription du demandeur au fichier judiciaire national automatisé des auteurs d’infractions terroristes et au fichier judiciaire national automatisé des auteurs d’infractions sexuelles ou violentes. » ;</p>
+</content>
+                            </alinea>
+                            <content>
+<p>
+    <i>a</i> bis<i>)</i> <i>(nouveau)</i> Après le premier alinéa, il est inséré un alinéa ainsi rédigé :</p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_14__art_1er" GUID="e0431f9c-b62e-42ad-a837-c95f39cd1bbf" data:pastille="14">
+                            <num>b)</num>
+                            <alinea eId="al_15__art_1er" GUID="58cf33cf-5f2f-4eca-acab-3d08610f1a10" data:pastille="15">
+<content>
+    <p>– après la première phrase, est insérée une phrase ainsi rédigée : « Il en va de même, dans le cas prévu au premier alinéa du présent article, lorsque le changement de nom est susceptible de constituer une menace pour l’ordre public en raison de la condamnation du demandeur pour l’une des infractions mentionnées au titre II du livre IV du code pénal, aux articles L. 224‑1 et L. 225‑7 du code de la sécurité intérieure ainsi qu’à l’article 706‑47 du code de procédure pénale, ou en raison de son inscription sur l’un des fichiers mentionnés au premier alinéa. » ;</p>
+</content>
+                            </alinea>
+                            <alinea eId="al_16__art_1er" GUID="3018b518-9f77-4419-af0d-23b195bc1c9e" data:pastille="16">
+<content>
+    <p>– au début de la dernière phrase, les mots : « En ce cas, » sont supprimés.</p>
+</content>
+                            </alinea>
+                            <content>
+<p>
+    <i>b)</i> Le quatrième alinéa est ainsi modifié :</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>2° L’article 61‑3‑1 est ainsi modifié :</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>I. – Le code civil est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_17__art_1er" GUID="b4b61b8c-19b1-49a6-b3cb-27f139cadaff" data:pastille="17">
+                    <num>II. –</num>
+                    <alinea eId="al_18__art_1er" GUID="6fe5bb65-72dc-468e-9215-ff2b3f31cc7a" data:pastille="18">
+                        <num>1°</num>
+                        <alinea eId="al_19__art_1er" GUID="11cff5e2-186f-4caf-9f2e-ff6a22ff1d5b" data:pastille="19">
+                            <num>a)</num>
+                            <alinea eId="al_20__art_1er" GUID="53aaa89f-6f54-416f-a0b9-3736f7089d7c" data:pastille="20">
+<content>
+    <p>« 5° De déclarer toute demande de changement de prénom ou de nom, au plus tard quinze jours après le dépôt de la demande auprès de l’officier de l’état civil, ainsi que tout changement de nom ou de prénom, dans un délai de quinze jours au plus tard après ce changement. » ;</p>
+</content>
+                            </alinea>
+                            <content>
+<p>
+    <i>a)</i> Après le 4°, il est inséré un 5° ainsi rédigé :</p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_21__art_1er" GUID="43f4a762-e752-420f-97bd-8fc2cf554636" data:mention="(nouveau)" data:pastille="21">
+                            <num>b)</num>
+                            <content>
+<p>
+    <i>b)</i> <i>(nouveau)</i> Au dernier alinéa, après le mot : « article », sont insérés les mots : « , à l’exception de l’obligation résultant du 5° » ;</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>1° L’article 706‑25‑7 est ainsi modifié :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_22__art_1er" GUID="04a06c16-efce-4c14-a552-3d80e42b67f5" data:mention="(nouveau)" data:pastille="22">
+                        <num>1° bis</num>
+                        <content>
+                            <p>1° <i>bis</i> <i>(nouveau)</i> L’avant‑dernier alinéa de l’article 706‑25‑9 est complété par les mots : « ou pour l’accomplissement des démarches de changement de prénom ou de nom prévues à l’article 60 du code civil et au premier alinéa de l’article 61‑3‑1 du même code » ;</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_23__art_1er" GUID="eed2766e-5ca7-4f2d-a762-e9c628b30273" data:pastille="23">
+                        <num>2°</num>
+                        <alinea eId="al_24__art_1er" GUID="91561521-8e0e-4d7b-b70f-bc7243553b7f" data:mention="(nouveau)" data:pastille="24">
+                            <content>
+<p>« 3° <i>(nouveau)</i> Sur décision expresse de la juridiction de jugement, et si la dangerosité de la personne le justifie, de déclarer tout déplacement à l’étranger quinze jours au plus tard avant ledit déplacement ;</p>
+                            </content>
+                        </alinea>
+                        <alinea eId="al_25__art_1er" GUID="62e841a7-b1d2-4473-8c86-dc9ace9c8c4f" data:pastille="25">
+                            <content>
+<p>« 4° De déclarer toute demande de changement de prénom ou de nom, au plus tard quinze jours après le dépôt de la demande auprès de l’officier de l’état civil, ainsi que tout changement de nom ou de prénom, dans un délai de quinze jours au plus tard après ce changement. » ;</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>2° Après le 2° de l’article 706‑53‑5, sont insérés des 3° et 4° ainsi rédigés :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_26__art_1er" GUID="a9cba588-2f7d-4412-a044-0dd23490f365" data:mention="(nouveau)" data:pastille="26">
+                        <num>3°</num>
+                        <content>
+                            <p>3° <i>(nouveau)</i> Le dernier alinéa de l’article 706‑53‑7 est complété par les mots : « ou pour l’accomplissement des démarches de changement de prénom ou de nom prévues à l’article 60 du code civil et au premier alinéa de l’article 61‑3‑1 du même code » ;</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_27__art_1er" GUID="48b338fc-5deb-43ee-9dae-23194af272fb" data:mention="(nouveau)" data:pastille="27">
+                        <num>4°</num>
+                        <content>
+                            <p>4° <i>(nouveau)</i> Au dernier alinéa de l’article 706‑53‑10, le mot : « cinquième » est remplacé par le mot : « septième » ;</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_28__art_1er" GUID="effe06dd-fdf0-4dce-afc5-c420937053d4" data:mention="(nouveau)" data:pastille="28">
+                        <num>5°</num>
+                        <alinea eId="al_29__art_1er" GUID="1bb7955d-4760-4f23-9ae2-95fe705dfdf2" data:amdts="n° 18" data:pastille="29">
+                            <content>
+<p>« Dans le cadre des procédures de changement de prénom ou de nom prévues respectivement aux articles 60 et 61‑3‑1 du code civil, le bulletin n° 2 est communiqué à l’officier de l’état civil dans des conditions fixées par décret en Conseil d’État. »</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>5° <i>(nouveau)</i> Avant le dernier alinéa de l’article 776, il est inséré un alinéa ainsi rédigé :</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>II. – Le code de procédure pénale est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_30__art_1er" GUID="210c516a-5c89-4ff8-bace-95b69a21f875" data:mention="(nouveau)" data:pastille="30">
+                    <num>III. –</num>
+                    <content>
+                        <p>III <i>(nouveau)</i>. – À l’article L. 632‑5 du code de la justice pénale des mineurs, le mot : « cinquième » est remplacé par le mot : « septième ».</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_2" GUID="b23ecde9-6357-4086-8f33-5f378877318a">
+                <num>Article 2</num>
+                <alinea eId="al_1__art_2" GUID="927124bf-bcc3-497e-9fee-0741f5da3df3" data:pastille="1">
+                    <content>
+                        <p>L’article 706‑47 du code de procédure pénale est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_2" GUID="359d7e62-7bbe-4d4a-8add-34d37cec2738" data:pastille="2">
+                    <num>1°</num>
+                    <alinea eId="al_3__art_2" GUID="f72e23bc-88f4-4124-8e3a-41bfa097df27" data:pastille="3">
+                        <content>
+                            <p>« 9° <i>bis</i> Délit d’incitation d’un mineur par un moyen de communication électronique, à commettre tout acte de nature sexuelle, soit sur lui‑même, soit sur ou avec un tiers, prévu à l’article 227‑22‑2 du même code ; »</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>1° Après le 9°, il est inséré un 9° <i>bis</i> ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_4__art_2" GUID="8c569a35-0e3a-4471-9ac6-011441be8c9a" data:pastille="4">
+                    <num>2°</num>
+                    <alinea eId="al_5__art_2" GUID="5017187c-5fd2-447e-b404-a28f78a0ab1a" data:pastille="5">
+                        <content>
+                            <p>« 10° <i>bis</i> Délit de sollicitation auprès d’un mineur de la diffusion ou de la transmission d’images, vidéos ou représentations à caractère pornographique prévu à l’article 227‑23‑1 du même code ; ».</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>2° Après le 10°, il est inséré un 10° <i>bis</i> ainsi rédigé :</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_3" GUID="3dba79c7-a819-49cb-bd0d-acd2a23420d4">
+                <num>Article 3</num>
+                <alinea eId="al_1__art_3" GUID="051f29e5-af13-4b0f-9321-3abd4be4193b" data:mention="(Supprimé)" data:pastille="1">
+                    <num>I. –</num>
+                    <content>
+                        <p>I. – <i>(Supprimé)</i></p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_3" GUID="f0492c17-1373-4c2c-854d-edffacdba317" data:mention="(nouveau)" data:pastille="2">
+                    <num>II. –</num>
+                    <alinea eId="al_3__art_3" GUID="e99280fa-6d1d-4dd5-be25-ff2703bd4e05" data:pastille="3">
+                        <content>
+                            <p>« <i>Art. L. 3116‑3‑1</i>. – I. – Nul ne peut exercer des fonctions de conducteur de véhicule de transport public collectif routier, au sens du présent titre, lorsque ces fonctions impliquent un contact habituel avec des mineurs ou des majeurs en situation de vulnérabilité, s’il a été condamné définitivement soit pour un crime, soit pour les délits prévus aux articles 421‑1 à 421‑2‑4‑1 du code pénal ou à l’article 706‑47 du code de procédure pénale. L’incapacité prévue au présent alinéa s’applique également en cas de condamnation définitive à une peine supérieure à deux mois d’emprisonnement sans sursis pour les délits prévus aux articles 421‑2‑5 et 421‑2‑5‑1 du code pénal, ainsi qu’aux personnes qui interviennent dans les mêmes véhicules de manière permanente ou occasionnelle, à quelque titre que ce soit, y compris bénévole.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_4__art_3" GUID="25952303-97a9-4d93-a515-6c2976b4d18b" data:pastille="4">
+                        <content>
+                            <p>« II. – Le contrôle des incapacités mentionnées au I du présent article est assuré par la délivrance du bulletin n° 2 du casier judiciaire dans les conditions prévues à l’article 776 du code de procédure pénale et par l’accès aux informations contenues dans le fichier judiciaire national automatisé des auteurs d’infractions sexuelles ou violentes dans les conditions prévues au 3° de l’article 706‑53‑7 du même code, avant l’exercice des fonctions de la personne et selon un rythme annuel lors de leur exercice.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_5__art_3" GUID="23f17113-fd3f-4b31-9b4a-9a0e53bafdab" data:pastille="5">
+                        <content>
+                            <p>« Saisie par le responsable de la collectivité compétente pour l’organisation et le fonctionnement du transport public concerné dans les conditions prévues par le dernier alinéa de l’article 706‑53‑7 dudit code, l’administration compétente de l’État peut délivrer une attestation à la personne qui ne fait pas l’objet d’une inscription entraînant les incapacités mentionnées au I du présent article au moyen d’un système d’information sécurisé permettant, par dérogation au premier alinéa des articles 706‑53‑11 et 777‑3 du code de procédure pénale, la consultation des deux traitements de données mentionnés au premier alinéa du présent II, dans des conditions fixées par décret en Conseil d’État.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_6__art_3" GUID="eb3d1186-7331-410d-8c3b-e06068a461de" data:pastille="6">
+                        <content>
+                            <p>« L’attestation mentionnée au deuxième alinéa du même II fait état de l’absence de condamnation non définitive ou de mise en examen mentionnées au fichier judiciaire national automatisé des auteurs d’infractions sexuelles ou violentes.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_7__art_3" GUID="90730990-c594-4fec-b523-d530347d29e7" data:pastille="7">
+                        <content>
+                            <p>« L’attestation ainsi délivrée peut être communiquée à l’employeur. L’administration chargée du contrôle peut également transmettre à cet employeur, pour les besoins du contrôle des incapacités à intervalles réguliers, l’information selon laquelle une personne en exercice est frappée par une incapacité mentionnée au I ou fait l’objet d’une mention au fichier judiciaire national automatisé des auteurs d’infractions sexuelles ou violentes.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_8__art_3" GUID="eb01d0e7-43a9-4814-9db0-e4dbb493b541" data:pastille="8">
+                        <content>
+                            <p>« III. – Lorsque, en application des articles 11‑2 ou 706‑47‑4 du code de procédure pénale ou en application du même II du présent article, un employeur est informé de la condamnation non définitive ou de la mise en examen d’une personne y travaillant au titre de l’une des infractions mentionnées au I, il peut, en raison de risques pour la santé ou la sécurité des mineurs ou des majeurs en situation de vulnérabilité avec lesquels elle est en contact, prononcer à l’encontre de la personne concernée une mesure de suspension temporaire d’activité jusqu’à la décision définitive de la juridiction compétente.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_9__art_3" GUID="d723fcff-e478-4b64-a3dd-a20bf5efbbe7" data:pastille="9">
+                        <content>
+                            <p>« Lorsque l’incapacité est avérée et qu’il n’est pas possible de proposer un autre poste de travail n’impliquant aucun contact avec des personnes accueillies ou accompagnées dans l’un des dispositifs mentionnés au même I, il est mis fin au contrat de travail ou aux fonctions de la personne concernée.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_10__art_3" GUID="5b2f94ef-c704-4c33-bc19-fed9fdfe71c3" data:pastille="10">
+                        <content>
+                            <p>« En cas de condamnation, prononcée par une juridiction étrangère et passée en force de chose jugée, pour une infraction constituant, selon la loi française, un crime ou l’un des délits mentionnés audit I, le tribunal judiciaire du domicile du condamné, statuant en matière correctionnelle, déclare, à la requête du ministère public, qu’il y a lieu à l’application de l’incapacité d’exercice prévue au présent article, après constatation de la régularité et de la légalité de la condamnation et l’intéressé dûment appelé en chambre du conseil.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_11__art_3" GUID="4bb86c83-7cb3-4ab6-8af8-bca01854a85b" data:pastille="11">
+                        <content>
+                            <p>« Les personnes faisant l’objet d’une incapacité d’exercice peuvent demander à en être relevées dans les conditions prévues à l’article 132‑21 du code pénal ainsi qu’aux articles 702‑1 et 703 du code de procédure pénale. Cette requête est portée devant la chambre des appels correctionnels de la cour d’appel dans le ressort de laquelle le requérant réside lorsque la condamnation résulte d’une condamnation étrangère et qu’il a été fait application du troisième alinéa du présent III.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_12__art_3" GUID="d8056d2a-3b49-4323-89da-1b26f2f0ce3a" data:pastille="12">
+                        <content>
+                            <p>« Par dérogation à l’article 133‑16 du code pénal, les incapacités prévues au présent article sont applicables en cas de condamnation définitive figurant au fichier judiciaire national automatisé des auteurs d’infractions sexuelles ou violentes même si cette condamnation n’est plus inscrite au bulletin n° 2 du casier judiciaire. »</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>II <i>(nouveau)</i>. – Après l’article L. 3116‑3 du code des transports, il est inséré un article L. 3116‑3‑1 ainsi rédigé :</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_4" GUID="24c4d0b0-c4f2-4196-943f-2221792e3cb2" data:amdts="n° 2, n° 4, n° 11, n° 17" data:mention="(Article nouveau-supprimé non transmis par le Sénat)">
+                <num>Article 4</num>
+            </article>
+            <article eId="art_4_bis" GUID="ef2ac76f-9473-4202-9cd1-b548f20ed837" data:amdts="n° 20" data:mention="(nouveau)">
+                <num>Article 4 bis</num>
+                <alinea eId="al_1__art_4_bis" GUID="0242d680-6f2b-4857-ab3d-3871d5a2fa49" data:amdts="n° 20" data:pastille="1">
+                    <content>
+                        <p>Le code pénal est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_4_bis" GUID="951a6097-1635-4ec2-a85a-cf67faa744ed" data:amdts="n° 20" data:pastille="2">
+                    <num>1°</num>
+                    <content>
+                        <p>1° À la première phrase de l’article 222‑48‑4, après la première occurrence du mot : « prévue », sont insérés les mots : « aux articles 221‑1 à 221‑5, 222‑1, 222‑7 et 222‑9 ou » ;</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_3__art_4_bis" GUID="375dd151-d251-434e-a97f-ccc15fe016b3" data:amdts="n° 20" data:pastille="3">
+                    <num>2°</num>
+                    <alinea eId="al_4__art_4_bis" GUID="34e12eaa-7f69-4c32-b673-a15f981c5b92" data:amdts="n° 20" data:pastille="4">
+                        <content>
+                            <p>« <i>Art. 224‑11</i>. – Les personnes physiques coupables des infractions prévues aux sections 1 et 1 <i>bis</i> du présent chapitre encourent également l’interdiction d’exercer, soit à titre définitif, soit pour une durée de dix ans au plus, une activité professionnelle ou bénévole impliquant un contact habituel avec des mineurs.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_5__art_4_bis" GUID="5f0e10b1-35c6-4594-95d9-9a0d7cfa5583" data:amdts="n° 20" data:pastille="5">
+                        <content>
+                            <p>« En cas de condamnation pour une infraction prévue aux mêmes sections commise sur un mineur, la peine complémentaire prévue au premier alinéa du présent article est prononcée à titre définitif. La juridiction peut, par une décision spécialement motivée, décider de ne pas prononcer cette peine en considération des circonstances de l’infraction et de la personnalité de son auteur ou de la prononcer pour une durée de dix ans au plus. » ;</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>2° L’article 224‑11 est ainsi rétabli :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_6__art_4_bis" GUID="115805aa-9b95-4446-9be0-91b9ee7acfbb" data:amdts="n° 20" data:pastille="6">
+                    <num>3°</num>
+                    <alinea eId="al_7__art_4_bis" GUID="da5167e9-8239-4886-9449-8f346cc121b5" data:amdts="n° 20" data:pastille="7">
+                        <content>
+                            <p>« III. – En cas de condamnation pour les infractions prévues aux sections 1 <i>bis</i> et 2 du présent chapitre, le prononcé de la peine complémentaire prévue au 7° du I du présent article, pour une durée de dix ans, est obligatoire. Lorsque les mêmes infractions ont été commises sur un mineur, la même peine complémentaire est prononcée à titre définitif.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_8__art_4_bis" GUID="943e3508-7110-491b-8831-150f906e9c32" data:amdts="n° 20" data:pastille="8">
+                        <content>
+                            <p>« La juridiction peut, par une décision spécialement motivée, lorsque la condamnation est prononcée par une juridiction correctionnelle, décider de ne pas prononcer cette peine, en considération des circonstances de l’infraction et de la personnalité de son auteur ou, lorsque l’infraction a été commise sur un mineur, de la prononcer pour une durée de dix ans au plus. » ;</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>3° L’article 225‑20 est complété par un III ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_9__art_4_bis" GUID="4525b71b-572e-4f00-a668-ac64dfe6b493" data:amdts="n° 20" data:pastille="9">
+                    <num>4°</num>
+                    <alinea eId="al_10__art_4_bis" GUID="a41bd0f4-94eb-468a-8e9d-a7aced1a19cc" data:amdts="n° 20" data:pastille="10">
+                        <content>
+                            <p>« En cas de condamnation pour une infraction prévue aux articles 227‑18 à 227‑21, le prononcé de la peine complémentaire d’interdiction d’exercer une activité professionnelle ou bénévole impliquant un contact habituel avec des mineurs prévue au 6° de l’article 227‑29, pour une durée de dix ans, est obligatoire, sauf décision spécialement motivée de la juridiction. »</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>4° Au début de l’article 227‑31‑1, il est ajouté un alinéa ainsi rédigé :</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_4_ter" GUID="17930a43-5d32-4eb4-a08b-e3028e6eaa62" data:amdts="n° 6" data:mention="(nouveau)">
+                <num>Article 4 ter</num>
+                <alinea eId="al_1__art_4_ter" GUID="0e6f1ad4-031f-48da-83bf-c0255e694cca" data:amdts="n° 6" data:pastille="1">
+                    <content>
+                        <p>Après l’article 434‑38‑1 du code pénal, il est inséré un article 434‑38‑2 ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_4_ter" GUID="748508cc-0ae0-411f-b4f2-26f5dbf09bd4" data:amdts="n° 6" data:pastille="2">
+                    <content>
+                        <p>« <i>Art. 434‑38‑2</i>. – I. – Par dérogation à l’article 434‑40, la violation d’une interdiction d’exercer une activité professionnelle ou bénévole impliquant un contact habituel avec des mineurs est punie de trois ans d’emprisonnement et de 45 000 euros d’amende.</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_3__art_4_ter" GUID="97adbd5c-16e8-4ab5-9c04-0530858dbe96" data:amdts="n° 6" data:pastille="3">
+                    <content>
+                        <p>« Dans le cas où l’infraction mentionnée au premier alinéa du présent I est commise à l’étranger par un Français ou par une personne résidant habituellement sur le territoire français, la loi française est applicable par dérogation au deuxième alinéa de l’article 113‑6 et la seconde phrase de l’article 113‑8 n’est pas applicable.</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_4__art_4_ter" GUID="da9e6bdd-669b-4c39-abfd-86c9db30cb03" data:amdts="n° 6" data:pastille="4">
+                    <content>
+                        <p>« II. – La tentative du délit mentionné au I est punie des mêmes peines. »</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_4_quater" GUID="e7df396d-9a08-4710-8a47-4b9b605df591" data:amdts="n° 21" data:mention="(nouveau)">
+                <num>Article 4 quater</num>
+                <alinea eId="al_1__art_4_quater" GUID="0ba793d7-2df6-467d-b706-cad7aa5a13de" data:amdts="n° 21" data:pastille="1">
+                    <content>
+                        <p>Après l’article 11‑3 du code de procédure pénale, il est inséré un article 11‑4 ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_4_quater" GUID="3642ec70-44c6-4638-85a2-2d75913ca0cf" data:amdts="n° 21" data:pastille="2">
+                    <content>
+                        <p>« <i>Art. 11‑4</i>. – I. – Par dérogation au I de l’article 11‑2, le ministère public informe par écrit l’administration d’une condamnation à une peine complémentaire d’interdiction d’exercer une activité professionnelle ou bénévole impliquant un contact habituel avec des mineurs prononcée à l’encontre d’une personne dont il a été établi au cours de l’enquête ou de l’instruction qu’elle exerce une telle activité et que cet exercice est contrôlé, directement ou indirectement, par l’administration.</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_3__art_4_quater" GUID="332a0122-19bc-4672-9c2c-358906e2dc9f" data:amdts="n° 21" data:pastille="3">
+                    <content>
+                        <p>« Il informe également, dans les mêmes conditions, les personnes publiques, les personnes morales de droit privé chargées d’une mission de service public ou les ordres professionnels des décisions mentionnées au premier alinéa du présent I prises à l’égard d’une personne dont l’activité professionnelle ou sociale est placée sous leur contrôle ou leur autorité.</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_4__art_4_quater" GUID="d66f01bf-2aff-41e1-932d-d62f0e7748b7" data:amdts="n° 21" data:pastille="4">
+                    <content>
+                        <p>« Les II à IV de l’article 11‑2 sont applicables aux modalités de transmission et de conservation des informations mentionnées au présent article.</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_5__art_4_quater" GUID="e1dd5b3f-3598-49e9-8255-d33b16605f80" data:amdts="n° 21" data:pastille="5">
+                    <content>
+                        <p>« II. – Les modalités d’application du présent article sont déterminées par décret en Conseil d’État. Ce décret précise :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_6__art_4_quater" GUID="70752ca2-fb3a-42f0-89cd-112506c86348" data:amdts="n° 21" data:pastille="6">
+                    <content>
+                        <p>« 1° Les formes de la transmission de l’information par le ministère public ;</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_7__art_4_quater" GUID="b9caad51-ae65-4bb1-8b80-1922166c4923" data:amdts="n° 21" data:pastille="7">
+                    <content>
+                        <p>« 2° Les professions et activités ou catégories de professions et d’activités concernées ;</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_8__art_4_quater" GUID="b19e8bbb-6825-43b3-af76-5501a6e46263" data:amdts="n° 21" data:pastille="8">
+                    <content>
+                        <p>« 3° Les autorités administratives destinataires de l’information. »</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_4_quinquies" GUID="819d331a-2c4c-4b27-8432-1556b5bc10b1" data:amdts="n° 7" data:mention="(nouveau)">
+                <num>Article 4 quinquies</num>
+                <alinea eId="al_1__art_4_quinquies" GUID="0db868bd-70f7-475d-ada9-61410313074d" data:amdts="n° 7" data:pastille="1">
+                    <content>
+                        <p>Après l’article 5 de la loi du 1<sup>er</sup> juillet 1901 relative au contrat d’association, il est inséré un article 5 <i>bis</i> ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_4_quinquies" GUID="edd0d215-67f8-42cd-87be-0d78bb4e657b" data:amdts="n° 7" data:pastille="2">
+                    <content>
+                        <p>« <i>Art. 5 </i>bis . – Aux fins de contrôler l’absence d’une peine complémentaire d’interdiction d’exercer une activité professionnelle ou bénévole impliquant un contact habituel avec des mineurs ou de toute interdiction, déchéance ou incapacité incompatible avec les activités de l’association, le récépissé mentionné au deuxième alinéa de l’article 5 comporte une information rappelant aux personnes chargées de l’administration de l’association qu’elles peuvent solliciter auprès des personnes appelées à participer à leurs activités le bulletin n° 3 du casier judiciaire mentionné à l’article 777 du code de procédure pénale. Cette information précise que le bulletin ne peut pas être conservé et qu’il ne peut pas en être pris de copie. »</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_4_sexies" GUID="a7b92d57-feaa-4ff7-b68e-54f54eada2fe" data:amdts="n° 5" data:mention="(nouveau)">
+                <num>Article 4 sexies</num>
+                <alinea eId="al_1__art_4_sexies" GUID="66350db9-25ab-4eae-9977-98dfecf576f6" data:amdts="n° 5" data:pastille="1">
+                    <content>
+                        <p>Le code du travail est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_2__art_4_sexies" GUID="aa5f368b-2f4c-4dc1-a031-9d5c78314846" data:amdts="n° 5" data:pastille="2">
+                    <num>1°</num>
+                    <alinea eId="al_3__art_4_sexies" GUID="f0cd75c0-e551-4eea-a79d-37e1a6fcd424" data:amdts="n° 5" data:pastille="3">
+                        <content>
+                            <p>« Lorsque l’emploi à pourvoir implique un contact habituel avec des mineurs ou avec des majeurs en situation de vulnérabilité, et aux seules fins de contrôler l’absence de toute interdiction, déchéance ou incapacité incompatible avec l’emploi précité, l’employeur peut demander au candidat de présenter le bulletin n° 3 de son casier judiciaire. Cette présentation peut intervenir avant l’embauche, puis à intervalles réguliers au cours de l’exécution du contrat de travail.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_4__art_4_sexies" GUID="80e150f9-c608-4d73-bc3e-c13155f0c765" data:amdts="n° 5" data:pastille="4">
+                        <content>
+                            <p>« Lorsque celui‑ci est directement incompatible avec l’emploi occupé par la personne condamnée, le prononcé d’une interdiction, déchéance ou incapacité au cours de l’exécution du contrat constitue une cause réelle et sérieuse au sens de l’article L. 1232‑1 ou un motif réel et sérieux au sens de l’article L. 1243‑1. Lorsque la rupture du contrat intervient pour cette raison, elle se fait selon les formes et modalités prévues en cas de faute grave du salarié. » ;</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>1° L’article L. 1221‑6 est complété par deux alinéas ainsi rédigés :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_5__art_4_sexies" GUID="78937336-eb2c-4470-ba37-974a98960d5e" data:amdts="n° 5" data:pastille="5">
+                    <num>2°</num>
+                    <alinea eId="al_6__art_4_sexies" GUID="f8ee4ee2-f56e-442f-8bf3-e7b323f89e35" data:amdts="n° 5" data:pastille="6">
+                        <content>
+                            <p>« Lors de cette déclaration, l’employeur est avisé de sa faculté de demander à la personne dont l’embauche est envisagée de présenter le bulletin n° 3 de son casier judiciaire, dans les conditions prévues à l’article L. 1221‑6. » ;</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>2° Après le premier alinéa de l’article L. 1221‑10, il est inséré un alinéa ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_7__art_4_sexies" GUID="ed025d0a-084d-42bf-be2f-4db69f9c08db" data:amdts="n° 5" data:pastille="7">
+                    <num>3°</num>
+                    <alinea eId="al_8__art_4_sexies" GUID="5f27cbe2-ea19-4660-afe8-0094af21b28a" data:amdts="n° 5" data:pastille="8">
+                        <content>
+                            <p>« Lorsque la mission implique un contact habituel avec des mineurs ou des majeurs vulnérables, l’entreprise de travail temporaire vérifie, au moyen d’une présentation par le salarié du bulletin n° 3 de son casier judiciaire, que celui‑ci n’est soumis à aucune interdiction, déchéance ou incapacité incompatible avec ladite mission. » ;</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>3° L’article L. 1251‑8 est complété par un alinéa ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_9__art_4_sexies" GUID="80882833-93d2-4f1f-a65b-c2e10bea10ff" data:amdts="n° 5" data:pastille="9">
+                    <num>4°</num>
+                    <content>
+                        <p>4° Le 4° de l’article L. 1251‑33 est complété par les mots : « , ou lorsqu’il a été mis fin au contrat en raison du prononcé d’une interdiction, déchéance ou incapacité mentionnée au dernier alinéa de l’article L. 1251‑8. » ;</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_10__art_4_sexies" GUID="f95ac6c6-8da4-45be-9dce-9c3adfcb2d79" data:amdts="n° 5" data:pastille="10">
+                    <num>5°</num>
+                    <alinea eId="al_11__art_4_sexies" GUID="55a0a66e-0ccb-4032-ab9b-7bfece508eb1" data:amdts="n° 5" data:pastille="11">
+                        <content>
+                            <p>« <i>Art. L. 7231‑3</i>. – I. – Sans préjudice de l’article L. 133‑6 du code de l’action sociale et des familles, la personne inscrite sur une place de marché en ligne de mise en relation en vue de la fourniture d’un service à la personne mentionné au 1° ou au 2° de l’article L. 7231‑1 du présent code fournit, à la demande du particulier employeur qui la salarie, le bulletin n° 3 de son casier judiciaire.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_12__art_4_sexies" GUID="b013f66d-d920-40e3-9c56-58f33fddb7cf" data:amdts="n° 5" data:pastille="12">
+                        <content>
+                            <p>« La place de marché en ligne mentionnée au premier alinéa du présent I fait apparaître, tout au long de l’accès de l’utilisateur, un message rappelant aux particuliers employeurs qu’ils peuvent disposer du bulletin mentionné au même premier alinéa.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_13__art_4_sexies" GUID="3b281338-ce9b-4a89-b47c-1179f66a554d" data:amdts="n° 5" data:pastille="13">
+                        <content>
+                            <p>« Tout contenu qui ne fait pas l’objet du message prévu au présent I est illicite au sens du paragraphe h de l’article 3 du règlement (UE) 2022/2065 du Parlement européen et du Conseil du 19 octobre 2022 relatif à un marché unique des services numériques et modifiant la directive 2000/31/CE (règlement sur les services numériques).</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_14__art_4_sexies" GUID="6a00b7c3-4cf8-4022-9faf-a7aec88f090c" data:amdts="n° 5" data:pastille="14">
+                        <content>
+                            <p>« II. – L’autorité administrative peut, soit d’office, soit à la demande d’une organisation professionnelle, d’une association agréée d’utilisateurs ou de toute personne physique ou morale concernée, constater les manquements à l’obligation mentionnée au I. Elle met le fournisseur de place de marché concerné en demeure d’afficher le message. Elle l’informe de la mise en œuvre des mesures conservatoires mentionnées au deuxième alinéa du présent II et l’invite à lui adresser ses observations dans un délai de cinq jours à compter de la notification de ces mesures.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_15__art_4_sexies" GUID="e26fb5a2-32bb-4fbc-b4a5-5f8e74bff0c4" data:amdts="n° 5" data:pastille="15">
+                        <content>
+                            <p>« Simultanément, l’autorité administrative notifie l’adresse électronique du service concerné aux fournisseurs de navigateurs internet, au sens du 11 de l’article 2 du règlement (UE) 2022/1925 du Parlement européen et du Conseil du 14 septembre 2022 relatif aux marchés contestables et équitables dans le secteur numérique et modifiant les directives (UE) 2019/1937 et (UE) 2020/1828 (règlement sur les marchés numériques), aux fins de la mise en œuvre de mesures conservatoires.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_16__art_4_sexies" GUID="49d0e83e-e4b1-4f13-9322-2b80a522d602" data:amdts="n° 5" data:pastille="16">
+                        <content>
+                            <p>« Lorsque l’autorité administrative, le cas échéant après avoir pris connaissance des observations du fournisseur de place de marché en cause, estime que le constat mentionné au premier alinéa du présent II n’est plus valable, elle demande sans délai aux fournisseurs de navigateurs internet destinataires de la notification de mettre fin aux mesures conservatoires.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_17__art_4_sexies" GUID="008567fa-ad05-4bf4-ab08-95a2bd1a228b" data:amdts="n° 5" data:pastille="17">
+                        <content>
+                            <p>« Tout manquement aux obligations définies au présent article par la personne destinataire d’une notification de l’autorité administrative est puni des peines prévues au C du III de l’article 6 de la loi n° 2004‑575 du 21 juin 2004 pour la confiance dans l’économie numérique.</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_18__art_4_sexies" GUID="c91116ee-8437-48dd-9dae-a59843de8c7a" data:amdts="n° 5" data:pastille="18">
+                        <content>
+                            <p>« III. – En cas de manquement aux obligations prévues au I du présent article, l’autorité administrative prononce à l’encontre du fournisseur de place de marché en ligne une sanction pécuniaire dont le montant est proportionné à la gravité du manquement et aux avantages qui en sont tirés, sans pouvoir excéder 3 % du chiffre d’affaires mondial hors taxes réalisé au cours du dernier exercice clos. Ce taux est porté à 5 % en cas de réitération du manquement dans un délai de cinq ans à compter de la date à laquelle la première décision de sanction est devenue définitive. »</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>5° Après l’article L. 7231‑2, il est inséré un article L. 7231‑3 ainsi rédigé :</p>
+                    </content>
+                </alinea>
+            </article>
+            <article eId="art_5" GUID="fe653639-1315-4efc-92fb-47a20256448d" data:mention="(nouveau)">
+                <num>Article 5</num>
+                <alinea eId="al_1__art_5" GUID="b6d4831e-277c-4176-8c52-1de73fabe210" data:pastille="1">
+                    <num>I. –</num>
+                    <alinea eId="al_2__art_5" GUID="910e03a6-0022-4e01-92f1-5bac3ffef99a" data:pastille="2">
+                        <content>
+                            <p>« Le présent code est applicable, dans sa rédaction résultant de la loi n°       du       tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes, en Nouvelle‑Calédonie, en Polynésie française et dans les îles Wallis et Futuna, sous réserve des adaptations prévues au présent titre et aux seules exceptions : ».</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>I. – Le premier alinéa de l’article 804 du code de procédure pénale est ainsi rédigé :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_3__art_5" GUID="3fbaf1c5-1820-4ddd-911b-e885e405075e" data:pastille="3">
+                    <num>II. –</num>
+                    <alinea eId="al_4__art_5" GUID="f26b0581-9b6d-4841-b0f2-3a7cd7bf9f79" data:pastille="4">
+                        <num>1°</num>
+                        <alinea eId="al_5__art_5" GUID="c8722cfb-e4a6-4141-827e-d782f55621d3" data:pastille="5">
+                            <content>
+<p>« <i>Art. L. 721‑1</i>. – Le présent code, à l’exception des articles L. 113‑2 et L. 113‑6, est applicable en Nouvelle‑Calédonie dans sa rédaction résultant de la loi n°       du       tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes, sous réserve des adaptations prévues au présent chapitre. » ;</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>1° L’article L. 721‑1 est ainsi rédigé :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_6__art_5" GUID="b406339f-d898-42cb-84c5-f423a6a2fb9f" data:pastille="6">
+                        <num>2°</num>
+                        <alinea eId="al_7__art_5" GUID="6cb99397-740b-4962-b6b5-cb7eb97505c5" data:pastille="7">
+                            <content>
+<p>« <i>Art. L. 722‑1</i>. – Le présent code, à l’exception des articles L. 113‑2 et L. 113‑6, est applicable en Polynésie française dans sa rédaction résultant de la loi n°       du       tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes, sous réserve des adaptations prévues au présent chapitre. » ;</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>2° L’article L. 722‑1 est ainsi rédigé :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_8__art_5" GUID="7b4c488e-176b-44e7-8442-7d080ad1cc34" data:pastille="8">
+                        <num>3°</num>
+                        <alinea eId="al_9__art_5" GUID="4c7d583e-1d4f-42cc-a3c2-4543b8b00a28" data:pastille="9">
+                            <content>
+<p>« <i>Art. L. 723‑1</i>. – Le présent code, à l’exception des articles L. 113‑2 et L. 113‑6, est applicable dans les îles Wallis et Futuna dans sa rédaction résultant de la loi n°       du       tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes, sous réserve des adaptations prévues au présent chapitre. »</p>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>3° L’article L. 723‑1 est ainsi rédigé :</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>II. – Le titre II du livre VII du code de la justice pénale des mineurs est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_10__art_5" GUID="ffccfb0e-b64c-46e5-b70e-6627439c58c5" data:pastille="10">
+                    <num>III. –</num>
+                    <alinea eId="al_11__art_5" GUID="8b22ecf7-ede6-4f3e-ae99-05c2ce3437a6" data:pastille="11">
+                        <num>1°</num>
+                        <alinea eId="al_12__art_5" GUID="ae089e9e-96f3-4761-ad80-e318b74f41b8" data:pastille="12">
+                            <content>
+<table class="alinea-table">
+    <tr>
+        <td style="width: 12.38%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;">
+            <p>«&lt;br&gt;</p>
+        </td>
+        <td style="width: 12.38%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-4 et L. 742-5&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n° 2023-1059 du 20 novembre 2023 d’orientation et de programmation du ministère de la justice 2023-2027&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>&lt;br&gt;</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 12.38%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;"/>
+        <td style="width: 12.38%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-6&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n°&amp;nbsp;&amp;nbsp;&amp;nbsp; du &amp;nbsp;&amp;nbsp; tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>&lt;br&gt;</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 12.38%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;"/>
+        <td style="width: 12.38%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-7 et L. 742-8&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n° 2023-1059 du 20 novembre 2023 d’orientation et de programmation du ministère de la justice 2023-2027&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>» ;&lt;br&gt;</p>
+        </td>
+    </tr>
+</table>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>1° La vingt et unième ligne du tableau du second alinéa des articles L. 762‑1 et L. 763‑1 est remplacée par trois lignes ainsi rédigées :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_13__art_5" GUID="30c3b896-0fc6-45b0-932e-2cbdfe2c8195" data:pastille="13">
+                        <num>2°</num>
+                        <alinea eId="al_14__art_5" GUID="ebc616c8-6cab-4cdc-a8c5-07185e23af4c" data:pastille="14">
+                            <content>
+<table class="alinea-table">
+    <tr>
+        <td style="width: 12.4533%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;">
+            <p>«</p>
+        </td>
+        <td style="width: 12.4533%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-4 et L. 742-5&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.537%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n° 2023-1059 du 20 novembre 2023 d’orientation et de programmation du ministère de la justice 2023-2027&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.537%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>&lt;br&gt;</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 12.4533%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;"/>
+        <td style="width: 12.4533%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-6&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.537%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n°&amp;nbsp;&amp;nbsp;&amp;nbsp; du &amp;nbsp; &amp;nbsp; tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.537%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>&lt;br&gt;</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 12.4533%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;"/>
+        <td style="width: 12.4533%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-7 et L. 742-8&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.537%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n° 2023-1059 du 20 novembre 2023 d’orientation et de programmation du ministère de la justice 2023-2027&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.537%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>» ;&lt;br&gt;</p>
+        </td>
+    </tr>
+</table>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>2° La dix‑septième ligne du tableau du second alinéa de l’article L. 764‑1 est remplacée par trois lignes ainsi rédigées :</p>
+                        </content>
+                    </alinea>
+                    <alinea eId="al_15__art_5" GUID="d47df129-3912-41d2-a381-e13426550223" data:pastille="15">
+                        <num>3°</num>
+                        <alinea eId="al_16__art_5" GUID="600d1098-28db-4d8d-abcd-6284f634ceff" data:pastille="16">
+                            <content>
+<table class="alinea-table">
+    <tr>
+        <td style="width: 12.38%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;">
+            <p>«</p>
+        </td>
+        <td style="width: 12.38%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-4 et L. 742-5&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n° 2023-1059 du 20 novembre 2023 d’orientation et de programmation du ministère de la justice 2023-2027&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>&lt;br&gt;</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 12.38%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;"/>
+        <td style="width: 12.38%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-6&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n°&amp;nbsp;&amp;nbsp;&amp;nbsp; du &amp;nbsp; &amp;nbsp; tendant à renforcer les moyens de surveillance des individus condamnés pour des infractions sexuelles, violentes ou terroristes&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>&lt;br&gt;</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 12.38%;border-top:0px solid black; border-left:0px solid black; border-bottom:0px solid black; border-right:1px solid black;"/>
+        <td style="width: 12.38%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;L. 742-7 et L. 742-8&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:1px solid black; border-left:1px solid black; border-bottom:1px solid black; border-right:1px solid black;">
+            <p>&lt;p style="text-align: justify;"&gt;La loi n° 2023-1059 du 20 novembre 2023 d’orientation et de programmation du ministère de la justice 2023-2027&lt;/p&gt;</p>
+        </td>
+        <td style="width: 87.1%;border-top:0px solid black; border-left:1px solid black; border-bottom:0px solid black; border-right:0px solid black;">
+            <p>»&lt;br&gt;</p>
+        </td>
+    </tr>
+</table>
+                            </content>
+                        </alinea>
+                        <content>
+                            <p>3° La dix‑neuvième ligne du tableau du second alinéa des articles L. 765‑1 et L. 766‑1 est remplacée par trois lignes ainsi rédigées :</p>
+                        </content>
+                    </alinea>
+                    <content>
+                        <p>III. – Le titre VI du livre VII du code de l’entrée et du séjour des étrangers et du droit d’asile est ainsi modifié :</p>
+                    </content>
+                </alinea>
+                <alinea eId="al_17__art_5" GUID="68af98f8-f7a5-40d0-a77e-f97863182bf8" data:pastille="17">
+                    <num>IV. –</num>
+                    <content>
+                        <p>IV. – L’article 3 est applicable dans les îles Wallis et Futuna, en Polynésie française et en Nouvelle‑Calédonie.</p>
+                    </content>
+                </alinea>
+            </article>
+        </body>
+    </bill>
+</akomaNtoso>

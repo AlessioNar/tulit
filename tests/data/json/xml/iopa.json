@@ -1,0 +1,20 @@
+{
+    "root": null,
+    "preface": null,
+    "preamble": null,
+    "formula": null,
+    "citations": [],
+    "recitals_init": null,
+    "recitals": [],
+    "preamble_final": null,
+    "body": null,
+    "chapters": [],
+    "articles": [],
+    "conclusions": null,
+    "valid": false,
+    "format": null,
+    "validation_errors": null,
+    "namespaces": {
+        "fmx": "http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd"
+    }
+}

@@ -1,0 +1,2588 @@
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:finlex="http://data.finlex.fi/schema/finlex" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <act contains="originalVersion" name="main">
+        <meta>
+            <identification source="#organization_fi.finlex">
+                <FRBRWork>
+                    <FRBRthis value="/akn/fi/act/statute/2024/123/!main"/>
+                    <FRBRuri value="/akn/fi/act/statute/2024/123"/>
+                    <FRBRalias name="eli" value="http://data.finlex.fi/eli/sd/2024/123/alkup"/>
+                    <FRBRdate date="2024-03-22" name="dateIssued"/>
+                    <FRBRdate date="2024-03-26" name="datePublished"/>
+                    <FRBRauthor as="#role_author" href="#organization_fi.parliament"/>
+                    <FRBRcountry value="fi"/>
+                    <FRBRsubtype value="statute"/>
+                    <FRBRnumber value="123"/>
+                    <FRBRprescriptive value="true"/>
+                    <FRBRauthoritative value="true"/>
+                </FRBRWork>
+                <FRBRExpression>
+                    <FRBRthis value="/akn/fi/act/statute/2024/123/fin@/!main"/>
+                    <FRBRuri value="/akn/fi/act/statute/2024/123/fin@"/>
+                    <FRBRalias name="eli" value="http://data.finlex.fi/eli/sd/2024/123/alkup/fin"/>
+                    <FRBRdate date="2024-03-22" name="dateIssued"/>
+                    <FRBRdate date="2024-03-26" name="datePublished"/>
+                    <FRBRauthor as="#role_author" href="#organization_fi.parliament"/>
+                    <FRBRlanguage language="fin"/>
+                </FRBRExpression>
+                <FRBRManifestation>
+                    <FRBRthis value="/akn/fi/act/statute/2024/123/fin@/!main.xml"/>
+                    <FRBRuri value="/akn/fi/act/statute/2024/123/fin@.akn"/>
+                    <FRBRalias name="eli" value="http://data.finlex.fi/eli/sd/2024/123/alkup/fin/xml"/>
+                    <FRBRdate date="2025-02-21" name="dateProduced"/>
+                    <FRBRdate date="2024-03-26" name="datePublished"/>
+                    <FRBRauthor as="#role_editor" href="#organization_fi.finlex"/>
+                    <FRBRformat value="xml"/>
+                </FRBRManifestation>
+            </identification>
+            <references source="#organization_fi.finlex">
+                <TLCOrganization eId="organization_fi.finlex" href="/akn/ontology/organization/fi.finlex" showAs="Finlex"/>
+                <TLCRole eId="role_author" href="/akn/ontology/role/author" showAs="Tekijä"/>
+                <TLCRole eId="role_editor" href="/akn/ontology/role/editor" showAs="Toimittaja"/>
+                <TLCConcept eId="decree" href="/akn/ontology/concept/statute/type-statute.decree" showAs="Asetus"/>
+                <TLCConcept eId="amending-statute" href="/akn/ontology/concept/statute/category-statute.amending-statute" showAs="Muutossäädös"/>
+            </references>
+            <proprietary source="#organization_fi.finlex">
+                <finlex:typeStatute refersTo="#decree"/>
+                <finlex:categoryStatute refersTo="#amending-statute"/>
+                <finlex:documentYear>2024</finlex:documentYear>
+            </proprietary>
+        </meta>
+        <preface>
+            <p>
+                <docNumber>123/2024</docNumber>
+                <docTitle>Työ- ja elinkeinoministeriön asetus Patentti- ja rekisterihallituksen maksullisista suoritteista vuonna 2024 annetun työ- ja elinkeinoministeriön asetuksen muuttamisesta</docTitle>
+            </p>
+        </preface>
+        <preamble>
+            <formula name="enactingClause">
+                <p>Työ- ja elinkeinoministeriön päätöksen mukaisesti</p>
+                <blockContainer>
+                    <block name="substitutions">
+                        <i>muutetaan</i>
+                         Patentti- ja rekisterihallituksen maksullisista suoritteista vuonna 2024 annetun työ- ja elinkeinoministeriön asetuksen (
+                        <affectedDocument href="/akn/fi/act/statute/2023/1247">1247/2023</affectedDocument>
+                        ) liitteenä oleva maksutaulukko.
+                    </block>
+                </blockContainer>
+            </formula>
+        </preamble>
+        <body>
+            <hcontainer finlex:outline="Säädöksen teksti" name="statuteTextWrapper">
+                <content>
+                    <p>Tämä asetus tulee voimaan 1 päivänä huhtikuuta 2024. Asetus on voimassa 31 päivään joulukuuta 2024 saakka.</p>
+                </content>
+            </hcontainer>
+            <hcontainer finlex:outline="Esityöt ja allekirjoitukset" name="conclusions">
+                <hcontainer finlex:outline="Allekirjoitukset" name="signatures">
+                    <content>
+                        <p>Helsingissä 22.3.2024</p>
+                        <p>
+                            <signature>
+                                <role refersTo="">Työministeri</role>
+                                <person refersTo="">Arto Satonen</person>
+                            </signature>
+                            <signature>
+                                <role refersTo="">Hallitusneuvos</role>
+                                <person refersTo="">Liisa Huhtala</person>
+                            </signature>
+                        </p>
+                    </content>
+                </hcontainer>
+            </hcontainer>
+            <hcontainer name="attachments">
+                <hcontainer name="attachment">
+                    <content>
+                        <p>
+                            <i>Liite</i>
+                        </p>
+                        <p>
+                            <b>MAKSUTAULUKKO (PRH)</b>
+                        </p>
+                        <p>
+                            <b>Kiinteämaksuiset julkisoikeudelliset suoritteet</b>
+                        </p>
+                        <p>
+                            <i>1. Kansalliset patenttiasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemusmaksu sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>430 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemusmaksu muuta kuin sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>540 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu jokaisesta viisitoista ylittävästä patenttivaatimuksesta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu patenttivaatimuksesta, joka on annettu sen jälkeen, kun hakemus tehtiin tai se on katsottava tehdyksi, mikäli vaatimusten määrä yhteensä ylittää niiden vaatimusten määrän, joista hakemusmaksu on suoritettu.</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Erityinen lisämaksu tapauksissa, joissa hakemusta jatketaan patenttilain (550/1967) 31 §:n 1 momentin tai 38 §:n 2 momentin mukaan ja se käsittää keksinnön, jolle ei ole suoritettu kansainvälistä uutuustutkimusta tai kansainvälistä patentoitavuuden esitutkimusta, eikä patenttilain 36 §:ää tai 37 §:ää sovelleta.</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>540 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu patenttilain 36 §:n tai 37 §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>370 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu patenttilain 31 §:n 2 momentin mukaisesta lisäajasta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>140 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu uudelleenkäsiteltäväksi ottamisesta, ensimmäinen kerta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>90 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu uudelleenkäsiteltäväksi ottamisesta, muut kerrat</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>160 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Käännösmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>80 €/sivu</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Julkaisumaksu sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>430 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Julkaisumaksu muuta kuin sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>540 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Julkaisumaksu käännöksen korjauksen johdosta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>540 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Patenttihakemuksista ja patenteista suoritettavat vuosimaksut:</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>0 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>2. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>0 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>3. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>135 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>4. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>160 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>5. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>210 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>6. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>240 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>270 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>8. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>320 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>9. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>375 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>430 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>11. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>480 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>12. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>535 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>13. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>590 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>14. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>640 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>700 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>16. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>750 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>17. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>800 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>18. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>860 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>19. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>910 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>20. vuosi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>965 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Vuosimaksu, joka patenttilain 41 §:n 3 momentin tai 42 §:n 3 momentin mukaan suoritetaan myöhemmin kuin vuosimaksun erääntymispäivänä, on suoritettava 20 prosentilla korotettuna.</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Väitemaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>900 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ratkaisumaksu patenttilain 71 a §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rajoittamista koskeva käsittelymaksu patenttilain 53 a §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>900 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu patenttirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Etuoikeustodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>70 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €  + 1 €/sivu</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>2. Kansalliset hyödyllisyysmallioikeusasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröintimaksu sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>230 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröintimaksu muuta kuin sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>280 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu jokaisesta viisi ylittävästä suojavaatimuksesta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>25 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu hyödyllisyysmallioikeudesta annetun lain (800/1991) 45 d §:n 2 momentin mukaisesta lisäajasta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>120 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uudelleenkäsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>70 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröinnin uudistamismaksu neljäksi vuodeksi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>300 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uudistamismaksun korotus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröinnin uudistamismaksu kahdeksi vuodeksi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>250 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uudistamismaksun korotus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu mitätöintivaatimuksesta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ratkaisumaksu hyödyllisyysmallioikeudesta annetun lain 26 a §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu hyödyllisyysmallirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Käännösmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>80 €/sivu</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Etuoikeustodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 € + 1 €/sivu</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tutkimusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>350 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lausuntomaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>150 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lykkäysmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>3. Patenttiyhteistyösopimuksen (SopS 58/1980, PCT) mukaiset asiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uutuustutkimusmaksu PCT-säännön 16.1(a) mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1 845 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu uutuustutkimuksesta PCT-säännön 40.2(a) mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1 845 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Täydentävästä uutuustutkimuksesta suoritettava maksu PCT-säännön 45bis.3 mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1 845 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Palautus uutuustutkimusmaksusta PCT-säännön 16.3 ja 41.1 mukaan. Jos kansainväliselle hakemukselle pyydetään etuoikeutta hakemuksesta, jolle Patentti- ja rekisterihallitus, jokin pohjoismainen patenttiviranomainen tai Euroopan patenttivirasto on aiemmin tehnyt kansallisen tai kansainvälisen uutuustutkimuksen tai täydentävän kansainvälisen uutuustutkimuksen tai kansainvälisen uutuustutkimuksen kaltaisen tutkimuksen (ITS) ja Patentti- ja rekisterihallitukselle on hyötyä tästä aiemmin suoritetusta tutkimuksesta, on palautuksen määrä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>300 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Patentoitavuuden esitutkimusmaksu PCT-säännön 58.1(b) mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>650 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu patentoitavuuden esitutkimuksesta PCT-säännön 68.3(a) mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>650 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lähettämismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>135 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Etuoikeustodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>70 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Etuoikeustodistuksen lähettäminen patenttiasetuksen (669/1980) 47 §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1" colspan="2">
+                                    <p>Käännöksen myöhästymismaksu PCT-säännön 12.3(e) tai 12.4(e) mukaan. Myöhästymismaksu on suuruudeltaan 25 % kansainvälisestä hakemusmaksusta, ottamatta huomioon maksuja, jotka peritään jokaiselta kansainvälisen hakemuksen 30 lehteä ylittävältä lehdeltä.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Sekvenssiluettelon myöhästymismaksu PCT-säännön 13ter.1(c) tai 13ter.2 mukaan.</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1" colspan="2">
+                                    <p>Maksun viivästysmaksu PCT-säännön 16bis.2 mukaan. Viivästysmaksu on 50 % maksukehotuksessa eriteltyjen erääntyneiden maksujen summasta, kuitenkin vähintään lähettämismaksun suuruinen, mutta korkeintaan 50 % kansainvälisestä hakemusmaksusta, ottamatta huomioon maksuja, jotka peritään jokaiselta kansainvälisen hakemuksen 30 lehteä ylittävältä lehdeltä.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1" colspan="2">
+                                    <p>Maksun viivästysmaksu PCT-säännön 58bis.2 mukaan. Viivästysmaksu on 50 % maksukehotuksessa eriteltyjen erääntyneiden maksujen summasta, kuitenkin vähintään käsittelymaksun suuruinen, mutta korkeintaan kaksi kertaa käsittelymaksun suuruinen määrä.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kopiot/sivu PCT-säännön 94.1ter ja 94.2 mukaan.</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>0,60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kansainvälisen uutuustutkimuksen kaltainen tutkimus (ITS)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>945 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ratkaisumaksu PCT-säännön 26bis.3 mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ratkaisumaksu PCT-säännön 49ter.2d mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>4. Eurooppapatenttiasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Käännöksen julkaisumaksu sähköistä järjestelmää käyttäen patenttilain 70 h §:n 1 momentin 70 q §:n 1 momentin tai 70 t §:n 2 momentin mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>430 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Käännöksen julkaisumaksu muuta kuin sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>540 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Eurooppapatentista patenttilain 70 l §:n 1 momentin mukaan suoritettavat vuosimaksut määräytyvät 1 §:n taulukon mukaan. Vuosimaksu, joka suoritetaan myöhemmin kuin patenttilain 70 l ja 41 §:n mukaisena vuosimaksun erääntymispäivänä, on suoritettava 20 prosentilla korotettuna. </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu patenttirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ratkaisumaksu patenttilain 71 a §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        15 € + 
+                                        <br/>
+                                        1 €/sivu
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>5. Lisäsuojatodistusasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisäsuojatodistuksen hakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>550 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisäsuojatodistuksen jatkamisen hakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>550 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu uudelleenkäsiteltäväksi ottamisesta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   ensimmäinen kerta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>90 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   muut kerrat</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>160 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu patenttirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ratkaisumaksu patenttilain 71 a §:n mukaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Vuosimaksu jokaiselta alkavalta vuodelta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1 020 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Valmistuspoikkeusilmoituksen julkaisumaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        15 € + 
+                                        <br/>
+                                        1 €/sivu 
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>6. Integroidun piirin piirimalliasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröintimaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu mitättömäksijulistamisvaatimuksesta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>250 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uudelleenkäsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>90 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu piirimallirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen  </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        15 € + 
+                                        <br/>
+                                        1 €/sivu
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>7. Teollisoikeusasiamiesasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Asiamiestutkintoon osallistumismaksu </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   Yhteinen osa</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>430 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   Teollisoikeuskohtainen osa</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Auktorisoinnin myöntämismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Auktorisoinnin jatkamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muutos tai muu erillinen merkintä asiamiestutkintorekisteriin</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muutos tai muu erillinen merkintä asiamiesrekisteriin</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ote asiamiestutkintorekisteristä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ote asiamiesrekisteristä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Jäljennös auktorisoitujen asiamiesten luettelosta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>8. Tavaramerkkiasiat</i>
+                        </p>
+                        <p>Maksut sähköistä järjestelmää käyttäen</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tavaramerkin rekisteröinnin hakemusmaksu </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>240 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisö- ja tarkastusmerkin rekisteröinnin hakemusmaksu </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>320 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu, luokkamaksu rekisteröitäessä jokaiselta luokalta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemuksen käsittelyn jatkamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu väitteen tekemisestä rekisteröintiä vastaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>290 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hallinnollinen menettämis- ja mitätöintihakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>420 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröinnin uudistamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>240 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröinnin uudistamismaksu, jos hakemus jätetään rekisteröintikauden päättymisen jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>290 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisö- ja tarkastusmerkin rekisteröinnin uudistamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>320 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisö- ja tarkastusmerkin rekisteröinnin uudistamismaksu, jos hakemus jätetään rekisteröintikauden päättymisen jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>370 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu luokkamaksu uudistettaessa jokaiselta luokalta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu määräajan pidentämisestä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröidyn merkin muuttamishakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu tavaramerkkirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Pyyntö kansallisen rekisteröinnin korvaamisesta kansainvälisellä rekisteröinnillä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Maksut muuta kuin sähköistä järjestelmää käyttäen</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tavaramerkin rekisteröinnin hakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>290 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisö- ja tarkastusmerkin rekisteröinnin hakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>370 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu, luokkamaksu rekisteröitäessä jokaiselta luokalta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemuksen käsittelyn jatkamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu väitteen tekemisestä rekisteröintiä vastaan</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>340 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hallinnollinen menettämis- ja mitätöintihakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>470 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröinnin uudistamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>290 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröinnin uudistamismaksu, jos hakemus jätetään rekisteröintikauden päättymisen jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>340 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisö- ja tarkastusmerkin rekisteröinnin uudistamismaksu </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>370 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisö- ja tarkastusmerkin rekisteröinnin uudistamismaksu, jos hakemus jätetään rekisteröintikauden päättymisen jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>420 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Lisämaksu luokkamaksu uudistettaessa jokaiselta luokalta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu määräajan pidentämisestä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröidyn merkin muuttamishakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>150 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu tavaramerkkirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>150 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Pyyntö kansallisen rekisteröinnin korvaamisesta kansainvälisellä rekisteröinnillä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kansainvälisen tavaramerkkihakemuksen vastaanottomaksu </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>160 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Etuoikeustodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 € + 1 €/sivu</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>9. Mallioikeusasiat</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemusmaksu sähköistä järjestelmää käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>250 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemusmaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>300 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Lisämaksut hakemuksen yhteydessä</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Luokkamaksu jokaiselta luokalta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisrekisteröintimaksu jokaiselta mallilta ensimmäisen jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>130 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säilytysmaksu jokaiselta mallikappaleelta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uudelleenkäsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Uudistamismaksu ja lisämaksut uudistamishakemuksen yhteydessä</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uudistamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>380 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Luokkamaksu jokaiselta luokalta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisrekisteröintimaksu jokaiselta mallilta ensimmäisen luokan jälkeen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>130 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säilytysmaksu jokaiselta mallikappaleelta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Jos uudistamismaksu suoritetaan kuluvan rekisteröintikauden päätyttyä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 € </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Muut maksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu mallirekisteriin tehtävästä merkinnästä, kultakin merkinnältä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu mallirekisteröinnin muuttamisesta hakemuksen perusteella kultakin mallilta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhteisömallia koskevan rekisteröintihakemuksen toimittamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kansainvälistä rekisteröintiä koskevan hakemuksen toimittamismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Etuoikeustodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>17 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>10 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 € + 1 €/sivu</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>10. Kaupparekisteriasiat</i>
+                        </p>
+                        <p>Kaupparekisteri-ilmoitusten käsittelymaksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Osakeyhtiön perustaminen malliasiakirjoilla</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>280 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Avoimen yhtiön ja kommandiittiyhtiön perusilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>280 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yksityisen elinkeinonharjoittajan perusilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>70 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muu elinkeinonharjoittajan perusilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>370 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yritysmuodon muutos, jonka rekisteröinti ei edellytä kuulutuksen antamista</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>370 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hallituksen, hallintoneuvoston, prokuristien, nimenkirjoittajien, tilintarkastajien, kestävyysraportointitarkastajan, toimitusjohtajan tai isännöitsijän muutosilmoitus </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €/asia</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yksityisen elinkeinonharjoittajan kotipaikan ja toimialan muutos</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €/asia</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Toiminimen tai rinnakkaistoiminimen muutosilmoitus ilmoittaminen muutosilmoituksella tai aputoiminimen ilmoittaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>70 €/nimi</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhtiöjärjestyksen, sääntöjen tai yhdistysjärjestyksen muuttamista koskeva muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>280 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhtiösopimuksen muuttamista koskeva muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>140 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Osakkeita tai osakepääomaa koskeva muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>280 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Optio-oikeuden antamista koskeva päätös</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>440 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Pääoman menettäminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus, jonka rekisteröinti edellyttää kuulutuksen antamista osakeyhtiön velkojille osakepääomaa alennettaessa, yhtiöjärjestystä muutettaessa tai siitä poikettaessa tai yritysmuotoa muutettaessa</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>280 € + 180 €/
+kuulutus</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhtiön kotipaikan siirto, sulautuminen tai jakautuminen Suomesta EU-alueelle</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muu muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €/asia</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tilinpäätöksen ilmoittaminen ennen 1.12.2024 päättyvältä tilikaudelta, kun on kulunut yli kahdeksan kuukautta tilikauden päättymisestä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tilinpäätöksen ilmoittaminen muuta kuin sähköistä asiointipalvelua käyttäen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Sulautumisen, jakautumisen ja kotipaikan siirron käsittelymaksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Sulautumiseen, jakautumiseen tai kotipaikan siirtoon liittyvän suunnitelman ilmoittaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        240 €/ 
+                                        <br/>
+                                        yhtiö
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus kuulutuksen antamiseksi sulautumis- tai jakautumisasiassa tai kotipaikan siirrossa</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        180 €/
+                                        <br/>
+                                        kuulutettava yhtiö
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus sulautumisen, jakautumisen tai kotipaikan siirron täytäntöönpanosta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        240 €/ 
+                                        <br/>
+                                        yhtiö
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus sulautumisen, jakautumisen tai kotipaikan siirron raukeamisesta tai peruuttamisesta </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €/yhtiö</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Muut hakemusasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus julkisesta haasteesta yhteisön velkojille</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>180 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muut Virallisessa lehdessä kuulutettavat hakemusasiat</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>180 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus olla poikkeusluvalla osakeyhtiön hallintoneuvostossa, hallituksessa, toimitusjohtajana tai selvitysmiehenä, asunto-osakeyhtiön hallituksessa tai isännöitsijänä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>140 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus toiminimen rekisteröinnin kumoamiseksi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>400 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muut hakemusasiat</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Otteet, todistukset ja jäljennökset</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kaupparekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhtiöjärjestys, yhtiösopimus, säännöt, yhdistysjärjestys</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kaupparekisteritietojen käännösote (suomi, ruotsi, englanti)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>40 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröintitodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tilinpäätösasiakirjat (yksi tilikausi)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        15 € + 
+                                        <br/>
+                                        1 €/sivu
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>11. Yritys- ja yhteisötunnusrekisteriasiat</i>
+                        </p>
+                        <p>Otteet ja todistukset</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Saapumistodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistettu yritys- ja yhteisötunnusrekisterin otetuloste</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>12. Yrityskiinnitysasiat</i>
+                        </p>
+                        <p>Todistukset</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rasitustodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        15 € + 
+                                        <br/>
+                                        1 €/sivu
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Hakemukset ja ilmoitusasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kiinnityshakemus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>140 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kiinnityksen vastattavaksi ottaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Vahvistetun kiinnityksen laajentaminen tai rajoittaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kiinnityksen yhdistäminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kiinnityksen keskinäisen etuoikeusjärjestyksen muuttaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus panttivelkakirjan haltijasta (kiinnityskohtainen)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>20 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus saatavan hakemisesta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>20 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus kiinnityksen jakamiseksi yhtiön jakautumisen yhteydessä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus kiinnitysten säilymisestä jakautuvassa yhtiössä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>50 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus elinkeinotoiminnan jatkamisesta ja kiinnityksen siirrosta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Kiinnityksen rahayksikön muuttaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>20 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>13. Säätiörekisteriasiat</i>
+                        </p>
+                        <p>Otteet, todistukset ja jäljennökset</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiörekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säännöt</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteröintitodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tilinpäätösasiakirjat (yksi tilikausi)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        15 € + 
+                                        <br/>
+                                        1 €/sivu
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Säätiölain (109/1930) mukaiset lupa- ja suostumusasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön perustaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1 680 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Säätiölain (487/2015) mukaiset maksut</p>
+                        <p>Ennakkotarkastusasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön sääntöjen tai sääntömuutosten ennakkotarkastus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>800 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Säätiörekisteri-ilmoitusten käsittelymaksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön perusilmoitus (ei ennakkotarkastettu)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>800 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön perusilmoitus (ennakkotarkastettu)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön sääntöjen muuttamista koskeva muutosilmoitus (ei ennakkotarkastettu)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>800 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön sääntöjen muuttamista koskeva muutosilmoitus (ennakkotarkastettu) </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säätiön hallituksen, hallintoneuvoston, nimenkirjoittajien, tilintarkastajien ja toimitusjohtajan muutos </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Aputoiminimen ilmoittaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €/nimi</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muu muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Vuosiselvityksen ilmoittaminen, kun on kulunut yli kuusi kuukautta tilikauden päättymisestä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>85 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Sulautumisasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Sulautumissuunnitelman ilmoittaminen</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>500 € /
+säätiö tai yhteisö</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus kuulutuksen antamiseksi velkojille sulautumisasiassa</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>410 € + 210 € / kuulutettava säätiö tai yhteisö</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ilmoitus sulautumisen täytäntöönpanosta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        110 €/ 
+                                        <br/>
+                                        yhteisö
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Muut hakemusasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus julkisesta haasteesta säätiön velkojille</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>210 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Muut Virallisessa lehdessä kuulutettavat hakemusasiat</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>210 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus toimia poikkeusluvalla säätiön perustajana, olla säätiön hallituksessa, hallintoneuvostossa, toimitusjohtajana, nimenkirjoittajana tai selvitysmiehenä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>120 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus selvitysmiehen määräämiseksi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus rekisteristä poistetun säätiön selvitystilaan määräämiseksi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>100 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>14. Yhdistysrekisteriasiat</i>
+                        </p>
+                        <p>Otteet, todistukset ja jäljennökset</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Säännöt, yhdyskuntajärjestys, paikallissäännöt tai perussäännöt</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Diaaritodistus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tilinpäätösasiakirjat (yksi tilikausi)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Oikeaksi todistaminen </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 € + 1 €/sivu</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Ennakkotarkastusasiat</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Sääntöjen tai sääntömuutoksen ennakkotarkastus </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>385 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Ilmoitus- ja hakemusmaksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhdistyksen, Keskuskauppakamarin tai kauppakamarin perus- tai perustamisilmoitus </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>110 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Yhdistyksen ohjattu perusilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Sääntöjen muuttamista koskeva muutosilmoitus (ei ennakkotarkastettu)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>110 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Sääntöjen muuttamista koskeva muutosilmoitus (ennakkotarkastettu)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>55 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uskonnollisen yhdyskunnan, paikallisen yhteisön tai seurakunnan perustamisilmoitus </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Uskonnollisen yhdyskunnan yhdyskuntajärjestyksen tai paikallisyhteisön tai seurakunnan paikallissääntöjen muuttamista koskeva muutosilmoitus </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Puheenjohtajan tai nimenkirjoittajan tai hallituksen muutosilmoitus </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>25 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>
+                                        Keskuskauppakamarin ja kauppakamarin toimielinten kokoonpano
+                                        <br/>
+                                        (kauppakamarilaki 2 §)
+                                    </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>25 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Eurooppalaisen alueellisen yhteistyön yhtymä perusilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Eurooppalaisen alueellisen yhteistyön yhtymän perussäännön tai yhtymäsopimuksen muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Eurooppalaisen alueellisen yhteistyön yhtymän jäsenten tai nimenkirjoittajien muutosilmoitus</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>25 € </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hakemus yhdistyksen määräämiseksi purettavaksi</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>220 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Poikkeuslupa (yhdistyslaki, 503/1989, 35 §)</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>110 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>15. Tilintarkastajia koskevat asiat</i>
+                        </p>
+                        <p>Tutkintomaksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>HT-tutkintoon tai sen osaan osallistumismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>490 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>KHT-tutkintoon tai sen osaan osallistumismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>610 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>JHT-tutkintoon osallistumismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>610 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>KRT-tutkintoon osallistumismaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>610 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Maksu HT-, JHT- ja KRT-tutkinnon lisätehtävästä:</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   1–3 opintopisteen laajuisesta lisätehtävästä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>180 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   4–6 opistopisteen laajuisesta lisätehtävästä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>360 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>   7–9 opistopisteen laajuisesta lisätehtävästä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>540 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Kelpoisuuskokeeseen tai sen osaan osallistumismaksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>HT-hakijalta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>245 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>KHT-hakijalta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>305 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>JHT-hakijalta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>305 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>KRT-hakijalta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>305 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Hyväksymisen palauttamista koskevan hakemuksen käsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>200 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Todistukset ja otteet tilintarkastajatutkinto- ja tilintarkastajarekisteristä</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ote tilintarkastajatutkintorekisteristä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Todistus tilintarkastajarekisteristä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ote tilintarkastajarekisteristä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>15 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Muut maksut</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Ennakkotieto hyväksymisen edellytysten täyttymisestä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>60 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Laaduntarkastuksen maksu 130 euroa tunnilta kultakin laaduntarkastajalta ja avustajalta</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>ETA-alueen ulkopuolelta tulevan tilintarkastajan rekisteröintihakemuksen käsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>400 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Tilintarkastajan tai kestävyysraportointitarkastajan määräämistä koskevan asian käsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>1 000 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Palkkiokaton ylittämistä koskevan poikkeuslupahakemuksen käsittelymaksu</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>2 000 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>16. Edunsaajia koskevat rekisteriasiat </i>
+                        </p>
+                        <p>Otteet, todistukset ja jäljennökset</p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Rekisteriote yhteisön tosiasiallisista edunsaajista </p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>7 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            <i>17. Muut suoritteet</i>
+                        </p>
+                        <table class="frame-all">
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Toimituslisä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>5,50 €</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>Laskutuslisä</p>
+                                </td>
+                                <td class="colsep-1 rowsep-1">
+                                    <p>6,50 €</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </content>
+                </hcontainer>
+            </hcontainer>
+        </body>
+    </act>
+</akomaNtoso>

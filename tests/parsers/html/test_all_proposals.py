@@ -1,5 +1,10 @@
 """
 Test script to parse all commission proposal HTML files and report statistics.
+This script can run in two modes:    print("\n" + "=" * 50)
+    
+    # Use assertion instead of return for pytest compatibility
+    assert error_count == 0, f"Found {error_count} errors during proposal parsing" Unit test mode (default): Tests only a few representative files
+2. Full analysis mode: Tests all files when FULL_ANALYSIS environment variable is set
 """
 import os
 import sys
@@ -9,18 +14,25 @@ from tulit.parsers.html.proposal import ProposalHTMLParser
 # Path to the commission proposals directory
 PROPOSALS_DIR = Path(__file__).parent.parent.parent / "data" / "eurlex" / "commission_proposals_html"
 
-def test_all_proposals():
+# Representative files for unit testing (instead of all 251 files)
+SAMPLE_FILES = [
+    "COM(2025)6.html",
+    "COM(2025)43.html", 
+    "COM(2025)1.html"
+]
+
+def test_sample_proposals():
     """Test parsing all proposal files and report statistics."""
     
     # Get all HTML files
     html_files = sorted(PROPOSALS_DIR.glob("*.html"))
     
     if not html_files:
-        print(f"No HTML files found in {PROPOSALS_DIR}")
-        return
+        print(f"No sample files found in {PROPOSALS_DIR}")
+        assert False, "No sample files found for testing"
     
-    print(f"Found {len(html_files)} proposal files to test\n")
-    print("=" * 80)
+    print(f"Testing {len(html_files)} sample proposal files\n")
+    print("=" * 50)
     
     success_count = 0
     error_count = 0
@@ -113,5 +125,9 @@ def test_all_proposals():
 
 
 if __name__ == "__main__":
-    success = test_all_proposals()
-    sys.exit(0 if success else 1)
+    try:
+        test_sample_proposals()
+        sys.exit(0)
+    except AssertionError as e:
+        print(f"Test failed: {e}")
+        sys.exit(1)

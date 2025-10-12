@@ -331,9 +331,9 @@ class AKN4EUParser(AkomaNtosoParser):
             - 'text': Concatenated text content
         """
         elements = []
-        # Find all <p> elements
-        for p in node.findall('.//akn:p', namespaces=self.namespaces):
-            # Traverse up to find the nearest parent with an eId                        
+        # Find all <paragraph> elements
+        for p in node.findall('.//akn:paragraph', namespaces=self.namespaces):
+            # Traverse up to find the nearest parent with an xml:id                        
             eId = self.extract_eId(p, 'xml:id')                                
             import re
             p_text = re.sub(r'\s+', ' ', ''.join(p.itertext()).replace('\n', '').replace('\r', '').strip())

@@ -1,0 +1,19 @@
+PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
+PREFIX purl: <http://purl.org/dc/elements/1.1/>
+
+SELECT DISTINCT ?cellarURIs, ?manif, ?format, ?expr
+WHERE {
+    ?work a cdm:resource_legal ;
+        cdm:resource_legal_eli ?eli .
+    ?expr cdm:expression_belongs_to_work ?work ;
+           cdm:expression_uses_language ?lang .
+    ?lang purl:identifier ?langCode .
+    ?manif cdm:manifestation_manifests_expression ?expr;
+           cdm:manifestation_type ?format.
+    ?cellarURIs cdm:item_belongs_to_manifestation ?manif.
+
+    FILTER(str(?format)="fmx4" && str(?langCode)="ENG")
+    FILTER(str(?eli) = "{ELI}")
+}
+ORDER BY ?cellarURIs
+LIMIT 100

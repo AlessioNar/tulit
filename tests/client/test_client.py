@@ -24,7 +24,9 @@ class TestClient(unittest.TestCase):
     def test_extract_zip(self, mock_zipfile):
         # Mock zipfile object
         mock_zip = Mock()
-        mock_zipfile.return_value = mock_zip
+        # Configure context manager support
+        mock_zipfile.return_value.__enter__ = Mock(return_value=mock_zip)
+        mock_zipfile.return_value.__exit__ = Mock(return_value=False)
 
         response = Mock()
         response.content = b'fake zip content'

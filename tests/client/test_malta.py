@@ -16,6 +16,7 @@ class TestMaltaLegislationClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'%PDF-1.4 test pdf content'
+        mock_response.headers = {'Content-Type': 'application/pdf'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 

@@ -43,8 +43,8 @@
 2025-06-20 21:34:40,599 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
 2025-06-20 21:34:40,783 INFO LegiluxClient File saved: tests\data\legilux\2006_07_31_n2_jo.xml
 2025-06-20 21:34:40,783 INFO LegiluxClient Document downloaded successfully and saved to ['tests\\data\\legilux\\2006_07_31_n2_jo.xml']
-2025-06-24 22:24:57,188 INFO LegiluxClient Client initialized with download_dir=./tests/data/legilux, log_dir=./tests/metadata/logs
-2025-06-24 22:24:57,190 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
-2025-06-24 22:24:57,190 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
-2025-06-24 22:24:57,419 INFO LegiluxClient File saved: tests\data\legilux\2006_07_31_n2_jo.xml
-2025-06-24 22:24:57,419 INFO LegiluxClient Document downloaded successfully and saved to ['tests\\data\\legilux\\2006_07_31_n2_jo.xml']
+2025-10-12 13:51:34,504 INFO LegiluxClient Client initialized with download_dir=./tests/data/legilux, log_dir=./tests/metadata/logs
+2025-10-12 13:51:34,509 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-12 13:51:34,509 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-12 13:51:34,814 INFO LegiluxClient File saved: tests\data\legilux\2006_07_31_n2_jo.xml
+2025-10-12 13:51:34,814 INFO LegiluxClient Document downloaded successfully and saved to ['tests\\data\\legilux\\2006_07_31_n2_jo.xml']

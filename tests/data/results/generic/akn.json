@@ -1,0 +1,1596 @@
+{
+    "preface": "Directive 2014/92/EU of the European Parliament and of the Council of 23 July 2014 on the comparability of fees related to payment accounts, payment account switching and access to payment accounts with basic features (Text with EEA relevance)",
+    "formula": "THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,",
+    "citations": [
+        {
+            "eId": "cits_1__cit_1",
+            "text": "Having regard to the Treaty on the Functioning of the European Union, and in particular Article 114"
+        },
+        {
+            "eId": "cits_1__cit_2",
+            "text": "Having regard to the proposal from the European Commission,"
+        },
+        {
+            "eId": "cits_1__cit_3",
+            "text": "After transmission of the draft legislative act to the national parliaments,"
+        },
+        {
+            "eId": "cits_1__cit_4",
+            "text": "Having regard to the opinion of the European Central Bank,"
+        },
+        {
+            "eId": "cits_1__cit_5",
+            "text": "Having regard to the opinion of the European Economic and Social Committee,"
+        },
+        {
+            "eId": "cits_1__cit_6",
+            "text": "Acting in accordance with the ordinary legislative procedure,"
+        }
+    ],
+    "recitals_init": null,
+    "recitals": [
+        {
+            "eId": "recs_1__rec_(1)",
+            "text": "In accordance with Article 26(2) of Treaty on the Functioning of the European Union (TFEU), the internal market is to comprise an area without internal frontiers in which the free movement of goods, persons, services and capital is ensured. Fragmentation of the internal market is detrimental to competitiveness, growth and job creation within the Union. Eliminating direct and indirect obstacles to the proper functioning of the internal market is essential for its completion. Union action with respect to the internal market in the retail financial services sector has already substantially contributed to developing cross-border activity of payment service providers, improving consumer choice and increasing the quality and transparency of the offers."
+        },
+        {
+            "eId": "recs_1__rec_(2)",
+            "text": "In this respect, Directive 2007/64/EC of the European Parliament and of the Council established basic transparency requirements for fees charged by payment service providers in relation to services offered on payment accounts. This has substantially facilitated the activity of payment service providers, creating uniform rules with respect to the provision of payment services and the information to be provided, reduced the administrative burden and generated cost savings for payment service providers."
+        },
+        {
+            "eId": "recs_1__rec_(3)",
+            "text": "The smooth functioning of the internal market and the development of a modern, socially inclusive economy increasingly depends on the universal provision of payment services. Any new legislation in this regard must be part of a smart economic strategy for the Union, which must effectively take into account the needs of more vulnerable consumers."
+        },
+        {
+            "eId": "recs_1__rec_(4)",
+            "text": "However, as indicated by the European Parliament in its resolution of 4 July 2012 with recommendations to the Commission on Access to Basic Banking Services, more must be done to improve and develop the internal market for retail banking. Currently, the lack of transparency and comparability of fees as well as the difficulties in switching payment accounts still create barriers to the deployment of a fully integrated market contributing to low competition in the retail banking sector. Those problems must be tackled and high-quality standards must be achieved."
+        },
+        {
+            "eId": "recs_1__rec_(5)",
+            "text": "The current conditions of the internal market could deter payment service providers from exercising their freedom to establish or to provide services within the Union because of the difficulty in attracting customers when entering a new market. Entering new markets often entails large investment. Such investment is only justified if the provider foresees sufficient opportunities and a corresponding demand from consumers. The low level of mobility of consumers with respect to retail financial services is to a large extent due to the lack of transparency and comparability as regards the fees and services on offer, as well as difficulties in relation to the switching of payment accounts. Those factors also stifle demand. This is particularly true in the cross-border context."
+        },
+        {
+            "eId": "recs_1__rec_(6)",
+            "text": "Moreover, significant barriers to the completion of the internal market in the area of payment accounts may be created by the fragmentation of existing national regulatory frameworks. Existing provisions at national level with respect to payment accounts, and particularly with respect to the comparability of fees and payment account switching, diverge. For switching, the lack of uniform binding measures at Union level has led to divergent practices and measures at national level. Those differences are even more marked in the area of comparability of fees, where no measures, even of a self-regulatory nature, exist at Union level. Should those differences become more significant in the future, as payment service providers tend to tailor their practices to national markets, this would raise the cost of operating across borders relative to the costs faced by domestic providers and would therefore make the pursuit of business on a cross-border basis less attractive. Cross-border activity in the internal market is hampered by obstacles to consumers opening a payment account abroad. Existing restrictive eligibility criteria may prevent Union citizens from moving freely within the Union. Providing all consumers with access to a payment account will permit their participation in the internal market and allow them to reap the benefits of the internal market."
+        },
+        {
+            "eId": "recs_1__rec_(7)",
+            "text": "Moreover, since some prospective customers do not open payment accounts, either because they are denied them or because they are not offered adequate products, the potential demand for payment account services in the Union is currently not fully exploited. Wider consumer participation in the internal market would further incentivise payment service providers to enter new markets. Also, creating the conditions to allow all consumers to access a payment account is a necessary means of fostering their participation in the internal market and of allowing them to reap the benefits the internal market has brought about."
+        },
+        {
+            "eId": "recs_1__rec_(8)",
+            "text": "Transparency and comparability of fees were considered at Union level in a self-regulatory initiative, initiated by the banking industry. However, no final agreement was reached on that initiative. As regards switching, the common principles established in 2008 by the European Banking Industry Committee provide a model mechanism for switching between payment accounts offered by banks located in the same Member State. However, given their non-binding nature, those common principles have been applied in an inconsistent manner throughout the Union and with ineffective results. Moreover, the common principles address payment account switching at national level only and do not address cross-border switching. Finally, as regards access to a basic payment account, Commission Recommendation 2011/442/EU invited Member States to take the necessary measures to ensure its application at the latest six months after its publication. To date, only a few Member States comply with the main principles of that Recommendation."
+        },
+        {
+            "eId": "recs_1__rec_(9)",
+            "text": "In order to support effective and smooth financial mobility in the long term, it is vital to establish a uniform set of rules to tackle the issue of low customer mobility, and in particular to improve comparison of payment account services and fees and to incentivise payment account switching, as well as to avoid discrimination on the basis of residency against consumers who intend to open and use a payment account on a cross-border basis. Moreover, it is essential to adopt adequate measures to foster consumers’ participation in the payment accounts market. Those measures will incentivise entry for payment service providers in the internal market and ensure a level playing field, thereby strengthening competition and the efficient allocation of resources within the Union’s financial retail market to the benefit of businesses and consumers. Also, transparent fee information and switching possibilities, combined with the right of access to a payment account with basic features, will allow Union citizens to move and shop around more easily within the Union, thereby benefitting from a fully functioning internal market in the area of retail financial services, and will contribute to the further development of the internal market."
+        },
+        {
+            "eId": "recs_1__rec_(10)",
+            "text": "It is also vital to ensure that this Directive does not hamper innovation in the area of retail financial services. Each year, new technologies become available, which may render the current model of payment accounts out of date, such as mobile banking services and stored value payment cards."
+        },
+        {
+            "eId": "recs_1__rec_(11)",
+            "text": "This Directive should not preclude Member States from retaining or adopting more stringent provisions in order to protect consumers, provided that such provisions are consistent with their obligations under Union law and this Directive."
+        },
+        {
+            "eId": "recs_1__rec_(12)",
+            "text": "The provisions of this Directive concerning the comparability of fees and payment account switching should apply to all payment service providers, as defined in Directive 2007/64/EC. The provisions of this Directive concerning access to payment accounts with basic features should apply only to credit institutions. All provisions of this Directive should concern payment accounts through which consumers are able to carry out the following transactions: place funds, withdraw cash and execute and receive payment transactions to and from third parties, including the execution of credit transfers. As a consequence, accounts with more limited functions should be excluded. For example, accounts such as savings accounts, credit card accounts where funds are usually paid in for the sole purpose of repaying a credit card debt, current account mortgages or e-money accounts should in principle be excluded from the scope of this Directive. However, should those accounts be used for day-to-day payment transactions and should they comprise all of the functions listed above, they will fall within the scope of this Directive. Accounts held by businesses, even small or micro enterprises, unless held in a personal capacity, should fall outside the scope of this Directive. Member States should be able to choose to extend the application of this Directive to other payment service providers and other payment accounts, for example those which offer more limited payment functions."
+        },
+        {
+            "eId": "recs_1__rec_(13)",
+            "text": "Since a payment account with basic features is a type of payment account for the purposes of this Directive, the provisions in respect of transparency and switching should also apply to such accounts."
+        },
+        {
+            "eId": "recs_1__rec_(14)",
+            "text": "The definitions contained in this Directive should be aligned as far as possible with those contained in other Union legislative acts, and in particular with those contained in Directive 2007/64/EC and in Regulation (EU) No 260/2012 of the European Parliament and of the Council"
+        },
+        {
+            "eId": "recs_1__rec_(15)",
+            "text": "It is vital for consumers to be able to understand fees so that they can compare offers from different payment service providers and make informed decisions as to which payment account is most suitable for their needs. Comparison between fees cannot be made where payment service providers use different terminology for the same services and provide information in different formats. Standardised terminology, coupled with targeted fee information presented in a consistent format covering the most representative services linked to payment accounts, can help consumers to both understand and compare fees."
+        },
+        {
+            "eId": "recs_1__rec_(16)",
+            "text": "Consumers would benefit most from information that is concise, standardised and easy to compare between different payment service providers. The tools made available to consumers to compare payment account offers would not have a positive impact if the time invested in going through lengthy lists of fees for different offers outweighed the benefit of choosing the offer that represents the best value. Those tools should be multifold and consumer testing should be conducted. At this stage, fee terminology should only be standardised for the most representative terms and definitions within Member States in order to avoid the risk of excessive information and to facilitate swift implementation."
+        },
+        {
+            "eId": "recs_1__rec_(17)",
+            "text": "The fee terminology should be determined by Member States, allowing for consideration of the specificities of local markets. To be considered representative, services should be subject to a fee at a minimum of one payment service provider in a Member State. In addition, where the services are common to a majority of Member States, the terminology used to define such services should be standardised at Union level, thus allowing for better comparison of payment account offers across the Union. In order to ensure sufficient homogeneity of the national lists, the European Supervisory Authority (European Banking Authority) (EBA should issue guidelines to assist Member States to determine the services which are most commonly used and which generate the highest cost to consumers at national level. To that end, Member States should by 18 December 2014 indicate to the Commission and EBA the appropriate authorities to which those guidelines should be addressed."
+        },
+        {
+            "eId": "recs_1__rec_(18)",
+            "text": "Once Member States have determined a provisional list of the most representative services subject to a fee at national level together with terms and definitions, EBA should review them to identify, by means of draft regulatory technical standards, the services that are common to the majority of Member States and propose standardised Union-level terms and definitions for them in all the official languages of the institutions of the Union. EBA should ensure that only one term is used for each service in any official language of each Member State which is also an official language of the institutions of the Union. This means that different terms can be used for the same service in different Member States sharing the same official language of the institutions of the Union, thereby taking into account national specificities. Member States should then integrate any applicable Union-level terms into their provisional lists and publish their final lists based on this."
+        },
+        {
+            "eId": "recs_1__rec_(19)",
+            "text": "In order to help consumers compare payment account fees throughout the internal market easily, payment service providers should provide consumers with a fee information document that states the fees for all services contained in the list of the most representative services linked to a payment account at national level. The fee information document should where applicable use the standardised terms and definitions established at Union level. This would also contribute to establishing a level playing field between payment service providers competing in the payment account market. The fee information document should not contain any other fees. Where a payment service provider does not offer a service appearing in the list of the most representative services linked to a payment account, it should indicate this by, for example, marking the service as not offerednot applicableThis is without prejudice to the provisions on overdrafts set out in Directive 2008/48/EC of the European Parliament and the Councilstatement of fees. Ex post information should be provided in a dedicated document called a ex post fee information presenting the most representative services in the same order as the ex ante fee information."
+        },
+        {
+            "eId": "recs_1__rec_(20)",
+            "text": "To satisfy the needs of consumers, it is necessary to ensure that fee information on payment accounts is accurate, clear and comparable. EBA should therefore, after consulting national authorities and after consumer testing, develop draft implementing technical standards regarding a standardised presentation format for the fee information document and the statement of fees and the common symbols, in order to ensure that they are understandable and comparable for consumers. The same format, order of items and headings should be followed for every fee information document and statement of fees in each Member State, allowing consumers to compare the two documents, thereby maximising understanding and use of the information. The fee information document and statement of fees should be clearly distinguishable from other communications. Furthermore, when developing those formats, EBA should also take into account the fact that Member States may choose to provide the fee information document and the statement of fees together with information required pursuant to other Union or national legislative acts on payment accounts and related services."
+        },
+        {
+            "eId": "recs_1__rec_(21)",
+            "text": "In order to ensure consistent use of applicable Union-level terminology across the Union, Member States should establish an obligation requiring payment service providers to use the applicable Union-level terminology together with the remaining national standardised terminology identified in the final list when communicating with consumers, including in the fee information document and the statement of fees. Payment service providers should be able to use brand names in their contractual, commercial and marketing information to consumers, as long as they clearly identify the applicable corresponding standardised term. Where they choose to use brand names in the fee information document or statement of fees, this should be in addition to the standardised terms as a secondary designation, such as in brackets or in a smaller font size."
+        },
+        {
+            "eId": "recs_1__rec_(22)",
+            "text": "Comparison websites that are independent are an effective means for consumers to assess the merits of different payment account offers in one place. Such websites can provide the right balance between the need for information to be clear and concise and the need for it to be complete and comprehensive, by enabling users to obtain more detailed information where this is of interest to them. They should aim at including the broadest possible range of offers, so as to give a representative overview, while also covering a significant part of the market. They can also reduce search costs as consumers will not need to collect information separately from payment service providers. It is crucial that the information given on such websites be trustworthy, impartial and transparent and that consumers be informed of the availability of such websites. In this regard, Member States should inform the public of such websites."
+        },
+        {
+            "eId": "recs_1__rec_(23)",
+            "text": "In order to obtain impartial information on fees charged and interest rates applied in relation to payment accounts, consumers should be able to use publicly accessible comparison websites that are operationally independent from payment service providers, which means that no payment service provider should be given favourable treatment in search results. Member States should therefore ensure that consumers have free access to at least one such website in their respective territories. Such comparison websites may be operated by, or on behalf of, the competent authorities, other public authorities and/or private operators. The function of comparing fees connected to payment accounts may also be fulfilled by existing websites comparing a broad range of financial or non-financial products. Such websites should be operated in accordance with specified quality criteria including the requirement to provide details of their owners, to provide accurate and up-to-date information, to state the time of the last update, to set out clear, objective criteria on which the comparison will be based and to include a broad range of payment account offers covering a significant part of the market. Member States should be able to determine how often comparison websites are to review and update the information they provide to consumers, taking into account the frequency with which payment service providers generally update their fee information. Member States should also determine what constitutes a broad range of payment account offers covering a significant part of the market, by assessing, for example, how many payment service providers exist and therefore whether a simple majority or less would be sufficient and/or market share and/or their geographic location. A comparison website should compare the fees payable for services contained in the list of most representative services linked to payment accounts, integrating Union-level terminology.It is appropriate that Member States should be able to require such websites to compare other information, for example information on determinants of the level of services provided by payment service providers, such as the number and location of branches or automated teller machines. Where there is only one website in a Member State and that website ceases to operate or ceases to comply with the quality criteria, the Member State should ensure that consumers have access within a reasonable time to another comparison website at national level."
+        },
+        {
+            "eId": "recs_1__rec_(24)",
+            "text": "It is current practice for payment service providers to offer a payment account in a package with products or services other than services linked to a payment account, such as insurance products or financial advice. That practice can be a means for payment service providers to diversify their offers and to compete against each other, and in the end it can be beneficial for consumers. However, the Commission’s 2009 study on tying practices in the financial sector, as well as relevant consultations and consumer complaints, have shown that payment service providers may offer payment accounts packaged with products not requested by consumers which are not essential for payment accounts, such as household insurance. Moreover, it has been observed that those practices may reduce transparency and comparability of prices, limit purchasing options for consumers and negatively impact upon their mobility. Therefore, Member States should ensure that when payment service providers offer packaged payment accounts consumers are provided with information on whether it is possible to purchase the payment account separately and if so, provide separate information regarding the applicable costs and fees associated with each of the other products or services included in the package that can be purchased separately."
+        },
+        {
+            "eId": "recs_1__rec_(25)",
+            "text": "The process for switching payment accounts should be harmonised across the Union. At present, existing measures at national level are extremely diverse and do not guarantee an adequate level of consumer protection in all Member States. The provision of legislative measures establishing the main principles to be followed by payment service providers when providing such a service in each Member State would improve the functioning of the internal market for both consumers and payment service providers. On the one hand, it would guarantee a level playing field for consumers who may be interested in opening a payment account in a different Member State, as it would ensure that an equivalent level of protection is offered. On the other hand, it would reduce the differences between the regulatory measures in place at national level and would therefore reduce the administrative burden for payment service providers which intend to offer their services on a cross-border basis. As a consequence, the measures on switching would facilitate the provision of services related to payment accounts within the internal market."
+        },
+        {
+            "eId": "recs_1__rec_(26)",
+            "text": "Switching should not imply the transfer of the contract from the transferring payment service provider to the receiving payment service provider."
+        },
+        {
+            "eId": "recs_1__rec_(27)",
+            "text": "Consumers only have an incentive to switch payment accounts if the process does not entail an excessive administrative and financial burden. Therefore, payment service providers should offer to consumers a clear, quick and safe procedure to switch payment accounts, including payment accounts with basic features. Such a procedure should be guaranteed when consumers want to switch from one payment service provider to another, and also when consumers want to switch between different payment accounts within the same payment service provider. This would allow consumers to benefit from the most convenient offers on the market and to easily change from their existing payment account to other potentially more suitable ones, irrespective of whether this occurs within the same payment service provider or between different payment service providers. Any fees charged by payment service providers in relation to the switching service should be reasonable and in line with the actual cost incurred by payment service providers."
+        },
+        {
+            "eId": "recs_1__rec_(28)",
+            "text": "Member States should be allowed, with regard to switching where both payment service providers are located in their territory, to establish or maintain arrangements that differ from those provided for in this Directive if this is clearly in the interests of the consumer."
+        },
+        {
+            "eId": "recs_1__rec_(29)",
+            "text": "The switching process should be as straightforward as possible for the consumer. Accordingly, Member States should ensure that the receiving payment service provider is responsible for initiating and managing the process on behalf of the consumer. Member States should be able to use additional means, such as a technical solution, when establishing the switching service. Such additional means may exceed the requirements of this Directive; for example, the switching service may be provided in a shorter time-frame or payment service providers may be required to ensure, upon a consumer’s request, the automated or manual routing of credit transfers received on the former payment account to the new payment account for a set limited period starting from receipt of the authorisation to switch. Such additional means may also be used by payment service providers on a voluntary basis even where this is not required by a Member State."
+        },
+        {
+            "eId": "recs_1__rec_(30)",
+            "text": "Consumers should be allowed to ask the receiving payment service provider to switch all or part of the incoming credit transfers, standing orders for credit transfers or direct debit mandates, ideally within a single meeting with the receiving payment service provider. To that end, consumers should be able to sign one authorisation giving consent to each of the abovementioned tasks. Member States could require that the authorisation from the consumer be in writing, but could also choose to accept equivalent means where appropriate, for example where an automated system for switching is in place. Before giving the authorisation, the consumer should be informed of all the steps of the procedure necessary to complete the switching. For example, the authorisation could include all the tasks that form part of the switching service and could allow for the possibility of the consumer choosing only some of those tasks."
+        },
+        {
+            "eId": "recs_1__rec_(31)",
+            "text": "The cooperation of the transferring payment service provider is necessary in order for the switching to be successful. The receiving payment service provider should be provided by the transferring payment service provider with all the information necessary to reinstate the payments on the other payment account. However, such information should not exceed what is necessary in order to carry out the switching."
+        },
+        {
+            "eId": "recs_1__rec_(32)",
+            "text": "In order to facilitate cross-border account-opening, the consumer should be allowed to ask the new payment service provider to set up on the new payment account all or part of standing orders for credit transfers, accept direct debits from the date specified by the consumer, and provide the consumer with information giving details of the new payment account, preferably within a single meeting with the new payment service provider."
+        },
+        {
+            "eId": "recs_1__rec_(33)",
+            "text": "Consumers should not be subject to financial losses, including charges and interest, caused by any mistakes made by either of the payment service providers involved in the switching process. In particular, consumers should not bear any financial loss deriving from the payment of additional fees, interest or other charges as well as fines, penalties or any other type of financial detriment due to delay in the execution of the payment."
+        },
+        {
+            "eId": "recs_1__rec_(34)",
+            "text": "Member States should guarantee that consumers who intend to open a payment account are not discriminated against on the basis of their nationality or place of residence. While it is important for credit institutions to ensure that their customers are not using the financial system for illegal purposes such as fraud, money laundering or terrorism financing, they should not impose barriers to consumers who want to benefit from the advantages of the internal market by opening and using payment accounts on a cross-border basis. Therefore, the provisions of Directive 2005/60/EC of the European Parliament and of the Council should not be used as a pretext for rejecting commercially less attractive consumers."
+        },
+        {
+            "eId": "recs_1__rec_(35)",
+            "text": "Consumers who are legally resident in the Union should not be discriminated against by reason of their nationality or place of residence, or on any other ground referred to in Article 21 of the Charter of Fundamental Rights of the European Union (the Charter"
+        },
+        {
+            "eId": "recs_1__rec_(36)",
+            "text": "Consumers who are legally resident in the Union and who do not hold a payment account in a certain Member State should be in a position to open and use a payment account with basic features in that Member State. The concept of legally resident in the Unionlegally resident in the Union, Council Directive 2003/109/EC, Council Regulation (EC) No 859/2003 and Directive 2004/38/EC of the European Parliament and of the Council. It should also include people seeking asylum under the Geneva Convention of 28 July 1951 Relating to the Status of Refugees, the Protocol thereto of 31 January 1967 and other relevant international treaties. Furthermore, Member States should be able to extend the concept of"
+        },
+        {
+            "eId": "recs_1__rec_(37)",
+            "text": "Member States should be able, in full respect of the fundamental freedoms guaranteed by the Treaties, to require consumers who wish to open a payment account with basic features in their territory to show a genuine interest in doing so. Without prejudice to the requirements adopted in conformity with Directive 2005/60/EC to prevent money laundering, physical attendance at the premises of the credit institutions should not be required in order to show such a genuine interest."
+        },
+        {
+            "eId": "recs_1__rec_(38)",
+            "text": "Member States should ensure that the number of credit institutions offering payment accounts with basic features is sufficient to ensure the reach of all consumers, to avoid any kind of discrimination against them and to prevent distortions of competition. When determining the sufficient number of credit institutions, the factors to be taken into account should include the coverage of the network of the credit institutions, the size of the territory of the Member State, the distribution of consumers on the territory, the market share of the credit institutions and whether payment accounts with basic features represent only a small part of the payment accounts provided by the credit institution. In principle, payment accounts with basic features should be offered by as many credit institutions as possible, with a view to guaranteeing that consumers can open such accounts at premises of a credit institution that is within close reach of their place of residence and that consumers are in no way discriminated against when accessing such accounts and can use them effectively. In particular, Member States should ensure that there is no visible discrimination illustrated by, for example, a different appearance of the card, a different account number or a different card number. However, it should be possible for a Member State to envisage that payment accounts with basic features are offered by a smaller number of credit institutions, but this should be justified on the basis that, for example, those credit institutions have such a widespread presence on the territory of that Member State that they could serve all consumers without forcing them to travel too far away from their home to reach them. Moreover, consumers accessing payment accounts with basic features should not be stigmatised in any way, and that objective can be better achieved if a larger number of credit institutions are designated."
+        },
+        {
+            "eId": "recs_1__rec_(39)",
+            "text": "Member States should be able to put in place mechanisms to assist consumers with no fixed address, asylum seekers and consumers who are not granted a residence permit, but whose expulsion is impossible for legal or factual reasons, to fully benefit from this Directive."
+        },
+        {
+            "eId": "recs_1__rec_(40)",
+            "text": "When allowing credit institutions to provide, at the request of a consumer, an overdraft facility in relation to a payment account with basic features, Member States should be able to define a maximum amount and a maximum duration of any such overdraft. Member States should also ensure that information concerning any related fees is communicated to consumers in a transparent manner. Finally, credit institutions should comply with Directive 2008/48/EC when offering overdraft facilities in conjunction with a payment account with basic features."
+        },
+        {
+            "eId": "recs_1__rec_(41)",
+            "text": "In order for users of payment accounts with basic features to be served in an appropriate way, Member States should require credit institutions to ensure that relevant staff are adequately trained and that potential conflicts of interest do not affect those customers negatively."
+        },
+        {
+            "eId": "recs_1__rec_(42)",
+            "text": "Member States should be able to permit credit institutions to refuse the opening of a payment account with basic features for consumers who already hold an active and at least equivalent payment account in the same Member State. In order to verify whether or not a consumer already holds a payment account, credit institutions should be able to rely on a declaration of honour provided by the consumer."
+        },
+        {
+            "eId": "recs_1__rec_(43)",
+            "text": "Member States should ensure that credit institutions process applications for a payment account with basic features within the deadlines laid down in this Directive and that, in the event of refusal of such an application, the credit institutions inform the consumer of the specific reasons for the refusal unless such disclosure would be contrary to national security, public policy or Directive 2005/60/EC"
+        },
+        {
+            "eId": "recs_1__rec_(44)",
+            "text": "Consumers should be guaranteed access to a range of basic payment services. Services linked to payment accounts with basic features should include the facility to place funds and withdraw cash. Consumers should be able to undertake essential payment transactions such as receiving income or benefits, paying bills or taxes and purchasing goods and services, including via direct debit, credit transfer and the use of a payment card. Such services should allow the purchase of goods and services online and should give consumers the opportunity to initiate payment orders via the credit institution’s online facility, where available. However, a payment account with basic features should not be restricted to online usage as this would create an obstacle for consumers without internet access. Member States should ensure, with respect to the services related to opening, operating and closing the payment account as well as placing funds and withdrawing cash and undertaking payment transactions with payment cards, with the exclusion of credit cards, that there are no limits to the number of operations which will be available to the consumer under the specific pricing rules laid down in this Directive. With respect to the execution of credit transfers and direct debits, as well as transactions made by means of a credit card, linked to the payment account with basic features, Member States should be able to determine a minimum number of operations, which will be available to the consumer under the specific pricing rules laid down in this Directive, provided that the services to which those operations relate are for the personal use of the consumer. In determining what should be considered as personal use, Member States should take into account existing consumer behaviour and common commercial practice. The fees charged for operations above the minimum number of operations should never be higher than those charged under the usual pricing policy of the credit institution."
+        },
+        {
+            "eId": "recs_1__rec_(45)",
+            "text": "In the process of identifying the services to be offered with a payment account with basic features and the minimum number of operations to be included, national specificities should be taken into account. In particular, certain services may be considered essential in guaranteeing full use of a payment account in a certain Member State, due to their widespread use at the national level. For example, in some Member States consumers still widely use cheques, while that means of payment is very rarely used in other Member States. This Directive should therefore allow Member States to identify additional services that are considered essential at national level and which should be provided with a payment account with basic features in the Member State concerned. Also, Member States should ensure that the fees charged by credit institutions for the offer of such additional services in relation to a payment account with basic features are reasonable."
+        },
+        {
+            "eId": "recs_1__rec_(46)",
+            "text": "In order to ensure that payment accounts with basic features are available to the widest possible range of consumers, they should be offered free of charge or for a reasonable fee. To encourage unbanked vulnerable consumers to participate in the retail banking market, Member States should be able to provide that payment accounts with basic features are to be offered to those consumers on particularly advantageous terms, such as free of charge. Member States should be free to define the mechanism to identify those consumers that can benefit from payment accounts with basic features on more advantageous terms, provided that the mechanism ensures that vulnerable consumers can access a payment account with basic features. In any event, such an approach should be without prejudice to the right of all consumers, including non-vulnerable ones, to access payment accounts with basic features at least at a reasonable fee. Furthermore, any additional charges to the consumer for non-compliance with the terms laid down in the contract should be reasonable. Member States should establish what constitutes a reasonable charge according to national circumstances."
+        },
+        {
+            "eId": "recs_1__rec_(47)",
+            "text": "Credit institutions should refuse to open or should terminate a contract for a payment account with basic features only in specific circumstances, such as non-compliance with the legislation on money laundering and terrorist financing or on the prevention and investigation of crimes. Even in those cases, a refusal can only be justified where the consumer does not comply with that legislation and not because the procedure to check compliance with the legislation is too burdensome or costly. However, there could be cases where a consumer abuses his right to open and use a payment account with basic features. For example, a Member State should be able to permit credit institutions to take measures against consumers who have committed a crime, such as a serious fraud against a credit institution, with a view to avoiding a recurrence of such a crime. Such measures may include, for example, limiting access by that consumer to a payment account with basic features for a certain period of time. Besides, there may be cases in which the previous refusal of an application for a payment account may be necessary in order to identify consumers who could benefit from a payment account on more advantageous terms. In such a case, the credit institution should inform the consumer that he may use a specific mechanism in the event of refusal of an application for a payment account for which a fee is charged as provided for in this Directive to obtain access to a payment account with basic features that is free of charge. Both such additional cases should, however, be limited, specific and based on precisely identified provisions of national law. When identifying additional cases in which credit institutions can refuse to offer payment accounts to consumers, Member States should be able to include, inter alia, grounds of public security or public policy."
+        },
+        {
+            "eId": "recs_1__rec_(48)",
+            "text": "Clear and comprehensible information on the right to open and use a payment account with basic features should be provided by Member States and credit institutions to consumers. Member States should ensure that communication measures are well-targeted and, in particular, that they reach out to unbanked, vulnerable and mobile consumers. Credit institutions should actively make available to consumers accessible information and adequate assistance about the specific features of the payment account with basic features on offer, their associated fees and their conditions of use, and also the steps consumers should take to exercise their right to open a payment account with basic features. In particular, consumers should be informed that the purchase of additional services is not compulsory in order to access a payment account with basic features."
+        },
+        {
+            "eId": "recs_1__rec_(49)",
+            "text": "Member States should promote measures that support the education of the most vulnerable consumers, providing them with guidance and assistance in the responsible management of their finances. Information also needs to be provided regarding the guidance that consumer organisations and national authorities may provide to consumers. Furthermore, Member States should encourage initiatives by credit institutions seeking to combine the provision of a payment account with basic features and independent financial education services."
+        },
+        {
+            "eId": "recs_1__rec_(50)",
+            "text": "In order to facilitate the ability of payment service providers to provide their services on a cross-border basis, for the purposes of cooperation, information exchange and dispute resolution between competent authorities, the competent authorities responsible for the enforcement of this Directive should be those acting under the auspices of EBA, as set out in Regulation (EU) No 1093/2010, or other national authorities provided that they cooperate with the authorities acting under the auspices of EBA in order to carry out their duties under this Directive."
+        },
+        {
+            "eId": "recs_1__rec_(51)",
+            "text": "Member States should designate competent authorities empowered to ensure enforcement of this Directive, and ensure that they are granted investigation and enforcement powers and adequate resources necessary for the performance of their duties. Competent authorities could act for certain aspects of this Directive by application to courts competent to grant a legal decision, including, where appropriate, by appeal. This could enable Member States, in particular where provisions of this Directive were transposed into civil law, to leave the enforcement of those provisions to the relevant bodies and to the courts. Member States should be able to designate different competent authorities in order to enforce the wide-ranging obligations laid down in this Directive. For instance, for some provisions, Member States could designate competent authorities responsible for the enforcement of consumer protection, while for others, they could decide to designate prudential supervisors. The option to designate different competent authorities should not affect the obligations for ongoing supervision and cooperation between the competent authorities, as provided for in this Directive."
+        },
+        {
+            "eId": "recs_1__rec_(52)",
+            "text": "Consumers should have access to effective and efficient alternative dispute resolution procedures for the settlement of disputes arising out of rights and obligations established under this Directive. Such access is already ensured by Directive 2013/11/EU of the European Parliament and of the Council in so far as relevant contractual disputes are concerned. However, consumers should also have access to alternative dispute resolution procedures in the event of pre-contractual disputes concerning rights and obligations established by this Directive, for example when they are denied access to a payment account with basic features. This Directive therefore provides that consumers should have access to alternative dispute resolution procedures for the settlement of disputes concerning rights and obligations established by this Directive, without distinguishing between contractual and pre-contractual disputes. Such alternative dispute resolution procedures and the entities offering them should comply with the quality requirements established by Directive 2013/11/EU. Compliance with this Directive requires the processing of consumers’ personal data. Such processing is subject to Directive 95/46/EC of the European Parliament and of the Council. This Directive should therefore comply with the rules laid down in Directive 95/46/EC"
+        },
+        {
+            "eId": "recs_1__rec_(53)",
+            "text": "On a biennial basis, and for the first time within four years from the entry into force of this Directive, Member States should obtain reliable annual statistics on the functioning of the measures introduced by this Directive. They should use any relevant sources of information and communicate that information to the Commission. The Commission should provide a report on the basis of the information received from the Member States for the first time after four years from the entry into force of this Directive and thereafter biennially."
+        },
+        {
+            "eId": "recs_1__rec_(54)",
+            "text": "A review of this Directive should be carried out five years after its entry into force in order to take account of market developments, such as the emergence of new types of payment accounts and payment services, as well as developments in other areas of Union law and the experiences of Member States. The report based on the review should include a list of infringement proceedings initiated by the Commission in relation to this Directive. It should also include an assessment of the average fee levels in Member States for payment accounts falling within the scope of this Directive, of the question whether the measures introduced have improved consumer understanding of payment account fees, the comparability of payment accounts and the ease of switching payment accounts and of the number of account holders who have switched payment accounts since the transposition of this Directive.It should also analyse the number of providers offering payment accounts with basic features and the number of such accounts that have been opened, including by previously unbanked consumers, examples of best practices among Member States for reducing consumer exclusion from access to payment services, and the average annual fees levied for payment accounts with basic features. It should also assess the costs and benefits of implementing Union-wide portability of payment accounts, the feasibility of a framework for ensuring automated redirection of payments from one payment account to another within the same Member State combined with automated notifications to payees or payers when their transfers are redirected, and of extending the switching services to cases where the receiving and transferring payment service provider are located in different Member States. It should also include an assessment of the effectiveness of existing measures and the need for additional measures to increase financial inclusion and to assist vulnerable members of society in relation to over-indebtedness. Also, it should assess whether the provisions on the information to be provided by payment service providers when offering packaged products are sufficient or whether additional measures are needed. It should also assess the need for additional measures with regard to comparison websites and the need for an accreditation of comparison websites. The Commission should submit that report to the European Parliament and to the Council accompanied, if appropriate, by legislative proposals."
+        },
+        {
+            "eId": "recs_1__rec_(55)",
+            "text": "This Directive respects fundamental rights and observes the principles recognised by the Charter in accordance with Article 6(1) of Treaty on European Union (TEU)."
+        },
+        {
+            "eId": "recs_1__rec_(56)",
+            "text": "Since the objectives of this Directive, namely to facilitate the transparency and comparability of fees related to payment accounts, payment account switching and access to payment accounts with basic features, cannot be sufficiently achieved by the Member States but can rather, due to the need to overcome market fragmentation and ensure a level-playing field in the Union, be better achieved at Union level, the Union may adopt measures, in accordance with the principle of subsidiarity as set out in Article 5 of the TEU. In accordance with the principle of proportionality, as set out in that Article, this Directive does not go beyond what is necessary in order to achieve those objectives."
+        },
+        {
+            "eId": "recs_1__rec_(57)",
+            "text": "In accordance with the Joint Political Declaration of 28 September 2011 of Member States and the Commission on explanatory documents, Member States have undertaken to accompany, in justified cases, the notification of their transposition measures with one or more documents explaining the relationship between the components of a directive and the corresponding parts of national transposition instruments. With regard to this Directive, the legislator considers the transmission of such documents to be justified."
+        },
+        {
+            "eId": "recs_1__rec_(58)",
+            "text": "The European Data Protection Supervisor has been consulted,"
+        }
+    ],
+    "preamble_final": "HAVE ADOPTED THIS DIRECTIVE:",
+    "chapters": [
+        {
+            "eId": "chp_I",
+            "num": "CHAPTER I",
+            "heading": "SUBJECT MATTER, SCOPE AND DEFINITIONS"
+        },
+        {
+            "eId": "chp_II",
+            "num": "CHAPTER II",
+            "heading": "COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS"
+        },
+        {
+            "eId": "chp_III",
+            "num": "CHAPTER III",
+            "heading": "SWITCHING"
+        },
+        {
+            "eId": "chp_IV",
+            "num": "CHAPTER IV",
+            "heading": "ACCESS TO PAYMENT ACCOUNTS"
+        },
+        {
+            "eId": "chp_V",
+            "num": "CHAPTER V",
+            "heading": "COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION"
+        },
+        {
+            "eId": "chp_VI",
+            "num": "CHAPTER VI",
+            "heading": "SANCTIONS"
+        },
+        {
+            "eId": "chp_VII",
+            "num": "CHAPTER VII",
+            "heading": "FINAL PROVISIONS"
+        }
+    ],
+    "articles": [
+        {
+            "eId": "chp_I__art_1",
+            "num": "Article 1",
+            "heading": "Subject matter and scope",
+            "children": [
+                {
+                    "eId": "chp_I__art_1__para_1.__al_1",
+                    "text": "This Directive lays down rules concerning the transparency and comparability of fees charged to consumers on their payment accounts held within the Union, rules concerning the switching of payment accounts within a Member State and rules to facilitate cross-border payment account-opening for consumers."
+                },
+                {
+                    "eId": "chp_I__art_1__para_2.__al_1",
+                    "text": "This Directive also defines a framework for the rules and conditions according to which Member States are required to guarantee a right for consumers to open and use payment accounts with basic features in the Union."
+                },
+                {
+                    "eId": "chp_I__art_1__para_3.__al_1",
+                    "text": "Chapters II and III apply to payment service providers."
+                },
+                {
+                    "eId": "chp_I__art_1__para_4.__al_1",
+                    "text": "Chapter IV applies to credit institutions."
+                },
+                {
+                    "eId": "chp_I__art_1__para_4.__al_2",
+                    "text": "Member States may decide to apply Chapter IV to payment service providers other than credit institutions."
+                },
+                {
+                    "eId": "chp_I__art_1__para_5.__al_1",
+                    "text": "Member States may decide not to apply all or part of this Directive to the entities referred to in Article 2(5) of Directive 2013/36/EU of the European Parliament and of the Council"
+                },
+                {
+                    "eId": "chp_I__art_1__para_6.__list_1__intro_1",
+                    "text": "This Directive applies to payment accounts through which consumers are able at least to:"
+                },
+                {
+                    "eId": "chp_I__art_1__para_6.__list_1__point_(a)",
+                    "text": "place funds in a payment account;"
+                },
+                {
+                    "eId": "chp_I__art_1__para_6.__list_1__point_(b)",
+                    "text": "withdraw cash from a payment account;"
+                },
+                {
+                    "eId": "chp_I__art_1__para_6.__list_1__point_(c)",
+                    "text": "execute and receive payment transactions, including credit transfers, to and from a third party."
+                },
+                {
+                    "eId": "chp_I__art_1__para_6.__al_1",
+                    "text": "Member States may decide to apply all or part of this Directive to payment accounts other than those referred to in the first subparagraph."
+                },
+                {
+                    "eId": "chp_I__art_1__para_7.__al_1",
+                    "text": "The opening and use of a payment account with basic features pursuant to this Directive shall be in conformity with Directive 2005/60/EC"
+                }
+            ]
+        },
+        {
+            "eId": "chp_I__art_2",
+            "num": "Article 2",
+            "heading": "Definitions",
+            "children": [
+                {
+                    "eId": "chp_I__art_2__list_1__intro_1",
+                    "text": "For the purposes of this Directive, the following definitions apply:"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(1)",
+                    "text": "consumer"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(2)",
+                    "text": "legally resident in the Union28 July 1951 Relating to the Status of Refugees, the Protocol thereto of 31 January 1967 and other relevant international treaties;"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(3)",
+                    "text": "payment account"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(4)",
+                    "text": "payment service"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(5)",
+                    "text": "payment transaction"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(6)",
+                    "text": "services linked to the payment account"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(7)",
+                    "text": "payment service provider"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(8)",
+                    "text": "credit institution;"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(9)",
+                    "text": "payment instrument"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(10)",
+                    "text": "transferring payment service provider"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(11)",
+                    "text": "receiving payment service provider"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(12)",
+                    "text": "payment order"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(13)",
+                    "text": "payer"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(14)",
+                    "text": "payee"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(15)",
+                    "text": "fees"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(16)",
+                    "text": "credit interest rate"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(17)",
+                    "text": "durable medium"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(18)",
+                    "text": "switching service"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(19)",
+                    "text": "direct debit"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(20)",
+                    "text": "credit transfer"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(21)",
+                    "text": "standing order"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(22)",
+                    "text": "funds;"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(23)",
+                    "text": "framework contract"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(24)",
+                    "text": "business day"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(25)",
+                    "text": "overdraft facility"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(26)",
+                    "text": "overrunning"
+                },
+                {
+                    "eId": "chp_I__art_2__list_1__point_(27)",
+                    "text": "competent authority"
+                }
+            ]
+        },
+        {
+            "eId": "chp_II__art_3",
+            "num": "Article 3",
+            "heading": "List of the most representative services linked to a payment account and subject to a fee at national level and standardised terminology",
+            "children": [
+                {
+                    "eId": "chp_II__art_3__para_1.__al_1",
+                    "text": "Member States shall establish a provisional list of at least 10 and no more than 20 of the most representative services linked to a payment account and subject to a fee, offered by at least one payment service provider at national level. The list shall contain terms and definitions for each of the services identified. In any official language of a Member State, only one term shall be used for each service."
+                },
+                {
+                    "eId": "chp_II__art_3__para_2.__list_1__intro_1",
+                    "text": "For the purposes of paragraph 1, the Member States shall have regard to the services that:"
+                },
+                {
+                    "eId": "chp_II__art_3__para_2.__list_1__point_(a)",
+                    "text": "are most commonly used by consumers in relation to their payment account;"
+                },
+                {
+                    "eId": "chp_II__art_3__para_2.__list_1__point_(b)",
+                    "text": "generate the highest cost for consumers, both overall as well as per unit."
+                },
+                {
+                    "eId": "chp_II__art_3__para_2.__al_1",
+                    "text": "In order to ensure the sound application of the criteria set out in the first subparagraph of this paragraph, EBA shall issue guidelines pursuant to Article 16 of Regulation (EU) No 1093/2010 by 18 March 2015"
+                },
+                {
+                    "eId": "chp_II__art_3__para_3.__al_1",
+                    "text": "Member States shall notify to the Commission and to EBA the provisional lists referred to in paragraph 1 by 18 September 2015. On request, Member States shall provide the Commission with supplementary information concerning the data on the basis of which they have compiled those lists with regard to the criteria set out in paragraph 2."
+                },
+                {
+                    "eId": "chp_II__art_3__para_4.__al_1",
+                    "text": "On the basis of the provisional lists notified pursuant to paragraph 3, EBA shall develop draft regulatory technical standards setting out the Union standardised terminology for those services that are common to at least a majority of Member States. The Union standardised terminology shall include common terms and definitions for the common services and shall be made available in the official languages of the institutions of the Union. In any official language of a Member State, only one term shall be used for each service."
+                },
+                {
+                    "eId": "chp_II__art_3__para_4.__al_2",
+                    "text": "EBA shall submit those draft regulatory technical standards to the Commission by 18 September 2016"
+                },
+                {
+                    "eId": "chp_II__art_3__para_4.__al_3",
+                    "text": "Power is delegated to the Commission to adopt the regulatory technical standards referred to in the first subparagraph in accordance with the procedure laid down in Articles 10 to 14 of Regulation (EU) No 1093/2010"
+                },
+                {
+                    "eId": "chp_II__art_3__para_5.__al_1",
+                    "text": "Member States shall integrate the Union standardised terminology established under paragraph 4 into the provisional list referred to in paragraph 1 and shall publish the resulting final list of the most representative services linked to a payment account without delay and at the latest within three months after the delegated act referred to in paragraph 4 has entered into force."
+                },
+                {
+                    "eId": "chp_II__art_3__para_6.__al_1",
+                    "text": "Every four years, following publication of the final list referred to in paragraph 5, Member States shall assess and, where appropriate, update the list of the most representative services established pursuant to paragraphs 1 and 2. They shall notify to the Commission and to EBA the outcome of their assessment and, where applicable, of the updated list of the most representative services. EBA shall review and, where necessary, update the Union standardised terminology, in accordance with the process set out in paragraph 4. Upon the Union standardised terminology being updated, Member States shall update and publish their final list as referred to in paragraph 5 and shall ensure that payment service providers use the updated terms and definitions."
+                }
+            ]
+        },
+        {
+            "eId": "chp_II__art_4",
+            "num": "Article 4",
+            "heading": "Fee information document and glossary",
+            "children": [
+                {
+                    "eId": "chp_II__art_4__para_1.__al_1",
+                    "text": "Without prejudice to Article 42(3) of Directive 2007/64/EC and Chapter II of Directive 2008/48/EC"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__intro_1",
+                    "text": "The fee information document shall:"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(a)",
+                    "text": "be a short and stand-alone document;"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(b)",
+                    "text": "be presented and laid out in a way that is clear and easy to read, using characters of a readable size;"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(c)",
+                    "text": "be no less comprehensible in the event that, having been originally produced in colour, it is printed or photocopied in black and white;"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(d)",
+                    "text": "be written in the official language of the Member State where the payment account is offered or, if agreed by the consumer and the payment service provider, in another language;"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(e)",
+                    "text": "be accurate, not misleading and expressed in the currency of the payment account or, if agreed by the consumer and the payment service provider, in another currency of the Union;"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(f)",
+                    "text": "contain the title fee information document"
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__list_1__point_(g)",
+                    "text": "include a statement that it contains fees for the most representative services related to the payment account and that complete pre-contractual and contractual information on all the services is provided in other documents."
+                },
+                {
+                    "eId": "chp_II__art_4__para_2.__al_1",
+                    "text": "Member States may determine that, for the purposes of paragraph 1, the fee information document shall be provided together with information required pursuant to other Union or national legislative acts on payment accounts and related services on the condition that all the requirements of the first subparagraph of this paragraph are met."
+                },
+                {
+                    "eId": "chp_II__art_4__para_3.__al_1",
+                    "text": "Where one or more services are offered as part of a package of services linked to a payment account, the fee information document shall disclose the fee for the entire package, the services included in the package and their quantity, and the additional fee for any service that exceeds the quantity covered by the package fee."
+                },
+                {
+                    "eId": "chp_II__art_4__para_4.__al_1",
+                    "text": "Member States shall establish an obligation for payment service providers to make available to consumers a glossary of at least the standardised terms set out in the final list referred to in Article 3(5) and the related definitions."
+                },
+                {
+                    "eId": "chp_II__art_4__para_4.__al_2",
+                    "text": "Member States shall ensure that the glossary provided pursuant to the first subparagraph, including other definitions, if any, is drafted in clear, unambiguous and non-technical language and that it is not misleading."
+                },
+                {
+                    "eId": "chp_II__art_4__para_5.__al_1",
+                    "text": "The fee information document and the glossary shall be made available to consumers at any time by payment service providers. They shall be provided in an easily accessible manner, including to non-customers, in electronic form on their websites where available and in the premises of payment service providers accessible to consumers. They shall also be provided on paper or another durable medium free of charge upon request by a consumer."
+                },
+                {
+                    "eId": "chp_II__art_4__para_6.__al_1",
+                    "text": "EBA, after consulting national authorities and after consumer testing, shall develop draft implementing technical standards regarding a standardised presentation format of the fee information document and its common symbol."
+                },
+                {
+                    "eId": "chp_II__art_4__para_6.__al_2",
+                    "text": "EBA shall submit those draft implementing technical standards to the Commission by 18 September 2016."
+                },
+                {
+                    "eId": "chp_II__art_4__para_6.__al_3",
+                    "text": "Power is conferred on the Commission to adopt the implementing technical standards referred to in the first subparagraph of this paragraph in accordance with Article 15 of Regulation (EU) No 1093/2010"
+                },
+                {
+                    "eId": "chp_II__art_4__para_7.__al_1",
+                    "text": "Following the updating of the Union standardised terminology pursuant to Article 3(6), EBA shall, where necessary, review and update the standardised presentation format of the fee information document and its common symbol, following the procedure set out in paragraph 6 of this Article."
+                }
+            ]
+        },
+        {
+            "eId": "chp_II__art_5",
+            "num": "Article 5",
+            "heading": "Statement of fees",
+            "children": [
+                {
+                    "eId": "chp_II__art_5__para_1.__al_1",
+                    "text": "Without prejudice to Articles 47 and 48 of Directive 2007/64/EC and Article 12 of Directive 2008/48/EC"
+                },
+                {
+                    "eId": "chp_II__art_5__para_1.__al_2",
+                    "text": "The communication channel used to provide the statement of fees shall be agreed with the consumer. The statement of fees shall be provided on paper at least upon the request of the consumer."
+                },
+                {
+                    "eId": "chp_II__art_5__para_2.__list_1__intro_1",
+                    "text": "The statement of fees shall specify at least the following information:"
+                },
+                {
+                    "eId": "chp_II__art_5__para_2.__list_1__point_(a)",
+                    "text": "the unit fee charged for each service and the number of times the service was used during the relevant period, and where the services are combined in a package, the fee charged for the package as a whole, the number of times the package fee was charged during the relevant period and the additional fee charged for any service exceeding the quantity covered by the package fee;"
+                },
+                {
+                    "eId": "chp_II__art_5__para_2.__list_1__point_(b)",
+                    "text": "the total amount of fees incurred during the relevant period for each service, each package of services provided and services exceeding the quantity covered by the package fee;"
+                },
+                {
+                    "eId": "chp_II__art_5__para_2.__list_1__point_(c)",
+                    "text": "the overdraft interest rate applied to the payment account and the total amount of interest charged relating to the overdraft during the relevant period, where applicable;"
+                },
+                {
+                    "eId": "chp_II__art_5__para_2.__list_1__point_(d)",
+                    "text": "the credit interest rate applied to the payment account and the total amount of interest earned during the relevant period, where applicable;"
+                },
+                {
+                    "eId": "chp_II__art_5__para_2.__list_1__point_(e)",
+                    "text": "the total amount of fees charged for all services provided during the relevant period."
+                },
+                {
+                    "eId": "chp_II__art_5__para_3.__list_1__intro_1",
+                    "text": "The statement of fees shall:"
+                },
+                {
+                    "eId": "chp_II__art_5__para_3.__list_1__point_(a)",
+                    "text": "be presented and laid out in a way that is clear and easy to read, using characters of a readable size;"
+                },
+                {
+                    "eId": "chp_II__art_5__para_3.__list_1__point_(b)",
+                    "text": "be accurate, not misleading and expressed in the currency of the payment account or, if agreed by the consumer and the payment service provider, in another currency;"
+                },
+                {
+                    "eId": "chp_II__art_5__para_3.__list_1__point_(c)",
+                    "text": "contain the title statement of fees"
+                },
+                {
+                    "eId": "chp_II__art_5__para_3.__list_1__point_(d)",
+                    "text": "be written in the official language of the Member State where the payment account is offered or, if agreed by the consumer and the payment service provider, in another language."
+                },
+                {
+                    "eId": "chp_II__art_5__para_3.__al_1",
+                    "text": "Member Stes may determine that the statement of fees shall be provided together with information required pursuant to other Union or national legislative acts on payment accounts and related services as long as all the requirements of the first subparagraph are met."
+                },
+                {
+                    "eId": "chp_II__art_5__para_4.__al_1",
+                    "text": "EBA, after consulting national authorities and after consumer testing, shall develop implementing technical standards regarding a standardised presentation format of the statement of fees and its common symbol."
+                },
+                {
+                    "eId": "chp_II__art_5__para_4.__al_2",
+                    "text": "EBA shall submit the draft implementing technical standards referred to in the first subparagraph to the Commission by 18 September 2016."
+                },
+                {
+                    "eId": "chp_II__art_5__para_4.__al_3",
+                    "text": "Power is conferred on the Commission to adopt the implementing technical standards referred to in the first subparagraph of this paragraph in accordance with Article 15 of Regulation (EU) No 1093/2010"
+                },
+                {
+                    "eId": "chp_II__art_5__para_5.__al_1",
+                    "text": "Following the updating of the Union standardised terminology pursuant to Article 3(6), EBA shall, where necessary, review and update the standardised presentation format of the statement of fees and its common symbol, following the procedure set out in paragraph 4 of this Article."
+                }
+            ]
+        },
+        {
+            "eId": "chp_II__art_6",
+            "num": "Article 6",
+            "heading": "Information for consumers",
+            "children": [
+                {
+                    "eId": "chp_II__art_6__para_1.__al_1",
+                    "text": "Member States shall ensure that in their contractual, commercial and marketing information to consumers, payment service providers use, where applicable, the standardised terms set out in the final list referred to in Article 3(5). Payment service providers may use brand names in the fee information document and in the statement of fees, provided such brand names are used in addition to the standardised terms set out in the final list referred to in Article 3(5) as a secondary designation of those services."
+                },
+                {
+                    "eId": "chp_II__art_6__para_2.__al_1",
+                    "text": "Payment service providers may use brand names to designate their services in their contractual, commercial and marketing information to consumers, provided that they clearly identify, where applicable, the corresponding standardised terms set out in the final list referred to in Article 3(5)."
+                }
+            ]
+        },
+        {
+            "eId": "chp_II__art_7",
+            "num": "Article 7",
+            "heading": "Comparison websites",
+            "children": [
+                {
+                    "eId": "chp_II__art_7__para_1.__al_1",
+                    "text": "Member States shall ensure that consumers have access, free of charge, to at least one website comparing fees charged by payment service providers for at least the services included in the final list referred to in Article 3(5) at national level."
+                },
+                {
+                    "eId": "chp_II__art_7__para_1.__al_2",
+                    "text": "Comparison websites may be operated either by a private operator or by a public authority."
+                },
+                {
+                    "eId": "chp_II__art_7__para_2.__al_1",
+                    "text": "Member States may require the comparison websites referred to in paragraph 1 to include further comparative determinants relating to the level of service offered by the payment service provider."
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__intro_1",
+                    "text": "The comparison websites established in accordance with paragraph 1 shall:"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(a)",
+                    "text": "be operationally independent by ensuring that payment service providers are given equal treatment in search results;"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(b)",
+                    "text": "clearly disclose their owners;"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(c)",
+                    "text": "set out clear, objective criteria on which the comparison will be based;"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(d)",
+                    "text": "use plain and unambiguous language and, where applicable, the standardised terms set out in the final list referred to in Article 3(5);"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(e)",
+                    "text": "provide accurate and up-to-date information and state the time of the last update;"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(f)",
+                    "text": "include a broad range of payment account offers covering a significant part of the market and, where the information presented is not a complete overview of the market, a clear statement to that effect, before displaying results; and"
+                },
+                {
+                    "eId": "chp_II__art_7__para_3.__list_1__point_(g)",
+                    "text": "provide an effective procedure to report incorrect information on published fees."
+                },
+                {
+                    "eId": "chp_II__art_7__para_4.__al_1",
+                    "text": "Member States shall ensure that information is made available online about the availability of websites that comply with this Article."
+                }
+            ]
+        },
+        {
+            "eId": "chp_II__art_8",
+            "num": "Article 8",
+            "heading": "Payment accounts packaged with another product or service",
+            "children": [
+                {
+                    "eId": "chp_II__art_8__al_1",
+                    "text": "Member States shall ensure that, when a payment account is offered as part of a package together with another product or service which is not linked to a payment account, the payment service provider informs the consumer whether it is possible to purchase the payment account separately and, if so, provides separate information regarding the costs and fees associated with each of the other products and services offered in that package that can be purchased separately."
+                }
+            ]
+        },
+        {
+            "eId": "chp_III__art_9",
+            "num": "Article 9",
+            "heading": "Provision of the switching service",
+            "children": [
+                {
+                    "eId": "chp_III__art_9__al_1",
+                    "text": "Member States shall ensure that payment service providers provide a switching service as described in Article 10 between payment accounts held in the same currency to any consumer who opens or holds a payment account with a payment service provider located in the territory of the Member State concerned."
+                }
+            ]
+        },
+        {
+            "eId": "chp_III__art_10",
+            "num": "Article 10",
+            "heading": "The switching service",
+            "children": [
+                {
+                    "eId": "chp_III__art_10__para_1.__al_1",
+                    "text": "Member States shall ensure that the switching service is initiated by the receiving payment service provider at the request of the consumer. The switching service shall at least comply with paragraphs 2 to 6."
+                },
+                {
+                    "eId": "chp_III__art_10__para_1.__list_1__intro_1",
+                    "text": "Member States may establish or maintain measures alternative to those referred to in paragraphs 2 to 6, provided that:"
+                },
+                {
+                    "eId": "chp_III__art_10__para_1.__list_1__point_(a)",
+                    "text": "it is clearly in the interest of the consumer;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_1.__list_1__point_(b)",
+                    "text": "there is no additional burden for the consumer; and"
+                },
+                {
+                    "eId": "chp_III__art_10__para_1.__list_1__point_(c)",
+                    "text": "the switching is completed within, as a maximum, the same overall time-frame as that indicated in paragraphs 2 to 6."
+                },
+                {
+                    "eId": "chp_III__art_10__para_2.__al_1",
+                    "text": "The receiving payment service provider shall perform the switching service upon receipt of the authorisation from the consumer. In the case of two or more holders of the account, authorisation shall be obtained from each of them."
+                },
+                {
+                    "eId": "chp_III__art_10__para_2.__al_2",
+                    "text": "The authorisation shall be drawn up in an official language of the Member State where the switching service is being initiated or in any other language agreed between the parties."
+                },
+                {
+                    "eId": "chp_III__art_10__para_2.__al_3",
+                    "text": "The authorisation shall allow the consumer to provide specific consent to the performance by the transferring payment service provider of each of the tasks referred to in paragraph 3 and to provide specific consent to the performance by the receiving payment service provider of each of the tasks referred to in paragraph 5."
+                },
+                {
+                    "eId": "chp_III__art_10__para_2.__al_4",
+                    "text": "The authorisation shall allow the consumer to specifically identify incoming credit transfers, standing orders for credit transfers and direct debit mandates that are to be switched. The authorisation shall also allow consumers to specify the date from which standing orders for credit transfers and direct debits are to be executed from the payment account opened or held with the receiving payment service provider. That date shall be at least six business days after the date on which the receiving payment service provider receives the documents transferred from the transferring payment service provider pursuant to paragraph 4. Member States may require the authorisation from the consumer to be in writing and that a copy of the authorisation be provided to the consumer."
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__intro_1",
+                    "text": "Within two business days from receipt of the authorisation referred to in paragraph 2, the receiving payment service provider shall request the transferring payment service provider to carry out the following tasks, if provided for in the consumer’s authorisation:"
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__point_(a)",
+                    "text": "transmit to the receiving payment service provider and, if specifically requested by the consumer, to the consumer, a list of the existing standing orders for credit transfers and available information on direct debit mandates that are being switched;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__point_(b)",
+                    "text": "transmit to the receiving payment service provider and, if specifically requested by the consumer, to the consumer, the available information about recurring incoming credit transfers and creditor-driven direct debits executed on the consumer’s payment account in the previous 13 months;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__point_(c)",
+                    "text": "where the transferring payment service provider does not provide a system for automated redirection of the incoming credit transfers and direct debits to the payment account held by the consumer with the receiving payment service provider, stop accepting direct debits and incoming credit transfers with effect from the date specified in the authorisation;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__point_(d)",
+                    "text": "cancel standing orders with effect from the date specified in the authorisation;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__point_(e)",
+                    "text": "transfer any remaining positive balance to the payment account opened or held with the receiving payment service provider on the date specified by the consumer; and"
+                },
+                {
+                    "eId": "chp_III__art_10__para_3.__list_1__point_(f)",
+                    "text": "close the payment account held with the transferring payment service provider on the date specified by the consumer."
+                },
+                {
+                    "eId": "chp_III__art_10__para_4.__list_1__intro_1",
+                    "text": "Upon receipt of a request from the receiving payment service provider, the transferring payment service provider shall carry out the following tasks, if provided for in the consumer’s authorisation:"
+                },
+                {
+                    "eId": "chp_III__art_10__para_4.__list_1__point_(a)",
+                    "text": "send the receiving payment service provider the information referred to in points (a) and (b) of paragraph 3 within five business days;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_4.__list_1__point_(b)",
+                    "text": "where the transferring payment service provider does not provide a system for automated redirection of the incoming credit transfers and direct debits to the payment account held or opened by the consumer with the receiving payment service provider, stop accepting incoming credit transfers and direct debits on the payment account with effect from the date specified in the authorisation. Member States may require the transferring payment service provider to inform the payer or the payee of the reason for not accepting the payment transaction;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_4.__list_1__point_(c)",
+                    "text": "cancel standing orders with effect from the date specified in the authorisation;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_4.__list_1__point_(d)",
+                    "text": "transfer any remaining positive balance from the payment account to the payment account opened or held with the receiving payment service provider on the date specified in the authorisation;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_4.__list_1__point_(e)",
+                    "text": "without prejudice to Article 45(1) and (6) of Directive 2007/64/EC"
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__list_1__intro_1",
+                    "text": "Within five business days of receipt of the information requested from the transferring payment service provider as referred to in paragraph 3, the receiving payment service provider shall, as and if provided for in the authorisation and to the extent that the information provided by the transferring payment service provider or the consumer enables the receiving payment service provider to do so, carry out the following tasks:"
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__list_1__point_(a)",
+                    "text": "set up the standing orders for credit transfers requested by the consumer and execute them with effect from the date specified in the authorisation;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__list_1__point_(b)",
+                    "text": "make any necessary preparations to accept direct debits and accept them with effect from the date specified in the authorisation;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__list_1__point_(c)",
+                    "text": "where relevant, inform consumers of their rights pursuant to point (d) of Article 5(3) of Regulation (EU) No 260/2012"
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__list_1__point_(d)",
+                    "text": "inform payers specified in the authorisation and making recurring incoming credit transfers into a consumer’s payment account of the details of the consumer’s payment account with the receiving payment service provider and transmit to the payers a copy of the consumer’s authorisation. If the receiving payment service provider does not have all the information it needs to inform the payers, it shall ask the consumer or the transferring payment service provider to provide the missing information;"
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__list_1__point_(e)",
+                    "text": "inform payees specified in the authorisation and using a direct debit to collect funds from the consumer’s payment account of the details of the consumer’s payment account with the receiving payment service provider and the date from which direct debits are to be collected from that payment account and transmit to the payees a copy of the consumer’s authorisation. If the receiving payment service provider does not have all the information it needs to inform the payees, it shall ask the consumer or the transferring payment service provider to provide the missing information."
+                },
+                {
+                    "eId": "chp_III__art_10__para_5.__al_1",
+                    "text": "Where the consumer chooses to personally provide the information referred to in points (d) and (e) of the first subparagraph of this paragraph to the payers or payees rather than provide specific consent in accordance with paragraph 2 to the receiving payment service provider to do so, the receiving payment service provider shall provide the consumer with standard letters providing details of the payment account and the starting date specified in the authorisation within the deadline referred to in the first subparagraph of this paragraph."
+                },
+                {
+                    "eId": "chp_III__art_10__para_6.__al_1",
+                    "text": "Without prejudice to Article 55(2) of Directive 2007/64/EC, the transferring payment service provider shall not block payment instruments before the date specified in the consumer’s authorisation, so that the provision of payment services to the consumer is not interrupted in the course of the provision of the switching service."
+                }
+            ]
+        },
+        {
+            "eId": "chp_III__art_11",
+            "num": "Article 11",
+            "heading": "Facilitation of cross-border account-opening for consumers",
+            "children": [
+                {
+                    "eId": "chp_III__art_11__para_1.__list_1__intro_1",
+                    "text": "Member States shall ensure that where a consumer indicates to his payment service provider that he wishes to open a payment account with a payment service provider located in another Member State, the payment service provider with which the consumer holds a payment account shall on receipt of such request provide the following assistance to the consumer:"
+                },
+                {
+                    "eId": "chp_III__art_11__para_1.__list_1__point_(a)",
+                    "text": "provide the consumer free of charge with a list of all the currently active standing orders for credit transfers and debtor-driven direct debit mandates, where available, and with available information about recurring incoming credit transfers and creditor-driven direct debits executed on the consumer’s payment account in the previous 13 months. That list shall not entail any obligation on the part of the new payment service provider to set up services that it does not provide;"
+                },
+                {
+                    "eId": "chp_III__art_11__para_1.__list_1__point_(b)",
+                    "text": "transfer any positive balance remaining on the payment account held by the consumer to the payment account opened or held by the consumer with the new payment service provider, provided that the request includes full details allowing the new payment service provider and the consumer’s payment account to be identified;"
+                },
+                {
+                    "eId": "chp_III__art_11__para_1.__list_1__point_(c)",
+                    "text": "close the payment account held by the consumer."
+                },
+                {
+                    "eId": "chp_III__art_11__para_2.__al_1",
+                    "text": "Without prejudice to Articles 45(1) and 45(6) of Directive 2007/64/EC"
+                }
+            ]
+        },
+        {
+            "eId": "chp_III__art_12",
+            "num": "Article 12",
+            "heading": "Fees connected with the switching service",
+            "children": [
+                {
+                    "eId": "chp_III__art_12__para_1.__al_1",
+                    "text": "Member States shall ensure that consumers are able to access free of charge their personal information regarding existing standing orders and direct debits held by either the transferring or the receiving payment service provider."
+                },
+                {
+                    "eId": "chp_III__art_12__para_2.__al_1",
+                    "text": "Member States shall ensure that the transferring payment service provider provides the information requested by the receiving payment service provider pursuant to point (a) of Article 10(4) without charging the consumer or the receiving payment service provider."
+                },
+                {
+                    "eId": "chp_III__art_12__para_3.__al_1",
+                    "text": "Member States shall ensure that fees, if any, applied by the transferring payment service provider to the consumer for the termination of the payment account held with it are determined in accordance with Article 45(2), (4) and (6) of Directive 2007/64/EC"
+                },
+                {
+                    "eId": "chp_III__art_12__para_4.__al_1",
+                    "text": "Member States shall ensure that fees, if any, applied by the transferring or the receiving payment service provider to the consumer for any service provided under Article 10, other than those referred to in paragraphs 1, 2 and 3 of this Article, are reasonable and in line with the actual costs of that payment service provider."
+                }
+            ]
+        },
+        {
+            "eId": "chp_III__art_13",
+            "num": "Article 13",
+            "heading": "Financial loss for consumers",
+            "children": [
+                {
+                    "eId": "chp_III__art_13__para_1.__al_1",
+                    "text": "Member States shall ensure that any financial loss, including charges and interest, incurred by the consumer and resulting directly from the non-compliance of a payment service provider involved in the switching process with its obligations under Article 10 is refunded by that payment service provider without delay."
+                },
+                {
+                    "eId": "chp_III__art_13__para_2.__al_1",
+                    "text": "Liability under paragraph 1 shall not apply in cases of abnormal and unforeseeable circumstances beyond the control of the payment service provider pleading for the application of those circumstances, the consequences of which would have been unavoidable despite all efforts to the contrary, or where a payment service provider is bound by other legal obligations covered by Union or national legislative acts."
+                },
+                {
+                    "eId": "chp_III__art_13__para_3.__al_1",
+                    "text": "Member States shall ensure that liability under paragraphs 1 and 2 is established in accordance with the legal requirements applicable at national level."
+                }
+            ]
+        },
+        {
+            "eId": "chp_III__art_14",
+            "num": "Article 14",
+            "heading": "Information about the switching service",
+            "children": [
+                {
+                    "eId": "chp_III__art_14__para_1.__list_1__intro_1",
+                    "text": "Member States shall ensure that payment service providers make available to consumers the following information about the switching service:"
+                },
+                {
+                    "eId": "chp_III__art_14__para_1.__list_1__point_(a)",
+                    "text": "the roles of the transferring and receiving payment service provider for each step of the switching process, as indicated in Article 10;"
+                },
+                {
+                    "eId": "chp_III__art_14__para_1.__list_1__point_(b)",
+                    "text": "the time-frame for completion of the respective steps;"
+                },
+                {
+                    "eId": "chp_III__art_14__para_1.__list_1__point_(c)",
+                    "text": "the fees, if any, charged for the switching process;"
+                },
+                {
+                    "eId": "chp_III__art_14__para_1.__list_1__point_(d)",
+                    "text": "any information that the consumer will be asked to provide; and"
+                },
+                {
+                    "eId": "chp_III__art_14__para_1.__list_1__point_(e)",
+                    "text": "the alternative dispute resolution procedures referred to in Article 24."
+                },
+                {
+                    "eId": "chp_III__art_14__para_1.__al_1",
+                    "text": "Member States may require that payment service providers also make available other information, including, where applicable, the information necessary for the identification of the deposit guarantee scheme within the Union of which the payment service provider is a member."
+                },
+                {
+                    "eId": "chp_III__art_14__para_2.__al_1",
+                    "text": "The information referred to in paragraph 1 shall be made available free of charge on paper or another durable medium at all premises of the payment service provider accessible to consumers, shall be available in electronic form on its website at all times, and shall be provided to consumers on request."
+                }
+            ]
+        },
+        {
+            "eId": "chp_IV__art_15",
+            "num": "Article 15",
+            "heading": "Non-discrimination",
+            "children": [
+                {
+                    "eId": "chp_IV__art_15__al_1",
+                    "text": "Member States shall ensure that credit institutions do not discriminate against consumers legally resident in the Union by reason of their nationality or place of residence or by reason of any other ground as referred to in Article 21 of the Charter, when those consumers apply for or access a payment account within the Union. The conditions applicable to holding a payment account with basic features shall be in no way discriminatory."
+                }
+            ]
+        },
+        {
+            "eId": "chp_IV__art_16",
+            "num": "Article 16",
+            "heading": "Right of access to a payment account with basic features",
+            "children": [
+                {
+                    "eId": "chp_IV__art_16__para_1.__al_1",
+                    "text": "Member States shall ensure that payment accounts with basic features are offered to consumers by all credit institutions or a sufficient number of credit institutions to guarantee access thereto for all consumers in their territory, and to prevent distortions of competition. Member States shall ensure that payment accounts with basic features are not only offered by credit institutions that provide payment accounts with solely online facilities."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_2.__al_1",
+                    "text": "Member States shall ensure that consumers legally resident in the Union, including consumers with no fixed address and asylum seekers, and consumers who are not granted a residence permit but whose expulsion is impossible for legal or factual reasons, have the right to open and use a payment account with basic features with credit institutions located in their territory. Such a right shall apply irrespective of the consumer’s place of residence."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_2.__al_2",
+                    "text": "Member States may, in full respect of the fundamental freedoms guaranteed by the Treaties, require consumers who wish to open a payment account with basic features in their territory to show a genuine interest in doing so."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_2.__al_3",
+                    "text": "Member States shall ensure that the exercise of the right is not made too difficult or burdensome for the consumer."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_3.__al_1",
+                    "text": "Member States shall ensure that credit institutions offering payment accounts with basic features open the payment account with basic features or refuse a consumer’s application for a payment account with basic features, in each case without undue delay and at the latest 10 business days after receiving a complete application."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_4.__al_1",
+                    "text": "Member States shall ensure that credit institutions refuse an application for a payment account with basic features where opening such an account would result in an infringement of the provisions on the prevention of money laundering and the countering of terrorist financing laid down in Directive 2005/60/EC"
+                },
+                {
+                    "eId": "chp_IV__art_16__para_5.__al_1",
+                    "text": "Member States may permit credit institutions that offer payment accounts with basic features to refuse an application for such an account where a consumer already holds a payment account with a credit institution located in their territory which allows him to make use of the services listed in Article 17(1), save where a consumer declares that he has received notice that a payment account will be closed."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_5.__al_2",
+                    "text": "In such cases, before opening a payment account with basic features, the credit institution may verify whether the consumer holds or does not hold a payment account with a credit institution located in the same Member State which enables consumers to make use of the services listed in Article 17(1). Credit institutions may rely on a declaration of honour signed by consumers for that purpose."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_6.__al_1",
+                    "text": "Member States may identify limited and specific additional cases where credit institutions may be required or may choose to refuse an application for a payment account with basic features. Such cases shall be based on provisions of national law applicable in their territory and shall be aimed either at facilitating access by the consumer to a payment account with basic features free of charge under the mechanism of Article 25 or at avoiding abuses by consumers of their right to access a payment account with basic features."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_7.__al_1",
+                    "text": "Member States shall ensure that, in the cases referred to in paragraphs 4, 5 and 6, after taking its decision, the credit institution immediately informs the consumer of the refusal and of the specific reason for that refusal, in writing and free of charge, unless such disclosure would be contrary to objectives of national security, public policy or Directive 2005/60/EC. In the event of refusal, the credit institution shall advise the consumer of the procedure to submit a complaint against the refusal, and of the consumer’s right to contact the relevant competent authority and designated alternative dispute resolution body and provide the relevant contact details."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_8.__al_1",
+                    "text": "Member States shall ensure that, in the cases referred to in paragraph 4, the credit institution adopts appropriate measures pursuant to Chapter III of Directive 2005/60/EC"
+                },
+                {
+                    "eId": "chp_IV__art_16__para_9.__al_1",
+                    "text": "Member States shall ensure that access to a payment account with basic features is not made conditional on the purchase of additional services or of shares in the credit institution, unless the latter is conditional for all customers of the credit institution."
+                },
+                {
+                    "eId": "chp_IV__art_16__para_10.__al_1",
+                    "text": "Member States shall be deemed to comply with the obligations laid down in Chapter IV where an existing binding framework ensures its full application in a sufficiently clear and precise manner so that the persons concerned can ascertain the full extent of their rights and rely on them before the national courts."
+                }
+            ]
+        },
+        {
+            "eId": "chp_IV__art_17",
+            "num": "Article 17",
+            "heading": "Characteristics of a payment account with basic features",
+            "children": [
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__intro_1",
+                    "text": "Member States shall ensure that a payment account with basic features includes the following services:"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(a)",
+                    "text": "services enabling all the operations required for the opening, operating and closing of a payment account;"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(b)",
+                    "text": "services enabling funds to be placed in a payment account;"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(c)",
+                    "text": "services enabling cash withdrawals within the Union from a payment account at the counter or at automated teller machines during or outside the credit institution’s opening hours;"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(d)__list_1__intro_1",
+                    "text": "execution of the following payment transactions within the Union:"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(d)__list_1__point_(i)",
+                    "text": "direct debits;"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(d)__list_1__point_(ii)",
+                    "text": "payment transactions through a payment card, including online payments;"
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__list_1__point_(d)__list_1__point_(iii)",
+                    "text": "credit transfers, including standing orders, at, where available, terminals and counters and via the online facilities of the credit institution."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_1.__al_1",
+                    "text": "The services listed in points (a) to (d) of the first subparagraph shall be offered by credit institutions to the extent that they already offer them to consumers holding payment accounts other than a payment account with basic features."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_2.__al_1",
+                    "text": "Member States may establish an obligation requiring credit institutions established in their territory to provide additional services, which are considered essential for consumers based on common practice at national level, with a payment account with basic features."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_3.__al_1",
+                    "text": "Member States shall ensure that payment accounts with basic features are offered by credit institutions established in their territory at least in the national currency of the Member State concerned."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_4.__al_1",
+                    "text": "Member States shall ensure that a payment account with basic features allows consumers to execute an unlimited number of operations in relation to the services referred to in paragraph 1."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_5.__al_1",
+                    "text": "With respect to the services referred to in points (a), (b), (c) and (d)(ii) of paragraph 1 of this Article excluding payment transactions through a credit card, Member States shall ensure that credit institutions do not charge any fees beyond the reasonable fees, if any, referred to in Article 18, irrespective of the number of operations executed on the payment account."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_6.__al_1",
+                    "text": "With respect to the services referred to in point (d)(i) of paragraph 1 of this Article, point d(ii) of paragraph 1 of this Article only as regards payment transactions through a credit card and point (d)(iii) of paragraph 1 of this Article, Member States may determine a minimum number of operations for which credit institutions can only charge the reasonable fees, if any, referred to in Article 18. Member States shall ensure that the minimum number of operations is sufficient to cover the personal use by the consumer, taking into account existing consumer behaviour and common commercial practices. The fees charged for operations above the minimum number of operations shall never be higher than those charged under the usual pricing policy of the credit institution."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_7.__al_1",
+                    "text": "Member States shall ensure that the consumer is able to manage and initiate payment transactions from the consumer’s payment account with basic features in the credit institution’s premises and/or via online facilities, where available."
+                },
+                {
+                    "eId": "chp_IV__art_17__para_8.__al_1",
+                    "text": "Without prejudice to the requirements laid down in Directive 2008/48/EC, Member States may allow credit institutions to provide, upon the consumer’s request, an overdraft facility in relation to a payment account with basic features. Member States may define a maximum amount and a maximum duration of any such overdraft. Access to, or use of, the payment account with basic features shall not be restricted by, or made conditional on, the purchase of such credit services."
+                }
+            ]
+        },
+        {
+            "eId": "chp_IV__art_18",
+            "num": "Article 18",
+            "heading": "Associated fees",
+            "children": [
+                {
+                    "eId": "chp_IV__art_18__para_1.__al_1",
+                    "text": "Member States shall ensure that the services referred to in Article 17 are offered by credit institutions free of charge or for a reasonable fee."
+                },
+                {
+                    "eId": "chp_IV__art_18__para_2.__al_1",
+                    "text": "Member States shall ensure that the fees charged to the consumer for non-compliance with the consumer’s commitments laid down in the framework contract are reasonable."
+                },
+                {
+                    "eId": "chp_IV__art_18__para_3.__list_1__intro_1",
+                    "text": "Member States shall ensure that the reasonable fees referred to in paragraphs 1 and 2 are established taking into account at least the following criteria:"
+                },
+                {
+                    "eId": "chp_IV__art_18__para_3.__list_1__point_(a)",
+                    "text": "national income levels;"
+                },
+                {
+                    "eId": "chp_IV__art_18__para_3.__list_1__point_(b)",
+                    "text": "average fees charged by credit institutions in the Member State concerned for services provided on payment accounts."
+                },
+                {
+                    "eId": "chp_IV__art_18__para_4.__al_1",
+                    "text": "Without prejudice to the right referred to in Article 16(2) and the obligation contained in paragraph 1 of this Article, Member States may require credit institutions to implement various pricing schemes depending on the level of banking inclusion of the consumer, allowing for, in particular, more advantageous conditions for unbanked vulnerable consumers. In such cases, Member States shall ensure that consumers are provided with guidance, as well as adequate information, on the available options."
+                }
+            ]
+        },
+        {
+            "eId": "chp_IV__art_19",
+            "num": "Article 19",
+            "heading": "Framework contracts and termination",
+            "children": [
+                {
+                    "eId": "chp_IV__art_19__para_1.__al_1",
+                    "text": "Framework contracts providing access to a payment account with basic features shall be subject to Directive 2007/64/EC unless otherwise specified in paragraphs 2 and 4 of this Article."
+                },
+                {
+                    "eId": "chp_IV__art_19__para_2.__list_1__intro_1",
+                    "text": "The credit institution may unilaterally terminate a framework contract only where at least one of the following conditions is met:"
+                },
+                {
+                    "eId": "chp_IV__art_19__para_2.__list_1__point_(a)",
+                    "text": "the consumer deliberately used the payment account for illegal purposes;"
+                },
+                {
+                    "eId": "chp_IV__art_19__para_2.__list_1__point_(b)",
+                    "text": "there has been no transaction on the payment account for more than 24 consecutive months;"
+                },
+                {
+                    "eId": "chp_IV__art_19__para_2.__list_1__point_(c)",
+                    "text": "the consumer provided incorrect information in order to obtain the payment account with basic features where the correct information would have resulted in the absence of such a right;"
+                },
+                {
+                    "eId": "chp_IV__art_19__para_2.__list_1__point_(d)",
+                    "text": "the consumer is no longer legally resident in the Union;"
+                },
+                {
+                    "eId": "chp_IV__art_19__para_2.__list_1__point_(e)",
+                    "text": "the consumer has subsequently opened a second payment account which allows him to make use of the services listed in Article 17(1) in the Member State where he already holds a payment account with basic features."
+                },
+                {
+                    "eId": "chp_IV__art_19__para_3.__al_1",
+                    "text": "Member States may identify additional limited and specific cases where a framework contract for a payment account with basic features may be unilaterally terminated by the credit institution. Such cases shall be based on provisions of national law applicable in their territory and shall be aimed at avoiding abuses by consumers of their right to access a payment account with basic features."
+                },
+                {
+                    "eId": "chp_IV__art_19__para_4.__al_1",
+                    "text": "Member States shall ensure that, where a credit institution terminates the contract for a payment account with basic features on one or more of the grounds mentioned in points (b),(d) and (e) of paragraph 2 and in paragraph 3, it informs the consumer of the grounds and the justification for the termination at least two months before the termination enters into force, in writing and free of charge, unless such disclosure would be contrary to objectives of national security or public policy. Where the credit institution terminates the contract in accordance with point (a) or (c) of paragraph 2, its termination shall take effect immediately."
+                },
+                {
+                    "eId": "chp_IV__art_19__para_5.__al_1",
+                    "text": "The notification of termination shall advise the consumer of the procedure to submit a complaint against the termination, if any, and of the consumer’s right to contact the competent authority and designated alternative dispute resolution body and provide the relevant contact details."
+                }
+            ]
+        },
+        {
+            "eId": "chp_IV__art_20",
+            "num": "Article 20",
+            "heading": "General information on payment accounts with basic features",
+            "children": [
+                {
+                    "eId": "chp_IV__art_20__para_1.__al_1",
+                    "text": "Member States shall ensure that adequate measures are in place to raise awareness among the public about the availability of payment accounts with basic features, their general pricing conditions, the procedures to be followed in order to exercise the right to access a payment account with basic features and the methods for having access to alternative dispute resolution procedures for the settlement of disputes. Member States shall ensure that communication measures are sufficient and well-targeted, in particular reaching out to unbanked, vulnerable and mobile consumers."
+                },
+                {
+                    "eId": "chp_IV__art_20__para_2.__al_1",
+                    "text": "Member States shall ensure that credit institutions make available to consumers, free of charge, accessible information and assistance about the specific features of the payment account with basic features on offer, their associated fees and the conditions of use. Member States shall also ensure that the information makes clear that the purchase of additional services is not compulsory in order to access a payment account with basic features."
+                }
+            ]
+        },
+        {
+            "eId": "chp_V__art_21",
+            "num": "Article 21",
+            "heading": "Competent authorities",
+            "children": [
+                {
+                    "eId": "chp_V__art_21__para_1.__al_1",
+                    "text": "Member States shall designate the national competent authorities empowered to ensure the application and enforcement of this Directive and shall ensure that they are granted investigation and enforcement powers and adequate resources necessary for the efficient and effective performance of their duties."
+                },
+                {
+                    "eId": "chp_V__art_21__para_1.__al_2",
+                    "text": "The competent authorities shall be either public authorities or bodies recognised by national law or by public authorities expressly empowered for that purpose by national law. They shall not be payment service providers, with the exception of national central banks."
+                },
+                {
+                    "eId": "chp_V__art_21__para_2.__al_1",
+                    "text": "Member States shall ensure that competent authorities and all persons who work or who have worked for competent authorities, as well as auditors and experts instructed by competent authorities, are bound by the obligation of professional secrecy. No confidential information which they may receive in the course of their duties may be divulged to any person or authority whatsoever, save in summary or aggregate form, without prejudice to cases covered by criminal law or by this Directive. This shall not, however, prevent competent authorities from exchanging or transmitting confidential information in accordance with Union and national law."
+                },
+                {
+                    "eId": "chp_V__art_21__para_3.__list_1__intro_1",
+                    "text": "Member States shall ensure that the authorities designated as competent for ensuring the application and enforcement of this Directive are either or both of the following:"
+                },
+                {
+                    "eId": "chp_V__art_21__para_3.__list_1__point_(a)",
+                    "text": "competent authorities as defined in point (2) of Article 4 of Regulation (EU) No 1093/2010"
+                },
+                {
+                    "eId": "chp_V__art_21__para_3.__list_1__point_(b)",
+                    "text": "authorities other than the competent authorities referred to in point (a) provided that national laws, regulations or administrative provisions require those authorities to cooperate with the competent authorities referred to in point (a) whenever necessary in order to carry out their duties under this Directive, including for the purposes of cooperating with EBA as required under this Directive."
+                },
+                {
+                    "eId": "chp_V__art_21__para_4.__al_1",
+                    "text": "Member States shall notify the Commission and EBA of the competent authorities and of any changes thereto. The first such notification shall be made as soon as possible and at the latest by 18 September 2016."
+                },
+                {
+                    "eId": "chp_V__art_21__para_5.__list_1__intro_1",
+                    "text": "The competent authorities shall exercise their powers in conformity with national law either:"
+                },
+                {
+                    "eId": "chp_V__art_21__para_5.__list_1__point_(a)",
+                    "text": "directly under their own authority or under the supervision of the judicial authorities; or"
+                },
+                {
+                    "eId": "chp_V__art_21__para_5.__list_1__point_(b)",
+                    "text": "by application to courts which are competent to grant the necessary decision, including, where appropriate, by appeal, if the application to grant the necessary decision is not successful."
+                },
+                {
+                    "eId": "chp_V__art_21__para_6.__al_1",
+                    "text": "Where there is more than one competent authority on their territory, Member States shall ensure that their respective duties are clearly defined and that those authorities collaborate closely so that they can discharge their respective duties effectively."
+                },
+                {
+                    "eId": "chp_V__art_21__para_7.__al_1",
+                    "text": "The Commission shall publish a list of the competent authorities in the Official Journal of the European Union at least once a year, and update it continuously on its website."
+                }
+            ]
+        },
+        {
+            "eId": "chp_V__art_22",
+            "num": "Article 22",
+            "heading": "Obligation to cooperate",
+            "children": [
+                {
+                    "eId": "chp_V__art_22__para_1.__al_1",
+                    "text": "Competent authorities of different Member States shall cooperate with each other whenever necessary for the purpose of carrying out their duties under this Directive, making use of their powers, whether set out in this Directive or in national law."
+                },
+                {
+                    "eId": "chp_V__art_22__para_1.__al_2",
+                    "text": "Competent authorities shall render assistance to competent authorities of the other Member States. In particular, they shall exchange information and cooperate in any investigation or supervisory activities."
+                },
+                {
+                    "eId": "chp_V__art_22__para_1.__al_3",
+                    "text": "In order to facilitate and accelerate cooperation, and more particularly the exchange of information, each Member State shall designate one single competent authority as a contact point for the purposes of this Directive. The Member State shall communicate to the Commission and to the other Member States the names of the authorities which are designated to receive requests for exchange of information or cooperation pursuant to this paragraph."
+                },
+                {
+                    "eId": "chp_V__art_22__para_2.__al_1",
+                    "text": "Member States shall take the necessary administrative and organisational measures to facilitate assistance provided for in paragraph 1."
+                },
+                {
+                    "eId": "chp_V__art_22__para_3.__al_1",
+                    "text": "Competent authorities of Member States having been designated as contact points for the purposes of this Directive in accordance with paragraph 1 shall without undue delay supply one another with the information required for the purposes of carrying out the duties of the competent authorities as set out in the measures adopted pursuant to this Directive."
+                },
+                {
+                    "eId": "chp_V__art_22__para_3.__al_2",
+                    "text": "Competent authorities exchanging information with other competent authorities under this Directive may indicate at the time of communication that such information must not be disclosed without their express agreement, in which case such information may be exchanged solely for the purposes for which those authorities gave their agreement."
+                },
+                {
+                    "eId": "chp_V__art_22__para_3.__al_3",
+                    "text": "The competent authority having been designated as the contact point may transmit the information received to the other competent authorities; however it shall not transmit the information to other bodies or natural or legal persons without the express agreement of the competent authorities which disclosed it and solely for the purposes for which those authorities gave their agreement, except in duly justified circumstances in which case it shall immediately inform the contact point that supplied the information."
+                },
+                {
+                    "eId": "chp_V__art_22__para_4.__list_1__intro_1",
+                    "text": "A competent authority may refuse to act on a request for cooperation in carrying out an investigation or supervisory activity or to exchange information as provided for in paragraph 3 only where:"
+                },
+                {
+                    "eId": "chp_V__art_22__para_4.__list_1__point_(a)",
+                    "text": "such an investigation, on-the-spot verification, supervisory activity or exchange of information might adversely affect the sovereignty, security or public policy of the Member State addressed;"
+                },
+                {
+                    "eId": "chp_V__art_22__para_4.__list_1__point_(b)",
+                    "text": "judicial proceedings have already been initiated in respect of the same actions and the same persons before the authorities of the Member State addressed;"
+                },
+                {
+                    "eId": "chp_V__art_22__para_4.__list_1__point_(c)",
+                    "text": "final judgement has already been delivered in the Member State addressed in respect of the same persons and the same actions."
+                },
+                {
+                    "eId": "chp_V__art_22__para_4.__al_1",
+                    "text": "In the event of such a refusal, the competent authority shall notify the requesting competent authority accordingly, providing as detailed information as possible."
+                }
+            ]
+        },
+        {
+            "eId": "chp_V__art_23",
+            "num": "Article 23",
+            "heading": "Settlement of disagreements between competent authorities of different Member States",
+            "children": [
+                {
+                    "eId": "chp_V__art_23__al_1",
+                    "text": "The competent authorities may refer the situation to EBA where a request for cooperation, in particular the exchange of information, has been rejected or has not been acted upon within a reasonable time, and may request EBA’s assistance in accordance with Article 19 of Regulation (EU) No 1093/2010. In such cases, EBA may act in accordance with the powers conferred on it by that Article and any binding decision made by EBA in accordance with that Article shall be binding on the competent authorities concerned regardless of whether those competent authorities are members of EBA or not."
+                }
+            ]
+        },
+        {
+            "eId": "chp_V__art_24",
+            "num": "Article 24",
+            "heading": "Alternative dispute resolution",
+            "children": [
+                {
+                    "eId": "chp_V__art_24__al_1",
+                    "text": "Member States shall ensure that consumers have access to effective and efficient alternative dispute resolution procedures for the settlement of disputes concerning rights and obligations established under this Directive. Such alternative dispute resolution procedures and the entities offering them shall comply with the quality requirements laid down by Directive 2013/11/EU"
+                }
+            ]
+        },
+        {
+            "eId": "chp_V__art_25",
+            "num": "Article 25",
+            "heading": "Mechanism in the event of refusal of a payment account for which a fee is charged",
+            "children": [
+                {
+                    "eId": "chp_V__art_25__al_1",
+                    "text": "Without prejudice to Article 16, Member States may set up a specific mechanism to ensure that consumers who do not have a payment account in their territory and who have been denied access to a payment account for which a fee is charged by credit institutions will have effective access to a payment account with basic features, free of charge."
+                }
+            ]
+        },
+        {
+            "eId": "chp_VI__art_26",
+            "num": "Article 26",
+            "heading": "Sanctions",
+            "children": [
+                {
+                    "eId": "chp_VI__art_26__para_1.__al_1",
+                    "text": "Member States shall lay down rules on sanctions applicable to infringements of the national legislation transposing this Directive and shall take all necessary measures to ensure that they are implemented. Such sanctions shall be effective, proportionate and dissuasive."
+                },
+                {
+                    "eId": "chp_VI__art_26__para_2.__al_1",
+                    "text": "Member States shall provide that the competent authority may disclose to the public any administrative sanction that will be imposed for infringement of the measures adopted in the transposition of this Directive, unless such disclosure would seriously jeopardise the financial markets or cause disproportionate damage to the parties involved."
+                }
+            ]
+        },
+        {
+            "eId": "chp_VII__art_27",
+            "num": "Article 27",
+            "heading": "Evaluation",
+            "children": [
+                {
+                    "eId": "chp_VII__art_27__para_1.__list_1__intro_1",
+                    "text": "Member States shall provide the Commission with information on the following for the first time by 18 September 2018 and every two years thereafter:"
+                },
+                {
+                    "eId": "chp_VII__art_27__para_1.__list_1__point_(a)",
+                    "text": "compliance by payment service providers with Articles 4, 5 and 6;"
+                },
+                {
+                    "eId": "chp_VII__art_27__para_1.__list_1__point_(b)",
+                    "text": "compliance by Member States with the requirements to ensure the existence of comparison websites pursuant to Article 7;"
+                },
+                {
+                    "eId": "chp_VII__art_27__para_1.__list_1__point_(c)",
+                    "text": "the number of payment accounts that have been switched and the proportion of applications for switching that have been refused;"
+                },
+                {
+                    "eId": "chp_VII__art_27__para_1.__list_1__point_(d)",
+                    "text": "the number of credit institutions offering payment accounts with basic features, the number of such accounts that have been opened and the proportion of applications for payment accounts with basic features that have been refused."
+                },
+                {
+                    "eId": "chp_VII__art_27__para_2.__al_1",
+                    "text": "The Commission shall prepare a report for the first time by 18 September 2018 and every two years thereafter, on the basis of the information received from Member States."
+                }
+            ]
+        },
+        {
+            "eId": "chp_VII__art_28",
+            "num": "Article 28",
+            "heading": "Review",
+            "children": [
+                {
+                    "eId": "chp_VII__art_28__para_1.__al_1",
+                    "text": "By 18 September 2019, the Commission shall submit to the European Parliament and to the Council a report on the application of this Directive accompanied, if appropriate, by a legislative proposal."
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__intro_1",
+                    "text": "That report shall include:"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(a)",
+                    "text": "a list of all infringement proceedings initiated by the Commission in relation to this Directive;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(b)",
+                    "text": "an assessment of the average fee levels in Member States for payment accounts falling within the scope of this Directive;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(c)",
+                    "text": "an assessment of the feasibility of developing a framework for ensuring automated redirection of payments from one payment account to another within the same Member State combined with automated notifications to payees or payers when their transfers are redirected;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(d)",
+                    "text": "an assessment of the feasibility of extending the switching service provided for in Article 10 to cases where the receiving and transferring payment service providers are located in different Member States and of the feasibility of cross-border account-opening under Article 11;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(e)",
+                    "text": "an assessment of the number of account-holders who switched payment accounts since the transposition of this Directive based on the information provided by Member States pursuant to Article 27;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(f)",
+                    "text": "an assessment of the costs and benefits of an implementation of full Union-wide portability of payment account numbers;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(g)",
+                    "text": "an assessment of the number of credit institutions offering payment accounts with basic features;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(h)",
+                    "text": "an assessment of the number and, where anonymised information is made available, characteristics of the consumers who have opened payment accounts with basic features since the transposition of this Directive;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(i)",
+                    "text": "an assessment of the average annual fees levied for payment accounts with basic features at Member State level;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(j)",
+                    "text": "an assessment of the effectiveness of existing measures and the need for additional measures to increase financial inclusion and to assist vulnerable members of society in relation to over-indebtedness;"
+                },
+                {
+                    "eId": "chp_VII__art_28__para_1.__list_1__point_(k)",
+                    "text": "examples of best practices among Member States for reducing consumer exclusion from access to payment services."
+                },
+                {
+                    "eId": "chp_VII__art_28__para_2.__al_1",
+                    "text": "The report shall assess, based also on the information received from Member States pursuant to Article 27, whether to amend and update the list of services that are part of a payment account with basic features, having regard to the evolution of means of payment and technology."
+                },
+                {
+                    "eId": "chp_VII__art_28__para_3.__al_1",
+                    "text": "The report shall also assess whether additional measures in addition to those adopted pursuant to Articles 7 and 8 with respect to comparison websites and packaged offers are needed, and in particular the need for an accreditation of comparison websites."
+                }
+            ]
+        },
+        {
+            "eId": "chp_VII__art_29",
+            "num": "Article 29",
+            "heading": "Transposition",
+            "children": [
+                {
+                    "eId": "chp_VII__art_29__para_1.__al_1",
+                    "text": "By 18 September 2016, Member States shall adopt and publish the laws, regulations and administrative provisions necessary to comply with this Directive. They shall immediately communicate to the Commission the text of those measures."
+                },
+                {
+                    "eId": "chp_VII__art_29__para_2.__al_1",
+                    "text": "They shall apply the measures referred to in paragraph 1 from 18 September 2016."
+                },
+                {
+                    "eId": "chp_VII__art_29__para_2.__list_1__intro_1",
+                    "text": "By way of derogation from the first subparagraph:"
+                },
+                {
+                    "eId": "chp_VII__art_29__para_2.__list_1__point_(a)",
+                    "text": "Article 3 shall apply from 17 September 2014;"
+                },
+                {
+                    "eId": "chp_VII__art_29__para_2.__list_1__point_(b)",
+                    "text": "Member States shall apply the measures necessary to comply with Article 4(1) to (5), Article 5(1), (2) and (3), Article 6(1) and (2) and Article 7 by nine months after the entry into force of the delegated act referred to in Article 3(4);"
+                },
+                {
+                    "eId": "chp_VII__art_29__para_2.__list_1__point_(c)",
+                    "text": "Member States in which the equivalent of a fee information document at national level already exists may choose to integrate the common format and its common symbol at the latest 18 months after the entry into force of the delegated act referred to in Article 3(4);"
+                },
+                {
+                    "eId": "chp_VII__art_29__para_2.__list_1__point_(d)",
+                    "text": "Member States in which the equivalent of a statement of fees at national level already exists may choose to integrate the common format and its common symbol at the latest 18 months after the entry into force of the delegated act referred to in Article 3(4)."
+                },
+                {
+                    "eId": "chp_VII__art_29__para_3.__al_1",
+                    "text": "When Member States adopt the measures referred to in paragraph 1, they shall contain a reference to this Directive or shall be accompanied by such a reference on the occasion of their official publication. The methods of making such reference shall be laid down by Member States."
+                },
+                {
+                    "eId": "chp_VII__art_29__para_4.__al_1",
+                    "text": "Member States shall communicate to the Commission the text of the main measures of national law which they adopt in the field covered by this Directive."
+                }
+            ]
+        },
+        {
+            "eId": "chp_VII__art_30",
+            "num": "Article 30",
+            "heading": "Entry into force",
+            "children": [
+                {
+                    "eId": "chp_VII__art_30__al_1",
+                    "text": "This Directive shall enter into force on the twentieth day following that of its publication in the Official Journal of the European Union."
+                }
+            ]
+        },
+        {
+            "eId": "chp_VII__art_31",
+            "num": "Article 31",
+            "heading": "Addressees",
+            "children": [
+                {
+                    "eId": "chp_VII__art_31__al_1",
+                    "text": "This Directive is addressed to the Member States in accordance with the Treaties."
+                }
+            ]
+        }
+    ],
+    "conclusions": {
+        "date": "23 July 2014",
+        "signatures": [
+            [
+                "Done at Brussels, 23 July 2014."
+            ],
+            [
+                "For the European Parliament",
+                "The President",
+                "M. Schulz"
+            ],
+            [
+                "For the Council",
+                "The President",
+                "S. Gozi"
+            ]
+        ]
+    },
+    "valid": true,
+    "format": null,
+    "validation_errors": null,
+    "namespaces": {
+        "akn": "http://docs.oasis-open.org/legaldocml/ns/akn/3.0",
+        "an": "http://docs.oasis-open.org/legaldocml/ns/akn/3.0",
+        "fmx": "http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd"
+    }
+}

@@ -3,7 +3,7 @@ import os
 from tulit.parsers.html.cellar import CellarHTMLParser
 import json
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\html")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\sources\\eu\\eurlex\\regulations\\html")
 file_path = os.path.join(DATA_DIR, "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03\\DOC_1.html")
 
 

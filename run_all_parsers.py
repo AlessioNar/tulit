@@ -1,90 +1,182 @@
+"""
+Script to run all parsers on documents in the database directory.
+This script processes documents from database/sources/ and saves 
+parsed results to database/results/ following the same hierarchy.
+"""
+
 import subprocess
 import sys
 import logging
-import os
+from pathlib import Path
+import json
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
+# Database directories (outside the package)
+DB_BASE = Path(__file__).parent.parent / 'database'
+DB_SOURCES = DB_BASE / 'sources'
+DB_RESULTS = DB_BASE / 'results'
+
 failed_parsers = []
 
-def run_parser(name, args):
-    # Ensure output directory exists
-    for i, arg in enumerate(args):
-        if arg in ('--output', '-o') and i + 1 < len(args):
-            output_path = args[i + 1]
-            output_dir = os.path.dirname(output_path)
-            if output_dir:
-                os.makedirs(output_dir, exist_ok=True)
+def ensure_dirs():
+    """Ensure results directory structure exists"""
+    dirs = [
+        DB_RESULTS / 'eu' / 'proposals',
+        DB_RESULTS / 'eu' / 'formex',
+        DB_RESULTS / 'eu' / 'html',
+        DB_RESULTS / 'eu' / 'akn',
+        DB_RESULTS / 'member_states' / 'portugal',
+        DB_RESULTS / 'member_states' / 'italy',
+        DB_RESULTS / 'member_states' / 'luxembourg',
+        DB_RESULTS / 'member_states' / 'france',
+        DB_RESULTS / 'member_states' / 'finland',
+        DB_RESULTS / 'member_states' / 'malta',
+        DB_RESULTS / 'member_states' / 'germany',
+        DB_RESULTS / 'regional' / 'italy' / 'veneto',
+    ]
+    for d in dirs:
+        d.mkdir(parents=True, exist_ok=True)
+
+ensure_dirs()
+
+def run_parser(name, parser_type, input_path, output_path):
+    """Run a parser on an input file and save to output"""
     try:
-        result = subprocess.run(args)
-        if result.returncode != 0:
-            logging.error(f"{name} failed (code {result.returncode})")
+        if not input_path.exists():
+            logging.warning(f"{name}: Input file not found: {input_path}")
+            return
+        
+        logging.info(f"Parsing {name}: {input_path.name}")
+        
+        # Import and run the appropriate parser
+        if parser_type == 'html_proposal':
+            from tulit.parsers.html.proposal import ProposalHTMLParser
+            parser = ProposalHTMLParser()
+            parser.parse(str(input_path))
+            
+            output_data = {
+                'preface': parser.preface,
+                'preamble': None,
+                'formula': parser.formula,
+                'citations': parser.citations if hasattr(parser, 'citations') else [],
+                'recitals': parser.recitals if hasattr(parser, 'recitals') else [],
+                'preamble_final': parser.preamble_final if hasattr(parser, 'preamble_final') else None,
+                'chapters': parser.chapters if hasattr(parser, 'chapters') else [],
+                'articles': parser.articles if hasattr(parser, 'articles') else [],
+                'conclusions': parser.conclusions if hasattr(parser, 'conclusions') else None
+            }
+            
+        elif parser_type == 'html_cellar':
+            from tulit.parsers.html.cellar import CellarHTMLParser
+            parser = CellarHTMLParser()
+            parser.parse(str(input_path))
+            
+            output_data = {
+                'preface': parser.preface,
+                'formula': parser.formula,
+                'citations': parser.citations,
+                'recitals': parser.recitals,
+                'preamble_final': parser.preamble_final,
+                'chapters': parser.chapters,
+                'articles': parser.articles,
+                'conclusions': parser.conclusions
+            }
+            
+        elif parser_type == 'formex':
+            from tulit.parsers.xml.formex import Formex4Parser
+            parser = Formex4Parser()
+            parser.parse(str(input_path))
+            
+            output_data = {
+                'preface': parser.preface,
+                'formula': parser.formula,
+                'citations': parser.citations,
+                'recitals': parser.recitals,
+                'preamble_final': parser.preamble_final,
+                'chapters': parser.chapters,
+                'articles': parser.articles,
+                'conclusions': parser.conclusions
+            }
+            
+        elif parser_type == 'akn':
+            from tulit.parsers.xml.akomantoso import AkomaNtosoParser
+            parser = AkomaNtosoParser()
+            parser.parse(str(input_path))
+            
+            output_data = {
+                'preface': parser.preface,
+                'formula': parser.formula,
+                'citations': parser.citations,
+                'recitals': parser.recitals,
+                'preamble_final': parser.preamble_final,
+                'chapters': parser.chapters,
+                'articles': parser.articles,
+                'conclusions': parser.conclusions
+            }
+        else:
+            logging.error(f"Unknown parser type: {parser_type}")
             failed_parsers.append(name)
+            return
+        
+        # Save output
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(output_data, f, indent=2, ensure_ascii=False)
+        
+        logging.info(f"✓ {name}: Saved to {output_path}")
+        
     except Exception as e:
-        logging.error(f"Exception while running {name}: {e}")
+        logging.error(f"✗ {name}: {e}")
         failed_parsers.append(name)
 
+def main():
+    logging.info("Starting parsers...")
+    logging.info(f"Source directory: {DB_SOURCES}")
+    logging.info(f"Results directory: {DB_RESULTS}")
+    
+    # Parse EU Commission Proposals (HTML)
+    proposals_dir = DB_SOURCES / 'eu' / 'eurlex' / 'commission_proposals'
+    if proposals_dir.exists():
+        for html_file in proposals_dir.glob('*.html'):
+            output_file = DB_RESULTS / 'eu' / 'proposals' / f"{html_file.stem}.json"
+            run_parser(f"EU Proposal {html_file.stem}", 'html_proposal', html_file, output_file)
+    
+    # Parse EU Regulations (HTML from Cellar)
+    regulations_dir = DB_SOURCES / 'eu' / 'eurlex' / 'regulations' / 'html'
+    if regulations_dir.exists():
+        for subdir in regulations_dir.iterdir():
+            if subdir.is_dir():
+                for html_file in subdir.glob('*.html'):
+                    output_file = DB_RESULTS / 'eu' / 'html' / f"{subdir.name}_{html_file.stem}.json"
+                    run_parser(f"EU Regulation {html_file.stem}", 'html_cellar', html_file, output_file)
+    
+    # Parse FORMEX documents
+    formex_dir = DB_SOURCES / 'eu' / 'eurlex' / 'formex'
+    if formex_dir.exists():
+        for subdir in formex_dir.iterdir():
+            if subdir.is_dir():
+                for xml_file in subdir.glob('*.xml'):
+                    output_file = DB_RESULTS / 'eu' / 'formex' / f"{subdir.name}_{xml_file.stem}.json"
+                    run_parser(f"FORMEX {xml_file.stem}", 'formex', xml_file, output_file)
+    
+    # Parse AKN documents
+    akn_dir = DB_SOURCES / 'eu' / 'eurlex' / 'akn'
+    if akn_dir.exists():
+        for akn_file in akn_dir.glob('*.akn'):
+            output_file = DB_RESULTS / 'eu' / 'akn' / f"{akn_file.stem}.json"
+            run_parser(f"AKN {akn_file.stem}", 'akn', akn_file, output_file)
+        for xml_file in akn_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'eu' / 'akn' / f"{xml_file.stem}.json"
+            run_parser(f"AKN {xml_file.stem}", 'akn', xml_file, output_file)
+    
+    # Summary
+    print("\n" + "="*60)
+    if failed_parsers:
+        logging.error(f"Failed parsers: {', '.join(failed_parsers)}")
+    else:
+        logging.info("✓ All parsers completed successfully!")
+    print("="*60)
 
-# Akoma Ntoso XML (EU)
-run_parser('Akoma Ntoso XML (EU)', [
-    sys.executable, 'tulit/parsers/xml/akomantoso.py',
-    '--input', 'tests/data/akn/eu/32014L0092.akn',
-    '--output', 'tests/data/json/xml/akn_eu.json'
-])
-
-# Akoma Ntoso XML (France)
-run_parser('Akoma Ntoso XML (France)', [
-    sys.executable, 'tulit/parsers/xml/akomantoso.py',
-    '--input', 'tests/data/akn/france/tas24-021.akn.xml',
-    '--output', 'tests/data/json/xml/akn_france.json'
-])
-
-
-# === CLIENT-DOWNLOADED FILES ===
-
-# BOE XML (from client)
-run_parser('BOE XML (client)', [
-    sys.executable, 'tulit/parsers/xml/boe.py',
-    'tests/data/clients/boe/BOE-A-1942-2205.xml',
-    'tests/data/json/clients/boe.json'
-])
-
-# Formex XML (from Cellar client)
-run_parser('Formex XML (Cellar client)', [
-    sys.executable, 'tulit/parsers/xml/formex.py',
-    '--input', 'tests/data/clients/cellar/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml',
-    '--output', 'tests/data/json/xml/cellar_formex.json'
-])
-
-# Finlex XML (from client)
-run_parser('Finlex XML (client)', [
-    sys.executable, 'tulit/parsers/xml/akomantoso.py',
-    '--input', 'tests/data/clients/finlex/finlex_2024_123.xml',
-    '--output', 'tests/data/json/xml/finlex.json'
-])
-
-# Germany HTML (from client)
-run_parser('Germany HTML (client)', [
-    sys.executable, 'tulit/parsers/html/xhtml.py',
-    '--input', 'tests/data/clients/germany/germany_eli.html',
-    '--output', 'tests/data/json/html/germany.json'
-])
-
-# Portugal HTML (from client)
-run_parser('Portugal HTML (client)', [
-    sys.executable, 'tulit/parsers/html/xhtml.py',
-    '--input', 'tests/data/clients/portugal/dre_act_lei_39_2016_12_19_p_pt.html',
-    '--output', 'tests/data/json/html/portugal.json'
-])
-
-# Veneto HTML (from client)
-run_parser('Veneto HTML (client)', [
-    sys.executable, 'tulit/parsers/html/veneto.py',
-    '--input', 'tests/data/clients/veneto/esg.html',
-    '--output', 'tests/data/json/html/veneto.json'
-])
-
-if failed_parsers:
-    logging.error(f"The following parsers failed: {', '.join(failed_parsers)}")
-else:
-    logging.info('All parsers executed successfully.')
+if __name__ == '__main__':
+    main()

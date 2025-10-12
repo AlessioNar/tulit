@@ -16,6 +16,7 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html>Journal</html>'
+        mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
         file_path = self.client.get_journal('1a', '1', '1991', '0', 'pt', 'html')
@@ -30,6 +31,7 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html>Act</html>'
+        mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
         file_path = self.client.get_legal_act('lei', '39', '2016', '12', '19', 'p', 'pt', 'html')
@@ -44,6 +46,7 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html>Consolidated</html>'
+        mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
         file_path = self.client.get_consolidated('lei', '7', '2009', 'p', '20171002', 'pt', 'html')

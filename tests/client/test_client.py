@@ -6,7 +6,7 @@ from tulit.client.client import Client
 class TestClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = Client(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = Client(download_dir='./tests/data/formex', log_dir='./tests/logs')
         
     def test_get_extension_from_content_type(self):
         content_type_mapping = {
@@ -24,7 +24,9 @@ class TestClient(unittest.TestCase):
     def test_extract_zip(self, mock_zipfile):
         # Mock zipfile object
         mock_zip = Mock()
-        mock_zipfile.return_value = mock_zip
+        # Configure context manager support
+        mock_zipfile.return_value.__enter__ = Mock(return_value=mock_zip)
+        mock_zipfile.return_value.__exit__ = Mock(return_value=False)
 
         response = Mock()
         response.content = b'fake zip content'

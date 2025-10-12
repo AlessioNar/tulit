@@ -1,5 +1,25 @@
 **/__pycache__/*
 tests/logs
-tests/data
 dist/*
 docs/build
+
+# Database directory - user-specific downloaded data
+../database/
+database/
+
+# Coverage reports
+.coverage
+coverage_re/
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/

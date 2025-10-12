@@ -16,6 +16,7 @@ class TestFinlexClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<akn:akomaNtoso>Test</akn:akomaNtoso>'
+        mock_response.headers = {'Content-Type': 'application/xml'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 

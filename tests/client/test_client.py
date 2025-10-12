@@ -6,7 +6,7 @@ from tulit.client.client import Client
 class TestClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = Client(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = Client(download_dir='./tests/data/formex', log_dir='./tests/logs')
         
     def test_get_extension_from_content_type(self):
         content_type_mapping = {

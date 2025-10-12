@@ -9,7 +9,7 @@ import io
 class TestCellarClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs', proxies=None)
+        self.downloader = CellarClient(download_dir='./tests/data/formex', log_dir='./tests/logs', proxies=None)
                 
     def test_download(self):
         celex = "32008R1137"
@@ -17,7 +17,7 @@ class TestCellarClient(unittest.TestCase):
         # Download the documents                           
         document_paths = self.downloader.download(celex, format='fmx4')
 
-        expected = ['tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_1.xml', 'tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_2.xml', 'tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_3.xml', 'tests\\data\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_4.xml']
+        expected = ['tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_1.xml', 'tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_2.xml', 'tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_3.xml', 'tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_4.xml']
         
         self.assertEqual(document_paths, expected)
     
@@ -26,7 +26,7 @@ class TestCellarClient(unittest.TestCase):
         with open('./tests/metadata/query_results/query_results.json', 'r') as f:
             cellar_results = json.loads(f.read())
         
-        self.downloader = CellarClient(download_dir='./tests/data', log_dir='./tests/logs')
+        self.downloader = CellarClient(download_dir='./tests/data/formex', log_dir='./tests/logs')
         
         # Test for formex format
         extracted_ids = self.downloader.get_cellar_ids_from_json_results(cellar_results, 'fmx4')

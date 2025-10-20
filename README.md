@@ -129,6 +129,57 @@ Further standards and formats will be added in the future such as:
 * [LegalHTML](https://art.uniroma2.it/legalhtml/)
 * [NormeInRete](https://www.cambridge.org/core/journals/international-journal-of-legal-information/article/abs/norme-in-rete-project-standards-and-tools-for-italian-legislation/483BA5BF2EC4E9DD6636E761FE84AE15)
 
+### 4.3 Akoma Ntoso Sources in the EU
+
+The following table provides an overview of Akoma Ntoso (AKN) support in official gazettes across the European Union and its 27 member states:
+
+| Jurisdiction | Official Gazette | Akoma Ntoso Support | Implementation Status in tulit | Notes |
+|--------------|------------------|---------------------|-------------------------------|-------|
+| **EU** | EUR-Lex | ✅ Yes (AKN4EU) | ⚠️ Partial (FORMEX/HTML) | AKN4EU format available via Cellar API |
+| **Austria** | Rechtsinformationssystem (RIS) | ❓ Unknown | ❌ Not implemented | - |
+| **Belgium** | Belgisch Staatsblad / Moniteur Belge | ❓ Unknown | ❌ Not implemented | - |
+| **Bulgaria** | Държавен вестник (State Gazette) | ❓ Unknown | ❌ Not implemented | - |
+| **Croatia** | Narodne novine | ❓ Unknown | ❌ Not implemented | - |
+| **Cyprus** | Official Gazette of the Republic | ❓ Unknown | ❌ Not implemented | - |
+| **Czech Republic** | Sbírka zákonů | ❓ Unknown | ❌ Not implemented | - |
+| **Denmark** | Retsinformation | ❓ Unknown | ❌ Not implemented | - |
+| **Estonia** | Riigi Teataja | ❓ Unknown | ❌ Not implemented | - |
+| **Finland** | Finlex | ✅ Yes | ✅ Implemented | Available via Finlex Open Data API |
+| **France** | Légifrance | ⚠️ Planned | ⚠️ Partial | Client requires credentials |
+| **Germany** | Bundesanzeiger / Rechtsinformationen | ❓ Unknown | ⚠️ Partial (HTML) | ELI-compliant HTML format |
+| **Greece** | Εφημερίς της Κυβερνήσεως (Government Gazette) | ❓ Unknown | ❌ Not implemented | - |
+| **Hungary** | Magyar Közlöny | ❓ Unknown | ❌ Not implemented | - |
+| **Ireland** | Irish Statute Book | ✅ Yes | ✅ Implemented | Available via ELI endpoints |
+| **Italy** | Normattiva / Gazzetta Ufficiale | ✅ Yes | ✅ Implemented | Full Akoma Ntoso support |
+| **Latvia** | Latvijas Vēstnesis | ❓ Unknown | ❌ Not implemented | - |
+| **Lithuania** | Teisės aktų registras (TAR) | ❓ Unknown | ❌ Not implemented | - |
+| **Luxembourg** | Legilux | ✅ Yes | ✅ Implemented | ELI-compliant with XML support |
+| **Malta** | legislation.mt | ✅ Yes | ✅ Implemented | ELI-compliant with XML support |
+| **Netherlands** | Officiële bekendmakingen | ❓ Unknown | ❌ Not implemented | - |
+| **Poland** | Dziennik Ustaw / Monitor Polski | ❓ Unknown | ❌ Not implemented | - |
+| **Portugal** | Diário da República Electrónico | ⚠️ Planned | ⚠️ Partial (HTML) | HTML format currently supported |
+| **Romania** | Monitorul Oficial | ❓ Unknown | ❌ Not implemented | - |
+| **Slovakia** | Zbierka zákonov | ❓ Unknown | ❌ Not implemented | - |
+| **Slovenia** | Uradni list | ❓ Unknown | ❌ Not implemented | - |
+| **Spain** | Boletín Oficial del Estado (BOE) | ❓ Unknown | ⚠️ Partial (HTML) | HTML format currently supported |
+| **Sweden** | Svensk författningssamling | ❓ Unknown | ❌ Not implemented | - |
+
+**Legend:**
+- ✅ Yes: Confirmed Akoma Ntoso support
+- ⚠️ Planned: Support planned or in development
+- ❓ Unknown: Status not confirmed
+- ❌ Not implemented: No client implementation in tulit yet
+
+**Implementation Status:**
+- ✅ Implemented: Full client support in tulit
+- ⚠️ Partial: Limited or format-specific support
+- ❌ Not implemented: No support yet
+
+**Notes:**
+- The EU is actively promoting the AKN4EU standard across all member states
+- Several countries use ELI (European Legislation Identifier) which facilitates Akoma Ntoso adoption
+- Implementation status reflects the current state of the tulit package and may evolve
+
 ## 5. Acknowledgements
 
 The `tulit` package has been inspired by a series of existing resources and builds upon some of their architectures and workflows. We would like to acknowledge their work and thank them for their contributions to the legal informatics community.

@@ -280,10 +280,11 @@ def main():
     parser.add_argument('--celex', type=str, default='32024R0903', help='CELEX identifier of the document')
     parser.add_argument('--format', type=str, default='fmx4', help='Format of the document, either fmx4 or xhtml')
     parser.add_argument('--dir', type=str, default='tests/data/formex', help='Path to the directory')
+    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Directory for logs')
     
     args = parser.parse_args()
     
-    client = CellarClient(download_dir=args.dir, log_dir='./tests/logs')    
+    client = CellarClient(download_dir=args.dir, log_dir=args.logdir)    
     
     documents = client.download(celex=args.celex, format=args.format)
     

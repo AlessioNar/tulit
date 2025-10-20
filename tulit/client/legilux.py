@@ -23,8 +23,16 @@ class LegiluxClient(Client):
     def download(self, eli):
         file_paths = []
         url = self.build_request_url(eli)
-        response = self.fetch_content(url)        
-        filename = eli.split('loi/')[1].replace('/', '_')
+        response = self.fetch_content(url)
+        # Extract filename from ELI - handle both /loi/ and /constitution/ paths
+        if '/loi/' in eli:
+            filename = eli.split('loi/')[1].replace('/', '_')
+        elif '/constitution/' in eli:
+            filename = eli.split('constitution/')[1].replace('/', '_')
+        else:
+            # Fallback: use last parts of ELI
+            filename = '_'.join(eli.split('/')[-4:])
+        filename = filename + '.xml' if not filename.endswith('.xml') else filename
         if response.status_code == 200:
             file_paths.append(self.handle_response(response, filename=filename))
             self.logger.info(f"Document downloaded successfully and saved to {file_paths}")
@@ -37,5 +45,19 @@ class LegiluxClient(Client):
             return None
 
 if __name__ == "__main__":
-    downloader = LegiluxClient(download_dir='./tests/data/legilux', log_dir='./tests/metadata/logs')
-    downloader.download(eli='http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo')
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Download a document from Legilux')
+    parser.add_argument('--eli', type=str, required=True, help='ELI URL of the document')
+    parser.add_argument('--dir', type=str, default='./tests/data/legilux', help='Download directory')
+    parser.add_argument('--logdir', type=str, default='./tests/metadata/logs', help='Log directory')
+    
+    args = parser.parse_args()
+    
+    downloader = LegiluxClient(download_dir=args.dir, log_dir=args.logdir)
+    documents = downloader.download(eli=args.eli)
+    if documents:
+        logging.info(f"Downloaded documents: {documents}")
+    else:
+        logging.error("No documents downloaded.")
+        sys.exit(1)

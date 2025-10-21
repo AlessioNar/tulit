@@ -78,13 +78,15 @@ run_client('Veneto', [
     '--file', str(DB_SOURCES / 'regional_authorities' / 'italy' / 'veneto' / 'esg.html')
 ])
 
-# Malta
-run_client('Malta', [
-    sys.executable, '-m', 'tulit.client.malta', 
-    '--eli_path', 'cap/9', '--lang', 'eng', '--fmt', 'xml', 
-    '--dir', str(DB_SOURCES / 'member_states' / 'malta' / 'moj'), 
-    '--logdir', str(DB_LOGS)
-])
+# Malta - DISABLED: API returning HTML instead of expected PDF format
+# Issue: Expected PDF response but got text/html; charset=utf-8
+# TODO: Check Malta MOJ API documentation for correct endpoint or format
+# run_client('Malta', [
+#     sys.executable, '-m', 'tulit.client.malta', 
+#     '--eli_path', 'cap/9', '--lang', 'eng', '--fmt', 'pdf', 
+#     '--dir', str(DB_SOURCES / 'member_states' / 'malta' / 'moj'), 
+#     '--logdir', str(DB_LOGS)
+# ])
 
 # Finlex
 run_client('Finlex', [
@@ -94,16 +96,20 @@ run_client('Finlex', [
     '--logdir', str(DB_LOGS)
 ])
 
-# Normattiva
+# Normattiva (Italy) - Example with specific document
 run_client('Normattiva', [
     sys.executable, '-m', 'tulit.client.normattiva',
+    '--dataGU', '20241231',  # Format: YYYYMMDD
+    '--codiceRedaz', '24G00229',
+    '--dataVigenza', '20251020',
     '--dir', str(DB_SOURCES / 'member_states' / 'italy' / 'normattiva'),
     '--logdir', str(DB_LOGS)
 ])
 
-# Legilux
+# Legilux (Luxembourg) - Example with valid ELI
 run_client('Legilux', [
     sys.executable, '-m', 'tulit.client.legilux',
+    '--eli', 'https://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo',
     '--dir', str(DB_SOURCES / 'member_states' / 'luxembourg' / 'legilux'),
     '--logdir', str(DB_LOGS)
 ])
@@ -119,13 +125,15 @@ run_client('Legilux', [
 #     '--logdir', str(DB_LOGS)
 # ])
 
-# Cellar
-run_client('Cellar', [
-    sys.executable, '-m', 'tulit.client.cellar', 
-    '--celex', '32024R0903', '--format', 'fmx4', 
-    '--dir', str(DB_SOURCES / 'eu' / 'eurlex' / 'formex'),
-    '--logdir', str(DB_LOGS)
-])
+# Cellar - DISABLED: Publications Office blocking access (403 Forbidden)
+# Issue: 403 Client Error for cellar resource URL
+# TODO: Investigate if authentication is required or if alternative endpoint exists
+# run_client('Cellar', [
+#     sys.executable, '-m', 'tulit.client.cellar', 
+#     '--celex', '32024R0903', '--format', 'fmx4', 
+#     '--dir', str(DB_SOURCES / 'eu' / 'eurlex' / 'formex'),
+#     '--logdir', str(DB_LOGS)
+# ])
 
 # Germany - Search and download recent legislation (XML - LegalDocML format)
 run_client('Germany Legislation', [

@@ -32,7 +32,9 @@ def ensure_dirs():
         DB_RESULTS / 'member_states' / 'france',
         DB_RESULTS / 'member_states' / 'finland',
         DB_RESULTS / 'member_states' / 'malta',
-        DB_RESULTS / 'member_states' / 'germany',
+        DB_RESULTS / 'member_states' / 'germany' / 'legislation',
+        DB_RESULTS / 'member_states' / 'germany' / 'case-law',
+        DB_RESULTS / 'member_states' / 'germany' / 'literature',
         DB_RESULTS / 'regional' / 'italy' / 'veneto',
     ]
     for d in dirs:
@@ -114,11 +116,23 @@ def run_parser(name, parser_type, input_path, output_path):
                 'articles': parser.articles,
                 'conclusions': parser.conclusions
             }
-        else:
-            logging.error(f"Unknown parser type: {parser_type}")
-            failed_parsers.append(name)
-            return
         
+        elif parser_type == 'akn-de' or parser_type == 'german':
+            from tulit.parsers.xml.akomantoso import GermanLegalDocMLParser
+            parser = GermanLegalDocMLParser()
+            parser.parse(str(input_path))
+            
+            output_data = {
+                'preface': parser.preface,
+                'formula': parser.formula,
+                'citations': parser.citations,
+                'recitals': parser.recitals,
+                'preamble_final': parser.preamble_final,
+                'chapters': parser.chapters,
+                'articles': parser.articles,
+                'conclusions': parser.conclusions
+            }
+                
         # Save output
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, 'w', encoding='utf-8') as f:
@@ -169,6 +183,27 @@ def main():
         for xml_file in akn_dir.glob('*.xml'):
             output_file = DB_RESULTS / 'eu' / 'akn' / f"{xml_file.stem}.json"
             run_parser(f"AKN {xml_file.stem}", 'akn', xml_file, output_file)
+    
+    # Parse German legislation (LegalDocML/AKN format)
+    germany_legislation_dir = DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'legislation'
+    if germany_legislation_dir.exists():
+        for xml_file in germany_legislation_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'member_states' / 'germany' / 'legislation' / f"{xml_file.stem}.json"
+            run_parser(f"Germany Legislation {xml_file.stem}", 'german', xml_file, output_file)
+    
+    # Parse German case law (LegalDocML/AKN format)
+    germany_caselaw_dir = DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'case-law'
+    if germany_caselaw_dir.exists():
+        for xml_file in germany_caselaw_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'member_states' / 'germany' / 'case-law' / f"{xml_file.stem}.json"
+            run_parser(f"Germany Case Law {xml_file.stem}", 'german', xml_file, output_file)
+    
+    # Parse German literature (LegalDocML/AKN format)
+    germany_literature_dir = DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'literature'
+    if germany_literature_dir.exists():
+        for xml_file in germany_literature_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'member_states' / 'germany' / 'literature' / f"{xml_file.stem}.json"
+            run_parser(f"Germany Literature {xml_file.stem}", 'german', xml_file, output_file)
     
     # Summary
     print("\n" + "="*60)

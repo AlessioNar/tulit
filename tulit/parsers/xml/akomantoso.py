@@ -1,9 +1,69 @@
 from tulit.parsers.xml.xml import XMLParser
 import json
 import argparse
-# LegalJSON validation
-from tulit.parsers.parser import LegalJSONValidator
-import logging
+from lxml import etree
+
+
+def detect_akn_format(file_path: str) -> str:
+    """
+    Automatically detect the Akoma Ntoso format/dialect based on the XML namespace.
+    
+    Parameters
+    ----------
+    file_path : str
+        Path to the XML file.
+    
+    Returns
+    -------
+    str
+        Format identifier: 'german', 'akn4eu', or 'akn' (standard)
+    """
+    try:
+        # Parse just enough to get the namespace
+        with open(file_path, 'rb') as f:
+            context = etree.iterparse(f, events=('start',), tag='{*}akomaNtoso')
+            event, elem = next(context)
+            namespace = elem.nsmap.get(None) or elem.nsmap.get('akn', '')
+            
+            # Detect format based on namespace
+            if 'LegalDocML.de' in namespace:
+                return 'german'
+            elif elem.get('{http://www.w3.org/XML/1998/namespace}id'):
+                return 'akn4eu'
+            else:
+                return 'akn'
+    except Exception:
+        # Default to standard Akoma Ntoso
+        return 'akn'
+
+
+def create_akn_parser(file_path: str = None, format: str = None):
+    """
+    Factory function to create the appropriate Akoma Ntoso parser.
+    
+    Parameters
+    ----------
+    file_path : str, optional
+        Path to the XML file (for auto-detection).
+    format : str, optional
+        Explicitly specify format: 'german', 'akn4eu', or 'akn'.
+        If not provided, format will be auto-detected from file_path.
+    
+    Returns
+    -------
+    AkomaNtosoParser
+        Appropriate parser instance for the detected or specified format.
+    """
+    if format is None and file_path:
+        format = detect_akn_format(file_path)
+    
+    if format == 'german' or format == 'de':
+        return GermanLegalDocMLParser()
+    elif format == 'akn4eu':
+        return AKN4EUParser()
+    else:
+        return AkomaNtosoParser()
+
 
 class AkomaNtosoParser(XMLParser):
     """
@@ -28,8 +88,9 @@ class AkomaNtosoParser(XMLParser):
         self.namespaces = {
             'akn': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0',
             'an': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0',
-            'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
-
+            'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd',
+            # German LegalDocML namespace (for compatibility)
+            'akn-de': 'http://Inhaltsdaten.LegalDocML.de/1.8.2/'
         }
     
     def get_preface(self):
@@ -344,6 +405,115 @@ class AKN4EUParser(AkomaNtosoParser):
             elements.append(element)
         return elements
 
+class GermanLegalDocMLParser(AkomaNtosoParser):
+    """
+    A parser for processing and extracting content from German LegalDocML files.
+    
+    This class is a subclass of the AkomaNtosoParser class and is specifically designed to handle
+    German RIS LegalDocML documents which use a German-specific namespace while following
+    Akoma Ntoso structure.
+    
+    German LegalDocML uses the namespace: http://Inhaltsdaten.LegalDocML.de/1.8.2/
+    
+    Attributes
+    ----------
+    namespaces : dict
+        Dictionary mapping namespace prefixes to their URIs, with 'akn' mapped to the German namespace.
+    """
+    def __init__(self):
+        super().__init__()
+        # Override the namespace to use German LegalDocML
+        # Map 'akn' prefix to German namespace so all XPath queries work seamlessly
+        self.namespaces = {
+            'akn': 'http://Inhaltsdaten.LegalDocML.de/1.8.2/',
+            'an': 'http://Inhaltsdaten.LegalDocML.de/1.8.2/',
+        }
+    
+    def parse(self, file: str) -> None:
+        """
+        Parses a German LegalDocML document to extract its components.
+        
+        German LegalDocML follows Akoma Ntoso structure but uses a German-specific namespace
+        and may have some schema variations. This method bypasses schema validation and
+        directly extracts the content.
+        
+        Parameters
+        ----------
+        file : str
+            Path to the German LegalDocML XML file to parse.
+        """
+        import logging
+        logger = logging.getLogger(__name__)
+        
+        # Skip schema validation for German LegalDocML
+        self.valid = True
+        
+        try:
+            self.get_root(file)
+            logger.info(f"Root element loaded successfully for German LegalDocML.")                    
+        except Exception as e:
+            logger.error(f"Error in get_root: {e}")                    
+        
+        try:
+            self.get_preface()
+            logger.info(f"Preface parsed.")                    
+        except Exception as e:
+            logger.error(f"Error in get_preface: {e}")                    
+        
+        try:
+            self.get_preamble()
+            logger.info(f"Preamble parsed.")                    
+        except Exception as e:
+            logger.error(f"Error in get_preamble: {e}")                    
+        
+        try:
+            self.get_formula()
+            logger.info(f"Formula parsed.")                    
+        except Exception as e:
+            logger.error(f"Error in get_formula: {e}")                    
+        
+        try:
+            self.get_citations()
+            logger.info(f"Citations parsed. Number: {len(self.citations) if self.citations else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_citations: {e}")
+        
+        try:
+            self.get_recitals()
+            logger.info(f"Recitals parsed. Number: {len(self.recitals) if self.recitals else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_recitals: {e}")
+        
+        try:
+            self.get_preamble_final()
+            logger.info(f"Preamble final parsed.")
+        except Exception as e:
+            logger.error(f"Error in get_preamble_final: {e}")
+        
+        try:
+            self.get_body()
+            logger.info(f"Body element retrieved.")
+        except Exception as e:
+            logger.error(f"Error in get_body: {e}")
+        
+        try:
+            self.get_chapters()
+            logger.info(f"Chapters parsed. Number: {len(self.chapters) if self.chapters else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_chapters: {e}")
+        
+        try:
+            self.get_articles()
+            logger.info(f"Articles parsed. Number: {len(self.articles) if self.articles else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_articles: {e}")
+        
+        try:
+            self.get_conclusions()
+            logger.info(f"Conclusions parsed.")
+        except Exception as e:
+            logger.error(f"Error in get_conclusions: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description='Parse an Akoma Ntoso XML document and output the results to a JSON file.')
     parser.add_argument('--input', type=str, default='tests/data/akn/eu/32014L0092.akn', help='Path to the Akoma Ntoso XML file to parse.')
@@ -354,6 +524,10 @@ def main():
         akoma_parser = AkomaNtosoParser()
     elif args.format == 'akn4eu':
         akoma_parser = AKN4EUParser()
+    elif args.format == 'german' or args.format == 'de':
+        akoma_parser = GermanLegalDocMLParser()
+    else:
+        akoma_parser = AkomaNtosoParser()
     akoma_parser.parse(args.input)
     with open(args.output, 'w', encoding='utf-8') as f:
         # Get the parser's attributes as a dictionary

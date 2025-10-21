@@ -1,0 +1,1677 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="Grammatiken/legalDocML.de.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<akn:akomaNtoso xmlns:akn="http://Inhaltsdaten.LegalDocML.de/1.8.2/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://MetadatenRIS.LegalDocML.de/1.8.2/ ../ris-norms-ldml-schema-extensions/1.8.2/legalDocML.de-metadaten-ris.xsd
+                        http://MetadatenRegelungstext.LegalDocML.de/1.8.2/ Grammatiken/legalDocML.de-metadaten-regelungstext.xsd
+                        http://MetadatenRechtsetzungsdokument.LegalDocML.de/1.8.2/ Grammatiken/legalDocML.de-metadaten-rechtsetzungsdokument.xsd
+                        http://Inhaltsdaten.LegalDocML.de/1.8.2/ Grammatiken/legalDocML.de-regelungstextverkuendungsfassung.xsd">
+    <akn:act name="/akn/ontology/de/concept/documenttype/bund/regelungstext-verkuendung">
+        <akn:meta GUID="5fe5dd1f-8c8a-4106-93f2-ec959209458b" eId="meta-n1">
+            <akn:identification GUID="54a434cf-4c63-49d3-ba8e-e6bbb93ec379" eId="meta-n1_ident-n1"
+                source="attributsemantik-noch-undefiniert">
+                <akn:FRBRWork GUID="715dcb28-4d40-482d-ad2a-7de790d94e2d"
+                    eId="meta-n1_ident-n1_frbrwork-n1">
+                    <akn:FRBRthis GUID="21fd2246-7283-40cc-b016-779038eef083"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrthis-n1"
+                        value="eli/bund/bgbl-1/2025/145/regelungstext-verkuendung-1" />
+                    <akn:FRBRuri GUID="afa960ee-4831-4d57-8f49-6b137bef43c5"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbruri-n1"
+                        value="eli/bund/bgbl-1/2025/145" />
+                    <akn:FRBRalias GUID="8b0fcede-ee74-4e45-a938-49eabeeb6bc2"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbralias-n1" name="übergreifende-id"
+                        value="d715a0af-32f5-44ec-baf3-7ce175db1288" />
+                    <akn:FRBRdate GUID="b839a0e5-190e-476a-8d34-b63a9410a76b" date="2025-06-20"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrdate-n1"
+                        name="verkuendungsfassung-verkuendungsdatum" />
+                    <akn:FRBRauthor GUID="f9814064-53d4-458e-9df3-01e5d79255e9"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrauthor-n1"
+                        href="recht.bund.de/institution/bundesregierung" />
+                    <akn:FRBRcountry GUID="c935eaec-cfb0-4ecb-b838-cc2ae0b6e2d3"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrcountry-n1" value="de" />
+                    <akn:FRBRnumber GUID="9fbc098b-7a90-4c2b-bb49-a1124b13c5cb"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrnumber-n1" value="145" />
+                    <akn:FRBRname GUID="f032267a-2567-4afa-85fd-6632d44cfdb0"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrname-n1" value="bgbl-1" />
+                    <akn:FRBRsubtype GUID="4b832637-a710-4b15-98b9-0d96f9b9ebaf"
+                        eId="meta-n1_ident-n1_frbrwork-n1_frbrsubtype-n1"
+                        value="regelungstext-verkuendung-1" />
+                </akn:FRBRWork>
+                <akn:FRBRExpression GUID="c5feb222-37ce-4678-8687-f3414497c713"
+                    eId="meta-n1_ident-n1_frbrexpression-n1">
+                    <akn:FRBRthis GUID="c5ab3ea4-de80-49c6-b84e-4d9daddb0da1"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbrthis-n1"
+                        value="eli/bund/bgbl-1/2025/145/2025-06-17/1/deu/regelungstext-verkuendung-1" />
+                    <akn:FRBRuri GUID="d4669e01-5fd2-4fd2-bad1-40ba83a9873a"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbruri-n1"
+                        value="eli/bund/bgbl-1/2025/145/2025-06-17/1/deu" />
+                    <akn:FRBRalias GUID="70d4052d-6bdb-4d60-aa0a-bdc2a5a061c4"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbralias-n1"
+                        name="aktuelle-version-id" value="904cba83-b61e-4c3a-a661-7a2eae9cb844" />
+                    <akn:FRBRalias GUID="83fb0b7a-f0ec-4827-9736-c5df51901f52"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbralias-n2"
+                        name="nachfolgende-version-id" value="2ddfcc81-e1e2-4d79-ac51-520f31af027d" />
+                    <akn:FRBRauthor GUID="b25f041c-e3e9-4340-8084-cd802ce4aeea"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbrauthor-n1"
+                        href="recht.bund.de/institution/bundesregierung" />
+                    <akn:FRBRdate GUID="eef583e7-4e8d-4a22-b6c2-2b6c34f71bf4" date="2025-06-17"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbrdate-n1" name="verkuendung" />
+                    <akn:FRBRlanguage GUID="abbbce3d-c242-49c4-bb69-e4500c2a2909"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbrlanguage-n1" language="deu" />
+                    <akn:FRBRversionNumber GUID="75afaaba-3716-418c-99fb-570338ab21e2"
+                        eId="meta-n1_ident-n1_frbrexpression-n1_frbrversionnumber-n1" value="1" />
+                </akn:FRBRExpression>
+                <akn:FRBRManifestation GUID="bb780236-0d84-49c9-9394-42f98a7eb1fa"
+                    eId="meta-n1_ident-n1_frbrmanifestation-n1">
+                    <akn:FRBRthis GUID="ebe7513b-d295-4d2b-aae3-9e029929dc71"
+                        eId="meta-n1_ident-n1_frbrmanifestation-n1_frbrthis-n1"
+                        value="eli/bund/bgbl-1/2025/145/2025-06-17/1/deu/2025-10-20/regelungstext-verkuendung-1.xml" />
+                    <akn:FRBRuri GUID="349a0edd-3942-4816-8512-f74c5cd35540"
+                        eId="meta-n1_ident-n1_frbrmanifestation-n1_frbruri-n1"
+                        value="eli/bund/bgbl-1/2025/145/2025-06-17/1/deu/2025-10-20/regelungstext-verkuendung-1.xml" />
+                    <akn:FRBRdate GUID="47f003af-1750-47fe-8e8c-0a0dc71a3dab" date="2025-10-20"
+                        eId="meta-n1_ident-n1_frbrmanifestation-n1_frbrdate-n1" name="generierung" />
+                    <akn:FRBRauthor GUID="aff840b5-c5c9-4c2f-b457-1f317549a37a"
+                        eId="meta-n1_ident-n1_frbrmanifestation-n1_frbrauthor-n1"
+                        href="recht.bund.de" />
+                    <akn:FRBRformat GUID="66e767ed-1a93-42bd-80a3-1491c374231b"
+                        eId="meta-n1_ident-n1_frbrmanifestation-n1_frbrformat-n1" value="xml" />
+                </akn:FRBRManifestation>
+            </akn:identification>
+            <akn:lifecycle GUID="8c6679d9-ed04-4256-812d-8576163d398a" eId="meta-n1_lebzykl-n1"
+                source="attributsemantik-noch-undefiniert">
+                <akn:eventRef GUID="91789999-d444-4cb9-9e1a-a41ab4813be2" date="1001-01-01"
+                    eId="meta-n1_lebzykl-n1_ereignis-n1" refersTo="ausfertigung"
+                    source="attributsemantik-noch-undefiniert" type="generation" />
+                <akn:eventRef GUID="68567463-f5dd-48ac-9137-1040ea5eca6f" date="1001-01-01"
+                    eId="meta-n1_lebzykl-n1_ereignis-n2" refersTo="inkrafttreten"
+                    source="attributsemantik-noch-undefiniert" type="generation" />
+            </akn:lifecycle>
+            <akn:temporalData GUID="5a851fe3-ab85-4931-ba53-76d9d1d48ea9"
+                eId="meta-n1_geltzeiten-n1" source="attributsemantik-noch-undefiniert">
+                <akn:temporalGroup GUID="fb144349-3db4-4ace-b930-a0a2af326c82"
+                    eId="meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:timeInterval GUID="a2252084-0258-4ba8-bc2b-0f3ce8d07972"
+                        eId="meta-n1_geltzeiten-n1_geltungszeitgr-n1_gelzeitintervall-n1"
+                        refersTo="geltungszeit" start="#meta-n1_lebzykl-n1_ereignis-n2" />
+                </akn:temporalGroup>
+            </akn:temporalData>
+            <akn:notes source="attributsemantik-noch-undefiniert">
+                <akn:note GUID="4569107c-da7b-4574-9d42-cb36b25529fa" eId="meta-n1_editfnote-n1"
+                    marker="#" placementBase="#einleitung-n1" refersTo="kommentierende-fussnote">
+                    <akn:p GUID="06138212-2905-4e54-8c51-66859e75b718"
+                        eId="meta-n1_editfnote-n1_text-n1">*T (+++ Textnachweis ab: 1.7.2025 +++)</akn:p>
+                </akn:note>
+                <akn:note GUID="65a2c6c0-df2e-4292-bd01-6eacc2cd5b5f" eId="meta-n1_editfnote-n3"
+                    marker="#" placementBase="#art-z10" refersTo="kommentierende-fussnote">
+                    <akn:p GUID="cbd7cc51-056a-4208-896c-6ad1964dfbd3"
+                        eId="meta-n1_editfnote-n3_text-n1">(+++ § 10 Abs. 3: Zur Geltung vgl. § 14
+                        Abs. 2 +++)</akn:p>
+                </akn:note>
+                <akn:note GUID="1791ee4d-6efc-4e93-8acf-4534faa39ca1" eId="meta-n1_editfnote-n4"
+                    marker="#" placementBase="#art-z11" refersTo="kommentierende-fussnote">
+                    <akn:p GUID="5f69fadc-39f6-4761-84aa-6aacf125b568"
+                        eId="meta-n1_editfnote-n4_text-n1">(+++ § 11: Zur Anwendung vgl. § 18 Abs. 1
+                        +++)</akn:p>
+                </akn:note>
+                <akn:note GUID="1edb4c1f-381c-4ab5-8f5c-b874e245d13f" eId="meta-n1_editfnote-n5"
+                    marker="#" placementBase="#art-z12" refersTo="kommentierende-fussnote">
+                    <akn:p GUID="fa8d8cc2-cfb7-4be4-84c1-b1ce092a70f7"
+                        eId="meta-n1_editfnote-n5_text-n1">(+++ § 12 Abs. 2: Zur Nichtanwendung vgl.
+                        § 13 Abs. 1 +++)</akn:p>
+                </akn:note>
+                <akn:note GUID="d4eb3e48-d250-46a5-be96-ffe6022c33dc" eId="meta-n1_editfnote-n6"
+                    marker="#" placementBase="#art-z13" refersTo="kommentierende-fussnote">
+                    <akn:p GUID="ad9a1c51-6cd4-41ea-b449-749324b14f59"
+                        eId="meta-n1_editfnote-n6_text-n1">(+++ § 13 Abs. 2: Zur Geltung vgl. § 14
+                        Abs. 2 +++)</akn:p>
+                </akn:note>
+            </akn:notes>
+            <akn:proprietary GUID="62bfe93d-011d-4372-9ad1-a5973323d77b"
+                eId="meta-n1_proprietary-n1" source="attributsemantik-noch-undefiniert">
+                <ris:legalDocML.de_metadaten xmlns:ris="http://MetadatenRIS.LegalDocML.de/1.8.2/"
+                    xsi:schemaLocation="http://MetadatenRIS.LegalDocML.de/1.8.2/ ../ris-norms-ldml-schema-extensions/1.8.2/legalDocML.de-metadaten-ris.xsd">
+                    <ris:vollzitat>Auslandszuschlagsverordnung vom 17. Juni 2025 (BGBl. 2025 I Nr.
+                        145)</ris:vollzitat>
+                    <ris:standangabe type="sonst">Ersetzt V 2032-1-37 v. 17.8.2010 I 1177, 1244
+                        (AuslZuschlV 2010)</ris:standangabe>
+                </ris:legalDocML.de_metadaten>
+            </akn:proprietary>
+        </akn:meta>
+        <akn:preface GUID="90218690-8dbe-44ad-a088-a4afc0adea54" eId="einleitung-n1">
+            <akn:longTitle GUID="633044e7-48cf-4050-9ba2-b61f9788a310"
+                eId="einleitung-n1_doktitel-n1">
+                <akn:p GUID="e537195e-2c30-47ee-afba-0a684dc10270"
+                    eId="einleitung-n1_doktitel-n1_text-n1">
+                    <akn:docStage GUID="32b51bc1-d8a4-4c9d-b805-823725c21260"
+                        eId="einleitung-n1_doktitel-n1_text-n1_docstadium-n1" />
+                    <akn:docTitle GUID="48eba48b-925b-425a-be49-b1010bfcf905"
+                        eId="einleitung-n1_doktitel-n1_text-n1_doctitel-n1">Verordnung über die
+                        Gewährung von Auslandszuschlägen</akn:docTitle>
+                    <akn:shortTitle GUID="d4714cb1-1e0f-4573-99c4-4edcf2696556"
+                        eId="einleitung-n1_doktitel-n1_text-n1_kurztitel-n1">(Auslandszuschlagsverordnung
+                        - <akn:inline GUID="da709b24-aa50-447d-bef7-d67c22422705"
+                            eId="einleitung-n1_doktitel-n1_text-n1_kurztitel-n1_inline-n1"
+                            name="attributsemantik-noch-undefiniert" refersTo="amtliche-abkuerzung">
+                        AuslZuschlV</akn:inline>)</akn:shortTitle>
+                </akn:p>
+            </akn:longTitle>
+            <akn:block GUID="dc059f05-2e0f-4ec0-bfab-0c6848adc56e" eId="einleitung-n1_block-n1"
+                name="attributsemantik-noch-undefiniert">
+                <akn:date GUID="70fc120b-a871-4957-9070-ce6cd86b01b0" date="2025-06-17"
+                    eId="einleitung-n1_block-n1_datum-n1" refersTo="ausfertigung-datum" />
+            </akn:block>
+        </akn:preface>
+        <akn:preamble GUID="48006d42-53dd-4a3f-b48f-47b8779fef3d" eId="präambel-n1">
+            <akn:blockContainer GUID="b47e13f5-74f4-4582-9208-c680e23f909d"
+                eId="präambel-n1_blockcontainer-n1" refersTo="inhaltsuebersicht">
+                <akn:heading GUID="e36fd5b6-8b1d-43ea-b8ad-b4ae19ed535f"
+                    eId="präambel-n1_blockcontainer-n1_überschrift-n1">Inhaltsübersicht</akn:heading>
+                <akn:toc GUID="f9118aae-7c60-4617-989f-1314cae25cac"
+                    eId="präambel-n1_blockcontainer-n1_inhuebs-n1">
+                    <akn:tocItem GUID="11e01663-1b26-45ca-9fba-c66f10be66c2"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n1" href="" level="1">
+                        <akn:span GUID="ebe404bb-8b31-44ff-9b34-e1edd565eda5"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n1_span-n1">Abschnitt
+                            1</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="cebc7927-e051-4adb-9ebc-9646dc28f9f0"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n2" href="" level="2">
+                        <akn:span GUID="bd3c0db9-a5d9-4644-83ca-648e22a20c33"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n2_span-n1">
+                            Auslandszuschlag</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="02246681-caa9-4c15-b78c-ef599550aeea"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n3" href="" level="5">
+                        <akn:span GUID="b4fb7f5b-677c-486c-b89c-5f1ca81666a5"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n3_span-n1">§ 1</akn:span>
+                        <akn:span GUID="6a4f3d01-29e2-43b8-b90c-3a4c9d2b2e36"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n3_span-n2">Zuteilung
+                            der Dienstorte zu Zonenstufen</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="5e60049a-89e0-4070-9f3b-d3b865b15b20"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n4" href="" level="5">
+                        <akn:span GUID="1ef6f5fc-41a0-4864-b4d8-83953a9d74ee"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n4_span-n1">§ 2</akn:span>
+                        <akn:span GUID="736782ed-a89e-463d-be39-adfd3d8efcc7"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n4_span-n2">Auslandszuschlag
+                            bei Arbeitsplatzteilung</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="d29753ec-0747-4abf-bf7d-21f1017468f0"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n5" href="" level="5">
+                        <akn:span GUID="108d63ff-ba50-4f4e-b818-5db8eec8c7e6"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n5_span-n1">§ 3</akn:span>
+                        <akn:span GUID="a309648e-de25-4017-938e-8272d672ed2e"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n5_span-n2">Zuschlag
+                            zur Abgeltung außergewöhnlicher materieller Mehraufwendungen und
+                            immaterieller Belastungen</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="6e308944-22ad-42c3-95f2-038569ff530e"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n6" href="" level="5">
+                        <akn:span GUID="d3aa9d94-e30a-44c3-a0cd-717f5a600948"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n6_span-n1">§ 4</akn:span>
+                        <akn:span GUID="c75e7d0b-8249-452a-b588-7ee02f60f1ca"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n6_span-n2">Zuschlag
+                            zur Sicherstellung einer anforderungsgerechten Besetzung eines
+                            Dienstpostens im Ausland</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="cad429a8-f5c0-4021-83e0-e13a222d162d"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n7" href="" level="5">
+                        <akn:span GUID="b1d214d1-6194-425e-b074-b9f38ea24e1c"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n7_span-n1">§ 5</akn:span>
+                        <akn:span GUID="8f893a50-2539-4fc6-b239-c91b54fc16d4"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n7_span-n2">Erhöhung
+                            der Zuschläge</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="bcf3bf38-635e-46bd-a6b9-a895a1cd33d6"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n8" href="" level="5">
+                        <akn:span GUID="e0376fee-ac9f-4e9f-8aa0-6157adee2803"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n8_span-n1">§ 6</akn:span>
+                        <akn:span GUID="2c003898-66d8-4f78-8525-8eec1561df8d"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n8_span-n2">Übernahme
+                            der Festsetzung einer anderen obersten Dienstbehörde</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="a6acb8a2-ca9d-43cb-835a-592c551ebe68"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n9" href="" level="5">
+                        <akn:span GUID="86eab9c1-cf7c-4429-b053-5176c4a03152"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n9_span-n1">§ 7</akn:span>
+                        <akn:span GUID="aaf6be68-1017-4582-9c55-931b376da202"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n9_span-n2">
+                            Höchstbetrag</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="5e176cae-c7f6-4976-a6e7-5b45d6c22bec"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n10" href="" level="1">
+                        <akn:span GUID="07739989-a091-4bb7-be5d-09e5e1b71d4c"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n10_span-n1">Abschnitt
+                            2</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="e2d701bf-1b12-4306-aa46-5dd67a16b125"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n11" href="" level="2">
+                        <akn:span GUID="827113ab-0102-47af-adc3-4613608cc87b"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n11_span-n1">Erhöhter
+                            Auslandszuschlag</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="28d3f554-033e-43c7-b025-f9f010bb4e48"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n12" href="" level="1">
+                        <akn:span GUID="c40ec00b-387a-483a-9f7a-991966a8be02"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n12_span-n1">Unterabschnitt
+                            1</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="1a5d2c12-59e6-4c44-a8aa-167549a53dd6"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n13" href="" level="2">
+                        <akn:span GUID="a942e64a-cb04-4846-a32f-ebb560f3d6ef"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n13_span-n1">Erhöhter
+                            Auslandszuschlag für Angehörige des Auswärtigen Dienstes</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="67d479be-386c-4c2e-ab21-6b58596a1546"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n14" href="" level="5">
+                        <akn:span GUID="5a4207bc-e010-4398-9395-0a45de33d51f"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n14_span-n1">§ 8</akn:span>
+                        <akn:span GUID="cc47e7d5-d75c-4025-af3d-545b052e0d16"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n14_span-n2">Information
+                            über den Ablauf des maßgeblichen Zeitraums bei befristeten Verwendungen
+                            im Ausland</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="d9b8b9ab-fc29-4623-8158-8e68927a2915"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n15" href="" level="5">
+                        <akn:span GUID="d6d3413a-f5ee-49a9-8abd-2526342826da"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n15_span-n1">§ 9</akn:span>
+                        <akn:span GUID="7e0d8286-d8a1-4ea6-9b6b-9036680ac647"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n15_span-n2">Maßgebliche
+                            Dienstbezüge</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="9feaba7b-7a3e-455a-92d0-fe7a1a2fa3d1"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n16" href="" level="1">
+                        <akn:span GUID="dbd34a7f-478d-41bb-b08b-9e5b6999c4d0"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n16_span-n1">Unterabschnitt
+                            2</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="d701bfd1-9583-4e2b-bb4b-53e04b5fa1cc"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n17" href="" level="2">
+                        <akn:span GUID="0766a43f-9930-49cc-9c82-8e4c7d52ad20"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n17_span-n1">Erhöhter
+                            Auslandszuschlag für berücksichtigungsfähige Personen</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="762d59ba-7bd2-4159-b125-f267c1f82969"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n18" href="" level="5">
+                        <akn:span GUID="acc1d9b9-575b-4058-b2db-5aecab6c5d11"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n18_span-n1">§ 10</akn:span>
+                        <akn:span GUID="3bb89195-4284-4b19-a973-9bf517e75413"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n18_span-n2">Erhöhter
+                            Auslandszuschlag für Verheiratete</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="0c86084c-e7fd-4e96-8d6c-31abfc5f911f"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n19" href="" level="5">
+                        <akn:span GUID="cf7f0907-1d6d-4423-a5e8-ae8e85d967c6"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n19_span-n1">§ 11</akn:span>
+                        <akn:span GUID="731da9e5-3dd4-4cae-852d-53cba3d27e4a"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n19_span-n2">Verwendung
+                            zum Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder des
+                            Ehegatten</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="029192f7-7653-4977-bbac-55453f0e4d95"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n20" href="" level="5">
+                        <akn:span GUID="d009747b-1629-4144-a3cc-73671b62508a"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n20_span-n1">§ 12</akn:span>
+                        <akn:span GUID="9c7c4097-3ca7-49f6-aa32-5b9fc83fb8ab"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n20_span-n2">Nachweis
+                            und Anzeigepflicht</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="5896b8c0-fbc3-49f3-80ce-94db01a6ab46"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n21" href="" level="5">
+                        <akn:span GUID="4f01680c-0c3a-4465-bf1a-02f45fc6b493"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n21_span-n1">§ 13</akn:span>
+                        <akn:span GUID="bbd769ed-825d-40b4-85fb-fc588a53d6ef"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n21_span-n2">Abweichende
+                            Regelungen für bestimmte Personengruppen zu Verwendung und Nachweis</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="4383af73-fcd3-483d-8e6e-afe6aacf9966"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n22" href="" level="5">
+                        <akn:span GUID="9eab4160-8c85-4e02-9a7b-8a119d0950b1"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n22_span-n1">§ 14</akn:span>
+                        <akn:span GUID="55c09503-87f6-4624-a121-ff091e0d2a49"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n22_span-n2">Erhöhter
+                            Auslandszuschlag für weitere berücksichtigungsfähige Personen</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="21b1b7d7-6696-4b80-bc9f-966c395abb5a"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n23" href="" level="5">
+                        <akn:span GUID="2b0f0f19-ee3d-4e1c-86d6-2383be9a49fc"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n23_span-n1">§ 15</akn:span>
+                        <akn:span GUID="1d1fc4fb-6bdf-4092-ac6d-50b41bda168c"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n23_span-n2">Begriff
+                            des Nettoerwerbseinkommens</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="ff8c5e8b-4f59-4ffe-bc1c-2d6f123b5522"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n24" href="" level="5">
+                        <akn:span GUID="45f57f8b-6ad4-419f-bc21-f38d6aaac4aa"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n24_span-n1">§ 16</akn:span>
+                        <akn:span GUID="7571edce-6e84-41c8-9e78-42317329bdaa"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n24_span-n2">Anrechnung
+                            des Nettoerwerbseinkommens der berücksichtigungsfähigen Person</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="fab3cd02-a122-4021-a515-7f2ad63383b1"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n25" href="" level="5">
+                        <akn:span GUID="307a42d9-b8c8-422d-b71b-421c24b038ac"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n25_span-n1">§ 17</akn:span>
+                        <akn:span GUID="fb9d1006-150d-450d-b5e5-5e5c5f2cb398"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n25_span-n2">Vorläufige
+                            Gewährung und Nachweis bei Nettoerwerbseinkommen der
+                            berücksichtigungsfähigen Person</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="b4bd6f4c-ae56-4045-a7c8-5b3a94574871"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n26" href="" level="1">
+                        <akn:span GUID="6cb222d6-7d19-415f-b6bf-25e04e04c4d7"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n26_span-n1">Abschnitt
+                            3</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="c7404197-70a9-4dc4-90d2-6d0b622147d9"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n27" href="" level="2">
+                        <akn:span GUID="e8281303-d5aa-4fed-b87b-ccaddf191abb"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n27_span-n1">
+                            Schlussvorschriften</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="e25e5120-882d-4f4b-b047-109a1686e6d8"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n28" href="" level="5">
+                        <akn:span GUID="3ca48b4c-a2d6-423e-91b5-472bd5112fe9"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n28_span-n1">§ 18</akn:span>
+                        <akn:span GUID="8dd0d1c6-ea81-4124-9053-5b5babf7ff2d"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n28_span-n2">
+                            Übergangsregelungen</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="e63d6236-c98c-45ca-89bc-8bb086310240"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n29" href="" level="1">
+                        <akn:span GUID="0a427ccb-63a5-4cd7-9c52-744416051928"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n29_span-n1">Anlage
+                            1</akn:span>
+                    </akn:tocItem>
+                    <akn:tocItem GUID="ce55eaf2-f8c0-4c73-8409-7f71e5b85db1"
+                        eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n30" href="" level="1">
+                        <akn:span GUID="1c910207-0cea-4a4e-9b62-1ddbd24c7adb"
+                            eId="präambel-n1_blockcontainer-n1_inhuebs-n1_eintrag-n30_span-n1">Anlage
+                            2</akn:span>
+                    </akn:tocItem>
+                </akn:toc>
+            </akn:blockContainer>
+        </akn:preamble>
+        <akn:body GUID="0ca70afd-62d6-49d5-b4dc-718bd8e78c62" eId="hauptteil-n1">
+            <akn:section GUID="f6d67fd4-d150-44d8-a4e8-fafdd755e05f" eId="hauptteil-n1_abschnitt-n1">
+                <akn:num GUID="426eeae5-5384-4d74-b788-7d12c1948308"
+                    eId="hauptteil-n1_abschnitt-n1_bezeichnung-n1">Abschnitt 1</akn:num>
+                <akn:heading GUID="db9d17b3-dd92-4f40-9e4d-a189ef92ee8d"
+                    eId="hauptteil-n1_abschnitt-n1_überschrift-n1">Auslandszuschlag</akn:heading>
+                <akn:article GUID="54eb7b17-b3d9-48db-ada8-d3dfd4ada712" eId="art-z1"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="51d84ce6-9ca7-494e-bcc5-e313ab1089bc" eId="art-z1_bezeichnung-n1">§
+                        1</akn:num>
+                    <akn:heading GUID="e1a44205-061d-417d-85ce-393ac5ec9f35"
+                        eId="art-z1_überschrift-n1">Zuteilung der Dienstorte zu Zonenstufen</akn:heading>
+                    <akn:paragraph GUID="89225791-8203-403c-8c90-ca5a1253c5dd" eId="art-z1_abs-z1">
+                        <akn:num GUID="b51a5685-1582-476b-920e-e97423b8b4bb"
+                            eId="art-z1_abs-z1_bezeichnung-n1">(1)</akn:num>
+                        <akn:content GUID="49e6ec3e-40c3-4475-9c61-11a5d61b5ca5"
+                            eId="art-z1_abs-z1_inhalt-n1">
+                            <akn:p GUID="e5254ca2-13f2-49b7-bc5d-c59b27c41332"
+                                eId="art-z1_abs-z1_inhalt-n1_text-n1">Befindet sich an einem
+                                Dienstort eine Auslandsvertretung der Bundesrepublik Deutschland, so
+                                wird dem Dienstort eine Zonenstufe nach Anlage 1 zugeteilt.<akn:marker
+                                    GUID="fc150253-2f92-4ed7-b1bd-d63dc197de9b"
+                                    eId="art-z1_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="e8c6b121-03ef-454f-a29c-df7022cb639b" eId="art-z1_abs-z2">
+                        <akn:num GUID="66d7ff03-25c3-4a31-9305-260d6ae655b6"
+                            eId="art-z1_abs-z2_bezeichnung-n1">(2)</akn:num>
+                        <akn:content GUID="e1081cab-fb94-4bdf-b487-6e389a4d7701"
+                            eId="art-z1_abs-z2_inhalt-n1">
+                            <akn:p GUID="b12a9779-2501-4561-9072-d738a52b1c20"
+                                eId="art-z1_abs-z2_inhalt-n1_text-n1">Ist ein Dienstort nicht in
+                                Anlage 1 aufgeführt, so wird der Dienstort einer Zonenstufe nach
+                                Anlage 2 zugeteilt.<akn:marker
+                                    GUID="c097ce9b-a2df-48e7-82c2-8e483d668bd6"
+                                    eId="art-z1_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="14b18d9d-8e80-4ea5-8d4b-98e6b7e2b49f" eId="art-z1_abs-z3">
+                        <akn:num GUID="cff64e63-9216-4f51-8c27-5ebb2c8bdb57"
+                            eId="art-z1_abs-z3_bezeichnung-n1">(3)</akn:num>
+                        <akn:content GUID="132f0bc0-172e-46fa-bb9f-905f45f227cb"
+                            eId="art-z1_abs-z3_inhalt-n1">
+                            <akn:p GUID="df27789d-c19a-4f8a-8661-b74fe0bed1c0"
+                                eId="art-z1_abs-z3_inhalt-n1_text-n1">Ist ein Dienstort weder in
+                                Anlage 1 noch in Anlage 2 aufgeführt, so richtet sich die Zuteilung
+                                des Dienstortes zu einer Zonenstufe nach der Zonenstufe der
+                                Auslandsvertretung der Bundesrepublik Deutschland, in deren
+                                Amtsbezirk der Dienstort liegt.<akn:marker
+                                    GUID="302e0845-8aff-4023-8185-07a28aa43cb9"
+                                    eId="art-z1_abs-z3_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /> Weichen die Lebensverhältnisse am
+                                Dienstort erheblich von denen am Ort der Auslandsvertretung ab, so
+                                kann die oberste Dienstbehörde die Zonenstufe abweichend von Satz 1
+                                anhand eines Ortes mit vergleichbaren Lebensverhältnissen zuteilen,
+                                dessen Zonenstufe nach den Grundsätzen des § 53 Absatz 1 Satz 1 bis
+                                4 des Bundesbesoldungsgesetzes ermittelt wurde.<akn:marker
+                                    GUID="0d96865e-c24e-48e7-b513-bfb0ea2bdac7"
+                                    eId="art-z1_abs-z3_inhalt-n1_text-n1_marker-n2"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="e37853a7-62be-4f9e-9ce0-e3eec4f057e2" eId="art-z1_abs-z4">
+                        <akn:num GUID="21a197a4-30c3-4e7b-9342-47005ab0b8ae"
+                            eId="art-z1_abs-z4_bezeichnung-n1">(4)</akn:num>
+                        <akn:content GUID="cc516680-911e-41ed-8130-c090383066ed"
+                            eId="art-z1_abs-z4_inhalt-n1">
+                            <akn:p GUID="090d52fe-9b66-4fe3-a98c-a6b13e23d99d"
+                                eId="art-z1_abs-z4_inhalt-n1_text-n1">Die Grundgehaltsspannen der
+                                Anlage VI Tabelle VI.1 des Bundesbesoldungsgesetzes umfassen auch
+                                die Amtszulagen.<akn:marker
+                                    GUID="a606fc1f-fcac-4740-a4ec-757c399cd422"
+                                    eId="art-z1_abs-z4_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+                <akn:article GUID="64c4c3fb-5cdf-49db-a30b-5e35a52606af" eId="art-z2"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="214a7d5a-4f09-4806-98bb-6cfd25f626e7" eId="art-z2_bezeichnung-n1">§
+                        2</akn:num>
+                    <akn:heading GUID="328cbb0d-91cc-42f0-b864-7ba2b11863fa"
+                        eId="art-z2_überschrift-n1">Auslandszuschlag bei Arbeitsplatzteilung</akn:heading>
+                    <akn:paragraph GUID="60f4644d-08a3-4dc4-8834-4e740caac462" eId="art-z2_abs-z">
+                        <akn:num GUID="8aa1050c-41d4-4f63-b0da-52e181db00a6"
+                            eId="art-z2_abs-z_bezeichnung-n1" />
+                        <akn:content GUID="0c0d807f-0686-4980-8513-2e0a51cd02b2"
+                            eId="art-z2_abs-z_inhalt-n1">
+                            <akn:p GUID="745b541f-f7ad-42f3-9108-aef93c07e828"
+                                eId="art-z2_abs-z_inhalt-n1_text-n1">In Fällen des § 53 Absatz 3
+                                Satz 3 des Bundesbesoldungsgesetzes wird die Grundgehaltsspanne der
+                                oder des höher besoldeten Berechtigten zugrunde gelegt.<akn:marker
+                                    GUID="729deb9d-39c0-4f6c-b488-19c55ea58942"
+                                    eId="art-z2_abs-z_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+                <akn:article GUID="f62f5b44-de0f-4807-879f-df5293a44f95" eId="art-z3"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="aac6886c-e60b-47fe-b54c-c452ac5b46d3" eId="art-z3_bezeichnung-n1">§
+                        3</akn:num>
+                    <akn:heading GUID="26bbcaa7-6688-4a0d-82c2-2c974d08b811"
+                        eId="art-z3_überschrift-n1">Zuschlag zur Abgeltung außergewöhnlicher
+                        materieller Mehraufwendungen und immaterieller Belastungen</akn:heading>
+                    <akn:paragraph GUID="af1d878b-46c9-438a-864c-a2793d413fcb" eId="art-z3_abs-z1">
+                        <akn:num GUID="a8762b7e-5171-4b82-80f7-9e52969e2bda"
+                            eId="art-z3_abs-z1_bezeichnung-n1">(1)</akn:num>
+                        <akn:content GUID="50bd66c4-5fd6-4ef4-ab00-b94090c5db81"
+                            eId="art-z3_abs-z1_inhalt-n1">
+                            <akn:p GUID="12739302-ff9d-4fc9-ad4a-2111a66bdbf1"
+                                eId="art-z3_abs-z1_inhalt-n1_text-n1">Als monatlicher Zuschlag zur
+                                Abgeltung außergewöhnlicher materieller Mehraufwendungen können
+                                zusätzlich zum Auslandszuschlag bis zu 715 Euro gezahlt werden.<akn:marker
+                                    GUID="ec1a0309-57c9-4298-9a93-98ce4638d11d"
+                                    eId="art-z3_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="2533a3d2-2095-4939-ad92-550751725a2d" eId="art-z3_abs-z2">
+                        <akn:num GUID="c1e9db49-4f3e-4698-b190-8706a974e312"
+                            eId="art-z3_abs-z2_bezeichnung-n1">(2)</akn:num>
+                        <akn:content GUID="710e6411-28d5-48c1-aa9c-50169c1318c4"
+                            eId="art-z3_abs-z2_inhalt-n1">
+                            <akn:p GUID="20435724-8ffd-4224-aa92-ad99ecdf24c4"
+                                eId="art-z3_abs-z2_inhalt-n1_text-n1">Als monatlicher Zuschlag zur
+                                Abgeltung außergewöhnlicher immaterieller Belastungen können
+                                zusätzlich zum Auslandszuschlag gezahlt werden: </akn:p>
+                            <akn:blockList GUID="6851656e-67ef-4e1a-9b72-e49365248c77"
+                                eId="art-z3_abs-z2_inhalt-n1_liste-n1">
+                                <akn:item GUID="653d65ca-9ca8-4a81-8093-a7229b623045"
+                                    eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1">
+                                    <akn:num GUID="e01dfbcd-ba05-4407-9ade-70b18c567767"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                        1.</akn:num>
+                                    <akn:p GUID="1a062471-15db-4ee7-9b76-edc15b102357"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_text-n1">bis
+                                        zu 500 Euro, wenn am Dienstort Belastungen auftreten,
+                                        insbesondere aufgrund von </akn:p>
+                                    <akn:blockList GUID="b81502bf-bac3-4690-a491-c1487b6a3b21"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1">
+                                        <akn:item GUID="a578cb3f-9e7c-4110-b685-4741a700df8b"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1">
+                                            <akn:num GUID="7c9c5302-6984-4e5c-a38d-87a9c6c865e2"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                                a)</akn:num>
+                                            <akn:p GUID="681217e6-937b-4490-bf45-d2eb7af8ea14"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_text-n1">Knappheit
+                                                von Gütern der Grundversorgung,</akn:p>
+                                        </akn:item>
+                                        <akn:item GUID="f93c97db-a94e-4697-a7e1-0c0a62b5daa4"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2">
+                                            <akn:num GUID="6c7d3a4c-3e8d-400a-8923-21bd048e0cf2"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                                b)</akn:num>
+                                            <akn:p GUID="b1e446b4-deca-463d-8108-c6a9ff6de9e2"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_text-n1">außergewöhnlichen
+                                                Umweltbelastungen oder</akn:p>
+                                        </akn:item>
+                                        <akn:item GUID="ecd2849b-3f8e-4509-831c-e3138b87e319"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n3">
+                                            <akn:num GUID="eb916ec9-fd91-46ad-9932-c407ecc9bdd6"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n3_bezeichnung-n1">
+                                                c)</akn:num>
+                                            <akn:p GUID="5e5da109-02c2-4b25-b8d4-4deb4081a232"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n3_text-n1">einer
+                                                hohen Rate an Gewaltdelikten;</akn:p>
+                                        </akn:item>
+                                    </akn:blockList>
+                                </akn:item>
+                                <akn:item GUID="90876a4b-0e0b-445b-a957-9511821d04d0"
+                                    eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2">
+                                    <akn:num GUID="ecfb1bef-53d5-4219-8c87-5baa116fbc3f"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                        2.</akn:num>
+                                    <akn:p GUID="1aad90f9-09e0-4410-9087-7d93e69e4fd0"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_text-n1">bis
+                                        zu 800 Euro, wenn am Dienstort eine abstrakte Gefahr für
+                                        Leben, Gesundheit oder Eigentum besteht, insbesondere
+                                        aufgrund von </akn:p>
+                                    <akn:blockList GUID="8edb5db0-30c5-4cc8-895c-3b14e0c2f28b"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1">
+                                        <akn:item GUID="f4e0567c-4a12-4972-b150-e1253d3eb084"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n1">
+                                            <akn:num GUID="13787a76-d564-4910-904f-602aae9a34dd"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n1_bezeichnung-n1">
+                                                a)</akn:num>
+                                            <akn:p GUID="f43e13bd-af1d-41e0-a43f-9aada2c8e96e"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n1_text-n1">Auswirkungen
+                                                von bewaffneten Konflikten,</akn:p>
+                                        </akn:item>
+                                        <akn:item GUID="3adfcbad-f569-4987-9cc1-56b12b3673a5"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n2">
+                                            <akn:num GUID="e3560410-e30b-4bc0-ab8a-b0448367af07"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n2_bezeichnung-n1">
+                                                b)</akn:num>
+                                            <akn:p GUID="223871b1-608d-440c-bb4e-8b83e208fad5"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n2_text-n1">politisch
+                                                motivierten Gewalttaten oder</akn:p>
+                                        </akn:item>
+                                        <akn:item GUID="37fca76b-34a3-4b95-9510-ac5aa54f7bdf"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n3">
+                                            <akn:num GUID="5d4bc35e-0eb2-423c-9204-56c13a9f1155"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n3_bezeichnung-n1">
+                                                c)</akn:num>
+                                            <akn:p GUID="8ea4be65-1d49-4f41-9401-59a01b0b824e"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n3_text-n1">schwerwiegender
+                                                Beeinträchtigung des Bestands oder der
+                                                Funktionsfähigkeit des Staates oder seiner
+                                                Einrichtungen einschließlich der Daseinsvorsorge;</akn:p>
+                                        </akn:item>
+                                    </akn:blockList>
+                                </akn:item>
+                                <akn:item GUID="9cb80c17-4b62-4354-877e-314b647e098b"
+                                    eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3">
+                                    <akn:num GUID="e2fa225f-5df1-4896-ad4e-95e08f9bc1b9"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_bezeichnung-n1">
+                                        3.</akn:num>
+                                    <akn:p GUID="791aafb3-e1a5-4e82-9b7c-d8b78bbf987c"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_text-n1">bis
+                                        zu 1 000 Euro, wenn am Dienstort eine konkrete Gefahr für
+                                        Leben oder Gesundheit besteht, insbesondere aufgrund von </akn:p>
+                                    <akn:blockList GUID="a18daf93-935f-43b8-b1cc-119e9e65823e"
+                                        eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1">
+                                        <akn:item GUID="8bd39084-e241-43f2-81e0-d64f70dad0e8"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n1">
+                                            <akn:num GUID="6ddc4020-cc76-4df7-ad01-109d5b752887"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n1_bezeichnung-n1">
+                                                a)</akn:num>
+                                            <akn:p GUID="0cde14f4-886c-48d9-a834-48a021e4b46e"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n1_text-n1">bewaffneten
+                                                Konflikten,</akn:p>
+                                        </akn:item>
+                                        <akn:item GUID="2d90a78c-7d13-46c2-873b-427269286977"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n2">
+                                            <akn:num GUID="c69892eb-6199-42e9-8b79-9defe4948743"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n2_bezeichnung-n1">
+                                                b)</akn:num>
+                                            <akn:p GUID="9c6d10be-5356-4e02-af95-ed640be77f0e"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n2_text-n1">Katastrophen
+                                                oder</akn:p>
+                                        </akn:item>
+                                        <akn:item GUID="b9361422-4146-4fa4-8393-3353030f15b3"
+                                            eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n3">
+                                            <akn:num GUID="15f7be5c-3bc1-441b-bd91-9af8b0654add"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n3_bezeichnung-n1">
+                                                c)</akn:num>
+                                            <akn:p GUID="e686132e-5bd0-48fc-8d97-1c403903155d"
+                                                eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n3_text-n1">
+                                                Epidemien.<akn:marker
+                                                    GUID="6f079f05-5493-4eec-a65e-8200c86f7a77"
+                                                    eId="art-z3_abs-z2_inhalt-n1_liste-n1_listenelem-n3_liste-n1_listenelem-n3_text-n1_marker-n1"
+                                                    refersTo="satzende" /></akn:p>
+                                        </akn:item>
+                                    </akn:blockList>
+                                </akn:item>
+                            </akn:blockList>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="f116d683-39d5-4107-8880-601debf96a74" eId="art-z3_abs-z3">
+                        <akn:num GUID="05e50230-aa5c-4f22-a6c4-8b3965a8c10e"
+                            eId="art-z3_abs-z3_bezeichnung-n1">(3)</akn:num>
+                        <akn:content GUID="b92cd180-4232-49da-a536-dcdeb3587014"
+                            eId="art-z3_abs-z3_inhalt-n1">
+                            <akn:p GUID="be84f772-cb46-4be0-9844-637f42aed4d7"
+                                eId="art-z3_abs-z3_inhalt-n1_text-n1">Der monatliche Zuschlag wird
+                                pauschal um einen Anteil gekürzt, der dem Umfang der am jeweiligen
+                                Dienstort typischerweise vorkommenden Abwesenheiten entspricht.<akn:marker
+                                    GUID="cd6cf3f5-4011-4d0a-ac09-cb3cd1dbc8ab"
+                                    eId="art-z3_abs-z3_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /> Der Kürzung wird insbesondere der für
+                                jeden vollen Monat zustehende Erholungs- und Zusatzurlaub zugrunde
+                                gelegt.<akn:marker GUID="8bba878a-7cb9-490a-9c6b-1d0041e7e669"
+                                    eId="art-z3_abs-z3_inhalt-n1_text-n1_marker-n2"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="8d77b374-1a7d-40b6-a230-3b6110be2016" eId="art-z3_abs-z4">
+                        <akn:num GUID="380ef9c1-06e9-4b65-ad91-e1855c8ed96b"
+                            eId="art-z3_abs-z4_bezeichnung-n1">(4)</akn:num>
+                        <akn:content GUID="a662b081-64e3-4fd4-a34e-3f6c3406bc1f"
+                            eId="art-z3_abs-z4_inhalt-n1">
+                            <akn:p GUID="e8085a66-1923-4a13-a4ee-d6f61e334133"
+                                eId="art-z3_abs-z4_inhalt-n1_text-n1">Während einer Abwesenheit vom
+                                Dienstort von mehr als zwei Wochen wird der Zuschlag nicht gezahlt.<akn:marker
+                                    GUID="c99328c2-5ce3-4380-ac49-b9b620b6227b"
+                                    eId="art-z3_abs-z4_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /> Dies gilt nicht für Abwesenheiten wegen
+                                Erholungs- und Zusatzurlaubs oder aus sonstigen Gründen, die der
+                                pauschalen Kürzung nach Absatz 3 zugrunde gelegt wurden.<akn:marker
+                                    GUID="b76a3d57-7e3f-4941-ad48-283fa41b39c1"
+                                    eId="art-z3_abs-z4_inhalt-n1_text-n1_marker-n2"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+                <akn:article GUID="69a4fb8e-5b00-4ac6-86be-b8b80391a63e" eId="art-z4"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="7ccfa07c-2338-40a9-85c8-d79628bad472" eId="art-z4_bezeichnung-n1">§
+                        4</akn:num>
+                    <akn:heading GUID="e6f953d9-7104-4b27-a589-7bf39cfa8897"
+                        eId="art-z4_überschrift-n1">Zuschlag zur Sicherstellung einer
+                        anforderungsgerechten Besetzung eines Dienstpostens im Ausland</akn:heading>
+                    <akn:paragraph GUID="6633a5eb-e95d-457c-9059-ce6f644144e9" eId="art-z4_abs-z1">
+                        <akn:num GUID="b18a3498-892a-4b1a-a395-042b000abbf0"
+                            eId="art-z4_abs-z1_bezeichnung-n1">(1)</akn:num>
+                        <akn:content GUID="3f2546c1-c79c-4fac-85bb-bbd38d669e9d"
+                            eId="art-z4_abs-z1_inhalt-n1">
+                            <akn:p GUID="8768d1b9-2270-4b4a-9b33-590e886cff90"
+                                eId="art-z4_abs-z1_inhalt-n1_text-n1">Kann ein Dienstposten im
+                                Ausland wegen außergewöhnlicher materieller Mehraufwendungen oder
+                                immaterieller Belastungen nicht mit einer geeigneten Bewerberin oder
+                                einem geeigneten Bewerber besetzt werden, so kann für die
+                                Sicherstellung einer anforderungsgerechten Besetzung des
+                                Dienstpostens zusätzlich zum Auslandszuschlag ein monatlicher
+                                Zuschlag von bis zu 715 Euro festgesetzt werden.<akn:marker
+                                    GUID="66bdb5db-04c4-4615-b704-477abd1ff21c"
+                                    eId="art-z4_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="506ac825-39b5-4027-97f6-9951c25925f7" eId="art-z4_abs-z2">
+                        <akn:num GUID="593da8de-e69c-4d0f-9409-040b0482a952"
+                            eId="art-z4_abs-z2_bezeichnung-n1">(2)</akn:num>
+                        <akn:content GUID="f13ad3da-0639-44c0-ac06-adfd102590cd"
+                            eId="art-z4_abs-z2_inhalt-n1">
+                            <akn:p GUID="63591526-888e-48c8-929f-6e3241f9de24"
+                                eId="art-z4_abs-z2_inhalt-n1_text-n1">Der Zuschlag wird so lange
+                                gezahlt, wie die Person den Dienstposten innehat, längstens jedoch
+                                für vier Jahre.<akn:marker
+                                    GUID="2db9ec79-af5e-4e81-bfe5-67f36fb91881"
+                                    eId="art-z4_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="120456a5-1e5e-49b6-8b55-fdcb31e4e9d9" eId="art-z4_abs-z3">
+                        <akn:num GUID="1124e595-656f-4540-a5b4-a9d2a9bc6b42"
+                            eId="art-z4_abs-z3_bezeichnung-n1">(3)</akn:num>
+                        <akn:content GUID="ebd59915-4e47-455e-8f22-2ec7fdbef6c1"
+                            eId="art-z4_abs-z3_inhalt-n1">
+                            <akn:p GUID="ac1799f5-11d1-4cff-9b6c-675cbf65f1d4"
+                                eId="art-z4_abs-z3_inhalt-n1_text-n1">Der Zuschlag wird auch bei
+                                vorübergehender Abwesenheit vom Dienstort gezahlt.<akn:marker
+                                    GUID="e3611801-8fe2-4cfd-b668-dcc2758e367c"
+                                    eId="art-z4_abs-z3_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="83abe3e8-2b54-4399-a761-2c65e53f91a9" eId="art-z4_abs-z4">
+                        <akn:num GUID="83303099-0915-4b3e-a2a5-3520ae68114c"
+                            eId="art-z4_abs-z4_bezeichnung-n1">(4)</akn:num>
+                        <akn:content GUID="ab904da4-be57-4d29-8726-f446b10f3a3e"
+                            eId="art-z4_abs-z4_inhalt-n1">
+                            <akn:p GUID="edaae434-706a-40a4-ba90-4c59b457cf7d"
+                                eId="art-z4_abs-z4_inhalt-n1_text-n1">Die Gründe für die Gewährung
+                                des Zuschlags sind zu dokumentieren.<akn:marker
+                                    GUID="a8aff0c8-a6f6-487a-ab3a-c46c42ae5033"
+                                    eId="art-z4_abs-z4_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+                <akn:article GUID="80789034-cf17-4028-bf80-b160714bc6fc" eId="art-z5"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="7fed602f-5eb3-4dd4-8666-837eb105083e" eId="art-z5_bezeichnung-n1">§
+                        5</akn:num>
+                    <akn:heading GUID="0ba2b6f9-e6ca-49da-a3bc-a2d01e2ed255"
+                        eId="art-z5_überschrift-n1">Erhöhung der Zuschläge</akn:heading>
+                    <akn:paragraph GUID="1cf11859-70c5-42fb-b567-a23498919c8d" eId="art-z5_abs-z">
+                        <akn:num GUID="55922048-5ac2-44dd-8356-acacc7e62c0f"
+                            eId="art-z5_abs-z_bezeichnung-n1" />
+                        <akn:content GUID="6286141b-5a76-4635-b644-f07a701f9cce"
+                            eId="art-z5_abs-z_inhalt-n1">
+                            <akn:p GUID="8412ab74-b06a-4b23-a89e-0297a9ad8cf9"
+                                eId="art-z5_abs-z_inhalt-n1_text-n1">Ein Zuschlag nach § 3 erhöht
+                                sich für jede Person, die nach § 53 Absatz 4 des
+                                Bundesbesoldungsgesetzes berücksichtigungsfähig ist, um 10 Prozent,
+                                sofern sich die Person an dem Dienstort, für den der Zuschlag
+                                festgesetzt worden ist, nicht nur vorübergehend aufhält.<akn:marker
+                                    GUID="bc8ffefb-b896-4a2a-aa25-a79ac0e34f5c"
+                                    eId="art-z5_abs-z_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+                <akn:article GUID="a57184b3-4718-4e14-a110-d18c8ac35350" eId="art-z6"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="bfa3fa87-3263-4749-9ddf-f1a5dc4cc5dd" eId="art-z6_bezeichnung-n1">§
+                        6</akn:num>
+                    <akn:heading GUID="3551d432-e33c-4e43-b03d-582e8ec2fd04"
+                        eId="art-z6_überschrift-n1">Übernahme der Festsetzung einer anderen obersten
+                        Dienstbehörde</akn:heading>
+                    <akn:paragraph GUID="928644e5-befb-4191-9041-bd5dfb23590e" eId="art-z6_abs-z">
+                        <akn:num GUID="2a6204c7-9d02-48fe-a479-3bdd54531311"
+                            eId="art-z6_abs-z_bezeichnung-n1" />
+                        <akn:content GUID="34a0a85e-a40a-4cc2-9dc9-2f7b72c4beec"
+                            eId="art-z6_abs-z_inhalt-n1">
+                            <akn:p GUID="adde16c4-1c8c-479a-9b3f-d5a81a1c69f0"
+                                eId="art-z6_abs-z_inhalt-n1_text-n1">Eine oberste Dienstbehörde kann
+                                einen Zuschlag nach § 3 übernehmen, den eine andere oberste
+                                Dienstbehörde festgesetzt hat.<akn:marker
+                                    GUID="ad19fffa-3fa6-41cd-98c4-d5c37710c2eb"
+                                    eId="art-z6_abs-z_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /> Ein Einvernehmen nach § 53 Absatz 1 Satz
+                                5 des Bundesbesoldungsgesetzes ist bei der Übernahme nicht
+                                herzustellen.<akn:marker GUID="36fc1ad7-45d5-4752-9bd2-3cddd98a9ec4"
+                                    eId="art-z6_abs-z_inhalt-n1_text-n1_marker-n2"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+                <akn:article GUID="e8464f77-3a38-4c14-aa83-affbad4706f8" eId="art-z7"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="e10403b5-618a-4f27-b28e-d13299f5c50b" eId="art-z7_bezeichnung-n1">§
+                        7</akn:num>
+                    <akn:heading GUID="f21f933b-2dd2-43b6-8c3d-1149ef9b9695"
+                        eId="art-z7_überschrift-n1">Höchstbetrag</akn:heading>
+                    <akn:paragraph GUID="24005658-cb2d-4604-950e-699da928d605" eId="art-z7_abs-z">
+                        <akn:num GUID="e5298efe-3e72-431d-a33b-3131cb53dd70"
+                            eId="art-z7_abs-z_bezeichnung-n1" />
+                        <akn:content GUID="e6ffdda3-0bd4-4138-83e4-ce17073fde78"
+                            eId="art-z7_abs-z_inhalt-n1">
+                            <akn:p GUID="af5b674f-ef6f-4bb1-903c-5d0c6b5865b0"
+                                eId="art-z7_abs-z_inhalt-n1_text-n1">Die Beträge nach den §§ 3 bis 5
+                                können bis zum gesetzlichen Höchstbetrag nach § 53 Absatz 1 Satz 5
+                                des Bundesbesoldungsgesetzes nebeneinander gewährt werden und
+                                unterliegen dem Kaufkraftausgleich (§ 55 des
+                                Bundesbesoldungsgesetzes).<akn:marker
+                                    GUID="d577dec7-f873-48e9-8cac-4bc4c8b84e16"
+                                    eId="art-z7_abs-z_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+            </akn:section>
+            <akn:section GUID="f8541dda-3023-4d6d-909d-d14b031a99d1" eId="hauptteil-n1_abschnitt-n2">
+                <akn:num GUID="c1c26a9b-e001-49c5-8f0e-04299120a323"
+                    eId="hauptteil-n1_abschnitt-n2_bezeichnung-n1">Abschnitt 2</akn:num>
+                <akn:heading GUID="d10e0ed8-46b9-4f4c-887b-6a4a47b761cd"
+                    eId="hauptteil-n1_abschnitt-n2_überschrift-n1">Erhöhter Auslandszuschlag</akn:heading>
+                <akn:subsection GUID="e8120f14-350e-4596-be68-91540d3c5d74"
+                    eId="hauptteil-n1_abschnitt-n2_uabschnitt-n1">
+                    <akn:num GUID="46e54093-9753-489a-a553-71edf8514334"
+                        eId="hauptteil-n1_abschnitt-n2_uabschnitt-n1_bezeichnung-n1">Unterabschnitt
+                        1</akn:num>
+                    <akn:heading GUID="233d2ca1-99c8-4866-b45b-3af66674bd44"
+                        eId="hauptteil-n1_abschnitt-n2_uabschnitt-n1_überschrift-n1">Erhöhter
+                        Auslandszuschlag für Angehörige des Auswärtigen Dienstes</akn:heading>
+                    <akn:article GUID="c9de0337-1276-413f-9624-387e77098d72" eId="art-z8"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="57086899-30c7-4e5b-8403-9b2594b4908b"
+                            eId="art-z8_bezeichnung-n1">§ 8</akn:num>
+                        <akn:heading GUID="4c2536f5-cd47-4a16-b588-b326a878951f"
+                            eId="art-z8_überschrift-n1">Information über den Ablauf des maßgeblichen
+                            Zeitraums bei befristeten Verwendungen im Ausland</akn:heading>
+                        <akn:paragraph GUID="47cfbf2b-10af-4200-9a52-b38dd9bb3b80"
+                            eId="art-z8_abs-z">
+                            <akn:num GUID="9621ab59-0273-444f-b5b1-cb21b8e4480c"
+                                eId="art-z8_abs-z_bezeichnung-n1" />
+                            <akn:content GUID="6f953679-0340-4f19-88b3-8d43e8870106"
+                                eId="art-z8_abs-z_inhalt-n1">
+                                <akn:p GUID="7819609e-65e8-49e4-a777-ac5c0c343123"
+                                    eId="art-z8_abs-z_inhalt-n1_text-n1">Die entsendende
+                                    Dienststelle informiert die Bezügestelle, wenn der Zeitraum nach
+                                    § 53 Absatz 6 Satz 2 des Bundesbesoldungsgesetzes abgelaufen
+                                    ist.<akn:marker GUID="a5708945-08e4-49d0-95fb-690f2704e06c"
+                                        eId="art-z8_abs-z_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="c02feba8-6b32-438f-ad7d-a4fff46c7727" eId="art-z9"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="f1f29e8b-3b31-4618-98fa-df419f9155f0"
+                            eId="art-z9_bezeichnung-n1">§ 9</akn:num>
+                        <akn:heading GUID="c6a241f2-fefb-4dbe-b7a7-8401d2bcc577"
+                            eId="art-z9_überschrift-n1">Maßgebliche Dienstbezüge</akn:heading>
+                        <akn:paragraph GUID="8d3b3d8d-9ab9-4186-8447-53f44b410e11"
+                            eId="art-z9_abs-z">
+                            <akn:num GUID="2236dc3d-5b65-4e65-bc10-d6b39630b7e5"
+                                eId="art-z9_abs-z_bezeichnung-n1" />
+                            <akn:content GUID="e8aea8cd-e973-4c8e-810e-99ac4779e9eb"
+                                eId="art-z9_abs-z_inhalt-n1">
+                                <akn:p GUID="c8e79abe-3a44-403f-8d30-6eb4c0faaaef"
+                                    eId="art-z9_abs-z_inhalt-n1_text-n1">Maßgebliche Dienstbezüge
+                                    für die Berechnung des erhöhten Auslandszuschlags nach § 53
+                                    Absatz 6 Satz 1 und 2 des Bundesbesoldungsgesetzes sind: </akn:p>
+                                <akn:blockList GUID="e1d23b9d-f7b2-44da-a37b-e01e47859b13"
+                                    eId="art-z9_abs-z_inhalt-n1_liste-n1">
+                                    <akn:item GUID="ba5ff75f-dce9-4a28-9369-323514a42bf7"
+                                        eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="7de97f13-8cc0-4382-8410-3155de3a6a01"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="4bcefd91-5cbd-4967-b1c9-3addc59455a0"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n1_text-n1">das
+                                            Grundgehalt,</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="1104a0b9-35b7-4fe8-96c3-476121a3ab4e"
+                                        eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="28bb3d9d-3149-4341-a756-d5a0bedba5e2"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="43c6e9fc-6a26-4c62-8af6-443adda98e96"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n2_text-n1">Familienzuschlag
+                                            bis zur Stufe 1,</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="ee3bd976-4c49-4b89-9098-2de9e7bca4f6"
+                                        eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n3">
+                                        <akn:num GUID="c7101cbb-e033-4464-bf17-67581e9d7ef9"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n3_bezeichnung-n1">
+                                            3.</akn:num>
+                                        <akn:p GUID="60e7b771-78d2-49b0-afe6-37f39b42040c"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n3_text-n1">Amts-
+                                            und Stellenzulagen sowie</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="28750945-c303-4af3-9c33-af3a90215b85"
+                                        eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n4">
+                                        <akn:num GUID="5c88af59-2a6a-4c48-ae29-e3eae27fbaaa"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n4_bezeichnung-n1">
+                                            4.</akn:num>
+                                        <akn:p GUID="34af8a23-9a7a-4a2e-9651-cf0f80e7f665"
+                                            eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n4_text-n1">der
+                                            Auslandszuschlag für die Empfängerin oder den Empfänger
+                                            von Auslandsdienstbezügen und für die erste nach § 53
+                                            Absatz 4 Nummer 1 oder Nummer 3 des
+                                            Bundesbesoldungsgesetzes berücksichtigungsfähige Person.<akn:marker
+                                                GUID="3da32aff-5028-499a-b1f6-3136397e82e7"
+                                                eId="art-z9_abs-z_inhalt-n1_liste-n1_listenelem-n4_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                </akn:subsection>
+                <akn:subsection GUID="6fd4c3da-f71d-4a35-bf32-1bf913da3d6a"
+                    eId="hauptteil-n1_abschnitt-n2_uabschnitt-n2">
+                    <akn:num GUID="12ff2448-e375-4776-b386-2760e43da203"
+                        eId="hauptteil-n1_abschnitt-n2_uabschnitt-n2_bezeichnung-n1">Unterabschnitt
+                        2</akn:num>
+                    <akn:heading GUID="dd8a1ef8-d049-4e43-a8f5-1d12992378d0"
+                        eId="hauptteil-n1_abschnitt-n2_uabschnitt-n2_überschrift-n1">Erhöhter
+                        Auslandszuschlag für berücksichtigungsfähige Personen</akn:heading>
+                    <akn:article GUID="65dd0b3e-a00f-4a6a-aa1a-77a8bb77dd4a" eId="art-z10"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="05b44666-4c65-4dca-aa1a-c697fdce2341"
+                            eId="art-z10_bezeichnung-n1">§ 10</akn:num>
+                        <akn:heading GUID="fbc196c1-3d28-49d4-bb4f-e401e976a7eb"
+                            eId="art-z10_überschrift-n1">Erhöhter Auslandszuschlag für Verheiratete</akn:heading>
+                        <akn:paragraph GUID="90f22517-07c0-4207-a005-9f0dc69ebc57"
+                            eId="art-z10_abs-z1">
+                            <akn:num GUID="b157f44e-a557-495d-9a51-93b7d6e9f19b"
+                                eId="art-z10_abs-z1_bezeichnung-n1">(1)</akn:num>
+                            <akn:content GUID="187df557-cf0a-4936-b074-b35ad9ee15f0"
+                                eId="art-z10_abs-z1_inhalt-n1">
+                                <akn:p GUID="3845471b-61c7-43e5-841e-4fd5d876e850"
+                                    eId="art-z10_abs-z1_inhalt-n1_text-n1">Einen erhöhten
+                                    Auslandszuschlag erhalten nach Maßgabe der Absätze 2 und 3: </akn:p>
+                                <akn:blockList GUID="e724715e-8510-443e-9dda-47d3321111d8"
+                                    eId="art-z10_abs-z1_inhalt-n1_liste-n1">
+                                    <akn:item GUID="62ce5da3-0636-4bf2-8682-75aae5153d2a"
+                                        eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="05cc4f65-3f2b-4658-9576-a06ee69b5d74"
+                                            eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="2c1aa8f6-a7aa-4d71-b3a1-54c74b92407e"
+                                            eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n1_text-n1">verheiratete
+                                            Empfängerinnen und Empfänger von Auslandsdienstbezügen,
+                                            für die das Gesetz über den Auswärtigen Dienst gilt, und</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="c9c15dde-df08-4180-a374-de38b9e7440e"
+                                        eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="416f68b6-07c1-4924-b997-141fa5ab4a54"
+                                            eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="dda77e04-3228-4caa-aa44-c535d79c6e27"
+                                            eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n2_text-n1">verheiratete
+                                            Empfängerinnen und Empfänger von Auslandsdienstbezügen,
+                                            die dem Geschäftsbereich des Bundesministeriums der
+                                            Verteidigung angehören, wenn sie zur Sicherstellung der
+                                            Einsatzbereitschaft im Rahmen der Landes- und
+                                            Bündnisverteidigung im Ausland soldatische Tätigkeiten
+                                            wahrnehmen oder unmittelbar unterstützen.<akn:marker
+                                                GUID="e5a6910f-2ef4-4477-8228-38ebf83ca1ba"
+                                                eId="art-z10_abs-z1_inhalt-n1_liste-n1_listenelem-n2_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="63d182f0-894b-4a47-9ed4-1d1778acb185"
+                            eId="art-z10_abs-z2">
+                            <akn:num GUID="c5252f9b-2bb3-498b-bc03-7dec5bdc82b2"
+                                eId="art-z10_abs-z2_bezeichnung-n1">(2)</akn:num>
+                            <akn:content GUID="c41dd1c2-8282-41f3-a33d-60991036481d"
+                                eId="art-z10_abs-z2_inhalt-n1">
+                                <akn:p GUID="465bb670-3b4a-44c9-8db9-4bbcb8074176"
+                                    eId="art-z10_abs-z2_inhalt-n1_text-n1">Der Auslandszuschlag
+                                    erhöht sich bis zu einer Höhe von 18,6 Prozent des Grundgehalts
+                                    zuzüglich Amtszulagen, höchstens jedoch 18,6 Prozent des
+                                    Grundgehalts aus der Endstufe der Besoldungsgruppe A 14, um den
+                                    Betrag, der für den Aufbau einer eigenständigen Altersvorsorge
+                                    der Ehegattin oder des Ehegatten verwendet wird
+                                    (Erhöhungsbetrag).<akn:marker
+                                        GUID="e12a027e-65fa-4086-9232-db9bd795b394"
+                                        eId="art-z10_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="b95a0e73-c632-4a69-a13d-70b2345b4376"
+                            eId="art-z10_abs-z3">
+                            <akn:num GUID="2459a8ec-7483-42e6-94d5-7c1fa829b966"
+                                eId="art-z10_abs-z3_bezeichnung-n1">(3)</akn:num>
+                            <akn:content GUID="92bfdf18-87c2-4129-9feb-7789b26da15e"
+                                eId="art-z10_abs-z3_inhalt-n1">
+                                <akn:p GUID="818d8514-9063-4e1c-93fe-1b0a11fa8d4e"
+                                    eId="art-z10_abs-z3_inhalt-n1_text-n1">Der Erhöhungsbetrag wird
+                                    gewährt, </akn:p>
+                                <akn:blockList GUID="c42e2cbe-acc7-41e9-b20c-b0a6bd1e699b"
+                                    eId="art-z10_abs-z3_inhalt-n1_liste-n1">
+                                    <akn:item GUID="de252ba2-0b01-483f-b3ec-807b193df018"
+                                        eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="aa7438c0-5c35-41b0-87f2-8837c1b15fe4"
+                                            eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="e3dbbeaf-a900-4e05-9050-9f1ac51614c7"
+                                            eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_text-n1">wenn
+                                            die Ehegattin oder der Ehegatte </akn:p>
+                                        <akn:blockList GUID="e261f599-3ec1-4759-86dd-e6958fb90707"
+                                            eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1">
+                                            <akn:item GUID="2de40b7f-5859-422b-962f-e6b3d2d88f64"
+                                                eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1">
+                                                <akn:num GUID="bcb31aeb-06d3-4853-b0a4-6b3b0a04d640"
+                                                    eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                                    a)</akn:num>
+                                                <akn:p GUID="f6703541-97d6-4e71-9477-8e7c0094061a"
+                                                    eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_text-n1">nach
+                                                    § 53 Absatz 4 Nummer 1 des
+                                                    Bundesbesoldungsgesetzes berücksichtigungsfähig
+                                                    ist oder</akn:p>
+                                            </akn:item>
+                                            <akn:item GUID="02155e44-1353-4893-a3ba-ac04cf70ae72"
+                                                eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2">
+                                                <akn:num GUID="eacf52ab-e5f8-4964-aeba-000e8ab882cb"
+                                                    eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                                    b)</akn:num>
+                                                <akn:p GUID="516e51a4-8b50-47b3-9c7b-01ee56ee80fb"
+                                                    eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_text-n1">einen
+                                                    Anspruch auf den erhöhten Auslandszuschlag nach
+                                                    § 53 Absatz 3 Satz 3 des
+                                                    Bundesbesoldungsgesetzes hat, und</akn:p>
+                                            </akn:item>
+                                        </akn:blockList>
+                                    </akn:item>
+                                    <akn:item GUID="494f32d7-1a14-4ec5-a01f-9e916fce45e7"
+                                        eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="01423b31-a674-41c8-a553-613a5726cfa4"
+                                            eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="5f05377e-52ca-488b-b046-89afebc29088"
+                                            eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n2_text-n1">bis
+                                            die Ehegattin oder der Ehegatte die Regelaltersgrenze
+                                            nach § 235 des Sechsten Buches Sozialgesetzbuch erreicht
+                                            hat.<akn:marker
+                                                GUID="545a96c2-d61c-4417-9869-98fcaceaae6a"
+                                                eId="art-z10_abs-z3_inhalt-n1_liste-n1_listenelem-n2_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                                <akn:p GUID="4a47992f-1a50-4978-8dba-30aa57284d86"
+                                    eId="art-z10_abs-z3_inhalt-n1_text-n2">Im Falle des Satzes 1
+                                    Nummer 1 Buchstabe b bestimmen die Eheleute, wer von ihnen den
+                                    Erhöhungsbetrag erhält.<akn:marker
+                                        GUID="c887e506-108f-4fb8-a990-14586b702449"
+                                        eId="art-z10_abs-z3_inhalt-n1_text-n2_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="5560d4bd-f661-449e-b1f3-9db1bd925aed" eId="art-z11"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="f6512b0c-5227-4389-b6c8-4b9025225f1a"
+                            eId="art-z11_bezeichnung-n1">§ 11</akn:num>
+                        <akn:heading GUID="c34c5cff-2983-46fb-aa43-9d32ea2c4ae5"
+                            eId="art-z11_überschrift-n1">Verwendung zum Aufbau einer eigenständigen
+                            Altersvorsorge der Ehegattin oder des Ehegatten</akn:heading>
+                        <akn:paragraph GUID="d221596c-0fad-4b5a-aeb9-9458b2d3191e"
+                            eId="art-z11_abs-z">
+                            <akn:num GUID="4cbfc245-e2af-4019-bfdb-3adf08a60956"
+                                eId="art-z11_abs-z_bezeichnung-n1" />
+                            <akn:content GUID="3a79d55b-ca41-41b2-b06b-71af8f19c298"
+                                eId="art-z11_abs-z_inhalt-n1">
+                                <akn:p GUID="a599f2d2-7124-4cfb-83ac-8929cabd025c"
+                                    eId="art-z11_abs-z_inhalt-n1_text-n1">Als Verwendung für den
+                                    Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder
+                                    des Ehegatten nach § 10 Absatz 2 gelten: </akn:p>
+                                <akn:blockList GUID="d454839f-a0eb-47bc-a187-27aa1b932d7a"
+                                    eId="art-z11_abs-z_inhalt-n1_liste-n1">
+                                    <akn:item GUID="6a438113-1947-4378-a3ed-6029f49c4727"
+                                        eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="13c4ad90-afca-44a1-9631-6d1abadb4e34"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="86b6278d-5a18-45fa-855b-766b32a5773e"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_text-n1">die
+                                            freiwillige Einzahlung des Erhöhungsbetrags </akn:p>
+                                        <akn:blockList GUID="5cfe1358-74cc-4aac-a948-b9e699d9e3a6"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1">
+                                            <akn:item GUID="b23261a6-b2de-4bba-93c6-8d07403442a1"
+                                                eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1">
+                                                <akn:num GUID="224210dd-4f3f-4634-b28f-d5a09f5f7f0c"
+                                                    eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                                    a)</akn:num>
+                                                <akn:p GUID="4de2049b-744e-4934-8835-ab949257fcd5"
+                                                    eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_text-n1">in
+                                                    die gesetzliche Rentenversicherung,</akn:p>
+                                            </akn:item>
+                                            <akn:item GUID="3039c709-0ea7-46f6-8419-1dd0aee80ceb"
+                                                eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2">
+                                                <akn:num GUID="423d53b4-0de4-42ef-b41d-64bb02b45e42"
+                                                    eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                                    b)</akn:num>
+                                                <akn:p GUID="09b4c451-9b83-4514-adbb-a988c74e89a6"
+                                                    eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_text-n1">in
+                                                    die landwirtschaftliche Alterskasse oder</akn:p>
+                                            </akn:item>
+                                            <akn:item GUID="1d80a96e-cac4-447d-90cf-d4523ec75aa4"
+                                                eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n3">
+                                                <akn:num GUID="17687961-d18d-44b5-ac95-4a0226de26f6"
+                                                    eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n3_bezeichnung-n1">
+                                                    c)</akn:num>
+                                                <akn:p GUID="aabc354c-bd00-41f3-abca-95f454c86178"
+                                                    eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n3_text-n1">in
+                                                    eine berufsständische Versorgungseinrichtung,
+                                                    die Leistungen erbringt, die denjenigen der
+                                                    gesetzlichen Rentenversicherung vergleichbar
+                                                    sind,</akn:p>
+                                            </akn:item>
+                                        </akn:blockList>
+                                    </akn:item>
+                                    <akn:item GUID="42e951e3-9a7b-42c4-9667-53edf8527028"
+                                        eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="0388eb97-1ba0-4ee9-929d-7ff45c45a2b9"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="2792f967-2b30-4c78-bca4-c36762a9fbe1"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n2_text-n1">die
+                                            Zahlung des Versorgungszuschlags,</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="cc55dd09-4b88-4cc9-bbd3-e7a78233238b"
+                                        eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n3">
+                                        <akn:num GUID="b8698a05-ed7c-4d57-b656-ab2fad553a64"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n3_bezeichnung-n1">
+                                            3.</akn:num>
+                                        <akn:p GUID="18e6e26e-1376-4ee9-be06-67004fe5e9c6"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n3_text-n1">der
+                                            Beitrag für einen Vertrag, der auf eine kapitalgedeckte
+                                            Altersvorsorge gerichtet und nach § 5 oder § 5a des
+                                            Altersvorsorgeverträge-Zertifizierungsgesetzes vom 26.
+                                            Juni 2001 (BGBl. I S. 1310, 1322), das zuletzt durch
+                                            Artikel 5 des Gesetzes vom 25. Oktober 2023 (BGBl. 2023
+                                            I Nr. 294) geändert worden ist, in der jeweils geltenden
+                                            Fassung zertifiziert worden ist oder</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="e87c9645-7be3-4d1f-b113-9511a02e9157"
+                                        eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n4">
+                                        <akn:num GUID="bd0b3794-3f9d-4e31-b20a-f0c50e63e602"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n4_bezeichnung-n1">
+                                            4.</akn:num>
+                                        <akn:p GUID="7e8aca62-e34c-4c08-869b-98f09be73766"
+                                            eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n4_text-n1">der
+                                            Beitrag für die Fortsetzung einer betrieblichen
+                                            Altersvorsorge im Sinne des Betriebsrentengesetzes.<akn:marker
+                                                GUID="98975355-45d0-428f-b4bd-44e756894c66"
+                                                eId="art-z11_abs-z_inhalt-n1_liste-n1_listenelem-n4_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                                <akn:p GUID="bf8e6a1b-c0d7-448d-8479-d18670d4c90e"
+                                    eId="art-z11_abs-z_inhalt-n1_text-n2">Eine Aufteilung des
+                                    Erhöhungsbetrags auf bis zu zwei Verwendungsarten ist zulässig.<akn:marker
+                                        GUID="b4659b5c-4dd9-4c18-89e1-c0e961754823"
+                                        eId="art-z11_abs-z_inhalt-n1_text-n2_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="c66b7dde-8410-43ef-9697-1a335766b439" eId="art-z12"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="8604f6b0-38ca-4c1d-98c5-feacb3b8f6f4"
+                            eId="art-z12_bezeichnung-n1">§ 12</akn:num>
+                        <akn:heading GUID="5d0395a9-2827-4618-848d-3db7785194f9"
+                            eId="art-z12_überschrift-n1">Nachweis und Anzeigepflicht</akn:heading>
+                        <akn:paragraph GUID="3cf1c83e-2d8b-4e5a-9761-94c3b488af95"
+                            eId="art-z12_abs-z1">
+                            <akn:num GUID="6d6fbc14-aada-47ef-b6ea-0e3f55152a14"
+                                eId="art-z12_abs-z1_bezeichnung-n1">(1)</akn:num>
+                            <akn:content GUID="443dbe63-2fad-4c26-b20e-8001d3b6ffc3"
+                                eId="art-z12_abs-z1_inhalt-n1">
+                                <akn:p GUID="a7e06b11-ff93-4313-a948-18f019037760"
+                                    eId="art-z12_abs-z1_inhalt-n1_text-n1">Die Verwendung zum Aufbau
+                                    einer eigenständigen Altersvorsorge nach § 10 Absatz 2 kann
+                                    durch eine schriftliche oder elektronische dienstliche Erklärung
+                                    nachgewiesen werden, die von der Ehegattin oder dem Ehegatten zu
+                                    bestätigen ist.<akn:marker
+                                        GUID="b2e64c4c-d9cd-4b52-b920-ce75c10f7983"
+                                        eId="art-z12_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="675d2031-cf5c-430e-94cb-679ad1b2263d"
+                            eId="art-z12_abs-z2">
+                            <akn:num GUID="aba2e95d-4a0e-482e-afff-24dfb2f6440f"
+                                eId="art-z12_abs-z2_bezeichnung-n1">(2)</akn:num>
+                            <akn:content GUID="dfcbc249-2141-4194-b370-4692d5cda573"
+                                eId="art-z12_abs-z2_inhalt-n1">
+                                <akn:p GUID="1381a4f6-2d4f-4625-8651-2510f848c886"
+                                    eId="art-z12_abs-z2_inhalt-n1_text-n1">Belege über die
+                                    Verwendung sind bis zum Ablauf der gesetzlichen Verjährungsfrist
+                                    durch die Empfängerinnen und Empfänger des Auslandszuschlags
+                                    aufzubewahren und der Bezügestelle auf Verlangen vorzulegen.<akn:marker
+                                        GUID="974eb7a0-7455-49bc-a74e-6848149b8999"
+                                        eId="art-z12_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /> Die Bezügestelle führt Belegprüfungen
+                                    stichprobenartig sowie bei Verdacht auf falsche Angaben durch.<akn:marker
+                                        GUID="d5da95a2-b83d-4516-8ef4-af671527de60"
+                                        eId="art-z12_abs-z2_inhalt-n1_text-n1_marker-n2"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="eb600805-56dd-4ec6-9029-2f8228bd420a"
+                            eId="art-z12_abs-z3">
+                            <akn:num GUID="7beec9e2-bf6e-4933-a3bc-a2e99dd6fdf4"
+                                eId="art-z12_abs-z3_bezeichnung-n1">(3)</akn:num>
+                            <akn:content GUID="f454ad90-1a60-4b97-8258-b4c841e3d5a8"
+                                eId="art-z12_abs-z3_inhalt-n1">
+                                <akn:p GUID="1af637a7-1a9c-4232-8391-54b18b34a308"
+                                    eId="art-z12_abs-z3_inhalt-n1_text-n1">Die Empfängerin oder der
+                                    Empfänger des erhöhten Auslandszuschlags hat der Bezügestelle
+                                    unverzüglich schriftlich oder elektronisch anzuzeigen, wenn eine
+                                    Verwendung verringert, unterbrochen oder eingestellt wird.<akn:marker
+                                        GUID="d059486d-9937-4f6d-b9ff-03f63021bab2"
+                                        eId="art-z12_abs-z3_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="9b9284da-0610-4ed9-af91-ec0866d8c659" eId="art-z13"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="4f9b91a8-b60b-46d0-ad7d-ba9138764400"
+                            eId="art-z13_bezeichnung-n1">§ 13</akn:num>
+                        <akn:heading GUID="3683d264-489d-43db-aedc-7c376b19272f"
+                            eId="art-z13_überschrift-n1">Abweichende Regelungen für bestimmte
+                            Personengruppen zu Verwendung und Nachweis</akn:heading>
+                        <akn:paragraph GUID="d5f3623f-ee91-4ed3-b6c9-754aea31b86f"
+                            eId="art-z13_abs-z1">
+                            <akn:num GUID="f9066bd1-5da4-474e-b738-ece74d61c234"
+                                eId="art-z13_abs-z1_bezeichnung-n1">(1)</akn:num>
+                            <akn:content GUID="d8679fd2-4ed6-4d42-a1ee-4cf67620a961"
+                                eId="art-z13_abs-z1_inhalt-n1">
+                                <akn:p GUID="7e155b33-8073-472e-beff-e96fe669e39b"
+                                    eId="art-z13_abs-z1_inhalt-n1_text-n1">Hat die Ehegattin oder
+                                    der Ehegatte das 50. Lebensjahr am 1. Januar 2020 vollendet, so
+                                    gelten als Verwendung zum Aufbau ihrer oder seiner
+                                    eigenständigen Altersvorsorge nach § 10 Absatz 2 auch
+                                    Anlagemöglichkeiten, die nicht in § 11 genannt sind.<akn:marker
+                                        GUID="08cb47dd-f9f9-4dbd-b4a1-8bb56e0a3984"
+                                        eId="art-z13_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /> § 12 Absatz 2 ist nicht anzuwenden.<akn:marker
+                                        GUID="f0750cea-86fe-4fb6-b210-ccba6b477ac1"
+                                        eId="art-z13_abs-z1_inhalt-n1_text-n1_marker-n2"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="afdfa797-d9e9-46fd-8aaa-a7eff7d2834e"
+                            eId="art-z13_abs-z2">
+                            <akn:num GUID="ea5848e1-d063-4eb2-9167-8d3a59fc33cd"
+                                eId="art-z13_abs-z2_bezeichnung-n1">(2)</akn:num>
+                            <akn:content GUID="9f7fc035-b9fa-4d03-b00a-a30ebdde380b"
+                                eId="art-z13_abs-z2_inhalt-n1">
+                                <akn:p GUID="b1520e3e-eaf4-4988-b3d8-4682b0c67e1b"
+                                    eId="art-z13_abs-z2_inhalt-n1_text-n1">Besitzt die Ehegattin
+                                    oder der Ehegatte nicht die deutsche Staatsangehörigkeit, so
+                                    wird der Auslandszuschlag abweichend von § 10 Absatz 2 um einen
+                                    Erhöhungsbetrag von 6 Prozent der Dienstbezüge im Ausland
+                                    erhöht, wenn anstelle des Nachweises der Verwendung zum Aufbau
+                                    einer eigenständigen Altersvorsorge nach § 10 Absatz 2 </akn:p>
+                                <akn:blockList GUID="c8c9bfd1-a7dc-4b71-b6a5-eec0a2cb85a2"
+                                    eId="art-z13_abs-z2_inhalt-n1_liste-n1">
+                                    <akn:item GUID="a84e7261-e497-46b6-8edb-9b2f40595bbc"
+                                        eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="2bb6559d-38f2-4447-8cc7-e802b2b1b828"
+                                            eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="9231810f-f0d9-419e-bfb0-6eacacdbdfcf"
+                                            eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_text-n1">die
+                                            Empfängerin oder der Empfänger des erhöhten
+                                            Auslandszuschlags durch eine schriftliche oder
+                                            elektronische dienstliche Erklärung bestätigt, dass die
+                                            Ehegattin oder der Ehegatte darüber informiert ist, dass </akn:p>
+                                        <akn:blockList GUID="a0e04902-d556-497e-9f96-1e72536d624e"
+                                            eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1">
+                                            <akn:item GUID="19a04cf0-0b18-4c9f-b6d6-38bf8757bdce"
+                                                eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1">
+                                                <akn:num GUID="a48419f3-4f86-45db-b5e7-63596a1fa8db"
+                                                    eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                                    a)</akn:num>
+                                                <akn:p GUID="2c8f9570-13f8-40e1-b926-c6715980b8bc"
+                                                    eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n1_text-n1">der
+                                                    Erhöhungsbetrag gezahlt wird und</akn:p>
+                                            </akn:item>
+                                            <akn:item GUID="1ecf279e-830f-4da2-b981-c3841f7c5385"
+                                                eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2">
+                                                <akn:num GUID="5e6912cd-bf58-41c2-827a-cb325184f27c"
+                                                    eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                                    b)</akn:num>
+                                                <akn:p GUID="7bc486da-ec0a-4e29-a294-d4b81c3326e0"
+                                                    eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n1_liste-n1_listenelem-n2_text-n1">der
+                                                    Zweck des Erhöhungsbetrags der Aufbau einer
+                                                    eigenständigen Altersvorsorge der Ehegattin oder
+                                                    des Ehegatten ist, und</akn:p>
+                                            </akn:item>
+                                        </akn:blockList>
+                                    </akn:item>
+                                    <akn:item GUID="49d97bda-9f0c-4c11-8304-c9cf2d74c701"
+                                        eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="0ed915da-581c-4627-b19f-c4eb19c2f8d7"
+                                            eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="e9d446bb-7e34-48ba-920a-fe62bcb09cc2"
+                                            eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n2_text-n1">die
+                                            Ehegattin oder der Ehegatte die dienstliche Erklärung
+                                            nach Nummer 1 bestätigt.<akn:marker
+                                                GUID="95ef3390-feca-4b79-960b-a163d3138590"
+                                                eId="art-z13_abs-z2_inhalt-n1_liste-n1_listenelem-n2_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                                <akn:p GUID="5ecc8518-7f8f-4368-912c-606463efd6c3"
+                                    eId="art-z13_abs-z2_inhalt-n1_text-n2">Als Dienstbezüge im
+                                    Ausland gelten die Dienstbezüge nach § 9 zuzüglich des erhöhten
+                                    Auslandszuschlags nach § 53 Absatz 6 Satz 1 und 2 des
+                                    Bundesbesoldungsgesetzes.<akn:marker
+                                        GUID="0b3e98fe-223b-4a06-a0e1-814bd1ac0b18"
+                                        eId="art-z13_abs-z2_inhalt-n1_text-n2_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="acf07ad3-21ec-4b7c-9cd2-380160360bbc" eId="art-z14"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="fb5fce59-fc4d-4d7e-aa09-9144a70acbf8"
+                            eId="art-z14_bezeichnung-n1">§ 14</akn:num>
+                        <akn:heading GUID="bc3b1e31-9c8d-4dfb-a843-a160271fd0a8"
+                            eId="art-z14_überschrift-n1">Erhöhter Auslandszuschlag für weitere
+                            berücksichtigungsfähige Personen</akn:heading>
+                        <akn:paragraph GUID="45aa8b3e-5075-4be2-8a01-8b2737c995d2"
+                            eId="art-z14_abs-z1">
+                            <akn:num GUID="e2f27b1d-84ce-4167-8019-aa59d95e98d1"
+                                eId="art-z14_abs-z1_bezeichnung-n1">(1)</akn:num>
+                            <akn:content GUID="64da211f-a68a-4ab1-b22f-e63d010c1840"
+                                eId="art-z14_abs-z1_inhalt-n1">
+                                <akn:p GUID="dfa19076-88e5-4718-9dbc-956d2d14cd94"
+                                    eId="art-z14_abs-z1_inhalt-n1_text-n1">Empfängerinnen und
+                                    Empfänger von Auslandsdienstbezügen, für die das Gesetz über den
+                                    Auswärtigen Dienst gilt, erhalten einen um einen Erhöhungsbetrag
+                                    von 6 Prozent ihrer Dienstbezüge im Ausland erhöhten
+                                    Auslandszuschlag, wenn </akn:p>
+                                <akn:blockList GUID="bc06d844-9898-40f9-8639-e442c54df3c9"
+                                    eId="art-z14_abs-z1_inhalt-n1_liste-n1">
+                                    <akn:item GUID="a3f75bd1-326c-4a6b-a8ed-2670db83550f"
+                                        eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="c126e70b-e094-4582-bda7-be44957915be"
+                                            eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="10e33778-d753-4bce-baea-8f1c0e43dfc6"
+                                            eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n1_text-n1">der
+                                            Empfängerin oder dem Empfänger kein erhöhter
+                                            Auslandszuschlag nach § 10 zusteht und</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="bda6a5e7-7203-4b36-8614-608ceb91ef09"
+                                        eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="b1d0e37c-62de-4ade-996f-cacf88d0ee02"
+                                            eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="aec316b3-e2ef-4e5e-abd9-72dd6d1e0c01"
+                                            eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n2_text-n1">eine
+                                            nach § 53 Absatz 4 Nummer 3 des Bundesbesoldungsgesetzes
+                                            berücksichtigungsfähige Person im dienstlichen Interesse
+                                            bei der Erfüllung der Aufgaben der Auslandsvertretung
+                                            oder an den Aufgaben der Empfängerin oder des Empfängers
+                                            mitwirkt.<akn:marker
+                                                GUID="3574df49-5ad0-41d7-9305-89709489bff0"
+                                                eId="art-z14_abs-z1_inhalt-n1_liste-n1_listenelem-n2_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="2b9cdd1d-3327-4f3c-8b80-a43e8b4de2c6"
+                            eId="art-z14_abs-z2">
+                            <akn:num GUID="0244e437-5016-4d6a-8108-afd3faffa485"
+                                eId="art-z14_abs-z2_bezeichnung-n1">(2)</akn:num>
+                            <akn:content GUID="084bbb68-91b5-4de4-ab5e-7c9b5b418d8d"
+                                eId="art-z14_abs-z2_inhalt-n1">
+                                <akn:p GUID="c929691f-edf2-41bc-8b3d-c5d90a7943ee"
+                                    eId="art-z14_abs-z2_inhalt-n1_text-n1">§ 10 Absatz 3 Satz 1
+                                    Nummer 2 und § 13 Absatz 2 Satz 2 gelten entsprechend.<akn:marker
+                                        GUID="b50595be-dbbb-427e-b203-5624b2a8f34c"
+                                        eId="art-z14_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="e4587e67-3f77-4d1e-9f41-aa071724743c" eId="art-z15"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="86a248ef-7193-46b8-b235-bfd101e7dac1"
+                            eId="art-z15_bezeichnung-n1">§ 15</akn:num>
+                        <akn:heading GUID="d2db214c-2983-465a-9fdf-164bd568b6de"
+                            eId="art-z15_überschrift-n1">Begriff des Nettoerwerbseinkommens</akn:heading>
+                        <akn:paragraph GUID="dc367901-6036-4d2b-b658-a111fadda478"
+                            eId="art-z15_abs-z">
+                            <akn:num GUID="d95427be-37e1-45d6-8c8a-8994211b3e30"
+                                eId="art-z15_abs-z_bezeichnung-n1" />
+                            <akn:content GUID="70a07ce8-ee42-4d1d-b7b1-2020ca09baec"
+                                eId="art-z15_abs-z_inhalt-n1">
+                                <akn:p GUID="ae84de0e-b14c-4a74-8280-290cc70407e1"
+                                    eId="art-z15_abs-z_inhalt-n1_text-n1">Das Nettoerwerbseinkommen
+                                    ist die Summe der nach Abzug der zu entrichtenden Steuern vom
+                                    Einkommen und der Arbeitnehmeranteile zur gesetzlichen
+                                    Sozialversicherung verbleibenden Einkünfte aus: </akn:p>
+                                <akn:blockList GUID="05ace601-ec86-4b90-9b6d-846748d96d1f"
+                                    eId="art-z15_abs-z_inhalt-n1_liste-n1">
+                                    <akn:item GUID="e4a1c5ca-7b9b-4ec4-b1a5-5b4b37407594"
+                                        eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n1">
+                                        <akn:num GUID="a8f1723f-bf51-4a3b-8eb0-57aefec40bc8"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n1_bezeichnung-n1">
+                                            1.</akn:num>
+                                        <akn:p GUID="3d3c932a-3471-4387-a5ad-7d074810e955"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n1_text-n1">Land-
+                                            und Forstwirtschaft (§ 2 Absatz 1 Satz 1 Nummer 1 in
+                                            Verbindung mit § 13 des Einkommensteuergesetzes),</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="e54c87b2-c55c-4928-9766-d0c0ec5769a9"
+                                        eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n2">
+                                        <akn:num GUID="28ad61d7-3a21-49c0-9b00-df3ccce4434b"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n2_bezeichnung-n1">
+                                            2.</akn:num>
+                                        <akn:p GUID="25a08905-63f8-4788-9874-f3085c4e5a27"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n2_text-n1">Gewerbebetrieb
+                                            (§ 2 Absatz 1 Satz 1 Nummer 2 in Verbindung mit § 15 des
+                                            Einkommensteuergesetzes),</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="ffe6f116-676e-4039-b240-cde8d414923f"
+                                        eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n3">
+                                        <akn:num GUID="57dc3a2f-cc2c-4a25-ac2e-dc61d8ab9b89"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n3_bezeichnung-n1">
+                                            3.</akn:num>
+                                        <akn:p GUID="d9409f06-fac6-4603-a4ca-f4963dbb0bcd"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n3_text-n1">selbstständiger
+                                            Arbeit (§ 2 Absatz 1 Satz 1 Nummer 3 in Verbindung mit §
+                                            18 des Einkommensteuergesetzes) und</akn:p>
+                                    </akn:item>
+                                    <akn:item GUID="ec4f210f-6e32-4d91-9bff-db5aeb7ec8d6"
+                                        eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n4">
+                                        <akn:num GUID="2a6c2daf-3b8e-42dd-88bf-2af427f8c734"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n4_bezeichnung-n1">
+                                            4.</akn:num>
+                                        <akn:p GUID="198b3ca6-b8ea-4caf-85ac-8dd0ce767726"
+                                            eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n4_text-n1">nichtselbstständiger
+                                            Arbeit (§ 2 Absatz 1 Satz 1 Nummer 4 in Verbindung mit §
+                                            19 Absatz 1 Satz 1 Nummer 1 und 3 des
+                                            Einkommensteuergesetzes).<akn:marker
+                                                GUID="0562e84b-1f8f-426c-9a8f-b27c1214817f"
+                                                eId="art-z15_abs-z_inhalt-n1_liste-n1_listenelem-n4_text-n1_marker-n1"
+                                                refersTo="satzende" /></akn:p>
+                                    </akn:item>
+                                </akn:blockList>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="b837a156-0ec2-41a1-aaa8-06de1d54b33b" eId="art-z16"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="a7b977fc-5d23-4323-aeae-61de0fe9f67c"
+                            eId="art-z16_bezeichnung-n1">§ 16</akn:num>
+                        <akn:heading GUID="5e3f7ec4-bb22-4a7b-8cea-1ff212b2293c"
+                            eId="art-z16_überschrift-n1">Anrechnung des Nettoerwerbseinkommens der
+                            berücksichtigungsfähigen Person</akn:heading>
+                        <akn:paragraph GUID="07e6244c-9463-4717-b1c1-90b035fcd789"
+                            eId="art-z16_abs-z1">
+                            <akn:num GUID="c0ca8823-372c-4067-b728-1d56068f55c0"
+                                eId="art-z16_abs-z1_bezeichnung-n1">(1)</akn:num>
+                            <akn:content GUID="62d8b464-548e-444d-bcae-ae95134bf8e4"
+                                eId="art-z16_abs-z1_inhalt-n1">
+                                <akn:p GUID="c3d89a91-265b-4212-8fd5-e4183d0cb24b"
+                                    eId="art-z16_abs-z1_inhalt-n1_text-n1">Ist die Ehegattin oder
+                                    der Ehegatte oder eine nach § 53 Absatz 4 Nummer 3 des
+                                    Bundesbesoldungsgesetzes berücksichtigungsfähige Person in dem
+                                    Zeitraum, für den ein erhöhter Auslandszuschlag nach diesem
+                                    Unterabschnitt gewährt wird, erwerbstätig, so wird das in diesem
+                                    Zeitraum erzielte Nettoerwerbseinkommen nach Maßgabe des
+                                    Absatzes 3 auf den Erhöhungsbetrag angerechnet.<akn:marker
+                                        GUID="d02f2a32-9bc0-4511-a478-1c6310de2aba"
+                                        eId="art-z16_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /> Eine Anrechnung findet nur statt,
+                                    soweit das monatliche Nettoerwerbseinkommen für diesen Zeitraum
+                                    das Zweifache der Arbeitsentgeltgrenze bei geringfügiger
+                                    Beschäftigung (§ 8 Absatz 1a des Vierten Buches
+                                    Sozialgesetzbuch) oder den entsprechenden Betrag in
+                                    ausländischer Währung übersteigt.<akn:marker
+                                        GUID="ac1d71c3-20b5-4854-8dbe-9a8a9e9160f0"
+                                        eId="art-z16_abs-z1_inhalt-n1_text-n1_marker-n2"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="d81bc74a-f117-418e-b23f-40b305988fa3"
+                            eId="art-z16_abs-z2">
+                            <akn:num GUID="c37b5fce-02b5-442a-b84b-e6cee8fe5f83"
+                                eId="art-z16_abs-z2_bezeichnung-n1">(2)</akn:num>
+                            <akn:content GUID="ec68c64a-3d1c-4e3e-b429-1a805c168408"
+                                eId="art-z16_abs-z2_inhalt-n1">
+                                <akn:p GUID="8eba4e67-54fc-4280-a802-2d6c77f59264"
+                                    eId="art-z16_abs-z2_inhalt-n1_text-n1">Einkünfte, die
+                                    ausschließlich durch Tätigkeiten erzielt wurden, die vor dem
+                                    Beginn oder nach dem Ende des Gewährungszeitraums des erhöhten
+                                    Auslandszuschlags ausgeübt wurden, bleiben bei der Anrechnung
+                                    unberücksichtigt.<akn:marker
+                                        GUID="185d73f5-a0a9-4439-a4f5-374072451415"
+                                        eId="art-z16_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="35f72086-0b3d-40f1-85c8-9c12f02b37fd"
+                            eId="art-z16_abs-z3">
+                            <akn:num GUID="52f11b00-fc79-4687-b6cb-bfcfe9d633b7"
+                                eId="art-z16_abs-z3_bezeichnung-n1">(3)</akn:num>
+                            <akn:content GUID="ada30f83-8fa6-4e1c-8494-4eba3bdfbd96"
+                                eId="art-z16_abs-z3_inhalt-n1">
+                                <akn:p GUID="314a65b5-b00e-4b7f-ac3a-0f18e1ea9eab"
+                                    eId="art-z16_abs-z3_inhalt-n1_text-n1">Die Hälfte des
+                                    Erhöhungsbetrags ist anrechnungsfrei.<akn:marker
+                                        GUID="0c5f0a7b-a76c-46be-b019-96c1304978a5"
+                                        eId="art-z16_abs-z3_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /> Auf die andere Hälfte wird das nach
+                                    Absatz 1 Satz 2 zu berücksichtigende Nettoerwerbseinkommen
+                                    angerechnet.<akn:marker
+                                        GUID="a284afe6-fede-4678-9e61-2786815967b2"
+                                        eId="art-z16_abs-z3_inhalt-n1_text-n1_marker-n2"
+                                        refersTo="satzende" /> Die Anrechnung erfolgt getrennt für
+                                    jedes Kalenderjahr.<akn:marker
+                                        GUID="90bc367e-06ca-45c5-afc4-e582d7a466af"
+                                        eId="art-z16_abs-z3_inhalt-n1_text-n1_marker-n3"
+                                        refersTo="satzende" /> Bei einem Dienstortwechsel innerhalb
+                                    eines Kalenderjahres wird das erzielte Nettoerwerbseinkommen
+                                    getrennt nach Dienstorten betrachtet.<akn:marker
+                                        GUID="b8d8dfff-982c-4ddb-b0ad-494802c836cc"
+                                        eId="art-z16_abs-z3_inhalt-n1_text-n1_marker-n4"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                    <akn:article GUID="2e8c376a-59d0-40c1-aed8-6b832f1a33b0" eId="art-z17"
+                        period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                        <akn:num GUID="825bcb31-f2f1-4e7f-a32a-4aada67f0611"
+                            eId="art-z17_bezeichnung-n1">§ 17</akn:num>
+                        <akn:heading GUID="390f9720-fd5a-4364-8807-3efcbf0ca35d"
+                            eId="art-z17_überschrift-n1">Vorläufige Gewährung und Nachweis bei
+                            Nettoerwerbseinkommen der berücksichtigungsfähigen Person</akn:heading>
+                        <akn:paragraph GUID="12f5b1fa-b4ca-42ef-80d9-544eca01bffd"
+                            eId="art-z17_abs-z1">
+                            <akn:num GUID="799f9fc1-a629-4fed-b9a0-f8b69e835146"
+                                eId="art-z17_abs-z1_bezeichnung-n1">(1)</akn:num>
+                            <akn:content GUID="36e71d94-54a0-4545-87da-d093b4cd7bc8"
+                                eId="art-z17_abs-z1_inhalt-n1">
+                                <akn:p GUID="6bdcf6a3-62ae-4057-875c-401c95ccf73e"
+                                    eId="art-z17_abs-z1_inhalt-n1_text-n1">Der erhöhte
+                                    Auslandszuschlag wird vorläufig auf Basis einer schriftlichen
+                                    oder elektronischen dienstlichen Erklärung zum
+                                    Nettoerwerbseinkommen der berücksichtigungsfähigen Person
+                                    gewährt, die von der berücksichtigungsfähigen Person zu
+                                    bestätigen ist.<akn:marker
+                                        GUID="5bb73ee6-065c-4a24-8b41-22889efeece3"
+                                        eId="art-z17_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                        <akn:paragraph GUID="1197a1a7-d7c6-4bea-aebe-89f95b84844d"
+                            eId="art-z17_abs-z2">
+                            <akn:num GUID="f9cecff1-2fc9-4d47-9f1b-85acdb18dd94"
+                                eId="art-z17_abs-z2_bezeichnung-n1">(2)</akn:num>
+                            <akn:content GUID="e664beef-b988-4257-96a3-1eb7dfc4171e"
+                                eId="art-z17_abs-z2_inhalt-n1">
+                                <akn:p GUID="48f49bf0-75f8-42f5-95c0-b96ab7c4da4b"
+                                    eId="art-z17_abs-z2_inhalt-n1_text-n1">Für die endgültige
+                                    Bestimmung des erhöhten Auslandszuschlags sind auf Verlangen der
+                                    Bezügestelle geeignete Nachweise zum Nettoerwerbseinkommen
+                                    vorzulegen.<akn:marker
+                                        GUID="76154324-29f0-4ffd-90a6-c8b18af56f61"
+                                        eId="art-z17_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                        refersTo="satzende" /> Geeignete Nachweise können
+                                    insbesondere die Steuerbescheide sein, die den Bezugszeitraum
+                                    des erhöhten Auslandszuschlags umfassen.<akn:marker
+                                        GUID="898853d8-fa5f-478e-9ff0-74ca09f8c2bc"
+                                        eId="art-z17_abs-z2_inhalt-n1_text-n1_marker-n2"
+                                        refersTo="satzende" /></akn:p>
+                            </akn:content>
+                        </akn:paragraph>
+                    </akn:article>
+                </akn:subsection>
+            </akn:section>
+            <akn:section GUID="1fbe4a2b-f1f2-4a4b-bea7-45457fcdcbd9" eId="hauptteil-n1_abschnitt-n3">
+                <akn:num GUID="a4fad77b-8851-4aaa-b6c1-3f4c319e3411"
+                    eId="hauptteil-n1_abschnitt-n3_bezeichnung-n1">Abschnitt 3</akn:num>
+                <akn:heading GUID="b0bcbef1-250a-424f-a2e9-ad0b07543b9c"
+                    eId="hauptteil-n1_abschnitt-n3_überschrift-n1">Schlussvorschriften</akn:heading>
+                <akn:article GUID="2aac5514-5a60-4250-86d9-ad787251fb0f" eId="art-z18"
+                    period="#meta-n1_geltzeiten-n1_geltungszeitgr-n1">
+                    <akn:num GUID="13ab6808-3bf4-41c2-a7a0-fdca7248dda5"
+                        eId="art-z18_bezeichnung-n1">§ 18</akn:num>
+                    <akn:heading GUID="16999f56-f2f5-4f11-b971-91a57fd92e8a"
+                        eId="art-z18_überschrift-n1">Übergangsregelungen</akn:heading>
+                    <akn:paragraph GUID="6c156dc3-f893-44aa-a67c-516174cc0e3d" eId="art-z18_abs-z1">
+                        <akn:num GUID="a3d96102-6dbf-4dff-868c-df0f8c0507ad"
+                            eId="art-z18_abs-z1_bezeichnung-n1">(1)</akn:num>
+                        <akn:content GUID="55858784-e07f-4f51-90b5-ac6588793d7f"
+                            eId="art-z18_abs-z1_inhalt-n1">
+                            <akn:p GUID="2bef4cb2-6ae2-45a4-b83a-ffcc4cb8963e"
+                                eId="art-z18_abs-z1_inhalt-n1_text-n1">Stand Empfängerinnen und
+                                Empfängern von Auslandsdienstbezügen schon vor dem 1. Juli 2025 ein
+                                erhöhter Auslandszuschlag für Verheiratete zu, so wird der
+                                Auslandszuschlag bis einschließlich 30. Juni 2026 abweichend von
+                                § 10 Absatz 2 um einen Erhöhungsbetrag von 18,6 Prozent des
+                                Grundgehalts zuzüglich Amtszulagen, höchstens jedoch 18,6 Prozent
+                                des Grundgehalts aus der Endstufe der Besoldungsgruppe A 14, erhöht,
+                                wenn mindestens 90 Prozent des Erhöhungsbetrags für den Aufbau einer
+                                eigenständigen Altersvorsorge der Ehegattin oder des Ehegatten
+                                verwendet werden.<akn:marker
+                                    GUID="4b87eb39-f269-49a3-8418-0b7d9bc00391"
+                                    eId="art-z18_abs-z1_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /> § 11 ist anzuwenden.<akn:marker
+                                    GUID="82215a5e-1e1e-4c06-a001-72de39b0a5e2"
+                                    eId="art-z18_abs-z1_inhalt-n1_text-n1_marker-n2"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                    <akn:paragraph GUID="59f9e6e7-9ef9-4cdb-8c20-d9f12b5cb29a" eId="art-z18_abs-z2">
+                        <akn:num GUID="f789c931-d8c0-4cba-bfda-091a3ebca914"
+                            eId="art-z18_abs-z2_bezeichnung-n1">(2)</akn:num>
+                        <akn:content GUID="037aa97e-cee7-4776-9d5a-d6e3b7ac23fc"
+                            eId="art-z18_abs-z2_inhalt-n1">
+                            <akn:p GUID="42b134ac-a45a-4b88-ad26-90ec87e7828d"
+                                eId="art-z18_abs-z2_inhalt-n1_text-n1">Bei einer befristeten
+                                Verwendung im Ausland wird bei der Berechnung der erforderlichen
+                                Mindestdauer der Verwendung nach § 53 Absatz 6 Satz 2 des
+                                Bundesbesoldungsgesetzes auch die Zeit berücksichtigt, während der
+                                Dienst vor dem 1. Juli 2025 geleistet worden ist.<akn:marker
+                                    GUID="f4e29a71-72f7-43fc-9723-d5c7c6b9eeeb"
+                                    eId="art-z18_abs-z2_inhalt-n1_text-n1_marker-n1"
+                                    refersTo="satzende" /></akn:p>
+                        </akn:content>
+                    </akn:paragraph>
+                </akn:article>
+            </akn:section>
+        </akn:body>
+        <akn:attachments GUID="c3e1e59b-c0d5-42f8-b871-3ad9d85bc3c6" eId="anlagen-n1">
+            <akn:attachment GUID="7ed5635f-5024-4ff8-ac7c-dcb358efee2e" eId="anlagen-n1_anlage-n1">
+                <akn:documentRef GUID="fc84c884-f171-45da-aa0b-ab927a6e7925"
+                    eId="anlagen-n1_anlage-n1_verweis-n1"
+                    href="eli/bund/bgbl-1/2025/145/2025-06-17/1/deu/2025-10-20/anlage-regelungstext-1.xml"
+                    showAs="/akn/ontology/de/concept/documenttype/bund/anlage-regelungstext" />
+            </akn:attachment>
+            <akn:attachment GUID="84799b6a-1a03-4232-94d2-fad9255aa81c" eId="anlagen-n1_anlage-n2">
+                <akn:documentRef GUID="b04e7ca3-0d20-4e5f-9c28-d7b0c0689829"
+                    eId="anlagen-n1_anlage-n2_verweis-n1"
+                    href="eli/bund/bgbl-1/2025/145/2025-06-17/1/deu/2025-10-20/anlage-regelungstext-2.xml"
+                    showAs="/akn/ontology/de/concept/documenttype/bund/anlage-regelungstext" />
+            </akn:attachment>
+        </akn:attachments>
+    </akn:act>
+</akn:akomaNtoso>

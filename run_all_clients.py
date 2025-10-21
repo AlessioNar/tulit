@@ -27,7 +27,9 @@ def ensure_dirs():
         DB_SOURCES / 'member_states' / 'france' / 'legifrance',
         DB_SOURCES / 'member_states' / 'finland' / 'finlex',
         DB_SOURCES / 'member_states' / 'malta' / 'moj',
-        DB_SOURCES / 'member_states' / 'germany' / 'gesetze',
+        DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'legislation',
+        DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'case-law',
+        DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'literature',
         DB_SOURCES / 'regional_authorities' / 'italy' / 'veneto',
         DB_RESULTS / 'eu',
         DB_RESULTS / 'member_states',
@@ -115,12 +117,13 @@ run_client('Cellar', [
     '--logdir', str(DB_LOGS)
 ])
 
-# Germany ELI
-run_client('Germany ELI', [
+# Germany - Search and download recent legislation (XML - LegalDocML format)
+run_client('Germany Legislation', [
     sys.executable, '-m', 'tulit.client.germany', 
-    '--eli_url', 'https://testphase.rechtsinformationen.bund.de/norms/eli/bund/banz-at/2025/130/2025-05-05/1/deu/regelungstext-1', 
-    '--file', 'germany_eli.html', 
-    '--dir', str(DB_SOURCES / 'member_states' / 'germany' / 'gesetze'), 
+    '--type', 'legislation',
+    '--search', 'Auslandszuschlagsverordnung',
+    '--format', 'xml',
+    '--dir', str(DB_SOURCES / 'member_states' / 'germany' / 'gesetze' / 'legislation'), 
     '--logdir', str(DB_LOGS)
 ])
 

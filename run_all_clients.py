@@ -125,9 +125,7 @@ run_client('Legilux', [
 #     '--logdir', str(DB_LOGS)
 # ])
 
-# Cellar - DISABLED: Publications Office blocking access (403 Forbidden)
-# Issue: 403 Client Error for cellar resource URL
-# TODO: Investigate if authentication is required or if alternative endpoint exists
+# Cellar - Download FMX4 document by CELEX number
 run_client('Cellar', [
     sys.executable, '-m', 'tulit.client.cellar', 
     '--celex', '32024R0903', '--format', 'fmx4', 

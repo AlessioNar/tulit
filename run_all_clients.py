@@ -128,12 +128,12 @@ run_client('Legilux', [
 # Cellar - DISABLED: Publications Office blocking access (403 Forbidden)
 # Issue: 403 Client Error for cellar resource URL
 # TODO: Investigate if authentication is required or if alternative endpoint exists
-# run_client('Cellar', [
-#     sys.executable, '-m', 'tulit.client.cellar', 
-#     '--celex', '32024R0903', '--format', 'fmx4', 
-#     '--dir', str(DB_SOURCES / 'eu' / 'eurlex' / 'formex'),
-#     '--logdir', str(DB_LOGS)
-# ])
+run_client('Cellar', [
+    sys.executable, '-m', 'tulit.client.cellar', 
+    '--celex', '32024R0903', '--format', 'fmx4', 
+    '--dir', str(DB_SOURCES / 'eu' / 'eurlex' / 'formex'),
+    '--logdir', str(DB_LOGS)
+])
 
 # Germany - Search and download recent legislation (XML - LegalDocML format)
 run_client('Germany Legislation', [

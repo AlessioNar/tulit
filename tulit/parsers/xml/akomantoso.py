@@ -16,7 +16,7 @@ def detect_akn_format(file_path: str) -> str:
     Returns
     -------
     str
-        Format identifier: 'german', 'akn4eu', or 'akn' (standard)
+        Format identifier: 'german', 'akn4eu', 'luxembourg', or 'akn' (standard)
     """
     try:
         # Parse just enough to get the namespace
@@ -28,6 +28,9 @@ def detect_akn_format(file_path: str) -> str:
             # Detect format based on namespace
             if 'LegalDocML.de' in namespace:
                 return 'german'
+            elif 'CSD13' in namespace or 'CSD' in namespace:
+                # Luxembourg and other jurisdictions using Committee Specification Drafts
+                return 'luxembourg'
             elif elem.get('{http://www.w3.org/XML/1998/namespace}id'):
                 return 'akn4eu'
             else:
@@ -46,7 +49,7 @@ def create_akn_parser(file_path: str = None, format: str = None):
     file_path : str, optional
         Path to the XML file (for auto-detection).
     format : str, optional
-        Explicitly specify format: 'german', 'akn4eu', or 'akn'.
+        Explicitly specify format: 'german', 'akn4eu', 'luxembourg', or 'akn'.
         If not provided, format will be auto-detected from file_path.
     
     Returns
@@ -61,6 +64,8 @@ def create_akn_parser(file_path: str = None, format: str = None):
         return GermanLegalDocMLParser()
     elif format == 'akn4eu':
         return AKN4EUParser()
+    elif format == 'luxembourg' or format == 'lu':
+        return LuxembourgAKNParser()
     else:
         return AkomaNtosoParser()
 
@@ -90,7 +95,9 @@ class AkomaNtosoParser(XMLParser):
             'an': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0',
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd',
             # German LegalDocML namespace (for compatibility)
-            'akn-de': 'http://Inhaltsdaten.LegalDocML.de/1.8.2/'
+            'akn-de': 'http://Inhaltsdaten.LegalDocML.de/1.8.2/',
+            # Luxembourg and other CSD variations (for compatibility)
+            'akn-csd13': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13'
         }
     
     def get_preface(self):
@@ -514,6 +521,198 @@ class GermanLegalDocMLParser(AkomaNtosoParser):
         except Exception as e:
             logger.error(f"Error in get_conclusions: {e}")
 
+class LuxembourgAKNParser(AkomaNtosoParser):
+    """
+    A parser for processing and extracting content from Luxembourg Akoma Ntoso files.
+    
+    This class is a subclass of the AkomaNtosoParser class and is specifically designed to handle
+    Luxembourg Legilux documents which use the Committee Specification Draft 13 (CSD13) namespace
+    variant of Akoma Ntoso 3.0.
+    
+    Luxembourg uses the namespace: http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13
+    along with a custom namespace for additional metadata: http://www.scl.lu
+    
+    Key differences from standard Akoma Ntoso:
+    - Uses 'id' attribute instead of 'eId'
+    - Content is nested in <alinea><content><p> structure
+    
+    Attributes
+    ----------
+    namespaces : dict
+        Dictionary mapping namespace prefixes to their URIs, with support for CSD13 namespace.
+    """
+    def __init__(self):
+        super().__init__()
+        # Override the namespace to use Luxembourg's CSD13 variant
+        # Map 'akn' prefix to CSD13 namespace so all XPath queries work seamlessly
+        self.namespaces = {
+            'akn': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13',
+            'an': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13',
+            'scl': 'http://www.scl.lu'  # Luxembourg-specific metadata namespace
+        }
+    
+    def extract_eId(self, element, index=None):
+        """
+        Luxembourg uses 'id' attribute instead of 'eId'.
+        
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            XML element to extract ID from.
+        index : str, optional
+            Not used for Luxembourg format.
+        
+        Returns
+        -------
+        str or None
+            The ID value from the 'id' attribute.
+        """
+        return element.get('id')
+    
+    def get_text_by_eId(self, node):
+        """
+        Groups paragraph text by their nearest parent element with an id attribute.
+        Luxembourg documents nest content in <alinea><content><p> structure.
+
+        Parameters
+        ----------
+        node : lxml.etree._Element
+            XML node to process for text extraction.
+
+        Returns
+        -------
+        list
+            List of dictionaries containing:
+            - 'eId': Identifier from the 'id' attribute
+            - 'text': Concatenated text content
+        """
+        elements = []
+        
+        # Luxembourg uses alinea elements containing content
+        for alinea in node.findall('.//akn:alinea', namespaces=self.namespaces):
+            # Find the content container within alinea
+            content = alinea.find('.//akn:content', namespaces=self.namespaces)
+            if content is None:
+                continue
+            
+            # Traverse up from alinea to find the nearest parent with an id
+            current_element = alinea
+            eId = None
+            while current_element is not None:
+                eId = self.extract_eId(current_element, 'id')
+                if eId:
+                    break
+                current_element = current_element.getparent()
+            
+            # Extract all text from paragraphs and other elements within content
+            if eId:
+                # Get all text content, including from nested elements
+                text_parts = []
+                for p in content.findall('.//akn:p', namespaces=self.namespaces):
+                    p_text = ''.join(p.itertext()).strip()
+                    if p_text:
+                        text_parts.append(p_text)
+                
+                # Also check for lists and other content
+                for ol in content.findall('.//akn:ol', namespaces=self.namespaces):
+                    ol_text = ''.join(ol.itertext()).strip()
+                    if ol_text:
+                        text_parts.append(ol_text)
+                
+                if text_parts:
+                    element = {
+                        'eId': eId,
+                        'text': ' '.join(text_parts)
+                    }
+                    elements.append(element)
+        
+        return elements
+    
+    def parse(self, file: str) -> None:
+        """
+        Parses a Luxembourg Akoma Ntoso document to extract its components.
+        
+        Luxembourg documents follow Akoma Ntoso structure but use the CSD13 namespace variant
+        and may include additional metadata in the scl namespace. This method bypasses 
+        strict schema validation and directly extracts the content.
+        
+        Parameters
+        ----------
+        file : str
+            Path to the Luxembourg Akoma Ntoso XML file to parse.
+        """
+        import logging
+        logger = logging.getLogger(__name__)
+        
+        # Skip strict schema validation for Luxembourg CSD13 variant
+        self.valid = True
+        
+        try:
+            self.get_root(file)
+            logger.info(f"Root element loaded successfully for Luxembourg AKN.")                    
+        except Exception as e:
+            logger.error(f"Error in get_root: {e}")                    
+        
+        try:
+            self.get_preface()
+            logger.info(f"Preface parsed.")                    
+        except Exception as e:
+            logger.error(f"Error in get_preface: {e}")                    
+        
+        try:
+            self.get_preamble()
+            logger.info(f"Preamble parsed.")                    
+        except Exception as e:
+            logger.error(f"Error in get_preamble: {e}")                    
+        
+        try:
+            self.get_formula()
+            logger.info(f"Formula parsed.")                    
+        except Exception as e:
+            logger.error(f"Error in get_formula: {e}")                    
+        
+        try:
+            self.get_citations()
+            logger.info(f"Citations parsed. Number: {len(self.citations) if self.citations else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_citations: {e}")
+        
+        try:
+            self.get_recitals()
+            logger.info(f"Recitals parsed. Number: {len(self.recitals) if self.recitals else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_recitals: {e}")
+        
+        try:
+            self.get_preamble_final()
+            logger.info(f"Preamble final parsed.")
+        except Exception as e:
+            logger.error(f"Error in get_preamble_final: {e}")
+        
+        try:
+            self.get_body()
+            logger.info(f"Body element retrieved.")
+        except Exception as e:
+            logger.error(f"Error in get_body: {e}")
+        
+        try:
+            self.get_chapters()
+            logger.info(f"Chapters parsed. Number: {len(self.chapters) if self.chapters else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_chapters: {e}")
+        
+        try:
+            self.get_articles()
+            logger.info(f"Articles parsed. Number: {len(self.articles) if self.articles else 0}")
+        except Exception as e:
+            logger.error(f"Error in get_articles: {e}")
+        
+        try:
+            self.get_conclusions()
+            logger.info(f"Conclusions parsed.")
+        except Exception as e:
+            logger.error(f"Error in get_conclusions: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description='Parse an Akoma Ntoso XML document and output the results to a JSON file.')
     parser.add_argument('--input', type=str, default='tests/data/akn/eu/32014L0092.akn', help='Path to the Akoma Ntoso XML file to parse.')
@@ -526,6 +725,8 @@ def main():
         akoma_parser = AKN4EUParser()
     elif args.format == 'german' or args.format == 'de':
         akoma_parser = GermanLegalDocMLParser()
+    elif args.format == 'luxembourg' or args.format == 'lu':
+        akoma_parser = LuxembourgAKNParser()
     else:
         akoma_parser = AkomaNtosoParser()
     akoma_parser.parse(args.input)

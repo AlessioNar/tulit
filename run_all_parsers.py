@@ -102,8 +102,9 @@ def run_parser(name, parser_type, input_path, output_path):
             }
             
         elif parser_type == 'akn':
-            from tulit.parsers.xml.akomantoso import AkomaNtosoParser
-            parser = AkomaNtosoParser()
+            from tulit.parsers.xml.akomantoso import create_akn_parser
+            # Auto-detect the correct parser based on the file's namespace
+            parser = create_akn_parser(file_path=str(input_path))
             parser.parse(str(input_path))
             
             output_data = {

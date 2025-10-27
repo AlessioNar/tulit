@@ -61,6 +61,10 @@ class LegifranceClient(Client):
             self._token = response.json()['access_token']
             self.logger.info("Successfully obtained OAuth token")
             return self._token
+        except requests.exceptions.HTTPError as e:
+            self.logger.error(f"Failed to obtain OAuth token: {e}")
+            self.logger.error(f"Response content: {e.response.text if hasattr(e, 'response') else 'N/A'}")
+            raise
         except Exception as e:
             self.logger.error(f"Failed to obtain OAuth token: {e}")
             raise
@@ -147,7 +151,7 @@ class LegifranceClient(Client):
             payload["date"] = date
         return self._make_request('/consult/code', payload)
     
-    def consult_law_decree(self, text_id: str, date: Optional[str] = None) -> Dict[str, Any]:
+    def consult_law_decree(self, text_id: str, date: Optional[str] = None, searched_string: Optional[str] = None) -> Dict[str, Any]:
         """
         Get the content of a law or decree (LODA).
         
@@ -157,6 +161,8 @@ class LegifranceClient(Client):
             Text identifier
         date : str, optional
             Date for versioned content (format: YYYY-MM-DD)
+        searched_string : str, optional
+            Search string to highlight in the document
             
         Returns
         -------
@@ -166,6 +172,8 @@ class LegifranceClient(Client):
         payload = {"textId": text_id}
         if date:
             payload["date"] = date
+        if searched_string:
+            payload["searchedString"] = searched_string
         return self._make_request('/consult/lawDecree', payload)
     
     def consult_article(self, article_id: str, date: Optional[str] = None) -> Dict[str, Any]:
@@ -1457,6 +1465,32 @@ class LegifranceClient(Client):
         filename = f"code_{text_id}_{date if date else 'current'}"
         return self.download('/consult/code', payload, filename)
     
+    def download_law_decree(self, text_id: str, date: Optional[str] = None, searched_string: Optional[str] = None) -> str:
+        """
+        Download a law or decree (LODA) and save to file.
+        
+        Parameters
+        ----------
+        text_id : str
+            Text identifier (LEGITEXT...)
+        date : str, optional
+            Date for versioned content (format: YYYY-MM-DD)
+        searched_string : str, optional
+            Search string to highlight in the document
+            
+        Returns
+        -------
+        str
+            Path to saved file
+        """
+        payload = {"textId": text_id}
+        if date:
+            payload["date"] = date
+        if searched_string:
+            payload["searchedString"] = searched_string
+        filename = f"loda_{text_id}_{date if date else 'current'}"
+        return self.download('/consult/lawDecree', payload, filename)
+    
     def download_dossier_legislatif(self, text_id: str) -> str:
         """
         Download a legislative dossier and save to file.
@@ -1492,6 +1526,13 @@ def main():
         # List codes
         python -m tulit.client.legifrance --action list_codes --page_number 1 --page_size 10 --dir ./data/france/legifrance --logdir ./logs
     """
+    # Load environment variables from .env file
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
+    
     parser = argparse.ArgumentParser(
         description='Legifrance Client - Access French legal documents',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -1508,11 +1549,13 @@ Examples:
         """
     )
     
-    # Required arguments
-    parser.add_argument('--client_id', type=str, required=True, help='Client ID for OAuth authentication')
-    parser.add_argument('--client_secret', type=str, required=True, help='Client Secret for OAuth authentication')
+    # Required arguments (can be provided via env vars)
+    parser.add_argument('--client_id', type=str, default=os.environ.get('LEGIFRANCE_CLIENT_ID'), 
+                       help='Client ID for OAuth authentication (or set LEGIFRANCE_CLIENT_ID env var)')
+    parser.add_argument('--client_secret', type=str, default=os.environ.get('LEGIFRANCE_CLIENT_SECRET'),
+                       help='Client Secret for OAuth authentication (or set LEGIFRANCE_CLIENT_SECRET env var)')
     parser.add_argument('--action', type=str, required=True,
-                       choices=['download_code', 'download_dossier', 'consult_code', 'consult_article',
+                       choices=['download_code', 'download_law_decree', 'download_dossier', 'consult_code', 'consult_article',
                                'consult_dossier', 'list_codes', 'list_loda', 'list_dossiers', 
                                'search', 'suggest'],
                        help='Action to perform')
@@ -1529,6 +1572,10 @@ Examples:
     parser.add_argument('--logdir', type=str, default='./logs', help='Log directory')
     
     args = parser.parse_args()
+    
+    # Validate credentials
+    if not args.client_id or not args.client_secret:
+        parser.error("Client ID and Client Secret are required. Provide via --client_id and --client_secret arguments or set LEGIFRANCE_CLIENT_ID and LEGIFRANCE_CLIENT_SECRET environment variables.")
     
     # Initialize client
     client = LegifranceClient(
@@ -1547,6 +1594,12 @@ Examples:
                 parser.error("--text_id is required for download_code action")
             result = client.download_code(args.text_id, args.date)
             print(f"Code downloaded to: {result}")
+            
+        elif args.action == 'download_law_decree':
+            if not args.text_id:
+                parser.error("--text_id is required for download_law_decree action")
+            result = client.download_law_decree(args.text_id, args.date)
+            print(f"Law/decree downloaded to: {result}")
             
         elif args.action == 'download_dossier':
             if not args.text_id:

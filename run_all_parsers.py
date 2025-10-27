@@ -133,6 +133,11 @@ def run_parser(name, parser_type, input_path, output_path):
                 'articles': parser.articles,
                 'conclusions': parser.conclusions
             }
+        
+        elif parser_type == 'legifrance':
+            from tulit.parsers.json.legifrance import LegifranceParser
+            parser = LegifranceParser(log_dir=str(DB_BASE / 'logs'))
+            output_data = parser.parse_file(str(input_path))
                 
         # Save output
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -229,6 +234,13 @@ def main():
         for xml_file in luxembourg_dir.glob('*.xml'):
             output_file = DB_RESULTS / 'member_states' / 'luxembourg' / f"{xml_file.stem}.json"
             run_parser(f"Luxembourg {xml_file.stem}", 'akn', xml_file, output_file)
+    
+    # Parse France Legifrance JSON documents
+    france_dir = DB_SOURCES / 'member_states' / 'france' / 'legifrance'
+    if france_dir.exists():
+        for json_file in france_dir.glob('*.json'):
+            output_file = DB_RESULTS / 'member_states' / 'france' / f"{json_file.stem}_legaljson.json"
+            run_parser(f"France {json_file.stem}", 'legifrance', json_file, output_file)
     
     # Summary
     print("\n" + "="*60)

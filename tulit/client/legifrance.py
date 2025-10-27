@@ -130,7 +130,9 @@ class LegifranceClient(Client):
         """
         return self._make_request('/consult/ping', {}, method='GET')
     
-    def consult_code(self, text_id: str, date: Optional[str] = None) -> Dict[str, Any]:
+    def consult_code(self, text_id: str, date: Optional[str] = None, 
+                     searched_string: Optional[str] = None, sct_cid: Optional[str] = None,
+                     abrogated: bool = False, from_suggest: bool = False) -> Dict[str, Any]:
         """
         Get the content of a Code.
         
@@ -140,18 +142,36 @@ class LegifranceClient(Client):
             Text identifier (e.g., 'LEGITEXT000006070721' for Code Civil)
         date : str, optional
             Date for versioned content (format: YYYY-MM-DD)
+        searched_string : str, optional
+            Search string to highlight in the document
+        sct_cid : str, optional
+            Section CID to retrieve specific section
+        abrogated : bool, optional
+            Include abrogated versions (default: False)
+        from_suggest : bool, optional
+            Indicates if request comes from suggest (default: False)
             
         Returns
         -------
         dict
             Code content
         """
-        payload = {"textId": text_id}
+        payload = {
+            "textId": text_id,
+            "abrogated": abrogated,
+            "fromSuggest": from_suggest
+        }
         if date:
             payload["date"] = date
+        if searched_string:
+            payload["searchedString"] = searched_string
+        if sct_cid:
+            payload["sctCid"] = sct_cid
         return self._make_request('/consult/code', payload)
     
-    def consult_law_decree(self, text_id: str, date: Optional[str] = None, searched_string: Optional[str] = None) -> Dict[str, Any]:
+    def consult_law_decree(self, text_id: str, date: Optional[str] = None, 
+                          searched_string: Optional[str] = None,
+                          abrogated: bool = False, from_suggest: bool = False) -> Dict[str, Any]:
         """
         Get the content of a law or decree (LODA).
         
@@ -163,13 +183,21 @@ class LegifranceClient(Client):
             Date for versioned content (format: YYYY-MM-DD)
         searched_string : str, optional
             Search string to highlight in the document
+        abrogated : bool, optional
+            Include abrogated versions (default: False)
+        from_suggest : bool, optional
+            Indicates if request comes from suggest (default: False)
             
         Returns
         -------
         dict
             Law/decree content
         """
-        payload = {"textId": text_id}
+        payload = {
+            "textId": text_id,
+            "abrogated": abrogated,
+            "fromSuggest": from_suggest
+        }
         if date:
             payload["date"] = date
         if searched_string:
@@ -1443,7 +1471,10 @@ class LegifranceClient(Client):
             self.logger.error(f"Failed to download document: {e}")
             raise
     
-    def download_code(self, text_id: str, date: Optional[str] = None) -> str:
+    def download_code(self, text_id: str, date: Optional[str] = None,
+                     searched_string: Optional[str] = None, sct_cid: Optional[str] = None,
+                     abrogated: bool = True, from_suggest: bool = True,
+                     enrich_articles: bool = False) -> str:
         """
         Download a code and save to file.
         
@@ -1453,17 +1484,82 @@ class LegifranceClient(Client):
             Code identifier
         date : str, optional
             Date for versioned content
+        searched_string : str, optional
+            Search string to highlight
+        sct_cid : str, optional
+            Section CID
+        abrogated : bool, optional
+            Include abrogated versions (default: True for sandbox compatibility)
+        from_suggest : bool, optional
+            From suggest (default: True for sandbox compatibility)
+        enrich_articles : bool, optional
+            Fetch full article content for each article (default: False)
+            Warning: Makes one API call per article, can be slow for large codes
             
         Returns
         -------
         str
             Path to saved file
         """
-        payload = {"textId": text_id}
-        if date:
-            payload["date"] = date
+        result = self.consult_code(text_id, date, searched_string, sct_cid, abrogated, from_suggest)
+        
+        # Enrich articles with full content if requested
+        if enrich_articles:
+            self.logger.info("Enriching articles with full content...")
+            result = self._enrich_articles_recursive(result, date)
+        
+        # Save as JSON
         filename = f"code_{text_id}_{date if date else 'current'}"
-        return self.download('/consult/code', payload, filename)
+        filepath = os.path.join(self.download_dir, f"{filename}.json")
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+        
+        self.logger.info(f"Code saved to: {filepath}")
+        return filepath
+    
+    def _enrich_articles_recursive(self, obj: Dict[str, Any], date: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Recursively enrich all articles in a structure with full content.
+        
+        Parameters
+        ----------
+        obj : dict
+            Object containing articles (code, section, etc.)
+        date : str, optional
+            Date for article version
+            
+        Returns
+        -------
+        dict
+            Object with enriched articles
+        """
+        if 'articles' in obj and isinstance(obj['articles'], list):
+            enriched_articles = []
+            for article in obj['articles']:
+                article_id = article.get('id')
+                if article_id:
+                    try:
+                        # Get full article content
+                        article_detail = self.consult_article(article_id, date)
+                        # The response has the article nested under 'article' key
+                        if 'article' in article_detail:
+                            full_article = article_detail['article']
+                            # Merge with existing article data, preferring full content
+                            article.update(full_article)
+                        self.logger.debug(f"Enriched article {article_id}")
+                    except Exception as e:
+                        self.logger.warning(f"Failed to enrich article {article_id}: {e}")
+                enriched_articles.append(article)
+            obj['articles'] = enriched_articles
+        
+        # Recurse into sections
+        if 'sections' in obj and isinstance(obj['sections'], list):
+            for section in obj['sections']:
+                self._enrich_articles_recursive(section, date)
+        
+        return obj
     
     def download_law_decree(self, text_id: str, date: Optional[str] = None, searched_string: Optional[str] = None) -> str:
         """

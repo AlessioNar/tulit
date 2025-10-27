@@ -106,24 +106,46 @@ run_client('Normattiva', [
     '--logdir', str(DB_LOGS)
 ])
 
-# Legilux (Luxembourg) - Example with valid ELI
+# Legilux (Luxembourg) - Example with valid ELI using data API endpoint
 run_client('Legilux', [
     sys.executable, '-m', 'tulit.client.legilux',
-    '--eli', 'https://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo',
+    '--eli', 'http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo',
     '--dir', str(DB_SOURCES / 'member_states' / 'luxembourg' / 'legilux'),
     '--logdir', str(DB_LOGS)
 ])
 
-# Legifrance (requires client_id, client_secret, and dossier_id)
-# Uncomment and fill in your credentials to use
-# run_client('Legifrance', [
-#     sys.executable, '-m', 'tulit.client.legifrance', 
-#     '--client_id', '<YOUR_CLIENT_ID>', 
-#     '--client_secret', '<YOUR_CLIENT_SECRET>', 
-#     '--dossier_id', '<DOSSIER_ID>',
-#     '--dir', str(DB_SOURCES / 'member_states' / 'france' / 'legifrance'),
-#     '--logdir', str(DB_LOGS)
-# ])
+# Legifrance (France) - Download Code Civil (requires credentials)
+# To use: Set environment variables LEGIFRANCE_CLIENT_ID and LEGIFRANCE_CLIENT_SECRET
+# Or uncomment and fill in your credentials
+legifrance_client_id = os.environ.get('LEGIFRANCE_CLIENT_ID')
+legifrance_client_secret = os.environ.get('LEGIFRANCE_CLIENT_SECRET')
+
+if legifrance_client_id and legifrance_client_secret:
+    run_client('Legifrance', [
+        sys.executable, '-m', 'tulit.client.legifrance',
+        '--client_id', legifrance_client_id,
+        '--client_secret', legifrance_client_secret,
+        '--action', 'download_code',
+        '--text_id', 'LEGITEXT000006070721',  # Code Civil
+        '--dir', str(DB_SOURCES / 'member_states' / 'france' / 'legifrance'),
+        '--logdir', str(DB_LOGS)
+    ])
+else:
+    logging.warning('Legifrance client skipped - set LEGIFRANCE_CLIENT_ID and LEGIFRANCE_CLIENT_SECRET environment variables to enable')
+
+# Alternative: Search example (also requires credentials)
+# if legifrance_client_id and legifrance_client_secret:
+#     run_client('Legifrance Search', [
+#         sys.executable, '-m', 'tulit.client.legifrance',
+#         '--client_id', legifrance_client_id,
+#         '--client_secret', legifrance_client_secret,
+#         '--action', 'search',
+#         '--query', 'droit du travail',
+#         '--page_size', '5',
+#         '--dir', str(DB_SOURCES / 'member_states' / 'france' / 'legifrance'),
+#         '--logdir', str(DB_LOGS)
+#     ])
+
 
 # Cellar - Download FMX4 document by CELEX number
 run_client('Cellar', [

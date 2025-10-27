@@ -11,28 +11,39 @@ class LegiluxClient(Client):
 
     def build_request_url(self, eli) -> str:
         self.logger.info(f"Building request URL for ELI: {eli}")
-        url = eli
-        return url
+        # The data API endpoint returns XML by default
+        return eli
     
     def fetch_content(self, url):
         self.logger.info(f"Fetching content from URL: {url}")
-        headers = {"Accept": "application/xml"}
-        response = requests.get(url, headers=headers)
+        headers = {
+            "Accept": "application/xml, text/xml, */*",
+            "User-Agent": "TulitClient/1.0"
+        }
+        response = requests.get(url, headers=headers, timeout=30)
         return response
 
     def download(self, eli):
         file_paths = []
         url = self.build_request_url(eli)
         response = self.fetch_content(url)
-        # Extract filename from ELI - handle both /loi/ and /constitution/ paths
-        if '/loi/' in eli:
-            filename = eli.split('loi/')[1].replace('/', '_')
-        elif '/constitution/' in eli:
-            filename = eli.split('constitution/')[1].replace('/', '_')
+        # Extract filename from ELI - handle different document types
+        eli_parts = eli.strip('/').split('/')
+        if len(eli_parts) >= 6:
+            # Standard format: .../eli/etat/leg/loi/2006/07/31/n2/jo
+            # Extract meaningful parts for filename
+            doc_type = eli_parts[-6] if len(eli_parts) > 6 else 'doc'
+            year = eli_parts[-5] if len(eli_parts) > 5 else 'unknown'
+            month = eli_parts[-4] if len(eli_parts) > 4 else 'unknown'
+            day = eli_parts[-3] if len(eli_parts) > 3 else 'unknown'
+            doc_id = eli_parts[-2] if len(eli_parts) > 2 else 'unknown'
+            filename = f"{doc_type}_{year}_{month}_{day}_{doc_id}"
         else:
             # Fallback: use last parts of ELI
-            filename = '_'.join(eli.split('/')[-4:])
-        filename = filename + '.xml' if not filename.endswith('.xml') else filename
+            filename = '_'.join(eli_parts[-4:])
+        
+        # Clean filename
+        filename = filename.replace('/', '_').replace('?', '_').replace('&', '_')
         if response.status_code == 200:
             file_paths.append(self.handle_response(response, filename=filename))
             self.logger.info(f"Document downloaded successfully and saved to {file_paths}")

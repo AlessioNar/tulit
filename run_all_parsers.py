@@ -170,9 +170,12 @@ def main():
     if formex_dir.exists():
         for subdir in formex_dir.iterdir():
             if subdir.is_dir():
-                for xml_file in subdir.glob('*.xml'):
-                    output_file = DB_RESULTS / 'eu' / 'formex' / f"{subdir.name}_{xml_file.stem}.json"
-                    run_parser(f"FORMEX {xml_file.stem}", 'formex', xml_file, output_file)
+                # Look for nested DOC_* directories
+                for doc_dir in subdir.iterdir():
+                    if doc_dir.is_dir() and doc_dir.name.startswith('DOC_'):
+                        for xml_file in doc_dir.glob('*.fmx.xml'):
+                            output_file = DB_RESULTS / 'eu' / 'formex' / f"{subdir.name}_{xml_file.stem}.json"
+                            run_parser(f"FORMEX {xml_file.stem}", 'formex', xml_file, output_file)
     
     # Parse AKN documents
     akn_dir = DB_SOURCES / 'eu' / 'eurlex' / 'akn'
@@ -204,6 +207,27 @@ def main():
         for xml_file in germany_literature_dir.glob('*.xml'):
             output_file = DB_RESULTS / 'member_states' / 'germany' / 'literature' / f"{xml_file.stem}.json"
             run_parser(f"Germany Literature {xml_file.stem}", 'german', xml_file, output_file)
+    
+    # Parse Finland AkomaNtoso documents
+    finland_dir = DB_SOURCES / 'member_states' / 'finland' / 'finlex'
+    if finland_dir.exists():
+        for xml_file in finland_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'member_states' / 'finland' / f"{xml_file.stem}.json"
+            run_parser(f"Finland {xml_file.stem}", 'akn', xml_file, output_file)
+    
+    # Parse Italy Normattiva AkomaNtoso documents
+    italy_dir = DB_SOURCES / 'member_states' / 'italy' / 'normattiva'
+    if italy_dir.exists():
+        for xml_file in italy_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'member_states' / 'italy' / f"{xml_file.stem}.json"
+            run_parser(f"Italy {xml_file.stem}", 'akn', xml_file, output_file)
+    
+    # Parse Luxembourg AkomaNtoso documents
+    luxembourg_dir = DB_SOURCES / 'member_states' / 'luxembourg' / 'legilux'
+    if luxembourg_dir.exists():
+        for xml_file in luxembourg_dir.glob('*.xml'):
+            output_file = DB_RESULTS / 'member_states' / 'luxembourg' / f"{xml_file.stem}.json"
+            run_parser(f"Luxembourg {xml_file.stem}", 'akn', xml_file, output_file)
     
     # Summary
     print("\n" + "="*60)

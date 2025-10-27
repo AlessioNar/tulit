@@ -20,6 +20,12 @@ print("Testing Legifrance API Endpoints in Sandbox")
 print("=" * 80)
 
 endpoints_to_test = [
+    # LIST ENDPOINTS
+    {
+        'name': 'List Ping',
+        'test': lambda: client.list_ping(),
+        'description': 'Test the list controller'
+    },
     {
         'name': 'List Codes',
         'test': lambda: client.list_codes(page_number=1, page_size=3),
@@ -41,14 +47,21 @@ endpoints_to_test = [
         'description': 'Get a list of collective agreements'
     },
     {
+        'name': 'List BOCC',
+        'test': lambda: client.list_bocc(page_number=1, page_size=3),
+        'description': 'Get bulletins officiels des conventions collectives'
+    },
+    {
+        'name': 'List Legislatures',
+        'test': lambda: client.list_legislatures(),
+        'description': 'Get list of legislatures'
+    },
+    
+    # CONSULT ENDPOINTS
+    {
         'name': 'Consult Ping',
         'test': lambda: client.consult_ping(),
         'description': 'Test the consult controller'
-    },
-    {
-        'name': 'Suggest',
-        'test': lambda: client.suggest("code civil"),
-        'description': 'Get autocomplete suggestions'
     },
     {
         'name': 'Consult Code (Code Civil)',
@@ -66,9 +79,52 @@ endpoints_to_test = [
         'description': 'Retrieve a specific article'
     },
     {
-        'name': 'Search',
+        'name': 'Consult Last N JO',
+        'test': lambda: client.consult_last_n_jo(n=3),
+        'description': 'Get last 3 Official Journals'
+    },
+    
+    # SEARCH ENDPOINTS
+    {
+        'name': 'Search Ping',
+        'test': lambda: client.search_ping(),
+        'description': 'Test the search controller'
+    },
+    {
+        'name': 'Search Documents',
         'test': lambda: client.search("code civil", page_size=3),
         'description': 'Search for documents'
+    },
+    
+    # SUGGEST ENDPOINTS
+    {
+        'name': 'Suggest Ping',
+        'test': lambda: client.suggest_ping(),
+        'description': 'Test the suggest controller'
+    },
+    {
+        'name': 'Suggest Terms',
+        'test': lambda: client.suggest("code civil"),
+        'description': 'Get autocomplete suggestions'
+    },
+    
+    # CHRONO ENDPOINTS
+    {
+        'name': 'Chrono Ping',
+        'test': lambda: client.chrono_ping(),
+        'description': 'Test the chrono (versioning) controller'
+    },
+    
+    # MISC ENDPOINTS
+    {
+        'name': 'Misc Commit ID',
+        'test': lambda: client.misc_commit_id(),
+        'description': 'Get deployment/version info'
+    },
+    {
+        'name': 'Misc Dates Without JO',
+        'test': lambda: client.misc_dates_without_jo(),
+        'description': 'Get dates without Official Journal'
     },
 ]
 

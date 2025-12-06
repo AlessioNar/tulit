@@ -1,8 +1,10 @@
 import re
 import json
+import argparse
+import logging
 
 from tulit.parsers.xml.xml import XMLParser
-import argparse
+from tulit.parsers.parser import LegalJSONValidator
 
 class Formex4Parser(XMLParser):
     """
@@ -343,9 +345,7 @@ def main():
         serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
         json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
 
-    if args.validate:
-        from tulit.parsers.parser import LegalJSONValidator
-        import logging
+    if args.validate:        
         logging.basicConfig(level=logging.INFO)
         validator = LegalJSONValidator()
         with open(args.output, 'r', encoding='utf-8') as f:

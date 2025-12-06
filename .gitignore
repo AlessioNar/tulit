@@ -12,6 +12,15 @@ database/
 coverage_re/
 htmlcov/
 
+# Temporary files
+temp/
+*.tmp
+
+# Log files
+logs/*.log
+data/logs/
+*.log
+
 # IDE
 .vscode/
 .idea/
@@ -23,3 +32,9 @@ htmlcov/
 .Python
 *.egg-info/
 .pytest_cache/
+.env
+
+# Test scripts in root (tests should be in tests/ directory)
+test_*.py
+check_*.py
+show_*.py

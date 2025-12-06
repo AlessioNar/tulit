@@ -70,7 +70,8 @@ def test_parse_german_legislation():
             text = first_para.get('text', '')
             print(f"   First paragraph: {text[:100]}...")
     
-    return True
+    # Use assertion for pytest compatibility
+    assert True, "German legislation parsing completed successfully"
 
 
 if __name__ == "__main__":

@@ -2,6 +2,9 @@ from tulit.parsers.html.xhtml import HTMLParser
 import json
 import re
 import argparse
+# LegalJSON validation
+from tulit.parsers.parser import LegalJSONValidator
+import logging
 
 class VenetoHTMLParser(HTMLParser):
     def __init__(self):
@@ -164,55 +167,46 @@ class VenetoHTMLParser(HTMLParser):
 
     def get_articles(self):
         """
-        Extracts articles from the HTML. Each <div> with an id starting with "art" is treated as an article (eId).
-        Subsequent subdivisions are processed based on the closest parent with an id.
-
-        Returns:
-            list[dict]: List of articles, each containing its eId and associated content.
+        Extracts articles from the HTML. Each <h6> is treated as an article heading, and the next <div> contains the article content.
+        Subdivisions are separated by <br> tags and stored as children.
         """
-        
-        articles = self.root.find_all('h6')
         self.articles = []
-        
+        articles = self.root.find_all('h6')
         for index, article in enumerate(articles):
-            eId = index
-            
+            # Extract article number and heading
             text = article.get_text(strip=True)
             text = text.replace('–', '-')
-            
-            num = text.split('-')[0].strip() 
-            heading = text.split('-')[1].strip()
-            
-            children = []
-            
-            # Get the next sibling of the h6 tag, which should be the div containing the article content
+            if '-' in text:
+                num, heading = [t.strip() for t in text.split('-', 1)]
+            else:
+                num, heading = str(index+1), text
+            # Get the next sibling div containing the article content
             content_div = article.find_next_sibling('div')
-            # Within the content div, separate all elements based on the presence
-            # of a <br> tag, and store them as separate children
+            children = []
             if content_div:
-                
-                for element_index, element in enumerate(content_div.descendants):
-                    separated_content = []
-                    # Print the tag name for debugging
-                    # print(element.name)
-                    
-                    
-                    # element index needs to be lower than the index of the first <br> tag
-                    if element.name == 'br' or element_index < list(content_div.descendants).index(content_div.find('br')):
-                        previous_content = (element.previous_sibling)
-                        next_content = (element.next_sibling)
-                        # Paste the previous and next siblings together
-                        if previous_content:
-                            separated_content.append(next_content.get_text(strip=True) if next_content else '')
-                        
+                # Split content by <br> tags
+                parts = []
+                current = ''
+                for elem in content_div.children:
+                    if getattr(elem, 'name', None) == 'br':
+                        if current.strip():
+                            parts.append(current.strip())
+                        current = ''
+                    else:
+                        current += str(elem)
+                if current.strip():
+                    parts.append(current.strip())
+                # Clean up HTML tags and whitespace
+                for child_index, part in enumerate(parts):
+                    clean_text = re.sub('<[^<]+?>', '', part)
+                    clean_text = re.sub(r'\s+', ' ', clean_text).strip()
+                    if clean_text:
                         children.append({
-                            'eId': element_index,
-                            'text': separated_content
+                            'eId': child_index,
+                            'text': clean_text
                         })
-                        
-            # Store the article with its eId and subdivisions
             self.articles.append({
-                'eId': eId,
+                'eId': index,
                 'num': num,
                 'heading': heading,
                 'children': children
@@ -248,6 +242,17 @@ def main():
     
         # Write to a JSON file
         json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
+    
+    logging.basicConfig(level=logging.INFO)
+    validator = LegalJSONValidator()
+    with open(args.output, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    valid = validator.validate(data)
+    if valid:
+        print('LegalJSON validation: SUCCESS')
+    else:
+        print('LegalJSON validation: FAILED')
+        exit(1)
 
 if __name__ == "__main__":
     main()

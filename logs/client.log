@@ -1,0 +1,34 @@
+2025-10-27 22:53:41,055 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:53:41,056 INFO LegiluxClient Building request URL for ELI: http://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo
+2025-10-27 22:53:56,117 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:53:56,118 INFO LegiluxClient Building request URL for ELI: http://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo
+2025-10-27 22:53:56,118 INFO LegiluxClient Building request URL for ELI: http://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo
+2025-10-27 22:53:56,118 INFO LegiluxClient Fetching content from URL: http://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo
+2025-10-27 22:53:56,546 INFO LegiluxClient File saved: database\sources\member_states\luxembourg\legilux\rgd_2025_10_16_a456.xml.html
+2025-10-27 22:53:56,546 INFO LegiluxClient Document downloaded successfully and saved to ['database\\sources\\member_states\\luxembourg\\legilux\\rgd_2025_10_16_a456.xml.html']
+2025-10-27 22:55:06,599 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:55:06,599 INFO LegiluxClient Building request URL for ELI: http://legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo
+2025-10-27 22:56:40,895 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:56:40,895 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo
+2025-10-27 22:56:40,895 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/rgd/2025/10/16/a456/jo/xml
+2025-10-27 22:56:41,387 ERROR LegiluxClient Failed to download document. Status code: 404
+2025-10-27 22:56:50,004 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:56:50,005 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:56:50,005 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo/xml
+2025-10-27 22:56:50,469 ERROR LegiluxClient Failed to download document. Status code: 404
+2025-10-27 22:57:30,616 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:57:30,617 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:57:30,617 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:57:31,099 INFO LegiluxClient File saved: database\sources\member_states\luxembourg\legilux\loi_2006_07_31_n2.xml.xml
+2025-10-27 22:57:31,100 INFO LegiluxClient Document downloaded successfully and saved to ['database\\sources\\member_states\\luxembourg\\legilux\\loi_2006_07_31_n2.xml.xml']
+2025-10-27 22:57:56,678 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:57:56,678 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:57:56,678 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:57:57,216 INFO LegiluxClient File saved: database\sources\member_states\luxembourg\legilux\loi_2006_07_31_n2.xml
+2025-10-27 22:57:57,216 INFO LegiluxClient Document downloaded successfully and saved to ['database\\sources\\member_states\\luxembourg\\legilux\\loi_2006_07_31_n2.xml']
+2025-10-27 22:58:13,538 INFO LegiluxClient Client initialized with download_dir=database/sources/member_states/luxembourg/legilux, log_dir=logs
+2025-10-27 22:58:13,538 INFO LegiluxClient Building request URL for ELI: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:58:13,538 INFO LegiluxClient Fetching content from URL: http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo
+2025-10-27 22:58:14,042 INFO LegiluxClient File saved: database\sources\member_states\luxembourg\legilux\loi_2006_07_31_n2.xml
+2025-10-27 22:58:14,047 INFO LegiluxClient Document downloaded successfully and saved to ['database\\sources\\member_states\\luxembourg\\legilux\\loi_2006_07_31_n2.xml']
+2025-10-27 22:58:14,047 INFO root Downloaded documents: ['database\\sources\\member_states\\luxembourg\\legilux\\loi_2006_07_31_n2.xml']

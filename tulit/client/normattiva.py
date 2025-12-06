@@ -99,10 +99,23 @@ class NormattivaClient(Client):
 
 # Example usage
 if __name__ == "__main__":
+    import argparse
     
-    downloader = NormattivaClient(download_dir='./tests/data/akn/italy', log_dir='./tests/logs')
-    #documents = downloader.download(dataGU='19410716', codiceRedaz='041U0633')
-    documents = downloader.download(dataGU='19410716', codiceRedaz='041U0633', dataVigenza='20211231')
+    parser = argparse.ArgumentParser(description='Download a document from Normattiva')
+    parser.add_argument('--dataGU', type=str, required=True, help='Publication date in YYYYMMDD format')
+    parser.add_argument('--codiceRedaz', type=str, required=True, help='Editorial code')
+    parser.add_argument('--dataVigenza', type=str, default=None, help='Validity date in YYYYMMDD format')
+    parser.add_argument('--fmt', type=str, default='xml', choices=['xml', 'pdf', 'html'], help='Output format')
+    parser.add_argument('--dir', type=str, default='./tests/data/akn/italy', help='Download directory')
+    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Log directory')
+    
+    args = parser.parse_args()
+    
+    if args.dataVigenza is None:
+        args.dataVigenza = datetime.today().strftime('%Y%m%d')
+    
+    downloader = NormattivaClient(download_dir=args.dir, log_dir=args.logdir)
+    documents = downloader.download(dataGU=args.dataGU, codiceRedaz=args.codiceRedaz, dataVigenza=args.dataVigenza, fmt=args.fmt)
     if documents:
         logging.info(f"Downloaded documents: {documents}")
     else:

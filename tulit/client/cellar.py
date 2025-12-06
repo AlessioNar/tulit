@@ -136,6 +136,7 @@ class CellarClient(Client):
         - Accept-Language: eng
         - Content-Type: application/x-www-form-urlencoded
         - Host: publications.europa.eu
+        - User-Agent: Browser user agent (required by EU server to bypass bot protection)
 
         Raises
         ------
@@ -153,7 +154,9 @@ class CellarClient(Client):
                 'Accept': "*, application/zip, application/zip;mtype=fmx4, application/xml;mtype=fmx4, application/xhtml+xml, text/html, text/html;type=simplified, application/msword, text/plain, application/xml, application/xml;notice=object",
                 'Accept-Language': "eng",
                 'Content-Type': "application/x-www-form-urlencoded",
-                'Host': "publications.europa.eu"
+                'Host': "publications.europa.eu",
+                # EU server blocks bot traffic - use browser User-Agent
+                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
             }
             if self.proxies is not None:
                 response = requests.request("GET", url, headers=headers, proxies=self.proxies)
@@ -280,10 +283,11 @@ def main():
     parser.add_argument('--celex', type=str, default='32024R0903', help='CELEX identifier of the document')
     parser.add_argument('--format', type=str, default='fmx4', help='Format of the document, either fmx4 or xhtml')
     parser.add_argument('--dir', type=str, default='tests/data/formex', help='Path to the directory')
+    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Directory for logs')
     
     args = parser.parse_args()
     
-    client = CellarClient(download_dir=args.dir, log_dir='./tests/logs')    
+    client = CellarClient(download_dir=args.dir, log_dir=args.logdir)    
     
     documents = client.download(celex=args.celex, format=args.format)
     

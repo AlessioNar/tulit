@@ -25,5 +25,5 @@
     },
     "conclusions": {"type": ["object", "null"]}
   },
-  "required": ["preface", "formula", "citations", "recitals", "preamble_final", "chapters", "articles", "conclusions"]
+  "required": ["preface", "citations", "recitals", "chapters", "articles"]
 }

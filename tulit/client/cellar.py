@@ -52,8 +52,12 @@ class CellarClient(Client):
         try:            
             
             if celex is not None:
-                # Option 1: If you want to use format()
-                sparql_query = sparql_query.replace("{CELEX}", celex) 
+                # URL encode parentheses in CELEX number for SPARQL query
+                # This is needed for documents with suffixes like (01), (02), etc.
+                import urllib.parse
+                celex_encoded = celex.replace("(", "%28").replace(")", "%29")
+                
+                sparql_query = sparql_query.replace("{CELEX}", celex_encoded) 
 
                 # send query to cellar endpoint and retrieve results
                 results = self.get_results_table(sparql_query)

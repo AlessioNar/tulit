@@ -235,6 +235,9 @@ class Formex4Parser(XMLParser):
                     "children": children
                 })
             
+            # Standardize children numbering to 001.001 format
+            self._standardize_children_numbering()
+            
             return self.articles
         else:
             print('No enacting terms XML tag has been found')
@@ -264,7 +267,22 @@ class Formex4Parser(XMLParser):
                     "text": text, 
                     "amendment": False                  
                 }
-                children.append(child)        
+                children.append(child)
+    
+    def _standardize_children_numbering(self):
+        """
+        Standardize article children numbering to format: 001.001, 001.002, etc.
+        where the first number is the article number and the second is the child index.
+        """
+        import re
+        for article in self.articles:
+            # Extract article number from eId (format: art_1 -> 1)
+            article_num_match = re.search(r'art_(\d+)', article['eId'])
+            article_num = int(article_num_match.group(1)) if article_num_match else 0
+            
+            # Renumber all children with standardized format
+            for idx, child in enumerate(article['children'], start=1):
+                child['eId'] = f"{article_num:03d}.{idx:03d}"
     
     def get_conclusions(self):
         """

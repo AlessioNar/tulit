@@ -153,26 +153,48 @@ class CellarHTMLParser(HTMLParser):
             The extracted body content is stored in the 'body' attribute
         """
         
+        # Try to find body with enc_ prefix
         self.body = self.root.find('div', id=lambda x: x and x.startswith('enc_'))
-        for a in self.body.find_all('a'):
-            a.replace_with(' ')
+        
+        # If no explicit body found, use eli-container as fallback
+        if self.body is None:
+            self.body = self.root.find('div', class_='eli-container')
+            print("Body element not found. Using eli-container as fallback.")
+        
+        # If still no body, use root itself
+        if self.body is None:
+            self.body = self.root
+            print("Body element not found. Using root as fallback.")
+        
+        # Remove anchor tags
+        if self.body:
+            for a in self.body.find_all('a'):
+                a.replace_with(' ')
 
     def get_chapters(self):
         """
         Extracts chapters from the HTML, grouping them by their IDs and headings.
         """
         
+        if self.body is None:
+            self.chapters = []
+            print("No body element to extract chapters from.")
+            return
+        
         chapters = self.body.find_all('div', id=lambda x: x and x.startswith('cpt_') and '.' not in x)
         self.chapters = []
         for chapter in chapters:
             eId = chapter.get('id')
-            chapter_num = chapter.find('p', class_="oj-ti-section-1").get_text(strip=True)
-            chapter_title = chapter.find('div', class_="eli-title").get_text(strip=True)
-            self.chapters.append({
-                'eId': eId,
-                'num': chapter_num,
-                'heading': chapter_title
-            })
+            chapter_num_elem = chapter.find('p', class_="oj-ti-section-1")
+            chapter_title_elem = chapter.find('div', class_="eli-title")
+            if chapter_num_elem and chapter_title_elem:
+                chapter_num = chapter_num_elem.get_text(strip=True)
+                chapter_title = chapter_title_elem.get_text(strip=True)
+                self.chapters.append({
+                    'eId': eId,
+                    'num': chapter_num,
+                    'heading': chapter_title
+                })
 
     def get_articles(self):
         """
@@ -183,12 +205,33 @@ class CellarHTMLParser(HTMLParser):
             list[dict]: List of articles, each containing its eId and associated content.
         """
         
-        articles = self.body.find_all('div', id=lambda x: x and x.startswith('art_') and '.' not in x)
+        if self.body is None:
+            self.articles = []
+            print("No body element to extract articles from.")
+            return
+        
+        # Find all article divs: either id="art" (sole article) or id="art_X" (numbered articles)
+        articles = self.body.find_all('div', id=lambda x: x and (x == 'art' or (x.startswith('art_') and '.' not in x)))
         self.articles = []
         for article in articles:
             eId = article.get('id')  # Treat the id as the eId
-            article_num = article.find('p', class_='oj-ti-art').get_text(strip=True)
+            
+            # Try original document format first (oj-ti-art), then consolidated format (title-article-norm)
+            article_num_elem = article.find('p', class_='oj-ti-art')
+            if article_num_elem is None:
+                article_num_elem = article.find('p', class_='title-article-norm')
+            
+            if article_num_elem is None:
+                print(f"Article {eId} has no article title element, skipping.")
+                continue
+            
+            article_num = article_num_elem.get_text(strip=True)
+            
+            # Try original document format first (oj-sti-art), then consolidated format (stitle-article-norm)
             article_title_element = article.find('p', class_='oj-sti-art')
+            if article_title_element is None:
+                article_title_element = article.find('p', class_='stitle-article-norm')
+            
             if article_title_element is not None:
                 article_title = article_title_element.get_text(strip=True)
             else:
@@ -221,16 +264,21 @@ class CellarHTMLParser(HTMLParser):
                     for row in rows:
                         cols = row.find_all('td')
                         if len(cols) == 2:
-                            number = cols[0].get_text(strip=True)
-                            number = number.strip('()')  # Remove parentheses
-                            number = int(number)
-                            text = ' '.join(cols[1].get_text(separator = ' ', strip=True).split())
-                            text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+                            number_text = cols[0].get_text(strip=True)
+                            number_str = number_text.strip('()')  # Remove parentheses
+                            try:
+                                # Only proceed if first column is actually a number
+                                number = int(number_str)
+                                text = ' '.join(cols[1].get_text(separator = ' ', strip=True).split())
+                                text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)  # replace spaces before punctuation with nothing
 
-                            children.append({
-                                'eId': number,
-                                'text': text
-                            })
+                                children.append({
+                                    'eId': number,
+                                    'text': text
+                                })
+                            except ValueError:
+                                # Not a numbered list table - will fallthrough to generic fallback
+                                pass
             # Handle articles with paragraphs and tables by treating tables as part of the same paragraph
             elif article.find_all('div', id=lambda x: x and '.' in x):
                 paragraphs = article.find_all('div', id=lambda x: x and '.' in x)
@@ -243,6 +291,67 @@ class CellarHTMLParser(HTMLParser):
                                 'text': text
                         })
             
+            # Handle consolidated text format with <div class="norm"> and <span class="no-parag">
+            # This format is used in consolidated documents (e.g., 02009R1010)
+            if not children:  # Only try this if we haven't already extracted children
+                norm_divs = article.find_all('div', class_='norm', recursive=False)
+                if norm_divs:
+                    for idx, norm_div in enumerate(norm_divs):
+                        # Check if this div has a numbered paragraph marker
+                        no_parag = norm_div.find('span', class_='no-parag')
+                        if no_parag:
+                            parag_num = no_parag.get_text(strip=True).strip('.')
+                            # Get the text from the inline-element div or the norm div itself
+                            inline_elem = norm_div.find('div', class_='inline-element')
+                            if inline_elem:
+                                text = ' '.join(inline_elem.get_text(separator=' ', strip=True).split())
+                            else:
+                                # Get all text except the no-parag span
+                                no_parag.extract()
+                                text = ' '.join(norm_div.get_text(separator=' ', strip=True).split())
+                            text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                            children.append({
+                                'eId': parag_num,
+                                'text': text
+                            })
+                        else:
+                            # Single paragraph without numbering
+                            text = ' '.join(norm_div.get_text(separator=' ', strip=True).split())
+                            text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                            if text:  # Only add if there's actual content
+                                children.append({
+                                    'eId': idx,
+                                    'text': text
+                                })
+                
+                # Also check for simple <p class="norm"> paragraphs (single paragraph articles)
+                if not children:
+                    norm_paragraphs = article.find_all('p', class_='norm', recursive=False)
+                    for idx, p in enumerate(norm_paragraphs):
+                        text = ' '.join(p.get_text(separator=' ', strip=True).split())
+                        text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                        if text:
+                            children.append({
+                                'eId': idx,
+                                'text': text
+                            })
+            
+            # Generic fallback: if no specific pattern matched, extract all text content
+            # This handles articles with complex tables or other structures not covered by specific patterns
+            if not children:
+                # Skip title elements to avoid duplicate content
+                article_copy = article.__copy__()
+                for title_elem in article_copy.find_all(['p'], class_=['oj-ti-art', 'oj-sti-art', 'title-article-norm', 'stitle-article-norm']):
+                    title_elem.decompose()
+                
+                text = ' '.join(article_copy.get_text(separator=' ', strip=True).split())
+                text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                if text:  # Only add if there's actual content after removing titles
+                    children.append({
+                        'eId': eId,
+                        'text': text
+                    })
+
             # Store the article with its eId and subdivisions
             self.articles.append({
                 'eId': eId,
@@ -250,14 +359,35 @@ class CellarHTMLParser(HTMLParser):
                 'heading': article_title,
                 'children': children
             })
+        
+        # Standardize children numbering to 001.001 format
+        self._standardize_children_numbering()
 
 
+    def _standardize_children_numbering(self):
+        """
+        Standardize article children numbering to format: 001.001, 001.002, etc.
+        where the first number is the article number and the second is the child index.
+        """
+        import re
+        for article in self.articles:
+            # Extract article number from eId (format: art_1 -> 1, or art -> 0)
+            article_num_match = re.search(r'art_?(\d+)', article['eId'])
+            article_num = int(article_num_match.group(1)) if article_num_match else 0
+            
+            # Renumber all children with standardized format
+            for idx, child in enumerate(article['children'], start=1):
+                child['eId'] = f"{article_num:03d}.{idx:03d}"
+    
     def get_conclusions(self):
         """
         Extracts conclusions from the HTML, if present.
         """
         conclusions_element = self.root.find('div', class_='oj-final')
-        self.conclusions = conclusions_element.get_text(separator=' ', strip=True)
+        if conclusions_element:
+            self.conclusions = conclusions_element.get_text(separator=' ', strip=True)
+        else:
+            self.conclusions = None
 
     def parse(self, file):
         return super().parse(file)

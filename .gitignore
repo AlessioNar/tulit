@@ -39,3 +39,5 @@ test_*.py
 check_*.py
 show_*.py
 example_data
+tests/data/cellar_legacy/*
+tests/data/cellar_parsed/*

@@ -255,8 +255,10 @@ class CellarClient(Client):
                 sparql_query = sparql_query.replace("{CELEX}", celex)                
         elif format == 'xhtml':
             sparql_query = files("tulit.client.queries").joinpath("html_query.rq").read_text()
+        elif format == 'html':
+            sparql_query = files("tulit.client.queries").joinpath("html_standard_query.rq").read_text()
         else:
-            self.logger.error('No valid format provided. Please choose one between fmx4 or xhtml')
+            self.logger.error('No valid format provided. Please choose one between fmx4, xhtml, or html')
             return None
             
         results = self.send_sparql_query(sparql_query, celex)

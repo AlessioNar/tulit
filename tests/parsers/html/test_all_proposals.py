@@ -127,7 +127,8 @@ def test_sample_proposals():
     
     print("\n" + "=" * 50)
     
-    return error_count == 0
+    # Use assertion instead of return for pytest compatibility
+    assert error_count == 0, f"Found {error_count} errors during proposal parsing"
 
 
 def run_full_analysis_mode():

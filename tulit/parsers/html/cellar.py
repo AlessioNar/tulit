@@ -11,6 +11,29 @@ class CellarHTMLParser(HTMLParser):
     def __init__(self):
         pass
 
+    def _normalize_text(self, text):
+        """
+        Normalize Unicode quotation marks and other special characters to ASCII equivalents.
+        
+        Parameters
+        ----------
+        text : str
+            The text to normalize
+            
+        Returns
+        -------
+        str
+            Normalized text with ASCII characters
+        """
+        # Replace Unicode quotation marks with ASCII apostrophes
+        text = text.replace('\u2018', "'")  # Left single quotation mark
+        text = text.replace('\u2019', "'")  # Right single quotation mark
+        text = text.replace('\u201c', '"')  # Left double quotation mark
+        text = text.replace('\u201d', '"')  # Right double quotation mark
+        # Replace non-breaking space with regular space
+        text = text.replace('\xa0', ' ')
+        return text
+
     def get_preface(self):
         """
         Extracts the preface text from the HTML, if available.
@@ -27,7 +50,7 @@ class CellarHTMLParser(HTMLParser):
         try:
             preface_element = self.root.find('div', class_='eli-main-title')
             if preface_element:
-                self.preface = preface_element.get_text(separator=' ', strip=True)
+                self.preface = self._normalize_text(preface_element.get_text(separator=' ', strip=True))
                 print("Preface extracted successfully.")
             else:
                 self.preface = None
@@ -90,7 +113,7 @@ class CellarHTMLParser(HTMLParser):
         self.citations = []
         for citation in citations:
             eId = citation.get('id')
-            text = citation.get_text(strip=True)
+            text = self._normalize_text(citation.get_text(strip=True))
             self.citations.append({
                     'eId' : eId,
                     'text' : text
@@ -225,7 +248,7 @@ class CellarHTMLParser(HTMLParser):
                 print(f"Article {eId} has no article title element, skipping.")
                 continue
             
-            article_num = article_num_elem.get_text(strip=True)
+            article_num = self._normalize_text(article_num_elem.get_text(strip=True))
             
             # Try original document format first (oj-sti-art), then consolidated format (stitle-article-norm)
             article_title_element = article.find('p', class_='oj-sti-art')
@@ -233,7 +256,7 @@ class CellarHTMLParser(HTMLParser):
                 article_title_element = article.find('p', class_='stitle-article-norm')
             
             if article_title_element is not None:
-                article_title = article_title_element.get_text(strip=True)
+                article_title = self._normalize_text(article_title_element.get_text(strip=True))
             else:
                 article_title = None
             
@@ -243,12 +266,12 @@ class CellarHTMLParser(HTMLParser):
             # Handle articles with only paragraphs
             paragraphs = article.find_all('p', class_='oj-normal')            
             if paragraphs and len(article.find_all('table')) == 0:
-                for paragraph in paragraphs:
+                for idx, paragraph in enumerate(paragraphs):
                     text = ' '.join(paragraph.get_text(separator= ' ', strip=True).split())
-                    text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+                    text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)  # replace spaces before punctuation with nothing
+                    text = self._normalize_text(text)
                     children.append({
-                        # Get parent of the paragraph: Use the id of the parent div as the eId
-                        'eId': paragraph.find_parent('div').get('id'),
+                        'eId': idx,
                         'text': text
                     })
             # Handle articles with only tables as first child:
@@ -270,7 +293,8 @@ class CellarHTMLParser(HTMLParser):
                                 # Only proceed if first column is actually a number
                                 number = int(number_str)
                                 text = ' '.join(cols[1].get_text(separator = ' ', strip=True).split())
-                                text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)  # replace spaces before punctuation with nothing
+                                text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)  # replace spaces before punctuation with nothing
+                                text = self._normalize_text(text)
 
                                 children.append({
                                     'eId': number,
@@ -282,12 +306,13 @@ class CellarHTMLParser(HTMLParser):
             # Handle articles with paragraphs and tables by treating tables as part of the same paragraph
             elif article.find_all('div', id=lambda x: x and '.' in x):
                 paragraphs = article.find_all('div', id=lambda x: x and '.' in x)
-                for paragraph in paragraphs:
+                for idx, paragraph in enumerate(paragraphs):
                     if not paragraph.get('class'):
                         text = ' '.join(paragraph.get_text(separator = ' ', strip=True).split())
-                        text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+                        text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)  # replace spaces before punctuation with nothing
+                        text = self._normalize_text(text)
                         children.append({
-                                'eId': paragraph.get('id'),
+                                'eId': idx,
                                 'text': text
                         })
             
@@ -300,7 +325,6 @@ class CellarHTMLParser(HTMLParser):
                         # Check if this div has a numbered paragraph marker
                         no_parag = norm_div.find('span', class_='no-parag')
                         if no_parag:
-                            parag_num = no_parag.get_text(strip=True).strip('.')
                             # Get the text from the inline-element div or the norm div itself
                             inline_elem = norm_div.find('div', class_='inline-element')
                             if inline_elem:
@@ -309,15 +333,17 @@ class CellarHTMLParser(HTMLParser):
                                 # Get all text except the no-parag span
                                 no_parag.extract()
                                 text = ' '.join(norm_div.get_text(separator=' ', strip=True).split())
-                            text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                            text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)
+                            text = self._normalize_text(text)
                             children.append({
-                                'eId': parag_num,
+                                'eId': idx,
                                 'text': text
                             })
                         else:
                             # Single paragraph without numbering
                             text = ' '.join(norm_div.get_text(separator=' ', strip=True).split())
-                            text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                            text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)
+                            text = self._normalize_text(text)
                             if text:  # Only add if there's actual content
                                 children.append({
                                     'eId': idx,
@@ -329,7 +355,8 @@ class CellarHTMLParser(HTMLParser):
                     norm_paragraphs = article.find_all('p', class_='norm', recursive=False)
                     for idx, p in enumerate(norm_paragraphs):
                         text = ' '.join(p.get_text(separator=' ', strip=True).split())
-                        text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                        text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)
+                        text = self._normalize_text(text)
                         if text:
                             children.append({
                                 'eId': idx,
@@ -345,10 +372,11 @@ class CellarHTMLParser(HTMLParser):
                     title_elem.decompose()
                 
                 text = ' '.join(article_copy.get_text(separator=' ', strip=True).split())
-                text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
+                text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)
+                text = self._normalize_text(text)
                 if text:  # Only add if there's actual content after removing titles
                     children.append({
-                        'eId': eId,
+                        'eId': 0,
                         'text': text
                     })
 
@@ -390,38 +418,29 @@ class CellarHTMLParser(HTMLParser):
             self.conclusions = None
 
     def parse(self, file):
-        return super().parse(file)
+        """
+        Parses an XHTML document. If the input is a directory, searches for XHTML files.
         
-
-def main():
-    parser = argparse.ArgumentParser(description='Parse an Cellar XHTML document and output the results to a JSON file.')
-    parser.add_argument('--input', type=str, default='tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html', help='Path to the Cellar XHTML file to parse.')
-    parser.add_argument('--output', type=str, default='tests/data/json/iopa_html.json', help='Path to the output JSON file.')
-    args = parser.parse_args()
-    
-    html_parser = CellarHTMLParser()
-    html_parser.parse(args.input)
-    
-    with open(args.output, 'w', encoding='utf-8') as f:
-        # Get the parser's attributes as a dictionary
-        parser_dict = html_parser.__dict__
-    
-        # Filter out non-serializable attributes
-        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
-    
-        # Write to a JSON file
-        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
-    
-    logging.basicConfig(level=logging.INFO)
-    validator = LegalJSONValidator()
-    with open(args.output, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    valid = validator.validate(data)
-    if valid:
-        print('LegalJSON validation: SUCCESS')
-    else:
-        print('LegalJSON validation: FAILED')
-        exit(1)
-
-if __name__ == "__main__":
-    main()
+        Args:
+            file (str): Path to the XHTML file or directory containing XHTML files.
+        
+        Returns:
+            Parser object with extracted content.
+        """
+        from pathlib import Path
+        
+        # Check if input is a directory
+        file_path = Path(file)
+        if file_path.is_dir():
+            # Search for XHTML files in the directory
+            xhtml_files = list(file_path.glob('*.xhtml')) + list(file_path.glob('*.html'))
+            
+            if xhtml_files:
+                # Use the first XHTML/HTML file found
+                file = str(xhtml_files[0])
+                logging.info(f"Found XHTML document: {xhtml_files[0].name}")
+            else:
+                logging.error(f"No XHTML/HTML files found in directory: {file_path}")
+                return self
+        
+        return super().parse(file)

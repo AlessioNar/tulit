@@ -111,3 +111,5 @@ class HTMLParser(Parser):
             print(f"Conclusions parsed successfully. ")
         except Exception as e:
             print(f"Error in get_conclusions: {e}")
+        
+        return self

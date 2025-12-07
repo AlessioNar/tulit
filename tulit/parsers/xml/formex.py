@@ -337,16 +337,65 @@ class Formex4Parser(XMLParser):
     def parse(self, file):
         """
         Parses a FORMEX XML document to extract its components, which are inherited from the XMLParser class.
+        If the input is a directory, searches for the correct XML file (one containing ACT or DECISION tags).
 
         Args:
-            file (str): Path to the FORMEX XML file.
+            file (str): Path to the FORMEX XML file or directory containing FORMEX files.
 
         Returns
         -------
         dict
             Parsed data containing metadata, title, preamble, and articles.
         """
+        import os
+        from pathlib import Path
+        
+        logger = logging.getLogger(__name__)
+        
+        # Check if input is a directory
+        file_path = Path(file)
+        if file_path.is_dir():
+            # Search for XML files in the directory
+            xml_files = list(file_path.glob('*.xml'))
+            
+            # Find the file containing ACT or DECISION tags
+            target_file = None
+            for xml_file in xml_files:
+                try:
+                    with open(xml_file, 'r', encoding='utf-8') as f:
+                        content = f.read(5000)  # Read first 5KB to check for tags
+                        if '<ACT' in content or '<DECISION' in content:
+                            target_file = str(xml_file)
+                            logger.info(f"Found Formex document with legal act: {xml_file.name}")
+                            break
+                except Exception as e:
+                    logger.debug(f"Error reading {xml_file}: {e}")
+                    continue
+            
+            if target_file:
+                file = target_file
+            elif xml_files:
+                # Fallback: use the largest XML file if no ACT/DECISION found
+                largest_file = max(xml_files, key=lambda f: f.stat().st_size)
+                file = str(largest_file)
+                logger.warning(f"No ACT/DECISION tag found, using largest file: {largest_file.name}")
+            else:
+                logger.error(f"No XML files found in directory: {file_path}")
+                return self
+        
         super().parse(file, schema='./formex4.xsd', format='Formex 4')
+        
+        # Check if this is an annex document (not a legal act)
+        if self.preface and isinstance(self.preface, str):
+            preface_upper = self.preface.strip().upper()
+            # Check if preface is just an annex reference (e.g., "ANNEX I", "ANNEX VII")
+            if preface_upper.startswith('ANNEX ') and len(preface_upper.split()) <= 3:
+                logger.warning(f"Skipping annex document: {self.preface}")
+                # Clear articles to indicate this should be skipped
+                self.articles = []
+                return self
+        
+        return self
 
 def main():
     parser = argparse.ArgumentParser(description='Parse a FORMEX XML document and output the results to a JSON file and validate as LegalJSON.')

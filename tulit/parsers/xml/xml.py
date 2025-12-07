@@ -438,80 +438,81 @@ class XMLParser(Parser):
         try:
             self.load_schema(schema)
             self.validate(file=file, format=format)
-            if self.valid == True:
-                try:
-                    self.get_root(file)
-                    logger.info(f"Root element loaded successfully.")                    
-                except Exception as e:
-                    logger.error(f"Error in get_root: {e}")
-                    
-                    
-                try:
-                    self.get_preface()
-                    logger.info(f"Preface element found. Preface: {self.preface}")                    
-                except Exception as e:
-                    logger.error(f"Error in get_preface: {e}")                    
+            # Proceed with parsing even if validation fails (schema might be too strict)
+            # Only skip if file cannot be parsed at all
+            try:
+                self.get_root(file)
+                logger.info(f"Root element loaded successfully.")                    
+            except Exception as e:
+                logger.error(f"Error in get_root: {e}")
                 
-                try:
-                    self.get_preamble()
-                    logger.info(f"Preamble element found.")                    
-                except Exception as e:
-                    logger.error(f"Error in get_preamble: {e}")                    
-                try:
-                    self.get_formula()
-                    logger.info(f"Formula element found. Formula: {self.formula}")                    
-                except Exception as e:
-                    logger.error(f"Error in get_formula: {e}")                    
-                try:
-                    self.get_citations()
-                    logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
-                    
-                except Exception as e:
-                    logger.error(f"Error in get_citations: {e}")
-                    
-                try:
-                    self.get_recitals()
-                    logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
-                    
-                except Exception as e:
-                    logger.error(f"Error in get_recitals: {e}")
-                    
                 
-                try:
-                    self.get_preamble_final()
-                    logger.info(f"Preamble final parsed successfully.")
-                    
-                except Exception as e:
-                    logger.error(f"Error in get_preamble_final: {e}")
-                    
+            try:
+                self.get_preface()
+                logger.info(f"Preface element found. Preface: {self.preface}")                    
+            except Exception as e:
+                logger.error(f"Error in get_preface: {e}")                    
+            
+            try:
+                self.get_preamble()
+                logger.info(f"Preamble element found.")                    
+            except Exception as e:
+                logger.error(f"Error in get_preamble: {e}")                    
+            try:
+                self.get_formula()
+                logger.info(f"Formula element found. Formula: {self.formula}")                    
+            except Exception as e:
+                logger.error(f"Error in get_formula: {e}")                    
+            try:
+                self.get_citations()
+                logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
                 
-                try:
-                    self.get_body()
-                    logger.info(f"Body element found.")                    
-                except Exception as e:
-                    logger.error(f"Error in get_body: {e}")
-                    
-                try:
-                    self.get_chapters()
-                    logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
-                    
-                except Exception as e:
-                    logger.error(f"Error in get_chapters: {e}")
-                    
-                try:
-                    self.get_articles()
-                    logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-                    logger.info(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                    
-                    
-                except Exception as e:
-                    logger.error(f"Error in get_articles: {e}")
-                                        
-                try:
-                    self.get_conclusions()                    
-                    logger.info(f"Conclusions parsed successfully.")
-                    
-                except Exception as e:
-                    logger.error(f"Error in get_conclusions: {e}")                    
+            except Exception as e:
+                logger.error(f"Error in get_citations: {e}")
+                
+            try:
+                self.get_recitals()
+                logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
+                
+            except Exception as e:
+                logger.error(f"Error in get_recitals: {e}")
+                
+            
+            try:
+                self.get_preamble_final()
+                logger.info(f"Preamble final parsed successfully.")
+                
+            except Exception as e:
+                logger.error(f"Error in get_preamble_final: {e}")
+                
+            
+            try:
+                self.get_body()
+                logger.info(f"Body element found.")                    
+            except Exception as e:
+                logger.error(f"Error in get_body: {e}")
+                
+            try:
+                self.get_chapters()
+                logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
+                
+            except Exception as e:
+                logger.error(f"Error in get_chapters: {e}")
+                
+            try:
+                self.get_articles()
+                logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
+                logger.info(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                    
+                
+            except Exception as e:
+                logger.error(f"Error in get_articles: {e}")
+                                    
+            try:
+                self.get_conclusions()                    
+                logger.info(f"Conclusions parsed successfully.")
+                
+            except Exception as e:
+                logger.error(f"Error in get_conclusions: {e}")                    
                 
             return self
                 

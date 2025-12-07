@@ -42,3 +42,4 @@ tests/data/cellar_legacy/*
 tests/data/cellar_parsed/*
 tests/data/cellar_all_formats/*
 tests/data/cellar_parsed_all_formats/*
+docs_wip/

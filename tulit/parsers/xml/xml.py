@@ -4,25 +4,164 @@ import re
 from tulit.parsers.parser import (
     Parser, 
     FileLoadError, 
+    ValidationError,
     TextNormalizationStrategy,
     create_standard_normalizer
 )
 import logging
-from typing import Optional, Any
+from typing import Optional, Any, Tuple
 from abc import abstractmethod
+
+
+# ============================================================================
+# XML Validation Helper Class
+# ============================================================================
+
+class XMLValidator:
+    """
+    Handles XML schema loading and validation.
+    
+    This class is responsible for loading XSD schemas and validating XML
+    documents against them, following the Single Responsibility Principle.
+    
+    Attributes
+    ----------
+    schema : lxml.etree.XMLSchema or None
+        The loaded XML schema
+    schema_path : str or None
+        Path to the loaded schema file
+    logger : logging.Logger
+        Logger instance for validation messages
+    
+    Example
+    -------
+    >>> validator = XMLValidator()
+    >>> validator.load_schema('akomantoso30.xsd', base_dir='/path/to/schemas')
+    >>> is_valid, errors = validator.validate('/path/to/document.xml')
+    """
+    
+    def __init__(self, logger: Optional[logging.Logger] = None):
+        """
+        Initialize the XML validator.
+        
+        Parameters
+        ----------
+        logger : logging.Logger, optional
+            Logger instance for validation messages
+        """
+        self.schema: Optional[etree.XMLSchema] = None
+        self.schema_path: Optional[str] = None
+        self.logger = logger or logging.getLogger(__name__)
+    
+    def load_schema(self, schema: str, base_dir: Optional[str] = None) -> None:
+        """
+        Load an XSD schema for XML validation.
+        
+        Schemas are expected to be in an 'assets' subdirectory relative to
+        the base directory.
+        
+        Parameters
+        ----------
+        schema : str
+            Filename of the XSD schema
+        base_dir : str, optional
+            Base directory containing the 'assets' folder.
+            If None, uses the directory of this module.
+        
+        Raises
+        ------
+        FileLoadError
+            If schema file cannot be loaded
+        ValidationError
+            If schema cannot be parsed
+        """
+        try:
+            # Determine base directory
+            if base_dir is None:
+                base_dir = os.path.dirname(os.path.abspath(__file__))
+            
+            # Resolve the absolute path to the XSD file
+            schema_path = os.path.join(base_dir, 'assets', schema)
+            
+            if not os.path.exists(schema_path):
+                raise FileLoadError(f"Schema file not found: {schema_path}")
+            
+            # Parse the schema
+            with open(schema_path, 'rb') as f:
+                schema_doc = etree.parse(f)
+                self.schema = etree.XMLSchema(schema_doc)
+            
+            self.schema_path = schema_path
+            self.logger.info(f"Schema loaded successfully from {schema_path}")
+            
+        except FileLoadError:
+            raise
+        except Exception as e:
+            raise ValidationError(f"Error loading schema: {e}")
+    
+    def validate(self, xml_file: str, format_name: str = "XML") -> Tuple[bool, Optional[Any]]:
+        """
+        Validate an XML file against the loaded schema.
+        
+        Parameters
+        ----------
+        xml_file : str
+            Path to the XML file to validate
+        format_name : str, optional
+            Name of the format for logging (default: "XML")
+        
+        Returns
+        -------
+        tuple[bool, Any or None]
+            (is_valid, error_log) - True if valid with None, 
+            False with error log if invalid
+        
+        Raises
+        ------
+        ValidationError
+            If no schema is loaded or file cannot be read
+        """
+        if not self.schema:
+            raise ValidationError("No schema loaded. Call load_schema() first.")
+        
+        try:
+            # Parse and validate the XML document
+            with open(xml_file, 'r', encoding='utf-8') as f:
+                xml_doc = etree.parse(f)
+                self.schema.assertValid(xml_doc)
+            
+            self.logger.info(f"{xml_file} is a valid {format_name} file.")
+            return True, None
+            
+        except etree.DocumentInvalid as e:
+            self.logger.warning(
+                f"{xml_file} is not a valid {format_name} file. "
+                f"Validation errors: {e}"
+            )
+            return False, e.error_log
+            
+        except FileNotFoundError:
+            raise ValidationError(f"XML file not found: {xml_file}")
+        except Exception as e:
+            raise ValidationError(f"Error during validation: {e}")
+    
+    def is_loaded(self) -> bool:
+        """Check if a schema is currently loaded."""
+        return self.schema is not None
 
 class XMLParser(Parser):
     """
     Abstract base class for XML parsers.
     
     Provides common XML parsing utilities and helper methods.
+    Uses XMLValidator for schema validation and TextNormalizationStrategy
+    for text processing.
+    
     Subclasses must implement get_preface(), get_articles(), and parse()
     or use the provided parse() template method by overriding component methods.
     
     Attributes
     ----------
-    schema : lxml.etree.XMLSchema or None
-        The XML schema used for validation.
     valid : bool or None
         Indicates whether the XML file is valid against the schema.
     format : str or None
@@ -31,6 +170,8 @@ class XMLParser(Parser):
         Validation errors if the XML file is invalid.
     namespaces : dict
         Dictionary containing XML namespaces.
+    normalizer : TextNormalizationStrategy
+        Strategy for text normalization operations.
     """
     
     def __init__(self, normalizer: Optional[TextNormalizationStrategy] = None) -> None:
@@ -44,7 +185,7 @@ class XMLParser(Parser):
         """
         super().__init__()
         
-        self.schema: Optional[etree.XMLSchema] = None
+        # Validation state (maintained for backward compatibility)
         self.valid: Optional[bool] = None
         self.format: Optional[str] = None
         self.validation_errors: Optional[Any] = None
@@ -53,66 +194,55 @@ class XMLParser(Parser):
         
         # Text normalization strategy (Strategy Pattern)
         self.normalizer = normalizer or create_standard_normalizer()
+        
+        # XML validator (Extracted responsibility)
+        self._validator = XMLValidator(logger=self.logger)
     
     def load_schema(self, schema: str) -> None:
         """
-        Loads the XSD schema for XML validation using a relative path. Schemas are stored in the 'assets' directory relative to the xml module.
+        Load an XSD schema for XML validation.
+        
+        Delegates to XMLValidator for actual schema loading.
         
         Parameters
         ----------
         schema : str
-            The path to the XSD schema file.
+            Filename of the XSD schema file
         
         Returns
         -------
         None
         """
-        try:
-            # Resolve the absolute path to the XSD file
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-            schema_path = os.path.join(base_dir, 'assets', schema)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self._validator.load_schema(schema, base_dir=base_dir)
 
-            # Parse the schema
-            with open(schema_path, 'rb') as f:
-                schema_doc = etree.parse(f)
-                self.schema = etree.XMLSchema(schema_doc)
-            self.logger.info("Schema loaded successfully.")
-        except Exception as e:
-            self.logger.error(f"Error loading schema: {e}")
-
-    def validate(self, file: str,  format: str) -> bool:
+    def validate(self, file: str, format: str) -> bool:
         """
-        Validates an XML file against the loaded XSD schema.
+        Validate an XML file against the loaded schema.
+        
+        Delegates to XMLValidator for actual validation.
         
         Parameters
         ----------
-        format : str
-            The format of the XML file (e.g., 'Akoma Ntoso', 'Formex 4').        
         file : str
-            Path to the XML file to validate.    
+            Path to the XML file to validate
+        format : str
+            Name of the format for logging (e.g., 'Akoma Ntoso', 'Formex 4')
         
         Returns
-        --------
+        -------
         bool
-            Sets the valid attribute to True if the file is valid, False otherwise.
+            True if valid, False otherwise. Also updates self.valid attribute.
         """
-        if not self.schema:
-            self.logger.error("No schema loaded. Please load an XSD schema first.")
-            return None
-
         try:
-            with open(file, 'r', encoding='utf-8') as f:
-                xml_doc = etree.parse(f)
-                self.schema.assertValid(xml_doc)
-            self.logger.info(f"{file} is a valid {format} file.")
-            self.valid = True
-        except etree.DocumentInvalid as e:
-            self.logger.warning(f"{file} is not a valid {format} file. Validation errors: {e}")
+            is_valid, error_log = self._validator.validate(file, format_name=format)
+            self.valid = is_valid
+            self.validation_errors = error_log
+            return is_valid
+        except ValidationError as e:
+            self.logger.error(str(e))
             self.valid = False
-            self.validation_errors = e.error_log
-        except Exception as e:
-            self.logger.error(f"An error occurred during validation: {e}")
-            self.valid = False
+            return False
         
     def remove_node(self, tree, node):
         """

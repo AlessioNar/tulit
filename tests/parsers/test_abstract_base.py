@@ -108,8 +108,10 @@ class TestXMLParserEnforcement:
         
         parser = CompleteXMLParser()
         assert parser is not None
-        assert hasattr(parser, 'schema')
+        # Verify XMLValidator integration
+        assert hasattr(parser, '_validator')
         assert hasattr(parser, 'namespaces')
+        assert hasattr(parser, 'normalizer')
 
 
 class TestHTMLParserEnforcement:

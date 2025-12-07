@@ -6,7 +6,7 @@ follow the Akoma Ntoso structure but use a German-specific namespace.
 """
 
 from tulit.parsers.xml.akomantoso.base import AkomaNtosoParser
-from tulit.parsers.xml.akn_extractors import AKNParseOrchestrator
+from tulit.parsers.xml.akomantoso.extractors import AKNParseOrchestrator
 
 
 class GermanLegalDocMLParser(AkomaNtosoParser):

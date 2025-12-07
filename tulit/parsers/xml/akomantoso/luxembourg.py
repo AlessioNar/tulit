@@ -6,7 +6,7 @@ Committee Specification Draft 13 (CSD13) variant of Akoma Ntoso 3.0.
 """
 
 from tulit.parsers.xml.akomantoso.base import AkomaNtosoParser
-from tulit.parsers.xml.akn_extractors import AKNParseOrchestrator
+from tulit.parsers.xml.akomantoso.extractors import AKNParseOrchestrator
 from typing import Optional
 from lxml import etree
 

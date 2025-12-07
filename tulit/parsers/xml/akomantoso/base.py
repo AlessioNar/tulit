@@ -7,7 +7,7 @@ Luxembourg) inherit from this base class.
 """
 
 from tulit.parsers.xml.xml import XMLParser
-from tulit.parsers.xml.akn_extractors import (
+from tulit.parsers.xml.akomantoso.extractors import (
     AKNArticleExtractor,
     AKNParseOrchestrator,
     AKNContentProcessor
@@ -100,8 +100,8 @@ class AkomaNtosoParser(XMLParser):
         """
         return super().get_citations(
             citations_xpath='.//akn:citations',
-            citation_xpath='akn:citation',
-            paragraph_xpath='akn:p'
+            citation_xpath='.//akn:citation',
+            extract_eId=self.extract_eId
         )
     
     def get_recitals(self) -> None:
@@ -111,10 +111,18 @@ class AkomaNtosoParser(XMLParser):
         Recitals are contained within the 'recitals' element. Each recital
         is extracted from the 'recital' element, with text from all paragraphs.
         """
+        def extract_intro(recitals_section):
+            recitals_intro = recitals_section.find('.//akn:intro', namespaces=self.namespaces)
+            intro_eId = self.extract_eId(recitals_intro, 'eId')
+            intro_text = ''.join(p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text)
+            return intro_eId, intro_text
+
         return super().get_recitals(
             recitals_xpath='.//akn:recitals',
-            recital_xpath='akn:recital',
-            paragraph_xpath='akn:p'
+            recital_xpath='.//akn:recital',
+            text_xpath='.//akn:p',
+            extract_intro=extract_intro,
+            extract_eId=self.extract_eId
         )
     
     def get_preamble_final(self) -> None:
@@ -122,11 +130,10 @@ class AkomaNtosoParser(XMLParser):
         Extract the final part of the preamble.
         
         This is typically the text after citations and recitals, contained
-        in the 'formula' elements.
+        in the 'preamble.final' block.
         """
         return super().get_preamble_final(
-            formula_xpath='.//akn:formula',
-            paragraph_xpath='akn:p'
+            preamble_final_xpath='.//akn:block[@name="preamble.final"]'
         )
     
     def get_body(self) -> None:
@@ -135,7 +142,7 @@ class AkomaNtosoParser(XMLParser):
         
         The body contains the main content including articles, chapters, etc.
         """
-        return super().get_body(body_xpath='.//akn:body')
+        return super().get_body('.//akn:body')
     
     def get_chapters(self) -> None:
         """
@@ -145,8 +152,9 @@ class AkomaNtosoParser(XMLParser):
         """
         return super().get_chapters(
             chapter_xpath='.//akn:chapter',
-            num_xpath='akn:num',
-            heading_xpath='akn:heading'
+            num_xpath='.//akn:num',
+            heading_xpath='.//akn:heading',
+            extract_eId=self.extract_eId
         )
     
     def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
@@ -175,7 +183,7 @@ class AkomaNtosoParser(XMLParser):
     
     def get_articles(self) -> None:
         """
-        Extract articles from the body using the orchestrator pattern.
+        Extract articles from the body using AKNArticleExtractor.
         
         Articles are the main structural units of legal documents. This method
         uses AKNArticleExtractor to handle the extraction logic.
@@ -184,8 +192,23 @@ class AkomaNtosoParser(XMLParser):
             self.logger.warning("Body is None. Call get_body() first.")
             return
         
-        extractor = AKNArticleExtractor(self)
-        self.articles = extractor.extract_articles()
+        # Removing all authorialNote nodes
+        self.body = self.remove_node(self.body, './/akn:authorialNote')
+
+        # Use extractor for article processing
+        extractor = AKNArticleExtractor(self.namespaces)
+
+        # Find all <article> elements in the XML
+        for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
+            metadata = extractor.extract_article_metadata(article)
+            children = extractor.extract_paragraphs_by_eid(article)
+
+            self.articles.append({
+                'eId': metadata['eId'],
+                'num': metadata['num'],
+                'heading': metadata['heading'],
+                'children': children
+            })
     
     def get_conclusions(self) -> None:
         """
@@ -193,7 +216,38 @@ class AkomaNtosoParser(XMLParser):
         
         Conclusions contain closing text and signatures.
         """
-        return super().get_conclusions(conclusions_xpath='.//akn:conclusions')
+        conclusions_section = self.root.find('.//akn:conclusions', namespaces=self.namespaces)
+        if conclusions_section is None:
+            return None
+
+        # Find the container with signatures
+        container = conclusions_section.find('.//akn:container[@name="signature"]', namespaces=self.namespaces)
+        if container is None:
+            return None
+
+        # Extract date from the first <signature>
+        date_element = container.find('.//akn:date', namespaces=self.namespaces)
+        signature_date = date_element.text if date_element is not None else None
+
+        # Extract all signatures
+        signatures = []
+        for p in container.findall('akn:p', namespaces=self.namespaces):
+            # For each <p>, find all <signature> tags
+            paragraph_signatures = []
+            for signature in p.findall('akn:signature', namespaces=self.namespaces):
+                # Collect text within the <signature>, including nested elements
+                signature_text = ''.join(signature.itertext()).strip()
+                paragraph_signatures.append(signature_text)
+
+            # Add the paragraph's signatures as a group
+            if paragraph_signatures:
+                signatures.append(paragraph_signatures)
+
+        # Store parsed conclusions data
+        self.conclusions = {
+            'date': signature_date,
+            'signatures': signatures
+        }
     
     def parse(self, file: str, **options) -> 'AkomaNtosoParser':
         """

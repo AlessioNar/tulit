@@ -4,6 +4,7 @@ import re
 import argparse
 from typing import Optional, Any
 from tulit.parsers.parser import LegalJSONValidator, create_html_normalizer
+from tulit.parsers.strategies.article_extraction import CellarStandardArticleStrategy
 import logging
 
 
@@ -18,6 +19,8 @@ class CellarStandardHTMLParser(HTMLParser):
         super().__init__()
         # Use HTML-specific normalizer for consolidation markers
         self.normalizer = create_html_normalizer()
+        # Initialize article extraction strategy
+        self.article_strategy = CellarStandardArticleStrategy()
     
     def _clean_text(self, text: str) -> str:
         """Clean and normalize text content using strategy pattern."""
@@ -291,8 +294,10 @@ class CellarStandardHTMLParser(HTMLParser):
     
     def get_articles(self):
         """
-        Extract articles from the document.
-        Articles typically start with "Article X" followed by optional title and content.
+        Extract articles from the document using CellarStandardArticleStrategy.
+        
+        This method delegates article extraction to the strategy pattern,
+        reducing code duplication and improving testability.
         """
         try:
             if not hasattr(self, 'txt_te') or not self.txt_te:
@@ -300,13 +305,11 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.logger.warning("No container found for article extraction.")
                 return
             
-            self.articles = []
-            
-            # Use different extraction method based on document type
-            if hasattr(self, 'is_consolidated') and self.is_consolidated:
-                self._extract_articles_consolidated()
-            else:
-                self._extract_articles_standard()
+            # Use strategy for extraction
+            self.articles = self.article_strategy.extract_articles(
+                self.txt_te,
+                stop_markers=['Done at', 'For the', 'Brussels,', 'Member of the Commission']
+            )
             
             self.logger.info(f"Extracted {len(self.articles)} articles.")
             

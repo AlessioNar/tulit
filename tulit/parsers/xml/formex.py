@@ -7,6 +7,7 @@ from lxml import etree
 
 from tulit.parsers.xml.xml import XMLParser
 from tulit.parsers.parser import LegalJSONValidator, create_formex_normalizer
+from tulit.parsers.strategies.article_extraction import FormexArticleStrategy
 
 class Formex4Parser(XMLParser):
     """
@@ -28,6 +29,9 @@ class Formex4Parser(XMLParser):
         self.namespaces = {
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
         }
+        
+        # Initialize article extraction strategy
+        self.article_strategy = FormexArticleStrategy()
     
     def get_preface(self) -> None:
         """
@@ -172,59 +176,35 @@ class Formex4Parser(XMLParser):
             
     def get_articles(self) -> None:
         """
-        Extracts articles from the ENACTING.TERMS section. Articles are assumed to be contained within the
-        ARTICLE elements. The article identifier is assumed to be the IDENTIFIER attribute of the ARTICLE element.
-        The article number is extracted from the TI.ART element. The article text is extracted from the PARAG
-        elements within the ARTICLE element or from LIST//ITEM elements, or from the ALINEA elements if PARAG elements
-        are absent.
+        Extracts articles from the ENACTING.TERMS section using FormexArticleStrategy.
+        
+        This method delegates article extraction to the strategy pattern,
+        reducing code duplication and improving testability.
 
         Returns
         -------
         list
             Articles with identifier and content.
         """
-        self.body = self.remove_node(self.body, './/NOTE')  # Remove notes from the body
-
         self.articles = []
+        
         if self.body is not None:
-            # The usage of xpath() method is to exclude nested ARTICLE elements
-            articles = self.body.xpath(".//ARTICLE[@IDENTIFIER][not(ancestor::ARTICLE)]")
-            for article in articles:
-                article_eId = article.get("IDENTIFIER")
-                article_eId = article_eId.lstrip('3')
-                article_eId = f'art_{article_eId}'
-                
-                children = []
-                
-                index = 0
-                
-                # Check whether within the ARTICLE element there are 
-                # QUOT.S elements, that mark the presence of amendments
-                if article.findall('.//QUOT.S'):
-                    for alinea in article.xpath('.//ALINEA[not(ancestor::QUOT.S)]'):
-                        children.append({
-                            "eId": index,
-                            "text": self.clean_text(alinea),
-                            "amendment": True
-                        })
-                                            
-                
-                # Extract text and metadata from PARAG elements 
-                # that are not descendants of QUOT.S elements (exclude amendments)
-                elif article.xpath('.//PARAG'):
-                    self._extract_elements(article, './/PARAG', children)
-                elif article.findall('.//ALINEA'):
-                    # If no PARAG elements, check for ALINEA elements
-                    alineas = article.xpath('.//ALINEA')
-                    for alinea in alineas:
-                        self._extract_elements(alinea, '.', children)
-                
-                self.articles.append({
-                    "eId": article_eId,
-                    "num": article.findtext('.//TI.ART') or article.findtext('.//TI.ART//P'),
-                    "heading": article.findtext('.//STI.ART') or article.findtext('.//STI.ART//P'),
-                    "children": children
-                })
+            # Use strategy for extraction
+            self.articles = self.article_strategy.extract_articles(
+                self.body,
+                remove_notes=True
+            )
+            
+            # Add article-specific fields (heading from STI.ART)
+            for article in self.articles:
+                article_elem = self.body.xpath(
+                    f".//ARTICLE[@IDENTIFIER][starts-with(@IDENTIFIER, '{article['eId'][4:]}')"
+                    f" or starts-with(@IDENTIFIER, '3{article['eId'][4:]}')]"
+                )[0]
+                article['heading'] = (
+                    article_elem.findtext('.//STI.ART') or 
+                    article_elem.findtext('.//STI.ART//P')
+                )
             
             # Standardize children numbering to 001.001 format
             self._standardize_children_numbering()

@@ -1,4 +1,5 @@
 from tulit.parsers.html.xhtml import HTMLParser
+from tulit.parsers.strategies.article_extraction import ProposalArticleStrategy
 import json
 import re
 import argparse
@@ -20,6 +21,8 @@ class ProposalHTMLParser(HTMLParser):
         super().__init__()
         self.metadata = {}
         self.explanatory_memorandum = {}
+        # Initialize article extraction strategy
+        self.article_strategy = ProposalArticleStrategy()
         
     def get_metadata(self) -> None:
         """
@@ -683,7 +686,12 @@ class ProposalHTMLParser(HTMLParser):
     def get_articles(self) -> None:
         """
         Extracts articles from the body of the legal act.
-        Articles may span multiple content divs.
+        
+        Note: Due to the complex nested structure of Proposal documents
+        (content divs, list concatenation, nested siblings), the full extraction
+        logic remains in parser helper methods. The strategy pattern provides
+        a consistent interface but delegates to parser-specific methods for
+        the actual complex traversal logic.
         
         Returns
         -------

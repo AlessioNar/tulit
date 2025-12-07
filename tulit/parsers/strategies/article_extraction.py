@@ -296,7 +296,8 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
             for idx, parag in enumerate(parags):
                 children.append({
                     'eId': f'para_{idx + 1}',
-                    'text': self._extract_text(parag)
+                    'text': self._extract_text(parag),
+                    'amendment': False
                 })
         
         # Fallback to ALINEA elements
@@ -305,7 +306,8 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
             for idx, alinea in enumerate(alineas):
                 children.append({
                     'eId': f'para_{idx + 1}',
-                    'text': self._extract_text(alinea)
+                    'text': self._extract_text(alinea),
+                    'amendment': False
                 })
         
         return children

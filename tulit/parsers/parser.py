@@ -60,6 +60,40 @@ class Parser(ABC):
         self.articles = []
         self.conclusions = None
 
+    def to_dict(self):
+        """
+        Convert the parser's extracted data to a dictionary.
+
+        Returns
+        -------
+        dict
+            A dictionary containing all extracted elements from the document:
+            - 'preface': Extracted preface text
+            - 'preamble': Dictionary containing preamble components:
+                - 'formula': The formula text
+                - 'citations': List of citations
+                - 'recitals': List of recitals
+                - 'final': Final preamble text
+            - 'body': Dictionary containing body components:
+                - 'chapters': List of chapters
+                - 'articles': List of articles
+            - 'conclusions': Extracted conclusions
+        """
+        return {
+            'preface': self.preface,
+            'preamble': {
+                'formula': self.formula,
+                'citations': self.citations,
+                'recitals': self.recitals,
+                'final': self.preamble_final
+            },
+            'body': {
+                'chapters': self.chapters,
+                'articles': self.articles
+            },
+            'conclusions': self.conclusions
+        }
+
 class LegalJSONValidator:
     """
     Validator for LegalJSON output using the LegalJSON schema.

@@ -1,8 +1,13 @@
 from tulit.parsers.xml.xml import XMLParser
+from tulit.parsers.parser import ParserRegistry
 import json
 import argparse
 from typing import Optional, Any
 from lxml import etree
+
+
+# Create Akoma Ntoso parser registry
+_akn_registry = ParserRegistry()
 
 
 def detect_akn_format(file_path: str) -> str:
@@ -43,7 +48,7 @@ def detect_akn_format(file_path: str) -> str:
 
 def create_akn_parser(file_path: Optional[str] = None, format: Optional[str] = None) -> XMLParser:
     """
-    Factory function to create the appropriate Akoma Ntoso parser.
+    Factory function to create the appropriate Akoma Ntoso parser using registry.
     
     Parameters
     ----------
@@ -61,14 +66,12 @@ def create_akn_parser(file_path: Optional[str] = None, format: Optional[str] = N
     if format is None and file_path:
         format = detect_akn_format(file_path)
     
-    if format == 'german' or format == 'de':
-        return GermanLegalDocMLParser()
-    elif format == 'akn4eu':
-        return AKN4EUParser()
-    elif format == 'luxembourg' or format == 'lu':
-        return LuxembourgAKNParser()
-    else:
-        return AkomaNtosoParser()
+    # Use registry to get parser (fallback to 'akn' if not found)
+    try:
+        return _akn_registry.get_parser(format or 'akn')
+    except KeyError:
+        # Fallback to standard parser if format not registered
+        return _akn_registry.get_parser('akn')
 
 
 class AkomaNtosoParser(XMLParser):
@@ -729,3 +732,19 @@ class LuxembourgAKNParser(AkomaNtosoParser):
             logger.error(f"Error in get_conclusions: {e}")
         
         return self
+
+# ============================================================================
+# Register Akoma Ntoso parsers in registry
+# ============================================================================
+
+# Register standard Akoma Ntoso parser
+_akn_registry.register('akn', AkomaNtosoParser, aliases=['akomantoso', 'standard'])
+
+# Register AKN4EU parser
+_akn_registry.register('akn4eu', AKN4EUParser, aliases=['eu'])
+
+# Register German LegalDocML parser
+_akn_registry.register('german', GermanLegalDocMLParser, aliases=['de', 'germany', 'legaldocml'])
+
+# Register Luxembourg parser
+_akn_registry.register('luxembourg', LuxembourgAKNParser, aliases=['lu', 'lux', 'csd13'])

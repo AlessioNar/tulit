@@ -115,6 +115,147 @@ class Chapter:
         }
 
 
+# ============================================================================
+# Parser Registry for Factory Pattern
+# ============================================================================
+
+class ParserRegistry:
+    """
+    Registry for dynamically registering and retrieving parser classes.
+    
+    This replaces hardcoded factory functions with a flexible registration
+    mechanism that supports plugins and extensions.
+    
+    Example
+    -------
+    >>> registry = ParserRegistry()
+    >>> registry.register('formex', Formex4Parser)
+    >>> parser = registry.get_parser('formex')
+    """
+    
+    def __init__(self):
+        """Initialize an empty parser registry."""
+        self._parsers: Dict[str, type] = {}
+        self._aliases: Dict[str, str] = {}
+    
+    def register(self, name: str, parser_class: type, aliases: Optional[List[str]] = None) -> None:
+        """
+        Register a parser class with a given name.
+        
+        Parameters
+        ----------
+        name : str
+            Primary identifier for the parser
+        parser_class : type
+            Parser class (must be subclass of Parser)
+        aliases : List[str], optional
+            Alternative names for the parser
+        
+        Raises
+        ------
+        ValueError
+            If name already registered or parser_class is not a Parser subclass
+        """
+        if name in self._parsers:
+            raise ValueError(f"Parser '{name}' is already registered")
+        
+        # Verify it's a Parser subclass (but allow at runtime for flexibility)
+        # if not issubclass(parser_class, Parser):
+        #     raise ValueError(f"{parser_class} must be a subclass of Parser")
+        
+        self._parsers[name] = parser_class
+        
+        # Register aliases
+        if aliases:
+            for alias in aliases:
+                if alias in self._aliases:
+                    raise ValueError(f"Alias '{alias}' is already registered")
+                self._aliases[alias] = name
+    
+    def get_parser(self, name: str, **kwargs) -> 'Parser':
+        """
+        Get a parser instance by name or alias.
+        
+        Parameters
+        ----------
+        name : str
+            Parser name or alias
+        **kwargs : dict
+            Arguments to pass to parser constructor
+        
+        Returns
+        -------
+        Parser
+            Instantiated parser
+        
+        Raises
+        ------
+        KeyError
+            If parser name not found
+        """
+        # Check if it's an alias
+        if name in self._aliases:
+            name = self._aliases[name]
+        
+        if name not in self._parsers:
+            available = list(self._parsers.keys()) + list(self._aliases.keys())
+            raise KeyError(f"Parser '{name}' not found. Available: {available}")
+        
+        parser_class = self._parsers[name]
+        return parser_class(**kwargs)
+    
+    def is_registered(self, name: str) -> bool:
+        """Check if a parser is registered."""
+        return name in self._parsers or name in self._aliases
+    
+    def list_parsers(self) -> List[str]:
+        """List all registered parser names."""
+        return list(self._parsers.keys())
+    
+    def list_aliases(self) -> Dict[str, str]:
+        """List all aliases and their target parser names."""
+        return self._aliases.copy()
+
+
+# Global parser registry instance
+_global_registry = ParserRegistry()
+
+
+def register_parser(name: str, parser_class: type, aliases: Optional[List[str]] = None) -> None:
+    """
+    Convenience function to register a parser in the global registry.
+    
+    Parameters
+    ----------
+    name : str
+        Primary identifier for the parser
+    parser_class : type
+        Parser class
+    aliases : List[str], optional
+        Alternative names
+    """
+    _global_registry.register(name, parser_class, aliases)
+
+
+def get_parser(name: str, **kwargs) -> 'Parser':
+    """
+    Convenience function to get a parser from the global registry.
+    
+    Parameters
+    ----------
+    name : str
+        Parser name or alias
+    **kwargs : dict
+        Arguments to pass to parser constructor
+    
+    Returns
+    -------
+    Parser
+        Instantiated parser
+    """
+    return _global_registry.get_parser(name, **kwargs)
+
+
 class Parser(ABC):
     """
     Abstract base class for legal document parsers.

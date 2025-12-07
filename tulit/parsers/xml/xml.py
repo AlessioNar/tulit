@@ -168,14 +168,14 @@ class XMLParser(Parser):
         )
         return parser
     
-    def get_root(self, file: str):
+    def get_root(self, file: Optional[str] = None):
         """
         Parses an XML file and returns its root element using secure parser settings.
 
         Parameters
         ----------
-        file : str
-            Path to the XML file.
+        file : str, optional
+            Path to the XML file. If not provided, uses the file path from parse()
 
         Returns
         -------
@@ -186,16 +186,20 @@ class XMLParser(Parser):
         FileLoadError
             If file cannot be loaded or parsed
         """
+        # Use provided file or fallback to stored path
+        file_path = file or getattr(self, '_file_path', None)
+        if not file_path:
+            raise FileLoadError("No file path provided to get_root()")
+        
         try:
             parser = self._create_secure_parser()
-            with open(file, 'r', encoding='utf-8') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 tree = etree.parse(f, parser)
                 self.root = tree.getroot()
         except (IOError, OSError) as e:
-            raise FileLoadError(f"Failed to load XML file '{file}': {e}") from e
+            raise FileLoadError(f"Failed to load XML file '{file_path}': {e}") from e
         except etree.ParseError as e:
-            raise FileLoadError(f"Failed to parse XML file '{file}': {e}") from e
-
+            raise FileLoadError(f"Failed to parse XML file '{file_path}': {e}") from e
     
     def get_preface(self, preface_xpath, paragraph_xpath) -> None:
         """
@@ -224,8 +228,7 @@ class XMLParser(Parser):
         # Join all paragraphs into a single string and remove duplicate spaces or newlines
         self.preface = ' '.join(paragraphs).replace('\n', '').replace('\t', '').replace('\r', '')
         self.preface = re.sub(' +', ' ', self.preface)
-        
-    
+            
     def get_preamble(self, preamble_xpath, notes_xpath) -> None:
         """
         Extracts the preamble section from the document.
@@ -464,11 +467,68 @@ class XMLParser(Parser):
         None
         """
         pass
+            
+    def _extract_component(self, method_name: str, component_name: str) -> None:
+        """
+        Template helper to extract a component with standardized error handling.
         
+        Parameters
+        ----------
+        method_name : str
+            Name of the extraction method to call
+        component_name : str
+            Human-readable component name for logging
+        """
+        try:
+            method = getattr(self, method_name)
+            method()
+            
+            # Log success with appropriate details
+            if component_name == 'preface' and self.preface:
+                self.logger.info(f"Preface extracted: {self.preface[:50]}...")
+            elif component_name == 'formula' and self.formula:
+                self.logger.info(f"Formula extracted: {self.formula[:50]}...")
+            elif component_name in ['citations', 'recitals', 'chapters', 'articles']:
+                count = len(getattr(self, component_name, []))
+                self.logger.info(f"{component_name.capitalize()} extracted: {count} items")
+            else:
+                self.logger.info(f"{component_name.capitalize()} extracted successfully")
+                
+        except Exception as e:
+            self.logger.error(f"Error extracting {component_name}: {e}")
+    
+    def _extract_all_components(self) -> None:
+        """
+        Template method that orchestrates extraction of all document components.
+        
+        This method defines the parsing workflow. Subclasses should not override
+        this method - instead, override the individual component extraction methods.
+        """
+        # Define extraction steps in order
+        extraction_steps = [
+            ('get_root', 'root'),
+            ('get_preface', 'preface'),
+            ('get_preamble', 'preamble'),
+            ('get_formula', 'formula'),
+            ('get_citations', 'citations'),
+            ('get_recitals', 'recitals'),
+            ('get_preamble_final', 'preamble_final'),
+            ('get_body', 'body'),
+            ('get_chapters', 'chapters'),
+            ('get_articles', 'articles'),
+            ('get_conclusions', 'conclusions'),
+        ]
+        
+        # Execute each step with standardized error handling
+        for method_name, component_name in extraction_steps:
+            self._extract_component(method_name, component_name)
     
     def parse(self, file: str, **options) -> 'XMLParser':
         """
-        Parses an XML file and extracts relevant sections based on the format.
+        Template method that orchestrates the entire parsing workflow.
+        
+        DO NOT OVERRIDE THIS METHOD. Instead, override individual component
+        extraction methods like get_preface(), get_articles(), etc.
         
         Parameters
         ----------
@@ -486,86 +546,24 @@ class XMLParser(Parser):
         """
         schema = options.get('schema')
         format = options.get('format', 'XML')
+        
         try:
-            self.load_schema(schema)
-            self.validate(file=file, format=format)
-            # Proceed with parsing even if validation fails (schema might be too strict)
-            # Only skip if file cannot be parsed at all
-            try:
-                self.get_root(file)
-                self.logger.info(f"Root element loaded successfully.")                    
-            except Exception as e:
-                self.logger.error(f"Error in get_root: {e}")
-                
-                
-            try:
-                self.get_preface()
-                self.logger.info(f"Preface element found. Preface: {self.preface}")                    
-            except Exception as e:
-                self.logger.error(f"Error in get_preface: {e}")                    
+            # Validation phase (optional)
+            if schema:
+                try:
+                    self.load_schema(schema)
+                    self.validate(file=file, format=format)
+                except Exception as e:
+                    self.logger.warning(f"Validation skipped or failed: {e}")
             
-            try:
-                self.get_preamble()
-                self.logger.info(f"Preamble element found.")                    
-            except Exception as e:
-                self.logger.error(f"Error in get_preamble: {e}")                    
-            try:
-                self.get_formula()
-                self.logger.info(f"Formula element found. Formula: {self.formula}")                    
-            except Exception as e:
-                self.logger.error(f"Error in get_formula: {e}")                    
-            try:
-                self.get_citations()
-                self.logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
-                
-            except Exception as e:
-                self.logger.error(f"Error in get_citations: {e}")
-                
-            try:
-                self.get_recitals()
-                self.logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
-                
-            except Exception as e:
-                self.logger.error(f"Error in get_recitals: {e}")
-                
+            # Store file path for get_root (backward compatibility)
+            self._file_path = file
             
-            try:
-                self.get_preamble_final()
-                self.logger.info(f"Preamble final parsed successfully.")
-                
-            except Exception as e:
-                self.logger.error(f"Error in get_preamble_final: {e}")
-                
+            # Extraction phase - orchestrated by template method
+            self._extract_all_components()
             
-            try:
-                self.get_body()
-                self.logger.info(f"Body element found.")                    
-            except Exception as e:
-                self.logger.error(f"Error in get_body: {e}")
-                
-            try:
-                self.get_chapters()
-                self.logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
-                
-            except Exception as e:
-                self.logger.error(f"Error in get_chapters: {e}")
-                
-            try:
-                self.get_articles()
-                self.logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-                self.logger.info(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                    
-                
-            except Exception as e:
-                self.logger.error(f"Error in get_articles: {e}")
-                                    
-            try:
-                self.get_conclusions()                    
-                self.logger.info(f"Conclusions parsed successfully.")
-                
-            except Exception as e:
-                self.logger.error(f"Error in get_conclusions: {e}")                    
-                
             return self
                 
         except Exception as e:
-            self.logger.warn(f"Invalid {format} file: parsing may not work or work only partially: {e}")
+            self.logger.warning(f"Parsing {format} file may be incomplete: {e}")
+            return self

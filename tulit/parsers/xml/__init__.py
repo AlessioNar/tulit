@@ -13,7 +13,7 @@ All XML parsers inherit from XMLParser base class and use shared utilities:
 
 Example Usage
 -------------
->>> from tulit.parsers.xml.akomantoso import AkomaNtosoParser
+>>> from tulit.parsers.xml import AkomaNtosoParser
 >>> parser = AkomaNtosoParser()
 >>> parser.parse('document.xml')
 """
@@ -21,8 +21,25 @@ Example Usage
 from tulit.parsers.xml.xml import XMLParser
 from tulit.parsers.xml.helpers import XMLNodeExtractor, XMLValidator
 
+# Akoma Ntoso parsers - exported from new package structure
+from tulit.parsers.xml.akomantoso import (
+    AkomaNtosoParser,
+    AKN4EUParser,
+    GermanLegalDocMLParser,
+    LuxembourgAKNParser,
+    create_akn_parser,
+    detect_akn_format,
+)
+
 __all__ = [
     'XMLParser',
     'XMLNodeExtractor',
     'XMLValidator',
+    # Akoma Ntoso parsers
+    'AkomaNtosoParser',
+    'AKN4EUParser',
+    'GermanLegalDocMLParser',
+    'LuxembourgAKNParser',
+    'create_akn_parser',
+    'detect_akn_format',
 ]

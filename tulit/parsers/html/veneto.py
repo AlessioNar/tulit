@@ -223,37 +223,3 @@ class VenetoHTMLParser(HTMLParser):
 
     def parse(self, file):
         return super().parse(file)
-        
-
-def main():
-    parser = argparse.ArgumentParser(description='Parse an Cellar XHTML document and output the results to a JSON file.')
-    parser.add_argument('--input', type=str, default='tests/data/html/veneto/legge.html', help='Path to the Cellar XHTML file to parse.')
-    parser.add_argument('--output', type=str, default='tests/data/json/veneto_html.json', help='Path to the output JSON file.')
-    args = parser.parse_args()
-    
-    html_parser = VenetoHTMLParser()
-    html_parser.parse(args.input)
-    
-    with open(args.output, 'w', encoding='utf-8') as f:
-        # Get the parser's attributes as a dictionary
-        parser_dict = html_parser.__dict__
-    
-        # Filter out non-serializable attributes
-        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
-    
-        # Write to a JSON file
-        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
-    
-    logging.basicConfig(level=logging.INFO)
-    validator = LegalJSONValidator()
-    with open(args.output, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    valid = validator.validate(data)
-    if valid:
-        print('LegalJSON validation: SUCCESS')
-    else:
-        print('LegalJSON validation: FAILED')
-        exit(1)
-
-if __name__ == "__main__":
-    main()

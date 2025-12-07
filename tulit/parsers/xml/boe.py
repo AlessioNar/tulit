@@ -103,16 +103,3 @@ class BOEXMLParser(XMLParser):
         self.get_preamble_final()
         self.get_conclusions()
         return self
-
-    def to_legaljson(self) -> dict[str, Any]:
-        return {
-            'preface': self.preface,
-            'citations': self.citations,
-            'recitals': self.recitals,
-            'chapters': self.chapters,
-            'articles': self.articles,
-            'preamble': self.preamble,
-            'formula': self.formula,
-            'preamble_final': self.preamble_final,
-            'conclusions': self.conclusions
-        }

@@ -337,7 +337,7 @@ class Formex4Parser(XMLParser):
                 try:
                     with open(xml_file, 'r', encoding='utf-8') as f:
                         content = f.read(5000)  # Read first 5KB to check for tags
-                        if '<ACT' in content or '<DECISION' in content:
+                        if '<ACT' in content or '<DECISION' in content or '<CONS.ACT' in content:
                             target_file = str(xml_file)
                             logger.info(f"Found Formex document with legal act: {xml_file.name}")
                             break
@@ -369,33 +369,3 @@ class Formex4Parser(XMLParser):
                 return self
         
         return self
-
-def main():
-    parser = argparse.ArgumentParser(description='Parse a FORMEX XML document and output the results to a JSON file and validate as LegalJSON.')
-    parser.add_argument('--input', type=str, default='tests/data/formex/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml', help='Path to the FORMEX XML file to parse.')
-    parser.add_argument('--output', type=str, default='tests/data/json/iopa.json', help='Path to the output JSON file.')
-    parser.add_argument('--validate', action='store_true', help='Validate output JSON as LegalJSON.')
-    args = parser.parse_args()
-
-    formex_parser = Formex4Parser()
-    formex_parser.parse(args.input)
-
-    with open(args.output, 'w', encoding='utf-8') as f:
-        parser_dict = formex_parser.__dict__
-        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
-        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
-
-    if args.validate:        
-        logging.basicConfig(level=logging.INFO)
-        validator = LegalJSONValidator()
-        with open(args.output, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        valid = validator.validate(data)
-        if valid:
-            print('LegalJSON validation: SUCCESS')
-        else:
-            print('LegalJSON validation: FAILED')
-            exit(1)
-
-if __name__ == "__main__":
-    main()

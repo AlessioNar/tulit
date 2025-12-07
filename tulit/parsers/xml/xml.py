@@ -14,6 +14,218 @@ from abc import abstractmethod
 
 
 # ============================================================================
+# XML Node Extraction Utility Class
+# ============================================================================
+
+class XMLNodeExtractor:
+    """
+    Utility class for XPath-based XML node extraction and manipulation.
+    
+    This class encapsulates common XPath operations and text extraction
+    patterns, reducing duplication and complexity in XML parsers.
+    
+    Attributes
+    ----------
+    namespaces : dict
+        Dictionary of XML namespaces for XPath queries
+    
+    Example
+    -------
+    >>> extractor = XMLNodeExtractor({'akn': 'http://...'})
+    >>> node = extractor.find(root, './/akn:article')
+    >>> text = extractor.extract_text(node)
+    """
+    
+    def __init__(self, namespaces: Optional[dict[str, str]] = None):
+        """
+        Initialize the node extractor.
+        
+        Parameters
+        ----------
+        namespaces : dict, optional
+            Dictionary of namespace prefixes to URIs
+        """
+        self.namespaces = namespaces or {}
+    
+    def find(self, element: etree._Element, xpath: str) -> Optional[etree._Element]:
+        """
+        Find the first element matching the XPath expression.
+        
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            Root element to search from
+        xpath : str
+            XPath expression
+        
+        Returns
+        -------
+        lxml.etree._Element or None
+            First matching element or None
+        """
+        return element.find(xpath, namespaces=self.namespaces)
+    
+    def findall(self, element: etree._Element, xpath: str) -> list[etree._Element]:
+        """
+        Find all elements matching the XPath expression.
+        
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            Root element to search from
+        xpath : str
+            XPath expression
+        
+        Returns
+        -------
+        list[lxml.etree._Element]
+            List of matching elements
+        """
+        return element.findall(xpath, namespaces=self.namespaces)
+    
+    def extract_text(self, element: etree._Element, strip: bool = True) -> str:
+        """
+        Extract all text content from an element and its descendants.
+        
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            Element to extract text from
+        strip : bool, optional
+            Whether to strip whitespace (default: True)
+        
+        Returns
+        -------
+        str
+            Concatenated text content
+        """
+        text = ''.join(element.itertext())
+        return text.strip() if strip else text
+    
+    def extract_text_from_all(
+        self, 
+        parent: etree._Element, 
+        xpath: str, 
+        strip: bool = True
+    ) -> list[str]:
+        """
+        Extract text from all elements matching the XPath.
+        
+        Parameters
+        ----------
+        parent : lxml.etree._Element
+            Parent element to search from
+        xpath : str
+            XPath expression
+        strip : bool, optional
+            Whether to strip whitespace (default: True)
+        
+        Returns
+        -------
+        list[str]
+            List of extracted text strings
+        """
+        elements = self.findall(parent, xpath)
+        return [self.extract_text(elem, strip=strip) for elem in elements]
+    
+    def safe_find(
+        self, 
+        element: etree._Element, 
+        xpath: str, 
+        default: Optional[etree._Element] = None
+    ) -> Optional[etree._Element]:
+        """
+        Safely find an element, returning default if not found.
+        
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            Root element to search from
+        xpath : str
+            XPath expression
+        default : lxml.etree._Element, optional
+            Value to return if not found
+        
+        Returns
+        -------
+        lxml.etree._Element or default
+            Found element or default value
+        """
+        result = self.find(element, xpath)
+        return result if result is not None else default
+    
+    def safe_find_text(
+        self, 
+        element: etree._Element, 
+        xpath: str, 
+        default: str = ""
+    ) -> str:
+        """
+        Safely find an element and extract its text.
+        
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            Root element to search from
+        xpath : str
+            XPath expression
+        default : str, optional
+            Value to return if not found
+        
+        Returns
+        -------
+        str
+            Extracted text or default value
+        """
+        found = self.find(element, xpath)
+        return self.extract_text(found) if found is not None else default
+    
+    def remove_nodes(
+        self, 
+        tree: etree._Element, 
+        xpath: str, 
+        preserve_tail: bool = True
+    ) -> etree._Element:
+        """
+        Remove nodes matching XPath, optionally preserving tail text.
+        
+        Parameters
+        ----------
+        tree : lxml.etree._Element
+            Tree to modify
+        xpath : str
+            XPath expression for nodes to remove
+        preserve_tail : bool, optional
+            Whether to preserve tail text (default: True)
+        
+        Returns
+        -------
+        lxml.etree._Element
+            Modified tree
+        """
+        nodes = self.findall(tree, xpath)
+        
+        for node in nodes:
+            if preserve_tail:
+                # Preserve tail text
+                tail = node.tail or ''
+                prev = node.getprevious()
+                parent = node.getparent()
+                
+                if prev is not None:
+                    prev.tail = (prev.tail or '') + tail
+                elif parent is not None:
+                    parent.text = (parent.text or '') + tail
+            
+            # Remove the node
+            parent = node.getparent()
+            if parent is not None:
+                parent.remove(node)
+        
+        return tree
+
+
+# ============================================================================
 # XML Validation Helper Class
 # ============================================================================
 
@@ -190,13 +402,27 @@ class XMLParser(Parser):
         self.format: Optional[str] = None
         self.validation_errors: Optional[Any] = None
         
-        self.namespaces: dict[str, str] = {}
+        self._namespaces: dict[str, str] = {}
         
         # Text normalization strategy (Strategy Pattern)
         self.normalizer = normalizer or create_standard_normalizer()
         
         # XML validator (Extracted responsibility)
         self._validator = XMLValidator(logger=self.logger)
+        
+        # XML node extractor (Utility for XPath operations)
+        self._extractor = XMLNodeExtractor()
+    
+    @property
+    def namespaces(self) -> dict[str, str]:
+        """Get the XML namespaces dictionary."""
+        return self._namespaces
+    
+    @namespaces.setter
+    def namespaces(self, value: dict[str, str]) -> None:
+        """Set the XML namespaces and synchronize with extractor."""
+        self._namespaces = value
+        self._extractor.namespaces = value
     
     def load_schema(self, schema: str) -> None:
         """
@@ -248,6 +474,8 @@ class XMLParser(Parser):
         """
         Removes specified nodes from the XML tree while preserving their tail text.
         
+        Delegates to XMLNodeExtractor for node removal.
+        
         Parameters
         ----------
         tree : lxml.etree._Element
@@ -260,35 +488,7 @@ class XMLParser(Parser):
         lxml.etree._Element
             The modified XML tree with specified nodes removed.
         """
-        
-        if tree.findall(node, namespaces=self.namespaces) is not None: 
-            for item in tree.findall(node, namespaces=self.namespaces):
-                text = ' '.join(item.itertext()).strip()
-                
-                if item.getprevious() is not None:
-                    item.getprevious().tail = (item.getprevious().tail or '') + (item.tail or '')
-                else:
-                    item.getparent().text = (item.getparent().text or '') + (item.tail or '')
-                
-                item.getparent().remove(item)
-                
-                    # Find the parent and remove the <node> element
-                    #parent = item.getparent()
-                    #tail_text = item.tail
-                    #if parent is not None:
-                    #    parent.remove(item)
-
-                    # Preserve tail text if present, 
-                    #if tail_text:
-                    #    if parent.getchildren():
-                            # If there's a previous sibling, add the tail text just after it
-                    #        previous_sibling = parent.getchildren()[-1]
-                    #        previous_sibling.tail = (previous_sibling.tail or '') + tail_text
-                    #    else:
-                            # If no siblings, add the tail text to the parent's text
-                    #        parent.text = (parent.text or '') + tail_text
-        
-        return tree
+        return self._extractor.remove_nodes(tree, node, preserve_tail=True)
     
     def _create_secure_parser(self) -> etree.XMLParser:
         """
@@ -356,13 +556,10 @@ class XMLParser(Parser):
         None
             Updates the instance's preface attribute with the found preface element.
         """
-        preface = self.root.find(preface_xpath, namespaces=self.namespaces)
+        preface = self._extractor.find(self.root, preface_xpath)
         if preface is not None:
-            paragraphs = []
-            for p in preface.findall(paragraph_xpath, namespaces=self.namespaces):
-                # Join all text parts in <p>, removing any inner tags
-                paragraph_text = ''.join(p.itertext()).strip()
-                paragraphs.append(paragraph_text)
+            # Extract text from all paragraph elements
+            paragraphs = self._extractor.extract_text_from_all(preface, paragraph_xpath)
 
         # Join all paragraphs and normalize using strategy
         self.preface = self.normalizer.normalize(' '.join(paragraphs))
@@ -383,7 +580,7 @@ class XMLParser(Parser):
         None
             Updates the instance's preamble attribute with the found preamble element
         """
-        self.preamble = self.root.find(preamble_xpath, namespaces=self.namespaces)
+        self.preamble = self._extractor.find(self.root, preamble_xpath)
         
         if self.preamble is not None:            
             self.preamble = self.remove_node(self.preamble, notes_xpath)
@@ -405,12 +602,13 @@ class XMLParser(Parser):
             Concatenated text from all paragraphs within the formula element.
             Returns None if no formula is found.
         """
-        formula = self.preamble.find(formula_xpath, namespaces=self.namespaces)
+        formula = self._extractor.find(self.preamble, formula_xpath)
         if formula is None:
             return None
 
         # Extract text from <p> within <formula>
-        formula_text = ' '.join(p.text.strip() for p in formula.findall(paragraph_xpath, namespaces=self.namespaces) if p.text)
+        paragraphs = self._extractor.findall(formula, paragraph_xpath)
+        formula_text = ' '.join(p.text.strip() for p in paragraphs if p.text)
         self.formula = formula_text
         return self.formula
         
@@ -432,15 +630,15 @@ class XMLParser(Parser):
         None
             Updates the instance's citations attribute with the found citations.
         """
-        citations_section = self.preamble.find(citations_xpath, namespaces=self.namespaces)
+        citations_section = self._extractor.find(self.preamble, citations_xpath)
         if citations_section is None:
             return None
 
         citations = []
-        for index, citation in enumerate(citations_section.findall(citation_xpath, namespaces=self.namespaces)):
+        for index, citation in enumerate(self._extractor.findall(citations_section, citation_xpath)):
             
             # Extract and normalize the citation text using strategy
-            text = "".join(citation.itertext())
+            text = self._extractor.extract_text(citation, strip=False)
             text = self.normalizer.normalize(text)
             
             eId = extract_eId(citation, index) if extract_eId else index
@@ -474,7 +672,7 @@ class XMLParser(Parser):
         None
             Updates the instance's recitals attribute with the found recitals.
         """
-        recitals_section = self.preamble.find(recitals_xpath, namespaces=self.namespaces)
+        recitals_section = self._extractor.find(self.preamble, recitals_xpath)
         if recitals_section is None:
             return None
         
@@ -482,11 +680,12 @@ class XMLParser(Parser):
         extract_intro(recitals_section) if extract_intro else None
         
         
-        for recital in recitals_section.findall(recital_xpath, namespaces=self.namespaces):
+        for recital in self._extractor.findall(recitals_section, recital_xpath):
             eId = extract_eId(recital) if extract_eId else None
             
             # Extract and normalize text using strategy
-            text = ''.join(''.join(p.itertext()).strip() for p in recital.findall(text_xpath, namespaces=self.namespaces))
+            text_elements = self._extractor.findall(recital, text_xpath)
+            text = ''.join(self._extractor.extract_text(p) for p in text_elements)
             text = self.normalizer.normalize(text)
             
             recitals.append({
@@ -528,10 +727,13 @@ class XMLParser(Parser):
             Updates the instance's body attribute with the found body element.
         """
         # Use the namespace-aware find
-        self.body = self.root.find(body_xpath, namespaces=self.namespaces)
+        self.body = self._extractor.find(self.root, body_xpath)
         if self.body is None:
             # Fallback: try without namespace
-            self.body = self.root.find(body_xpath)
+            self._extractor.namespaces = {}
+            self.body = self._extractor.find(self.root, body_xpath)
+            # Restore namespaces
+            self._extractor.namespaces = self.namespaces
 
     def get_chapters(self, chapter_xpath: str, num_xpath: str, heading_xpath: str, extract_eId=None, get_headings=None) -> None:
         """
@@ -558,17 +760,16 @@ class XMLParser(Parser):
             
         """
         
-        chapters = self.body.findall(chapter_xpath, namespaces=self.namespaces)
+        chapters = self._extractor.findall(self.body, chapter_xpath)
         
         for index, chapter in enumerate(chapters):
             eId = extract_eId(chapter, index) if extract_eId else index
             if get_headings:
                 chapter_num, chapter_heading = get_headings(chapter)
             else:
-                chapter_num = chapter.find(num_xpath, namespaces=self.namespaces)
-                chapter_num = chapter_num.text if chapter_num is not None else None
-                chapter_heading = chapter.find(heading_xpath, namespaces=self.namespaces)
-                chapter_heading = ''.join(chapter_heading.itertext()).strip() if chapter_heading is not None else None
+                chapter_num_elem = self._extractor.find(chapter, num_xpath)
+                chapter_num = chapter_num_elem.text if chapter_num_elem is not None else None
+                chapter_heading = self._extractor.safe_find_text(chapter, heading_xpath, default=None)
             
             self.chapters.append({
                 'eId': eId,

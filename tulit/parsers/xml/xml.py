@@ -3,6 +3,7 @@ import os
 import re
 from tulit.parsers.parser import Parser
 import logging
+from typing import Optional, Any
 
 class XMLParser(Parser):
     """
@@ -22,7 +23,7 @@ class XMLParser(Parser):
         Dictionary containing XML namespaces.
     """
     
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes the Parser object with default attributes.
         
@@ -32,14 +33,14 @@ class XMLParser(Parser):
         """
         super().__init__()
         
-        self.schema = None
-        self.valid = None
-        self.format = None
-        self.validation_errors = None
+        self.schema: Optional[etree.XMLSchema] = None
+        self.valid: Optional[bool] = None
+        self.format: Optional[str] = None
+        self.validation_errors: Optional[Any] = None
         
-        self.namespaces = {}
+        self.namespaces: dict[str, str] = {}
     
-    def load_schema(self, schema):
+    def load_schema(self, schema: str) -> None:
         """
         Loads the XSD schema for XML validation using a relative path. Schemas are stored in the 'assets' directory relative to the xml module.
         

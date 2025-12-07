@@ -18,6 +18,8 @@ class CellarStandardHTMLParser(HTMLParser):
     
     def _clean_text(self, text):
         """Clean and normalize text content."""
+        # Remove consolidation markers (▼B, ▼M1, ▼M2, etc.)
+        text = re.sub(r'▼[A-Z]\d*', '', text)
         # Replace multiple whitespaces with single space
         text = re.sub(r'\s+', ' ', text).strip()
         # Fix spacing before punctuation
@@ -460,6 +462,7 @@ class CellarStandardHTMLParser(HTMLParser):
     def _finalize_article(self, article, paragraphs):
         """
         Process collected paragraphs for an article and add to articles list.
+        Paragraphs are kept separate, but points within a paragraph are combined.
         """
         if not paragraphs:
             # No content paragraphs
@@ -476,8 +479,32 @@ class CellarStandardHTMLParser(HTMLParser):
         article_num_match = re.search(r'art_(\d+)', article['eId'])
         article_num = int(article_num_match.group(1)) if article_num_match else 0
         
-        # Process remaining paragraphs with standardized numbering: 001.001, 001.002, etc.
-        for idx, para_text in enumerate(paragraphs, start=1):
+        # Group paragraphs: combine consecutive lettered/roman points, but keep numbered paragraphs separate
+        grouped_paragraphs = []
+        current_group = []
+        
+        for para_text in paragraphs:
+            # Check if this is a lettered point: (a), (b), (c) or roman numerals: (i), (ii), (iii)
+            is_letter_point = bool(re.match(r'^\s*\([a-z]\)\s+', para_text, re.IGNORECASE))
+            is_roman_point = bool(re.match(r'^\s*\([ivxlcdm]+\)\s+', para_text, re.IGNORECASE))
+            
+            if (is_letter_point or is_roman_point) and current_group:
+                # This is a continuation point - add to current group
+                current_group.append(para_text)
+            else:
+                # This is a new paragraph (including numbered points like 1., 2.)
+                if current_group:
+                    # Save previous group
+                    grouped_paragraphs.append('\n'.join(current_group))
+                # Start new group
+                current_group = [para_text]
+        
+        # Don't forget the last group
+        if current_group:
+            grouped_paragraphs.append('\n'.join(current_group))
+        
+        # Create children from grouped paragraphs
+        for idx, para_text in enumerate(grouped_paragraphs, start=1):
             article['children'].append({
                 'eId': f"{article_num:03d}.{idx:03d}",
                 'text': para_text
@@ -517,11 +544,12 @@ class CellarStandardHTMLParser(HTMLParser):
     def parse(self, file_path, validate=False):
         """
         Parse a standard HTML document and extract all components.
+        If the input is a directory, searches for HTML files.
         
         Parameters
         ----------
         file_path : str
-            Path to the HTML file to parse
+            Path to the HTML file or directory containing HTML files
         validate : bool, optional
             Whether to validate against LegalJSON schema (default: False)
         
@@ -530,6 +558,22 @@ class CellarStandardHTMLParser(HTMLParser):
         dict
             Parsed document in LegalJSON-compatible format
         """
+        from pathlib import Path
+        
+        # Check if input is a directory
+        path = Path(file_path)
+        if path.is_dir():
+            # Search for HTML files in the directory
+            html_files = list(path.glob('*.html'))
+            
+            if html_files:
+                # Use the first HTML file found
+                file_path = str(html_files[0])
+                self.logger.info(f"Found HTML document: {html_files[0].name}")
+            else:
+                self.logger.error(f"No HTML files found in directory: {path}")
+                return {'articles': []}  # Return empty result
+        
         try:
             # Load and parse HTML
             self.get_root(file_path)
@@ -572,36 +616,3 @@ class CellarStandardHTMLParser(HTMLParser):
         except Exception as e:
             self.logger.error(f"Error parsing document: {e}")
             raise
-
-
-def main():
-    """Command-line interface for the parser."""
-    parser = argparse.ArgumentParser(description='Parse EU Cellar standard HTML documents')
-    parser.add_argument('file_path', help='Path to HTML file to parse')
-    parser.add_argument('--output', '-o', help='Output JSON file path')
-    parser.add_argument('--validate', '-v', action='store_true', help='Validate against LegalJSON schema')
-    parser.add_argument('--debug', action='store_true', help='Enable debug logging')
-    
-    args = parser.parse_args()
-    
-    # Configure logging
-    logging.basicConfig(
-        level=logging.DEBUG if args.debug else logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
-    
-    # Parse document
-    html_parser = CellarStandardHTMLParser()
-    result = html_parser.parse(args.file_path, validate=args.validate)
-    
-    # Output results
-    if args.output:
-        with open(args.output, 'w', encoding='utf-8') as f:
-            json.dump(result, f, indent=2, ensure_ascii=False)
-        print(f"Results saved to {args.output}")
-    else:
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-
-
-if __name__ == '__main__':
-    main()

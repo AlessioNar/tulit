@@ -6,7 +6,7 @@ from typing import Optional, Any
 from lxml import etree
 
 from tulit.parsers.xml.xml import XMLParser
-from tulit.parsers.parser import LegalJSONValidator
+from tulit.parsers.parser import LegalJSONValidator, create_formex_normalizer
 
 class Formex4Parser(XMLParser):
     """
@@ -21,9 +21,10 @@ class Formex4Parser(XMLParser):
         """
         Initializes the Formex4Parser object with the Formex namespace.
         """
-        # Define the namespace mapping
-        super().__init__()
+        # Initialize with Formex-specific normalizer
+        super().__init__(normalizer=create_formex_normalizer())
 
+        # Define the namespace mapping
         self.namespaces = {
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
         }
@@ -320,18 +321,16 @@ class Formex4Parser(XMLParser):
         
 
     def clean_text(self, element: etree._Element) -> str:
-        for sub_element in element.iter(): # Replace QUOT.START and QUOT.END elements with proper quotes
+        # Replace QUOT.START and QUOT.END elements with proper quotes
+        for sub_element in element.iter():
             if sub_element.tag == 'QUOT.START':                    
-                sub_element.text = "‘"                    
+                sub_element.text = "'"                    
             elif sub_element.tag == 'QUOT.END':                    
-                sub_element.text = "’"
+                sub_element.text = "'"
                 
-        text = "".join(element.itertext()).strip() # Join text content of element and its descendants
-        text = re.sub(r'^\(\d+\)', '', text).strip() # Remove leading numbers in parentheses`
-        text = text.replace('\n', '').replace('\t', '').replace('\r', '') # remove newline and tab characters
-        text = text.replace('\u00A0', ' ')  # replace non-breaking spaces with regular spaces
-        text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
-        text = re.sub(r'\s+([.,!?;:’])', r'\1', text)  # replace spaces before punctuation with nothing
+        # Extract text and normalize using strategy
+        text = "".join(element.itertext())
+        text = self.normalizer.normalize(text)
         
         return text
 

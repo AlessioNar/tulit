@@ -419,8 +419,9 @@ class AKN4EUParser(AkomaNtosoParser):
         for p in node.findall('.//akn:paragraph', namespaces=self.namespaces):
             # Traverse up to find the nearest parent with an xml:id                        
             eId = self.extract_eId(p, 'xml:id')                                
-            import re
-            p_text = re.sub(r'\s+', ' ', ''.join(p.itertext()).replace('\n', '').replace('\r', '').strip())
+            # Extract and normalize text using strategy
+            p_text = ''.join(p.itertext())
+            p_text = self.normalizer.normalize(p_text)
             element = {
                     'eId': eId,
                     'text': p_text

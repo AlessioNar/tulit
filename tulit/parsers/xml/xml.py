@@ -1,7 +1,12 @@
 from lxml import etree
 import os
 import re
-from tulit.parsers.parser import Parser, FileLoadError
+from tulit.parsers.parser import (
+    Parser, 
+    FileLoadError, 
+    TextNormalizationStrategy,
+    create_standard_normalizer
+)
 import logging
 from typing import Optional, Any
 from abc import abstractmethod
@@ -28,13 +33,14 @@ class XMLParser(Parser):
         Dictionary containing XML namespaces.
     """
     
-    def __init__(self) -> None:
+    def __init__(self, normalizer: Optional[TextNormalizationStrategy] = None) -> None:
         """
         Initializes the Parser object with default attributes.
         
         Parameters
         ----------
-        None
+        normalizer : TextNormalizationStrategy, optional
+            Text normalization strategy to use. Defaults to standard normalizer.
         """
         super().__init__()
         
@@ -44,6 +50,9 @@ class XMLParser(Parser):
         self.validation_errors: Optional[Any] = None
         
         self.namespaces: dict[str, str] = {}
+        
+        # Text normalization strategy (Strategy Pattern)
+        self.normalizer = normalizer or create_standard_normalizer()
     
     def load_schema(self, schema: str) -> None:
         """
@@ -225,9 +234,8 @@ class XMLParser(Parser):
                 paragraph_text = ''.join(p.itertext()).strip()
                 paragraphs.append(paragraph_text)
 
-        # Join all paragraphs into a single string and remove duplicate spaces or newlines
-        self.preface = ' '.join(paragraphs).replace('\n', '').replace('\t', '').replace('\r', '')
-        self.preface = re.sub(' +', ' ', self.preface)
+        # Join all paragraphs and normalize using strategy
+        self.preface = self.normalizer.normalize(' '.join(paragraphs))
             
     def get_preamble(self, preamble_xpath, notes_xpath) -> None:
         """
@@ -301,10 +309,9 @@ class XMLParser(Parser):
         citations = []
         for index, citation in enumerate(citations_section.findall(citation_xpath, namespaces=self.namespaces)):
             
-            # Extract the citation text
-            text = "".join(citation.itertext()).strip()
-            text = text.replace('\n', '').replace('\t', '').replace('\r', '')  # remove newline and tab characters
-            text = re.sub(' +', ' ', text)  # replace multiple spaces with a single space
+            # Extract and normalize the citation text using strategy
+            text = "".join(citation.itertext())
+            text = self.normalizer.normalize(text)
             
             eId = extract_eId(citation, index) if extract_eId else index
             
@@ -348,9 +355,9 @@ class XMLParser(Parser):
         for recital in recitals_section.findall(recital_xpath, namespaces=self.namespaces):
             eId = extract_eId(recital) if extract_eId else None
             
-            text = ''.join(''.join(p.itertext()).strip() for p in recital.findall(text_xpath, namespaces=self.namespaces))                        
-            text = text.replace('\n', '').replace('\t', '').replace('\r', '')            
-            text = re.sub(' +', ' ', text)
+            # Extract and normalize text using strategy
+            text = ''.join(''.join(p.itertext()).strip() for p in recital.findall(text_xpath, namespaces=self.namespaces))
+            text = self.normalizer.normalize(text)
             
             recitals.append({
                     "eId": eId, 

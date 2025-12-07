@@ -3,7 +3,7 @@ import json
 import re
 import argparse
 from typing import Optional, Any
-from tulit.parsers.parser import LegalJSONValidator
+from tulit.parsers.parser import LegalJSONValidator, create_html_normalizer
 import logging
 
 
@@ -16,16 +16,12 @@ class CellarStandardHTMLParser(HTMLParser):
     
     def __init__(self) -> None:
         super().__init__()
+        # Use HTML-specific normalizer for consolidation markers
+        self.normalizer = create_html_normalizer()
     
     def _clean_text(self, text: str) -> str:
-        """Clean and normalize text content."""
-        # Remove consolidation markers (▼B, ▼M1, ▼M2, etc.)
-        text = re.sub(r'▼[A-Z]\d*', '', text)
-        # Replace multiple whitespaces with single space
-        text = re.sub(r'\s+', ' ', text).strip()
-        # Fix spacing before punctuation
-        text = re.sub(r'\s+([.,!?;:\'])', r'\1', text)
-        return text
+        """Clean and normalize text content using strategy pattern."""
+        return self.normalizer.normalize(text)
     
     def _extract_article_number(self, text):
         """

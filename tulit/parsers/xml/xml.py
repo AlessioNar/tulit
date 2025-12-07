@@ -1,366 +1,33 @@
+"""
+XML Parser Base Module
+
+This module provides the abstract XMLParser base class for XML-based document parsers.
+All XML parsers should inherit from XMLParser and implement the required abstract methods.
+
+The XMLParser class integrates XML validation, node extraction utilities, and text
+normalization from the organized helper modules.
+"""
+
 from lxml import etree
 import os
 import re
-from tulit.parsers.parser import (
-    Parser, 
-    FileLoadError, 
-    ValidationError,
-    TextNormalizationStrategy,
-    create_standard_normalizer
-)
 import logging
 from typing import Optional, Any, Tuple
 from abc import abstractmethod
 
-
-# ============================================================================
-# XML Node Extraction Utility Class
-# ============================================================================
-
-class XMLNodeExtractor:
-    """
-    Utility class for XPath-based XML node extraction and manipulation.
-    
-    This class encapsulates common XPath operations and text extraction
-    patterns, reducing duplication and complexity in XML parsers.
-    
-    Attributes
-    ----------
-    namespaces : dict
-        Dictionary of XML namespaces for XPath queries
-    
-    Example
-    -------
-    >>> extractor = XMLNodeExtractor({'akn': 'http://...'})
-    >>> node = extractor.find(root, './/akn:article')
-    >>> text = extractor.extract_text(node)
-    """
-    
-    def __init__(self, namespaces: Optional[dict[str, str]] = None):
-        """
-        Initialize the node extractor.
-        
-        Parameters
-        ----------
-        namespaces : dict, optional
-            Dictionary of namespace prefixes to URIs
-        """
-        self.namespaces = namespaces or {}
-    
-    def find(self, element: etree._Element, xpath: str) -> Optional[etree._Element]:
-        """
-        Find the first element matching the XPath expression.
-        
-        Parameters
-        ----------
-        element : lxml.etree._Element
-            Root element to search from
-        xpath : str
-            XPath expression
-        
-        Returns
-        -------
-        lxml.etree._Element or None
-            First matching element or None
-        """
-        return element.find(xpath, namespaces=self.namespaces)
-    
-    def findall(self, element: etree._Element, xpath: str) -> list[etree._Element]:
-        """
-        Find all elements matching the XPath expression.
-        
-        Parameters
-        ----------
-        element : lxml.etree._Element
-            Root element to search from
-        xpath : str
-            XPath expression
-        
-        Returns
-        -------
-        list[lxml.etree._Element]
-            List of matching elements
-        """
-        return element.findall(xpath, namespaces=self.namespaces)
-    
-    def extract_text(self, element: etree._Element, strip: bool = True) -> str:
-        """
-        Extract all text content from an element and its descendants.
-        
-        Parameters
-        ----------
-        element : lxml.etree._Element
-            Element to extract text from
-        strip : bool, optional
-            Whether to strip whitespace (default: True)
-        
-        Returns
-        -------
-        str
-            Concatenated text content
-        """
-        text = ''.join(element.itertext())
-        return text.strip() if strip else text
-    
-    def extract_text_from_all(
-        self, 
-        parent: etree._Element, 
-        xpath: str, 
-        strip: bool = True
-    ) -> list[str]:
-        """
-        Extract text from all elements matching the XPath.
-        
-        Parameters
-        ----------
-        parent : lxml.etree._Element
-            Parent element to search from
-        xpath : str
-            XPath expression
-        strip : bool, optional
-            Whether to strip whitespace (default: True)
-        
-        Returns
-        -------
-        list[str]
-            List of extracted text strings
-        """
-        elements = self.findall(parent, xpath)
-        return [self.extract_text(elem, strip=strip) for elem in elements]
-    
-    def safe_find(
-        self, 
-        element: etree._Element, 
-        xpath: str, 
-        default: Optional[etree._Element] = None
-    ) -> Optional[etree._Element]:
-        """
-        Safely find an element, returning default if not found.
-        
-        Parameters
-        ----------
-        element : lxml.etree._Element
-            Root element to search from
-        xpath : str
-            XPath expression
-        default : lxml.etree._Element, optional
-            Value to return if not found
-        
-        Returns
-        -------
-        lxml.etree._Element or default
-            Found element or default value
-        """
-        result = self.find(element, xpath)
-        return result if result is not None else default
-    
-    def safe_find_text(
-        self, 
-        element: etree._Element, 
-        xpath: str, 
-        default: str = ""
-    ) -> str:
-        """
-        Safely find an element and extract its text.
-        
-        Parameters
-        ----------
-        element : lxml.etree._Element
-            Root element to search from
-        xpath : str
-            XPath expression
-        default : str, optional
-            Value to return if not found
-        
-        Returns
-        -------
-        str
-            Extracted text or default value
-        """
-        found = self.find(element, xpath)
-        return self.extract_text(found) if found is not None else default
-    
-    def remove_nodes(
-        self, 
-        tree: etree._Element, 
-        xpath: str, 
-        preserve_tail: bool = True
-    ) -> etree._Element:
-        """
-        Remove nodes matching XPath, optionally preserving tail text.
-        
-        Parameters
-        ----------
-        tree : lxml.etree._Element
-            Tree to modify
-        xpath : str
-            XPath expression for nodes to remove
-        preserve_tail : bool, optional
-            Whether to preserve tail text (default: True)
-        
-        Returns
-        -------
-        lxml.etree._Element
-            Modified tree
-        """
-        nodes = self.findall(tree, xpath)
-        
-        for node in nodes:
-            if preserve_tail:
-                # Preserve tail text
-                tail = node.tail or ''
-                prev = node.getprevious()
-                parent = node.getparent()
-                
-                if prev is not None:
-                    prev.tail = (prev.tail or '') + tail
-                elif parent is not None:
-                    parent.text = (parent.text or '') + tail
-            
-            # Remove the node
-            parent = node.getparent()
-            if parent is not None:
-                parent.remove(node)
-        
-        return tree
+# Import from organized modules
+from tulit.parsers.parser import Parser
+from tulit.parsers.exceptions import FileLoadError, ValidationError
+from tulit.parsers.normalization import (
+    TextNormalizationStrategy,
+    create_standard_normalizer
+)
+from tulit.parsers.xml.helpers import XMLNodeExtractor, XMLValidator
 
 
 # ============================================================================
-# XML Validation Helper Class
+# XML Parser Abstract Base Class
 # ============================================================================
-
-class XMLValidator:
-    """
-    Handles XML schema loading and validation.
-    
-    This class is responsible for loading XSD schemas and validating XML
-    documents against them, following the Single Responsibility Principle.
-    
-    Attributes
-    ----------
-    schema : lxml.etree.XMLSchema or None
-        The loaded XML schema
-    schema_path : str or None
-        Path to the loaded schema file
-    logger : logging.Logger
-        Logger instance for validation messages
-    
-    Example
-    -------
-    >>> validator = XMLValidator()
-    >>> validator.load_schema('akomantoso30.xsd', base_dir='/path/to/schemas')
-    >>> is_valid, errors = validator.validate('/path/to/document.xml')
-    """
-    
-    def __init__(self, logger: Optional[logging.Logger] = None):
-        """
-        Initialize the XML validator.
-        
-        Parameters
-        ----------
-        logger : logging.Logger, optional
-            Logger instance for validation messages
-        """
-        self.schema: Optional[etree.XMLSchema] = None
-        self.schema_path: Optional[str] = None
-        self.logger = logger or logging.getLogger(__name__)
-    
-    def load_schema(self, schema: str, base_dir: Optional[str] = None) -> None:
-        """
-        Load an XSD schema for XML validation.
-        
-        Schemas are expected to be in an 'assets' subdirectory relative to
-        the base directory.
-        
-        Parameters
-        ----------
-        schema : str
-            Filename of the XSD schema
-        base_dir : str, optional
-            Base directory containing the 'assets' folder.
-            If None, uses the directory of this module.
-        
-        Raises
-        ------
-        FileLoadError
-            If schema file cannot be loaded
-        ValidationError
-            If schema cannot be parsed
-        """
-        try:
-            # Determine base directory
-            if base_dir is None:
-                base_dir = os.path.dirname(os.path.abspath(__file__))
-            
-            # Resolve the absolute path to the XSD file
-            schema_path = os.path.join(base_dir, 'assets', schema)
-            
-            if not os.path.exists(schema_path):
-                raise FileLoadError(f"Schema file not found: {schema_path}")
-            
-            # Parse the schema
-            with open(schema_path, 'rb') as f:
-                schema_doc = etree.parse(f)
-                self.schema = etree.XMLSchema(schema_doc)
-            
-            self.schema_path = schema_path
-            self.logger.info(f"Schema loaded successfully from {schema_path}")
-            
-        except FileLoadError:
-            raise
-        except Exception as e:
-            raise ValidationError(f"Error loading schema: {e}")
-    
-    def validate(self, xml_file: str, format_name: str = "XML") -> Tuple[bool, Optional[Any]]:
-        """
-        Validate an XML file against the loaded schema.
-        
-        Parameters
-        ----------
-        xml_file : str
-            Path to the XML file to validate
-        format_name : str, optional
-            Name of the format for logging (default: "XML")
-        
-        Returns
-        -------
-        tuple[bool, Any or None]
-            (is_valid, error_log) - True if valid with None, 
-            False with error log if invalid
-        
-        Raises
-        ------
-        ValidationError
-            If no schema is loaded or file cannot be read
-        """
-        if not self.schema:
-            raise ValidationError("No schema loaded. Call load_schema() first.")
-        
-        try:
-            # Parse and validate the XML document
-            with open(xml_file, 'r', encoding='utf-8') as f:
-                xml_doc = etree.parse(f)
-                self.schema.assertValid(xml_doc)
-            
-            self.logger.info(f"{xml_file} is a valid {format_name} file.")
-            return True, None
-            
-        except etree.DocumentInvalid as e:
-            self.logger.warning(
-                f"{xml_file} is not a valid {format_name} file. "
-                f"Validation errors: {e}"
-            )
-            return False, e.error_log
-            
-        except FileNotFoundError:
-            raise ValidationError(f"XML file not found: {xml_file}")
-        except Exception as e:
-            raise ValidationError(f"Error during validation: {e}")
-    
-    def is_loaded(self) -> bool:
-        """Check if a schema is currently loaded."""
-        return self.schema is not None
-
 class XMLParser(Parser):
     """
     Abstract base class for XML parsers.
@@ -408,7 +75,7 @@ class XMLParser(Parser):
         self.normalizer = normalizer or create_standard_normalizer()
         
         # XML validator (Extracted responsibility)
-        self._validator = XMLValidator(logger=self.logger)
+        self._validator = XMLValidator()
         
         # XML node extractor (Utility for XPath operations)
         self._extractor = XMLNodeExtractor()

@@ -154,6 +154,74 @@ class CellarStandardHTMLParser(HTMLParser):
             self.citations = []
             self.logger.error(f"Error extracting citations: {e}")
     
+    def _extract_table_recital(self, num_text: str, content_text: str):
+        """Extract recital from table row if format matches."""
+        if re.match(r'^\(?\d+\)?$', num_text):
+            recital_num = re.sub(r'[()]', '', num_text)
+            return {
+                'eId': f'rct_{recital_num}',
+                'text': content_text
+            }
+        return None
+    
+    def _extract_recitals_from_tables(self):
+        """Extract recitals from table format."""
+        recitals = []
+        tables = self.txt_te.find_all('table')
+        for table in tables:
+            rows = table.find_all('tr')
+            for row in rows:
+                cols = row.find_all('td')
+                if len(cols) == 2:
+                    num_text = self._clean_text(cols[0].get_text())
+                    content_text = self._clean_text(cols[1].get_text())
+                    
+                    recital = self._extract_table_recital(num_text, content_text)
+                    if recital:
+                        recitals.append(recital)
+        return recitals
+    
+    def _is_recitals_start(self, text: str) -> bool:
+        """Check if text marks start of recitals section."""
+        return text.strip() == 'Whereas:'
+    
+    def _is_recitals_end(self, text: str) -> bool:
+        """Check if text marks end of recitals section."""
+        return bool(re.match(r'^(HAS ADOPTED|HAS DECIDED|Article)', text, re.IGNORECASE))
+    
+    def _extract_numbered_recital(self, text: str):
+        """Extract numbered recital from text like '(1) Some text'."""
+        match = re.match(r'^\((\d+)\)\s*(.+)$', text)
+        if match:
+            return {
+                'eId': f'rct_{match.group(1)}',
+                'text': match.group(2)
+            }
+        return None
+    
+    def _extract_recitals_from_paragraphs(self):
+        """Extract recitals from paragraph format."""
+        recitals = []
+        paragraphs = self.txt_te.find_all('p')
+        in_recitals = False
+        
+        for p in paragraphs:
+            text = self._clean_text(p.get_text())
+            
+            if self._is_recitals_start(text):
+                in_recitals = True
+                continue
+            
+            if in_recitals and self._is_recitals_end(text):
+                break
+            
+            if in_recitals:
+                recital = self._extract_numbered_recital(text)
+                if recital:
+                    recitals.append(recital)
+        
+        return recitals
+    
     def get_recitals(self):
         """
         Extract recitals (whereas clauses).
@@ -164,56 +232,10 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.recitals = []
                 return
             
-            self.recitals = []
+            self.recitals = self._extract_recitals_from_tables()
             
-            # Check for consolidated format with table-based recitals
-            tables = self.txt_te.find_all('table')
-            for table in tables:
-                rows = table.find_all('tr')
-                for row in rows:
-                    cols = row.find_all('td')
-                    if len(cols) == 2:
-                        # First column might be recital number
-                        num_text = self._clean_text(cols[0].get_text())
-                        content_text = self._clean_text(cols[1].get_text())
-                        
-                        # Check if it's a numbered recital (1), (2), etc.
-                        if re.match(r'^\(?\d+\)?$', num_text):
-                            recital_num = re.sub(r'[()]', '', num_text)
-                            self.recitals.append({
-                                'eId': f'rct_{recital_num}',
-                                'text': content_text
-                            })
-            
-            # If no recitals found in tables, try paragraph-based extraction
             if not self.recitals:
-                paragraphs = self.txt_te.find_all('p')
-                
-                in_recitals = False
-                
-                for p in paragraphs:
-                    text = self._clean_text(p.get_text())
-                    
-                    # Check if we're entering the recitals section
-                    if text.strip() == 'Whereas:':
-                        in_recitals = True
-                        continue
-                    
-                    # Check if we're exiting recitals (usually at "HAS ADOPTED")
-                    if in_recitals and re.match(r'^(HAS ADOPTED|HAS DECIDED|Article)', text, re.IGNORECASE):
-                        in_recitals = False
-                        break
-                    
-                    # Extract numbered recitals like "(1) Some text"
-                    if in_recitals:
-                        match = re.match(r'^\((\d+)\)\s*(.+)$', text)
-                        if match:
-                            recital_num = match.group(1)
-                            recital_text = match.group(2)
-                            self.recitals.append({
-                                'eId': f'rct_{recital_num}',
-                                'text': recital_text
-                            })
+                self.recitals = self._extract_recitals_from_paragraphs()
             
             self.logger.info(f"Extracted {len(self.recitals)} recitals.")
         except Exception as e:
@@ -292,64 +314,64 @@ class CellarStandardHTMLParser(HTMLParser):
             self.articles = []
             self.logger.error(f"Error extracting articles: {e}")
     
+    def _process_article_start_standard(self, text: str, current_article, article_content):
+        """Process start of new article in standard format."""
+        article_num, remaining = self._extract_article_number(text)
+        
+        if article_num:
+            if current_article:
+                self._finalize_article(current_article, article_content)
+                article_content.clear()
+            
+            current_article = {
+                'eId': f'art_{article_num}',
+                'num': f'Article {article_num}',
+                'heading': remaining if remaining else None,
+                'children': []
+            }
+        
+        return current_article, article_content
+    
+    def _process_article_content_standard(self, text: str, current_article, article_content):
+        """Process article content in standard format."""
+        if self._should_stop_processing(text):
+            if current_article:
+                self._finalize_article(current_article, article_content)
+            return None, True
+        
+        if text:
+            article_content.append(text)
+        
+        return current_article, False
+    
     def _extract_articles_standard(self):
         """Extract articles from standard HTML format (with TXT_TE tags)."""
-        # Get all children elements (paragraphs, tables, etc.)
         elements = self.txt_te.find_all(['p', 'table'], recursive=False)
-        
         current_article = None
         article_content = []
         
         for element in elements:
             if element.name == 'table':
-                # Handle tables
-                if current_article:
-                    # Table belongs to current article
-                    table_text = self._extract_table_text(element)
-                    if table_text:
-                        article_content.append(f"[TABLE]\n{table_text}")
+                self._process_table_element(element, current_article, article_content)
                 continue
             
-            # Handle paragraphs
             text = self._clean_text(element.get_text())
-            
-            # Check if this is the start of a new article
-            article_num, remaining = self._extract_article_number(text)
+            article_num, _ = self._extract_article_number(text)
             
             if article_num:
-                # Save previous article if exists
-                if current_article:
-                    self._finalize_article(current_article, article_content)
-                    article_content = []
-                
-                # Start new article
-                current_article = {
-                    'eId': f'art_{article_num}',
-                    'num': f'Article {article_num}',
-                    'heading': None,
-                    'children': []
-                }
-                
-                # Check if there's a title on the same line
-                if remaining:
-                    current_article['heading'] = remaining
-            
+                current_article, article_content = self._process_article_start_standard(
+                    text, current_article, article_content
+                )
             elif current_article:
-                # Check if this is signature or footnote section
-                if self._is_signature_section(text) or self._is_footnote(text):
-                    # Stop collecting article content - finalize current article and break
-                    self._finalize_article(current_article, article_content)
-                    current_article = None
+                current_article, should_break = self._process_article_content_standard(
+                    text, current_article, article_content
+                )
+                if should_break:
                     break
-                # This is content of the current article
-                if text:  # Only add non-empty content
-                    article_content.append(text)
             else:
-                # No current article - check if we've reached signature/footnote section
-                if self._is_signature_section(text) or self._is_footnote(text):
+                if self._should_stop_processing(text):
                     break
         
-        # Finalize the last article if not already finalized
         if current_article:
             self._finalize_article(current_article, article_content)
     
@@ -384,75 +406,88 @@ class CellarStandardHTMLParser(HTMLParser):
         # Footnotes typically start with (1), (2), etc. and contain OJ references
         return bool(re.match(r'^\(\d+\)\s+OJ\s+[A-Z]', text))
     
+    def _is_article_number_style(self, style: str) -> bool:
+        """Check if style indicates article number (italic, centered)."""
+        return 'italic' in style and 'center' in style
+    
+    def _is_heading_style(self, style: str) -> bool:
+        """Check if style indicates article heading (bold, centered)."""
+        return 'bold' in style and 'center' in style
+    
+    def _process_table_element(self, element, current_article, article_content):
+        """Process table element and add to article content."""
+        if current_article:
+            table_text = self._extract_table_text(element)
+            if table_text:
+                article_content.append(f"[TABLE]\n{table_text}")
+    
+    def _extract_article_heading(self, elements, current_index: int):
+        """Extract article heading from next element if present."""
+        if current_index + 1 < len(elements):
+            next_elem = elements[current_index + 1]
+            if next_elem.name == 'p':
+                next_style = next_elem.get('style', '')
+                if self._is_heading_style(next_style):
+                    return self._clean_text(next_elem.get_text())
+        return None
+    
+    def _create_new_article(self, article_num: str, heading: str):
+        """Create new article dictionary."""
+        return {
+            'eId': f'art_{article_num}',
+            'num': f'Article {article_num}',
+            'heading': heading,
+            'children': []
+        }
+    
+    def _should_stop_processing(self, text: str) -> bool:
+        """Check if text indicates end of articles section."""
+        return self._is_signature_section(text) or self._is_footnote(text)
+    
+    def _process_article_content(self, text: str, style: str, current_article, article_content):
+        """Process paragraph as article content."""
+        if current_article['heading'] and text == current_article['heading']:
+            return
+        
+        if text and 'center' not in style and 'italic' not in style:
+            article_content.append(text)
+    
     def _extract_articles_consolidated(self):
         """Extract articles from consolidated HTML format (styled paragraphs)."""
-        # Get all children elements (paragraphs, tables, etc.)
         elements = self.txt_te.find_all(['p', 'table'], recursive=False)
-        
         current_article = None
         article_content = []
         
         for i, element in enumerate(elements):
             if element.name == 'table':
-                # Handle tables
-                if current_article:
-                    # Table belongs to current article
-                    table_text = self._extract_table_text(element)
-                    if table_text:
-                        article_content.append(f"[TABLE]\n{table_text}")
+                self._process_table_element(element, current_article, article_content)
                 continue
             
-            # Handle paragraphs
             text = self._clean_text(element.get_text())
             style = element.get('style', '')
             
-            # Check if this is an article number (italic, centered)
-            if 'italic' in style and 'center' in style:
+            if self._is_article_number_style(style):
                 article_num, remaining = self._extract_article_number(text)
                 
                 if article_num:
-                    # Save previous article if exists
                     if current_article:
                         self._finalize_article(current_article, article_content)
                         article_content = []
                     
-                    # Start new article
-                    current_article = {
-                        'eId': f'art_{article_num}',
-                        'num': f'Article {article_num}',
-                        'heading': None,
-                        'children': []
-                    }
-                    
-                    # Next element might be the heading (bold, centered)
-                    if i + 1 < len(elements):
-                        next_elem = elements[i + 1]
-                        if next_elem.name == 'p':
-                            next_style = next_elem.get('style', '')
-                            if 'bold' in next_style and 'center' in next_style:
-                                current_article['heading'] = self._clean_text(next_elem.get_text())
+                    heading = self._extract_article_heading(elements, i)
+                    current_article = self._create_new_article(article_num, heading)
             
             elif current_article:
-                # Check if this is signature or footnote section
-                if self._is_signature_section(text) or self._is_footnote(text):
-                    # Stop collecting article content - finalize current article and break
+                if self._should_stop_processing(text):
                     self._finalize_article(current_article, article_content)
                     current_article = None
                     break
-                # This might be article content
-                # Skip if it's the heading we already captured
-                if current_article['heading'] and text == current_article['heading']:
-                    continue
                 
-                # Add content paragraphs
-                if text and 'center' not in style and 'italic' not in style:
-                    article_content.append(text)
+                self._process_article_content(text, style, current_article, article_content)
             else:
-                # No current article - check if we've reached signature/footnote section
-                if self._is_signature_section(text) or self._is_footnote(text):
+                if self._should_stop_processing(text):
                     break
         
-        # Finalize the last article if not already finalized
         if current_article:
             self._finalize_article(current_article, article_content)
     

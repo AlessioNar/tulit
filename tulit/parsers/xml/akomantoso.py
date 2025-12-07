@@ -1,5 +1,10 @@
 from tulit.parsers.xml.xml import XMLParser
 from tulit.parsers.parser import ParserRegistry
+from tulit.parsers.xml.akn_extractors import (
+    AKNArticleExtractor,
+    AKNParseOrchestrator,
+    AKNContentProcessor
+)
 import json
 import argparse
 from typing import Optional, Any
@@ -232,91 +237,31 @@ class AkomaNtosoParser(XMLParser):
     
     def get_articles(self) -> None:
         """
-        Extracts article information from the document. The articles are assumed to be
-        contained within the 'article' element in the XML file. Each article is extracted
-        from the 'article' element. The article number and title are extracted from the
-        'num' and 'heading' elements within the article element. The article identifier
-        is extracted from the 'eId' attribute of the article element. The article is further
-        divided into child elements.
+        Extracts article information from the document using AKNArticleExtractor.
     
         Returns
         -------
-        list
-            List of dictionaries containing article data with keys:
-            - 'eId': Article identifier
-            - 'article_num': Article number
-            - 'article_title': Article title
-            - 'children': List of dictionaries with eId and text content
+        None
+            The extracted articles are stored in the 'articles' attribute.
         """        
         # Removing all authorialNote nodes
         self.body = self.remove_node(self.body, './/akn:authorialNote')
-
+        
+        # Use extractor for article processing
+        extractor = AKNArticleExtractor(self.namespaces)
+        
         # Find all <article> elements in the XML
         for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
-            eId = self.extract_eId(article, 'eId')
+            metadata = extractor.extract_article_metadata(article)
+            children = extractor.extract_paragraphs_by_eid(article)
             
-            # Find the main <num> element representing the article number
-            article_num = article.find('akn:num', namespaces=self.namespaces)
-            article_num_text = ''.join(article_num.itertext()).strip() if article_num is not None else None
-
-            # Find a secondary <num> or <heading> to represent the article title or subtitle, if present
-            article_title_element = article.find('akn:heading', namespaces=self.namespaces)
-            if article_title_element is None:
-                # If <heading> is not found, use the second <num> as the title if it exists
-                article_title_element = article.findall('akn:num', namespaces=self.namespaces)[1] if len(article.findall('akn:num', namespaces=self.namespaces)) > 1 else None
-            # Get the title text 
-            article_title_text = ''.join(article_title_element.itertext()).strip() if article_title_element is not None else None
-
-            children = self.get_text_by_eId(article)
-        
-            # Append the article data to the articles list
             self.articles.append({
-                'eId': eId,
-                'num': article_num_text,
-                'heading': article_title_text,
+                'eId': metadata['eId'],
+                'num': metadata['num'],
+                'heading': metadata['heading'],
                 'children': children
             })
 
-    
-    def get_text_by_eId(self, node: etree._Element) -> list[dict[str, str]]:
-        """
-        Groups paragraph text by their nearest parent element with an eId attribute.
-
-        Parameters
-        ----------
-        node : lxml.etree._Element
-            XML node to process for text extraction.
-
-        Returns
-        -------
-        list
-            List of dictionaries containing:
-            - 'eId': Identifier of the nearest parent with an eId
-            - 'text': Concatenated text content
-        """
-        elements = []
-        # Find all <p> elements
-        for p in node.findall('.//akn:p', namespaces=self.namespaces):
-            # Traverse up to find the nearest parent with an eId
-            current_element = p
-            eId = None
-            while current_element is not None:
-                eId = self.extract_eId(current_element, 'eId')                
-                if eId:
-                    break
-                current_element = current_element.getparent()  # Traverse up
-
-            # If an eId is found, add <p> text to the eId_text_map
-            if eId:
-                # Capture the full text within the <p> tag, including nested elements
-                p_text = ''.join(p.itertext()).strip()
-                element = {
-                    'eId': eId,
-                    'text': p_text
-                }
-                elements.append(element)
-        return elements
-    
     def get_conclusions(self) -> None:
         """
         Extracts conclusions information from the document. The conclusions are assumed to be
@@ -397,37 +342,6 @@ class AKN4EUParser(AkomaNtosoParser):
 
     def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         return element.get('{http://www.w3.org/XML/1998/namespace}id')
-    
-    def get_text_by_eId(self, node: etree._Element) -> list[dict[str, str]]:
-        """
-        Groups paragraph text by their nearest parent element with an eId attribute.
-
-        Parameters
-        ----------
-        node : lxml.etree._Element
-            XML node to process for text extraction.
-
-        Returns
-        -------
-        list
-            List of dictionaries containing:
-            - 'eId': Identifier of the nearest parent with an eId
-            - 'text': Concatenated text content
-        """
-        elements = []
-        # Find all <paragraph> elements
-        for p in node.findall('.//akn:paragraph', namespaces=self.namespaces):
-            # Traverse up to find the nearest parent with an xml:id                        
-            eId = self.extract_eId(p, 'xml:id')                                
-            # Extract and normalize text using strategy
-            p_text = ''.join(p.itertext())
-            p_text = self.normalizer.normalize(p_text)
-            element = {
-                    'eId': eId,
-                    'text': p_text
-            }
-            elements.append(element)
-        return elements
 
 class GermanLegalDocMLParser(AkomaNtosoParser):
     """
@@ -466,77 +380,12 @@ class GermanLegalDocMLParser(AkomaNtosoParser):
         file : str
             Path to the German LegalDocML XML file to parse.
         """
-        import logging
-        logger = logging.getLogger(__name__)
-        
         # Skip schema validation for German LegalDocML
         self.valid = True
         
-        try:
-            self.get_root(file)
-            logger.info(f"Root element loaded successfully for German LegalDocML.")                    
-        except Exception as e:
-            logger.error(f"Error in get_root: {e}")                    
-        
-        try:
-            self.get_preface()
-            logger.info(f"Preface parsed.")                    
-        except Exception as e:
-            logger.error(f"Error in get_preface: {e}")                    
-        
-        try:
-            self.get_preamble()
-            logger.info(f"Preamble parsed.")                    
-        except Exception as e:
-            logger.error(f"Error in get_preamble: {e}")                    
-        
-        try:
-            self.get_formula()
-            logger.info(f"Formula parsed.")                    
-        except Exception as e:
-            logger.error(f"Error in get_formula: {e}")                    
-        
-        try:
-            self.get_citations()
-            logger.info(f"Citations parsed. Number: {len(self.citations) if self.citations else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_citations: {e}")
-        
-        try:
-            self.get_recitals()
-            logger.info(f"Recitals parsed. Number: {len(self.recitals) if self.recitals else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_recitals: {e}")
-        
-        try:
-            self.get_preamble_final()
-            logger.info(f"Preamble final parsed.")
-        except Exception as e:
-            logger.error(f"Error in get_preamble_final: {e}")
-        
-        try:
-            self.get_body()
-            logger.info(f"Body element retrieved.")
-        except Exception as e:
-            logger.error(f"Error in get_body: {e}")
-        
-        try:
-            self.get_chapters()
-            logger.info(f"Chapters parsed. Number: {len(self.chapters) if self.chapters else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_chapters: {e}")
-        
-        try:
-            self.get_articles()
-            logger.info(f"Articles parsed. Number: {len(self.articles) if self.articles else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_articles: {e}")
-        
-        try:
-            self.get_conclusions()
-            logger.info(f"Conclusions parsed.")
-        except Exception as e:
-            logger.error(f"Error in get_conclusions: {e}")
+        # Use orchestrator for standard parsing workflow
+        orchestrator = AKNParseOrchestrator(self, context_name="German LegalDocML")
+        orchestrator.execute_standard_workflow(file)
         
         return self
 
@@ -588,65 +437,6 @@ class LuxembourgAKNParser(AkomaNtosoParser):
         """
         return element.get('id')
     
-    def get_text_by_eId(self, node):
-        """
-        Groups paragraph text by their nearest parent element with an id attribute.
-        Luxembourg documents nest content in <alinea><content><p> structure.
-
-        Parameters
-        ----------
-        node : lxml.etree._Element
-            XML node to process for text extraction.
-
-        Returns
-        -------
-        list
-            List of dictionaries containing:
-            - 'eId': Identifier from the 'id' attribute
-            - 'text': Concatenated text content
-        """
-        elements = []
-        
-        # Luxembourg uses alinea elements containing content
-        for alinea in node.findall('.//akn:alinea', namespaces=self.namespaces):
-            # Find the content container within alinea
-            content = alinea.find('.//akn:content', namespaces=self.namespaces)
-            if content is None:
-                continue
-            
-            # Traverse up from alinea to find the nearest parent with an id
-            current_element = alinea
-            eId = None
-            while current_element is not None:
-                eId = self.extract_eId(current_element, 'id')
-                if eId:
-                    break
-                current_element = current_element.getparent()
-            
-            # Extract all text from paragraphs and other elements within content
-            if eId:
-                # Get all text content, including from nested elements
-                text_parts = []
-                for p in content.findall('.//akn:p', namespaces=self.namespaces):
-                    p_text = ''.join(p.itertext()).strip()
-                    if p_text:
-                        text_parts.append(p_text)
-                
-                # Also check for lists and other content
-                for ol in content.findall('.//akn:ol', namespaces=self.namespaces):
-                    ol_text = ''.join(ol.itertext()).strip()
-                    if ol_text:
-                        text_parts.append(ol_text)
-                
-                if text_parts:
-                    element = {
-                        'eId': eId,
-                        'text': ' '.join(text_parts)
-                    }
-                    elements.append(element)
-        
-        return elements
-    
     def parse(self, file: str, **options) -> 'LuxembourgAKNParser':
         """
         Parses a Luxembourg Akoma Ntoso document to extract its components.
@@ -660,77 +450,12 @@ class LuxembourgAKNParser(AkomaNtosoParser):
         file : str
             Path to the Luxembourg Akoma Ntoso XML file to parse.
         """
-        import logging
-        logger = logging.getLogger(__name__)
-        
         # Skip strict schema validation for Luxembourg CSD13 variant
         self.valid = True
         
-        try:
-            self.get_root(file)
-            logger.info(f"Root element loaded successfully for Luxembourg AKN.")                    
-        except Exception as e:
-            logger.error(f"Error in get_root: {e}")                    
-        
-        try:
-            self.get_preface()
-            logger.info(f"Preface parsed.")                    
-        except Exception as e:
-            logger.error(f"Error in get_preface: {e}")                    
-        
-        try:
-            self.get_preamble()
-            logger.info(f"Preamble parsed.")                    
-        except Exception as e:
-            logger.error(f"Error in get_preamble: {e}")                    
-        
-        try:
-            self.get_formula()
-            logger.info(f"Formula parsed.")                    
-        except Exception as e:
-            logger.error(f"Error in get_formula: {e}")                    
-        
-        try:
-            self.get_citations()
-            logger.info(f"Citations parsed. Number: {len(self.citations) if self.citations else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_citations: {e}")
-        
-        try:
-            self.get_recitals()
-            logger.info(f"Recitals parsed. Number: {len(self.recitals) if self.recitals else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_recitals: {e}")
-        
-        try:
-            self.get_preamble_final()
-            logger.info(f"Preamble final parsed.")
-        except Exception as e:
-            logger.error(f"Error in get_preamble_final: {e}")
-        
-        try:
-            self.get_body()
-            logger.info(f"Body element retrieved.")
-        except Exception as e:
-            logger.error(f"Error in get_body: {e}")
-        
-        try:
-            self.get_chapters()
-            logger.info(f"Chapters parsed. Number: {len(self.chapters) if self.chapters else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_chapters: {e}")
-        
-        try:
-            self.get_articles()
-            logger.info(f"Articles parsed. Number: {len(self.articles) if self.articles else 0}")
-        except Exception as e:
-            logger.error(f"Error in get_articles: {e}")
-        
-        try:
-            self.get_conclusions()
-            logger.info(f"Conclusions parsed.")
-        except Exception as e:
-            logger.error(f"Error in get_conclusions: {e}")
+        # Use orchestrator for standard parsing workflow
+        orchestrator = AKNParseOrchestrator(self, context_name="Luxembourg AKN")
+        orchestrator.execute_standard_workflow(file)
         
         return self
 

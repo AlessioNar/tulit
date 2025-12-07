@@ -128,26 +128,3 @@ class BOEXMLParser(XMLParser):
             'preamble_final': self.preamble_final,
             'conclusions': self.conclusions
         }
-
-def main():
-    parser = argparse.ArgumentParser(description='Parse BOE XML to LegalJSON.')
-    parser.add_argument('xml_file', help='Path to BOE XML file')
-    parser.add_argument('output', help='Output LegalJSON file')
-    args = parser.parse_args()
-
-    logging.basicConfig(level=logging.INFO)
-    boe_parser = BOEXMLParser()
-    boe_parser.parse(args.xml_file)
-    legaljson = boe_parser.to_legaljson()
-
-    # Validate LegalJSON
-    validator = LegalJSONValidator()
-    if not validator.validate(legaljson):
-        logging.error('LegalJSON validation failed.')
-        exit(1)
-    with open(args.output, 'w', encoding='utf-8') as f:
-        json.dump(legaljson, f, ensure_ascii=False, indent=2)
-    logging.info(f'LegalJSON written to {args.output}')
-
-if __name__ == '__main__':
-    main()

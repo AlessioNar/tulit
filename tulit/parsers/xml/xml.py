@@ -59,7 +59,7 @@ class XMLParser(Parser):
             schema_path = os.path.join(base_dir, 'assets', schema)
 
             # Parse the schema
-            with open(schema_path, 'r') as f:
+            with open(schema_path, 'rb') as f:
                 schema_doc = etree.parse(f)
                 self.schema = etree.XMLSchema(schema_doc)
             self.logger.info("Schema loaded successfully.")

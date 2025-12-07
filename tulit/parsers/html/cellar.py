@@ -9,7 +9,7 @@ import logging
 
 class CellarHTMLParser(HTMLParser):
     def __init__(self):
-        pass
+        super().__init__()
 
     def _normalize_text(self, text):
         """
@@ -51,12 +51,12 @@ class CellarHTMLParser(HTMLParser):
             preface_element = self.root.find('div', class_='eli-main-title')
             if preface_element:
                 self.preface = self._normalize_text(preface_element.get_text(separator=' ', strip=True))
-                print("Preface extracted successfully.")
+                self.logger.info("Preface extracted successfully")
             else:
                 self.preface = None
-                print("No preface found.")
+                self.logger.warning("No preface found")
         except Exception as e:
-            print(f"Error extracting preface: {e}")
+            self.logger.error(f"Error extracting preface: {e}", exc_info=True)
     
             
     def get_preamble(self):
@@ -182,12 +182,12 @@ class CellarHTMLParser(HTMLParser):
         # If no explicit body found, use eli-container as fallback
         if self.body is None:
             self.body = self.root.find('div', class_='eli-container')
-            print("Body element not found. Using eli-container as fallback.")
+            self.logger.warning("Body element not found. Using eli-container as fallback")
         
         # If still no body, use root itself
         if self.body is None:
             self.body = self.root
-            print("Body element not found. Using root as fallback.")
+            self.logger.warning("Body element not found. Using root as fallback")
         
         # Remove anchor tags
         if self.body:
@@ -201,7 +201,7 @@ class CellarHTMLParser(HTMLParser):
         
         if self.body is None:
             self.chapters = []
-            print("No body element to extract chapters from.")
+            self.logger.warning("No body element to extract chapters from")
             return
         
         chapters = self.body.find_all('div', id=lambda x: x and x.startswith('cpt_') and '.' not in x)
@@ -230,7 +230,7 @@ class CellarHTMLParser(HTMLParser):
         
         if self.body is None:
             self.articles = []
-            print("No body element to extract articles from.")
+            self.logger.warning("No body element to extract articles from")
             return
         
         # Find all article divs: either id="art" (sole article) or id="art_X" (numbered articles)
@@ -245,7 +245,7 @@ class CellarHTMLParser(HTMLParser):
                 article_num_elem = article.find('p', class_='title-article-norm')
             
             if article_num_elem is None:
-                print(f"Article {eId} has no article title element, skipping.")
+                self.logger.warning(f"Article {eId} has no article title element, skipping")
                 continue
             
             article_num = self._normalize_text(article_num_elem.get_text(strip=True))

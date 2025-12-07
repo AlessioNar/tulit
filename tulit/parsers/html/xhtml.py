@@ -30,9 +30,9 @@ class HTMLParser(Parser):
             with open(file, 'r', encoding='utf-8') as f:
                 html = f.read()
             self.root = BeautifulSoup(html, 'html.parser')
-            print("HTML loaded successfully.")
+            self.logger.info("HTML loaded successfully")
         except Exception as e:
-            print(f"Error loading HTML: {e}")
+            self.logger.error(f"Error loading HTML: {e}", exc_info=True)
             
 
     def parse(self, file: str) -> Parser:
@@ -52,64 +52,64 @@ class HTMLParser(Parser):
             
         try:
             self.get_root(file)
-            print("Root element loaded successfully.")
+            self.logger.info("Root element loaded successfully")
         except Exception as e:
-            print(f"Error in get_root: {e}")
+            self.logger.error(f"Error in get_root: {e}", exc_info=True)
             
         try:
             self.get_preface()
-            print(f"Preface parsed successfully. Preface: {self.preface}")
+            self.logger.debug(f"Preface parsed successfully. Preface: {self.preface}")
         except Exception as e:
-            print(f"Error in get_preface: {e}")
+            self.logger.error(f"Error in get_preface: {e}", exc_info=True)
         
         try:
             self.get_preamble()
-            print(f"Preamble element found.")
+            self.logger.info("Preamble element found")
         except Exception as e:
-            print(f"Error in get_preamble: {e}")
+            self.logger.error(f"Error in get_preamble: {e}", exc_info=True)
         try:
             self.get_formula()
-            print(f"Formula parsed successfully.")
+            self.logger.info("Formula parsed successfully")
         except Exception as e:
-            print(f"Error in get_formula: {e}")
+            self.logger.error(f"Error in get_formula: {e}", exc_info=True)
         try:
             self.get_citations()
-            print(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
+            self.logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
         except Exception as e:
-            print(f"Error in get_citations: {e}")
+            self.logger.error(f"Error in get_citations: {e}", exc_info=True)
         try:
             self.get_recitals()
-            print(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
+            self.logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
         except Exception as e:
-            print(f"Error in get_recitals: {e}")
+            self.logger.error(f"Error in get_recitals: {e}", exc_info=True)
         
         try:
             self.get_preamble_final()
-            print(f"Preamble final parsed successfully.")
+            self.logger.info("Preamble final parsed successfully")
         except Exception as e:
-            print(f"Error in get_preamble_final: {e}")
+            self.logger.error(f"Error in get_preamble_final: {e}", exc_info=True)
         
         try:
             self.get_body()
-            print("Body element found.")
+            self.logger.info("Body element found")
         except Exception as e:
-            print(f"Error in get_body: {e}")
+            self.logger.error(f"Error in get_body: {e}", exc_info=True)
         try:
             self.get_chapters()
-            print(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
+            self.logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
         except Exception as e:
-            print(f"Error in get_chapters: {e}")
+            self.logger.error(f"Error in get_chapters: {e}", exc_info=True)
         try:
             self.get_articles()
-            print(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-            print(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                        
+            self.logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
+            self.logger.debug(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")
             
         except Exception as e:
-            print(f"Error in get_articles: {e}")
+            self.logger.error(f"Error in get_articles: {e}", exc_info=True)
         try:
-            self.get_conclusions()                    
-            print(f"Conclusions parsed successfully. ")
+            self.get_conclusions()
+            self.logger.info("Conclusions parsed successfully")
         except Exception as e:
-            print(f"Error in get_conclusions: {e}")
+            self.logger.error(f"Error in get_conclusions: {e}", exc_info=True)
         
         return self

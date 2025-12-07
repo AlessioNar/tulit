@@ -44,6 +44,8 @@ class Parser(ABC):
         ----------
         None
         """
+        # Initialize logger with fully qualified class name
+        self.logger = logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
        
         self.root = None 
         self.preface = None
@@ -81,16 +83,13 @@ class Parser(ABC):
         """
         return {
             'preface': self.preface,
-            'preamble': {
-                'formula': self.formula,
-                'citations': self.citations,
-                'recitals': self.recitals,
-                'final': self.preamble_final
-            },
-            'body': {
-                'chapters': self.chapters,
-                'articles': self.articles
-            },
+            'preamble': self.preamble,
+            'formula': self.formula,
+            'citations': self.citations,
+            'recitals': self.recitals,
+            'preamble_final': self.preamble_final,
+            'chapters': self.chapters,
+            'articles': self.articles,            
             'conclusions': self.conclusions
         }
 

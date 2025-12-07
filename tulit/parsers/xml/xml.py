@@ -2,10 +2,7 @@ from lxml import etree
 import os
 import re
 from tulit.parsers.parser import Parser
-
 import logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
 class XMLParser(Parser):
     """
@@ -64,9 +61,9 @@ class XMLParser(Parser):
             with open(schema_path, 'r') as f:
                 schema_doc = etree.parse(f)
                 self.schema = etree.XMLSchema(schema_doc)
-            logger.info("Schema loaded successfully.")
+            self.logger.info("Schema loaded successfully.")
         except Exception as e:
-            logger.error(f"Error loading schema: {e}")
+            self.logger.error(f"Error loading schema: {e}")
 
     def validate(self, file: str,  format: str) -> bool:
         """
@@ -85,21 +82,21 @@ class XMLParser(Parser):
             Sets the valid attribute to True if the file is valid, False otherwise.
         """
         if not self.schema:
-            logger.error("No schema loaded. Please load an XSD schema first.")
+            self.logger.error("No schema loaded. Please load an XSD schema first.")
             return None
 
         try:
             with open(file, 'r', encoding='utf-8') as f:
                 xml_doc = etree.parse(f)
                 self.schema.assertValid(xml_doc)
-            logger.info(f"{file} is a valid {format} file.")
+            self.logger.info(f"{file} is a valid {format} file.")
             self.valid = True
         except etree.DocumentInvalid as e:
-            logger.warning(f"{file} is not a valid {format} file. Validation errors: {e}")
+            self.logger.warning(f"{file} is not a valid {format} file. Validation errors: {e}")
             self.valid = False
             self.validation_errors = e.error_log
         except Exception as e:
-            logger.error(f"An error occurred during validation: {e}")
+            self.logger.error(f"An error occurred during validation: {e}")
             self.valid = False
         
     def remove_node(self, tree, node):
@@ -442,79 +439,79 @@ class XMLParser(Parser):
             # Only skip if file cannot be parsed at all
             try:
                 self.get_root(file)
-                logger.info(f"Root element loaded successfully.")                    
+                self.logger.info(f"Root element loaded successfully.")                    
             except Exception as e:
-                logger.error(f"Error in get_root: {e}")
+                self.logger.error(f"Error in get_root: {e}")
                 
                 
             try:
                 self.get_preface()
-                logger.info(f"Preface element found. Preface: {self.preface}")                    
+                self.logger.info(f"Preface element found. Preface: {self.preface}")                    
             except Exception as e:
-                logger.error(f"Error in get_preface: {e}")                    
+                self.logger.error(f"Error in get_preface: {e}")                    
             
             try:
                 self.get_preamble()
-                logger.info(f"Preamble element found.")                    
+                self.logger.info(f"Preamble element found.")                    
             except Exception as e:
-                logger.error(f"Error in get_preamble: {e}")                    
+                self.logger.error(f"Error in get_preamble: {e}")                    
             try:
                 self.get_formula()
-                logger.info(f"Formula element found. Formula: {self.formula}")                    
+                self.logger.info(f"Formula element found. Formula: {self.formula}")                    
             except Exception as e:
-                logger.error(f"Error in get_formula: {e}")                    
+                self.logger.error(f"Error in get_formula: {e}")                    
             try:
                 self.get_citations()
-                logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
+                self.logger.info(f"Citations parsed successfully. Number of citations: {len(self.citations)}")
                 
             except Exception as e:
-                logger.error(f"Error in get_citations: {e}")
+                self.logger.error(f"Error in get_citations: {e}")
                 
             try:
                 self.get_recitals()
-                logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
+                self.logger.info(f"Recitals parsed successfully. Number of recitals: {len(self.recitals)}")
                 
             except Exception as e:
-                logger.error(f"Error in get_recitals: {e}")
+                self.logger.error(f"Error in get_recitals: {e}")
                 
             
             try:
                 self.get_preamble_final()
-                logger.info(f"Preamble final parsed successfully.")
+                self.logger.info(f"Preamble final parsed successfully.")
                 
             except Exception as e:
-                logger.error(f"Error in get_preamble_final: {e}")
+                self.logger.error(f"Error in get_preamble_final: {e}")
                 
             
             try:
                 self.get_body()
-                logger.info(f"Body element found.")                    
+                self.logger.info(f"Body element found.")                    
             except Exception as e:
-                logger.error(f"Error in get_body: {e}")
+                self.logger.error(f"Error in get_body: {e}")
                 
             try:
                 self.get_chapters()
-                logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
+                self.logger.info(f"Chapters parsed successfully. Number of chapters: {len(self.chapters)}")
                 
             except Exception as e:
-                logger.error(f"Error in get_chapters: {e}")
+                self.logger.error(f"Error in get_chapters: {e}")
                 
             try:
                 self.get_articles()
-                logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-                logger.info(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                    
+                self.logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
+                self.logger.info(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")                    
                 
             except Exception as e:
-                logger.error(f"Error in get_articles: {e}")
+                self.logger.error(f"Error in get_articles: {e}")
                                     
             try:
                 self.get_conclusions()                    
-                logger.info(f"Conclusions parsed successfully.")
+                self.logger.info(f"Conclusions parsed successfully.")
                 
             except Exception as e:
-                logger.error(f"Error in get_conclusions: {e}")                    
+                self.logger.error(f"Error in get_conclusions: {e}")                    
                 
             return self
                 
         except Exception as e:
-            logger.warn(f"Invalid {format} file: parsing may not work or work only partially: {e}")
+            self.logger.warn(f"Invalid {format} file: parsing may not work or work only partially: {e}")

@@ -35,7 +35,6 @@ data/logs/
 .env
 
 # Test scripts in root (tests should be in tests/ directory)
-test_*.py
 check_*.py
 show_*.py
 example_data

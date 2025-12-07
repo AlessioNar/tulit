@@ -4,15 +4,16 @@ import json
 import argparse
 import logging
 from tulit.parsers.parser import LegalJSONValidator
+from typing import Optional
 
 class HTMLParser(Parser):
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes the HTML parser and sets up the BeautifulSoup instance.
         """
         super().__init__()
         
-    def get_root(self, file):
+    def get_root(self, file: str) -> None:
         """
         Loads an HTML file and parses it with BeautifulSoup.
 

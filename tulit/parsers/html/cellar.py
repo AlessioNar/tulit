@@ -5,13 +5,14 @@ import argparse
 # LegalJSON validation
 from tulit.parsers.parser import LegalJSONValidator
 import logging
+from typing import Optional, Any
 
 
 class CellarHTMLParser(HTMLParser):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-    def _normalize_text(self, text):
+    def _normalize_text(self, text: str) -> str:
         """
         Normalize Unicode quotation marks and other special characters to ASCII equivalents.
         
@@ -34,7 +35,7 @@ class CellarHTMLParser(HTMLParser):
         text = text.replace('\xa0', ' ')
         return text
 
-    def get_preface(self):
+    def get_preface(self) -> None:
         """
         Extracts the preface text from the HTML, if available.
         
@@ -59,7 +60,7 @@ class CellarHTMLParser(HTMLParser):
             self.logger.error(f"Error extracting preface: {e}", exc_info=True)
     
             
-    def get_preamble(self):
+    def get_preamble(self) -> None:
         """
         Extracts the preamble text from the HTML, if available.
         
@@ -79,7 +80,7 @@ class CellarHTMLParser(HTMLParser):
             a.decompose()
             
     
-    def get_formula(self):
+    def get_formula(self) -> None:
         """
         Extracts the formula from the HTML, if present.
         
@@ -96,7 +97,7 @@ class CellarHTMLParser(HTMLParser):
 
 
     
-    def get_citations(self):
+    def get_citations(self) -> None:
         """
         Extracts citations from the HTML.
         
@@ -120,7 +121,7 @@ class CellarHTMLParser(HTMLParser):
                 }
             )
 
-    def get_recitals(self):
+    def get_recitals(self) -> None:
         """
         Extracts recitals from the HTML.
         
@@ -147,7 +148,7 @@ class CellarHTMLParser(HTMLParser):
                     'text' : text
                 }
             )
-    def get_preamble_final(self):
+    def get_preamble_final(self) -> None:
         """
         Extracts the final preamble text from the HTML, if available.
         
@@ -162,7 +163,7 @@ class CellarHTMLParser(HTMLParser):
         """
         self.preamble_final = self.preamble.find_all('p', class_='oj-normal')[-1].get_text(strip=True)
 
-    def get_body(self):
+    def get_body(self) -> None:
         """
         Extracts the body content from the HTML.
         
@@ -194,7 +195,7 @@ class CellarHTMLParser(HTMLParser):
             for a in self.body.find_all('a'):
                 a.replace_with(' ')
 
-    def get_chapters(self):
+    def get_chapters(self) -> None:
         """
         Extracts chapters from the HTML, grouping them by their IDs and headings.
         """
@@ -219,7 +220,7 @@ class CellarHTMLParser(HTMLParser):
                     'heading': chapter_title
                 })
 
-    def get_articles(self):
+    def get_articles(self) -> None:
         """
         Extracts articles from the HTML. Each <div> with an id starting with "art" is treated as an article (eId).
         Subsequent subdivisions are processed based on the closest parent with an id.
@@ -392,7 +393,7 @@ class CellarHTMLParser(HTMLParser):
         self._standardize_children_numbering()
 
 
-    def _standardize_children_numbering(self):
+    def _standardize_children_numbering(self) -> None:
         """
         Standardize article children numbering to format: 001.001, 001.002, etc.
         where the first number is the article number and the second is the child index.
@@ -407,7 +408,7 @@ class CellarHTMLParser(HTMLParser):
             for idx, child in enumerate(article['children'], start=1):
                 child['eId'] = f"{article_num:03d}.{idx:03d}"
     
-    def get_conclusions(self):
+    def get_conclusions(self) -> None:
         """
         Extracts conclusions from the HTML, if present.
         """
@@ -417,7 +418,7 @@ class CellarHTMLParser(HTMLParser):
         else:
             self.conclusions = None
 
-    def parse(self, file):
+    def parse(self, file: str) -> "CellarHTMLParser":
         """
         Parses an XHTML document. If the input is a directory, searches for XHTML files.
         

@@ -2,6 +2,8 @@ from abc import ABC
 import jsonschema
 import json
 import logging
+from typing import Any, Optional
+from logging import Logger
 
 class Parser(ABC):
     """
@@ -36,7 +38,7 @@ class Parser(ABC):
         Extracted conclusions from the body.
     """
     
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes the Parser object.
 
@@ -45,24 +47,24 @@ class Parser(ABC):
         None
         """
         # Initialize logger with fully qualified class name
-        self.logger = logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
+        self.logger: Logger = logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
        
-        self.root = None 
-        self.preface = None
+        self.root: Any = None  # Can be lxml.etree._Element or bs4.BeautifulSoup
+        self.preface: Optional[str] = None
 
-        self.preamble = None        
-        self.formula = None    
-        self.citations = []
-        self.recitals_init = None
-        self.recitals = []
-        self.preamble_final = None
+        self.preamble: Any = None  # Can be lxml.etree.Element or bs4.Tag
+        self.formula: Optional[str] = None
+        self.citations: list[dict[str, str]] = []
+        self.recitals_init: Optional[str] = None
+        self.recitals: list[dict[str, str]] = []
+        self.preamble_final: Optional[str] = None
     
-        self.body = None
-        self.chapters = []
-        self.articles = []
-        self.conclusions = None
+        self.body: Any = None  # Can be lxml.etree.Element or bs4.Tag
+        self.chapters: list[dict[str, Any]] = []
+        self.articles: list[dict[str, Any]] = []
+        self.conclusions: Optional[dict[str, Any]] = None
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert the parser's extracted data to a dictionary.
 
@@ -97,15 +99,15 @@ class LegalJSONValidator:
     """
     Validator for LegalJSON output using the LegalJSON schema.
     """
-    def __init__(self, schema_path=None):
+    def __init__(self, schema_path: Optional[str] = None) -> None:
         if schema_path is None:
             import os
             schema_path = os.path.join(os.path.dirname(__file__), 'legaljson_schema.json')
         with open(schema_path, 'r', encoding='utf-8') as f:
-            self.schema = json.load(f)
-        self.logger = logging.getLogger(self.__class__.__name__)
+            self.schema: dict[str, Any] = json.load(f)
+        self.logger: Logger = logging.getLogger(self.__class__.__name__)
 
-    def validate(self, data):
+    def validate(self, data: dict[str, Any]) -> bool:
         """
         Validate a LegalJSON object against the LegalJSON schema.
         Returns True if valid, False otherwise.

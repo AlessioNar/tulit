@@ -5,15 +5,20 @@ from typing import Optional, Any
 from lxml import etree
 from tulit.parsers.parser import LegalJSONValidator, Parser
 from tulit.parsers.xml.xml import XMLParser
+from tulit.parsers.strategies.article_extraction import BOEArticleStrategy
 import logging
 
 class BOEXMLParser(XMLParser):
     """
-    Parser for BOE XML documents to LegalJSON, using the same method structure as AkomaNtosoParser.
+    Parser for BOE XML documents to LegalJSON.
+    
+    Uses BOEArticleStrategy to extract articles, reducing code duplication
+    and improving maintainability.
     """
     def __init__(self) -> None:
         super().__init__()
         self.namespaces = {}
+        self.article_strategy = BOEArticleStrategy()
 
     def get_preface(self) -> Optional[str]:
         # Get all <p> elements in the document and filter by those under <texto>
@@ -32,30 +37,13 @@ class BOEXMLParser(XMLParser):
         return self.preface
 
     def get_articles(self) -> None:
-        # Get all <p> elements in the document and filter by those under <texto>
-        all_p_elements = self.root.findall('.//p')
-        texto_p_elements = [p for p in all_p_elements if p.getparent() is not None and p.getparent().tag == 'texto']
+        """
+        Extract articles using BOEArticleStrategy.
         
-        articles = []
-        current_article = None
-        article_count = 0
-        for p in texto_p_elements:
-            p_class = p.get('class')
-            text = ''.join(p.itertext()).strip()
-            if p_class == 'articulo':
-                if current_article:
-                    articles.append(current_article)
-                article_count += 1
-                current_article = {
-                    'eId': f'art_{article_count}',
-                    'text': text,  # Article title goes here
-                    'children': []
-                }
-            elif p_class == 'parrafo' and current_article:
-                current_article['children'].append({'text': text})
-        if current_article:
-            articles.append(current_article)
-        self.articles = articles
+        This method delegates article extraction to the strategy pattern,
+        reducing code duplication and improving testability.
+        """
+        self.articles = self.article_strategy.extract_articles(self.root)
         return self.articles
 
     def get_chapters(self) -> list:

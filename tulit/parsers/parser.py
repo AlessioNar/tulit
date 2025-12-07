@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import jsonschema
 import json
 import logging
+import re
 from typing import Any, Optional, List, Dict
 from logging import Logger
 from dataclasses import dataclass, field
@@ -399,8 +400,8 @@ class PatternReplacementNormalizer(TextNormalizationStrategy):
         Example
         -------
         >>> normalizer = PatternReplacementNormalizer([
-        ...     (r'▼[A-Z]\d*', ''),  # Remove consolidation markers
-        ...     (r'^\(\d+\)', '')     # Remove leading numbers in parentheses
+        ...     (r'▼[A-Z]\\d*', ''),  # Remove consolidation markers
+        ...     (r'^\\(\\d+\\)', '')     # Remove leading numbers in parentheses
         ... ])
         """
         self.patterns = patterns
@@ -428,7 +429,7 @@ class CompositeNormalizer(TextNormalizationStrategy):
     >>> normalizer = CompositeNormalizer([
     ...     UnicodeNormalizer(),
     ...     WhitespaceNormalizer(),
-    ...     PatternReplacementNormalizer([(r'▼[A-Z]\d*', '')])
+    ...     PatternReplacementNormalizer([(r'▼[A-Z]\\d*', '')])
     ... ])
     >>> clean_text = normalizer.normalize(raw_text)
     """
@@ -495,7 +496,7 @@ def create_html_normalizer() -> CompositeNormalizer:
     """
     return CompositeNormalizer([
         PatternReplacementNormalizer([
-            (r'▼[A-Z]\d*', ''),  # Remove consolidation markers
+            (r'▼[A-Z]\\d*', ''),  # Remove consolidation markers
         ]),
         UnicodeNormalizer(replace_nbsp=True),
         WhitespaceNormalizer(fix_punctuation=True)
@@ -518,7 +519,7 @@ def create_formex_normalizer() -> CompositeNormalizer:
     """
     return CompositeNormalizer([
         PatternReplacementNormalizer([
-            (r'^\(\d+\)', ''),  # Remove leading numbers in parentheses
+            (r'^\\(\\d+\\)', ''),  # Remove leading numbers in parentheses
         ]),
         UnicodeNormalizer(replace_nbsp=True),
         WhitespaceNormalizer(fix_punctuation=True)

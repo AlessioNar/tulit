@@ -4,10 +4,15 @@ import re
 from tulit.parsers.parser import Parser
 import logging
 from typing import Optional, Any
+from abc import abstractmethod
 
 class XMLParser(Parser):
     """
-    Base class for XML parsers.
+    Abstract base class for XML parsers.
+    
+    Provides common XML parsing utilities and helper methods.
+    Subclasses must implement get_preface(), get_articles(), and parse()
+    or use the provided parse() template method by overriding component methods.
     
     Attributes
     ----------
@@ -403,15 +408,32 @@ class XMLParser(Parser):
                 'heading': chapter_heading 
             })
 
+    @abstractmethod
     def get_articles(self) -> None:
         """
-        Extracts articles from the body section. It is implemented in the subclass.
+        Extracts articles from the body section.
+        
+        MUST be implemented by all XML parser subclasses.
+        Subclasses should extract articles according to their specific XML format
+        and store them in self.articles.
+        
+        Returns
+        -------
+        None
+            Articles are stored in self.articles attribute
         """
         pass
     
     def get_conclusions(self):
         """
-        Extracts conclusions from the body section. It is implemented in the subclass.
+        Extracts conclusions from the body section. 
+        
+        Override in subclass if format has conclusions.
+        Default implementation does nothing.
+        
+        Returns
+        -------
+        None
         """
         pass
         

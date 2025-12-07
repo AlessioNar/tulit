@@ -5,8 +5,17 @@ import argparse
 import logging
 from tulit.parsers.parser import LegalJSONValidator
 from typing import Optional
+from abc import abstractmethod
 
 class HTMLParser(Parser):
+    """
+    Abstract base class for HTML parsers.
+    
+    Provides common HTML parsing utilities and a template parse() method.
+    Subclasses must implement get_preface() and get_articles().
+    Optional methods like get_preamble(), get_chapters(), etc. can be overridden.
+    """
+    
     def __init__(self) -> None:
         """
         Initializes the HTML parser and sets up the BeautifulSoup instance.

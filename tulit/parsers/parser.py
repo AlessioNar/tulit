@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import jsonschema
 import json
 import logging
@@ -7,7 +7,22 @@ from logging import Logger
 
 class Parser(ABC):
     """
-    Abstract base class for parsers
+    Abstract base class for legal document parsers.
+    
+    All subclasses must implement:
+    - get_preface()
+    - get_articles()
+    - parse()
+    
+    Optional methods with default implementations:
+    - get_preamble()
+    - get_formula()
+    - get_citations()
+    - get_recitals()
+    - get_preamble_final()
+    - get_body()
+    - get_chapters()
+    - get_conclusions()
     
     Attributes
     ----------
@@ -19,17 +34,17 @@ class Parser(ABC):
         The preamble section of the document.
     formula : str or None
         The formula element extracted from the preamble.
-    citations : list or None
+    citations : list
         List of extracted citations from the preamble.
-    recitals : list or None
+    recitals : list
         List of extracted recitals from the preamble.
     preamble_final : str or None
         The final preamble text extracted from the document.
     body : lxml.etree.Element or bs4.Tag or None
         The body section of the document.
-    chapters : list or None
+    chapters : list
         List of extracted chapters from the body.
-    articles : list or None
+    articles : list
         List of extracted articles from the body. Each article is a dictionary with keys:
         - 'eId': Article identifier
         - 'text': Article text
@@ -63,6 +78,168 @@ class Parser(ABC):
         self.chapters: list[dict[str, Any]] = []
         self.articles: list[dict[str, Any]] = []
         self.conclusions: Optional[dict[str, Any]] = None
+
+    @abstractmethod
+    def get_preface(self) -> Optional[str]:
+        """
+        Extract document preface/title.
+        
+        MUST be implemented by all subclasses.
+        
+        Returns
+        -------
+        str or None
+            Document title/preface text
+        """
+        pass
+
+    @abstractmethod
+    def get_articles(self) -> None:
+        """
+        Extract articles from document body.
+        
+        MUST be implemented by all subclasses.
+        Extracts articles and stores them in self.articles as a list of dictionaries.
+        
+        Returns
+        -------
+        None
+            Articles are stored in self.articles attribute
+        """
+        pass
+
+    @abstractmethod
+    def parse(self, file: str) -> 'Parser':
+        """
+        Parse document and extract all components.
+        
+        MUST be implemented by all subclasses.
+        
+        Parameters
+        ----------
+        file : str
+            Path to document file
+            
+        Returns
+        -------
+        Parser
+            Self (for method chaining)
+        """
+        pass
+
+    # Optional methods with default implementations
+
+    def get_preamble(self) -> Optional[Any]:
+        """
+        Extract preamble section.
+        
+        Override in subclass if format has preamble.
+        Default returns None.
+        
+        Returns
+        -------
+        Any or None
+            Preamble element or None if not present
+        """
+        return None
+
+    def get_formula(self) -> Optional[str]:
+        """
+        Extract formula (enacting clause).
+        
+        Override in subclass if format has formula.
+        Default returns None.
+        
+        Returns
+        -------
+        str or None
+            Formula text or None if not present
+        """
+        return None
+
+    def get_citations(self) -> list[dict[str, str]]:
+        """
+        Extract citations/references.
+        
+        Override in subclass if format has citations.
+        Default returns empty list.
+        
+        Returns
+        -------
+        list[dict[str, str]]
+            List of citation dictionaries
+        """
+        return []
+
+    def get_recitals(self) -> list[dict[str, str]]:
+        """
+        Extract recitals (whereas clauses).
+        
+        Override in subclass if format has recitals.
+        Default returns empty list.
+        
+        Returns
+        -------
+        list[dict[str, str]]
+            List of recital dictionaries
+        """
+        return []
+
+    def get_preamble_final(self) -> Optional[str]:
+        """
+        Extract final preamble text.
+        
+        Override in subclass if format has final preamble.
+        Default returns None.
+        
+        Returns
+        -------
+        str or None
+            Final preamble text or None if not present
+        """
+        return None
+
+    def get_body(self) -> Optional[Any]:
+        """
+        Extract body section.
+        
+        Override in subclass if needed.
+        Default returns None.
+        
+        Returns
+        -------
+        Any or None
+            Body element or None
+        """
+        return None
+
+    def get_chapters(self) -> list[dict[str, Any]]:
+        """
+        Extract chapters.
+        
+        Override in subclass if format has chapters.
+        Default returns empty list.
+        
+        Returns
+        -------
+        list[dict[str, Any]]
+            List of chapter dictionaries
+        """
+        return []
+
+    def get_conclusions(self) -> Optional[dict[str, Any]]:
+        """
+        Extract conclusions section.
+        
+        Override in subclass if format has conclusions.
+        Default returns None.
+        
+        Returns
+        -------
+        dict[str, Any] or None
+            Conclusions dictionary or None if not present
+        """
+        return None
 
     def to_dict(self) -> dict[str, Any]:
         """

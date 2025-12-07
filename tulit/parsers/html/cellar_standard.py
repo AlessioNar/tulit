@@ -2,6 +2,7 @@ from tulit.parsers.html.xhtml import HTMLParser
 import json
 import re
 import argparse
+from typing import Optional, Any
 from tulit.parsers.parser import LegalJSONValidator
 import logging
 
@@ -13,10 +14,10 @@ class CellarStandardHTMLParser(HTMLParser):
     unlike the semantic XHTML format with class-based structure.
     """
     
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
     
-    def _clean_text(self, text):
+    def _clean_text(self, text: str) -> str:
         """Clean and normalize text content."""
         # Remove consolidation markers (▼B, ▼M1, ▼M2, etc.)
         text = re.sub(r'▼[A-Z]\d*', '', text)
@@ -36,7 +37,7 @@ class CellarStandardHTMLParser(HTMLParser):
             return match.group(1), match.group(2)
         return None, text
     
-    def get_preface(self):
+    def get_preface(self) -> None:
         """
         Extract document title/preface.
         In standard HTML, this is typically in the metadata or first heading.
@@ -69,7 +70,7 @@ class CellarStandardHTMLParser(HTMLParser):
             self.preface = None
             self.logger.error(f"Error extracting preface: {e}")
     
-    def get_preamble(self):
+    def get_preamble(self) -> None:
         """
         Extract preamble content.
         In standard HTML, the preamble typically includes the decision-making body,
@@ -103,7 +104,7 @@ class CellarStandardHTMLParser(HTMLParser):
             self.preamble = None
             self.logger.error(f"Error extracting preamble: {e}")
     
-    def get_formula(self):
+    def get_formula(self) -> None:
         """
         Extract the formula (decision-making body statement).
         Usually starts with "THE COUNCIL", "THE COMMISSION", etc.

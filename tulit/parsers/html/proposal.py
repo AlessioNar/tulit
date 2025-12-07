@@ -2,6 +2,7 @@ from tulit.parsers.html.xhtml import HTMLParser
 import json
 import re
 import argparse
+from typing import Optional, Any
 
 class ProposalHTMLParser(HTMLParser):
     """
@@ -15,12 +16,12 @@ class ProposalHTMLParser(HTMLParser):
     - Sometimes the actual legal act text at the end
     """
     
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.metadata = {}
         self.explanatory_memorandum = {}
         
-    def get_metadata(self):
+    def get_metadata(self) -> None:
         """
         Extracts metadata from the Commission proposal HTML.
         
@@ -77,7 +78,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting metadata: {e}")
     
-    def get_explanatory_memorandum(self):
+    def get_explanatory_memorandum(self) -> None:
         """
         Extracts the Explanatory Memorandum section from the proposal.
         
@@ -266,7 +267,7 @@ class ProposalHTMLParser(HTMLParser):
             import traceback
             traceback.print_exc()
     
-    def get_preface(self):
+    def get_preface(self) -> None:
         """
         For proposals, the preface is the combination of status, document type, and title.
         This extracts from the SECOND occurrence (the actual legal act), not the first (cover page).
@@ -297,7 +298,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting preface: {e}")
     
-    def get_preamble(self):
+    def get_preamble(self) -> None:
         """
         Extracts the preamble of the legal act (not the explanatory memorandum).
         The preamble appears after the explanatory memorandum and contains:
@@ -330,7 +331,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting preamble: {e}")
     
-    def get_formula(self):
+    def get_formula(self) -> None:
         """
         Extracts the formula from the preamble (e.g., "THE COUNCIL OF THE EUROPEAN UNION,").
         
@@ -352,7 +353,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting formula: {e}")
     
-    def get_citations(self):
+    def get_citations(self) -> None:
         """
         Extracts citations from the preamble (paragraphs starting with "Having regard to").
         Citations appear between the formula and "Whereas:"
@@ -397,7 +398,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting citations: {e}")
     
-    def get_recitals(self):
+    def get_recitals(self) -> None:
         """
         Extracts recitals from the preamble (paragraphs with class "li ManualConsidrant").
         Recitals may span multiple content divs.
@@ -433,7 +434,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting recitals: {e}")
     
-    def get_preamble_final(self):
+    def get_preamble_final(self) -> None:
         """
         Extracts the final formula of the preamble (e.g., "HAS ADOPTED THIS DECISION:").
         
@@ -455,7 +456,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting preamble final: {e}")
     
-    def get_body(self):
+    def get_body(self) -> None:
         """
         Extracts the body of the legal act (the enacting terms/articles).
         
@@ -480,7 +481,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting body: {e}")
     
-    def get_articles(self):
+    def get_articles(self) -> None:
         """
         Extracts articles from the body of the legal act.
         Articles may span multiple content divs.
@@ -750,7 +751,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting articles: {e}")
     
-    def get_conclusions(self):
+    def get_conclusions(self) -> None:
         """
         Extracts conclusions from the legal act (signature section).
         
@@ -778,7 +779,7 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting conclusions: {e}")
     
-    def parse(self, file):
+    def parse(self, file: str) -> "ProposalHTMLParser":
         """
         Parses a Commission proposal HTML file and extracts all relevant information.
         

@@ -2,20 +2,21 @@ from tulit.parsers.html.xhtml import HTMLParser
 import json
 import re
 import argparse
+from typing import Optional, Any
 # LegalJSON validation
 from tulit.parsers.parser import LegalJSONValidator
 import logging
 
 class VenetoHTMLParser(HTMLParser):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
     
-    def get_root(self, file):
+    def get_root(self, file: str) -> None:
         super().get_root(file)
         
         self.root = self.root.find_all('div', class_="row testo")[0]
 
-    def get_preface(self):
+    def get_preface(self) -> None:
         """
         Extracts the preface text from the HTML, if available.
         

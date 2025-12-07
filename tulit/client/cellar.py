@@ -283,26 +283,3 @@ class CellarClient(Client):
             self.logger.error(f"Error processing range: {e}")
         
         return document_paths
-
-def main():
-    parser = argparse.ArgumentParser(description='Download a Cellar document to a folder')
-    parser.add_argument('--celex', type=str, default='32024R0903', help='CELEX identifier of the document')
-    parser.add_argument('--format', type=str, default='fmx4', help='Format of the document, either fmx4 or xhtml')
-    parser.add_argument('--dir', type=str, default='tests/data/formex', help='Path to the directory')
-    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Directory for logs')
-    
-    args = parser.parse_args()
-    
-    client = CellarClient(download_dir=args.dir, log_dir=args.logdir)    
-    
-    documents = client.download(celex=args.celex, format=args.format)
-    
-    if documents:
-        logger.info(f"Downloaded documents: {documents}")
-    else:
-        logger.error("No documents downloaded.")
-        sys.exit(1)
-    print(documents)
-
-if __name__ == "__main__":
-    main()

@@ -1,4 +1,4 @@
-from tulit.parsers.html.xhtml import HTMLParser
+from tulit.parsers.html.html_parser import HTMLParser
 from tulit.parsers.strategies.article_extraction import ProposalArticleStrategy
 import json
 import re

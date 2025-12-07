@@ -4,7 +4,7 @@ Utility script to parse all commission proposal HTML files and save them as JSON
 import os
 import json
 from pathlib import Path
-from tulit.parsers.html.proposal import ProposalHTMLParser
+from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 
 # Paths
 PROPOSALS_DIR = Path(__file__).parent.parent.parent / "data" / "eurlex" / "commission_proposals_html"

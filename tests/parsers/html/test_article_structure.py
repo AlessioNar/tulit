@@ -1,4 +1,4 @@
-from tulit.parsers.html.proposal import ProposalHTMLParser
+from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 import json
 import os
 

@@ -9,7 +9,7 @@ This script can run in two modes:    print("\n" + "=" * 50)
 import os
 import sys
 from pathlib import Path
-from tulit.parsers.html.proposal import ProposalHTMLParser
+from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 
 # Path to the commission proposals directory
 PROPOSALS_DIR = Path(__file__).parent.parent.parent / "data" / "sources" / "eu" / "eurlex" / "commission_proposals"

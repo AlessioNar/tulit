@@ -1,6 +1,6 @@
 import unittest
 import os
-from tulit.parsers.html.proposal import ProposalHTMLParser
+from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 import json
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\sources\\eu\\eurlex\\commission_proposals")

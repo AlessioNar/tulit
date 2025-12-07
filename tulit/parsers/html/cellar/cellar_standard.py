@@ -1,4 +1,4 @@
-from tulit.parsers.html.xhtml import HTMLParser
+from tulit.parsers.html.html_parser import HTMLParser
 import json
 import re
 import argparse

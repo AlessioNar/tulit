@@ -1,6 +1,7 @@
 from tulit.parsers.xml.xml import XMLParser
 import json
 import argparse
+from typing import Optional, Any
 from lxml import etree
 
 
@@ -40,7 +41,7 @@ def detect_akn_format(file_path: str) -> str:
         return 'akn'
 
 
-def create_akn_parser(file_path: str = None, format: str = None):
+def create_akn_parser(file_path: Optional[str] = None, format: Optional[str] = None) -> XMLParser:
     """
     Factory function to create the appropriate Akoma Ntoso parser.
     
@@ -83,7 +84,7 @@ class AkomaNtosoParser(XMLParser):
     namespaces : dict
         Dictionary mapping namespace prefixes to their URIs.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initializes the parser.
         """
@@ -100,23 +101,23 @@ class AkomaNtosoParser(XMLParser):
             'akn-csd13': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13'
         }
     
-    def get_preface(self):
+    def get_preface(self) -> None:
         """	
         Extracts preface information from the document. It is assumed that the preface
         is contained within the 'preface' element in the XML file.
         """
         return super().get_preface(preface_xpath='.//akn:preface', paragraph_xpath='.//akn:p')
     
-    def get_preamble(self):
+    def get_preamble(self) -> None:
         """
         Extracts preamble information from the document. It is assumed that the preamble
         is contained within the 'preamble' element in the XML file.
         """
         return super().get_preamble(preamble_xpath='.//akn:preamble', notes_xpath='.//akn:authorialNote')
     
-    def get_formula(self):
+    def get_formula(self) -> None:
         """
-        Extracts formula text from the preamble. The formula is assumed to be contained
+        Extracts formula from the preamble. The formula is assumed to be contained within
         within the 'formula' element in the XML file. The formula text is extracted from
         all paragraphs within the formula element.
 
@@ -128,7 +129,7 @@ class AkomaNtosoParser(XMLParser):
         """
         return super().get_formula(formula_xpath='.//akn:formula', paragraph_xpath='akn:p')
     
-    def get_citations(self) -> list:
+    def get_citations(self) -> None:
         """
         Extracts citations from the preamble. The citations are assumed to be contained
         within the 'citations' element in the XML file. Each citation is extracted from
@@ -144,7 +145,7 @@ class AkomaNtosoParser(XMLParser):
             extract_eId=self.extract_eId
         )
     
-    def get_recitals(self):
+    def get_recitals(self) -> None:
         """
         Extracts recitals from the preamble. The recitals are assumed to be contained
         within the 'recitals' element in the XML file. Each recital is extracted from
@@ -176,7 +177,7 @@ class AkomaNtosoParser(XMLParser):
             
         )
     
-    def get_preamble_final(self):
+    def get_preamble_final(self) -> None:
         """
         Extracts the final preamble text from the document. The final preamble is assumed
         to be contained within the 'preamble.final' element in the XML file. 
@@ -190,14 +191,14 @@ class AkomaNtosoParser(XMLParser):
         return super().get_preamble_final(preamble_final_xpath='.//akn:block[@name="preamble.final"]')
     
     
-    def get_body(self):
+    def get_body(self) -> None:
         """
-        Extracts the body section from the document. The body is assumed to be contained
+        Extracts body section from the document. The body is assumed to be contained within
         within the 'body' element in the XML file.
         """
         return super().get_body('.//akn:body')
     
-    def extract_eId(self, element, index=None):
+    def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         return element.get('eId')
         
     def get_chapters(self) -> None:
@@ -274,7 +275,7 @@ class AkomaNtosoParser(XMLParser):
             })
 
     
-    def get_text_by_eId(self, node):
+    def get_text_by_eId(self, node: etree._Element) -> list[dict[str, str]]:
         """
         Groups paragraph text by their nearest parent element with an eId attribute.
 
@@ -313,7 +314,7 @@ class AkomaNtosoParser(XMLParser):
                 elements.append(element)
         return elements
     
-    def get_conclusions(self):
+    def get_conclusions(self) -> None:
         """
         Extracts conclusions information from the document. The conclusions are assumed to be
         contained within the 'conclusions' element in the XML file. The conclusions section
@@ -376,13 +377,13 @@ class AKN4EUParser(AkomaNtosoParser):
     namespaces : dict
         Dictionary mapping namespace prefixes to their URIs.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-    def extract_eId(self, element, index=None):
+    def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         return element.get('{http://www.w3.org/XML/1998/namespace}id')
     
-    def get_text_by_eId(self, node):
+    def get_text_by_eId(self, node: etree._Element) -> list[dict[str, str]]:
         """
         Groups paragraph text by their nearest parent element with an eId attribute.
 
@@ -427,7 +428,7 @@ class GermanLegalDocMLParser(AkomaNtosoParser):
     namespaces : dict
         Dictionary mapping namespace prefixes to their URIs, with 'akn' mapped to the German namespace.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         # Override the namespace to use German LegalDocML
         # Map 'akn' prefix to German namespace so all XPath queries work seamlessly
@@ -541,7 +542,7 @@ class LuxembourgAKNParser(AkomaNtosoParser):
     namespaces : dict
         Dictionary mapping namespace prefixes to their URIs, with support for CSD13 namespace.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         # Override the namespace to use Luxembourg's CSD13 variant
         # Map 'akn' prefix to CSD13 namespace so all XPath queries work seamlessly
@@ -551,7 +552,7 @@ class LuxembourgAKNParser(AkomaNtosoParser):
             'scl': 'http://www.scl.lu'  # Luxembourg-specific metadata namespace
         }
     
-    def extract_eId(self, element, index=None):
+    def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         """
         Luxembourg uses 'id' attribute instead of 'eId'.
         

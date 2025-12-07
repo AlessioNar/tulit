@@ -45,19 +45,21 @@ class HTMLParser(Parser):
             self.logger.error(f"Error loading HTML: {e}", exc_info=True)
             
 
-    def parse(self, file: str) -> Parser:
+    def parse(self, file: str, **options) -> 'HTMLParser':
         """
         Parses an HTML file and extracts the preface, preamble, formula, citations, recitals, preamble final, body, chapters, articles, and conclusions.
         
         Parameters
         ----------
         file : str
-            Path to the XML file to parse.
+            Path to the HTML file to parse.
+        **options : dict
+            Optional configuration options
         
         Returns
         -------
-        Parser
-            The parser object with the parsed elements stored in the attributes.
+        HTMLParser
+            Self for method chaining with the parsed elements stored in the attributes.
         """
             
         try:

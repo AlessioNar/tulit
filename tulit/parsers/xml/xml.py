@@ -1,7 +1,7 @@
 from lxml import etree
 import os
 import re
-from tulit.parsers.parser import Parser
+from tulit.parsers.parser import Parser, FileLoadError
 import logging
 from typing import Optional, Any
 from abc import abstractmethod
@@ -151,9 +151,26 @@ class XMLParser(Parser):
         
         return tree
     
+    def _create_secure_parser(self) -> etree.XMLParser:
+        """
+        Creates a secure XML parser with protections against XXE attacks.
+        
+        Returns
+        -------
+        etree.XMLParser
+            Configured secure parser
+        """
+        # Create parser with security settings to prevent XXE attacks
+        parser = etree.XMLParser(
+            resolve_entities=False,  # Disable external entity resolution
+            no_network=True,         # Disable network access
+            remove_blank_text=False  # Preserve formatting
+        )
+        return parser
+    
     def get_root(self, file: str):
         """
-        Parses an XML file and returns its root element.
+        Parses an XML file and returns its root element using secure parser settings.
 
         Parameters
         ----------
@@ -163,10 +180,21 @@ class XMLParser(Parser):
         Returns
         -------
         None
+        
+        Raises
+        ------
+        FileLoadError
+            If file cannot be loaded or parsed
         """
-        with open(file, 'r', encoding='utf-8') as f:
-            tree = etree.parse(f)
-            self.root = tree.getroot()
+        try:
+            parser = self._create_secure_parser()
+            with open(file, 'r', encoding='utf-8') as f:
+                tree = etree.parse(f, parser)
+                self.root = tree.getroot()
+        except (IOError, OSError) as e:
+            raise FileLoadError(f"Failed to load XML file '{file}': {e}") from e
+        except etree.ParseError as e:
+            raise FileLoadError(f"Failed to parse XML file '{file}': {e}") from e
 
     
     def get_preface(self, preface_xpath, paragraph_xpath) -> None:
@@ -438,7 +466,7 @@ class XMLParser(Parser):
         pass
         
     
-    def parse(self, file: str, schema, format) -> Parser:
+    def parse(self, file: str, **options) -> 'XMLParser':
         """
         Parses an XML file and extracts relevant sections based on the format.
         
@@ -446,15 +474,18 @@ class XMLParser(Parser):
         ----------
         file : str
             Path to the XML file to parse.
-        schema : str
-            Path to the XSD schema file.
-        format : str
-            The format of the XML file (e.g., 'Akoma Ntoso', 'Formex 4').
+        **options : dict
+            Optional configuration:
+            - schema : str - Path to the XSD schema file
+            - format : str - Format of the XML file (e.g., 'Akoma Ntoso', 'Formex 4')
         
         Returns
         -------
-        A XMLParser object with the parsed data stored in its attributes.
+        XMLParser
+            Self for method chaining with the parsed data stored in its attributes.
         """
+        schema = options.get('schema')
+        format = options.get('format', 'XML')
         try:
             self.load_schema(schema)
             self.validate(file=file, format=format)

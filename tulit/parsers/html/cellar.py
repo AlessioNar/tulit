@@ -418,15 +418,21 @@ class CellarHTMLParser(HTMLParser):
         else:
             self.conclusions = None
 
-    def parse(self, file: str) -> "CellarHTMLParser":
+    def parse(self, file: str, **options) -> "CellarHTMLParser":
         """
         Parses an XHTML document. If the input is a directory, searches for XHTML files.
         
-        Args:
-            file (str): Path to the XHTML file or directory containing XHTML files.
+        Parameters
+        ----------
+        file : str
+            Path to the XHTML file or directory containing XHTML files.
+        **options : dict
+            Optional configuration options
         
-        Returns:
-            Parser object with extracted content.
+        Returns
+        -------
+        CellarHTMLParser
+            Self for method chaining with extracted content.
         """
         from pathlib import Path
         

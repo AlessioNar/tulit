@@ -2,8 +2,118 @@ from abc import ABC, abstractmethod
 import jsonschema
 import json
 import logging
-from typing import Any, Optional
+from typing import Any, Optional, List, Dict
 from logging import Logger
+from dataclasses import dataclass, field
+
+
+# ============================================================================
+# Custom Exception Hierarchy
+# ============================================================================
+
+class ParserError(Exception):
+    """Base exception for all parser errors."""
+    pass
+
+
+class ParseError(ParserError):
+    """Raised when document parsing fails."""
+    pass
+
+
+class ValidationError(ParserError):
+    """Raised when document validation fails."""
+    pass
+
+
+class ExtractionError(ParserError):
+    """Raised when content extraction fails."""
+    pass
+
+
+class FileLoadError(ParserError):
+    """Raised when file loading fails."""
+    pass
+
+
+# ============================================================================
+# Domain Classes
+# ============================================================================
+
+@dataclass
+class Citation:
+    """Represents a legal citation in a document."""
+    eId: str
+    text: str
+    
+    def to_dict(self) -> Dict[str, str]:
+        """Convert to dictionary for JSON serialization."""
+        return {'eId': self.eId, 'text': self.text}
+
+
+@dataclass
+class Recital:
+    """Represents a recital (whereas clause) in a document."""
+    eId: str
+    text: str
+    
+    def to_dict(self) -> Dict[str, str]:
+        """Convert to dictionary for JSON serialization."""
+        return {'eId': self.eId, 'text': self.text}
+
+
+@dataclass
+class ArticleChild:
+    """Represents a child element (paragraph, point) of an article."""
+    eId: str
+    text: str
+    amendment: bool = False
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary for JSON serialization."""
+        result = {'eId': self.eId, 'text': self.text}
+        if self.amendment:
+            result['amendment'] = self.amendment
+        return result
+
+
+@dataclass
+class Article:
+    """Represents a legal article in a document."""
+    eId: str
+    num: Optional[str] = None
+    heading: Optional[str] = None
+    children: List[ArticleChild] = field(default_factory=list)
+    
+    def add_child(self, child: ArticleChild) -> None:
+        """Add a child element to this article."""
+        self.children.append(child)
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary for JSON serialization."""
+        return {
+            'eId': self.eId,
+            'num': self.num,
+            'heading': self.heading,
+            'children': [child.to_dict() for child in self.children]
+        }
+
+
+@dataclass
+class Chapter:
+    """Represents a chapter or section in a document."""
+    eId: str
+    num: Optional[str] = None
+    heading: Optional[str] = None
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary for JSON serialization."""
+        return {
+            'eId': self.eId,
+            'num': self.num,
+            'heading': self.heading
+        }
+
 
 class Parser(ABC):
     """
@@ -109,7 +219,7 @@ class Parser(ABC):
         pass
 
     @abstractmethod
-    def parse(self, file: str) -> 'Parser':
+    def parse(self, file: str, **options) -> 'Parser':
         """
         Parse document and extract all components.
         
@@ -119,6 +229,8 @@ class Parser(ABC):
         ----------
         file : str
             Path to document file
+        **options : dict
+            Optional parser-specific configuration options
             
         Returns
         -------

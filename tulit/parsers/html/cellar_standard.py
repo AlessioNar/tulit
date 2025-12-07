@@ -542,7 +542,7 @@ class CellarStandardHTMLParser(HTMLParser):
             self.conclusions = None
             self.logger.error(f"Error extracting conclusions: {e}")
     
-    def parse(self, file_path, validate=False):
+    def parse(self, file_path: str, **options) -> 'CellarStandardHTMLParser':
         """
         Parse a standard HTML document and extract all components.
         If the input is a directory, searches for HTML files.
@@ -551,14 +551,16 @@ class CellarStandardHTMLParser(HTMLParser):
         ----------
         file_path : str
             Path to the HTML file or directory containing HTML files
-        validate : bool, optional
-            Whether to validate against LegalJSON schema (default: False)
+        **options : dict
+            Optional configuration:
+            - validate : bool - Whether to validate against LegalJSON schema (default: False)
         
         Returns
         -------
-        dict
-            Parsed document in LegalJSON-compatible format
+        CellarStandardHTMLParser
+            Self for method chaining with parsed document.
         """
+        validate = options.get('validate', False)
         from pathlib import Path
         
         # Check if input is a directory
@@ -612,7 +614,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 if not is_valid:
                     self.logger.warning(f"Validation failed: {errors}")
             
-            return result
+            return self
             
         except Exception as e:
             self.logger.error(f"Error parsing document: {e}")

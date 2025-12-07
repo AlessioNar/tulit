@@ -336,18 +336,22 @@ class Formex4Parser(XMLParser):
         return text
 
     
-    def parse(self, file: str) -> "Formex4Parser":
+    def parse(self, file: str, **options) -> "Formex4Parser":
         """
         Parses a FORMEX XML document to extract its components, which are inherited from the XMLParser class.
         If the input is a directory, searches for the correct XML file (one containing ACT or DECISION tags).
 
-        Args:
-            file (str): Path to the FORMEX XML file or directory containing FORMEX files.
+        Parameters
+        ----------
+        file : str
+            Path to the FORMEX XML file or directory containing FORMEX files.
+        **options : dict
+            Optional configuration options (passed to parent XMLParser)
 
         Returns
         -------
-        dict
-            Parsed data containing metadata, title, preamble, and articles.
+        Formex4Parser
+            Self for method chaining with parsed data.
         """
         import os
         from pathlib import Path
@@ -385,7 +389,7 @@ class Formex4Parser(XMLParser):
                 logger.error(f"No XML files found in directory: {file_path}")
                 return self
         
-        super().parse(file, schema='./formex4.xsd', format='Formex 4')
+        super().parse(file, schema='./formex4.xsd', format='Formex 4', **options)
         
         # Check if this is an annex document (not a legal act)
         if self.preface and isinstance(self.preface, str):

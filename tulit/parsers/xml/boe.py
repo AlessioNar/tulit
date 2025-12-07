@@ -86,9 +86,24 @@ class BOEXMLParser(XMLParser):
         self.conclusions = None
         return self.conclusions
 
-    def parse(self, file: str) -> "BOEXMLParser":
-        tree = etree.parse(file)
-        self.root = tree.getroot()
+    def parse(self, file: str, **options) -> "BOEXMLParser":
+        """
+        Parse a BOE XML document.
+        
+        Parameters
+        ----------
+        file : str
+            Path to the BOE XML file
+        **options : dict
+            Optional configuration options
+            
+        Returns
+        -------
+        BOEXMLParser
+            Self for method chaining
+        """
+        # Use secure parser from parent class
+        self.get_root(file)
         
         self.get_preface()
         self.get_articles()

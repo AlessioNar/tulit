@@ -359,11 +359,23 @@ class AkomaNtosoParser(XMLParser):
             'signatures': signatures
         }
     
-    def parse(self, file: str) -> None:
+    def parse(self, file: str, **options) -> 'AkomaNtosoParser':
         """
-        Parses an Akoma Ntoso 3.0 document to extract its components, which are inherited from the XMLParser class
+        Parses an Akoma Ntoso 3.0 document to extract its components.
+        
+        Parameters
+        ----------
+        file : str
+            Path to the Akoma Ntoso XML file
+        **options : dict
+            Optional configuration options
+            
+        Returns
+        -------
+        AkomaNtosoParser
+            Self for method chaining
         """
-        return super().parse(file, schema = 'akomantoso30.xsd', format = 'Akoma Ntoso')
+        return super().parse(file, schema='akomantoso30.xsd', format='Akoma Ntoso', **options)
 
 class AKN4EUParser(AkomaNtosoParser):
     """
@@ -437,7 +449,7 @@ class GermanLegalDocMLParser(AkomaNtosoParser):
             'an': 'http://Inhaltsdaten.LegalDocML.de/1.8.2/',
         }
     
-    def parse(self, file: str) -> None:
+    def parse(self, file: str, **options) -> 'GermanLegalDocMLParser':
         """
         Parses a German LegalDocML document to extract its components.
         
@@ -521,6 +533,8 @@ class GermanLegalDocMLParser(AkomaNtosoParser):
             logger.info(f"Conclusions parsed.")
         except Exception as e:
             logger.error(f"Error in get_conclusions: {e}")
+        
+        return self
 
 class LuxembourgAKNParser(AkomaNtosoParser):
     """
@@ -629,7 +643,7 @@ class LuxembourgAKNParser(AkomaNtosoParser):
         
         return elements
     
-    def parse(self, file: str) -> None:
+    def parse(self, file: str, **options) -> 'LuxembourgAKNParser':
         """
         Parses a Luxembourg Akoma Ntoso document to extract its components.
         
@@ -713,43 +727,5 @@ class LuxembourgAKNParser(AkomaNtosoParser):
             logger.info(f"Conclusions parsed.")
         except Exception as e:
             logger.error(f"Error in get_conclusions: {e}")
-
-def main():
-    parser = argparse.ArgumentParser(description='Parse an Akoma Ntoso XML document and output the results to a JSON file.')
-    parser.add_argument('--input', type=str, default='tests/data/akn/eu/32014L0092.akn', help='Path to the Akoma Ntoso XML file to parse.')
-    parser.add_argument('--output', type=str, default='tests/data/json/akn.json', help='Path to the output JSON file.')
-    parser.add_argument('--format', type=str, default='akn', help='Dialect of Akoma Ntoso to parse.')
-    args = parser.parse_args()
-    if args.format == 'akn':
-        akoma_parser = AkomaNtosoParser()
-    elif args.format == 'akn4eu':
-        akoma_parser = AKN4EUParser()
-    elif args.format == 'german' or args.format == 'de':
-        akoma_parser = GermanLegalDocMLParser()
-    elif args.format == 'luxembourg' or args.format == 'lu':
-        akoma_parser = LuxembourgAKNParser()
-    else:
-        akoma_parser = AkomaNtosoParser()
-    akoma_parser.parse(args.input)
-    with open(args.output, 'w', encoding='utf-8') as f:
-        # Get the parser's attributes as a dictionary
-        parser_dict = akoma_parser.__dict__
-        # Filter out non-serializable attributes
-        serializable_dict = {k: v for k, v in parser_dict.items() if isinstance(v, (str, int, float, bool, list, dict, type(None)))}
-        # Write to a JSON file
-        json.dump(serializable_dict, f, ensure_ascii=False, indent=4)
-    
-    logging.basicConfig(level=logging.INFO)
-    validator = LegalJSONValidator()
-    with open(args.output, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    valid = validator.validate(data)
-    if valid:
-        print('LegalJSON validation: SUCCESS')
-    else:
-        print('LegalJSON validation: FAILED')
-        exit(1)
-
-if __name__ == "__main__":
-    main()
-
+        
+        return self

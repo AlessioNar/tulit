@@ -8,7 +8,7 @@ import logging
 
 class VenetoHTMLParser(HTMLParser):
     def __init__(self):
-        pass
+        super().__init__()
     
     def get_root(self, file):
         super().get_root(file)

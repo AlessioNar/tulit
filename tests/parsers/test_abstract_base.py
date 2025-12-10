@@ -11,7 +11,7 @@ This module verifies that:
 import pytest
 from tulit.parsers.parser import Parser
 from tulit.parsers.xml.xml import XMLParser
-from tulit.parsers.html.xhtml import HTMLParser
+from tulit.parsers.html.html_parser import HTMLParser
 
 
 class TestAbstractParserEnforcement:
@@ -243,7 +243,7 @@ class TestConcreteImplementations:
     
     def test_proposal_html_parser_is_concrete(self):
         """Test that ProposalHTMLParser can be instantiated."""
-        from tulit.parsers.html.proposal import ProposalHTMLParser
+        from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
         
         parser = ProposalHTMLParser()
         assert parser is not None

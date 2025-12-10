@@ -245,12 +245,13 @@ Key organizational achievements:
 Testing Strategy
 ----------------
 
-The refactoring maintained 100% test coverage:
+The codebase maintains comprehensive test coverage:
 
 * **126 tests passing** across all parsers
 * **16 tests skipped** (external API dependencies)
-* All refactored code validated through existing test suite
-* New architectural patterns tested through existing functionality
+* Unit tests for all public methods
+* Integration tests for complete parsing workflows
+* Edge case coverage for error handling
 
 Extension Points
 ----------------
@@ -262,18 +263,16 @@ The architecture provides multiple extension points:
 1. Inherit from ``XMLParser`` or ``HTMLParser``
 2. Implement required abstract methods
 3. Register with ``ParserRegistry``
-Testing Strategy
-----------------
+4. Add tests
 
-The codebase maintains comprehensive test coverage:
+**Adding a New Normalization Strategy:**
 
-* **126 tests passing** across all parsers
-* **16 tests skipped** (external API dependencies)
-* Unit tests for all public methods
-* Integration tests for complete parsing workflows
-* Edge case coverage for error handling
+1. Inherit from ``TextNormalizationStrategy``
+2. Implement ``normalize()`` method
+3. Use in parser through composition
+
+**Adding a New Article Extraction Strategy:**
 
 1. Inherit from ``ArticleExtractionStrategy``
 2. Implement ``extract_articles()`` method
 3. Use in parser initialization
-

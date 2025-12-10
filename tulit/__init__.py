@@ -1,4 +1,8 @@
 """
-This package provides functions to send a SPARQL query to the SPARQL endpoint of the Publications Office of the European Union (CELLAR),
-retrieve the results, and store them in a JSON file.
+TULIT - The Universal Legal Informatics Toolkit
+
+A comprehensive Python library for retrieving and parsing legal documents from various 
+jurisdictions and formats, with support for EU Cellar, Legifrance, and other legal databases.
 """
+
+__version__ = "0.4.0"

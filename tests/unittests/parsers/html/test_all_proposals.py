@@ -12,7 +12,8 @@ from pathlib import Path
 from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 
 # Path to the commission proposals directory
-PROPOSALS_DIR = Path(__file__).parent.parent.parent / "data" / "sources" / "eu" / "eurlex" / "commission_proposals"
+from tests.unittests.conftest import locate_data_dir
+PROPOSALS_DIR = locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "commission_proposals"
 
 # Representative files for unit testing (instead of all 251 files)
 SAMPLE_FILES = [

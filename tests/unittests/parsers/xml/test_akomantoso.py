@@ -3,7 +3,7 @@ from tulit.parsers.xml.akomantoso import AkomaNtosoParser, AKN4EUParser
 import os
 import lxml.etree as etree
 from pathlib import Path
-from tests.conftest import locate_data_dir
+from tests.unittests.conftest import locate_data_dir
 
 # Define constants for file paths and directories
 file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "akn" / "32014L0092.akn")

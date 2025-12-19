@@ -6,10 +6,13 @@ from unittest.mock import patch, Mock
 import requests
 import io
 
+from tests.unittests.conftest import locate_data_dir
+
 class TestCellarClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = CellarClient(download_dir='./tests/data/formex', log_dir='./tests/logs', proxies=None)
+        data_root = locate_data_dir(__file__)
+        self.downloader = CellarClient(download_dir=str(data_root / 'formex'), log_dir=str(data_root.parent / 'logs'), proxies=None)
                 
     def test_download(self):
         celex = "32008R1137"
@@ -17,16 +20,25 @@ class TestCellarClient(unittest.TestCase):
         # Download the documents                           
         document_paths = self.downloader.download(celex, format='fmx4')
 
-        expected = ['tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_1.xml', 'tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_2.xml', 'tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_3.xml', 'tests\\data\\formex\\e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_4.xml']
-        
+        data_root = locate_data_dir(__file__)
+        expected = [
+            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_1.xml'),
+            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_2.xml'),
+            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_3.xml'),
+            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_4.xml'),
+        ]
+
         self.assertEqual(document_paths, expected)
     
     def test_get_cellar_ids_from_json_results(self):
         
-        with open('./tests/metadata/query_results/query_results.json', 'r') as f:
+        from tests.unittests.conftest import locate_tests_dir
+        tests_root = locate_tests_dir(__file__)
+        with open(tests_root / 'metadata' / 'query_results' / 'query_results.json', 'r') as f:
             cellar_results = json.loads(f.read())
         
-        self.downloader = CellarClient(download_dir='./tests/data/formex', log_dir='./tests/logs')
+        data_root = locate_data_dir(__file__)
+        self.downloader = CellarClient(download_dir=str(data_root / 'formex'), log_dir=str(tests_root / 'logs'))
         
         # Test for formex format
         extracted_ids = self.downloader.get_cellar_ids_from_json_results(cellar_results, 'fmx4')

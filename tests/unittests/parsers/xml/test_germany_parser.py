@@ -11,14 +11,16 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tulit.parsers.xml.akomantoso import GermanLegalDocMLParser
+from tests.unittests.conftest import locate_data_dir
 
 
 def test_parse_german_legislation():
     """Test parsing a German legislation XML file."""
     
     # Input and output paths
-    input_file = Path(__file__).parent / 'data' / 'sources' / 'member_states' / 'germany' / 'legislation' / 'bgbl-1_2025_145_2025-06-17_1_deu_2025-10-20_regelungstext-verkuendung-1.xml'
-    output_file = Path(__file__).parent / 'data' / 'results' / 'member_states' / 'germany' / 'bgbl-1_2025_145.json'
+    data_root = locate_data_dir(__file__)
+    input_file = data_root / 'sources' / 'member_states' / 'germany' / 'legislation' / 'bgbl-1_2025_145_2025-06-17_1_deu_2025-10-20_regelungstext-verkuendung-1.xml'
+    output_file = data_root / 'results' / 'member_states' / 'germany' / 'bgbl-1_2025_145.json'
     
     if not input_file.exists():
         print(f"❌ Input file not found: {input_file}")

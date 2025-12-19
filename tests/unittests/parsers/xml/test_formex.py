@@ -2,11 +2,12 @@ import unittest
 from tulit.parsers.xml.formex import Formex4Parser
 import xml.etree.ElementTree as ET
 
-import os 
+from pathlib import Path
+from tests.unittests.conftest import locate_data_dir
 
-file_path = os.path.join(".\\tests\\data\\sources\\eu\\eurlex\\formex\\5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05\\DOC_2.xml")
+file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05" / "DOC_2.xml")
 
-iopa = ".\\tests\\data\\sources\\eu\\eurlex\\formex\\c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02\\DOC_1\\L_202400903EN.000101.fmx.xml"
+iopa = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.000101.fmx.xml")
 
 class TestFormex4Parser(unittest.TestCase):
     def setUp(self):

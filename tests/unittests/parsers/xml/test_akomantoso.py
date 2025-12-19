@@ -2,9 +2,11 @@ import unittest
 from tulit.parsers.xml.akomantoso import AkomaNtosoParser, AKN4EUParser
 import os
 import lxml.etree as etree
+from pathlib import Path
+from tests.conftest import locate_data_dir
 
 # Define constants for file paths and directories
-file_path = os.path.join(os.path.dirname(__file__), '..\\..\\data\\sources\\eu\\eurlex\\akn', '32014L0092.akn')
+file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "akn" / "32014L0092.akn")
 
 class TestAkomaNtosoParser(unittest.TestCase):
     maxDiff = None
@@ -129,7 +131,7 @@ class TestAKN4EUParser(unittest.TestCase):
     def setUp(self):
         """Initialize the AKN4EUParser before each test."""
         self.parser = AKN4EUParser()
-        self.file_path = os.path.join(os.path.dirname(__file__), '..\\..\\data\\sources\\eu\\eurlex\\akn', 'akn4eu.xml')
+        self.file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "akn" / "akn4eu.xml")
         self.parser.get_root(self.file_path)
         
     def tearDown(self):

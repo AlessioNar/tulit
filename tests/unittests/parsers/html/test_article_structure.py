@@ -1,9 +1,11 @@
 from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 import json
 import os
+from tests.unittests.conftest import locate_data_dir
 
 # Get the path relative to the project root
-file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'sources', 'eu', 'eurlex', 'commission_proposals', 'COM(2025)6.html')
+DATA_ROOT = locate_data_dir(__file__)
+file_path = str(DATA_ROOT / 'sources' / 'eu' / 'eurlex' / 'commission_proposals' / 'COM(2025)6.html')
 parser = ProposalHTMLParser()
 parser.parse(file_path)
 
@@ -46,7 +48,7 @@ output_data = {
     'conclusions': parser.conclusions if hasattr(parser, 'conclusions') else None
 }
 
-output_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'results', 'eu', 'proposals', 'COM(2025)6.json')
+output_path = str(DATA_ROOT / 'results' / 'eu' / 'proposals' / 'COM(2025)6.json')
 with open(output_path, 'w', encoding='utf-8') as f:
     json.dump(output_data, f, indent=2, ensure_ascii=False)
     

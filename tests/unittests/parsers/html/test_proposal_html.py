@@ -2,11 +2,14 @@ import unittest
 import os
 from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 import json
+from pathlib import Path
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..\\..\\data\\sources\\eu\\eurlex\\commission_proposals")
-file_path_com6 = os.path.join(DATA_DIR, "COM(2025)6.html")
-file_path_com43 = os.path.join(DATA_DIR, "COM(2025)43.html")
-file_path_com1 = os.path.join(DATA_DIR, "COM(2025)1.html")
+from tests.unittests.conftest import locate_data_dir
+
+DATA_DIR = locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "commission_proposals"
+file_path_com6 = str(DATA_DIR / "COM(2025)6.html")
+file_path_com43 = str(DATA_DIR / "COM(2025)43.html")
+file_path_com1 = str(DATA_DIR / "COM(2025)1.html")
 
 
 class TestProposalHTMLParser(unittest.TestCase):

@@ -29,6 +29,7 @@ path = "tulit/client/queries/*.rq"
 sphinx = ">=6,<9"
 sphinx-rtd-theme = "^3.0.2"
 
+pytest-cov = "^7.0.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

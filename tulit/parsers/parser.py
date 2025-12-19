@@ -285,31 +285,70 @@ class Parser(ABC):
         """
         Convert the parser's extracted data to a dictionary.
 
+        This version ensures that common non-JSON-native objects are converted to
+        JSON-serializable forms. It will:
+        - Call `.to_dict()` on domain model objects (Citation, Article, etc.) if
+          available.
+        - Recursively convert lists and dicts.
+        - Convert BeautifulSoup `Tag` objects to their text content.
+        - Convert lxml elements to their concatenated text content.
+
         Returns
         -------
         dict
-            A dictionary containing all extracted elements from the document:
-            - 'preface': Extracted preface text
-            - 'preamble': Dictionary containing preamble components:
-                - 'formula': The formula text
-                - 'citations': List of citations
-                - 'recitals': List of recitals
-                - 'final': Final preamble text
-            - 'body': Dictionary containing body components:
-                - 'chapters': List of chapters
-                - 'articles': List of articles
-            - 'conclusions': Extracted conclusions
+            A dictionary containing all extracted elements from the document
+            with JSON-serializable values.
         """
+        def _serialize(obj: Any) -> Any:
+            # Domain models with a to_dict() method
+            if hasattr(obj, 'to_dict') and callable(getattr(obj, 'to_dict')):
+                try:
+                    return obj.to_dict()
+                except Exception:
+                    return str(obj)
+
+            # dicts and mappings
+            if isinstance(obj, dict):
+                return {k: _serialize(v) for k, v in obj.items()}
+
+            # sequences
+            if isinstance(obj, (list, tuple, set)):
+                return [_serialize(v) for v in obj]
+
+            # BeautifulSoup Tag -> extract text
+            try:
+                from bs4.element import Tag
+                if isinstance(obj, Tag):
+                    return obj.get_text()
+            except Exception:
+                pass
+
+            # lxml element -> concat text
+            try:
+                from lxml.etree import _Element
+                if isinstance(obj, _Element):
+                    return ''.join(obj.itertext())
+            except Exception:
+                pass
+
+            # Basic types (str, int, float, bool, None) are JSON serializable as-is
+            # For anything else, attempt json.dumps check; fall back to str()
+            try:
+                json.dumps(obj)
+                return obj
+            except Exception:
+                return str(obj)
+
         return {
-            'preface': self.preface,
-            'preamble': self.preamble,
-            'formula': self.formula,
-            'citations': self.citations,
-            'recitals': self.recitals,
-            'preamble_final': self.preamble_final,
-            'chapters': self.chapters,
-            'articles': self.articles,            
-            'conclusions': self.conclusions
+            'preface': _serialize(self.preface),
+            'preamble': _serialize(self.preamble),
+            'formula': _serialize(self.formula),
+            'citations': _serialize(self.citations),
+            'recitals': _serialize(self.recitals),
+            'preamble_final': _serialize(self.preamble_final),
+            'chapters': _serialize(self.chapters),
+            'articles': _serialize(self.articles),
+            'conclusions': _serialize(self.conclusions)
         }
 
 class LegalJSONValidator:

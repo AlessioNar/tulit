@@ -248,15 +248,15 @@ class CellarClient(Client):
         self.logger.info(f"Downloading document for celex: {celex}, format: {format}")
         if format == 'fmx4':
             if type_id == 'eli':
-                sparql_query = files("tulit.client.queries").joinpath("formex_eli_query.rq").read_text()
+                sparql_query = files("tulit.client.eu.queries").joinpath("formex_eli_query.rq").read_text()
                 sparql_query = sparql_query.replace("{ELI}", celex)            
             elif type_id == 'celex':
-                sparql_query = files("tulit.client.queries").joinpath("formex_query.rq").read_text()
+                sparql_query = files("tulit.client.eu.queries").joinpath("formex_query.rq").read_text()
                 sparql_query = sparql_query.replace("{CELEX}", celex)                
         elif format == 'xhtml':
-            sparql_query = files("tulit.client.queries").joinpath("html_query.rq").read_text()
+            sparql_query = files("tulit.client.eu.queries").joinpath("html_query.rq").read_text()
         elif format == 'html':
-            sparql_query = files("tulit.client.queries").joinpath("html_standard_query.rq").read_text()
+            sparql_query = files("tulit.client.eu.queries").joinpath("html_standard_query.rq").read_text()
         else:
             self.logger.error('No valid format provided. Please choose one between fmx4, xhtml, or html')
             return None

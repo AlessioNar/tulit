@@ -186,7 +186,8 @@ class AkomaNtosoParser(XMLParser):
         Extract articles from the body using AKNArticleExtractor.
         
         Articles are the main structural units of legal documents. This method
-        uses AKNArticleExtractor to handle the extraction logic.
+        uses AKNArticleExtractor to handle the extraction logic. Also handles
+        sections for jurisdictions that use sections instead of articles.
         """
         if self.body is None:
             self.logger.warning("Body is None. Call get_body() first.")
@@ -202,6 +203,18 @@ class AkomaNtosoParser(XMLParser):
         for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
             metadata = extractor.extract_article_metadata(article)
             children = extractor.extract_paragraphs_by_eid(article)
+
+            self.articles.append({
+                'eId': metadata['eId'],
+                'num': metadata['num'],
+                'heading': metadata['heading'],
+                'children': children
+            })
+        
+        # Also find all <section> elements (used in some jurisdictions like Finland)
+        for section in self.body.findall('.//akn:section', namespaces=self.namespaces):
+            metadata = extractor.extract_article_metadata(section)
+            children = extractor.extract_paragraphs_by_eid(section)
 
             self.articles.append({
                 'eId': metadata['eId'],

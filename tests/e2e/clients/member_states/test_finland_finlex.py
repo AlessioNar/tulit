@@ -25,7 +25,7 @@ class TestFinlandFinlexClient:
         client = FinlexClient(str(sources_dir), str(logs_dir))
 
         try:
-            result = client.download(year='2024', number='123', fmt='xml')
+            result = client.download(year='2018', number='729', fmt='xml')
         except Exception as e:
             pytest.skip(f"Finlex API unavailable: {e}")
 
@@ -33,6 +33,6 @@ class TestFinlandFinlexClient:
         assert Path(result).exists(), f"Downloaded file not found: {result}"
 
         # Check file content
-        content = Path(result).read_text()
+        content = Path(result).read_text(encoding='utf-8')
         assert len(content) > 100, "Downloaded file seems too small"
         assert '<akomaNtoso' in content, "File doesn't contain Akoma Ntoso XML"

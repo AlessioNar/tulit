@@ -15,7 +15,7 @@ class TestIrishStatuteBookClient(unittest.TestCase):
         self.client = IrishStatuteBookClient(download_dir=self.download_dir, log_dir=self.log_dir)
 
     @patch('tulit.client.state.irishstatutebook.requests.Session.get')
-    def test_get_act_success(self, mock_get):
+    def test_download_success(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<akomaNtoso>Irish Test</akomaNtoso>'
@@ -23,7 +23,7 @@ class TestIrishStatuteBookClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        file_path = self.client.get_act(year=2012, act_number=10)
+        file_path = self.client.download(year=2012, act_number=10)
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -31,11 +31,11 @@ class TestIrishStatuteBookClient(unittest.TestCase):
         os.remove(file_path)
 
     @patch('tulit.client.state.irishstatutebook.requests.Session.get')
-    def test_get_act_http_error(self, mock_get):
+    def test_download_http_error(self, mock_get):
         mock_response = Mock()
         mock_response.raise_for_status.side_effect = Exception('HTTP error')
         mock_get.return_value = mock_response
-        file_path = self.client.get_act(year=2012, act_number=999999)
+        file_path = self.client.download(year=2012, act_number=999999)
         self.assertIsNone(file_path)
 
 if __name__ == "__main__":

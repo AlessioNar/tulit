@@ -19,48 +19,67 @@ class PortugalDREClient(Client):
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def get_journal(self, series, number, year, supplement=0, lang='pt', fmt='html'):
+    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None, month=None, day=None, region=None, cons_date=None, lang='pt', fmt='html'):
         """
-        Download an official journal Diário da República (Pillar I).
-        series: '1', '1a', '1b', etc.
-        number: number in the year
-        year: year of publication
-        supplement: supplement number (default 0)
-        lang: language (default 'pt')
-        fmt: 'html' or 'pdf' (default 'html')
+        Download documents from the Portuguese DRE ELI portal.
+        
+        Parameters
+        ----------
+        document_type : str
+            Type of document: 'journal', 'legal_act', or 'consolidated'
+        series : str, optional
+            For journals: series ('1', '1a', '1b', etc.)
+        number : str, optional
+            Document number in the year
+        year : str, optional
+            Year of publication
+        supplement : int, optional
+            For journals: supplement number (default 0)
+        act_type : str, optional
+            For legal acts: type ('lei', 'dec-lei', 'declegreg', etc.)
+        month : str, optional
+            For legal acts: month of publication
+        day : str, optional
+            For legal acts: day of publication
+        region : str, optional
+            For legal acts: region ('p', 'm', 'a')
+        cons_date : str, optional
+            For consolidated acts: consolidation date as 'yyyymmdd'
+        lang : str, optional
+            Language (default 'pt')
+        fmt : str, optional
+            Format: 'html' or 'pdf' (default 'html')
+            
+        Returns
+        -------
+        str or None
+            Path to downloaded file or None if failed
         """
-        url = f"{self.BASE_URL}/diario/{series}/{number}/{year}/{supplement}/{lang}/{fmt}"
-        self.logger.info(f"Requesting journal: series={series}, number={number}, year={year}, supplement={supplement}, lang={lang}, fmt={fmt}")
-        return self._download(url, f"dre_journal_{series}_{number}_{year}_{supplement}_{lang}.{fmt}", fmt)
-
-    def get_legal_act(self, act_type, number, year, month, day, region, lang='pt', fmt='html'):
-        """
-        Download a legal act (Pillar II).
-        act_type: e.g. 'lei', 'dec-lei', 'declegreg', etc.
-        number: act number (may include suffix, e.g. '111-a')
-        year, month, day: date of publication
-        region: 'p', 'm', 'a'
-        lang: language (default 'pt')
-        fmt: 'html' or 'pdf' (default 'html')
-        """
-        self.logger.info(f"Requesting legal act: type={act_type}, number={number}, year={year}, month={month}, day={day}, region={region}, lang={lang}, fmt={fmt}")
-        url = f"{self.BASE_URL}/{act_type}/{number}/{year}/{month}/{day}/{region}/dre/{lang}/{fmt}"
-        return self._download(url, f"dre_act_{act_type}_{number}_{year}_{month}_{day}_{region}_{lang}.{fmt}", fmt)
-
-    def get_consolidated(self, act_type, number, year, region, cons_date, lang='pt', fmt='html'):
-        """
-        Download a consolidated legal act (Pillar III).
-        act_type: e.g. 'lei', 'dec-lei', 'declegreg', etc.
-        number: act number
-        year: year of publication
-        region: 'p', 'm', 'a'
-        cons_date: consolidation date as 'yyyymmdd'
-        lang: language (default 'pt')
-        fmt: 'html' or 'pdf' (default 'html')
-        """
-        self.logger.info(f"Requesting consolidated act: type={act_type}, number={number}, year={year}, region={region}, cons_date={cons_date}, lang={lang}, fmt={fmt}")
-        url = f"{self.BASE_URL}/{act_type}/{number}/{year}/{region}/cons/{cons_date}/{lang}/{fmt}"
-        return self._download(url, f"dre_cons_{act_type}_{number}_{year}_{region}_{cons_date}_{lang}.{fmt}", fmt)
+        if document_type == 'journal':
+            if not all([series, number, year]):
+                raise ValueError("Journal downloads require series, number, and year")
+            url = f"{self.BASE_URL}/diario/{series}/{number}/{year}/{supplement}/{lang}/{fmt}"
+            filename = f"dre_journal_{series}_{number}_{year}_{supplement}_{lang}.{fmt}"
+            self.logger.info(f"Requesting journal: series={series}, number={number}, year={year}, supplement={supplement}, lang={lang}, fmt={fmt}")
+            
+        elif document_type == 'legal_act':
+            if not all([act_type, number, year, month, day, region]):
+                raise ValueError("Legal act downloads require act_type, number, year, month, day, and region")
+            url = f"{self.BASE_URL}/{act_type}/{number}/{year}/{month}/{day}/{region}/dre/{lang}/{fmt}"
+            filename = f"dre_act_{act_type}_{number}_{year}_{month}_{day}_{region}_{lang}.{fmt}"
+            self.logger.info(f"Requesting legal act: type={act_type}, number={number}, year={year}, month={month}, day={day}, region={region}, lang={lang}, fmt={fmt}")
+            
+        elif document_type == 'consolidated':
+            if not all([act_type, number, year, region, cons_date]):
+                raise ValueError("Consolidated act downloads require act_type, number, year, region, and cons_date")
+            url = f"{self.BASE_URL}/{act_type}/{number}/{year}/{region}/cons/{cons_date}/{lang}/{fmt}"
+            filename = f"dre_cons_{act_type}_{number}_{year}_{region}_{cons_date}_{lang}.{fmt}"
+            self.logger.info(f"Requesting consolidated act: type={act_type}, number={number}, year={year}, region={region}, cons_date={cons_date}, lang={lang}, fmt={fmt}")
+            
+        else:
+            raise ValueError(f"Unknown document_type: {document_type}. Must be 'journal', 'legal_act', or 'consolidated'")
+            
+        return self._download(url, filename, fmt)
 
     def _download(self, url, filename, fmt=None):
         self.logger.info(f"Downloading from URL: {url} to filename: {filename}")

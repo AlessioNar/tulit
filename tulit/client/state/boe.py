@@ -19,7 +19,7 @@ class BOEClient(Client):
         super().__init__(download_dir=download_dir, log_dir=log_dir, proxies=proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def get_html(self, id, fmt=None):
+    def download(self, id, fmt=None):
         try:
             url = 'https://www.boe.es/diario_boe/xml.php?id='
             self.logger.info(f"Requesting BOE document with id: {id}")

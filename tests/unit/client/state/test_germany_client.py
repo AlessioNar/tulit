@@ -142,7 +142,9 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_legislation_html(
+            file_path = client.download(
+                document_type='legislation',
+                format='html',
                 jurisdiction='bund',
                 agent='bgbl-1',
                 year='1979',
@@ -171,7 +173,9 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_legislation_xml(
+            file_path = client.download(
+                document_type='legislation',
+                format='xml',
                 jurisdiction='bund',
                 agent='bgbl-1',
                 year='1979',
@@ -209,7 +213,9 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_legislation_zip(
+            file_path = client.download(
+                document_type='legislation',
+                format='zip',
                 jurisdiction='bund',
                 agent='bgbl-1',
                 year='1979',
@@ -233,35 +239,6 @@ class TestGermanyClient:
             import shutil
             shutil.rmtree(file_path)
     
-    def test_get_legislation_metadata(self, client):
-        """Test retrieving legislation metadata with mock."""
-        mock_data = {
-            "jurisdiction": "bund",
-            "agent": "bgbl-1",
-            "year": "1979",
-            "naturalIdentifier": "s1325"
-        }
-        
-        with patch('tulit.client.state.germany.requests.get') as mock_get:
-            mock_response = Mock()
-            mock_response.status_code = 200
-            mock_response.json.return_value = mock_data
-            mock_response.raise_for_status = Mock()
-            mock_get.return_value = mock_response
-            
-            metadata = client.get_legislation_metadata(
-                jurisdiction='bund',
-                agent='bgbl-1',
-                year='1979',
-                natural_identifier='s1325',
-                point_in_time='2020-06-19',
-                version=2,
-                language='deu'
-            )
-            
-            assert metadata == mock_data
-            mock_get.assert_called_once()
-            print(f"Legislation metadata: {metadata.get('name', 'N/A')}")
     
     def test_download_from_eli_url(self, client):
         """Test downloading from a full ELI URL with mock."""
@@ -365,62 +342,6 @@ class TestGermanyClient:
     
     # ===== CASE LAW TESTS =====
     
-    def test_search_case_law(self, client):
-        """Test searching for case law."""
-        results = client.search_case_law(
-            search_term="Urteil",
-            size=5
-        )
-        
-        assert results is not None
-        assert 'totalItems' in results
-        print(f"Found {results['totalItems']} case law items")
-        
-        if results['member']:
-            first_item = results['member'][0]['item']
-            print(f"First result: {first_item.get('headline', 'N/A')}")
-    
-    def test_search_case_law_with_parameters(self, client):
-        """Test searching for case law with various parameters."""
-        mock_data = {
-            "totalItems": 1,
-            "member": [{"item": {"headline": "Test Case"}}]
-        }
-        
-        with patch('tulit.client.state.germany.requests.get') as mock_get:
-            mock_response = Mock()
-            mock_response.status_code = 200
-            mock_response.json.return_value = mock_data
-            mock_response.raise_for_status = Mock()
-            mock_get.return_value = mock_response
-            
-            results = client.search_case_law(
-                search_term="Urteil",
-                file_number="123",
-                ecli="ECLI:DE:BGH:2020:123",
-                court="BGH",
-                document_type="U",
-                date_from="2020-01-01",
-                date_to="2020-12-31",
-                size=10,
-                page_index=1,
-                sort="date"
-            )
-            
-            assert results == mock_data
-            # Verify the call was made with correct parameters
-            call_args = mock_get.call_args
-            params = call_args[1]['params']
-            assert params['searchTerm'] == "Urteil"
-            assert params['fileNumber'] == "123"
-            assert params['ecli'] == "ECLI:DE:BGH:2020:123"
-            assert params['court'] == "BGH"
-            assert params['type'] == "U"
-            assert params['dateFrom'] == "2020-01-01"
-            assert params['dateTo'] == "2020-12-31"
-            assert params['size'] == 10
-            assert params['pageIndex'] == 1
-            assert params['sort'] == "date"
     
     def test_download_case_law_html(self, client):
         """Test downloading case law as HTML with mock."""
@@ -432,7 +353,11 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_case_law_html('STRE201770751')
+            file_path = client.download(
+                document_type='case_law',
+                format='html',
+                document_number='STRE201770751'
+            )
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -451,7 +376,11 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_case_law_xml('STRE201770751')
+            file_path = client.download(
+                document_type='case_law',
+                format='xml',
+                document_number='STRE201770751'
+            )
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -479,7 +408,11 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_case_law_zip('STRE201770751')
+            file_path = client.download(
+                document_type='case_law',
+                format='zip',
+                document_number='STRE201770751'
+            )
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -494,83 +427,8 @@ class TestGermanyClient:
             import shutil
             shutil.rmtree(file_path)
     
-    def test_get_case_law_metadata(self, client):
-        """Test retrieving case law metadata with mock."""
-        mock_data = {
-            "documentNumber": "STRE201770751",
-            "headline": "Test Case Law Document",
-            "court": "Test Court"
-        }
-        
-        with patch('tulit.client.state.germany.requests.get') as mock_get:
-            mock_response = Mock()
-            mock_response.status_code = 200
-            mock_response.json.return_value = mock_data
-            mock_response.raise_for_status = Mock()
-            mock_get.return_value = mock_response
-            
-            metadata = client.get_case_law_metadata('STRE201770751')
-            
-            assert metadata == mock_data
-            mock_get.assert_called_once()
-            print(f"Case law metadata: {metadata.get('headline', 'N/A')}")
     
     # ===== LITERATURE TESTS =====
-    
-    def test_search_literature(self, client):
-        """Test searching for literature."""
-        results = client.search_literature(
-            search_term="Recht",
-            size=5
-        )
-        
-        assert results is not None
-        assert 'totalItems' in results
-        print(f"Found {results['totalItems']} literature items")
-        
-        if results['member']:
-            first_item = results['member'][0]['item']
-            print(f"First result: {first_item.get('headline', 'N/A')}")
-    
-    def test_search_literature_with_parameters(self, client):
-        """Test searching for literature with various parameters."""
-        mock_data = {
-            "totalItems": 1,
-            "member": [{"item": {"headline": "Test Literature"}}]
-        }
-        
-        with patch('tulit.client.state.germany.requests.get') as mock_get:
-            mock_response = Mock()
-            mock_response.status_code = 200
-            mock_response.json.return_value = mock_data
-            mock_response.raise_for_status = Mock()
-            mock_get.return_value = mock_response
-            
-            results = client.search_literature(
-                search_term="Recht",
-                document_number="DOC123",
-                year_of_publication="2020",
-                author="Test Author",
-                date_from="2020-01-01",
-                date_to="2020-12-31",
-                size=10,
-                page_index=1,
-                sort="date"
-            )
-            
-            assert results == mock_data
-            # Verify the call was made with correct parameters
-            call_args = mock_get.call_args
-            params = call_args[1]['params']
-            assert params['searchTerm'] == "Recht"
-            assert params['documentNumber'] == "DOC123"
-            assert params['yearOfPublication'] == "2020"
-            assert params['author'] == "Test Author"
-            assert params['dateFrom'] == "2020-01-01"
-            assert params['dateTo'] == "2020-12-31"
-            assert params['size'] == 10
-            assert params['pageIndex'] == 1
-            assert params['sort'] == "date"
     
     def test_download_literature_html(self, client):
         """Test downloading literature as HTML with mock."""
@@ -582,7 +440,11 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_literature_html('BJLU075748788')
+            file_path = client.download(
+                document_type='literature',
+                format='html',
+                document_number='BJLU075748788'
+            )
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -601,7 +463,11 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_literature_xml('BJLU075748788')
+            file_path = client.download(
+                document_type='literature',
+                format='xml',
+                document_number='BJLU075748788'
+            )
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -610,108 +476,7 @@ class TestGermanyClient:
             assert b'Test XML' in content
             os.remove(file_path)
     
-    def test_get_literature_metadata(self, client):
-        """Test retrieving literature metadata with mock."""
-        mock_data = {
-            "documentNumber": "BJLU075748788",
-            "headline": "Test Literature Document",
-            "author": "Test Author"
-        }
-        
-        with patch('tulit.client.state.germany.requests.get') as mock_get:
-            mock_response = Mock()
-            mock_response.status_code = 200
-            mock_response.json.return_value = mock_data
-            mock_response.raise_for_status = Mock()
-            mock_get.return_value = mock_response
-            
-            metadata = client.get_literature_metadata('BJLU075748788')
-            
-            assert metadata == mock_data
-            mock_get.assert_called_once()
-            print(f"Literature metadata: {metadata.get('headline', 'N/A')}")
     
-    # ===== GLOBAL SEARCH TESTS =====
-    
-    def test_search_all_documents(self, client):
-        """Test searching across all document types."""
-        results = client.search_all_documents(
-            search_term="Gesetz",
-            size=10
-        )
-        
-        assert results is not None
-        assert 'totalItems' in results
-        print(f"Found {results['totalItems']} documents across all types")
-        
-        if results['member']:
-            for i, member in enumerate(results['member'][:5]):
-                item = member['item']
-                doc_type = item.get('@type', 'Unknown')
-                name = item.get('name', item.get('headline', 'N/A'))
-                print(f"  {i+1}. [{doc_type}] {name}")
-    
-    def test_search_all_documents_with_parameters(self, client):
-        """Test searching across all document types with various parameters."""
-        mock_data = {
-            "totalItems": 1,
-            "member": [{"item": {"@type": "legislation", "name": "Test Document"}}]
-        }
-        
-        with patch('tulit.client.state.germany.requests.get') as mock_get:
-            mock_response = Mock()
-            mock_response.status_code = 200
-            mock_response.json.return_value = mock_data
-            mock_response.raise_for_status = Mock()
-            mock_get.return_value = mock_response
-            
-            results = client.search_all_documents(
-                search_term="Gesetz",
-                document_kind="N",
-                date_from="2020-01-01",
-                date_to="2020-12-31",
-                size=10,
-                page_index=1,
-                sort="date"
-            )
-            
-            assert results == mock_data
-            # Verify the call was made with correct parameters
-            call_args = mock_get.call_args
-            params = call_args[1]['params']
-            assert params['searchTerm'] == "Gesetz"
-            assert params['documentKind'] == "N"
-            assert params['dateFrom'] == "2020-01-01"
-            assert params['dateTo'] == "2020-12-31"
-            assert params['size'] == 10
-            assert params['pageIndex'] == 1
-            assert params['sort'] == "date"
-    
-    def test_search_legislation_only(self, client):
-        """Test searching only legislation documents."""
-        results = client.search_all_documents(
-            search_term="Verordnung",
-            document_kind='N',  # N for Normen (legislation)
-            size=5
-        )
-        
-        assert results is not None
-        assert 'totalItems' in results
-        print(f"Found {results['totalItems']} legislation documents")
-    
-    def test_search_case_law_only(self, client):
-        """Test searching only case law documents."""
-        results = client.search_all_documents(
-            search_term="Urteil",
-            document_kind='R',  # R for Rechtsprechung (case law)
-            size=5
-        )
-        
-        assert results is not None
-        assert 'totalItems' in results
-        print(f"Found {results['totalItems']} case law documents")
-
-
 if __name__ == "__main__":
     """Run tests manually without pytest."""
     import tempfile

@@ -19,7 +19,7 @@ class MaltaLegislationClient(Client):
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def get_document(self, eli_path, lang=None, fmt=None):
+    def download(self, eli_path, lang=None, fmt=None):
         """
         Download a document from the Maltese ELI portal.
         eli_path: str, e.g. 'cap/9', 'sl/9.24', 'ln/2015/433', 'lcbl/49/2004/10'

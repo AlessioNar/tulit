@@ -19,7 +19,7 @@ class IrishStatuteBookClient(Client):
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def get_act(self, year, act_number, lang="en", status="enacted", fmt="xml"):
+    def download(self, year, act_number, lang="en", status="enacted", fmt="xml"):
         """
         Download an Act XML from the Irish Statute Book.
         """

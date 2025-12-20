@@ -15,7 +15,7 @@ class TestFinlexClient(unittest.TestCase):
         self.client = FinlexClient(download_dir=self.download_dir, log_dir=self.log_dir)
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_success(self, mock_get):
+    def test_download_success(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<akn:akomaNtoso>Test</akn:akomaNtoso>'
@@ -23,7 +23,7 @@ class TestFinlexClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        file_path = self.client.get_statute(year=2024, number=123)
+        file_path = self.client.download(year=2024, number=123)
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -31,15 +31,15 @@ class TestFinlexClient(unittest.TestCase):
         os.remove(file_path)
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_http_error(self, mock_get):
+    def test_download_http_error(self, mock_get):
         mock_response = Mock()
         mock_response.raise_for_status.side_effect = Exception('HTTP error')
         mock_get.return_value = mock_response
-        file_path = self.client.get_statute(year=2024, number=999999)
+        file_path = self.client.download(year=2024, number=999999)
         self.assertIsNone(file_path)
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_pdf_format(self, mock_get):
+    def test_download_pdf_format(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'%PDF-1.4 test content'
@@ -47,7 +47,7 @@ class TestFinlexClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        file_path = self.client.get_statute(year=2024, number=123, fmt='pdf')
+        file_path = self.client.download(year=2024, number=123, fmt='pdf')
         self.assertTrue(os.path.exists(file_path))
         self.assertTrue(file_path.endswith('.pdf'))
         with open(file_path, 'rb') as f:
@@ -56,7 +56,7 @@ class TestFinlexClient(unittest.TestCase):
         os.remove(file_path)
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_html_format(self, mock_get):
+    def test_download_html_format(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html><body>Test HTML</body></html>'
@@ -64,7 +64,7 @@ class TestFinlexClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        file_path = self.client.get_statute(year=2024, number=123, fmt='html')
+        file_path = self.client.download(year=2024, number=123, fmt='html')
         self.assertTrue(os.path.exists(file_path))
         self.assertTrue(file_path.endswith('.html'))
         with open(file_path, 'rb') as f:
@@ -73,7 +73,7 @@ class TestFinlexClient(unittest.TestCase):
         os.remove(file_path)
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_wrong_content_type_xml(self, mock_get):
+    def test_download_wrong_content_type_xml(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'test content'
@@ -83,10 +83,10 @@ class TestFinlexClient(unittest.TestCase):
 
         # Should exit with code 1 for wrong content type
         with self.assertRaises(SystemExit):
-            self.client.get_statute(year=2024, number=123, fmt='xml')
+            self.client.download(year=2024, number=123, fmt='xml')
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_wrong_content_type_pdf(self, mock_get):
+    def test_download_wrong_content_type_pdf(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'test content'
@@ -95,16 +95,16 @@ class TestFinlexClient(unittest.TestCase):
         mock_get.return_value = mock_response
 
         with self.assertRaises(SystemExit):
-            self.client.get_statute(year=2024, number=123, fmt='pdf')
+            self.client.download(year=2024, number=123, fmt='pdf')
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_network_error(self, mock_get):
+    def test_download_network_error(self, mock_get):
         mock_get.side_effect = Exception('Network error')
-        file_path = self.client.get_statute(year=2024, number=123)
+        file_path = self.client.download(year=2024, number=123)
         self.assertIsNone(file_path)
 
     @patch('tulit.client.state.finlex.requests.Session.get')
-    def test_get_statute_with_proxies(self, mock_get):
+    def test_download_with_proxies(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<akn:akomaNtoso>Test</akn:akomaNtoso>'
@@ -118,7 +118,7 @@ class TestFinlexClient(unittest.TestCase):
             log_dir=self.log_dir, 
             proxies={'http': 'http://proxy.example.com:8080'}
         )
-        file_path = client_with_proxies.get_statute(year=2024, number=123)
+        file_path = client_with_proxies.download(year=2024, number=123)
         self.assertTrue(os.path.exists(file_path))
         os.remove(file_path)
 

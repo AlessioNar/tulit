@@ -23,7 +23,7 @@ class FinlexClient(Client):
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def get_statute(self, year, number, lang="fi", doc_type="act", fmt="xml"):
+    def download(self, year, number, lang="fi", doc_type="act", fmt="xml"):
         """
         Download a statute XML from Finlex Open Data API.
         Example endpoint:

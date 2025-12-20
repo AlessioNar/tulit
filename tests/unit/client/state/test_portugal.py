@@ -15,14 +15,14 @@ class TestPortugalDREClient(unittest.TestCase):
         self.client = PortugalDREClient(download_dir=self.download_dir, log_dir=self.log_dir)
 
     @patch('tulit.client.state.portugal.requests.Session.get')
-    def test_get_journal_success(self, mock_get):
+    def test_download_journal_success(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html>Journal</html>'
         mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
-        file_path = self.client.get_journal('1a', '1', '1991', '0', 'pt', 'html')
+        file_path = self.client.download('journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html')
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -30,14 +30,14 @@ class TestPortugalDREClient(unittest.TestCase):
         os.remove(file_path)
 
     @patch('tulit.client.state.portugal.requests.Session.get')
-    def test_get_legal_act_success(self, mock_get):
+    def test_download_legal_act_success(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html>Act</html>'
         mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
-        file_path = self.client.get_legal_act('lei', '39', '2016', '12', '19', 'p', 'pt', 'html')
+        file_path = self.client.download('legal_act', act_type='lei', number='39', year='2016', month='12', day='19', region='p', lang='pt', fmt='html')
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -45,14 +45,14 @@ class TestPortugalDREClient(unittest.TestCase):
         os.remove(file_path)
 
     @patch('tulit.client.state.portugal.requests.Session.get')
-    def test_get_consolidated_success(self, mock_get):
+    def test_download_consolidated_success(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
         mock_response.content = b'<html>Consolidated</html>'
         mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
-        file_path = self.client.get_consolidated('lei', '7', '2009', 'p', '20171002', 'pt', 'html')
+        file_path = self.client.download('consolidated', act_type='lei', number='7', year='2009', region='p', cons_date='20171002', lang='pt', fmt='html')
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -64,7 +64,7 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.raise_for_status.side_effect = Exception('HTTP error')
         mock_get.return_value = mock_response
-        file_path = self.client.get_journal('1a', '1', '1991', '0', 'pt', 'html')
+        file_path = self.client.download('journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html')
         self.assertIsNone(file_path)
 
 if __name__ == "__main__":

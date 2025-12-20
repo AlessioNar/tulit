@@ -88,6 +88,37 @@ class TestXMLHelpersAndParser(unittest.TestCase):
         errors = self.validator.get_validation_errors()
         self.assertIsInstance(errors, list)
 
+    def test_load_relaxng_and_unknown_type(self):
+        import tempfile, os
+        # create a small RelaxNG that only accepts <root/>
+        rng = b"""
+        <element name='root' xmlns='http://relaxng.org/ns/structure/1.0' />
+        """
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.rng') as fh:
+            fh.write(rng)
+            rng_path = fh.name
+
+        try:
+            self.assertTrue(os.path.exists(rng_path))
+            loaded = self.validator.load_schema(rng_path, schema_type='relaxng')
+            self.assertTrue(loaded)
+
+            # Validate a non-matching document -> expect False
+            xml = etree.fromstring('<notroot/>')
+            valid = self.validator.validate(xml)
+            self.assertFalse(valid)
+            errs = self.validator.get_validation_errors()
+            # errors should be a list (may be empty depending on lib), but allow either
+            self.assertIsInstance(errs, list)
+
+            # unknown schema type should return False (file exists but type unknown)
+            self.assertFalse(self.validator.load_schema(rng_path, schema_type='unknown'))
+        finally:
+            try:
+                os.unlink(rng_path)
+            except Exception:
+                pass
+
 
 if __name__ == '__main__':
     unittest.main()

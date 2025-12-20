@@ -3,8 +3,6 @@ name: Run Unit Tests
 on:
   push:
     branches: [ main, development ]
-    paths-ignore:
-      - '.github/badges/**'
   pull_request:
     branches: [ main, development ]
 
@@ -29,15 +27,22 @@ jobs:
     - name: Run tests
       run: poetry run pytest --cov=tulit --cov-report=xml
 
-    - name: Generate coverage badge
-      run: python .github/scripts/generate_badges.py || true
-
-    - name: Commit badge if changed
+    - name: Update coverage badge
       if: github.event_name == 'push'
       run: |
+        python3 << 'EOF'
+            import json
+            import xml.etree.ElementTree as ET
+            from pathlib import Path
+            tree = ET.parse('coverage.xml')
+            pct = round(float(tree.getroot().get('line-rate')) * 100, 1)
+            badge = {'schemaVersion': 1, 'label': 'coverage', 'message': f'{pct}%', 'color': 'brightgreen' if pct >= 90 else 'yellow'}
+            Path('.github/badges').mkdir(exist_ok=True)
+            with open('.github/badges/coverage.json', 'w') as f: json.dump(badge, f)
+            EOF
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .github/badges/coverage.json || true
+        git add .github/badges/coverage.json
         git diff --staged --quiet || (git commit -m "chore: update coverage badge" && git push)
 
     - name: Upload coverage artifact

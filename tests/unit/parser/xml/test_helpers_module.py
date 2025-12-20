@@ -90,10 +90,16 @@ class TestXMLHelpersAndParser(unittest.TestCase):
 
     def test_load_relaxng_and_unknown_type(self):
         import tempfile, os
-        # create a small RelaxNG that only accepts <root/>
-        rng = b"""
-        <element name='root' xmlns='http://relaxng.org/ns/structure/1.0' />
-        """
+                # create a small RelaxNG that only accepts <root/>
+                rng = b"""
+                <grammar xmlns='http://relaxng.org/ns/structure/1.0'>
+                    <start>
+                        <element name='root'>
+                            <empty/>
+                        </element>
+                    </start>
+                </grammar>
+                """
         with tempfile.NamedTemporaryFile(delete=False, suffix='.rng') as fh:
             fh.write(rng)
             rng_path = fh.name

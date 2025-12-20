@@ -252,7 +252,7 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_from_eli(eli_url, fmt='html')
+            file_path = client._download_from_eli(eli_url, fmt='html')
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -273,7 +273,7 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_from_eli(eli_url, fmt='html')
+            file_path = client._download_from_eli(eli_url, fmt='html')
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -295,7 +295,7 @@ class TestGermanyClient:
             mock_response.raise_for_status = Mock()
             mock_get.return_value = mock_response
             
-            file_path = client.download_from_eli(eli_url, fmt='xml')
+            file_path = client._download_from_eli(eli_url, fmt='xml')
             
             assert file_path is not None
             assert os.path.exists(file_path)
@@ -327,7 +327,7 @@ class TestGermanyClient:
             mock_get.return_value = mock_response
             
             # Request XML format even though URL ends with .zip
-            file_path = client.download_from_eli(eli_url, fmt='xml')
+            file_path = client._download_from_eli(eli_url, fmt='xml')
             
             assert file_path is not None
             assert os.path.exists(file_path)

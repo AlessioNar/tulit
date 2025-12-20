@@ -96,9 +96,11 @@ class LuxembourgAKNParser(AkomaNtosoParser):
         """
         # Skip schema validation for Luxembourg CSD13 variant
         self.valid = True
-        
-        # Use orchestrator for standard parsing workflow
-        orchestrator = AKNParseOrchestrator(self, context_name="Luxembourg AKN")
-        orchestrator.execute_standard_workflow(file)
-        
+
+        # Store file path for get_root (backward compatibility)
+        self._file_path = file
+
+        # Extract all components using the standard workflow
+        self._extract_all_components()
+
         return self

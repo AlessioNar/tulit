@@ -12,6 +12,7 @@ import pytest
 import os
 import sys
 from pathlib import Path
+from unittest.mock import patch, Mock
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -32,109 +33,202 @@ class TestGermanyClient:
             log_dir=str(log_dir)
         )
     
-    # ===== LEGISLATION TESTS =====
+    # ===== UNIT TESTS =====
     
-    @pytest.mark.skip(reason="German RIS test server returns no results - external test data may have changed")
-    def test_search_legislation(self, client):
-        """Test searching for legislation."""
-        results = client.search_legislation(
-            search_term="Kakaoverordnung",
-            size=5
-        )
+    def test_build_url(self, client):
+        """Test URL building."""
+        # Test with relative endpoint
+        url = client._build_url("legislation")
+        assert url == "https://testphase.rechtsinformationen.bund.de/v1/legislation"
         
-        assert results is not None
-        assert 'totalItems' in results
-        assert results['totalItems'] > 0
-        print(f"Found {results['totalItems']} legislation items")
+        # Test with absolute URL
+        url = client._build_url("https://example.com/test")
+        assert url == "https://example.com/test"
         
-        if results['member']:
-            first_item = results['member'][0]['item']
-            print(f"First result: {first_item.get('name', 'N/A')}")
+        # Test with leading slash
+        url = client._build_url("/legislation")
+        assert url == "https://testphase.rechtsinformationen.bund.de/v1/legislation"
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
+    @pytest.mark.parametrize("status_code,should_raise", [
+        (200, False),
+        (404, True),
+        (500, True),
+    ])
+    def test_make_request(self, client, status_code, should_raise):
+        """Test HTTP request handling."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = status_code
+            if status_code == 200:
+                mock_response.raise_for_status = Mock()
+            else:
+                mock_response.raise_for_status.side_effect = Exception(f"HTTP {status_code}")
+            mock_get.return_value = mock_response
+            
+            if should_raise:
+                with pytest.raises(Exception):
+                    client._make_request("https://example.com")
+            else:
+                response = client._make_request("https://example.com")
+                assert response == mock_response
+    
+    def test_init(self, client):
+        """Test client initialization."""
+        assert client.base_url == "https://testphase.rechtsinformationen.bund.de"
+        assert client.api_version == "v1"
+        assert hasattr(client, 'logger')
+    
     def test_download_legislation_html(self, client):
-        """Test downloading legislation as HTML."""
-        # Using the example from the API documentation
-        file_path = client.download_legislation_html(
-            jurisdiction='bund',
-            agent='bgbl-1',
-            year='1979',
-            natural_identifier='s1325',
-            point_in_time='2020-06-19',
-            version=2,
-            language='deu',
-            point_in_time_manifestation='2020-06-19',
-            subtype='regelungstext-1'
-        )
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded legislation HTML to: {file_path}")
+        """Test downloading legislation as HTML with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<html><body>Test Legislation HTML</body></html>'
+            mock_response.headers = {'Content-Type': 'text/html'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_legislation_html(
+                jurisdiction='bund',
+                agent='bgbl-1',
+                year='1979',
+                natural_identifier='s1325',
+                point_in_time='2020-06-19',
+                version=2,
+                language='deu',
+                point_in_time_manifestation='2020-06-19',
+                subtype='regelungstext-1'
+            )
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test Legislation HTML' in content
+            os.remove(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_legislation_xml(self, client):
-        """Test downloading legislation as XML."""
-        file_path = client.download_legislation_xml(
-            jurisdiction='bund',
-            agent='bgbl-1',
-            year='1979',
-            natural_identifier='s1325',
-            point_in_time='2020-06-19',
-            version=2,
-            language='deu',
-            point_in_time_manifestation='2020-06-19',
-            subtype='regelungstext-1'
-        )
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded legislation XML to: {file_path}")
+        """Test downloading legislation as XML with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<?xml version="1.0"?><legislation>Test XML</legislation>'
+            mock_response.headers = {'Content-Type': 'application/xml'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_legislation_xml(
+                jurisdiction='bund',
+                agent='bgbl-1',
+                year='1979',
+                natural_identifier='s1325',
+                point_in_time='2020-06-19',
+                version=2,
+                language='deu',
+                point_in_time_manifestation='2020-06-19',
+                subtype='regelungstext-1'
+            )
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test XML' in content
+            os.remove(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_legislation_zip(self, client):
-        """Test downloading legislation as ZIP."""
-        file_path = client.download_legislation_zip(
-            jurisdiction='bund',
-            agent='bgbl-1',
-            year='1979',
-            natural_identifier='s1325',
-            point_in_time='2020-06-19',
-            version=2,
-            language='deu',
-            point_in_time_manifestation='2020-06-19'
-        )
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded legislation ZIP to: {file_path}")
+        """Test downloading legislation as ZIP with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            # Create a valid ZIP file content in memory
+            import zipfile
+            import io
+            
+            zip_buffer = io.BytesIO()
+            with zipfile.ZipFile(zip_buffer, 'w') as zf:
+                zf.writestr('test.txt', 'Test ZIP content')
+            zip_content = zip_buffer.getvalue()
+            
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = zip_content
+            mock_response.headers = {'Content-Type': 'application/zip'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_legislation_zip(
+                jurisdiction='bund',
+                agent='bgbl-1',
+                year='1979',
+                natural_identifier='s1325',
+                point_in_time='2020-06-19',
+                version=2,
+                language='deu',
+                point_in_time_manifestation='2020-06-19'
+            )
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            assert os.path.isdir(file_path)  # Should be a directory after extraction
+            # Check if the test file was extracted
+            test_file = os.path.join(file_path, 'test.txt')
+            assert os.path.exists(test_file)
+            with open(test_file, 'r') as f:
+                content = f.read()
+            assert content == 'Test ZIP content'
+            # Clean up
+            import shutil
+            shutil.rmtree(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_get_legislation_metadata(self, client):
-        """Test retrieving legislation metadata."""
-        metadata = client.get_legislation_metadata(
-            jurisdiction='bund',
-            agent='bgbl-1',
-            year='1979',
-            natural_identifier='s1325',
-            point_in_time='2020-06-19',
-            version=2,
-            language='deu'
-        )
+        """Test retrieving legislation metadata with mock."""
+        mock_data = {
+            "jurisdiction": "bund",
+            "agent": "bgbl-1",
+            "year": "1979",
+            "naturalIdentifier": "s1325"
+        }
         
-        assert metadata is not None
-        assert 'name' in metadata or 'legislationIdentifier' in metadata
-        print(f"Legislation metadata: {metadata.get('name', 'N/A')}")
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_data
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            metadata = client.get_legislation_metadata(
+                jurisdiction='bund',
+                agent='bgbl-1',
+                year='1979',
+                natural_identifier='s1325',
+                point_in_time='2020-06-19',
+                version=2,
+                language='deu'
+            )
+            
+            assert metadata == mock_data
+            mock_get.assert_called_once()
+            print(f"Legislation metadata: {metadata.get('name', 'N/A')}")
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_from_eli_url(self, client):
-        """Test downloading from a full ELI URL."""
+        """Test downloading from a full ELI URL with mock."""
         eli_url = "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.html"
         
-        file_path = client.download_from_eli(eli_url, fmt='html')
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded from ELI URL to: {file_path}")
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<html><body>Test ELI Content</body></html>'
+            mock_response.headers = {'Content-Type': 'text/html'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_from_eli(eli_url, fmt='html')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test ELI Content' in content
+            os.remove(file_path)
     
     # ===== CASE LAW TESTS =====
     
@@ -153,42 +247,98 @@ class TestGermanyClient:
             first_item = results['member'][0]['item']
             print(f"First result: {first_item.get('headline', 'N/A')}")
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_case_law_html(self, client):
-        """Test downloading case law as HTML."""
-        # Using the example document number from the API documentation
-        file_path = client.download_case_law_html('STRE201770751')
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded case law HTML to: {file_path}")
+        """Test downloading case law as HTML with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<html><body>Test Case Law HTML</body></html>'
+            mock_response.headers = {'Content-Type': 'text/html'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_case_law_html('STRE201770751')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test Case Law HTML' in content
+            os.remove(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_case_law_xml(self, client):
-        """Test downloading case law as XML."""
-        file_path = client.download_case_law_xml('STRE201770751')
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded case law XML to: {file_path}")
+        """Test downloading case law as XML with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<?xml version="1.0"?><case-law>Test XML</case-law>'
+            mock_response.headers = {'Content-Type': 'application/xml'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_case_law_xml('STRE201770751')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test XML' in content
+            os.remove(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_case_law_zip(self, client):
-        """Test downloading case law as ZIP."""
-        file_path = client.download_case_law_zip('STRE201770751')
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded case law ZIP to: {file_path}")
+        """Test downloading case law as ZIP with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            # Create a valid ZIP file content in memory
+            import zipfile
+            import io
+            
+            zip_buffer = io.BytesIO()
+            with zipfile.ZipFile(zip_buffer, 'w') as zf:
+                zf.writestr('case_law.txt', 'Test Case Law ZIP content')
+            zip_content = zip_buffer.getvalue()
+            
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = zip_content
+            mock_response.headers = {'Content-Type': 'application/zip'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_case_law_zip('STRE201770751')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            assert os.path.isdir(file_path)  # Should be a directory after extraction
+            # Check if the test file was extracted
+            test_file = os.path.join(file_path, 'case_law.txt')
+            assert os.path.exists(test_file)
+            with open(test_file, 'r') as f:
+                content = f.read()
+            assert content == 'Test Case Law ZIP content'
+            # Clean up
+            import shutil
+            shutil.rmtree(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_get_case_law_metadata(self, client):
-        """Test retrieving case law metadata."""
-        metadata = client.get_case_law_metadata('STRE201770751')
+        """Test retrieving case law metadata with mock."""
+        mock_data = {
+            "documentNumber": "STRE201770751",
+            "headline": "Test Case Law Document",
+            "court": "Test Court"
+        }
         
-        assert metadata is not None
-        assert 'documentNumber' in metadata or 'headline' in metadata
-        print(f"Case law metadata: {metadata.get('headline', 'N/A')}")
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_data
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            metadata = client.get_case_law_metadata('STRE201770751')
+            
+            assert metadata == mock_data
+            mock_get.assert_called_once()
+            print(f"Case law metadata: {metadata.get('headline', 'N/A')}")
     
     # ===== LITERATURE TESTS =====
     
@@ -207,33 +357,64 @@ class TestGermanyClient:
             first_item = results['member'][0]['item']
             print(f"First result: {first_item.get('headline', 'N/A')}")
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_literature_html(self, client):
-        """Test downloading literature as HTML."""
-        # Using the example document number from the API documentation
-        file_path = client.download_literature_html('BJLU075748788')
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded literature HTML to: {file_path}")
+        """Test downloading literature as HTML with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<html><body>Test Literature HTML</body></html>'
+            mock_response.headers = {'Content-Type': 'text/html'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_literature_html('BJLU075748788')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test Literature HTML' in content
+            os.remove(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_download_literature_xml(self, client):
-        """Test downloading literature as XML."""
-        file_path = client.download_literature_xml('BJLU075748788')
-        
-        assert file_path is not None
-        assert os.path.exists(file_path)
-        print(f"Downloaded literature XML to: {file_path}")
+        """Test downloading literature as XML with mock."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<?xml version="1.0"?><literature>Test XML</literature>'
+            mock_response.headers = {'Content-Type': 'application/xml'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_literature_xml('BJLU075748788')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            with open(file_path, 'rb') as f:
+                content = f.read()
+            assert b'Test XML' in content
+            os.remove(file_path)
     
-    @pytest.mark.skip(reason="German RIS test server returns 404 - test document no longer available")
     def test_get_literature_metadata(self, client):
-        """Test retrieving literature metadata."""
-        metadata = client.get_literature_metadata('BJLU075748788')
+        """Test retrieving literature metadata with mock."""
+        mock_data = {
+            "documentNumber": "BJLU075748788",
+            "headline": "Test Literature Document",
+            "author": "Test Author"
+        }
         
-        assert metadata is not None
-        assert 'documentNumber' in metadata or 'headline' in metadata
-        print(f"Literature metadata: {metadata.get('headline', 'N/A')}")
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_data
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            metadata = client.get_literature_metadata('BJLU075748788')
+            
+            assert metadata == mock_data
+            mock_get.assert_called_once()
+            print(f"Literature metadata: {metadata.get('headline', 'N/A')}")
     
     # ===== GLOBAL SEARCH TESTS =====
     

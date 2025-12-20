@@ -74,22 +74,3 @@ def test_parse_german_legislation():
     
     # Use assertion for pytest compatibility
     assert True, "German legislation parsing completed successfully"
-
-
-if __name__ == "__main__":
-    print("=" * 80)
-    print("German LegalDocML Parser Test")
-    print("=" * 80)
-    print()
-    
-    success = test_parse_german_legislation()
-    
-    print()
-    print("=" * 80)
-    if success:
-        print("✓ Test completed successfully!")
-    else:
-        print("✗ Test failed")
-    print("=" * 80)
-    
-    sys.exit(0 if success else 1)

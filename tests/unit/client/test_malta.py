@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
-from tulit.client.malta import MaltaLegislationClient
+from tulit.client.state.malta import MaltaLegislationClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestMaltaLegislationClient(unittest.TestCase):

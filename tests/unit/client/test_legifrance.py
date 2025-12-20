@@ -2,7 +2,7 @@ import pytest
 import os
 import json
 from unittest.mock import Mock, patch, MagicMock
-from tulit.client.legifrance import LegifranceClient
+from tulit.client.state.legifrance import LegifranceClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
 

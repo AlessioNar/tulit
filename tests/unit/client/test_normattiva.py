@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from tulit.client.normattiva import NormattivaClient
+from tulit.client.state.normattiva import NormattivaClient
 
 from tests.conftest import locate_data_dir, locate_tests_dir
 

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
-from tulit.client.portugal import PortugalDREClient
+from tulit.client.state.portugal import PortugalDREClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestPortugalDREClient(unittest.TestCase):

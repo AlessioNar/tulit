@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
-from tulit.client.finlex import FinlexClient
+from tulit.client.state.finlex import FinlexClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestFinlexClient(unittest.TestCase):

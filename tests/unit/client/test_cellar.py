@@ -1,6 +1,6 @@
 import unittest
 import json
-from tulit.client.cellar import CellarClient
+from tulit.client.eu.cellar import CellarClient
 import os
 from unittest.mock import patch, Mock
 import requests

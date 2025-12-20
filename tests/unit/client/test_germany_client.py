@@ -16,7 +16,7 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from tulit.client.germany import GermanyClient
+from tulit.client.state.germany import GermanyClient
 
 
 class TestGermanyClient:

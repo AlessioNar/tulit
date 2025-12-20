@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
-from tulit.client.irishstatutebook import IrishStatuteBookClient
+from tulit.client.state.irishstatutebook import IrishStatuteBookClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestIrishStatuteBookClient(unittest.TestCase):

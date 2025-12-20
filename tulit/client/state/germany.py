@@ -18,7 +18,7 @@ class GermanyClient(Client):
     - Literature (legal literature)
     
     Base API: https://testphase.rechtsinformationen.bund.de
-    API Documentation: https://testphase.rechtsinformationen.bund.de/swagger-ui/index.html
+    API Documentation: https://docs.rechtsinformationen.bund.de/
     """
     
     def __init__(self, download_dir, log_dir, proxies=None):

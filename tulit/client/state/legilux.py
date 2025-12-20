@@ -4,8 +4,8 @@ import sys
 from tulit.client.client import Client
 
 class LegiluxClient(Client):
-    def __init__(self, download_dir, log_dir):
-        super().__init__(download_dir, log_dir)
+    def __init__(self, download_dir, log_dir, proxies=None):
+        super().__init__(download_dir, log_dir, proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
         #self.endpoint = "https://legilux.public.lu/eli/etat/leg/loi"
 

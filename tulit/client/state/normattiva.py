@@ -6,8 +6,8 @@ import sys
 
 
 class NormattivaClient(Client):
-    def __init__(self, download_dir, log_dir):
-        super().__init__(download_dir, log_dir)
+    def __init__(self, download_dir, log_dir, proxies=None):
+        super().__init__(download_dir, log_dir, proxies)
         self.endpoint = "https://www.normattiva.it/do/atto/caricaAKN"
         self.logger = logging.getLogger(self.__class__.__name__)
     

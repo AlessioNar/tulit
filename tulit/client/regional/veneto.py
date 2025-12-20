@@ -6,8 +6,8 @@ import os
 import sys
 
 class VenetoClient(Client):
-    def __init__(self, download_dir, log_dir):
-        super().__init__(download_dir=download_dir, log_dir=log_dir)
+    def __init__(self, download_dir, log_dir, proxies=None):
+        super().__init__(download_dir=download_dir, log_dir=log_dir, proxies=proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
     def get_html(self, url, fmt=None):

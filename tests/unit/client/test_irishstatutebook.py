@@ -14,7 +14,7 @@ class TestIrishStatuteBookClient(unittest.TestCase):
         os.makedirs(self.log_dir, exist_ok=True)
         self.client = IrishStatuteBookClient(download_dir=self.download_dir, log_dir=self.log_dir)
 
-    @patch('tulit.client.irishstatutebook.requests.Session.get')
+    @patch('tulit.client.state.irishstatutebook.requests.Session.get')
     def test_get_act_success(self, mock_get):
         mock_response = Mock()
         mock_response.status_code = 200
@@ -30,7 +30,7 @@ class TestIrishStatuteBookClient(unittest.TestCase):
         self.assertIn(b'Irish Test', content)
         os.remove(file_path)
 
-    @patch('tulit.client.irishstatutebook.requests.Session.get')
+    @patch('tulit.client.state.irishstatutebook.requests.Session.get')
     def test_get_act_http_error(self, mock_get):
         mock_response = Mock()
         mock_response.raise_for_status.side_effect = Exception('HTTP error')

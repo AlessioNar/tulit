@@ -23,7 +23,7 @@ pygments = "^2.19.1"
 
 jsonschema = "^4.24.0"
 [[tool.poetry.include]]
-path = "tulit/client/queries/*.rq"
+path = "tulit/client/eu/queries/*.rq"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = ">=6,<9"

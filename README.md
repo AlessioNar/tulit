@@ -1,7 +1,7 @@
 # `tulit`, The Universal Legal Informatics Toolkit
 
-[![Tests (status)](https://img.shields.io/github/actions/workflow/status/AlessioNar/tulit/test.yml?branch=development&label=Tests&logo=github)](https://github.com/AlessioNar/tulit/actions/workflows/test.yml) [![Coverage](https://img.shields.io/codecov/c/github/AlessioNar/tulit?branch=development&logo=codecov)](https://codecov.io/gh/AlessioNar/tulit/tree/development)
-
+[![Tests (status)](https://img.shields.io/github/actions/workflow/status/AlessioNar/tulit/test.yml?branch=development&label=Tests&logo=github)](https://github.com/AlessioNar/tulit/actions/workflows/test.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/AlessioNar/tulit/development/.github/badges/coverage.json)](https://github.com/AlessioNar/tulit/actions/workflows/test.yml)
 
 ## 1. Introduction
 

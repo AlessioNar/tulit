@@ -10,6 +10,11 @@ from tulit.parser.xml.xml import XMLParser
 from typing import Optional
 from lxml import etree
 
+from tulit.parser.xml.akomantoso.base import AkomaNtosoParser
+from tulit.parser.xml.akomantoso.akn4eu import AKN4EUParser
+from tulit.parser.xml.akomantoso.german import GermanLegalDocMLParser
+from tulit.parser.xml.akomantoso.luxembourg import LuxembourgAKNParser
+
 
 # Create Akoma Ntoso parser registry
 _akn_registry = ParserRegistry()
@@ -115,10 +120,7 @@ def register_akn_parsers() -> None:
     This function should be called during module initialization to ensure
     all parser types are available for the factory function.
     """
-    from tulit.parser.xml.akomantoso.base import AkomaNtosoParser
-    from tulit.parser.xml.akomantoso.akn4eu import AKN4EUParser
-    from tulit.parser.xml.akomantoso.german import GermanLegalDocMLParser
-    from tulit.parser.xml.akomantoso.luxembourg import LuxembourgAKNParser
+    
     
     # Register standard Akoma Ntoso parser
     _akn_registry.register('akn', AkomaNtosoParser, aliases=['akomantoso', 'standard'])

@@ -22,12 +22,20 @@ class TestFranceLegifranceClient:
         results_dir = db_paths['results'] / 'member_states' / 'france'
         logs_dir = db_paths['logs']
 
+        # Check if Legifrance credentials are available
+        client_id = os.environ.get('LEGIFRANCE_CLIENT_ID')
+        client_secret = os.environ.get('LEGIFRANCE_CLIENT_SECRET')
+
+        if not client_id or not client_secret:
+            pytest.skip("Legifrance API credentials not available (set LEGIFRANCE_CLIENT_ID and LEGIFRANCE_CLIENT_SECRET)")
+
         try:
-            from tulit.client.state.france import LegifranceClient
+            from tulit.client.state.legifrance import LegifranceClient
             client = LegifranceClient(
-                sources_dir=str(sources_dir),
-                results_dir=str(results_dir),
-                logs_dir=str(logs_dir)
+                client_id=client_id,
+                client_secret=client_secret,
+                download_dir=str(sources_dir),
+                log_dir=str(logs_dir)
             )
 
             # Test download with a sample CELEX number

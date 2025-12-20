@@ -5,6 +5,10 @@ import xml.etree.ElementTree as ET
 
 from pathlib import Path
 from tests.conftest import locate_data_dir
+import tempfile
+from unittest.mock import patch
+import builtins
+from lxml import etree
 
 file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05" / "DOC_2.xml")
 
@@ -142,4 +146,4 @@ class TestFormex4Parser(unittest.TestCase):
 
 # Run the tests
 if __name__ == "__main__":
-    unittest.main()
+        unittest.main()

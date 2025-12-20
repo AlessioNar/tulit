@@ -1,0 +1,192 @@
+{
+  "modules_total": 34,
+  "test_files_total": 19,
+  "missing_tests": [
+    {
+      "module": "client\\boe.py",
+      "expected_test": "client\\test_boe.py"
+    },
+    {
+      "module": "client\\germany.py",
+      "expected_test": "client\\test_germany.py"
+    },
+    {
+      "module": "client\\legilux.py",
+      "expected_test": "client\\test_legilux.py"
+    },
+    {
+      "module": "client\\veneto.py",
+      "expected_test": "client\\test_veneto.py"
+    },
+    {
+      "module": "parsers\\exceptions.py",
+      "expected_test": "parsers\\test_exceptions.py"
+    },
+    {
+      "module": "parsers\\models.py",
+      "expected_test": "parsers\\test_models.py"
+    },
+    {
+      "module": "parsers\\normalization.py",
+      "expected_test": "parsers\\test_normalization.py"
+    },
+    {
+      "module": "parsers\\registry.py",
+      "expected_test": "parsers\\test_registry.py"
+    },
+    {
+      "module": "parsers\\html\\html_parser.py",
+      "expected_test": "parsers\\html\\test_html_parser.py"
+    },
+    {
+      "module": "parsers\\html\\veneto.py",
+      "expected_test": "parsers\\html\\test_veneto.py"
+    },
+    {
+      "module": "parsers\\html\\cellar\\cellar.py",
+      "expected_test": "parsers\\html\\cellar\\test_cellar.py"
+    },
+    {
+      "module": "parsers\\html\\cellar\\cellar_standard.py",
+      "expected_test": "parsers\\html\\cellar\\test_cellar_standard.py"
+    },
+    {
+      "module": "parsers\\html\\cellar\\proposal.py",
+      "expected_test": "parsers\\html\\cellar\\test_proposal.py"
+    },
+    {
+      "module": "parsers\\json\\legifrance.py",
+      "expected_test": "parsers\\json\\test_legifrance.py"
+    },
+    {
+      "module": "parsers\\strategies\\article_extraction.py",
+      "expected_test": "parsers\\strategies\\test_article_extraction.py"
+    },
+    {
+      "module": "parsers\\xml\\boe.py",
+      "expected_test": "parsers\\xml\\test_boe.py"
+    },
+    {
+      "module": "parsers\\xml\\helpers.py",
+      "expected_test": "parsers\\xml\\test_helpers.py"
+    },
+    {
+      "module": "parsers\\xml\\xml.py",
+      "expected_test": "parsers\\xml\\test_xml.py"
+    },
+    {
+      "module": "parsers\\xml\\akomantoso\\akn4eu.py",
+      "expected_test": "parsers\\xml\\akomantoso\\test_akn4eu.py"
+    },
+    {
+      "module": "parsers\\xml\\akomantoso\\base.py",
+      "expected_test": "parsers\\xml\\akomantoso\\test_base.py"
+    },
+    {
+      "module": "parsers\\xml\\akomantoso\\extractors.py",
+      "expected_test": "parsers\\xml\\akomantoso\\test_extractors.py"
+    },
+    {
+      "module": "parsers\\xml\\akomantoso\\german.py",
+      "expected_test": "parsers\\xml\\akomantoso\\test_german.py"
+    },
+    {
+      "module": "parsers\\xml\\akomantoso\\luxembourg.py",
+      "expected_test": "parsers\\xml\\akomantoso\\test_luxembourg.py"
+    },
+    {
+      "module": "parsers\\xml\\akomantoso\\utils.py",
+      "expected_test": "parsers\\xml\\akomantoso\\test_utils.py"
+    }
+  ],
+  "extra_tests": [
+    {
+      "test": "client\\test_cellar.py",
+      "mapped_module_candidate": "client\\cellar.py.py"
+    },
+    {
+      "test": "client\\test_client.py",
+      "mapped_module_candidate": "client\\client.py.py"
+    },
+    {
+      "test": "client\\test_finlex.py",
+      "mapped_module_candidate": "client\\finlex.py.py"
+    },
+    {
+      "test": "client\\test_germany_client.py",
+      "mapped_module_candidate": "client\\germany_client.py.py"
+    },
+    {
+      "test": "client\\test_irishstatutebook.py",
+      "mapped_module_candidate": "client\\irishstatutebook.py.py"
+    },
+    {
+      "test": "client\\test_legifrance.py",
+      "mapped_module_candidate": "client\\legifrance.py.py"
+    },
+    {
+      "test": "client\\test_malta.py",
+      "mapped_module_candidate": "client\\malta.py.py"
+    },
+    {
+      "test": "client\\test_normattiva.py",
+      "mapped_module_candidate": "client\\normattiva.py.py"
+    },
+    {
+      "test": "client\\test_portugal.py",
+      "mapped_module_candidate": "client\\portugal.py.py"
+    },
+    {
+      "test": "parsers\\test_abstract_base.py",
+      "mapped_module_candidate": "parsers\\abstract_base.py.py"
+    },
+    {
+      "test": "parsers\\test_parser.py",
+      "mapped_module_candidate": "parsers\\parser.py.py"
+    },
+    {
+      "test": "parsers\\html\\test_all_proposals.py",
+      "mapped_module_candidate": "parsers\\html\\all_proposals.py.py"
+    },
+    {
+      "test": "parsers\\html\\test_article_structure.py",
+      "mapped_module_candidate": "parsers\\html\\article_structure.py.py"
+    },
+    {
+      "test": "parsers\\html\\test_cellar_html.py",
+      "mapped_module_candidate": "parsers\\html\\cellar_html.py.py"
+    },
+    {
+      "test": "parsers\\html\\test_html.py",
+      "mapped_module_candidate": "parsers\\html\\html.py.py"
+    },
+    {
+      "test": "parsers\\html\\test_proposal_html.py",
+      "mapped_module_candidate": "parsers\\html\\proposal_html.py.py"
+    },
+    {
+      "test": "parsers\\xml\\test_akomantoso.py",
+      "mapped_module_candidate": "parsers\\xml\\akomantoso.py.py"
+    },
+    {
+      "test": "parsers\\xml\\test_formex.py",
+      "mapped_module_candidate": "parsers\\xml\\formex.py.py"
+    },
+    {
+      "test": "parsers\\xml\\test_germany_parser.py",
+      "mapped_module_candidate": "parsers\\xml\\germany_parser.py.py"
+    }
+  ],
+  "multi_test_modules": [],
+  "non_class_based_tests": [
+    {
+      "test": "parsers\\html\\test_all_proposals.py",
+      "top_level_tests_count": 1
+    },
+    {
+      "test": "parsers\\xml\\test_germany_parser.py",
+      "top_level_tests_count": 1
+    }
+  ],
+  "mirror_mismatches": []
+}

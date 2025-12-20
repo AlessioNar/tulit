@@ -1,6 +1,6 @@
 import unittest
 import os
-from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
+from tulit.parser.html.cellar.proposal import ProposalHTMLParser
 from tests.conftest import locate_data_dir
 
 DATA_DIR = locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "commission_proposals"

@@ -53,7 +53,7 @@ def run_parser(name, parser_type, input_path, output_path):
         
         # Import and run the appropriate parser
         if parser_type == 'html_proposal':
-            from tulit.parsers.html.proposal import ProposalHTMLParser
+            from tulit.parser.html.proposal import ProposalHTMLParser
             parser = ProposalHTMLParser()
             parser.parse(str(input_path))
             
@@ -70,7 +70,7 @@ def run_parser(name, parser_type, input_path, output_path):
             }
             
         elif parser_type == 'html_cellar':
-            from tulit.parsers.html.cellar import CellarHTMLParser
+            from tulit.parser.html.cellar import CellarHTMLParser
             parser = CellarHTMLParser()
             parser.parse(str(input_path))
             
@@ -86,7 +86,7 @@ def run_parser(name, parser_type, input_path, output_path):
             }
             
         elif parser_type == 'formex':
-            from tulit.parsers.xml.formex import Formex4Parser
+            from tulit.parser.xml.formex import Formex4Parser
             parser = Formex4Parser()
             parser.parse(str(input_path))
             
@@ -102,7 +102,7 @@ def run_parser(name, parser_type, input_path, output_path):
             }
             
         elif parser_type == 'akn':
-            from tulit.parsers.xml.akomantoso import create_akn_parser
+            from tulit.parser.xml.akomantoso import create_akn_parser
             # Auto-detect the correct parser based on the file's namespace
             parser = create_akn_parser(file_path=str(input_path))
             parser.parse(str(input_path))
@@ -119,7 +119,7 @@ def run_parser(name, parser_type, input_path, output_path):
             }
         
         elif parser_type == 'akn-de' or parser_type == 'german':
-            from tulit.parsers.xml.akomantoso import GermanLegalDocMLParser
+            from tulit.parser.xml.akomantoso import GermanLegalDocMLParser
             parser = GermanLegalDocMLParser()
             parser.parse(str(input_path))
             
@@ -135,7 +135,7 @@ def run_parser(name, parser_type, input_path, output_path):
             }
         
         elif parser_type == 'legifrance':
-            from tulit.parsers.json.legifrance import LegifranceParser
+            from tulit.parser.json.legifrance import LegifranceParser
             parser = LegifranceParser(log_dir=str(DB_BASE / 'logs'))
             output_data = parser.parse_file(str(input_path))
                 

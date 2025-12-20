@@ -9,9 +9,9 @@ This module verifies that:
 """
 
 import pytest
-from tulit.parsers.parser import Parser
-from tulit.parsers.xml.xml import XMLParser
-from tulit.parsers.html.html_parser import HTMLParser
+from tulit.parser.parser import Parser
+from tulit.parser.xml.xml import XMLParser
+from tulit.parser.html.html_parser import HTMLParser
 
 
 class TestAbstractParserEnforcement:
@@ -207,7 +207,7 @@ class TestConcreteImplementations:
     
     def test_akomantoso_parser_is_concrete(self):
         """Test that AkomaNtosoParser can be instantiated."""
-        from tulit.parsers.xml.akomantoso import AkomaNtosoParser
+        from tulit.parser.xml.akomantoso import AkomaNtosoParser
         
         parser = AkomaNtosoParser()
         assert parser is not None
@@ -216,7 +216,7 @@ class TestConcreteImplementations:
     
     def test_formex_parser_is_concrete(self):
         """Test that Formex4Parser can be instantiated."""
-        from tulit.parsers.xml.formex import Formex4Parser
+        from tulit.parser.xml.formex import Formex4Parser
         
         parser = Formex4Parser()
         assert parser is not None
@@ -225,7 +225,7 @@ class TestConcreteImplementations:
     
     def test_boe_parser_is_concrete(self):
         """Test that BOEXMLParser can be instantiated."""
-        from tulit.parsers.xml.boe import BOEXMLParser
+        from tulit.parser.xml.boe import BOEXMLParser
         
         parser = BOEXMLParser()
         assert parser is not None
@@ -234,7 +234,7 @@ class TestConcreteImplementations:
     
     def test_cellar_html_parser_is_concrete(self):
         """Test that CellarHTMLParser can be instantiated."""
-        from tulit.parsers.html.cellar import CellarHTMLParser
+        from tulit.parser.html.cellar import CellarHTMLParser
         
         parser = CellarHTMLParser()
         assert parser is not None
@@ -243,7 +243,7 @@ class TestConcreteImplementations:
     
     def test_proposal_html_parser_is_concrete(self):
         """Test that ProposalHTMLParser can be instantiated."""
-        from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
+        from tulit.parser.html.cellar.proposal import ProposalHTMLParser
         
         parser = ProposalHTMLParser()
         assert parser is not None

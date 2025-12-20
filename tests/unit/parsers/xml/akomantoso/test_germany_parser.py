@@ -10,7 +10,7 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from tulit.parsers.xml.akomantoso import GermanLegalDocMLParser
+from tulit.parser.xml.akomantoso import GermanLegalDocMLParser
 from tests.conftest import locate_data_dir
 
 

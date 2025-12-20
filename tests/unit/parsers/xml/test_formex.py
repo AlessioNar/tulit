@@ -1,6 +1,6 @@
 import unittest
 import os
-from tulit.parsers.xml.formex import Formex4Parser
+from tulit.parser.xml.formex import Formex4Parser
 import xml.etree.ElementTree as ET
 
 from pathlib import Path

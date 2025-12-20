@@ -1,5 +1,5 @@
 import unittest
-from tulit.parsers.xml.akomantoso import AkomaNtosoParser, AKN4EUParser
+from tulit.parser.xml.akomantoso import AkomaNtosoParser, AKN4EUParser
 import os
 import lxml.etree as etree
 from pathlib import Path

@@ -1,6 +1,6 @@
 import unittest
 import os
-from tulit.parsers.html.cellar import CellarHTMLParser
+from tulit.parser.html.cellar import CellarHTMLParser
 from tests.conftest import locate_data_dir
 
 DATA_DIR = locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "regulations" / "html"

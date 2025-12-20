@@ -50,27 +50,3 @@ class IrishStatuteBookClient(Client):
         except Exception as e:
             self.logger.error(f"Error downloading ISB act: {e}")
             return None
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Download an Act XML from the Irish Statute Book.')
-    parser.add_argument('--year', type=int, required=True, help='Year of the Act (e.g. 2012)')
-    parser.add_argument('--act_number', type=int, required=True, help='Number of the Act (e.g. 10)')
-    parser.add_argument('--dir', type=str, default='./tests/data/isb', help='Directory to save the XML file')
-    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Directory for logs')
-    args = parser.parse_args()
-
-    os.makedirs(args.dir, exist_ok=True)
-    os.makedirs(args.logdir, exist_ok=True)
-    client = IrishStatuteBookClient(download_dir=args.dir, log_dir=args.logdir)
-    file_path = client.get_act(year=args.year, act_number=args.act_number, fmt='xml')
-    if file_path:
-        logging.info(f"Downloaded to {file_path}")
-        print(f"Downloaded to {file_path}")
-    else:
-        logging.error("Download failed.")
-        print("Download failed.")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()

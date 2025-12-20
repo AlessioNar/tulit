@@ -54,21 +54,3 @@ class LegiluxClient(Client):
             print(f"Failed to download document. Status code: {response.status_code}")
             sys.exit(1)
             return None
-
-if __name__ == "__main__":
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Download a document from Legilux')
-    parser.add_argument('--eli', type=str, required=True, help='ELI URL of the document')
-    parser.add_argument('--dir', type=str, default='./tests/data/legilux', help='Download directory')
-    parser.add_argument('--logdir', type=str, default='./tests/metadata/logs', help='Log directory')
-    
-    args = parser.parse_args()
-    
-    downloader = LegiluxClient(download_dir=args.dir, log_dir=args.logdir)
-    documents = downloader.download(eli=args.eli)
-    if documents:
-        logging.info(f"Downloaded documents: {documents}")
-    else:
-        logging.error("No documents downloaded.")
-        sys.exit(1)

@@ -57,24 +57,3 @@ class FinlexClient(Client):
             self.logger.error(f"Error downloading Finlex statute: {e}")
             return None
 
-
-def main():
-    parser = argparse.ArgumentParser(description='Download a statute XML from Finlex Open Data API.')
-    parser.add_argument('--year', type=int, required=True, help='Year of the statute (e.g. 2024)')
-    parser.add_argument('--number', type=int, required=True, help='Number of the statute (e.g. 123)')
-    parser.add_argument('--dir', type=str, default='./tests/data/finlex', help='Directory to save the XML file')
-    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Directory for logs')
-    args = parser.parse_args()
-
-    os.makedirs(args.dir, exist_ok=True)
-    os.makedirs(args.logdir, exist_ok=True)
-    client = FinlexClient(download_dir=args.dir, log_dir=args.logdir)
-    file_path = client.get_statute(year=args.year, number=args.number, fmt='xml')
-    if file_path:
-        logging.info(f"Downloaded to {file_path}")
-    else:
-        logging.error("Download failed.")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()

@@ -70,25 +70,3 @@ class MaltaLegislationClient(Client):
             self.logger.error(f"Error downloading Malta legislation: {e}")
             return None
 
-
-def main():
-    parser = argparse.ArgumentParser(description='Download a document from the Maltese ELI portal.')
-    parser.add_argument('--eli_path', type=str, required=True, help="ELI path, e.g. 'cap/9', 'sl/9.24', 'ln/2015/433', 'lcbl/49/2004/10'")
-    parser.add_argument('--lang', type=str, default=None, help="Language code, e.g. 'mlt' or 'eng'")
-    parser.add_argument('--fmt', type=str, default=None, help="Format, e.g. 'pdf', 'xml', 'html'")
-    parser.add_argument('--dir', type=str, default='./tests/data/malta', help='Directory to save the file')
-    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Directory for logs')
-    args = parser.parse_args()
-
-    os.makedirs(args.dir, exist_ok=True)
-    os.makedirs(args.logdir, exist_ok=True)
-    client = MaltaLegislationClient(download_dir=args.dir, log_dir=args.logdir)
-    file_path = client.get_document(eli_path=args.eli_path, lang=args.lang, fmt=args.fmt)
-    if file_path:
-        logging.info(f"Downloaded to {file_path}")
-    else:
-        logging.error("Download failed.")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()

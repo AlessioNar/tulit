@@ -96,28 +96,3 @@ class NormattivaClient(Client):
         document_paths.append(file_path)
         self.logger.info(f"Downloaded Normattiva document to {file_path}")
         return document_paths
-
-# Example usage
-if __name__ == "__main__":
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Download a document from Normattiva')
-    parser.add_argument('--dataGU', type=str, required=True, help='Publication date in YYYYMMDD format')
-    parser.add_argument('--codiceRedaz', type=str, required=True, help='Editorial code')
-    parser.add_argument('--dataVigenza', type=str, default=None, help='Validity date in YYYYMMDD format')
-    parser.add_argument('--fmt', type=str, default='xml', choices=['xml', 'pdf', 'html'], help='Output format')
-    parser.add_argument('--dir', type=str, default='./tests/data/akn/italy', help='Download directory')
-    parser.add_argument('--logdir', type=str, default='./tests/logs', help='Log directory')
-    
-    args = parser.parse_args()
-    
-    if args.dataVigenza is None:
-        args.dataVigenza = datetime.today().strftime('%Y%m%d')
-    
-    downloader = NormattivaClient(download_dir=args.dir, log_dir=args.logdir)
-    documents = downloader.download(dataGU=args.dataGU, codiceRedaz=args.codiceRedaz, dataVigenza=args.dataVigenza, fmt=args.fmt)
-    if documents:
-        logging.info(f"Downloaded documents: {documents}")
-    else:
-        logging.error("No documents downloaded.")
-        sys.exit(1)

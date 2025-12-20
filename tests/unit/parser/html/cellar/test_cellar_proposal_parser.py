@@ -572,3 +572,375 @@ class TestProposalHTMLParser:
         proposal_parser.get_citations()
         
         assert len(proposal_parser.citations) == 1
+
+    def test_get_recitals_success(self, proposal_parser, tmp_path):
+        """Test get_recitals extracts recitals."""
+        html_file = tmp_path / "recitals.html"
+        html_file.write_text(
+            '''<html><body>
+                <p class="li ManualConsidrant"><span class="num">(1)</span> First recital text</p>
+                <p class="li ManualConsidrant"><span class="num">(2)</span> Second recital text</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_recitals()
+        
+        assert len(proposal_parser.recitals) == 2
+        assert proposal_parser.recitals[0]['num'] == '(1)'
+        assert 'First recital' in proposal_parser.recitals[0]['text']
+
+    def test_get_recitals_no_num(self, proposal_parser, tmp_path):
+        """Test get_recitals without number span."""
+        html_file = tmp_path / "recital_no_num.html"
+        html_file.write_text(
+            '<html><body><p class="li ManualConsidrant">Unnumbered recital</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_recitals()
+        
+        assert len(proposal_parser.recitals) == 1
+        assert proposal_parser.recitals[0]['num'] is None
+
+    def test_get_preamble_final_success(self, proposal_parser, tmp_path):
+        """Test get_preamble_final extracts adoption formula."""
+        html_file = tmp_path / "preamble_final.html"
+        html_file.write_text(
+            '''<html><body><div class="content">
+                <p class="Formuledadoption">HAS ADOPTED THIS DECISION:</p>
+            </div></body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.preamble = proposal_parser.root.find('div', class_='content')
+        proposal_parser.get_preamble_final()
+        
+        assert 'HAS ADOPTED' in proposal_parser.preamble_final
+
+    def test_get_preamble_final_no_preamble(self, proposal_parser):
+        """Test get_preamble_final with no preamble."""
+        proposal_parser.preamble = None
+        proposal_parser.get_preamble_final()
+        
+        assert proposal_parser.preamble_final is None
+
+    def test_get_body_success(self, proposal_parser, tmp_path):
+        """Test get_body finds body element."""
+        html_file = tmp_path / "body.html"
+        html_file.write_text(
+            '''<html><body><div class="content">
+                <p class="Formuledadoption">HAS ADOPTED:</p>
+                <p>Body content</p>
+            </div></body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.preamble = proposal_parser.root.find('div', class_='content')
+        proposal_parser.get_body()
+        
+        assert proposal_parser.body is not None
+
+    def test_get_body_no_preamble(self, proposal_parser):
+        """Test get_body with no preamble."""
+        proposal_parser.preamble = None
+        proposal_parser.get_body()
+        
+        assert proposal_parser.body is None
+
+    def test_is_after_fait_true(self, proposal_parser, tmp_path):
+        """Test _is_after_fait returns True when article after fait."""
+        html_file = tmp_path / "fait_order.html"
+        html_file.write_text(
+            '''<html><body>
+                <p id="fait">Fait</p>
+                <p id="article">Article</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        fait_elem = proposal_parser.root.find('p', id='fait')
+        article_elem = proposal_parser.root.find('p', id='article')
+        
+        result = proposal_parser._is_after_fait(article_elem, fait_elem)
+        assert result is True
+
+    def test_is_after_fait_false(self, proposal_parser, tmp_path):
+        """Test _is_after_fait returns False when article before fait."""
+        html_file = tmp_path / "fait_order2.html"
+        html_file.write_text(
+            '''<html><body>
+                <p id="article">Article</p>
+                <p id="fait">Fait</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        fait_elem = proposal_parser.root.find('p', id='fait')
+        article_elem = proposal_parser.root.find('p', id='article')
+        
+        result = proposal_parser._is_after_fait(article_elem, fait_elem)
+        assert result is False
+
+    def test_extract_article_number_and_heading_with_br(self, proposal_parser, tmp_path):
+        """Test _extract_article_number_and_heading splits by br."""
+        html_file = tmp_path / "article_br.html"
+        html_file.write_text(
+            '<html><body><p><span>Article 1</span><br/><span>Scope</span></p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        element = proposal_parser.root.find('p')
+        
+        num, heading = proposal_parser._extract_article_number_and_heading(element)
+        
+        assert 'Article 1' in num
+        assert heading == 'Scope'
+
+    def test_extract_article_number_and_heading_no_br(self, proposal_parser, tmp_path):
+        """Test _extract_article_number_and_heading without br."""
+        html_file = tmp_path / "article_no_br.html"
+        html_file.write_text(
+            '<html><body><p>Article 2</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        element = proposal_parser.root.find('p')
+        
+        num, heading = proposal_parser._extract_article_number_and_heading(element)
+        
+        assert 'Article 2' in num
+        assert heading is None
+
+    def test_generate_article_eid_with_number(self, proposal_parser):
+        """Test _generate_article_eid extracts article number."""
+        eid = proposal_parser._generate_article_eid("Article 5 - Title", 0)
+        assert eid == "art_5"
+
+    def test_generate_article_eid_without_number(self, proposal_parser):
+        """Test _generate_article_eid uses index when no number."""
+        eid = proposal_parser._generate_article_eid("Something else", 3)
+        assert eid == "art_3"
+
+    def test_try_extract_heading_from_next_paragraph(self, proposal_parser, tmp_path):
+        """Test _try_extract_heading_from_next_paragraph."""
+        html_file = tmp_path / "next_heading.html"
+        html_file.write_text(
+            '''<html><body>
+                <p id="article">Article 1</p>
+                <p class="Normal">Short heading</p>
+                <p class="Normal">Content text</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        article_elem = proposal_parser.root.find('p', id='article')
+        
+        heading = proposal_parser._try_extract_heading_from_next_paragraph(article_elem)
+        
+        assert heading == 'Short heading'
+
+    def test_try_extract_heading_no_following_paragraph(self, proposal_parser, tmp_path):
+        """Test _try_extract_heading_from_next_paragraph with no following."""
+        html_file = tmp_path / "no_following.html"
+        html_file.write_text(
+            '''<html><body>
+                <p id="article">Article 1</p>
+                <p class="Normal">Only one paragraph</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        article_elem = proposal_parser.root.find('p', id='article')
+        
+        heading = proposal_parser._try_extract_heading_from_next_paragraph(article_elem)
+        
+        assert heading is None
+
+    def test_concatenate_list_items(self, proposal_parser, tmp_path):
+        """Test _concatenate_list_items concatenates list points."""
+        html_file = tmp_path / "list_items.html"
+        html_file.write_text(
+            '''<html><body>
+                <p id="base">Base text</p>
+                <p class="li Point0">First item</p>
+                <p class="li Point1">Second item</p>
+                <p>Stop here</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        base_elem = proposal_parser.root.find('p', id='base')
+        
+        result = proposal_parser._concatenate_list_items("Base text", base_elem, set())
+        
+        assert 'First item' in result
+        assert 'Second item' in result
+
+    def test_process_normal_paragraph(self, proposal_parser, tmp_path):
+        """Test _process_normal_paragraph processes text."""
+        html_file = tmp_path / "normal.html"
+        html_file.write_text(
+            '<html><body><p class="Normal">Paragraph text</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        elem = proposal_parser.root.find('p')
+        
+        result, consumed, idx = proposal_parser._process_normal_paragraph(
+            elem, None, False, set(), "art_1", 1
+        )
+        
+        assert result is not None
+        assert 'Paragraph text' in result['text']
+
+    def test_process_normal_paragraph_heading_match(self, proposal_parser, tmp_path):
+        """Test _process_normal_paragraph skips heading."""
+        html_file = tmp_path / "heading_match.html"
+        html_file.write_text(
+            '<html><body><p class="Normal">Heading Text</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        elem = proposal_parser.root.find('p')
+        
+        result, consumed, idx = proposal_parser._process_normal_paragraph(
+            elem, "Heading Text", False, set(), "art_1", 1
+        )
+        
+        assert result is None
+        assert consumed is True
+
+    def test_process_numbered_paragraph(self, proposal_parser, tmp_path):
+        """Test _process_numbered_paragraph processes numbered text."""
+        html_file = tmp_path / "numbered.html"
+        html_file.write_text(
+            '<html><body><p class="li ManualNumPar1">Numbered text</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        elem = proposal_parser.root.find('p')
+        
+        result, idx = proposal_parser._process_numbered_paragraph(
+            elem, set(), "art_1", 1
+        )
+        
+        assert result is not None
+        assert 'Numbered text' in result['text']
+
+    def test_process_list_item(self, proposal_parser, tmp_path):
+        """Test _process_list_item processes list points."""
+        html_file = tmp_path / "list_point.html"
+        html_file.write_text(
+            '<html><body><p class="li Point0">List item text</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        elem = proposal_parser.root.find('p')
+        
+        result, idx = proposal_parser._process_list_item(
+            elem, set(), "art_1", 1
+        )
+        
+        assert result is not None
+        assert 'List item text' in result['text']
+
+    def test_extract_article_content(self, proposal_parser, tmp_path):
+        """Test _extract_article_content extracts paragraphs."""
+        html_file = tmp_path / "article_content.html"
+        html_file.write_text(
+            '''<html><body><div class="content">
+                <p class="Titrearticle" id="art">Article 1</p>
+                <p class="Normal">First paragraph</p>
+                <p class="Normal">Second paragraph</p>
+                <p class="Fait">Done</p>
+            </div></body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        article = proposal_parser.root.find('p', id='art')
+        fait = proposal_parser.root.find('p', class_='Fait')
+        
+        content = proposal_parser._extract_article_content(article, "art_1", None, fait)
+        
+        assert len(content) == 2
+
+    def test_get_articles_success(self, proposal_parser, tmp_path):
+        """Test get_articles extracts articles."""
+        html_file = tmp_path / "articles.html"
+        html_file.write_text(
+            '''<html><body>
+                <p class="Titrearticle">Article 1<br/>Title</p>
+                <p class="Normal">Content text</p>
+                <p class="Titrearticle">Article 2</p>
+                <p class="Normal">More content</p>
+                <p class="Fait">Done at Brussels</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_articles()
+        
+        assert len(proposal_parser.articles) == 2
+        assert proposal_parser.articles[0]['eId'] == 'art_1'
+
+    def test_get_articles_stops_at_fait(self, proposal_parser, tmp_path):
+        """Test get_articles stops after fait."""
+        html_file = tmp_path / "fait_stop.html"
+        html_file.write_text(
+            '''<html><body>
+                <p class="Titrearticle">Article 1</p>
+                <p class="Normal">Content</p>
+                <p class="Fait">Done</p>
+                <p class="Titrearticle">Article 2</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_articles()
+        
+        assert len(proposal_parser.articles) == 1
+
+    def test_get_articles_exception(self, proposal_parser):
+        """Test get_articles handles exception."""
+        proposal_parser.root = None
+        proposal_parser.get_articles()
+        
+        assert proposal_parser.articles == []
+
+    def test_get_conclusions_with_fait_and_signature(self, proposal_parser, tmp_path):
+        """Test get_conclusions with both fait and signature."""
+        html_file = tmp_path / "conclusions.html"
+        html_file.write_text(
+            '''<html><body>
+                <p class="Fait">Done at Brussels, 1 January 2025.</p>
+                <div class="signature">For the Council</div>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_conclusions()
+        
+        assert 'Done at Brussels' in proposal_parser.conclusions
+        assert 'For the Council' in proposal_parser.conclusions
+
+    def test_get_conclusions_fait_only(self, proposal_parser, tmp_path):
+        """Test get_conclusions with fait only."""
+        html_file = tmp_path / "fait_only.html"
+        html_file.write_text(
+            '<html><body><p class="Fait">Done at Brussels</p></body></html>',
+            encoding='utf-8'
+        )
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_conclusions()
+        
+        assert 'Done at Brussels' in proposal_parser.conclusions
+
+    def test_get_conclusions_none(self, proposal_parser, tmp_path):
+        """Test get_conclusions with no elements."""
+        html_file = tmp_path / "no_conclusions.html"
+        html_file.write_text('<html><body></body></html>', encoding='utf-8')
+        proposal_parser.get_root(str(html_file))
+        proposal_parser.get_conclusions()
+        
+        assert proposal_parser.conclusions is None

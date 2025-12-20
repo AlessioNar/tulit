@@ -27,10 +27,30 @@ jobs:
       run: poetry install --no-interaction --no-ansi
     - name: Run tests
       run: poetry run pytest --cov=tulit --cov-report=xml
-    - name: Upload coverage to Codecov
+
+    - name: Show coverage file
+      run: |
+        echo "Working dir: $(pwd)"
+        ls -la
+        if [ -f coverage.xml ]; then
+          echo "coverage.xml found — showing first 200 lines"
+          head -n 200 coverage.xml
+        else
+          echo "coverage.xml NOT FOUND"
+          ls -la .
+        fi
+
+    - name: Upload coverage to Codecov (action)
       uses: codecov/codecov-action@v4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: false
+
+    - name: Upload coverage to Codecov (bash fallback)
+      if: ${{ always() }}
+      run: |
+        echo "Attempting bash uploader fallback (verbose)"
+        bash <(curl -s https://codecov.io/bash) -f coverage.xml -F unittests -n codecov-umbrella || echo "bash uploader failed"

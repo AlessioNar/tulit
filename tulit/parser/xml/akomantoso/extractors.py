@@ -17,7 +17,7 @@ class AKNArticleExtractor:
     AKN parser variants (standard, AKN4EU, German, Luxembourg).
     """
     
-    def __init__(self, namespaces: Dict[str, str]):
+    def __init__(self, namespaces: Dict[str, str], id_attr: str = 'eId'):
         """
         Initialize with namespace configuration.
         
@@ -25,8 +25,11 @@ class AKNArticleExtractor:
         ----------
         namespaces : dict
             XML namespace mapping for XPath queries.
+        id_attr : str
+            The attribute name used for element IDs (default 'eId').
         """
         self.namespaces = namespaces
+        self.id_attr = id_attr
     
     def extract_article_metadata(self, article: etree._Element) -> Dict[str, Optional[str]]:
         """
@@ -42,7 +45,7 @@ class AKNArticleExtractor:
         dict
             Dictionary with 'eId', 'num', and 'heading' keys.
         """
-        eId = article.get('eId', '')
+        eId = article.get(self.id_attr, '')
         
         # Extract article number
         num_elem = article.find('akn:num', namespaces=self.namespaces)
@@ -80,13 +83,13 @@ class AKNArticleExtractor:
         elements = []
         
         for p in node.findall('.//akn:p', namespaces=self.namespaces):
-            # Find nearest parent with eId
+            # Find nearest parent with id_attr
             parent = p.getparent()
-            while parent is not None and 'eId' not in parent.attrib:
+            while parent is not None and self.id_attr not in parent.attrib:
                 parent = parent.getparent()
             
             if parent is not None:
-                parent_eId = parent.get('eId', '')
+                parent_eId = parent.get(self.id_attr, '')
                 text = ''.join(p.itertext()).strip()
                 if text:
                     # Check if we already have this eId

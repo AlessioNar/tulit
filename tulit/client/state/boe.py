@@ -41,36 +41,3 @@ class BOEClient(Client):
         except requests.RequestException as e:
             self.logger.error(f"An error occurred: {e}")
             return None
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Downloads an XML file from the BVeneto website.')
-    parser.add_argument('--id', type=str, default='BOE-A-2001-11814', help='BOE Id of the document to download.')
-    parser.add_argument('--file', type=str, default='boe.xml', help='Path to the output HTML file.')
-    args = parser.parse_args()
-    
-    client = BOEClient(download_dir=args.file, log_dir='../tests/metadata/logs')
-    html_content = client.get_html(args.id, fmt=os.path.splitext(args.file)[1][1:])
-
-    if html_content:
-        # Ensure the directory exists
-        output_dir = os.path.abspath('./tests/data/xml/spain/')
-        os.makedirs(output_dir, exist_ok=True)
-
-        # Write the HTML content to a file
-        try:
-            with open(os.path.join(output_dir, os.path.basename(args.file)), 'w', encoding='utf-8') as f:
-                f.write(html_content)
-            logging.info(f"File saved successfully to {os.path.join(output_dir, os.path.basename(args.file))}")
-        except PermissionError as e:
-            logging.error(f"Permission error: {e}")
-            sys.exit(1)
-        except Exception as e:
-            logging.error(f"An error occurred while writing the file: {e}")
-            sys.exit(1)
-    else:
-        logging.error("Failed to retrieve HTML content.")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    main()

@@ -72,6 +72,60 @@ class TestGermanyClient:
                 response = client._make_request("https://example.com")
                 assert response == mock_response
     
+    def test_make_request_with_proxies(self, client):
+        """Test HTTP request with proxy configuration."""
+        client.proxies = {'http': 'http://proxy.example.com:8080', 'https': 'https://proxy.example.com:8080'}
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            response = client._make_request("https://example.com", params={'test': 'value'})
+            
+            assert response == mock_response
+            mock_get.assert_called_once_with(
+                "https://example.com",
+                params={'test': 'value'},
+                headers={
+                    'Accept': 'application/json',
+                    'User-Agent': 'TuLit-Germany-Client/1.0'
+                },
+                proxies=client.proxies
+            )
+    
+    def test_make_request_with_custom_headers(self, client):
+        """Test HTTP request with custom headers."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            custom_headers = {'Authorization': 'Bearer token123', 'X-Custom': 'value'}
+            response = client._make_request("https://example.com", headers=custom_headers)
+            
+            assert response == mock_response
+            mock_get.assert_called_once_with(
+                "https://example.com",
+                params=None,
+                headers={
+                    'Accept': 'application/json',
+                    'User-Agent': 'TuLit-Germany-Client/1.0',
+                    'Authorization': 'Bearer token123',
+                    'X-Custom': 'value'
+                }
+            )
+    
+    def test_make_request_network_error(self, client):
+        """Test HTTP request network error handling."""
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_get.side_effect = Exception("Network connection failed")
+            
+            with pytest.raises(Exception, match="Network connection failed"):
+                client._make_request("https://example.com")
+    
     def test_init(self, client):
         """Test client initialization."""
         assert client.base_url == "https://testphase.rechtsinformationen.bund.de"
@@ -230,6 +284,85 @@ class TestGermanyClient:
             assert b'Test ELI Content' in content
             os.remove(file_path)
     
+    def test_download_from_eli_relative_url(self, client):
+        """Test downloading from a relative ELI URL."""
+        eli_url = "legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1"
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<html><body>Test Relative ELI</body></html>'
+            mock_response.headers = {'Content-Type': 'text/html'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_from_eli(eli_url, fmt='html')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            # Verify the URL was constructed correctly
+            call_args = mock_get.call_args
+            called_url = call_args[0][0]
+            assert called_url == "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.html"
+            os.remove(file_path)
+    
+    def test_download_from_eli_with_version_prefix(self, client):
+        """Test downloading from ELI URL with v1/ prefix."""
+        eli_url = "/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1"
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = b'<?xml version="1.0"?><doc>Test XML</doc>'
+            mock_response.headers = {'Content-Type': 'application/xml'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            file_path = client.download_from_eli(eli_url, fmt='xml')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            # Verify the URL was constructed correctly (no double v1/)
+            call_args = mock_get.call_args
+            called_url = call_args[0][0]
+            assert called_url == "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.xml"
+            os.remove(file_path)
+    
+    def test_download_from_eli_format_override(self, client):
+        """Test downloading from ELI URL with format override."""
+        eli_url = "legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.zip"
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            # Create a valid ZIP file content
+            import zipfile
+            import io
+            
+            zip_buffer = io.BytesIO()
+            with zipfile.ZipFile(zip_buffer, 'w') as zf:
+                zf.writestr('test.txt', 'Test ZIP content')
+            zip_content = zip_buffer.getvalue()
+            
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.content = zip_content
+            mock_response.headers = {'Content-Type': 'application/zip'}
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            # Request XML format even though URL ends with .zip
+            file_path = client.download_from_eli(eli_url, fmt='xml')
+            
+            assert file_path is not None
+            assert os.path.exists(file_path)
+            assert os.path.isdir(file_path)  # ZIP content gets extracted to directory
+            # Verify the URL was changed to .xml
+            call_args = mock_get.call_args
+            called_url = call_args[0][0]
+            assert called_url.endswith('.xml')
+            # Clean up the directory
+            import shutil
+            shutil.rmtree(file_path)
+    
     # ===== CASE LAW TESTS =====
     
     def test_search_case_law(self, client):
@@ -246,6 +379,48 @@ class TestGermanyClient:
         if results['member']:
             first_item = results['member'][0]['item']
             print(f"First result: {first_item.get('headline', 'N/A')}")
+    
+    def test_search_case_law_with_parameters(self, client):
+        """Test searching for case law with various parameters."""
+        mock_data = {
+            "totalItems": 1,
+            "member": [{"item": {"headline": "Test Case"}}]
+        }
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_data
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            results = client.search_case_law(
+                search_term="Urteil",
+                file_number="123",
+                ecli="ECLI:DE:BGH:2020:123",
+                court="BGH",
+                document_type="U",
+                date_from="2020-01-01",
+                date_to="2020-12-31",
+                size=10,
+                page_index=1,
+                sort="date"
+            )
+            
+            assert results == mock_data
+            # Verify the call was made with correct parameters
+            call_args = mock_get.call_args
+            params = call_args[1]['params']
+            assert params['searchTerm'] == "Urteil"
+            assert params['fileNumber'] == "123"
+            assert params['ecli'] == "ECLI:DE:BGH:2020:123"
+            assert params['court'] == "BGH"
+            assert params['type'] == "U"
+            assert params['dateFrom'] == "2020-01-01"
+            assert params['dateTo'] == "2020-12-31"
+            assert params['size'] == 10
+            assert params['pageIndex'] == 1
+            assert params['sort'] == "date"
     
     def test_download_case_law_html(self, client):
         """Test downloading case law as HTML with mock."""
@@ -357,6 +532,46 @@ class TestGermanyClient:
             first_item = results['member'][0]['item']
             print(f"First result: {first_item.get('headline', 'N/A')}")
     
+    def test_search_literature_with_parameters(self, client):
+        """Test searching for literature with various parameters."""
+        mock_data = {
+            "totalItems": 1,
+            "member": [{"item": {"headline": "Test Literature"}}]
+        }
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_data
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            results = client.search_literature(
+                search_term="Recht",
+                document_number="DOC123",
+                year_of_publication="2020",
+                author="Test Author",
+                date_from="2020-01-01",
+                date_to="2020-12-31",
+                size=10,
+                page_index=1,
+                sort="date"
+            )
+            
+            assert results == mock_data
+            # Verify the call was made with correct parameters
+            call_args = mock_get.call_args
+            params = call_args[1]['params']
+            assert params['searchTerm'] == "Recht"
+            assert params['documentNumber'] == "DOC123"
+            assert params['yearOfPublication'] == "2020"
+            assert params['author'] == "Test Author"
+            assert params['dateFrom'] == "2020-01-01"
+            assert params['dateTo'] == "2020-12-31"
+            assert params['size'] == 10
+            assert params['pageIndex'] == 1
+            assert params['sort'] == "date"
+    
     def test_download_literature_html(self, client):
         """Test downloading literature as HTML with mock."""
         with patch('tulit.client.state.germany.requests.get') as mock_get:
@@ -435,6 +650,42 @@ class TestGermanyClient:
                 doc_type = item.get('@type', 'Unknown')
                 name = item.get('name', item.get('headline', 'N/A'))
                 print(f"  {i+1}. [{doc_type}] {name}")
+    
+    def test_search_all_documents_with_parameters(self, client):
+        """Test searching across all document types with various parameters."""
+        mock_data = {
+            "totalItems": 1,
+            "member": [{"item": {"@type": "legislation", "name": "Test Document"}}]
+        }
+        
+        with patch('tulit.client.state.germany.requests.get') as mock_get:
+            mock_response = Mock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_data
+            mock_response.raise_for_status = Mock()
+            mock_get.return_value = mock_response
+            
+            results = client.search_all_documents(
+                search_term="Gesetz",
+                document_kind="N",
+                date_from="2020-01-01",
+                date_to="2020-12-31",
+                size=10,
+                page_index=1,
+                sort="date"
+            )
+            
+            assert results == mock_data
+            # Verify the call was made with correct parameters
+            call_args = mock_get.call_args
+            params = call_args[1]['params']
+            assert params['searchTerm'] == "Gesetz"
+            assert params['documentKind'] == "N"
+            assert params['dateFrom'] == "2020-01-01"
+            assert params['dateTo'] == "2020-12-31"
+            assert params['size'] == 10
+            assert params['pageIndex'] == 1
+            assert params['sort'] == "date"
     
     def test_search_legislation_only(self, client):
         """Test searching only legislation documents."""

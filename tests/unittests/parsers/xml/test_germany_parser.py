@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tulit.parsers.xml.akomantoso import GermanLegalDocMLParser
-from tests.unittests.conftest import locate_data_dir
+from tests.conftest import locate_data_dir
 
 
 def test_parse_german_legislation():

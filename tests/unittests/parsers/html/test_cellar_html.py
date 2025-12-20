@@ -4,7 +4,7 @@ from tulit.parsers.html.cellar import CellarHTMLParser
 import json
 from pathlib import Path
 
-from tests.unittests.conftest import locate_data_dir
+from tests.conftest import locate_data_dir
 
 DATA_DIR = locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "regulations" / "html"
 file_path = str(DATA_DIR / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03" / "DOC_1.html")

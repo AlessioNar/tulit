@@ -6,7 +6,8 @@ from unittest.mock import patch, Mock
 import requests
 import io
 
-from tests.unittests.conftest import locate_data_dir
+from tests.conftest import locate_data_dir
+from tests.conftest import locate_tests_dir
 
 class TestCellarClient(unittest.TestCase):
     def setUp(self):
@@ -30,9 +31,7 @@ class TestCellarClient(unittest.TestCase):
 
         self.assertEqual(document_paths, expected)
     
-    def test_get_cellar_ids_from_json_results(self):
-        
-        from tests.unittests.conftest import locate_tests_dir
+    def test_get_cellar_ids_from_json_results(self):        
         tests_root = locate_tests_dir(__file__)
         with open(tests_root / 'metadata' / 'query_results' / 'query_results.json', 'r') as f:
             cellar_results = json.loads(f.read())

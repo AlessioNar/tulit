@@ -2,11 +2,14 @@ import unittest
 from unittest.mock import patch, Mock
 import os
 from tulit.client.client import Client
+from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.downloader = Client(download_dir='./tests/data/formex', log_dir='./tests/logs')
+        data_root = locate_data_dir(__file__)
+        tests_root = locate_tests_dir(__file__)
+        self.downloader = Client(download_dir=str(data_root / 'formex'), log_dir=str(tests_root / 'logs'))
         
     def test_get_extension_from_content_type(self):
         content_type_mapping = {
@@ -31,7 +34,7 @@ class TestClient(unittest.TestCase):
         response = Mock()
         response.content = b'fake zip content'
 
-        folder_path = './tests/data'
+        folder_path = str(locate_tests_dir(__file__) / 'data')
         self.downloader.extract_zip(response, folder_path)
 
         # Check that the zipfile was opened and extracted

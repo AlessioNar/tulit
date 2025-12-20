@@ -4,7 +4,7 @@ from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 import json
 from pathlib import Path
 
-from tests.unittests.conftest import locate_data_dir
+from tests.conftest import locate_data_dir
 
 DATA_DIR = locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "commission_proposals"
 file_path_com6 = str(DATA_DIR / "COM(2025)6.html")

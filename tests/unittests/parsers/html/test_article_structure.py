@@ -1,7 +1,7 @@
 from tulit.parsers.html.cellar.proposal import ProposalHTMLParser
 import json
 import os
-from tests.unittests.conftest import locate_data_dir
+from tests.conftest import locate_data_dir
 
 # Get the path relative to the project root
 DATA_ROOT = locate_data_dir(__file__)

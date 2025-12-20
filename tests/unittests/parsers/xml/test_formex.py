@@ -4,7 +4,7 @@ from tulit.parsers.xml.formex import Formex4Parser
 import xml.etree.ElementTree as ET
 
 from pathlib import Path
-from tests.unittests.conftest import locate_data_dir
+from tests.conftest import locate_data_dir
 
 file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05" / "DOC_2.xml")
 

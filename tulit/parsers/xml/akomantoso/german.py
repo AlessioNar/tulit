@@ -70,7 +70,8 @@ class GermanLegalDocMLParser(AkomaNtosoParser):
         self.valid = True
         
         # Use orchestrator for standard parsing workflow
-        orchestrator = AKNParseOrchestrator(self, context_name="German LegalDocML")
-        orchestrator.execute_standard_workflow(file)
+        # AKNParseOrchestrator currently accepts only the parser instance
+        orchestrator = AKNParseOrchestrator(self)
+        orchestrator.execute_standard_workflow()
         
         return self

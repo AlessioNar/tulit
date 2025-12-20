@@ -3,16 +3,19 @@ import os
 import json
 from unittest.mock import Mock, patch, MagicMock
 from tulit.client.legifrance import LegifranceClient
+from tests.conftest import locate_data_dir, locate_tests_dir
 
 
 @pytest.fixture
 def client():
     """Create a LegifranceClient instance for testing."""
+    data_root = locate_data_dir(__file__)
+    tests_root = locate_tests_dir(__file__)
     return LegifranceClient(
         client_id="test_client_id",
         client_secret="test_client_secret",
-        download_dir="./tests/data/legifrance",
-        log_dir="./tests/logs"
+        download_dir=str(data_root / 'legifrance'),
+        log_dir=str(tests_root / 'logs')
     )
 
 

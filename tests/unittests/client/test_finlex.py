@@ -2,11 +2,14 @@ import unittest
 from unittest.mock import patch, Mock
 import os
 from tulit.client.finlex import FinlexClient
+from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestFinlexClient(unittest.TestCase):
     def setUp(self):
-        self.download_dir = './tests/data/finlex'
-        self.log_dir = './tests/logs'
+        data_root = locate_data_dir(__file__)
+        tests_root = locate_tests_dir(__file__)
+        self.download_dir = str(data_root / 'finlex')
+        self.log_dir = str(tests_root / 'logs')
         os.makedirs(self.download_dir, exist_ok=True)
         os.makedirs(self.log_dir, exist_ok=True)
         self.client = FinlexClient(download_dir=self.download_dir, log_dir=self.log_dir)

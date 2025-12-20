@@ -1,0 +1,146 @@
+[
+  {
+    "path": "tests\\unittests\\client\\test_cellar.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_client.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_finlex.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_irishstatutebook.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_legifrance.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_malta.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_normattiva.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\client\\test_portugal.py",
+    "issues": [
+      {
+        "pattern": "data-reference-without-locate",
+        "description": "File references tests/data but does not use locate_data_dir()"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\html\\test_all_proposals.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\html\\test_article_structure.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\html\\test_cellar_html.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\html\\test_html.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\html\\test_proposal_html.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\xml\\test_akomantoso.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\xml\\test_formex.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  },
+  {
+    "path": "tests\\unittests\\parsers\\xml\\test_germany_parser.py",
+    "issues": [
+      {
+        "pattern": "tests\\.unittests\\.conftest",
+        "description": "import from tests.unittests.conftest (prefer tests.conftest)"
+      }
+    ]
+  }
+]

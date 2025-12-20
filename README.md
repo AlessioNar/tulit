@@ -1,6 +1,7 @@
 # `tulit`, The Universal Legal Informatics Toolkit
 
-[![Publish Package to PyPI](https://github.com/AlessioNar/op_cellar/actions/workflows/publish.yml/badge.svg)](https://github.com/AlessioNar/op_cellar/actions/workflows/publish.yml)
+[![CI](https://github.com/AlessioNar/tulit/actions/workflows/ci.yml/badge.svg)](https://github.com/AlessioNar/tulit/actions/workflows/ci.yml)
+[![Publish Package to PyPI](https://github.com/AlessioNar/tulit/actions/workflows/publish.yml/badge.svg)](https://github.com/AlessioNar/tulit/actions/workflows/publish.yml)
 
 ## 1. Introduction
 

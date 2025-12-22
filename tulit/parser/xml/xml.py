@@ -106,8 +106,7 @@ class XMLParser(Parser):
         -------
         None
         """
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        self._validator.load_schema(schema, base_dir=base_dir)
+        self._validator.load_schema(schema)
 
     def validate(self, file: str, format: str) -> bool:
         """

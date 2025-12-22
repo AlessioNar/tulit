@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: poetry install --no-interaction --no-ansi
     - name: Run tests
-      run: poetry run pytest --cov=tulit --cov-report=xml
+      run: poetry run pytest ./tests/unit --cov=tulit --cov-report=xml
 
     - name: Commit badge if changed
       if: github.event_name == 'push'

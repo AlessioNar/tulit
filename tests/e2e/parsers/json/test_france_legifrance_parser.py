@@ -5,10 +5,10 @@ Uses files downloaded by France Legifrance client e2e tests as fixtures.
 """
 
 import pytest
-import os
+
 import json
 from pathlib import Path
-import logging
+
 
 
 @pytest.mark.e2e
@@ -21,7 +21,7 @@ class TestFranceLegifranceParser:
         """Test parsing France Legifrance XML documents."""
         sources_dir = db_paths['sources'] / 'member_states' / 'france' / 'legifrance'
         results_dir = db_paths['results'] / 'member_states' / 'france'
-        logs_dir = db_paths['logs']
+
 
         # Find downloaded XML files
         xml_files = list(sources_dir.glob('*.xml'))
@@ -63,7 +63,7 @@ class TestFranceLegifranceParser:
             
             # Optional fields
             if 'heading' in article:
-                assert isinstance(article['heading'], (str, type(None))), f"Article heading should be string or None: {article}"
+                assert isinstance(article['heading'], str) or article['heading'] is None, f"Article heading should be string or None: {article}"
 
         # Save results
         output_data = {

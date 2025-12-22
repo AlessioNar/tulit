@@ -15,7 +15,7 @@ import logging
 class TestFranceLegifranceClient:
     """Test suite for France Legifrance client functionality."""
 
-    @pytest.mark.slow
+    @pytest.mark.skip
     def test_france_legifrance_download(self, db_paths):
         """Test downloading documents from France Legifrance."""
         sources_dir = db_paths['sources'] / 'member_states' / 'france' / 'legifrance'

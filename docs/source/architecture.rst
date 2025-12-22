@@ -1,25 +1,12 @@
 Architecture Overview
 =====================
 
-The ``tulit`` parser package follows modern software engineering principles and design patterns. This document describes the architectural decisions and patterns used throughout the codebase.
-
-Design Principles
------------------
-
-The architecture is built on:
-
-* **Single Responsibility Principle:** Each module has one clear purpose
-* **Open/Closed Principle:** Easy to extend with new parsers without modifying existing code
-* **Dependency Inversion:** Depend on abstractions, not concrete implementations
-* **DRY (Don't Repeat Yourself):** Common functionality extracted into reusable components
-* **Clean Code:** Readable, maintainable, well-documented code with minimal module length
-
 Package Structure
 -----------------
 
 The parser package is organized into focused modules::
 
-    tulit/parsers/
+    tulit/parser/
     ├── parser.py                 # Abstract base Parser class
     ├── models.py                 # Domain models (Article, Citation, Recital, etc.)
     ├── registry.py               # Parser registry pattern for dynamic parser selection
@@ -57,7 +44,7 @@ The ``ParserRegistry`` class implements the Registry pattern to enable dynamic p
 
 .. code-block:: python
 
-    from tulit.parsers.registry import ParserRegistry, get_parser_for_format
+    from tulit.parser.registry import ParserRegistry, get_parser_for_format
     
     # Register a new parser
     registry = ParserRegistry()
@@ -81,7 +68,7 @@ Multiple strategy patterns are used for algorithmic flexibility:
 
 .. code-block:: python
 
-    from tulit.parsers.normalization import (
+    from tulit.parser.normalization import (
         WhitespaceNormalizer,
         UnicodeNormalizer,
         CompositeNormalizer
@@ -97,7 +84,7 @@ Multiple strategy patterns are used for algorithmic flexibility:
 
 .. code-block:: python
 
-    from tulit.parsers.strategies.article_extraction import (
+    from tulit.parser.strategies.article_extraction import (
         FormexArticleStrategy,
         CellarStandardArticleStrategy
     )
@@ -119,7 +106,7 @@ Factory functions create appropriate parser instances:
 
 .. code-block:: python
 
-    from tulit.parsers.xml.akomantoso import create_akn_parser
+    from tulit.parser.xml.akomantoso import create_akn_parser
     
     # Automatically detect format and create appropriate parser
     parser = create_akn_parser('document.akn')
@@ -166,7 +153,7 @@ Structured domain objects provide type-safe access to document components:
 
 .. code-block:: python
 
-    from tulit.parsers.models import Article, Citation, Recital, Chapter
+    from tulit.parser.models import Article, Citation, Recital, Chapter
     
     @dataclass
     class Article:

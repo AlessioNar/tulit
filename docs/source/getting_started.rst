@@ -1,8 +1,6 @@
 Getting Started
 ===============
 
-tulit is hosted on PyPi, and documentation is published on readthedocs.io.
-
 Installation
 ------------
 
@@ -25,28 +23,82 @@ Alternatively, you can install the package using pip:
 Basic usage
 -----------
 
-The `tulit` package main components are:
-* a client to query and retrieve data from a variety of legal data sources. Currently the package supports the Cellar, LegiLux and Normattiva.
-* a parser to convert legal documents from a variety of formats to a json representation.
+The `tulit` package has two main components:
+
+* **Client**: Query and retrieve data from legal sources across Europe:
+  
+  * EU: Cellar (EU Publications Office)
+  * Member States: Finland, France, Germany, Ireland, Italy, Luxembourg, Malta, Portugal, Spain
+  * Regional: Italian regions (Veneto)
+
+* **Parser**: Convert legal documents from various formats to JSON:
+  
+  * XML: Akoma Ntoso, FORMEX 4, BOE XML
+  * HTML: Cellar variants, Regional parsers
+  * JSON: Legifrance
 
 Retrieving legal documents
 ---------------------------
 
-The `tulit` package provides a client to query and retrieve data from a variety of legal data sources. The following code snippet shows how to use the `tulit` package to retrieve a legal document from Cellar, given its CELEX number:
+EU Cellar Client
+~~~~~~~~~~~~~~~~
+
+Retrieve documents from the EU Publications Office:
 
 .. code-block:: python
 
-    from tulit.client.cellar import CellarClient
+    from tulit.client.eu.cellar import CellarClient
     
     client = CellarClient(download_dir='./database', log_dir='./logs')
 
-    file_format = 'fmx4' # Or xhtml
+    file_format = 'fmx4'  # Or 'xhtml', 'pdfa', etc.
     celex = "32024R0903"
 
     documents = client.download(celex=celex, format=file_format)
+    print(f"Downloaded: {documents}")
 
-    # Location of the documents
-    print(documents)
+Member State Clients
+~~~~~~~~~~~~~~~~~~~~
+
+**Italy (Normattiva):**
+
+.. code-block:: python
+
+    from tulit.client.state.normattiva import NormativaClient
+    
+    client = NormativaClient(download_dir='./database')
+    # Download by URN
+    client.download(urn='urn:nir:stato:decreto.legge:2024-01-01;1')
+
+**Luxembourg (Legilux):**
+
+.. code-block:: python
+
+    from tulit.client.state.legilux import LegiluxClient
+    
+    client = LegiluxClient(download_dir='./database')
+    client.download(eli='eli/etat/leg/code/travail')
+
+**Germany (RIS):**
+
+.. code-block:: python
+
+    from tulit.client.state.germany import GermanyClient
+    
+    client = GermanyClient(download_dir='./database')
+    client.download(doc_type='bgbl', year='2024', number='145')
+
+Regional Clients
+~~~~~~~~~~~~~~~~
+
+**Veneto (Italy):**
+
+.. code-block:: python
+
+    from tulit.client.regional.veneto import VenetoClient
+    
+    client = VenetoClient(download_dir='./database')
+    client.download(bur_number='1', year='2024')
 
 Parsing legal documents
 -----------------------
@@ -54,42 +106,50 @@ Parsing legal documents
 The `tulit` parsers support legislative documents in the following formats:
 
 **XML Formats:**
+
   * Akoma Ntoso 3.0 (EU, German LegalDocML, Luxembourg variants)
   * FORMEX 4 (EU legislative documents)
   * BOE XML (Spanish Official Gazette)
 
 **HTML Formats:**
+
   * Cellar XHTML (semantic structure)
-  * Cellar Standard HTML
+  * Cellar Standard HTML (simple structure)
   * EU Legislative Proposals
+  * Veneto Regional HTML
+
+**JSON Formats:**
+
+  * Legifrance JSON
 
 Parsing XML Documents
 ~~~~~~~~~~~~~~~~~~~~~
 
-**Akoma Ntoso:** The package automatically detects the variant (EU, German, Luxembourg) based on namespace and structure:
+**Akoma Ntoso:** 
 
-.. code-block:: python
-
-    from tulit.parsers.xml.akomantoso import AkomaNtosoParser, create_akn_parser
+.. code-block:: python    
+    from tulit.parser.xml.akomantoso import AKN4EUParser, GermanLegalDocMLParser
     
-    # Automatic variant detection
-    parser = create_akn_parser('tests/data/akn/eu/32014L0092.akn')
-    parser.parse('tests/data/akn/eu/32014L0092.akn')
+    eu_parser = AKN4EUParser()
+    eu_parser.parse('tests/data/akn/eu/32014L0092.akn')
     
-    # Or use specific parser directly
-    from tulit.parsers.xml.akomantoso import AKN4EUParser, GermanLegalDocMLParser
-    parser = AKN4EUParser()
-    parser.parse('tests/data/akn/eu/32014L0092.akn')
+    german_parser = GermanLegalDocMLParser()
+    german_parser.parse('tests/data/akn/germany/document.akn')
 
 **FORMEX 4:** Parse EU legislative documents in FORMEX format:
 
 .. code-block:: python
 
-    from tulit.parsers.xml.formex import Formex4Parser
+    from tulit.parser.xml.formex import Formex4Parser
 
     parser = Formex4Parser()
     formex_file = 'tests/data/formex/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml'
-    parser.parse(formex_file)
+    result = parser.parse(formex_file)
+    
+    # Access parsed content
+    print(f"Found {len(parser.articles)} articles")
+    for article in parser.articles:
+        print(f"Article {article.number}: {article.title}")
 
 Parsing HTML Documents
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -98,7 +158,7 @@ Parsing HTML Documents
 
 .. code-block:: python
 
-    from tulit.parsers.html.cellar import CellarHTMLParser
+    from tulit.parser.html.cellar import CellarHTMLParser
     
     parser = CellarHTMLParser()
     html_file = 'tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html'
@@ -108,7 +168,7 @@ Parsing HTML Documents
 
 .. code-block:: python
 
-    from tulit.parsers.html.cellar import CellarStandardHTMLParser
+    from tulit.parser.html.cellar import CellarStandardHTMLParser
     
     parser = CellarStandardHTMLParser()
     parser.parse('document.html')
@@ -117,10 +177,19 @@ Parsing HTML Documents
 
 .. code-block:: python
 
-    from tulit.parsers.html.cellar import ProposalHTMLParser
+    from tulit.parser.html.cellar import ProposalHTMLParser
     
     parser = ProposalHTMLParser()
     parser.parse('proposal.html')
+
+**Veneto Regional:** Parse Italian regional legislation:
+
+.. code-block:: python
+
+    from tulit.parser.html.veneto import VenetoHTMLParser
+    
+    parser = VenetoHTMLParser()
+    parser.parse('tests/data/html/veneto/esg.html')
 
 
 Accessing Parsed Content
@@ -130,70 +199,37 @@ After parsing, the document structure is available through parser attributes:
 
 .. code-block:: python
     
+    # Parse a document
+    from tulit.parser.xml.formex import Formex4Parser
+    parser = Formex4Parser()
+    parser.parse('document.fmx.xml')
+    
     # Metadata and preface
-    print(parser.preface)
+    print(f"Title: {parser.preface}")
     
     # Preamble components
-    print(parser.citations)
-    print(parser.recitals)
-    print(parser.formula)
-    print(parser.preamble_final)
+    for citation in parser.citations:
+        print(f"Citation: {citation.content}")
+    
+    for recital in parser.recitals:
+        print(f"Recital {recital.number}: {recital.content}")
+    
+    print(f"Formula: {parser.formula}")
+    print(f"Preamble final: {parser.preamble_final}")
     
     # Body structure
-    print(parser.chapters)
-    print(parser.articles)
+    for chapter in parser.chapters:
+        print(f"Chapter {chapter.number}: {chapter.title}")
+    
+    for article in parser.articles:
+        print(f"Article {article.number}: {article.title}")
+        print(f"Content: {article.content}")
+        for child in article.children:
+            print(f"  {child.type} {child.number}: {child.content}")
     
     # Conclusions
-    print(parser.conclusions)
+    print(f"Conclusions: {parser.conclusions}")
     
     # Export to JSON
     json_output = parser.export_to_json()
-
-Using the Parser Registry
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The parser registry allows dynamic parser selection based on format:
-
-.. code-block:: python
-
-    from tulit.parsers.registry import get_parser_for_format
-    
-    # Automatically get the right parser for a format
-    parser = get_parser_for_format('akn')
-    parser.parse('document.akn')
-    
-    # Supported formats: 'akn', 'formex', 'fmx4', 'xhtml', 'html', 'boe'
-
-Advanced Features
-~~~~~~~~~~~~~~~~~
-
-**Text Normalization:** Use normalization strategies for consistent text processing:
-
-.. code-block:: python
-
-    from tulit.parsers.normalization import create_html_normalizer, create_xml_normalizer
-    
-    normalizer = create_html_normalizer()
-    clean_text = normalizer.normalize(raw_text)
-
-**Custom Article Extraction:** Implement custom article extraction strategies:
-
-.. code-block:: python
-
-    from tulit.parsers.strategies.article_extraction import FormexArticleStrategy
-    
-    strategy = FormexArticleStrategy()
-    articles = strategy.extract_articles(root_element)
-
-**Domain Models:** Work with structured domain objects:
-
-.. code-block:: python
-
-    from tulit.parsers.models import Article, Citation, Recital
-    
-    # Models provide type-safe access to document components
-    for article in parser.articles:
-        print(f"Article {article.number}: {article.title}")
-        for child in article.children:
-            print(f"  {child.type}: {child.content}")
-
+    print(json_output)

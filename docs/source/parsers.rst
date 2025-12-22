@@ -20,7 +20,7 @@ The formats currently supported are:
 Core Parser Architecture
 -------------------------
 
-.. automodule:: tulit.parsers.parser
+.. automodule:: tulit.parser.parser
     :members:
     :undoc-members:
     :show-inheritance:
@@ -28,7 +28,7 @@ Core Parser Architecture
 Domain Models
 -------------
 
-.. automodule:: tulit.parsers.models
+.. automodule:: tulit.parser.models
     :members:
     :undoc-members:
     :show-inheritance:
@@ -36,7 +36,7 @@ Domain Models
 Parser Registry
 ---------------
 
-.. automodule:: tulit.parsers.registry
+.. automodule:: tulit.parser.registry
     :members:
     :undoc-members:
     :show-inheritance:
@@ -44,7 +44,7 @@ Parser Registry
 Text Normalization
 ------------------
 
-.. automodule:: tulit.parsers.normalization
+.. automodule:: tulit.parser.normalization
     :members:
     :undoc-members:
     :show-inheritance:
@@ -52,7 +52,7 @@ Text Normalization
 Parser Exceptions
 -----------------
 
-.. automodule:: tulit.parsers.exceptions
+.. automodule:: tulit.parser.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
@@ -63,7 +63,7 @@ XML Parsers
 Base XML Parser
 ~~~~~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.xml.xml
+.. automodule:: tulit.parser.xml.xml
     :members:
     :undoc-members:
     :show-inheritance:
@@ -71,7 +71,7 @@ Base XML Parser
 XML Helpers
 ~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.xml.helpers
+.. automodule:: tulit.parser.xml.helpers
     :members:
     :undoc-members:
     :show-inheritance:
@@ -79,7 +79,7 @@ XML Helpers
 Formex Parser
 ~~~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.xml.formex
+.. automodule:: tulit.parser.xml.formex
     :members:
     :undoc-members:
     :show-inheritance:
@@ -88,32 +88,32 @@ Formex Parser
 Akoma Ntoso Parsers
 ~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.xml.akomantoso.base
+.. automodule:: tulit.parser.xml.akomantoso.base
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.xml.akomantoso.akn4eu
+.. automodule:: tulit.parser.xml.akomantoso.akn4eu
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.xml.akomantoso.german
+.. automodule:: tulit.parser.xml.akomantoso.german
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.xml.akomantoso.luxembourg
+.. automodule:: tulit.parser.xml.akomantoso.luxembourg
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.xml.akomantoso.utils
+.. automodule:: tulit.parser.xml.akomantoso.utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.xml.akomantoso.extractors
+.. automodule:: tulit.parser.xml.akomantoso.extractors
     :members:
     :undoc-members:
     :show-inheritance:
@@ -121,7 +121,7 @@ Akoma Ntoso Parsers
 BOE Parser
 ~~~~~~~~~~
 
-.. automodule:: tulit.parsers.xml.boe
+.. automodule:: tulit.parser.xml.boe
     :members:
     :undoc-members:
     :show-inheritance:
@@ -132,7 +132,7 @@ HTML Parsers
 Base HTML Parser
 ~~~~~~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.html.html_parser
+.. automodule:: tulit.parser.html.html_parser
     :members:
     :undoc-members:
     :show-inheritance:
@@ -140,18 +140,18 @@ Base HTML Parser
 Cellar HTML Parsers
 ~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.html.cellar.cellar
+.. automodule:: tulit.parser.html.cellar.cellar
     :members:
     :undoc-members:
     :show-inheritance:
     :exclude-members: main
 
-.. automodule:: tulit.parsers.html.cellar.cellar_standard
+.. automodule:: tulit.parser.html.cellar.cellar_standard
     :members:
     :undoc-members:
     :show-inheritance:
 
-.. automodule:: tulit.parsers.html.cellar.proposal
+.. automodule:: tulit.parser.html.cellar.proposal
     :members:
     :undoc-members:
     :show-inheritance:
@@ -159,7 +159,7 @@ Cellar HTML Parsers
 Other HTML Parsers
 ~~~~~~~~~~~~~~~~~~
 
-.. automodule:: tulit.parsers.html.veneto
+.. automodule:: tulit.parser.html.veneto
     :members:
     :undoc-members:
     :show-inheritance:
@@ -167,7 +167,7 @@ Other HTML Parsers
 Article Extraction Strategies
 ------------------------------
 
-.. automodule:: tulit.parsers.strategies.article_extraction
+.. automodule:: tulit.parser.strategies.article_extraction
     :members:
     :undoc-members:
     :show-inheritance:

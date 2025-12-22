@@ -125,9 +125,10 @@ The `tulit` parsers support legislative documents in the following formats:
 Parsing XML Documents
 ~~~~~~~~~~~~~~~~~~~~~
 
-**Akoma Ntoso:** 
+**Akoma Ntoso:** The package automatically detects variants (EU, German, Luxembourg):
 
-.. code-block:: python    
+.. code-block:: python
+    
     from tulit.parser.xml.akomantoso import AKN4EUParser, GermanLegalDocMLParser
     
     eu_parser = AKN4EUParser()

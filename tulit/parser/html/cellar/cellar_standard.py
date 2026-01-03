@@ -72,8 +72,13 @@ class CellarStandardHTMLParser(HTMLParser):
     def get_preamble(self) -> None:
         """
         Extract preamble content.
-        In standard HTML, the preamble typically includes the decision-making body,
-        references, and recitals.
+        
+        This parser is specifically designed for EU Cellar Standard HTML format
+        with TXT_TE tags. Files without TXT_TE tags are not supported and will
+        cause the parser to fail.
+        
+        Raises:
+            ValueError: If no TXT_TE tag is found in the document.
         """
         try:
             # Find the TXT_TE container (case-insensitive)
@@ -87,21 +92,24 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.txt_te = txt_te
                 self.preamble = txt_te
                 self.is_consolidated = False
-                self.logger.info("Preamble container found (standard format).")
+                self.logger.info("Preamble container found (standard format with TXT_TE).")
             else:
-                # Consolidated format - use body element
-                body = self.root.find('body')
-                if body:
-                    self.txt_te = body
-                    self.preamble = body
-                    self.is_consolidated = True
-                    self.logger.info("Preamble container found (consolidated format).")
-                else:
-                    self.preamble = None
-                    self.logger.warning("No preamble container found.")
+                # No TXT_TE found - this parser cannot handle this format
+                error_msg = (
+                    "No TXT_TE tag found. CellarStandardHTMLParser is designed specifically "
+                    "for EU Cellar Standard HTML format with TXT_TE tags. "
+                    "Use a different parser for this document format."
+                )
+                self.logger.error(error_msg)
+                raise ValueError(error_msg)
+                
+        except ValueError:
+            # Re-raise ValueError to signal unsupported format
+            raise
         except Exception as e:
             self.preamble = None
             self.logger.error(f"Error extracting preamble: {e}")
+            raise
     
     def get_formula(self) -> None:
         """

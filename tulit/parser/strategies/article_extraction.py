@@ -194,7 +194,12 @@ class HTMLArticleExtractionStrategy(ArticleExtractionStrategy):
     
     def _is_article_marker(self, text: str) -> bool:
         """
-        Check if text represents an article marker.
+        Check if text is a standalone article marker (not a reference within content).
+        
+        A true article marker is:
+        - Starts with 'Article N'
+        - Is short (typically just "Article N" or "Article N [heading]")
+        - Not part of a longer sentence mentioning another regulation's article
         
         Parameters
         ----------
@@ -204,9 +209,41 @@ class HTMLArticleExtractionStrategy(ArticleExtractionStrategy):
         Returns
         -------
         bool
-            True if text matches article pattern
+            True if text is a standalone article marker
         """
-        return bool(re.match(self.article_pattern, text, re.IGNORECASE))
+        # Must start with Article N
+        if not re.match(r'^Article\s+\d+[a-z]?', text, re.IGNORECASE):
+            return False
+        
+        # If it's just "Article N" (possibly with whitespace), it's a marker
+        if re.match(r'^Article\s+\d+[a-z]?\s*$', text, re.IGNORECASE):
+            return True
+        
+        # If it contains phrases indicating it's referencing another regulation's article, not a marker
+        reference_patterns = [
+            r'of Regulation',
+            r'of Commission',
+            r'of Council',
+            r'of Directive',
+            r'of Decision',
+            r'\(\d+\)',  # Article 28 (1) - paragraph number
+            r'is hereby',
+            r'shall be',
+            r'thereof',
+            r'thereto'
+        ]
+        
+        for pattern in reference_patterns:
+            if re.search(pattern, text, re.IGNORECASE):
+                return False
+        
+        # If it's relatively short (likely "Article N" plus a short heading), it's a marker
+        # Typical: "Article 1", "Article 2 - Definitions", "Article 3 Scope"
+        # Not typical: "Article 28 (1) of Regulation (EEC) No 1204/72 is hereby amended..."
+        if len(text) < 100:
+            return True
+        
+        return False
 
 
 class FormexArticleStrategy(XMLArticleExtractionStrategy):
@@ -432,9 +469,12 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
                 }
             
             # Check for stop markers (conclusions section)
-            elif any(marker in text for marker in stop_markers):
-                if current_article:
-                    self._finalize_article(current_article, article_content, articles)
+            # Only check after we've started extracting articles
+            # Stop markers must appear at the START of the text to avoid false positives
+            # Use case-insensitive matching for older regulations in ALL CAPS
+            elif current_article and any(text.upper().startswith(marker.upper()) for marker in stop_markers):
+                self._finalize_article(current_article, article_content, articles)
+                current_article = None  # Mark as finalized to prevent double-finalization
                 break
             
             # Accumulate article content
@@ -450,24 +490,177 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
     def _finalize_article(self, article: Dict[str, Any], content: List[str], 
                          articles: List[Dict[str, Any]]) -> None:
         """
-        Finalize an article by grouping its content into children.
+        Finalize an article by grouping its content into paragraph children.
+        
+        Consecutive list items (a), (b), (c) or sub-items are concatenated
+        into the same paragraph to maintain list coherence.
         
         Parameters
         ----------
         article : dict
             Article dictionary to finalize
         content : list
-            List of content strings
+            List of paragraph text strings within this article
         articles : list
             List to append finalized article to
         """
         if content:
-            for idx, text in enumerate(content, 1):
+            # Group content into logical paragraphs by concatenating list items
+            grouped_content = self._group_list_items(content)
+            
+            for idx, text in enumerate(grouped_content, 1):
                 article['children'].append({
-                    'eId': f'para_{idx}',
+                    'eId': f'{article["eId"]}_para_{idx}',
+                    'num': str(idx),
                     'text': text
                 })
         articles.append(article)
+    
+    def _group_list_items(self, content: List[str]) -> List[str]:
+        """
+        Group consecutive list items and amendment commands into single paragraphs.
+        
+        Recognizes patterns like:
+        - (a), (b), (c), (d) - lettered lists
+        - (A), (B), (C), (D) - uppercase lettered lists  
+        - (1), (2), (3) - numbered lists with parens
+        - 1., 2., 3. - numbered lists with periods
+        - - bullet points
+        
+        Amendment commands (e.g., "shall be amended as follows:", "shall be replaced by:")
+        are grouped WITH their content. This applies recursively to nested structures.
+        
+        Text starting with double quotes after a list item is grouped with that item.
+        Quoted content is kept together until the closing quote.
+        
+        Parameters
+        ----------
+        content : list
+            List of paragraph text strings
+            
+        Returns
+        -------
+        list
+            Grouped content with related items concatenated
+        """
+        if not content:
+            return []
+        
+        grouped = []
+        current_group = []
+        in_amendment_structure = False
+        in_quoted_content = False
+        
+        # Pattern to detect list item starts
+        list_item_pattern = re.compile(r'^\s*\(\s*[A-Za-z0-9]+\s*\)\s+', re.IGNORECASE)
+        numbered_pattern = re.compile(r'^\s*\d+\.\s+')
+        dash_item_pattern = re.compile(r'^\s*-\s+')
+        
+        # Pattern to detect amendment commands
+        amendment_pattern = re.compile(
+            r'(shall be (amended|replaced|inserted|deleted|added)|'
+            r'is hereby (amended|replaced|inserted|deleted|added)|'
+            r'are hereby (amended|replaced|inserted|deleted|added)|'
+            r'shall be inserted|the following .* shall be (added|inserted))',
+            re.IGNORECASE
+        )
+        
+        def is_continuation_marker(text):
+            """Check if text indicates continuation (ends with colon or contains amendment command)."""
+            text_stripped = text.strip()
+            return (text_stripped.endswith(':') or 
+                   (amendment_pattern.search(text) and text_stripped.endswith(':')))
+        
+        def starts_with_quote(text):
+            """Check if text starts with opening double quote."""
+            text_stripped = text.strip()
+            return text_stripped.startswith('"') or text_stripped.startswith('&quot;')
+        
+        def ends_with_quote(text):
+            """Check if text ends with closing double quote."""
+            text_stripped = text.strip()
+            return text_stripped.endswith('"') or text_stripped.endswith('&quot;')
+        
+        def is_amendment_intro(text):
+            """Check if this text is an amendment introduction that should keep grouping."""
+            return (numbered_pattern.match(text) and 
+                   (amendment_pattern.search(text) or text.strip().endswith(':')))
+        
+        for i, text in enumerate(content):
+            is_list_item = (list_item_pattern.match(text) or dash_item_pattern.match(text))
+            is_numbered = numbered_pattern.match(text)
+            is_intro = is_continuation_marker(text)
+            is_amend_intro = is_amendment_intro(text)
+            starts_quote = starts_with_quote(text)
+            ends_quote = ends_with_quote(text)
+            
+            # Update quote state
+            if starts_quote:
+                in_quoted_content = True
+            if ends_quote and not starts_quote:  # Only if it ends but doesn't start (to avoid single-line quotes closing immediately)
+                in_quoted_content = False
+            elif ends_quote and starts_quote:
+                # Both start and end - check if there are more quotes in between
+                # This is a complete quoted section in one line
+                in_quoted_content = False
+            
+            # Check lookahead
+            next_is_list = False
+            next_starts_quote = False
+            next_is_amend_intro = False
+            if i + 1 < len(content):
+                next_text = content[i + 1]
+                next_is_list = (list_item_pattern.match(next_text) or dash_item_pattern.match(next_text))
+                next_starts_quote = starts_with_quote(next_text)
+                next_is_amend_intro = is_amendment_intro(next_text)
+            
+            current_group.append(text)
+            
+            # Update amendment structure state
+            if is_intro or is_amend_intro:
+                in_amendment_structure = True
+            
+            # Decide whether to finalize
+            should_finalize = False
+            
+            if in_quoted_content:
+                # We're inside a quote - never finalize until quote ends
+                should_finalize = False
+            elif is_intro or is_amend_intro:
+                # This is introducing something - keep grouping
+                should_finalize = False
+            elif is_list_item:
+                # List item - keep grouping if next is related (list item, quote, or amendment)
+                should_finalize = not (next_is_list or next_starts_quote or next_is_amend_intro)
+            elif starts_quote and in_amendment_structure:
+                # Quoted content in amendment - already handled by in_quoted_content
+                should_finalize = False
+            elif is_numbered and not is_amend_intro:
+                # Numbered item that's NOT an amendment intro
+                if in_amendment_structure:
+                    # This might be a new amendment section - check if it's introducing something
+                    should_finalize = not (next_starts_quote or next_is_amend_intro)
+                else:
+                    should_finalize = True
+            elif in_amendment_structure:
+                # We're in an amendment but this is regular content
+                # Continue if next is list, quote, or amendment intro
+                should_finalize = not (next_is_list or next_starts_quote or next_is_amend_intro)
+            else:
+                # Not in any special structure
+                should_finalize = True
+            
+            if should_finalize:
+                grouped.append(' '.join(current_group))
+                current_group = []
+                in_amendment_structure = False
+                in_quoted_content = False
+        
+        # Save remaining
+        if current_group:
+            grouped.append(' '.join(current_group))
+        
+        return grouped
 
 
 class ProposalArticleStrategy(HTMLArticleExtractionStrategy):

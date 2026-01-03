@@ -163,7 +163,7 @@ class TestCellarStandardHTMLParser:
         assert parser.is_consolidated is False
 
     def test_get_preamble_consolidated_format(self, parser, tmp_path):
-        """Test get_preamble detects consolidated format with body tag."""
+        """Test get_preamble raises ValueError when no TXT_TE tag found."""
         html_file = tmp_path / "consolidated.html"
         html_file.write_text(
             '<html><body><p>Consolidated content</p></body></html>',
@@ -171,26 +171,24 @@ class TestCellarStandardHTMLParser:
         )
         
         parser.get_root(str(html_file))
-        parser.get_preamble()
-        
-        assert parser.txt_te is not None
-        assert parser.is_consolidated is True
+        with pytest.raises(ValueError, match="No TXT_TE tag found"):
+            parser.get_preamble()
 
     def test_get_preamble_no_container(self, parser, tmp_path):
-        """Test get_preamble when no container found."""
+        """Test get_preamble raises ValueError when no TXT_TE container found."""
         html_file = tmp_path / "no_container.html"
         html_file.write_text('<html><div></div></html>', encoding='utf-8')
         
         parser.get_root(str(html_file))
-        parser.get_preamble()
-        
-        assert parser.preamble is None
+        with pytest.raises(ValueError, match="No TXT_TE tag found"):
+            parser.get_preamble()
 
     def test_get_preamble_exception(self, parser):
-        """Test get_preamble handles exceptions."""
+        """Test get_preamble re-raises exceptions when root is None."""
         parser.root = None
-        parser.get_preamble()
-        assert parser.preamble is None
+        # When root is None, AttributeError is caught, logged, and re-raised
+        with pytest.raises(AttributeError):
+            parser.get_preamble()
 
     def test_get_formula_success(self, parser, tmp_path):
         """Test get_formula extracts formula text."""

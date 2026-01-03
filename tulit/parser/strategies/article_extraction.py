@@ -426,6 +426,41 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
     def __init__(self):
         super().__init__(article_pattern=r'Article\s+(\d+[a-z]?)')
     
+    def _generate_article_eid(self, num: str, index: Optional[int] = None) -> str:
+        """
+        Generate article eId in format 'XXX' (e.g., '001', '002', '003a').
+        
+        Overrides base class to use simplified format without 'art_' prefix.
+        
+        Parameters
+        ----------
+        num : str
+            Article number
+        index : int, optional
+            Fallback index if number is not available
+            
+        Returns
+        -------
+        str
+            eId in format 'XXX' where XXX is zero-padded to 3 digits
+        """
+        if num:
+            normalized = self._normalize_article_number(num)
+            numeric_match = re.match(r'^(\d+)', normalized)
+            if numeric_match:
+                padded_num = numeric_match.group(1).zfill(3)
+                remainder = normalized[len(numeric_match.group(1)):]
+                if remainder:
+                    clean_remainder = re.sub(r'[^\w\-]', '_', remainder)
+                    return f'{padded_num}{clean_remainder}'
+                return padded_num
+            else:
+                clean = re.sub(r'[^\w\-]', '_', normalized)
+                return clean
+        elif index is not None:
+            return str(index).zfill(3)
+        return 'unknown'
+    
     def extract_articles(self, document: Any, **kwargs) -> List[Dict[str, Any]]:
         """
         Extract articles from Cellar HTML document.
@@ -508,10 +543,16 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
             # Group content into logical paragraphs by concatenating list items
             grouped_content = self._group_list_items(content)
             
+            # Extract article number from eId for paragraph numbering
+            # eId format is 'XXX' or 'XXXa' (e.g., '003', '003a')
+            article_num_match = re.match(r'^(\d{3})', article['eId'])
+            article_num_padded = article_num_match.group(1) if article_num_match else '000'
+            
             for idx, text in enumerate(grouped_content, 1):
+                para_num = str(idx).zfill(6)  # 6-digit paragraph number
                 article['children'].append({
-                    'eId': f'{article["eId"]}_para_{idx}',
-                    'num': str(idx),
+                    'eId': f'{article_num_padded}.{str(idx).zfill(3)}',
+                    'num': para_num,
                     'text': text
                 })
         articles.append(article)

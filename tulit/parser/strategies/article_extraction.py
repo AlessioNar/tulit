@@ -543,16 +543,13 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
             # Group content into logical paragraphs by concatenating list items
             grouped_content = self._group_list_items(content)
             
-            # Extract article number from eId for paragraph numbering
-            # eId format is 'XXX' or 'XXXa' (e.g., '003', '003a')
-            article_num_match = re.match(r'^(\d{3})', article['eId'])
-            article_num_padded = article_num_match.group(1) if article_num_match else '000'
+            # Use full article eId as prefix for paragraph eIds
+            # This preserves suffixes like 'a', 'b', 'bis', etc.
+            article_eid = article['eId']
             
             for idx, text in enumerate(grouped_content, 1):
-                para_num = str(idx).zfill(6)  # 6-digit paragraph number
                 article['children'].append({
-                    'eId': f'{article_num_padded}.{str(idx).zfill(3)}',
-                    'num': para_num,
+                    'eId': f'{article_eid}.{str(idx).zfill(3)}',
                     'text': text
                 })
         articles.append(article)

@@ -712,6 +712,37 @@ class ProposalArticleStrategy(HTMLArticleExtractionStrategy):
     def __init__(self):
         super().__init__(article_pattern=r'Article\s+(\d+[a-z]?)')
     
+    def _generate_article_eid(self, num: str, index: Optional[int] = None) -> str:
+        """
+        Generate article eId in format 'XXX' (e.g., '001', '002', '003').
+        
+        Overrides base class to use zero-padded 3-digit format.
+        
+        Parameters
+        ----------
+        num : str
+            Article number
+        index : int, optional
+            Fallback index if number is not available
+            
+        Returns
+        -------
+        str
+            eId in format 'XXX' where XXX is zero-padded to 3 digits
+        """
+        if num:
+            normalized = self._normalize_article_number(num)
+            numeric_match = re.match(r'^(\d+)', normalized)
+            if numeric_match:
+                return numeric_match.group(1).zfill(3)
+            else:
+                # Fallback for non-numeric article numbers
+                clean = re.sub(r'[^\w\-]', '_', normalized)
+                return clean
+        elif index is not None:
+            return str(index).zfill(3)
+        return 'unknown'
+    
     def extract_articles(self, document: Any, **kwargs) -> List[Dict[str, Any]]:
         """
         Extract articles from Proposal HTML document.

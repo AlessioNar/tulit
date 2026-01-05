@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tulit"
-version = "0.4.2"
+version = "0.4.3"
 description = "TULIT - The Universal Legal Informatics Toolkit, is a set of legal informatics utilities collected in a Python package that focuses on the retrieval of legal data and metadata from official sources in the EU, and their transformation in legalJSON, a pythonic data structure for legal documents"
 authors = ["AlessioNar <alessio.nardin@gmail.com>"]
 license = "EUPL 1.2"

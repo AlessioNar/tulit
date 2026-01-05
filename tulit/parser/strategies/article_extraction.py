@@ -281,7 +281,17 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         article_elements = document.xpath(".//ARTICLE[@IDENTIFIER][not(ancestor::ARTICLE)]")
         
         for article in article_elements:
-            article_id = article.get("IDENTIFIER", "").lstrip('3')
+            # Some Formex documents prefix article IDs with '3', but we need to be careful
+            # not to strip '3' from actual article numbers starting with 3 (like 300, 301, etc.)
+            # Only remove a single leading '3' if the ID starts with '3' followed by more digits
+            # AND the remaining ID would still be a valid 3-digit article number
+            raw_id = article.get("IDENTIFIER", "")
+            if raw_id.startswith('3') and len(raw_id) > 3 and raw_id[1:].isdigit():
+                # Only strip the leading '3' prefix for 4+ digit IDs like "3001" -> "001"
+                article_id = raw_id[1:]
+            else:
+                # Keep the ID as-is for normal article numbers (001, 300, etc.)
+                article_id = raw_id
             article_eid = f'art_{article_id}'
             
             # Extract article number from TI.ART element

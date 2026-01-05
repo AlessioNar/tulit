@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.3] - 2026-01-05
+### Fixed
+- **Formex Article eID Parsing**: Fixed bug in `FormexArticleStrategy` where articles with IDs starting with `3` (e.g., Article 300, 333) were incorrectly parsed. The `lstrip('3')` method was stripping all leading `3` characters instead of just the legacy prefix. Now correctly handles both normal 3-digit article numbers (300, 333, etc.) and legacy 4-digit prefixed IDs (3001 -> 001).
+
 ## [0.4.2] - 2026-01-04
 ### Changed
 - Released version 0.4.2 with bug fixes and improvements for cellar standard parsing and proposal parsing.

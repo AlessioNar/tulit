@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.4] - 2026-01-07
+### Fixed
+- **AKN4EU Parser Article ID Extraction**: Fixed bug where `AKN4EUParser` was not correctly extracting `xml:id` attributes for articles. The `AKNArticleExtractor` now properly receives the `id_attr='{http://www.w3.org/XML/1998/namespace}id'` parameter for AKN4EU documents.
+
+### Added
+- **Chained Intro Extraction for AKN4EU**: New `extract_content_with_chained_intro` method in `AKNArticleExtractor` that properly combines list intro text (subparagraph) with all its points into a single paragraph entry, preserving the logical structure of legal provisions.
+
 ## [0.4.3] - 2026-01-05
 ### Fixed
 - **Formex Article eID Parsing**: Fixed bug in `FormexArticleStrategy` where articles with IDs starting with `3` (e.g., Article 300, 333) were incorrectly parsed. The `lstrip('3')` method was stripping all leading `3` characters instead of just the legacy prefix. Now correctly handles both normal 3-digit article numbers (300, 333, etc.) and legacy 4-digit prefixed IDs (3001 -> 001).

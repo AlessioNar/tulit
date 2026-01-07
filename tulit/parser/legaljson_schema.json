@@ -23,7 +23,36 @@
       "type": "array",
       "items": {"type": "object"}
     },
-    "conclusions": {"type": ["object", "null"]}
+    "conclusions": {"type": ["object", "null"]},
+    "digital_dimensions": {
+      "type": ["object", "null"],
+      "properties": {
+        "number": {"type": ["string", "null"]},
+        "heading": {"type": "string"},
+        "subsections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {"type": ["string", "null"]},
+              "heading": {"type": "string"},
+              "tables": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {"type": ["string", "null"]},
+                    "headers": {"type": "array", "items": {"type": "string"}},
+                    "rows": {"type": "array", "items": {"type": "array", "items": {"type": "string"}}}
+                  }
+                }
+              },
+              "text_content": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    }
   },
   "required": ["preface", "citations", "recitals", "chapters", "articles"]
 }

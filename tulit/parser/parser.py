@@ -367,7 +367,8 @@ class Parser(ABC):
                 'preamble_final': _serialize(self.preamble_final),
                 'chapters': _serialize(self.chapters),
                 'articles': _serialize(self.articles),
-                'conclusions': _serialize(self.conclusions)
+                'conclusions': _serialize(self.conclusions),
+                'digital_dimensions': _serialize(getattr(self, 'digital_dimensions', None))
             }
         except Exception as e:
             from tulit.parser.exceptions import ParseError

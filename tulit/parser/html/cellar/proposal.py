@@ -22,6 +22,7 @@ class ProposalHTMLParser(HTMLParser):
         self.metadata = {}
         self.explanatory_memorandum = {}
         self.chapters = []  # Proposals don't have chapters structure
+        self.digital_dimensions = None  # Digital Dimensions section from Legislative Financial Statement
         # Initialize article extraction strategy
         self.article_strategy = ProposalArticleStrategy()
         
@@ -933,6 +934,313 @@ class ProposalHTMLParser(HTMLParser):
         except Exception as e:
             print(f"Error extracting conclusions: {e}")
     
+    def get_digital_dimensions(self) -> None:
+        """
+        Extracts the Digital Dimensions section from the Legislative Financial Statement.
+        
+        This section (Chapter 4) is optional and only present in some proposals.
+        It contains standardized subsections:
+        - 4.1. Requirements of digital relevance
+        - 4.2. Data
+        - 4.3. Digital solutions
+        - 4.4. Interoperability assessment
+        - 4.5. Measures to support digital implementation
+        
+        Each subsection has predefined table column structures.
+        
+        Returns
+        -------
+        None
+            The extracted digital dimensions are stored in the 'digital_dimensions' attribute.
+            If the section is not present, the attribute will be None.
+        """
+        # Predefined table column headers for each subsection
+        TABLE_STRUCTURES = {
+            '4.1': {
+                'requirements': [
+                    'Reference to the requirement',
+                    'Requirement description',
+                    'Actor affected or concerned by the requirement',
+                    'High level processes',
+                    'Category'
+                ]
+            },
+            '4.2': {
+                'data_description': [
+                    'Type of data',
+                    'Reference(s) to the requirement',
+                    'Standard and/or specification (if applicable)'
+                ],
+                'data_flows': [
+                    'Type of data',
+                    'Reference(s) to the requirement(s)',
+                    'Actor who provides the data',
+                    'Actor who receives the data',
+                    'Trigger for the data exchange',
+                    'Frequency (if applicable)'
+                ]
+            },
+            '4.3': {
+                'digital_solutions': [
+                    'Digital solution',
+                    'Reference(s) to the requirement(s)',
+                    'Main mandated functionalities',
+                    'Responsible body',
+                    'How is accessibility catered for?',
+                    'How is reusability considered?',
+                    'Use of AI technologies (if applicable)'
+                ],
+                'policy_alignment': [
+                    'Digital and/or sectorial policy (when these are applicable)',
+                    'Explanation on how it aligns'
+                ]
+            },
+            '4.4': {
+                'interoperability': [
+                    'Digital public service or category of digital public services',
+                    'Description',
+                    'Reference(s) to the requirement(s)',
+                    'Other interoperability solution(s)'
+                ]
+            },
+            '4.5': {
+                'implementation_measures': []  # Usually just text content
+            }
+        }
+        
+        try:
+            # Find the Digital Dimensions heading (ManualHeading1 with "4." and "Digital dimensions")
+            # Take the LAST matching heading to get the content section (not TOC)
+            digital_heading = None
+            all_headings = self.root.find_all('p', class_=lambda c: c and 'ManualHeading1' in c)
+            
+            matching_headings = []
+            for heading in all_headings:
+                text = heading.get_text(strip=True).lower()
+                if 'digital dimension' in text:
+                    # Check if this has the right number prefix
+                    num_elem = heading.find('span', class_='num')
+                    if num_elem:
+                        num_text = num_elem.get_text(strip=True)
+                        if num_text.startswith('4'):
+                            matching_headings.append(heading)
+                    elif text.startswith('4'):
+                        matching_headings.append(heading)
+            
+            # Use the last matching heading (content section comes after TOC)
+            if matching_headings:
+                digital_heading = matching_headings[-1]
+            
+            if not digital_heading:
+                self.digital_dimensions = None
+                return
+            
+            # Extract main heading info
+            num_elem = digital_heading.find('span', class_='num')
+            heading_number = num_elem.get_text(strip=True) if num_elem else '4.'
+            
+            # Get heading text (last span or remaining text)
+            heading_text = 'Digital dimensions'
+            spans = digital_heading.find_all('span')
+            for span in spans:
+                span_class = span.get('class', [])
+                if 'num' not in span_class:
+                    text = span.get_text(strip=True)
+                    if text and 'digital dimension' in text.lower():
+                        heading_text = text
+                        break
+            
+            self.digital_dimensions = {
+                'number': heading_number,
+                'heading': heading_text,
+                'subsections': []
+            }
+            
+            # Find all ManualHeading2 elements that follow this heading
+            # and belong to section 4 (4.1, 4.2, 4.3, 4.4, 4.5)
+            # Use find_next() to traverse across div.content boundaries
+            current_element = digital_heading.find_next()
+            
+            current_subsection = None
+            current_table_title = None
+            
+            while current_element:
+                # Skip non-element nodes
+                if not hasattr(current_element, 'name') or current_element.name is None:
+                    current_element = current_element.find_next()
+                    continue
+                
+                element_class = current_element.get('class', [])
+                if isinstance(element_class, list):
+                    element_class_str = ' '.join(element_class)
+                else:
+                    element_class_str = str(element_class)
+                
+                # Check if we've reached the next major section (ManualHeading1 with different number)
+                if 'ManualHeading1' in element_class_str:
+                    heading_text = current_element.get_text(strip=True).lower()
+                    # Stop if this is a new section 1, 2, 3 (not 4.x)
+                    if not heading_text.startswith('4'):
+                        break
+                    # Also stop if this is "digital dimension" again (duplicate/TOC)
+                    if 'digital dimension' in heading_text:
+                        current_element = current_element.find_next_sibling()
+                        continue
+                
+                # Process ManualHeading2 (subsections 4.1, 4.2, etc.)
+                if 'ManualHeading2' in element_class_str:
+                    # Extract subsection number and heading
+                    num_elem = current_element.find('span', class_='num')
+                    sub_number = num_elem.get_text(strip=True) if num_elem else None
+                    
+                    # If no num span, check if text starts with 4.x pattern
+                    full_text = current_element.get_text(strip=True)
+                    if not sub_number:
+                        import re
+                        match = re.match(r'^(4\.\d\.?)', full_text)
+                        if match:
+                            sub_number = match.group(1)
+                    
+                    # Verify this is a 4.x subsection - skip if no number or doesn't start with 4
+                    if not sub_number or not sub_number.startswith('4'):
+                        current_element = current_element.find_next()
+                        continue
+                    
+                    # Save previous subsection if exists
+                    if current_subsection:
+                        self.digital_dimensions['subsections'].append(current_subsection)
+                    
+                    # Get heading text - exclude number spans and clean up
+                    sub_heading = ''
+                    all_spans = current_element.find_all('span')
+                    non_num_texts = []
+                    for span in all_spans:
+                        span_class = span.get('class', [])
+                        if 'num' not in span_class:
+                            text = span.get_text(strip=True)
+                            # Filter out texts that are just the number
+                            if text and text != sub_number and not text.startswith('4.'):
+                                non_num_texts.append(text)
+                    
+                    if non_num_texts:
+                        sub_heading = ' '.join(non_num_texts)
+                    else:
+                        # Fallback: get full text and remove number prefix
+                        sub_heading = current_element.get_text(strip=True)
+                        if sub_number:
+                            sub_heading = sub_heading.replace(sub_number, '', 1).strip()
+                    
+                    current_subsection = {
+                        'number': sub_number,
+                        'heading': sub_heading,
+                        'tables': [],
+                        'text_content': []
+                    }
+                    current_table_title = None
+                
+                # Process tables
+                elif current_element.name == 'table' and current_subsection:
+                    table_data = self._extract_digital_table(current_element, current_table_title)
+                    if table_data:
+                        current_subsection['tables'].append(table_data)
+                    current_table_title = None  # Reset after using
+                
+                # Process paragraphs (could be table titles or content)
+                elif current_element.name == 'p' and current_subsection:
+                    text = current_element.get_text(strip=True)
+                    if text:
+                        # Check if this looks like a table title (short text before a table)
+                        next_elem = current_element.find_next_sibling()
+                        if next_elem and next_elem.name == 'table':
+                            current_table_title = text
+                        else:
+                            current_subsection['text_content'].append(text)
+                
+                # Process div.border (content containers) - but skip div.content to avoid duplication
+                elif current_element.name == 'div' and current_subsection:
+                    div_class = current_element.get('class', [])
+                    if 'border' in div_class:
+                        # Extract text from paragraphs inside
+                        for p in current_element.find_all('p'):
+                            text = p.get_text(strip=True)
+                            if text:
+                                current_subsection['text_content'].append(text)
+                        # Also check for tables inside divs
+                        for table in current_element.find_all('table'):
+                            table_data = self._extract_digital_table(table, None)
+                            if table_data:
+                                current_subsection['tables'].append(table_data)
+                
+                # Move to next element (using find_next to traverse across div boundaries)
+                current_element = current_element.find_next()
+            
+            # Don't forget the last subsection
+            if current_subsection:
+                self.digital_dimensions['subsections'].append(current_subsection)
+            
+            if self.digital_dimensions['subsections']:
+                print(f"Digital Dimensions extracted with {len(self.digital_dimensions['subsections'])} subsections.")
+            else:
+                self.digital_dimensions = None
+                print("Digital Dimensions section found but no subsections extracted.")
+                
+        except Exception as e:
+            print(f"Error extracting Digital Dimensions: {e}")
+            self.digital_dimensions = None
+    
+    def _extract_digital_table(self, table_element, table_title: Optional[str] = None) -> Optional[dict]:
+        """
+        Extract table data from a Digital Dimensions table element.
+        
+        Parameters
+        ----------
+        table_element : BeautifulSoup Tag
+            The table element to extract data from.
+        table_title : str, optional
+            Title for the table (from preceding paragraph).
+        
+        Returns
+        -------
+        dict or None
+            Dictionary with 'title', 'headers', and 'rows', or None if table is empty.
+        """
+        rows = table_element.find_all('tr')
+        if not rows:
+            return None
+        
+        headers = []
+        data_rows = []
+        
+        for i, row in enumerate(rows):
+            cells = row.find_all(['td', 'th'])
+            cell_texts = []
+            for cell in cells:
+                # Get text content, handling nested paragraphs
+                paragraphs = cell.find_all('p')
+                if paragraphs:
+                    cell_text = ' | '.join([p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)])
+                else:
+                    cell_text = cell.get_text(strip=True)
+                cell_texts.append(cell_text)
+            
+            if not any(cell_texts):
+                continue
+            
+            # First row with content is typically headers
+            if i == 0 or (not headers and cell_texts):
+                headers = cell_texts
+            else:
+                data_rows.append(cell_texts)
+        
+        if not headers and not data_rows:
+            return None
+        
+        return {
+            'title': table_title,
+            'headers': headers,
+            'rows': data_rows
+        }
+    
     def parse(self, file: str) -> "ProposalHTMLParser":
         """
         Parses a Commission proposal HTML file and extracts all relevant information.
@@ -1026,5 +1334,10 @@ class ProposalHTMLParser(HTMLParser):
             self.get_conclusions()
         except Exception as e:
             print(f"Error in get_conclusions: {e}")
+        
+        try:
+            self.get_digital_dimensions()
+        except Exception as e:
+            print(f"Error in get_digital_dimensions: {e}")
         
         return self

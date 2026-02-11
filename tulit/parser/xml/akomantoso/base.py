@@ -230,6 +230,11 @@ class AkomaNtosoParser(XMLParser):
                     error_msg = f"Failed to extract article with eId={article.get('eId', 'unknown')}: {e}"
                     self.logger.error(error_msg)
                     raise ExtractionError(error_msg) from e
+        except Exception as e:
+            from tulit.parser.exceptions import ExtractionError
+            error_msg = f"Failed during article extraction: {e}"
+            self.logger.error(error_msg)
+            raise ExtractionError(error_msg) from e
         
         # Also find all <section> elements (used in some jurisdictions like Finland)
         try:
@@ -251,7 +256,10 @@ class AkomaNtosoParser(XMLParser):
                     self.logger.error(error_msg)
                     raise ExtractionError(error_msg) from e
         except Exception as e:
-            self.logger.warning(f"Section extraction completed with {len(self.articles)} articles extracted")
+            from tulit.parser.exceptions import ExtractionError
+            error_msg = f"Failed during section extraction: {e}"
+            self.logger.error(error_msg)
+            raise ExtractionError(error_msg) from e
     
     def get_conclusions(self) -> None:
         """

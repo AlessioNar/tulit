@@ -34,7 +34,10 @@ Example Usage
 # Core modules
 from tulit.parser.exceptions import (
     ParserError, ParseError, ValidationError, 
-    ExtractionError, FileLoadError
+    ExtractionError, FileLoadError, NetworkError,
+    AuthenticationError, RateLimitError, SPARQLError,
+    SchemaValidationError, ContentTypeError, 
+    ElementNotFoundError, ParserConfigurationError
 )
 from tulit.parser.models import (
     Citation, Recital, Article, ArticleChild, Chapter
@@ -60,6 +63,14 @@ __all__ = [
     'ValidationError',
     'ExtractionError',
     'FileLoadError',
+    'NetworkError',
+    'AuthenticationError',
+    'RateLimitError',
+    'SPARQLError',
+    'SchemaValidationError',
+    'ContentTypeError',
+    'ElementNotFoundError',
+    'ParserConfigurationError',
     # Models
     'Citation',
     'Recital',

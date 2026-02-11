@@ -188,40 +188,70 @@ class AkomaNtosoParser(XMLParser):
         Articles are the main structural units of legal documents. This method
         uses AKNArticleExtractor to handle the extraction logic. Also handles
         sections for jurisdictions that use sections instead of articles.
+        
+        Raises
+        ------
+        ParserConfigurationError
+            If body is not properly initialized
+        ExtractionError
+            If article extraction fails
         """
         if self.body is None:
-            self.logger.warning("Body is None. Call get_body() first.")
-            return
+            from tulit.parser.exceptions import ParserConfigurationError
+            error_msg = "Body is None. Call get_body() first to initialize the document body."
+            self.logger.error(error_msg)
+            raise ParserConfigurationError(error_msg)
         
-        # Removing all authorialNote nodes
-        self.body = self.remove_node(self.body, './/akn:authorialNote')
+        try:
+            # Removing all authorialNote nodes
+            self.body = self.remove_node(self.body, './/akn:authorialNote')
+            
+            # Use extractor for article processing
+            extractor = AKNArticleExtractor(self.namespaces)
 
-        # Use extractor for article processing
-        extractor = AKNArticleExtractor(self.namespaces)
+            # Find all <article> elements in the XML
+            article_elements = self.body.findall('.//akn:article', namespaces=self.namespaces)
+            if not article_elements:
+                self.logger.warning("No <article> elements found in document body")
+            
+            for article in article_elements:
+                try:
+                    metadata = extractor.extract_article_metadata(article)
+                    children = extractor.extract_paragraphs_by_eid(article)
 
-        # Find all <article> elements in the XML
-        for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
-            metadata = extractor.extract_article_metadata(article)
-            children = extractor.extract_paragraphs_by_eid(article)
-
-            self.articles.append({
-                'eId': metadata['eId'],
-                'num': metadata['num'],
-                'heading': metadata['heading'],
-                'children': children
-            })
+                    self.articles.append({
+                        'eId': metadata['eId'],
+                        'num': metadata['num'],
+                        'heading': metadata['heading'],
+                        'children': children
+                    })
+                except Exception as e:
+                    from tulit.parser.exceptions import ExtractionError
+                    error_msg = f"Failed to extract article with eId={article.get('eId', 'unknown')}: {e}"
+                    self.logger.error(error_msg)
+                    raise ExtractionError(error_msg) from e
         
         # Also find all <section> elements (used in some jurisdictions like Finland)
-        for section in self.body.findall('.//akn:section', namespaces=self.namespaces):
-            metadata = extractor.extract_article_metadata(section)
-            children = extractor.extract_paragraphs_by_eid(section)
+        try:
+            section_elements = self.body.findall('.//akn:section', namespaces=self.namespaces)
+            for section in section_elements:
+                try:
+                    metadata = extractor.extract_article_metadata(section)
+                    children = extractor.extract_paragraphs_by_eid(section)
 
-            self.articles.append({
-                'eId': metadata['eId'],
-                'num': metadata['num'],
-                'heading': metadata['heading'],
-                'children': children
-            })
+                    self.articles.append({
+                        'eId': metadata['eId'],
+                        'num': metadata['num'],
+                        'heading': metadata['heading'],
+                        'children': children
+                    })
+                except Exception as e:
+                    from tulit.parser.exceptions import ExtractionError
+                    error_msg = f"Failed to extract section with eId={section.get('eId', 'unknown')}: {e}"
+                    self.logger.error(error_msg)
+                    raise ExtractionError(error_msg) from e
+        except Exception as e:
+            self.logger.warning(f"Section extraction completed with {len(self.articles)} articles extracted")
     
     def get_conclusions(self) -> None:
         """

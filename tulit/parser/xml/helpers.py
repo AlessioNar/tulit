@@ -263,9 +263,11 @@ class XMLValidator:
         ParserConfigurationError
             If the schema is invalid or unsupported type
         """
+        # Import exceptions at the top of the method to avoid local variable issues
+        from tulit.parser.exceptions import FileLoadError, ParserConfigurationError
+        
         try:
             if not os.path.exists(schema_path):
-                from tulit.parser.exceptions import FileLoadError
                 error_msg = f"Schema file not found: {schema_path}"
                 self.logger.error(error_msg)
                 raise FileLoadError(error_msg)
@@ -279,7 +281,6 @@ class XMLValidator:
                 self.relaxng = etree.RelaxNG(schema_doc)
                 self.logger.info(f"Loaded RelaxNG schema: {schema_path}")
             else:
-                from tulit.parser.exceptions import ParserConfigurationError
                 error_msg = f"Unknown schema type: {schema_type}"
                 self.logger.error(error_msg)
                 raise ParserConfigurationError(error_msg)
@@ -287,7 +288,6 @@ class XMLValidator:
             return True
             
         except etree.XMLSchemaParseError as e:
-            from tulit.parser.exceptions import ParserConfigurationError
             error_msg = f"Invalid XML schema: {e}"
             self.logger.error(error_msg)
             raise ParserConfigurationError(error_msg) from e
@@ -295,7 +295,6 @@ class XMLValidator:
             # FileLoadError should be re-raised, not wrapped
             raise
         except Exception as e:
-            from tulit.parser.exceptions import ParserConfigurationError
             error_msg = f"Failed to load schema: {e}"
             self.logger.error(error_msg)
             raise ParserConfigurationError(error_msg) from e

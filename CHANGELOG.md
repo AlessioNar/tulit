@@ -79,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **CI**: Replaced committed coverage badge artifact with Codecov integration. No more bot commits on every push.
 
+
 ## [0.4.4] - 2026-01-07
 ### Fixed
 - **AKN4EU Parser Article ID Extraction**: Fixed bug where `AKN4EUParser` was not correctly extracting `xml:id` attributes for articles. The `AKNArticleExtractor` now properly receives the `id_attr='{http://www.w3.org/XML/1998/namespace}id'` parameter for AKN4EU documents.

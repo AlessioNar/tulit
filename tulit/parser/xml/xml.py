@@ -105,8 +105,22 @@ class XMLParser(Parser):
         Returns
         -------
         None
+        
+        Raises
+        ------
+        FileLoadError
+            If the schema file cannot be loaded
+        ParserConfigurationError
+            If the schema is invalid
         """
-        self._validator.load_schema(schema)
+        try:
+            self._validator.load_schema(schema)
+        except FileNotFoundError as e:
+            from tulit.parser.exceptions import FileLoadError
+            raise FileLoadError(f"Schema file not found: {schema}") from e
+        except Exception as e:
+            from tulit.parser.exceptions import ParserConfigurationError
+            raise ParserConfigurationError(f"Invalid schema configuration: {e}") from e
 
     def validate(self, file: str, format: str) -> bool:
         """

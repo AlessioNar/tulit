@@ -82,11 +82,11 @@ class TestXMLHelpersAndParser(unittest.TestCase):
         self.assertTrue(os.path.exists(schema), f"Schema not found: {schema}")
         loaded = self.validator.load_schema(schema)
         self.assertTrue(loaded, "Expected schema to load successfully")
-        # validate a small document that likely does not match the schema -> expect False
+        # validate a small document that likely does not match the schema -> expect SchemaValidationError
+        from tulit.parser.exceptions import SchemaValidationError
         xml = etree.fromstring('<root><invalid/></root>')
-        valid = self.validator.validate(xml)
-        # valid may be True if schema doesn't enforce anything for this doc; just ensure method returns bool
-        self.assertIsInstance(valid, bool)
+        with self.assertRaises(SchemaValidationError):
+            self.validator.validate(xml)
         # get_validation_errors returns list
         errors = self.validator.get_validation_errors()
         self.assertIsInstance(errors, list)

@@ -75,14 +75,15 @@ class TestCellarClient(unittest.TestCase):
 
     @patch('tulit.client.client.requests.request')
     def test_fetch_content_request_exception(self, mock_request):
-        # Mock request to raise a RequestException
+        # Mock request to raise a RequestException (should be converted to NetworkError)
         mock_request.side_effect = requests.RequestException("Error sending GET request")
 
         url = 'http://publications.europa.eu/resource/cellar/e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1'
-        response = self.downloader.fetch_content(url)
-
-        # Check that the response is None when an exception is raised
-        self.assertIsNone(response)
+        
+        # Check that NetworkError is raised instead of RequestException
+        from tulit.parser.exceptions import NetworkError
+        with self.assertRaises(NetworkError):
+            self.downloader.fetch_content(url)
 
     def test_send_sparql_query(self):    
         sparql_query = """

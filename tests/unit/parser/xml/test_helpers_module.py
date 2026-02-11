@@ -46,11 +46,14 @@ class TestXMLHelpersAndParser(unittest.TestCase):
 
     def test_validator_no_schema(self):
         xml = etree.fromstring('<root><child/></root>')
-        # No schema loaded -> validate should return True
-        self.assertTrue(self.validator.validate(xml))
-        self.assertEqual(self.validator.get_validation_errors(), [])
-        # Loading non-existent schema should return False
-        self.assertFalse(self.validator.load_schema('nonexistent.xsd'))
+        # No schema loaded -> validate should raise ParserConfigurationError
+        from tulit.parser.exceptions import ParserConfigurationError
+        with self.assertRaises(ParserConfigurationError):
+            self.validator.validate(xml)
+        # Loading non-existent schema should raise FileLoadError
+        from tulit.parser.exceptions import FileLoadError
+        with self.assertRaises(FileLoadError):
+            self.validator.load_schema('nonexistent.xsd')
 
     def test_xmlparser_namespace_and_secure_parser(self):
         # namespaces property should sync with extractor

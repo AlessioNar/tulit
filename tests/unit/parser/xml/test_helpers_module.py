@@ -112,16 +112,19 @@ class TestXMLHelpersAndParser(unittest.TestCase):
             loaded = self.validator.load_schema(rng_path, schema_type='relaxng')
             self.assertTrue(loaded)
 
-            # Validate a non-matching document -> expect False
+            # Validate a non-matching document -> expect SchemaValidationError
+            from tulit.parser.exceptions import SchemaValidationError
             xml = etree.fromstring('<notroot/>')
-            valid = self.validator.validate(xml)
-            self.assertFalse(valid)
+            with self.assertRaises(SchemaValidationError):
+                self.validator.validate(xml)
             errs = self.validator.get_validation_errors()
             # errors should be a list (may be empty depending on lib), but allow either
             self.assertIsInstance(errs, list)
 
-            # unknown schema type should return False (file exists but type unknown)
-            self.assertFalse(self.validator.load_schema(rng_path, schema_type='unknown'))
+            # unknown schema type should raise ParserConfigurationError
+            from tulit.parser.exceptions import ParserConfigurationError
+            with self.assertRaises(ParserConfigurationError):
+                self.validator.load_schema(rng_path, schema_type='unknown')
         finally:
             try:
                 os.unlink(rng_path)

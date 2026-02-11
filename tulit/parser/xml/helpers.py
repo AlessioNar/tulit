@@ -255,11 +255,20 @@ class XMLValidator:
         -------
         bool
             True if schema loaded successfully
+        
+        Raises
+        ------
+        FileLoadError
+            If the schema file cannot be found or read
+        ParserConfigurationError
+            If the schema is invalid or unsupported type
         """
         try:
             if not os.path.exists(schema_path):
-                self.logger.error(f"Schema file not found: {schema_path}")
-                return False
+                from tulit.parser.exceptions import FileLoadError
+                error_msg = f"Schema file not found: {schema_path}"
+                self.logger.error(error_msg)
+                raise FileLoadError(error_msg)
             
             schema_doc = etree.parse(schema_path)
             
@@ -270,14 +279,23 @@ class XMLValidator:
                 self.relaxng = etree.RelaxNG(schema_doc)
                 self.logger.info(f"Loaded RelaxNG schema: {schema_path}")
             else:
-                self.logger.error(f"Unknown schema type: {schema_type}")
-                return False
+                from tulit.parser.exceptions import ParserConfigurationError
+                error_msg = f"Unknown schema type: {schema_type}"
+                self.logger.error(error_msg)
+                raise ParserConfigurationError(error_msg)
             
             return True
             
+        except etree.XMLSchemaParseError as e:
+            from tulit.parser.exceptions import ParserConfigurationError
+            error_msg = f"Invalid XML schema: {e}"
+            self.logger.error(error_msg)
+            raise ParserConfigurationError(error_msg) from e
         except Exception as e:
-            self.logger.error(f"Failed to load schema: {e}")
-            return False
+            from tulit.parser.exceptions import ParserConfigurationError
+            error_msg = f"Failed to load schema: {e}"
+            self.logger.error(error_msg)
+            raise ParserConfigurationError(error_msg) from e
     
     def validate(self, xml_tree: etree._Element) -> bool:
         """

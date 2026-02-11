@@ -66,10 +66,12 @@ class CellarClient(Client):
     
         except FileNotFoundError as e:
             self.logger.error(f"SPARQL query file not found: {e}")
-            raise e
+            from tulit.parser.exceptions import FileLoadError
+            raise FileLoadError(f"SPARQL query file not found: {e}") from e
         except Exception as e:
             self.logger.error(f"Error sending SPARQL query: {e}")
-            raise e
+            from tulit.parser.exceptions import SPARQLError
+            raise SPARQLError(f"SPARQL query execution failed: {e}") from e
 
     def get_results_table(self, sparql_query):
         """
@@ -117,7 +119,8 @@ class CellarClient(Client):
             return results
         except Exception as e:
             self.logger.error(f"Error retrieving SPARQL results: {e}")
-            raise e
+            from tulit.parser.exceptions import SPARQLError
+            raise SPARQLError(f"Failed to retrieve SPARQL results: {e}") from e
     
     def fetch_content(self, url) -> requests.Response:
         """
@@ -170,7 +173,8 @@ class CellarClient(Client):
             return response
         except requests.RequestException as e:
             self.logger.error(f"Error sending GET request: {e}")
-            return None
+            from tulit.parser.exceptions import NetworkError
+            raise NetworkError(f"Network request failed: {e}") from e
              
     def build_request_url(self, params):
         """

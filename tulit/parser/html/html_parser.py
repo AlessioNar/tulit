@@ -11,9 +11,86 @@ class HTMLParser(Parser):
     """
     Abstract base class for HTML parsers.
     
-    Provides common HTML parsing utilities and a template parse() method.
-    Subclasses must implement get_preface() and get_articles().
-    Optional methods like get_preamble(), get_chapters(), etc. can be overridden.
+    Provides common HTML parsing utilities and a template parse() method that
+    orchestrates the complete parsing workflow. Subclasses must implement the
+    core extraction methods while inheriting robust error handling and logging.
+    
+    Key Features
+    ------------
+    - BeautifulSoup integration for HTML parsing
+    - Template method pattern for consistent parsing workflow
+    - Comprehensive error handling and logging
+    - Support for various HTML-based legal document formats
+    - Automatic conversion to structured LegalJSON format
+    
+    Abstract Methods (Must Implement)
+    --------------------------------
+    get_preface() -> Optional[str]
+        Extract the document preface/title
+    get_articles() -> None
+        Extract articles from the document body
+    
+    Optional Methods (Can Override)
+    -------------------------------
+    get_preamble() -> Optional[Any]
+        Extract preamble section
+    get_formula() -> Optional[str]
+        Extract formula (enacting clause)
+    get_citations() -> list[dict[str, str]]
+        Extract citations/references
+    get_recitals() -> list[dict[str, str]]
+        Extract recitals (whereas clauses)
+    get_preamble_final() -> Optional[str]
+        Extract final preamble text
+    get_body() -> Optional[Any]
+        Extract body section
+    get_chapters() -> list[dict[str, Any]]
+        Extract chapters
+    get_conclusions() -> Optional[dict[str, Any]]
+        Extract conclusions section
+    
+    Usage Example
+    -------------
+    >>> class MyHTMLParser(HTMLParser):
+    ...     def get_preface(self) -> Optional[str]:
+    ...         if self.root:
+    ...             title = self.root.find('title')
+    ...             return title.text if title else None
+    ...         return None
+    ...     
+    ...     def get_articles(self) -> None:
+    ...         self.articles = []
+    ...         if self.root:
+    ...             for article in self.root.select('div.article'):
+    ...                 self.articles.append({
+    ...                     'text': article.get_text(),
+    ...                     'id': article.get('id')
+    ...                 })
+    
+    >>> parser = MyHTMLParser()
+    >>> parser.parse('document.html')
+    >>> result = parser.to_dict()
+    
+    Error Handling
+    --------------
+    The parser implements comprehensive error handling with:
+    - Detailed logging at different levels (DEBUG, INFO, WARNING, ERROR)
+    - Graceful degradation on partial failures
+    - Specific exception types for different failure modes
+    - Validation of parsed data structure
+    
+    Performance Considerations
+    -------------------------
+    - Uses BeautifulSoup's built-in parsing optimizations
+    - Processes document in single pass where possible
+    - Minimizes memory usage by streaming large documents when feasible
+    
+    Notes
+    -----
+    - Subclasses should call super().__init__() to ensure proper initialization
+    - Always check for None values when accessing self.root
+    - Use BeautifulSoup's CSS selectors for robust element selection
+    - Consider using self.normalizer for text cleaning
     """
     
     def __init__(self) -> None:

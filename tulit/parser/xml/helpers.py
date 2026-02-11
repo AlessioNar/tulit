@@ -357,6 +357,9 @@ class XMLValidator:
                     )
                 return is_valid
             
+        except SchemaValidationError:
+            # SchemaValidationError should be re-raised, not wrapped
+            raise
         except Exception as e:
             from tulit.parser.exceptions import ParserConfigurationError
             error_msg = f"Validation setup error: {e}"

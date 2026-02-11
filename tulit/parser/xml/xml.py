@@ -139,16 +139,35 @@ class XMLParser(Parser):
         -------
         bool
             True if valid, False otherwise. Also updates self.valid attribute.
+        
+        Raises
+        ------
+        SchemaValidationError
+            If the XML document fails schema validation
+        ParserConfigurationError
+            If validation setup fails
         """
         try:
-            is_valid, error_log = self._validator.validate(file, format_name=format)
+            # Parse the XML file first
+            xml_tree = etree.parse(file)
+            
+            # Validate against schema
+            is_valid = self._validator.validate(xml_tree)
             self.valid = is_valid
-            self.validation_errors = error_log
+            
+            # Get validation errors if any
+            self.validation_errors = self._validator.get_validation_errors()
             return is_valid
-        except ValidationError as e:
-            self.logger.error(str(e))
+            
+        except etree.XMLSyntaxError as e:
+            from tulit.parser.exceptions import ParseError
+            self.logger.error(f"XML syntax error in {file}: {e}")
             self.valid = False
-            return False
+            raise ParseError(f"Invalid XML syntax: {e}") from e
+        except Exception as e:
+            self.logger.error(f"Validation failed for {format} document {file}: {e}")
+            self.valid = False
+            raise
         
     def remove_node(self, tree, node):
         """

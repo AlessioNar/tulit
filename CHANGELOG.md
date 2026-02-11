@@ -5,6 +5,73 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-02-11
+### Added
+
+- **Enhanced Exception Hierarchy**: Added 8 new custom exception classes for granular error handling:
+  - `NetworkError`: Network-related failures (replaces generic `RequestException`)
+  - `AuthenticationError`: Authentication failures with APIs
+  - `RateLimitError`: API rate limit exceedances
+  - `SPARQLError`: SPARQL query execution failures
+  - `SchemaValidationError`: XML schema validation failures with detailed error messages
+  - `ContentTypeError`: Unexpected content type errors with content type information
+  - `ElementNotFoundError`: Missing XML/HTML elements with element name and XPath
+  - `ParserConfigurationError`: Parser misconfiguration errors
+
+- **Comprehensive Exception Testing**: Added 14 new tests covering:
+  - Exception hierarchy verification
+  - Individual exception class functionality
+  - Exception attribute validation
+  - Exception chaining and propagation
+  - Real-world usage in parsers and validators
+
+### Changed
+
+- **Improved Error Handling in Cellar Client**: 
+  - `fetch_content()` now raises `NetworkError` instead of returning `None`
+  - `send_sparql_query()` raises `SPARQLError` for query failures
+  - Better error messages with context information
+
+- **Enhanced XML Validation**: 
+  - `XMLValidator.validate()` now raises `SchemaValidationError` for validation failures
+  - `XMLValidator.load_schema()` raises `FileLoadError` for missing schemas
+  - Proper exception chaining preserves original error context
+
+- **Robust Parser Error Handling**:
+  - `AkomaNtosoParser.get_articles()` raises `ParserConfigurationError` for missing body
+  - `AKNArticleExtractor.extract_article_metadata()` raises `ElementNotFoundError` for missing elements
+  - `Parser.to_dict()` raises `ParseError` for serialization failures
+
+- **Improved Exception Propagation**:
+  - Specific exceptions are re-raised instead of being wrapped
+  - Better exception chaining with `from e` syntax
+  - More informative error messages throughout the codebase
+
+### Enhanced
+
+- **Documentation Improvements**:
+  - **Client Module**: Complete rewrite of `tulit/client/__init__.py` with:
+    - Comprehensive module overview
+    - Available clients organized by jurisdiction
+    - Usage examples for key clients
+    - Error handling and authentication notes
+  - **HTML Parser**: Extensive documentation for `HTMLParser` class including:
+    - Design patterns and key features
+    - Abstract methods and implementation requirements
+    - Usage examples with code snippets
+    - Performance considerations and best practices
+
+- **Error Messages with Context**:
+  - XML extractors include element names and XPath in error messages
+  - Parser methods include document and element IDs in error messages
+  - Validation errors include line numbers and specific issues
+
+### Fixed
+
+- **Exception Wrapping Issues**: Fixed cases where specific exceptions were being wrapped in generic `ParserConfigurationError`
+- **Local Variable Scope**: Fixed `UnboundLocalError` in `XMLValidator.load_schema()` by moving imports to method level
+- **Test Compatibility**: Updated existing tests to work with new exception-based error handling
+
 ## [0.4.4] - 2026-01-07
 ### Fixed
 - **AKN4EU Parser Article ID Extraction**: Fixed bug where `AKN4EUParser` was not correctly extracting `xml:id` attributes for articles. The `AKNArticleExtractor` now properly receives the `id_attr='{http://www.w3.org/XML/1998/namespace}id'` parameter for AKN4EU documents.

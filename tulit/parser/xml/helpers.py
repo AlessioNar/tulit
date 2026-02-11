@@ -291,6 +291,9 @@ class XMLValidator:
             error_msg = f"Invalid XML schema: {e}"
             self.logger.error(error_msg)
             raise ParserConfigurationError(error_msg) from e
+        except FileLoadError:
+            # FileLoadError should be re-raised, not wrapped
+            raise
         except Exception as e:
             from tulit.parser.exceptions import ParserConfigurationError
             error_msg = f"Failed to load schema: {e}"

@@ -7,7 +7,7 @@ on:
     branches: [ main, development ]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   test:
@@ -27,17 +27,10 @@ jobs:
     - name: Run tests
       run: poetry run pytest ./tests/unit --cov=tulit --cov-report=xml
 
-    - name: Commit badge if changed
-      if: github.event_name == 'push'
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .github/badges/coverage.json || true
-        git diff --staged --quiet || (git commit -m "chore: update coverage badge" && git push)
-
-    - name: Upload coverage artifact
-      uses: actions/upload-artifact@v4
-      if: always()
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v5
       with:
-        name: coverage-xml
-        path: coverage.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage.xml
+        flags: unittests
+        fail_ci_if_error: false

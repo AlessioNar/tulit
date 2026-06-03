@@ -16,4 +16,3 @@ WHERE {
     FILTER(str(?eli) = "{ELI}")
 }
 ORDER BY ?cellarURIs
-LIMIT 100

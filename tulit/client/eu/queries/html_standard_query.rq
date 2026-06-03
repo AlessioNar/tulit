@@ -14,4 +14,3 @@ WHERE {
     FILTER(str(?format)="html" && str(?langCode)="ENG")
 }
 ORDER BY ?cellarURIs
-LIMIT 10

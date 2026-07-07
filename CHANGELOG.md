@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.6] - 2026-07-07
+### Changed
+- **Dependencies**: Bumped `lxml` from `^5.3.0` to `^6.1.0` (resolves to 6.1.1). All lxml usage relies on the stable `etree` API; the full test suite passes unchanged.
+
 ## [0.4.5] - 2026-06-03
 ### Fixed
 - **Cellar SPARQL queries**: Removed `LIMIT` clause from all four production query files (`formex_query.rq`, `formex_eli_query.rq`, `html_query.rq`, `html_standard_query.rq`) so all results are returned instead of an arbitrary subset.

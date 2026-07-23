@@ -95,15 +95,12 @@ def test_get_body(parser):
 def test_get_chapters(iopa_parser):
     iopa_parser.get_body()
     iopa_parser.get_chapters()
-    expected_chapters = [
-        {'eId': "cpt_1", 'num': 'Chapter 1', 'heading': 'General provisions'},
-        {'eId': "cpt_2", 'num': 'Chapter 2', 'heading': 'European Interoperability enablers'},
-        {'eId': "cpt_3", 'num': 'Chapter 3', 'heading': 'Interoperable Europe support measures'},
-        {'eId': "cpt_4", 'num': 'Chapter 4', 'heading': 'Governance of cross-border interoperability'},
-        {'eId': "cpt_5", 'num': 'Chapter 5', 'heading': 'Interoperable Europe planning and monitoring'},
-        {'eId': "cpt_6", 'num': 'Chapter 6', 'heading': 'Final provisions'},
-    ]
-    assert iopa_parser.chapters[0] == expected_chapters[0], "Chapters data does not match expected content"
+    expected_first = {
+        'eId': 'chp_1', 'type': 'chapter', 'num': 'Chapter 1',
+        'heading': 'General provisions', 'parent': None,
+    }
+    assert iopa_parser.chapters[0] == expected_first, "Chapters data does not match expected content"
+    assert [c['eId'] for c in iopa_parser.chapters] == [f'chp_{i}' for i in range(1, 7)]
 
 
 def test_get_articles(parser):
@@ -139,16 +136,16 @@ def test_get_articles(parser):
 def test_get_conclusions(iopa_parser):
     iopa_parser.get_body()
     iopa_parser.get_conclusions()
-    conclusions = {
-        "conclusion_text": "This Regulation shall be binding in its entirety and directly applicable in all Member States.",
-        "signature": {
-            "place": "Done at Strasbourg,",
-            "date": "13\xa0March 2024",  # Non-breaking space in date
-            "signatory": "For the European Parliament",
-            "title": "The President"
-        }
-    }
-    assert iopa_parser.conclusions == conclusions
+    assert iopa_parser.conclusions["conclusion_text"] == (
+        "This Regulation shall be binding in its entirety and directly applicable in all Member States."
+    )
+    signature = iopa_parser.conclusions["signature"]
+    assert signature["place"] == "Done at Strasbourg,"
+    assert signature["date"] == "13\xa0March 2024"  # Non-breaking space in date
+    assert signature["signatory"] == "For the European Parliament"
+    assert signature["title"] == "The President"
+    # Acts signed by both institutions keep the complete line sequence
+    assert "For the Council" in signature["signatories"]
 
 
 # ========== COVERAGE BOOST TESTS ==========
@@ -1025,3 +1022,35 @@ def test_ordinary_content_has_no_amendment():
     )
     children = p._extract_annex_children(contents, annex_index=1)
     assert children[0]['amendment'] is None
+
+
+def test_definitions_are_not_amendments():
+    """Definitions with quoted terms or 'is added to' phrasing are not amendments."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS>'
+        '<P><QUOT.START/>Resettlement<QUOT.END/> means the transfer of displaced persons.</P>'
+        '<P>additive means any substance which is added to feed or water.</P>'
+        '<P>For the purposes of this Regulation, the following definitions apply:</P>'
+        '</CONTENTS>'
+    )
+    children = p._extract_annex_children(contents, annex_index=1)
+    assert all(c['amendment'] is None for c in children), [c['amendment'] for c in children]
+
+
+def test_amendment_still_detected_with_referent_or_follows():
+    """Genuine amendment instructions keep being detected."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS>'
+        '<P>Regulation (EC) No 1760/2000 is amended as follows:</P>'
+        '<P>In entry 73, the date <QUOT.START/>31 July 2014<QUOT.END/> is replaced by '
+        '<QUOT.START/>30 April 2017<QUOT.END/>.</P>'
+        '<P>The following Article 3a is inserted:</P>'
+        '</CONTENTS>'
+    )
+    children = p._extract_annex_children(contents, annex_index=1)
+    actions = [c['amendment'] and c['amendment']['action'] for c in children]
+    assert actions == ['amend', 'replace', 'insert']
+    # the inline spans are captured for the confirmed amendment
+    assert [q['text'] for q in children[1]['amendment']['quoted']] == ['31 July 2014', '30 April 2017']

@@ -16,6 +16,31 @@ _AMEND_VERB_RE = re.compile(
     re.IGNORECASE,
 )
 
+# A verb frame alone is not enough ("any substance which is added to feed"
+# is a definition, not an amendment). The instruction must name a structural
+# element of the amended act before the verb, or use an "as follows" /
+# "the following" construction around it.
+_AMEND_REFERENT_RE = re.compile(
+    r"\b(articles?|paragraphs?|subparagraphs?|points?|annex(?:es)?|appendix|"
+    r"parts?|sections?|chapters?|titles?|entry|entries|rows?|columns?|lines?|"
+    r"dates?|words?|terms?|texts?|sentences?|footnotes?|headings?|references?|"
+    r"numbers?|tables?|items?|indents?|figures?|formulas?)\b",
+    re.IGNORECASE,
+)
+_AMEND_FOLLOWS_RE = re.compile(r"as follows|the following|accordingly",
+                               re.IGNORECASE)
+
+# Division level names above the article, mapped to the eId prefixes of the
+# ELI/Akoma Ntoso naming convention
+_DIVISION_TYPES = {
+    'PART': ('part', 'part'),
+    'TITLE': ('title', 'title'),
+    'CHAPTER': ('chapter', 'chp'),
+    'SECTION': ('section', 'sec'),
+    'SUBSECTION': ('subsection', 'subsec'),
+    'SUB-SECTION': ('subsection', 'subsec'),
+}
+
 _AMEND_ACTIONS = {
     'replaced': 'replace', 'substituted': 'replace',
     'inserted': 'insert', 'added': 'add',
@@ -90,7 +115,13 @@ class Formex4Parser(XMLParser):
         str
             Formula text from the preamble.
         """
-        self.formula = self.preamble.findtext('PREAMBLE.INIT')
+        el = self.preamble.find('PREAMBLE.INIT') if self.preamble is not None else None
+        if el is not None:
+            # Full text: the formula may sit in P children rather than in the
+            # element's own text node (findtext would miss it)
+            self.formula = self.clean_text(el) or None
+        else:
+            self.formula = None
         return self.formula
 
     
@@ -120,7 +151,11 @@ class Formex4Parser(XMLParser):
         """
         Extracts recitals from the preamble. Recitals are assumed to be contained within the GR.CONSID
         and CONSID elements. The introductory recital is extracted separately. The recital identifier
-        is set as the index of the recital in the preamble.
+        is taken from the recital's number.
+
+        The full recital content is extracted — not only the TXT element but
+        also lists and other block content inside the recital (e.g. lists of
+        repealed acts).
 
         Returns
         -------
@@ -128,32 +163,58 @@ class Formex4Parser(XMLParser):
             List of dictionaries containing recital text and eId for each
             recital. Returns None if no recitals are found.
         """
-        
-        def extract_intro(recitals_section):        
-            intro_text = self.preamble.findtext('.//GR.CONSID.INIT')
-            self.recitals_intro = intro_text            
-        
-        def extract_eId(recital):
-            eId = recital.findtext('.//NO.P')
-            # Remove () and return eId in the format rct_{number}
-            eId = eId.strip('()')  # Remove parentheses
-            return f'rct_{eId}'
-            
-        return super().get_recitals(
-            recitals_xpath='.//GR.CONSID', 
-            recital_xpath='.//CONSID',
-            text_xpath='.//TXT',
-            extract_intro=extract_intro,
-            extract_eId=extract_eId
-        )
+        if self.preamble is None:
+            return None
+        recitals_section = self.preamble.find('.//GR.CONSID')
+        if recitals_section is None:
+            return None
+
+        self.recitals_intro = self.preamble.findtext('.//GR.CONSID.INIT')
+
+        def make_eid(no_p, index):
+            if no_p:
+                value = no_p.strip().strip('()').rstrip('.')
+                if re.fullmatch(r'\w+', value):
+                    return f'rct_{value}'
+            return f'rct_{index}'
+
+        def np_text(nps):
+            parts = []
+            for np in nps:
+                for sub in np:
+                    if isinstance(sub.tag, str) and sub.tag != 'NO.P':
+                        parts.append(self._render_annex_text(sub))
+            return ' '.join(part for part in parts if part)
+
+        recitals = []
+        consids = recitals_section.findall('.//CONSID')
+        if consids:
+            for consid in consids:
+                no_p = consid.findtext('.//NO.P')
+                nps = consid.xpath('.//NP[not(ancestor::NP)]')
+                text = np_text(nps) if nps else self.clean_text(consid)
+                recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
+                                 'text': text})
+        else:
+            # Some acts list recitals as bare numbered points (LIST > ITEM >
+            # NP or direct NPs) instead of CONSID elements
+            for np in recitals_section.xpath('.//NP[not(ancestor::NP)]'):
+                no_p = np.findtext('NO.P')
+                text = np_text([np])
+                if text:
+                    recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
+                                     'text': text})
+
+        self.recitals = recitals
     
     def get_preamble_final(self) -> None:
         """
         Extracts the final preamble text from the document. The final preamble text is assumed to be
-        contained within the PREAMBLE.FINAL element.
+        contained within the PREAMBLE.FINAL element (possibly spanning several paragraphs).
         """
-        
-        return super().get_preamble_final(preamble_final_xpath='.//PREAMBLE.FINAL')
+        el = self.preamble.find('.//PREAMBLE.FINAL') if self.preamble is not None else None
+        self.preamble_final = self.clean_text(el) if el is not None else None
+        return self.preamble_final
 
     def get_body(self) -> None:
         """
@@ -176,31 +237,74 @@ class Formex4Parser(XMLParser):
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text
         """
-        def extract_eId(chapter, index):
-            return f'cpt_{index+1}'
-        
-        def get_headings(chapter):
-            if len(chapter.findall('.//HT')) > 0:
-                chapter_num = chapter.findall('.//HT')[0]
-                chapter_num = "".join(chapter_num.itertext()).strip()  # Ensure chapter_num is a string
-                if len(chapter.findall('.//HT')) > 1:      
-                    chapter_heading = chapter.findall('.//HT')[1]
-                    chapter_heading = "".join(chapter_heading.itertext()).strip()
-                else:
-                    return None, None
-            else: 
-                return None, None
-                                
-            return chapter_num, chapter_heading
-        
-        
-        return super().get_chapters(
-            chapter_xpath='.//TITLE',
-            num_xpath='.//HT',
-            heading_xpath='.//HT',
-            extract_eId=extract_eId,
-            get_headings=get_headings
+        self.chapters = []
+        if self.body is None:
+            return self.chapters
+
+        used_eids: set[str] = set()
+        eid_by_division: dict = {}
+
+        def classify(num_text):
+            first = (num_text or '').split()[0].upper().rstrip('.') if num_text else ''
+            return _DIVISION_TYPES.get(first, ('division', 'div'))
+
+        def make_eid(prefix, num_text, type_count):
+            token = None
+            if num_text:
+                words = num_text.split()
+                if len(words) > 1 and re.fullmatch(r'[\w-]+', words[1]):
+                    token = words[1]
+            eid = f'{prefix}_{token or type_count}'
+            while eid in used_eids:
+                eid = f'{eid}_{type_count}'
+            used_eids.add(eid)
+            return eid
+
+        counters: dict[str, int] = {}
+        divisions = self.body.xpath('.//DIVISION[not(ancestor::QUOT.S)]')
+        for div in divisions:
+            title = div.find('TITLE')
+            ti = title.find('TI') if title is not None else None
+            sti = title.find('STI') if title is not None else None
+            num = self._title_text(ti) if ti is not None else None
+            heading = self._title_text(sti) if sti is not None else None
+            div_type, prefix = classify(num)
+            counters[div_type] = counters.get(div_type, 0) + 1
+            eid = make_eid(prefix, num, counters[div_type])
+            parent = next((eid_by_division[a] for a in div.iterancestors()
+                           if a in eid_by_division), None)
+            eid_by_division[div] = eid
+            self.chapters.append({
+                'eId': eid,
+                'type': div_type,
+                'num': num,
+                'heading': heading,
+                'parent': parent,
+            })
+
+        # Legacy layout: division titles as bare TITLE elements (older
+        # Formex versions), outside any DIVISION/article/table/quote
+        titles = self.body.xpath(
+            './/TITLE[not(ancestor::DIVISION) and not(ancestor::ARTICLE)'
+            ' and not(ancestor::TBL) and not(ancestor::QUOT.S)'
+            ' and not(ancestor::GR.NOTES) and not(ancestor::GR.SEQ)]'
         )
+        for title in titles:
+            hts = title.findall('.//HT')
+            if len(hts) < 2:
+                continue
+            num = ''.join(hts[0].itertext()).strip()
+            heading = ''.join(hts[1].itertext()).strip()
+            div_type, prefix = classify(num)
+            counters[div_type] = counters.get(div_type, 0) + 1
+            self.chapters.append({
+                'eId': make_eid(prefix, num, counters[div_type]),
+                'type': div_type,
+                'num': num,
+                'heading': heading,
+                'parent': None,
+            })
+        return self.chapters
         
             
     def get_articles(self) -> None:
@@ -216,26 +320,62 @@ class Formex4Parser(XMLParser):
             Articles with identifier and content.
         """
         self.articles = []
-        
+
         if self.body is not None:
             # Use strategy for extraction
             self.articles = self.article_strategy.extract_articles(
                 self.body,
                 remove_notes=True
             )
-            
+
             # Add article-specific fields (heading from STI.ART) and
             # structured amendment objects, uniform with annex children
             for article in self.articles:
-                article_elem = self.body.xpath(
+                matches = self.body.xpath(
                     f".//ARTICLE[@IDENTIFIER][starts-with(@IDENTIFIER, '{article['eId'][4:]}')"
                     f" or starts-with(@IDENTIFIER, '3{article['eId'][4:]}')]"
-                )[0]
-                article['heading'] = (
-                    article_elem.findtext('.//STI.ART') or
-                    article_elem.findtext('.//STI.ART//P')
                 )
+                if not matches:
+                    continue
+                article_elem = matches[0]
+                # Heading: only the article's own STI.ART, never one inside
+                # quoted amendment content
+                sti = article_elem.xpath('.//STI.ART[not(ancestor::QUOT.S)]')
+                article['heading'] = (
+                    (sti[0].findtext('.//P') or ''.join(sti[0].itertext())).strip()
+                    if sti else None
+                ) or None
                 self._attach_article_amendments(article, article_elem)
+
+            # Fallback: enacting terms without ARTICLE elements (budget acts,
+            # decisions organised as grouped sequences or plain blocks). The
+            # content is extracted with the same block machinery as annexes,
+            # into a single pseudo-article.
+            if not self.articles:
+                children = []
+                for block in self._iter_annex_blocks(self.body):
+                    text = self._render_annex_text(block)
+                    if not text:
+                        continue
+                    child: dict[str, Any] = {
+                        'eId': f'000.{len(children) + 1:03d}',
+                        'text': text,
+                        'amendment': self._analyze_amendment(block),
+                    }
+                    if block.tag == 'TBL':
+                        child['table'] = {
+                            'caption': self._table_caption(block),
+                            'rows': self._table_rows(block),
+                            'notes': self._table_notes(block),
+                        }
+                    children.append(child)
+                if children:
+                    self.articles = [{
+                        'eId': 'enacting_terms',
+                        'num': None,
+                        'heading': None,
+                        'children': children,
+                    }]
             
             # Standardize children numbering to 001.001 format
             self._standardize_children_numbering()
@@ -281,11 +421,14 @@ class Formex4Parser(XMLParser):
         counts diverge, a text-only analysis is applied instead.
         """
         if article_elem.xpath('.//QUOT.S | .//QUOT.START'):
-            elems = article_elem.xpath('.//ALINEA[not(ancestor::QUOT.S)]')
+            elems = article_elem.xpath('.//ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]')
         elif article_elem.xpath('.//PARAG[not(ancestor::QUOT.S)]'):
-            elems = article_elem.xpath('.//PARAG[not(ancestor::QUOT.S)]')
+            elems = article_elem.xpath(
+                './/PARAG[not(ancestor::QUOT.S)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA)]'
+            )
         else:
-            elems = article_elem.xpath('.//ALINEA')
+            elems = article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)]')
 
         if len(elems) == len(article['children']):
             for child, elem in zip(article['children'], elems):
@@ -330,15 +473,24 @@ class Formex4Parser(XMLParser):
         self.conclusions = {}
         final_section = self.root.find('.//FINAL')
         if final_section is not None:
-            conclusion_text = "".join(final_section.findtext('.//P')).strip()
+            # All concluding paragraphs outside the signature block
+            paragraphs = final_section.xpath('.//P[not(ancestor::SIGNATURE)]')
+            conclusion_text = ' '.join(
+                filter(None, (self.clean_text(p) for p in paragraphs))
+            ).strip()
             self.conclusions['conclusion_text'] = conclusion_text
 
             signature_section = final_section.find('.//SIGNATURE')
             if signature_section is not None:
-                place = signature_section.findtext('.//PL.DATE/P').strip()
+                place = (signature_section.findtext('.//PL.DATE/P') or '').strip()
                 date = signature_section.findtext('.//PL.DATE/P/DATE')
-                signatory = signature_section.findtext('.//SIGNATORY/P/HT')
-                title = signature_section.findtext('.//SIGNATORY/P[2]/HT')
+
+                # Signatory lines in order: function, [name...], title
+                lines = [self.clean_text(p)
+                         for p in signature_section.findall('.//SIGNATORY/P')]
+                lines = [line for line in lines if line]
+                signatory = lines[0] if lines else None
+                title = lines[1] if len(lines) > 1 else None
 
                 self.conclusions['signature'] = {
                     'place': place,
@@ -346,6 +498,10 @@ class Formex4Parser(XMLParser):
                     'signatory': signatory,
                     'title': title
                 }
+                # Acts signed by several institutions or with named
+                # signatories carry the complete line sequence as well
+                if len(lines) > 2:
+                    self.conclusions['signature']['signatories'] = lines
         return self.conclusions
         
 
@@ -669,7 +825,11 @@ class Formex4Parser(XMLParser):
         do not run together) and stray quotation marks from QUOT.START
         markers around quoted annex titles are stripped.
         """
-        paragraphs = element.findall('.//P')
+        # Paragraphs inside NOTE are footnote bodies already covered by the
+        # enclosing paragraph's text — rendering them separately would
+        # duplicate them.
+        paragraphs = [p for p in element.findall('.//P')
+                      if not any(a.tag == 'NOTE' for a in p.iterancestors())]
         if paragraphs:
             parts = [self.clean_text(p) for p in paragraphs]
             text = ' '.join(p for p in parts if p)
@@ -718,12 +878,17 @@ class Formex4Parser(XMLParser):
             }
 
         quot_blocks = element.xpath('.//QUOT.S[not(ancestor::QUOT.S)]')
-        inline_spans = self._inline_quoted_spans(element)
         instruction = self._instruction_text(element)
         action = self._amendment_action(instruction)
 
-        if not quot_blocks and not inline_spans and action is None:
+        # QUOT.S structures are strong evidence on their own. Inline
+        # QUOT.START/END marks are not: definitions quote their defined
+        # terms the same way, so they only count when an amendment verb
+        # frame confirms the instruction.
+        if not quot_blocks and action is None:
             return None
+
+        inline_spans = self._inline_quoted_spans(element)
 
         quoted: list[dict[str, Any]] = []
         for quot in quot_blocks:
@@ -740,12 +905,23 @@ class Formex4Parser(XMLParser):
         }
 
     def _amendment_action(self, text: str) -> Optional[str]:
-        """Classifies the amendment operation from the instruction verb."""
+        """
+        Classifies the amendment operation from the instruction verb.
+
+        The verb must operate on a structural referent (article, point,
+        date, entry, ...) named shortly before it, or be part of an
+        "as follows" / "the following" construction — otherwise phrases
+        like "a substance which is added to feed" inside definitions would
+        be misread as amendments.
+        """
         if not text:
             return None
-        match = _AMEND_VERB_RE.search(text)
-        if match:
-            return _AMEND_ACTIONS[match.group(1).lower()]
+        for match in _AMEND_VERB_RE.finditer(text):
+            window = text[max(0, match.start() - 140):match.start()]
+            context = text[max(0, match.start() - 140):match.end() + 40]
+            if (_AMEND_REFERENT_RE.search(window)
+                    or _AMEND_FOLLOWS_RE.search(context)):
+                return _AMEND_ACTIONS[match.group(1).lower()]
         return None
 
     def _cited_act(self, text: str) -> Optional[str]:

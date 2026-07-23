@@ -272,10 +272,20 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         """
         articles = []
         
-        # Remove notes if requested
+        # Remove notes if requested, preserving their tail text (the rest of
+        # the sentence after a footnote reference)
         if kwargs.get('remove_notes', True):
             for note in document.findall('.//NOTE'):
-                note.getparent().remove(note)
+                parent = note.getparent()
+                if parent is None:
+                    continue
+                if note.tail:
+                    prev = note.getprevious()
+                    if prev is not None:
+                        prev.tail = (prev.tail or '') + note.tail
+                    else:
+                        parent.text = (parent.text or '') + note.tail
+                parent.remove(note)
         
         # Find top-level ARTICLE elements (not nested within other ARTICLEs)
         article_elements = document.xpath(".//ARTICLE[@IDENTIFIER][not(ancestor::ARTICLE)]")
@@ -294,8 +304,10 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
                 article_id = raw_id
             article_eid = f'art_{article_id}'
             
-            # Extract article number from TI.ART element
-            ti_art = article.find('.//TI.ART')
+            # Extract article number from TI.ART element (never from
+            # quoted amendment content)
+            ti_arts = article.xpath('.//TI.ART[not(ancestor::QUOT.S)]')
+            ti_art = ti_arts[0] if ti_arts else None
             article_num = self._extract_text(ti_art) if ti_art is not None else article_id
             
             # Extract children based on content structure
@@ -329,7 +341,7 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         # Check for amendments (quoted blocks or inline quotation markers)
         if article.xpath('.//QUOT.S | .//QUOT.START'):
             # Extract ALINEAs that are NOT inside QUOT.S (keep amendments separate)
-            alineas = article.xpath('.//ALINEA[not(ancestor::QUOT.S)]')
+            alineas = article.xpath('.//ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]')
             for idx, alinea in enumerate(alineas):
                 children.append({
                     'eId': f'para_{idx + 1}',
@@ -337,9 +349,13 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
                     'amendment': True
                 })
         
-        # Extract PARAG elements (not inside QUOT.S)
+        # Extract PARAG elements (not inside QUOT.S), together with any
+        # direct ALINEAs that sit outside a PARAG, in document order
         elif article.xpath('.//PARAG[not(ancestor::QUOT.S)]'):
-            parags = article.xpath('.//PARAG[not(ancestor::QUOT.S)]')
+            parags = article.xpath(
+                './/PARAG[not(ancestor::QUOT.S)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA)]'
+            )
             for idx, parag in enumerate(parags):
                 children.append({
                     'eId': f'para_{idx + 1}',
@@ -349,7 +365,7 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         
         # Fallback to ALINEA elements
         elif article.findall('.//ALINEA'):
-            alineas = article.xpath('.//ALINEA')
+            alineas = article.xpath('.//ALINEA[not(ancestor::ALINEA)]')
             for idx, alinea in enumerate(alineas):
                 children.append({
                     'eId': f'para_{idx + 1}',

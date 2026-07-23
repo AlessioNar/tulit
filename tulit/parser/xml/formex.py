@@ -408,9 +408,9 @@ class Formex4Parser(XMLParser):
             ti = title.find('TI')
             sti = title.find('STI')
             if ti is not None:
-                num = ' '.join(self.clean_text(ti).split())
+                num = ' '.join(self.clean_text(ti).split()) or None
             if sti is not None:
-                heading = self.clean_text(sti)
+                heading = self.clean_text(sti) or None
 
         children = []
         contents = annex_root.find('.//CONTENTS')
@@ -428,9 +428,17 @@ class Formex4Parser(XMLParser):
         """
         Extracts content blocks from an annex CONTENTS element.
 
-        Top-level paragraphs and grouped sequences become individual children;
-        list items are expanded one level so each item is its own child. Child
-        eIds follow the ``{annex:03d}.{child:03d}`` format used elsewhere.
+        The output is uniform with article children: each block becomes a
+        ``{'eId': '<annex:03d>.<child:03d>', 'text': ..., 'amendment': bool}``
+        dictionary, matching the standardized ``001.001`` numbering that
+        article children receive.
+        Lists are expanded so every item (with its number) is its own child,
+        grouped sequences contribute their heading and their blocks, and
+        tables additionally carry a structured ``'table'`` key with
+        ``'caption'`` and ``'rows'``. As in articles, an annex that quotes
+        amendment text (``QUOT.S`` blocks or inline ``QUOT.START`` markers)
+        has its children flagged with ``amendment: True`` and the quoted
+        text kept inline.
 
         Parameters
         ----------
@@ -442,31 +450,138 @@ class Formex4Parser(XMLParser):
         Returns
         -------
         list
-            List of {'eId', 'text'} dictionaries.
+            List of child dictionaries.
         """
-        texts: list[str] = []
-        for child in contents:
-            # Skip comments and processing instructions
-            if not isinstance(child.tag, str):
+        has_amendment = len(contents.xpath('.//QUOT.S | .//QUOT.START')) > 0
+        children: list[dict[str, Any]] = []
+
+        for block in self._iter_annex_blocks(contents):
+            text = self._render_annex_text(block)
+            if not text:
                 continue
-
-            if child.tag == 'LIST':
-                for item in child.findall('ITEM'):
-                    item_text = self.clean_text(item)
-                    if item_text:
-                        texts.append(item_text)
-            else:
-                text = self.clean_text(child)
-                if text:
-                    texts.append(text)
-
-        children = []
-        for idx, text in enumerate(texts, start=1):
-            children.append({
-                'eId': f'{annex_index:03d}.{idx:03d}',
+            child: dict[str, Any] = {
+                'eId': f'{annex_index:03d}.{len(children) + 1:03d}',
                 'text': text,
-            })
+                'amendment': has_amendment,
+            }
+            if block.tag == 'TBL':
+                child['table'] = {
+                    'caption': self._table_caption(block),
+                    'rows': self._table_rows(block),
+                }
+            children.append(child)
         return children
+
+    def _iter_annex_blocks(self, element: etree._Element):
+        """
+        Yields paragraph-level blocks of an annex in document order.
+
+        Containers (LIST, DLIST, GR.SEQ, QUOT.S at top level) are unwrapped so
+        each item, heading, or nested block is yielded individually; leaf
+        blocks (P, NP, TBL, DLIST.ITEM, ...) are yielded as-is.
+        """
+        for node in element:
+            if not isinstance(node.tag, str):
+                continue
+            tag = node.tag
+            if tag == 'LIST':
+                for item in node.findall('ITEM'):
+                    yield from self._iter_annex_blocks(item)
+            elif tag == 'DLIST':
+                yield from node.findall('DLIST.ITEM')
+            elif tag in ('GR.SEQ', 'GR.ANNOTATION', 'QUOT.S'):
+                yield from self._iter_annex_blocks(node)
+            elif tag == 'BIB.INSTANCE':
+                continue
+            else:
+                yield node
+
+    def _render_annex_text(self, element: etree._Element) -> str:
+        """
+        Renders an annex block as readable text.
+
+        Numbered points keep their number separated from the body, quoted
+        amendment blocks are wrapped in quotes, tables are rendered row by
+        row with cell separators, and definition list items join term and
+        definition.
+        """
+        tag = element.tag
+
+        if tag == 'TBL':
+            caption = self._table_caption(element)
+            rows = [' | '.join(row) for row in self._table_rows(element)]
+            return '\n'.join(([caption] if caption else []) + rows)
+
+        if tag == 'NP':
+            parts = []
+            no_p = element.find('NO.P')
+            if no_p is not None:
+                # Raw text: the normalizer would strip numbers like '(1)'
+                num = ' '.join(''.join(no_p.itertext()).split())
+                if num:
+                    parts.append(num)
+            for sub in element:
+                if not isinstance(sub.tag, str) or sub.tag == 'NO.P':
+                    continue
+                rendered = self._render_annex_text(sub)
+                if rendered:
+                    parts.append(rendered)
+            return ' '.join(parts)
+
+        if tag == 'DLIST.ITEM':
+            term = element.find('TERM')
+            definition = element.find('DEFINITION')
+            parts = [self.clean_text(el) for el in (term, definition) if el is not None]
+            return ' — '.join(p for p in parts if p)
+
+        if tag == 'QUOT.S':
+            inner = ' '.join(
+                filter(None, (self._render_annex_text(sub) for sub in element
+                              if isinstance(sub.tag, str)))
+            )
+            return f"'{inner}'" if inner else ''
+
+        if tag == 'DLIST':
+            return ' '.join(
+                filter(None, (self._render_annex_text(item)
+                              for item in element.findall('DLIST.ITEM')))
+            )
+
+        # Blocks containing tables, quoted blocks, numbered points or
+        # definition lists need structured rendering; anything else is plain text.
+        special = element.xpath('.//TBL | .//QUOT.S | .//NP | .//DLIST.ITEM')
+        if not special:
+            return self.clean_text(element)
+
+        parts = [(element.text or '').strip()]
+        for sub in element:
+            if isinstance(sub.tag, str):
+                parts.append(self._render_annex_text(sub))
+            if sub.tail and sub.tail.strip():
+                parts.append(sub.tail.strip())
+        return ' '.join(p for p in parts if p)
+
+    def _table_caption(self, table: etree._Element) -> Optional[str]:
+        """Returns the caption of a Formex TBL element, if any."""
+        title = table.find('TITLE')
+        if title is not None:
+            caption = self.clean_text(title)
+            return caption or None
+        return None
+
+    def _table_rows(self, table: etree._Element) -> list[list[str]]:
+        """
+        Extracts a Formex TBL element as a list of rows of cell texts.
+
+        Cells are cleaned individually so values from adjacent cells can
+        never run together.
+        """
+        rows = []
+        for row in table.findall('.//ROW'):
+            cells = [self.clean_text(cell) for cell in row.findall('CELL')]
+            if any(cells):
+                rows.append(cells)
+        return rows
 
     def clean_text(self, element: etree._Element) -> str:
         # Replace QUOT.START and QUOT.END elements with proper quotes
@@ -510,8 +625,12 @@ class Formex4Parser(XMLParser):
         # Check if input is a directory
         file_path = Path(file)
         if file_path.is_dir():
-            # Search for XML files in the directory
-            xml_files = sorted(file_path.glob('*.xml'))
+            # Search for XML files in the directory, in natural order so that
+            # e.g. DOC_10.xml sorts after DOC_2.xml and annexes keep OJ order
+            def natural_key(p):
+                return [int(part) if part.isdigit() else part
+                        for part in re.split(r'(\d+)', p.name)]
+            xml_files = sorted(file_path.glob('*.xml'), key=natural_key)
 
             # Find the file containing ACT or DECISION tags, and collect annexes
             target_file = None

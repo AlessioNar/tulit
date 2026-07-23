@@ -623,9 +623,78 @@ def test_extract_annex_children_expands_lists():
     assert len(children) == 3
     assert children[0]['eId'] == '002.001'
     assert children[0]['text'] == 'Intro paragraph.'
+    assert children[0]['amendment'] is False
+    # Numbered points keep their number, separated from the body
     assert children[1]['eId'] == '002.002'
-    assert 'First item' in children[1]['text']
-    assert children[2]['eId'] == '002.003'
+    assert children[1]['text'] == '1. First item'
+    assert children[2]['text'] == '2. Second item'
+
+
+def test_extract_annex_children_renders_tables_with_structure():
+    """Tables become one child with row/cell separators and structured rows."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <TBL>
+        <TITLE><TI><P>List of products</P></TI></TITLE>
+        <CORPUS>
+          <ROW><CELL>2843909075</CELL><CELL>457-82-4</CELL><CELL>padeliporfin</CELL></ROW>
+          <ROW><CELL>2844403012</CELL><CELL>3748-56-1</CELL><CELL>iodofiltic acid</CELL></ROW>
+        </CORPUS>
+      </TBL>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert len(children) == 1
+    child = children[0]
+    # Cell values never run together in the text rendering
+    assert '2843909075 | 457-82-4 | padeliporfin' in child['text']
+    assert child['table']['caption'] == 'List of products'
+    assert child['table']['rows'] == [
+        ['2843909075', '457-82-4', 'padeliporfin'],
+        ['2844403012', '3748-56-1', 'iodofiltic acid'],
+    ]
+
+
+def test_extract_annex_children_amendment_flag_and_quotes():
+    """Annexes quoting amendment text mirror the article convention."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <P>The Annex is amended as follows:</P>
+      <LIST TYPE="ARAB">
+        <ITEM><NP><NO.P>(1)</NO.P><TXT>entry 73 is replaced by the following:</TXT>
+          <QUOT.S LEVEL="1"><P>73 | thiram | 30 April 2017</P></QUOT.S>
+        </NP></ITEM>
+      </LIST>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert all(c['amendment'] is True for c in children)
+    point = children[1]
+    assert point['text'].startswith('(1) entry 73 is replaced by the following:')
+    # Quoted amendment text is kept inline, wrapped in quotes
+    assert "'73 | thiram | 30 April 2017'" in point['text']
+
+
+def test_extract_annex_children_definition_lists():
+    """DLIST items join term and definition."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <DLIST>
+        <DLIST.ITEM><TERM>ESCB</TERM><DEFINITION><P>European System of Central Banks</P></DEFINITION></DLIST.ITEM>
+      </DLIST>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert children[0]['text'] == 'ESCB — European System of Central Banks'
 
 
 def test_extract_annex_returns_none_for_non_annex():
@@ -737,3 +806,16 @@ def test_parse_validates_against_bundled_schema():
 
     assert p.valid is True
     assert p.validation_errors == []
+
+
+def test_extract_annex_children_inline_quot_start_flags_amendment():
+    """Inline QUOT.START/QUOT.END markers also flag amendment, as in articles."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>the date <QUOT.START/>31 July 2014<QUOT.END/> is replaced by '
+        '<QUOT.START/>30 April 2017<QUOT.END/>.</P></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert children[0]['amendment'] is True

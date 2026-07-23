@@ -326,8 +326,8 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         """
         children = []
         
-        # Check for amendments (QUOT.S elements)
-        if article.findall('.//QUOT.S'):
+        # Check for amendments (quoted blocks or inline quotation markers)
+        if article.xpath('.//QUOT.S | .//QUOT.START'):
             # Extract ALINEAs that are NOT inside QUOT.S (keep amendments separate)
             alineas = article.xpath('.//ALINEA[not(ancestor::QUOT.S)]')
             for idx, alinea in enumerate(alineas):

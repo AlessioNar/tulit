@@ -235,13 +235,14 @@ class XMLParser(Parser):
         None
             Updates the instance's preface attribute with the found preface element.
         """
+        paragraphs = []
         preface = self._extractor.find(self.root, preface_xpath)
         if preface is not None:
             # Extract text from all paragraph elements
             paragraphs = self._extractor.extract_text_from_all(preface, paragraph_xpath)
 
         # Join all paragraphs and normalize using strategy
-        self.preface = self.normalizer.normalize(' '.join(paragraphs))
+        self.preface = self.normalizer.normalize(' '.join(paragraphs)) or None
             
     def get_preamble(self, preamble_xpath, notes_xpath) -> None:
         """

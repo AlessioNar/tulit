@@ -819,3 +819,95 @@ def test_extract_annex_children_inline_quot_start_flags_amendment():
     children = p._extract_annex_children(contents, annex_index=1)
 
     assert children[0]['amendment'] is True
+
+
+def test_table_notes_are_extracted():
+    """GR.NOTES legends are kept in the table text and structured notes."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><TBL>'
+        '<GR.NOTES><NOTE NOTE.ID="E0001"><P>Quotas available pursuant to Regulation X.</P></NOTE></GR.NOTES>'
+        '<CORPUS><ROW><CELL>PT</CELL><CELL>ANE</CELL></ROW></CORPUS>'
+        '</TBL></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert 'Quotas available pursuant to Regulation X.' in children[0]['text']
+    assert children[0]['table']['notes'] == ['Quotas available pursuant to Regulation X.']
+
+
+def test_annex_num_joins_title_paragraphs_and_strips_quotes():
+    """Multi-paragraph TI joins with spaces; quote markers do not leak into num."""
+    p = Formex4Parser()
+    annex = etree.fromstring(
+        '<ANNEX><TITLE><TI><P>ANNEX</P><P>to be allocated for September</P></TI></TITLE>'
+        '<CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+    )
+    assert p._extract_annex(annex, 1)['num'] == 'ANNEX to be allocated for September'
+
+    quoted = etree.fromstring(
+        '<ANNEX><TITLE><TI><P><QUOT.START/>ANNEX I</P></TI></TITLE>'
+        '<CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+    )
+    assert p._extract_annex(quoted, 1)['num'] == 'ANNEX I'
+
+
+def test_parse_skips_annex_files_referenced_as_inclusions(tmp_path):
+    """A sibling annex file that is only an INCL.ELEMENT target is not duplicated."""
+    (tmp_path / "act.xml").write_text(
+        '<ACT><ENACTING.TERMS><ARTICLE IDENTIFIER="001"><TI.ART>Article 1</TI.ART>'
+        '<ALINEA>Text.</ALINEA></ARTICLE></ENACTING.TERMS></ACT>'
+    )
+    (tmp_path / "annex_wrapper.xml").write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX VII</P></TI></TITLE>'
+        '<CONTENTS><INCL.ELEMENT FILEREF="annex_content.xml" TYPE="FORMEX.DOC"/></CONTENTS></ANNEX>'
+    )
+    (tmp_path / "annex_content.xml").write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX VII</P></TI></TITLE>'
+        '<CONTENTS><P>Part 1 requirements.</P></CONTENTS></ANNEX>'
+    )
+
+    p = Formex4Parser().parse(str(tmp_path))
+
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['children'][0]['text'] == 'Part 1 requirements.'
+
+
+def test_annotation_table_notes_are_extracted():
+    """GR.NOTES containing GR.ANNOTATION blocks (not just NOTE) are kept."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><TBL>'
+        '<GR.NOTES><GR.ANNOTATION><ANNOTATION><NP><NO.P>(1)</NO.P>'
+        '<TXT>EFSA identified some information as unavailable.</TXT></NP>'
+        '</ANNOTATION></GR.ANNOTATION></GR.NOTES>'
+        '<CORPUS><ROW><CELL>A</CELL></ROW></CORPUS>'
+        '</TBL></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert 'EFSA identified some information as unavailable.' in children[0]['text']
+    assert any('EFSA' in n for n in children[0]['table']['notes'])
+
+
+def test_titleless_annex_wrapper_adopts_included_title(tmp_path):
+    """A wrapper annex without TITLE adopts the included annex's title."""
+    (tmp_path / "act.xml").write_text(
+        '<ACT><ENACTING.TERMS><ARTICLE IDENTIFIER="001"><TI.ART>Article 1</TI.ART>'
+        '<ALINEA>Text.</ALINEA></ARTICLE></ENACTING.TERMS></ACT>'
+    )
+    (tmp_path / "wrapper.xml").write_text(
+        '<ANNEX><CONTENTS><INCL.ELEMENT FILEREF="content.xml" TYPE="FORMEX.DOC"/></CONTENTS></ANNEX>'
+    )
+    (tmp_path / "content.xml").write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX VII</P></TI></TITLE>'
+        '<CONTENTS><P>Part 1 requirements.</P></CONTENTS></ANNEX>'
+    )
+
+    p = Formex4Parser().parse(str(tmp_path))
+
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['num'] == 'ANNEX VII'
+    assert p.annexes[0]['children'][0]['text'] == 'Part 1 requirements.'

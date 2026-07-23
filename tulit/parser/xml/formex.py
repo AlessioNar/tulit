@@ -350,7 +350,9 @@ class Formex4Parser(XMLParser):
         if base_dir is None or _depth > 2:
             return
 
-        for incl in element.findall('.//INCL.ELEMENT'):
+        # INCL.ELEMENT inside BIB.INSTANCE is a manifest declaration, not a
+        # content reference — only resolve inclusions in the document body.
+        for incl in element.xpath('.//INCL.ELEMENT[not(ancestor::BIB.INSTANCE)]'):
             fileref = incl.get('FILEREF')
             if not fileref:
                 continue
@@ -363,6 +365,18 @@ class Formex4Parser(XMLParser):
             except Exception as e:
                 self.logger.warning(f"Could not parse included file {path}: {e}")
                 continue
+
+            # An included ANNEX contributes only its CONTENTS: its own TITLE
+            # would duplicate the referencing annex's title. If the host annex
+            # has no title of its own, it adopts the included one instead.
+            if included_root.tag == 'ANNEX':
+                incl_title = included_root.find('TITLE')
+                if (_depth == 0 and element.tag == 'ANNEX'
+                        and element.find('TITLE') is None and incl_title is not None):
+                    element.insert(0, incl_title)
+                included_contents = included_root.find('.//CONTENTS')
+                if included_contents is not None:
+                    included_root = included_contents
 
             # Bibliographic metadata of the included document is not content
             for bib in included_root.findall('.//BIB.INSTANCE') + included_root.findall('.//BIB.DOC'):
@@ -408,9 +422,9 @@ class Formex4Parser(XMLParser):
             ti = title.find('TI')
             sti = title.find('STI')
             if ti is not None:
-                num = ' '.join(self.clean_text(ti).split()) or None
+                num = self._title_text(ti)
             if sti is not None:
-                heading = self.clean_text(sti) or None
+                heading = self._title_text(sti)
 
         children = []
         contents = annex_root.find('.//CONTENTS')
@@ -468,6 +482,7 @@ class Formex4Parser(XMLParser):
                 child['table'] = {
                     'caption': self._table_caption(block),
                     'rows': self._table_rows(block),
+                    'notes': self._table_notes(block),
                 }
             children.append(child)
         return children
@@ -510,7 +525,8 @@ class Formex4Parser(XMLParser):
         if tag == 'TBL':
             caption = self._table_caption(element)
             rows = [' | '.join(row) for row in self._table_rows(element)]
-            return '\n'.join(([caption] if caption else []) + rows)
+            notes = self._table_notes(element)
+            return '\n'.join(([caption] if caption else []) + rows + notes)
 
         if tag == 'NP':
             parts = []
@@ -527,6 +543,9 @@ class Formex4Parser(XMLParser):
                 if rendered:
                     parts.append(rendered)
             return ' '.join(parts)
+
+        if tag == 'TITLE':
+            return self._title_text(element) or ''
 
         if tag == 'DLIST.ITEM':
             term = element.find('TERM')
@@ -561,6 +580,22 @@ class Formex4Parser(XMLParser):
                 parts.append(sub.tail.strip())
         return ' '.join(p for p in parts if p)
 
+    def _title_text(self, element: etree._Element) -> Optional[str]:
+        """
+        Renders a TI/STI title element as a single line.
+
+        Multiple paragraphs are joined with a space (so 'ANNEX' + 'to ...'
+        do not run together) and stray quotation marks from QUOT.START
+        markers around quoted annex titles are stripped.
+        """
+        paragraphs = element.findall('.//P')
+        if paragraphs:
+            parts = [self.clean_text(p) for p in paragraphs]
+            text = ' '.join(p for p in parts if p)
+        else:
+            text = self.clean_text(element)
+        return ' '.join(text.split()).strip("'‘’") or None
+
     def _table_caption(self, table: etree._Element) -> Optional[str]:
         """Returns the caption of a Formex TBL element, if any."""
         title = table.find('TITLE')
@@ -568,6 +603,20 @@ class Formex4Parser(XMLParser):
             caption = self.clean_text(title)
             return caption or None
         return None
+
+    def _table_notes(self, table: etree._Element) -> list[str]:
+        """
+        Extracts the notes (GR.NOTES legend) of a Formex TBL element.
+        """
+        notes = []
+        for gr_notes in table.findall('GR.NOTES'):
+            for child in gr_notes:
+                if not isinstance(child.tag, str):
+                    continue
+                text = self._render_annex_text(child)
+                if text:
+                    notes.append(text)
+        return notes
 
     def _table_rows(self, table: etree._Element) -> list[list[str]]:
         """
@@ -662,14 +711,23 @@ class Formex4Parser(XMLParser):
 
         super().parse(file, schema='formex4.xsd', format='Formex 4', **options)
 
-        # If the parsed document is itself an annex (single annex file), extract it
-        # directly rather than treating it as a (missing) legal act.
+        # Files that are only the target of an INCL.ELEMENT reference in
+        # another annex are skipped: their content is grafted into the
+        # referencing annex, so extracting them separately would duplicate it.
+        annex_files = self._drop_included_annex_files(annex_files)
+
+        # If the parsed document is itself an annex (e.g. a standalone annex
+        # file, or a corrigendum directory where no legal act was found),
+        # extract the collected annex files — or the document itself.
         if self.root is not None and getattr(self.root, 'tag', None) == 'ANNEX':
             logger.info("Parsed document is an annex; extracting annex content")
             self.articles = []
-            base_dir = os.path.dirname(os.path.abspath(str(file)))
-            annex = self._extract_annex(self.root, 1, base_dir=base_dir)
-            self.annexes = [annex] if annex is not None else []
+            if annex_files:
+                self.get_annexes(annex_files)
+            else:
+                base_dir = os.path.dirname(os.path.abspath(str(file)))
+                annex = self._extract_annex(self.root, 1, base_dir=base_dir)
+                self.annexes = [annex] if annex is not None else []
             return self
 
         # Extract any annex files found alongside the legal act
@@ -677,3 +735,24 @@ class Formex4Parser(XMLParser):
             self.get_annexes(annex_files)
 
         return self
+
+    def _drop_included_annex_files(self, annex_files: list[str]) -> list[str]:
+        """
+        Filters out annex files that are INCL.ELEMENT targets of other annexes.
+
+        Manifest declarations inside BIB.INSTANCE are ignored — only body
+        references count as inclusions.
+        """
+        if not annex_files:
+            return annex_files
+        referenced = set()
+        for annex_file in annex_files:
+            try:
+                root = etree.parse(annex_file).getroot()
+            except Exception:
+                continue
+            for incl in root.xpath('.//INCL.ELEMENT[not(ancestor::BIB.INSTANCE)]'):
+                fileref = incl.get('FILEREF')
+                if fileref:
+                    referenced.add(os.path.basename(fileref))
+        return [f for f in annex_files if os.path.basename(f) not in referenced]

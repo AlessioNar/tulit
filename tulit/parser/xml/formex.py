@@ -765,9 +765,9 @@ class Formex4Parser(XMLParser):
             ti = title.find('TI')
             sti = title.find('STI')
             if ti is not None:
-                num = self._title_text(ti)
+                num = self._title_text(ti, keep_notes=True)
             if sti is not None:
-                heading = self._title_text(sti)
+                heading = self._title_text(sti, keep_notes=True)
 
         children = []
         contents = annex_root.find('.//CONTENTS')
@@ -909,7 +909,7 @@ class Formex4Parser(XMLParser):
             return ' '.join(parts)
 
         if tag == 'TITLE':
-            return self._title_text(element) or ''
+            return self._title_text(element, keep_notes=True) or ''
 
         if tag == 'DLIST.ITEM':
             # An item may hold several TERM/DEFINITION pairs, in order
@@ -951,7 +951,7 @@ class Formex4Parser(XMLParser):
                 parts.append(sub.tail.strip())
         return ' '.join(p for p in parts if p)
 
-    def _title_text(self, element: etree._Element) -> Optional[str]:
+    def _title_text(self, element: etree._Element, keep_notes: bool = False) -> Optional[str]:
         """
         Renders a TI/STI title element as a single line.
 
@@ -965,7 +965,8 @@ class Formex4Parser(XMLParser):
         sub_titles = [c for c in element
                       if isinstance(c.tag, str) and c.tag in ('TI', 'STI')]
         if sub_titles:
-            parts = [self._title_text(sub) for sub in sub_titles]
+            parts = [self._title_text(sub, keep_notes=keep_notes)
+                     for sub in sub_titles]
             text = ' '.join(p for p in parts if p)
         else:
             # Paragraphs inside NOTE are footnote bodies already covered by
@@ -978,8 +979,10 @@ class Formex4Parser(XMLParser):
                 text = ' '.join(p for p in parts if p)
             else:
                 # Raw text: numbered titles like '1.Figure 1' must not be
-                # eaten by the point-number normalizer
-                text = self._cell_text(self._without_notes(element))
+                # eaten by the point-number normalizer. Annex titles keep
+                # their footnotes (keep_notes), act titles do not.
+                base = element if keep_notes else self._without_notes(element)
+                text = self._cell_text(deepcopy(base))
         return ' '.join(text.split()).strip("'‘’") or None
 
     def _analyze_amendment(self, element: etree._Element) -> Optional[dict[str, Any]]:
@@ -1160,7 +1163,7 @@ class Formex4Parser(XMLParser):
         """Returns the caption of a Formex TBL element, if any."""
         title = table.find('TITLE')
         if title is not None:
-            caption = self.clean_text(title)
+            caption = self._title_text(title, keep_notes=True)
             return caption or None
         return None
 

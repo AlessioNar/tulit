@@ -58,7 +58,8 @@
             "type": "array",
             "items": {
                 "type": "object"
-            }
+            },
+            "description": "Articles of the legal act. Children have eId (NNN.NNN), text, and the same structured 'amendment' field as annex children (null when the paragraph does not amend another act)."
         },
         "conclusions": {
             "type": [
@@ -68,7 +69,7 @@
         },
         "annexes": {
             "type": "array",
-            "description": "Annexes of the legal act, uniform with articles: eId, num, heading and children (para_N blocks with text and amendment flag; tables carry structured rows)",
+            "description": "Annexes of the legal act, uniform with articles: eId, num, heading and children. Each child has eId (NNN.NNN), text (full readable text), and amendment — null for ordinary content, or a structured object {action: replace|insert|add|delete|amend|null, instruction, amended_act, quoted: [{kind: structure, children: [...]} | {kind: text, text}]} modelled on Akoma Ntoso mod/quotedText/quotedStructure. Tables carry a 'table' key with caption, rows and notes.",
             "items": {
                 "type": "object"
             }

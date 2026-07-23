@@ -3,8 +3,36 @@ import re
 import json
 import argparse
 import logging
+from copy import deepcopy
 from typing import Optional, Any
 from lxml import etree
+
+# Amendment instruction verbs, in a syntactic frame so that incidental words
+# ("value added tax") never match: "is replaced by", "are hereby deleted",
+# "shall be inserted", "is amended as follows", ...
+_AMEND_VERB_RE = re.compile(
+    r"(?:is|are|shall be)\s+(?:hereby\s+)?"
+    r"(replaced|substituted|inserted|added|deleted|repealed|amended)\b",
+    re.IGNORECASE,
+)
+
+_AMEND_ACTIONS = {
+    'replaced': 'replace', 'substituted': 'replace',
+    'inserted': 'insert', 'added': 'add',
+    'deleted': 'delete', 'repealed': 'delete',
+    'amended': 'amend',
+}
+
+# EU act citations, both numbering families:
+#   "Implementing Regulation (EU) No 540/2011", "Regulation (EU) 2019/124"
+#   "Directive 2009/128/EC", "Decision 2011/172/CFSP"
+_CITED_ACT_RE = re.compile(
+    r"(?:Commission\s+|Council\s+|European Parliament and of the Council\s+)?"
+    r"(?:Implementing\s+|Delegated\s+)?"
+    r"(?:Regulation|Directive|Decision|Guideline)\s+"
+    r"(?:\((?:EU|EC|EEC|Euratom|EU,\s*Euratom)\)\s+(?:No\s+)?\d{1,4}/\d{2,4}"
+    r"|\d{2,4}/\d{1,4}/(?:EU|EC|EEC|CFSP|Euratom))"
+)
 
 from tulit.parser.xml.xml import XMLParser
 from tulit.parser.parser import LegalJSONValidator, create_formex_normalizer
@@ -196,16 +224,18 @@ class Formex4Parser(XMLParser):
                 remove_notes=True
             )
             
-            # Add article-specific fields (heading from STI.ART)
+            # Add article-specific fields (heading from STI.ART) and
+            # structured amendment objects, uniform with annex children
             for article in self.articles:
                 article_elem = self.body.xpath(
                     f".//ARTICLE[@IDENTIFIER][starts-with(@IDENTIFIER, '{article['eId'][4:]}')"
                     f" or starts-with(@IDENTIFIER, '3{article['eId'][4:]}')]"
                 )[0]
                 article['heading'] = (
-                    article_elem.findtext('.//STI.ART') or 
+                    article_elem.findtext('.//STI.ART') or
                     article_elem.findtext('.//STI.ART//P')
                 )
+                self._attach_article_amendments(article, article_elem)
             
             # Standardize children numbering to 001.001 format
             self._standardize_children_numbering()
@@ -241,6 +271,36 @@ class Formex4Parser(XMLParser):
                 }
                 children.append(child)
     
+    def _attach_article_amendments(self, article: dict[str, Any], article_elem: etree._Element) -> None:
+        """
+        Replaces the boolean 'amendment' of article children with the same
+        structured amendment object used for annex children (or None).
+
+        The elements are re-selected with the same XPath logic the article
+        strategy uses, so children and elements pair up positionally; if the
+        counts diverge, a text-only analysis is applied instead.
+        """
+        if article_elem.xpath('.//QUOT.S | .//QUOT.START'):
+            elems = article_elem.xpath('.//ALINEA[not(ancestor::QUOT.S)]')
+        elif article_elem.xpath('.//PARAG[not(ancestor::QUOT.S)]'):
+            elems = article_elem.xpath('.//PARAG[not(ancestor::QUOT.S)]')
+        else:
+            elems = article_elem.xpath('.//ALINEA')
+
+        if len(elems) == len(article['children']):
+            for child, elem in zip(article['children'], elems):
+                child['amendment'] = self._analyze_amendment(elem)
+        else:
+            for child in article['children']:
+                text = child.get('text') or ''
+                action = self._amendment_action(text)
+                child['amendment'] = ({
+                    'action': action,
+                    'instruction': text,
+                    'amended_act': self._cited_act(text),
+                    'quoted': [],
+                } if action else None)
+
     def _standardize_children_numbering(self) -> None:
         """
         Standardize article children numbering to format: 001.001, 001.002, etc.
@@ -443,16 +503,18 @@ class Formex4Parser(XMLParser):
         Extracts content blocks from an annex CONTENTS element.
 
         The output is uniform with article children: each block becomes a
-        ``{'eId': '<annex:03d>.<child:03d>', 'text': ..., 'amendment': bool}``
+        ``{'eId': '<annex:03d>.<child:03d>', 'text': ..., 'amendment': ...}``
         dictionary, matching the standardized ``001.001`` numbering that
         article children receive.
         Lists are expanded so every item (with its number) is its own child,
         grouped sequences contribute their heading and their blocks, and
         tables additionally carry a structured ``'table'`` key with
-        ``'caption'`` and ``'rows'``. As in articles, an annex that quotes
-        amendment text (``QUOT.S`` blocks or inline ``QUOT.START`` markers)
-        has its children flagged with ``amendment: True`` and the quoted
-        text kept inline.
+        ``'caption'``, ``'rows'`` and ``'notes'``.
+
+        ``'amendment'`` is ``None`` for ordinary content, and a structured
+        object for children that amend another act (see
+        :meth:`_analyze_amendment`). The full readable text — including
+        quoted amendment payloads — always remains in ``'text'``.
 
         Parameters
         ----------
@@ -466,17 +528,36 @@ class Formex4Parser(XMLParser):
         list
             List of child dictionaries.
         """
-        has_amendment = len(contents.xpath('.//QUOT.S | .//QUOT.START')) > 0
         children: list[dict[str, Any]] = []
 
         for block in self._iter_annex_blocks(contents):
             text = self._render_annex_text(block)
             if not text:
                 continue
+
+            # A quoted block following an instruction that ends with ':' is
+            # that instruction's payload — attach it instead of emitting a
+            # separate child (mirrors the NP > TXT + QUOT.S pattern used
+            # when the quote is a sibling rather than nested).
+            if (block.tag == 'QUOT.S' and children
+                    and children[-1]['text'].rstrip().endswith(':')):
+                prev = children[-1]
+                if prev['amendment'] is None:
+                    prev['amendment'] = {
+                        'action': self._amendment_action(prev['text']),
+                        'instruction': prev['text'],
+                        'amended_act': self._cited_act(prev['text']),
+                        'quoted': [],
+                    }
+                prev['amendment']['quoted'].append(
+                    {'kind': 'structure', 'children': self._quoted_children(block)})
+                prev['text'] = f"{prev['text']} {text}"
+                continue
+
             child: dict[str, Any] = {
                 'eId': f'{annex_index:03d}.{len(children) + 1:03d}',
                 'text': text,
-                'amendment': has_amendment,
+                'amendment': self._analyze_amendment(block),
             }
             if block.tag == 'TBL':
                 child['table'] = {
@@ -491,9 +572,9 @@ class Formex4Parser(XMLParser):
         """
         Yields paragraph-level blocks of an annex in document order.
 
-        Containers (LIST, DLIST, GR.SEQ, QUOT.S at top level) are unwrapped so
-        each item, heading, or nested block is yielded individually; leaf
-        blocks (P, NP, TBL, DLIST.ITEM, ...) are yielded as-is.
+        Containers (LIST, DLIST, GR.SEQ, grafted CONTENTS/DOC) are unwrapped
+        so each item, heading, or nested block is yielded individually; leaf
+        blocks (P, NP, TBL, DLIST.ITEM, QUOT.S, ...) are yielded as-is.
         """
         for node in element:
             if not isinstance(node.tag, str):
@@ -504,9 +585,9 @@ class Formex4Parser(XMLParser):
                     yield from self._iter_annex_blocks(item)
             elif tag == 'DLIST':
                 yield from node.findall('DLIST.ITEM')
-            elif tag in ('GR.SEQ', 'GR.ANNOTATION', 'QUOT.S'):
+            elif tag in ('GR.SEQ', 'GR.ANNOTATION', 'CONTENTS', 'DOC'):
                 yield from self._iter_annex_blocks(node)
-            elif tag == 'BIB.INSTANCE':
+            elif tag in ('BIB.INSTANCE', 'BIB.DOC'):
                 continue
             else:
                 yield node
@@ -596,6 +677,164 @@ class Formex4Parser(XMLParser):
             text = self.clean_text(element)
         return ' '.join(text.split()).strip("'‘’") or None
 
+    def _analyze_amendment(self, element: etree._Element) -> Optional[dict[str, Any]]:
+        """
+        Analyzes a content block for amendment semantics.
+
+        A block amends another act when it carries quoted payloads
+        (``QUOT.S`` structures or inline ``QUOT.START``/``QUOT.END`` spans)
+        or when its text matches an amendment instruction ("... is replaced
+        by ...", "... is amended as follows:"). Modelled on the Akoma Ntoso
+        ``mod``/``quotedText``/``quotedStructure`` triple.
+
+        Returns
+        -------
+        dict or None
+            ``None`` for ordinary content, otherwise::
+
+                {
+                  'action': 'replace'|'insert'|'add'|'delete'|'amend'|None,
+                  'instruction': str,       # the command, without payloads
+                  'amended_act': str|None,  # first act citation, best effort
+                  'quoted': [               # payloads, in document order
+                    {'kind': 'structure', 'children': [{'text', 'table'?}]},
+                    {'kind': 'text', 'text': str},
+                  ],
+                }
+
+            Quoted children carry no eIds: they are content of the amended
+            act, not structure of the amending one.
+        """
+        if element.tag == 'TBL':
+            return None
+
+        if element.tag == 'QUOT.S':
+            return {
+                'action': None,
+                'instruction': '',
+                'amended_act': None,
+                'quoted': [{'kind': 'structure',
+                            'children': self._quoted_children(element)}],
+            }
+
+        quot_blocks = element.xpath('.//QUOT.S[not(ancestor::QUOT.S)]')
+        inline_spans = self._inline_quoted_spans(element)
+        instruction = self._instruction_text(element)
+        action = self._amendment_action(instruction)
+
+        if not quot_blocks and not inline_spans and action is None:
+            return None
+
+        quoted: list[dict[str, Any]] = []
+        for quot in quot_blocks:
+            quoted.append({'kind': 'structure',
+                           'children': self._quoted_children(quot)})
+        for span in inline_spans:
+            quoted.append({'kind': 'text', 'text': span})
+
+        return {
+            'action': action,
+            'instruction': instruction,
+            'amended_act': self._cited_act(instruction),
+            'quoted': quoted,
+        }
+
+    def _amendment_action(self, text: str) -> Optional[str]:
+        """Classifies the amendment operation from the instruction verb."""
+        if not text:
+            return None
+        match = _AMEND_VERB_RE.search(text)
+        if match:
+            return _AMEND_ACTIONS[match.group(1).lower()]
+        return None
+
+    def _cited_act(self, text: str) -> Optional[str]:
+        """Returns the first EU act citation in the text, if any."""
+        if not text:
+            return None
+        match = _CITED_ACT_RE.search(text)
+        return match.group(0) if match else None
+
+    def _instruction_text(self, element: etree._Element) -> str:
+        """
+        Renders a block's text with quoted payloads (QUOT.S) removed,
+        leaving only the amendment command itself.
+        """
+        copy = deepcopy(element)
+        for quot in copy.xpath('.//QUOT.S'):
+            parent = quot.getparent()
+            if parent is None:
+                continue
+            if quot.tail and quot.tail.strip():
+                prev = quot.getprevious()
+                if prev is not None:
+                    prev.tail = (prev.tail or '') + quot.tail
+                else:
+                    parent.text = (parent.text or '') + quot.tail
+            parent.remove(quot)
+        return self._render_annex_text(copy)
+
+    def _inline_quoted_spans(self, element: etree._Element) -> list[str]:
+        """
+        Extracts the text spans between inline QUOT.START/QUOT.END markers,
+        excluding anything inside QUOT.S structures (those are payloads of
+        their own).
+        """
+        copy = deepcopy(element)
+        for quot in copy.xpath('.//QUOT.S'):
+            parent = quot.getparent()
+            if parent is not None:
+                parent.remove(quot)
+        starts = copy.xpath('.//QUOT.START')
+        if not starts:
+            return []
+        # Private-use-area sentinels: lxml rejects ASCII control characters
+        for marker in starts:
+            marker.text = ''
+        for marker in copy.xpath('.//QUOT.END'):
+            marker.text = ''
+        raw = ''.join(copy.itertext())
+        spans = re.findall('\ue000(.*?)\ue001', raw, re.S)
+        return [' '.join(s.split()) for s in spans if s.strip()]
+
+    def _quoted_children(self, quot: etree._Element) -> list[dict[str, Any]]:
+        """
+        Extracts the content blocks of a QUOT.S payload, using the same
+        block extraction as annex children (so quoted tables keep their
+        structured rows). Quoted children carry no eIds or amendment field.
+        """
+        # A quote wrapping a grafted document (INCL.ELEMENT resolution) is
+        # unwrapped to that document's CONTENTS so its blocks come out
+        # individually instead of as one flattened paragraph. Only CONTENTS
+        # that are top-level within the quote count (ancestry is checked
+        # relative to the quote, not the whole tree).
+        def _top_level_in_quote(el):
+            for ancestor in el.iterancestors():
+                if ancestor is quot:
+                    return True
+                if ancestor.tag == 'CONTENTS':
+                    return False
+            return True
+
+        scopes = [c for c in quot.xpath('.//CONTENTS')
+                  if _top_level_in_quote(c)] or [quot]
+
+        children: list[dict[str, Any]] = []
+        for scope in scopes:
+            for block in self._iter_annex_blocks(scope):
+                text = self._render_annex_text(block)
+                if not text:
+                    continue
+                item: dict[str, Any] = {'text': text}
+                if block.tag == 'TBL':
+                    item['table'] = {
+                        'caption': self._table_caption(block),
+                        'rows': self._table_rows(block),
+                        'notes': self._table_notes(block),
+                    }
+                children.append(item)
+        return children
+
     def _table_caption(self, table: etree._Element) -> Optional[str]:
         """Returns the caption of a Formex TBL element, if any."""
         title = table.find('TITLE')
@@ -623,13 +862,29 @@ class Formex4Parser(XMLParser):
         Extracts a Formex TBL element as a list of rows of cell texts.
 
         Cells are cleaned individually so values from adjacent cells can
-        never run together.
+        never run together. Row groups (BLK) contribute their TI.BLK/STI.BLK
+        block titles as single-cell rows, in document order. Nested tables
+        inside cells stay inline in the cell text.
         """
-        rows = []
-        for row in table.findall('.//ROW'):
-            cells = [self.clean_text(cell) for cell in row.findall('CELL')]
-            if any(cells):
-                rows.append(cells)
+        rows: list[list[str]] = []
+
+        def walk(element):
+            for child in element:
+                if not isinstance(child.tag, str):
+                    continue
+                if child.tag == 'ROW':
+                    cells = [self.clean_text(cell) for cell in child.findall('CELL')]
+                    if any(cells):
+                        rows.append(cells)
+                elif child.tag in ('TI.BLK', 'STI.BLK'):
+                    title = self.clean_text(child)
+                    if title:
+                        rows.append([title])
+                elif child.tag in ('CORPUS', 'BLK'):
+                    walk(child)
+
+        corpus = table.find('CORPUS')
+        walk(corpus if corpus is not None else table)
         return rows
 
     def clean_text(self, element: etree._Element) -> str:

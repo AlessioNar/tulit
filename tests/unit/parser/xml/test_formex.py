@@ -115,7 +115,13 @@ def test_get_articles(parser):
             "num": "Article 1",
             "heading": None,
             "children": [
-                {"eId": '001.001', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.", "amendment": False}
+                {"eId": '001.001', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                 "amendment": {
+                     "action": "replace",
+                     "instruction": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                     "amended_act": "Regulation (EC) No 1484/95",
+                     "quoted": []
+                 }}
             ]
         },
         {
@@ -123,7 +129,7 @@ def test_get_articles(parser):
             "num": "Article 2",
             "heading": None,
             "children": [
-                {"eId": "002.001", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": False}
+                {"eId": "002.001", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": None}
             ]
         }
     ]
@@ -623,7 +629,7 @@ def test_extract_annex_children_expands_lists():
     assert len(children) == 3
     assert children[0]['eId'] == '002.001'
     assert children[0]['text'] == 'Intro paragraph.'
-    assert children[0]['amendment'] is False
+    assert children[0]['amendment'] is None
     # Numbered points keep their number, separated from the body
     assert children[1]['eId'] == '002.002'
     assert children[1]['text'] == '1. First item'
@@ -674,11 +680,18 @@ def test_extract_annex_children_amendment_flag_and_quotes():
 
     children = p._extract_annex_children(contents, annex_index=1)
 
-    assert all(c['amendment'] is True for c in children)
+    # The intro is itself an amendment instruction
+    intro = children[0]
+    assert intro['amendment']['action'] == 'amend'
+    # The point carries the quoted payload as structured content
     point = children[1]
     assert point['text'].startswith('(1) entry 73 is replaced by the following:')
-    # Quoted amendment text is kept inline, wrapped in quotes
     assert "'73 | thiram | 30 April 2017'" in point['text']
+    mod = point['amendment']
+    assert mod['action'] == 'replace'
+    assert mod['instruction'] == '(1) entry 73 is replaced by the following:'
+    assert mod['quoted'][0]['kind'] == 'structure'
+    assert mod['quoted'][0]['children'][0]['text'] == '73 | thiram | 30 April 2017'
 
 
 def test_extract_annex_children_definition_lists():
@@ -818,7 +831,11 @@ def test_extract_annex_children_inline_quot_start_flags_amendment():
 
     children = p._extract_annex_children(contents, annex_index=1)
 
-    assert children[0]['amendment'] is True
+    mod = children[0]['amendment']
+    assert mod is not None
+    assert mod['action'] == 'replace'
+    # Inline quoted spans are captured in document order
+    assert [q['text'] for q in mod['quoted']] == ['31 July 2014', '30 April 2017']
 
 
 def test_table_notes_are_extracted():
@@ -911,3 +928,100 @@ def test_titleless_annex_wrapper_adopts_included_title(tmp_path):
     assert len(p.annexes) == 1
     assert p.annexes[0]['num'] == 'ANNEX VII'
     assert p.annexes[0]['children'][0]['text'] == 'Part 1 requirements.'
+
+
+def test_table_block_titles_are_extracted():
+    """BLK groups in a table contribute their TI.BLK titles as rows."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><TBL><CORPUS>'
+        '<BLK><TI.BLK><HT TYPE="BOLD">Belgium:</HT></TI.BLK>'
+        '<ROW><CELL>Airport A</CELL><CELL>open</CELL></ROW></BLK>'
+        '<BLK><TI.BLK><HT TYPE="BOLD">Denmark:</HT></TI.BLK>'
+        '<ROW><CELL>Airport B</CELL><CELL>closed</CELL></ROW></BLK>'
+        '</CORPUS></TBL></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    rows = children[0]['table']['rows']
+    assert rows == [['Belgium:'], ['Airport A', 'open'], ['Denmark:'], ['Airport B', 'closed']]
+    assert 'Belgium:' in children[0]['text']
+
+
+# ---------------------------------------------------------------------------
+# Structured amendment representation
+# ---------------------------------------------------------------------------
+
+def test_amendment_quoted_table_keeps_structured_rows():
+    """A table quoted as amendment payload exposes structured rows."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><NP><NO.P>(1)</NO.P>'
+        '<TXT>the table in Part B is replaced by the following:</TXT>'
+        '<QUOT.S LEVEL="1"><TBL><CORPUS>'
+        '<ROW><CELL>73</CELL><CELL>thiram</CELL></ROW>'
+        '<ROW><CELL>74</CELL><CELL>ziram</CELL></ROW>'
+        '</CORPUS></TBL></QUOT.S></NP></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    mod = children[0]['amendment']
+    assert mod['action'] == 'replace'
+    payload = mod['quoted'][0]
+    assert payload['kind'] == 'structure'
+    assert payload['children'][0]['table']['rows'] == [['73', 'thiram'], ['74', 'ziram']]
+
+
+def test_amendment_sibling_quote_attaches_to_instruction():
+    """A QUOT.S sibling after an instruction ending with ':' is its payload."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>Annex III is amended as follows:</P>'
+        '<QUOT.S LEVEL="1"><P>New annex body.</P></QUOT.S></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert len(children) == 1
+    mod = children[0]['amendment']
+    assert mod['action'] == 'amend'
+    assert mod['quoted'][0]['children'][0]['text'] == 'New annex body.'
+    assert "'New annex body.'" in children[0]['text']
+
+
+def test_amendment_detected_from_text_without_markup():
+    """Amendments without QUOT markup are detected from the instruction text."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>In the sixth column, of entry 73, the date 31 July 2014 '
+        'is replaced by 30 April 2017.</P></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    mod = children[0]['amendment']
+    assert mod is not None
+    assert mod['action'] == 'replace'
+    assert mod['quoted'] == []
+
+
+def test_amendment_cited_act_extraction():
+    """The amended act citation is extracted from the instruction."""
+    p = Formex4Parser()
+    assert p._cited_act(
+        'Part A of the Annex to Implementing Regulation (EU) No 540/2011 is amended as follows:'
+    ) == 'Implementing Regulation (EU) No 540/2011'
+    assert p._cited_act('Annexes I and II to Directive 2009/128/EC are amended.') == 'Directive 2009/128/EC'
+    assert p._cited_act('This text cites no act.') is None
+
+
+def test_ordinary_content_has_no_amendment():
+    """Plain annex content gets amendment None; 'value added tax' is not an amendment."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>The value added tax identification number of the operator.</P></CONTENTS>'
+    )
+    children = p._extract_annex_children(contents, annex_index=1)
+    assert children[0]['amendment'] is None

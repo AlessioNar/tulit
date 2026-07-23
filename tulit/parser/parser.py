@@ -116,6 +116,7 @@ class Parser(ABC):
         self.chapters: list[dict[str, Any]] = []
         self.articles: list[dict[str, Any]] = []
         self.conclusions: Optional[dict[str, Any]] = None
+        self.annexes: list[dict[str, Any]] = []
 
     @abstractmethod
     def get_preface(self) -> Optional[str]:
@@ -348,7 +349,8 @@ class Parser(ABC):
             'preamble_final': _serialize(self.preamble_final),
             'chapters': _serialize(self.chapters),
             'articles': _serialize(self.articles),
-            'conclusions': _serialize(self.conclusions)
+            'conclusions': _serialize(self.conclusions),
+            'annexes': _serialize(self.annexes)
         }
 
 class LegalJSONValidator:

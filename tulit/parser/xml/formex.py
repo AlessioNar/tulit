@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import argparse
@@ -288,6 +289,185 @@ class Formex4Parser(XMLParser):
         return self.conclusions
         
 
+    def get_annexes(self, annex_files: list[str]) -> list[dict[str, Any]]:
+        """
+        Extracts annexes from a list of Formex annex files.
+
+        In Formex, each annex is stored in a separate file whose root element is
+        ``ANNEX``. Each annex contains a ``TITLE`` (with ``TI`` for the annex number
+        and ``STI`` for the heading) and a ``CONTENTS`` element holding the body.
+
+        Parameters
+        ----------
+        annex_files : list of str
+            Paths to Formex annex files (root element ``ANNEX``), in document order.
+
+        Returns
+        -------
+        list
+            List of dictionaries containing annex data with keys:
+            - 'eId': Annex identifier (e.g. 'anx_1')
+            - 'num': Annex number/title (e.g. 'ANNEX I')
+            - 'heading': Annex subtitle, or None
+            - 'children': List of {'eId', 'text'} content blocks
+        """
+        self.annexes = []
+        for index, annex_file in enumerate(annex_files, start=1):
+            try:
+                tree = etree.parse(annex_file)
+            except Exception as e:
+                self.logger.warning(f"Could not parse annex file {annex_file}: {e}")
+                continue
+
+            annex_root = tree.getroot()
+            base_dir = os.path.dirname(os.path.abspath(annex_file))
+            annex = self._extract_annex(annex_root, index, base_dir=base_dir)
+            if annex is not None:
+                self.annexes.append(annex)
+
+        return self.annexes
+
+    def _resolve_inclusions(self, element: etree._Element, base_dir: Optional[str], _depth: int = 0) -> None:
+        """
+        Replaces ``INCL.ELEMENT`` references with the content of the referenced file.
+
+        Formex documents can externalise content (e.g. quoted sub-documents in
+        annexes) into separate files referenced through
+        ``<INCL.ELEMENT FILEREF="..."/>``. This method parses each referenced
+        file found under ``element`` and grafts its content in place of the
+        reference so that text extraction sees the full annex body.
+
+        Parameters
+        ----------
+        element : lxml.etree._Element
+            Subtree in which to resolve inclusions, modified in place.
+        base_dir : str or None
+            Directory against which FILEREF values are resolved. If None,
+            inclusions are left untouched.
+        _depth : int
+            Internal recursion guard for nested inclusions.
+        """
+        if base_dir is None or _depth > 2:
+            return
+
+        for incl in element.findall('.//INCL.ELEMENT'):
+            fileref = incl.get('FILEREF')
+            if not fileref:
+                continue
+            path = os.path.join(base_dir, fileref)
+            if not os.path.exists(path):
+                self.logger.warning(f"Included file not found: {path}")
+                continue
+            try:
+                included_root = etree.parse(path).getroot()
+            except Exception as e:
+                self.logger.warning(f"Could not parse included file {path}: {e}")
+                continue
+
+            # Bibliographic metadata of the included document is not content
+            for bib in included_root.findall('.//BIB.INSTANCE') + included_root.findall('.//BIB.DOC'):
+                bib_parent = bib.getparent()
+                if bib_parent is not None:
+                    bib_parent.remove(bib)
+
+            self._resolve_inclusions(included_root, base_dir, _depth + 1)
+
+            parent = incl.getparent()
+            if parent is not None:
+                included_root.tail = incl.tail
+                parent[parent.index(incl)] = included_root
+
+    def _extract_annex(self, annex_root: etree._Element, index: int, base_dir: Optional[str] = None) -> Optional[dict[str, Any]]:
+        """
+        Extracts a single annex from an ANNEX root element.
+
+        Parameters
+        ----------
+        annex_root : lxml.etree._Element
+            The ANNEX root element.
+        index : int
+            1-based position of the annex, used for eId and child numbering.
+        base_dir : str, optional
+            Directory of the annex file, used to resolve INCL.ELEMENT
+            references to external content files.
+
+        Returns
+        -------
+        dict or None
+            Annex dictionary, or None if the element is not an annex.
+        """
+        if annex_root is None or annex_root.tag != 'ANNEX':
+            return None
+
+        self._resolve_inclusions(annex_root, base_dir)
+
+        title = annex_root.find('.//TITLE')
+        num = None
+        heading = None
+        if title is not None:
+            ti = title.find('TI')
+            sti = title.find('STI')
+            if ti is not None:
+                num = ' '.join(self.clean_text(ti).split())
+            if sti is not None:
+                heading = self.clean_text(sti)
+
+        children = []
+        contents = annex_root.find('.//CONTENTS')
+        if contents is not None:
+            children = self._extract_annex_children(contents, index)
+
+        return {
+            'eId': f'anx_{index}',
+            'num': num,
+            'heading': heading,
+            'children': children,
+        }
+
+    def _extract_annex_children(self, contents: etree._Element, annex_index: int) -> list[dict[str, Any]]:
+        """
+        Extracts content blocks from an annex CONTENTS element.
+
+        Top-level paragraphs and grouped sequences become individual children;
+        list items are expanded one level so each item is its own child. Child
+        eIds follow the ``{annex:03d}.{child:03d}`` format used elsewhere.
+
+        Parameters
+        ----------
+        contents : lxml.etree._Element
+            The CONTENTS element of an annex.
+        annex_index : int
+            1-based position of the parent annex.
+
+        Returns
+        -------
+        list
+            List of {'eId', 'text'} dictionaries.
+        """
+        texts: list[str] = []
+        for child in contents:
+            # Skip comments and processing instructions
+            if not isinstance(child.tag, str):
+                continue
+
+            if child.tag == 'LIST':
+                for item in child.findall('ITEM'):
+                    item_text = self.clean_text(item)
+                    if item_text:
+                        texts.append(item_text)
+            else:
+                text = self.clean_text(child)
+                if text:
+                    texts.append(text)
+
+        children = []
+        for idx, text in enumerate(texts, start=1):
+            children.append({
+                'eId': f'{annex_index:03d}.{idx:03d}',
+                'text': text,
+            })
+        return children
+
     def clean_text(self, element: etree._Element) -> str:
         # Replace QUOT.START and QUOT.END elements with proper quotes
         for sub_element in element.iter():
@@ -320,31 +500,36 @@ class Formex4Parser(XMLParser):
         Formex4Parser
             Self for method chaining with parsed data.
         """
-        import os
         from pathlib import Path
-        
+
         logger = logging.getLogger(__name__)
-        
+
+        # Annex files (root element ANNEX) found alongside the legal act
+        annex_files: list[str] = []
+
         # Check if input is a directory
         file_path = Path(file)
         if file_path.is_dir():
             # Search for XML files in the directory
-            xml_files = list(file_path.glob('*.xml'))
-            
-            # Find the file containing ACT or DECISION tags
+            xml_files = sorted(file_path.glob('*.xml'))
+
+            # Find the file containing ACT or DECISION tags, and collect annexes
             target_file = None
             for xml_file in xml_files:
                 try:
                     with open(xml_file, 'r', encoding='utf-8') as f:
                         content = f.read(5000)  # Read first 5KB to check for tags
-                        if '<ACT' in content or '<DECISION' in content or '<CONS.ACT' in content:
+                        if '<ANNEX' in content:
+                            annex_files.append(str(xml_file))
+                        elif target_file is None and (
+                            '<ACT' in content or '<DECISION' in content or '<CONS.ACT' in content
+                        ):
                             target_file = str(xml_file)
                             logger.info(f"Found Formex document with legal act: {xml_file.name}")
-                            break
                 except Exception as e:
                     logger.debug(f"Error reading {xml_file}: {e}")
                     continue
-            
+
             if target_file:
                 file = target_file
             elif xml_files:
@@ -355,17 +540,21 @@ class Formex4Parser(XMLParser):
             else:
                 logger.error(f"No XML files found in directory: {file_path}")
                 return self
-        
-        super().parse(file, schema='./formex4.xsd', format='Formex 4', **options)
-        
-        # Check if this is an annex document (not a legal act)
-        if self.preface and isinstance(self.preface, str):
-            preface_upper = self.preface.strip().upper()
-            # Check if preface is just an annex reference (e.g., "ANNEX I", "ANNEX VII")
-            if preface_upper.startswith('ANNEX ') and len(preface_upper.split()) <= 3:
-                logger.warning(f"Skipping annex document: {self.preface}")
-                # Clear articles to indicate this should be skipped
-                self.articles = []
-                return self
-        
+
+        super().parse(file, schema='formex4.xsd', format='Formex 4', **options)
+
+        # If the parsed document is itself an annex (single annex file), extract it
+        # directly rather than treating it as a (missing) legal act.
+        if self.root is not None and getattr(self.root, 'tag', None) == 'ANNEX':
+            logger.info("Parsed document is an annex; extracting annex content")
+            self.articles = []
+            base_dir = os.path.dirname(os.path.abspath(str(file)))
+            annex = self._extract_annex(self.root, 1, base_dir=base_dir)
+            self.annexes = [annex] if annex is not None else []
+            return self
+
+        # Extract any annex files found alongside the legal act
+        if annex_files:
+            self.get_annexes(annex_files)
+
         return self

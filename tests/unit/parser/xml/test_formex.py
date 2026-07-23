@@ -12,6 +12,10 @@ file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "forme
 
 iopa = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.000101.fmx.xml")
 
+iopa_dir = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1")
+
+iopa_annex = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.002601.fmx.xml")
+
 
 @pytest.fixture
 def parser():
@@ -266,26 +270,37 @@ def test_parse_directory_no_xml_files(tmp_path):
     assert result is p
 
 
-def test_parse_annex_preface_clears_articles(tmp_path):
-    """Test parse() clears articles when preface indicates annex."""
+def test_parse_single_annex_document_extracts_annex(tmp_path):
+    """Test parse() clears articles and extracts the annex when the root is ANNEX."""
+    annex_xml = (
+        '<ANNEX><TITLE><TI><P>ANNEX I</P></TI><STI><P>Sample heading</P></STI></TITLE>'
+        '<CONTENTS><P>First paragraph.</P></CONTENTS></ANNEX>'
+    )
+
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX I'
         self.articles = ['will_be_cleared']
-        self.root = etree.fromstring('<ROOT/>')
+        self.root = etree.fromstring(annex_xml)
 
     with patch('tulit.parser.xml.xml.XMLParser.parse', new=fake_super_parse):
         p = Formex4Parser()
         ret = p.parse('somefile.xml')
 
     assert ret is p
+    # A standalone annex document carries no articles but exposes the annex content
     assert p.articles == []
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['eId'] == 'anx_1'
+    assert p.annexes[0]['num'] == 'ANNEX I'
+    assert p.annexes[0]['heading'] == 'Sample heading'
+    assert p.annexes[0]['children'][0]['text'] == 'First paragraph.'
 
 
-def test_parse_annex_preface_with_extra_words(tmp_path):
-    """Test parse() clears articles for annex with extra words."""
+def test_parse_non_annex_root_keeps_articles(tmp_path):
+    """Test parse() keeps articles when the document root is not an annex."""
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX VII TO'
-        self.articles = ['will_be_cleared']
+        self.articles = ['kept']
         self.root = etree.fromstring('<ROOT/>')
 
     with patch('tulit.parser.xml.xml.XMLParser.parse', new=fake_super_parse):
@@ -293,7 +308,8 @@ def test_parse_annex_preface_with_extra_words(tmp_path):
         ret = p.parse('somefile.xml')
 
     assert ret is p
-    assert p.articles == []
+    assert p.articles == ['kept']
+    assert p.annexes == []
 
 
 def test_parse_non_annex_preface_keeps_articles(tmp_path):
@@ -583,3 +599,141 @@ def test_get_conclusions_with_full_signature():
     assert conclusions['signature']['date'] == '2024-12-20'
     assert 'Jane Smith' in conclusions['signature']['signatory']
     assert conclusions['signature']['title'] == 'Director'
+
+
+# ---------------------------------------------------------------------------
+# Annex extraction
+# ---------------------------------------------------------------------------
+
+def test_extract_annex_children_expands_lists():
+    """_extract_annex_children() turns top-level Ps and list items into children."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <P>Intro paragraph.</P>
+      <LIST TYPE="ARAB">
+        <ITEM><NP><NO.P>1.</NO.P><TXT>First item</TXT></NP></ITEM>
+        <ITEM><NP><NO.P>2.</NO.P><TXT>Second item</TXT></NP></ITEM>
+      </LIST>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=2)
+
+    assert len(children) == 3
+    assert children[0]['eId'] == '002.001'
+    assert children[0]['text'] == 'Intro paragraph.'
+    assert children[1]['eId'] == '002.002'
+    assert 'First item' in children[1]['text']
+    assert children[2]['eId'] == '002.003'
+
+
+def test_extract_annex_returns_none_for_non_annex():
+    """_extract_annex() returns None when the element is not an ANNEX."""
+    p = Formex4Parser()
+    assert p._extract_annex(etree.fromstring('<ACT/>'), 1) is None
+    assert p._extract_annex(None, 1) is None
+
+
+def test_get_annexes_skips_unparseable_files(tmp_path):
+    """get_annexes() logs and skips files that cannot be parsed."""
+    bad = tmp_path / "bad.xml"
+    bad.write_text("<ANNEX><TITLE>unclosed")  # malformed
+    good = tmp_path / "good.xml"
+    good.write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX I</P></TI></TITLE>'
+        '<CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+    )
+
+    p = Formex4Parser()
+    annexes = p.get_annexes([str(bad), str(good)])
+
+    assert len(annexes) == 1
+    assert annexes[0]['num'] == 'ANNEX I'
+
+
+def test_parse_directory_extracts_sibling_annex():
+    """parse() on a real DOC directory extracts both articles and sibling annexes."""
+    p = Formex4Parser().parse(iopa_dir)
+
+    # The legal act articles are still parsed
+    assert len(p.articles) > 0
+    # The sibling ANNEX file is extracted into annexes
+    assert len(p.annexes) == 1
+    annex = p.annexes[0]
+    assert annex['eId'] == 'anx_1'
+    assert annex['num'] == 'ANNEX'
+    assert 'CHECKLIST' in annex['heading'].upper()
+    assert len(annex['children']) > 0
+    assert all('eId' in c and 'text' in c for c in annex['children'])
+
+
+def test_parse_single_annex_file_real_fixture():
+    """parse() on a standalone annex file populates annexes and clears articles."""
+    p = Formex4Parser().parse(iopa_annex)
+
+    assert p.articles == []
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['num'] == 'ANNEX'
+
+
+def test_to_dict_includes_annexes():
+    """to_dict() exposes the annexes field."""
+    p = Formex4Parser()
+    p.annexes = [{'eId': 'anx_1', 'num': 'ANNEX I', 'heading': None, 'children': []}]
+    result = p.to_dict()
+
+    assert 'annexes' in result
+    assert result['annexes'][0]['eId'] == 'anx_1'
+
+
+# ---------------------------------------------------------------------------
+# Annex INCL.ELEMENT resolution and schema validation
+# ---------------------------------------------------------------------------
+
+def test_resolve_inclusions_grafts_external_content(tmp_path):
+    """get_annexes() resolves INCL.ELEMENT references to sibling files."""
+    (tmp_path / "included.xml").write_text(
+        '<DOC><BIB.DOC><PROD.ID>meta</PROD.ID></BIB.DOC>'
+        '<CONTENTS><P>Included quoted decision text.</P></CONTENTS></DOC>'
+    )
+    annex_file = tmp_path / "annex.xml"
+    annex_file.write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX</P></TI></TITLE>'
+        '<CONTENTS><QUOT.S LEVEL="1">'
+        '<INCL.ELEMENT FILEREF="included.xml" TYPE="FORMEX.DOC"/>'
+        '</QUOT.S></CONTENTS></ANNEX>'
+    )
+
+    annexes = Formex4Parser().get_annexes([str(annex_file)])
+
+    assert len(annexes) == 1
+    children = annexes[0]['children']
+    assert len(children) == 1
+    assert 'Included quoted decision text.' in children[0]['text']
+    # Bibliographic metadata of the included file is not extracted as content
+    assert 'meta' not in children[0]['text']
+
+
+def test_resolve_inclusions_missing_file_is_skipped(tmp_path):
+    """get_annexes() does not crash when an INCL.ELEMENT target is missing."""
+    annex_file = tmp_path / "annex.xml"
+    annex_file.write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX</P></TI></TITLE>'
+        '<CONTENTS><QUOT.S LEVEL="1">'
+        '<INCL.ELEMENT FILEREF="does_not_exist.xml" TYPE="FORMEX.DOC"/>'
+        '</QUOT.S></CONTENTS></ANNEX>'
+    )
+
+    annexes = Formex4Parser().get_annexes([str(annex_file)])
+
+    assert len(annexes) == 1
+    assert annexes[0]['children'] == []
+
+
+def test_parse_validates_against_bundled_schema():
+    """parse() resolves formex4.xsd from the package assets and validates."""
+    p = Formex4Parser().parse(iopa)
+
+    assert p.valid is True
+    assert p.validation_errors == []

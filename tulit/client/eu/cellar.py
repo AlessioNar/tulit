@@ -49,18 +49,15 @@ class CellarClient(Client):
         """
 
         # Open SPARQL QUERY and print it to screen
-        try:            
-            
+        try:
             if celex is not None:
                 # URL encode parentheses in CELEX number for SPARQL query
                 # This is needed for documents with suffixes like (01), (02), etc.
-                import urllib.parse
                 celex_encoded = celex.replace("(", "%28").replace(")", "%29")
-                
-                sparql_query = sparql_query.replace("{CELEX}", celex_encoded) 
+                sparql_query = sparql_query.replace("{CELEX}", celex_encoded)
 
-                # send query to cellar endpoint and retrieve results
-                results = self.get_results_table(sparql_query)
+            # send query to cellar endpoint and retrieve results
+            results = self.get_results_table(sparql_query)
 
             return results
     
@@ -249,10 +246,10 @@ class CellarClient(Client):
         if format == 'fmx4':
             if type_id == 'eli':
                 sparql_query = files("tulit.client.eu.queries").joinpath("formex_eli_query.rq").read_text()
-                sparql_query = sparql_query.replace("{ELI}", celex)            
+                sparql_query = sparql_query.replace("{ELI}", celex)
             elif type_id == 'celex':
+                # {CELEX} is substituted (with parentheses encoded) by send_sparql_query
                 sparql_query = files("tulit.client.eu.queries").joinpath("formex_query.rq").read_text()
-                sparql_query = sparql_query.replace("{CELEX}", celex)                
         elif format == 'xhtml':
             sparql_query = files("tulit.client.eu.queries").joinpath("html_query.rq").read_text()
         elif format == 'html':

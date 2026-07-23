@@ -94,42 +94,55 @@ class XMLParser(Parser):
     def load_schema(self, schema: str) -> None:
         """
         Load an XSD schema for XML validation.
-        
-        Delegates to XMLValidator for actual schema loading.
-        
+
+        Delegates to XMLValidator for actual schema loading. A schema given as
+        a bare filename or non-existing relative path is resolved against the
+        bundled ``assets`` directory of the package.
+
         Parameters
         ----------
         schema : str
-            Filename of the XSD schema file
-        
+            Path or filename of the XSD schema file
+
         Returns
         -------
         None
         """
+        if not os.path.exists(schema):
+            bundled = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                'assets', os.path.basename(schema)
+            )
+            if os.path.exists(bundled):
+                schema = bundled
         self._validator.load_schema(schema)
 
     def validate(self, file: str, format: str) -> bool:
         """
         Validate an XML file against the loaded schema.
-        
+
         Delegates to XMLValidator for actual validation.
-        
+
         Parameters
         ----------
         file : str
             Path to the XML file to validate
         format : str
             Name of the format for logging (e.g., 'Akoma Ntoso', 'Formex 4')
-        
+
         Returns
         -------
         bool
             True if valid, False otherwise. Also updates self.valid attribute.
         """
         try:
-            is_valid, error_log = self._validator.validate(file, format_name=format)
+            tree = etree.parse(file, self._create_secure_parser())
+            is_valid = self._validator.validate(tree)
             self.valid = is_valid
-            self.validation_errors = error_log
+            self.validation_errors = self._validator.get_validation_errors()
+            self.format = format
+            if not is_valid:
+                self.logger.warning(f"{format} file failed schema validation: {file}")
             return is_valid
         except ValidationError as e:
             self.logger.error(str(e))

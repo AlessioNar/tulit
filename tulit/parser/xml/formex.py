@@ -89,21 +89,42 @@ class Formex4Parser(XMLParser):
     
     def get_preface(self) -> None:
         """
-        Extracts the preface from the document. It is assumed that the preface is contained within
-        the TITLE and P elements.
-        
+        Extracts the preface from the document title. Only top-level
+        paragraphs are joined: paragraphs nested in another paragraph or in
+        a footnote are already part of their parent's text.
         """
-        
-        return super().get_preface(preface_xpath='.//TITLE', paragraph_xpath='.//P')
-    
+        title = self.root.find('.//TITLE') if self.root is not None else None
+        if title is None:
+            self.preface = None
+            return None
+        title = self._without_notes(title)
+        paragraphs = title.xpath('.//P[not(ancestor::P) and not(ancestor::NOTE)]')
+        if paragraphs:
+            text = ' '.join(filter(None, (self.clean_text(p) for p in paragraphs)))
+        else:
+            text = self.clean_text(title)
+
+        # Publication prologues (PROLOG) are front matter as well
+        prolog = self.root.find('.//PROLOG')
+        if prolog is not None:
+            prolog_text = self.clean_text(self._without_notes(prolog))
+            if prolog_text:
+                text = f'{text} {prolog_text}'.strip()
+
+        self.preface = ' '.join(text.split()) or None
+        return self.preface
+
     def get_preamble(self) -> None:
         """
-        Extracts the preamble from the document. It is assumed that the preamble is contained within
-        the PREAMBLE element, while notes are contained within the NOTE elements.
-        
+        Extracts the preamble from the document (PREAMBLE, or PREAMBLE.GEN
+        in general acts), with footnotes removed (tails preserved).
         """
-        
-        return super().get_preamble(preamble_xpath='.//PREAMBLE', notes_xpath='.//NOTE')
+        preamble = self.root.find('.//PREAMBLE') if self.root is not None else None
+        if preamble is None and self.root is not None:
+            preamble = self.root.find('.//PREAMBLE.GEN')
+        self.preamble = preamble
+        if self.preamble is not None:
+            self.preamble = self.remove_node(self.preamble, './/NOTE')
     
     def get_formula(self) -> None:
         """
@@ -118,8 +139,22 @@ class Formex4Parser(XMLParser):
         el = self.preamble.find('PREAMBLE.INIT') if self.preamble is not None else None
         if el is not None:
             # Full text: the formula may sit in P children rather than in the
-            # element's own text node (findtext would miss it)
-            self.formula = self.clean_text(el) or None
+            # element's own text node. Old acts nest the citation/recital
+            # groups inside PREAMBLE.INIT — those are extracted separately
+            # and must not be repeated here.
+            copy = deepcopy(el)
+            for sub in copy.xpath('.//GR.VISA | .//VISA | .//GR.CONSID | .//CONSID'):
+                parent = sub.getparent()
+                if parent is None:
+                    continue
+                if sub.tail:
+                    prev = sub.getprevious()
+                    if prev is not None:
+                        prev.tail = (prev.tail or '') + sub.tail
+                    else:
+                        parent.text = (parent.text or '') + sub.tail
+                parent.remove(sub)
+            self.formula = self.clean_text(copy) or None
         else:
             self.formula = None
         return self.formula
@@ -137,15 +172,30 @@ class Formex4Parser(XMLParser):
             - 'eId': Citation identifier, which is the index of the citation in the preamble
             - 'text': Citation text
         """
-        def extract_eId(citation, index):
-            return f'cit_{index + 1}'
-            
-        
-        return super().get_citations(
-            citations_xpath='.//GR.VISA',
-            citation_xpath='.//VISA',
-            extract_eId=extract_eId
-        )
+        if self.preamble is None:
+            return None
+
+        citations = []
+        # All VISA elements, across every GR.VISA group
+        for visa in self.preamble.findall('.//VISA'):
+            text = self.clean_text(visa)
+            if text:
+                citations.append({'eId': f'cit_{len(citations) + 1}',
+                                  'text': text})
+
+        # Old/lean acts carry citations as bare paragraphs directly under
+        # the preamble ("Having regard to ...", "With the approval of ...")
+        if not citations:
+            for para in self.preamble:
+                if not isinstance(para.tag, str) or para.tag != 'P':
+                    continue
+                text = self.clean_text(para)
+                if text and not text.lower().startswith('whereas'):
+                    citations.append({'eId': f'cit_{len(citations) + 1}',
+                                      'text': text})
+
+        self.citations = citations
+        return self.citations
     
     def get_recitals(self) -> None:
         """
@@ -167,9 +217,19 @@ class Formex4Parser(XMLParser):
             return None
         recitals_section = self.preamble.find('.//GR.CONSID')
         if recitals_section is None:
+            # Old/lean acts carry recitals as bare "Whereas ..." paragraphs
+            recitals = []
+            for para in self.preamble:
+                if isinstance(para.tag, str) and para.tag == 'P':
+                    text = self.clean_text(para)
+                    if text and text.lower().startswith('whereas'):
+                        recitals.append({'eId': f'rct_{len(recitals) + 1}',
+                                         'text': text})
+            self.recitals = recitals or None
             return None
 
-        self.recitals_intro = self.preamble.findtext('.//GR.CONSID.INIT')
+        intro_el = self.preamble.find('.//GR.CONSID.INIT')
+        self.recitals_intro = self.clean_text(intro_el) if intro_el is not None else None
 
         def make_eid(no_p, index):
             if no_p:
@@ -187,23 +247,65 @@ class Formex4Parser(XMLParser):
             return ' '.join(part for part in parts if part)
 
         recitals = []
+
+        # Group titles inside the recitals (DIV.CONSID divisions)
+        for div_title in recitals_section.xpath('.//DIV.CONSID/TITLE'):
+            text = self._title_text(div_title)
+            if text:
+                recitals.append({'eId': f'rct_grp_{len(recitals) + 1}',
+                                 'text': text})
+
         consids = recitals_section.findall('.//CONSID')
         if consids:
             for consid in consids:
-                no_p = consid.findtext('.//NO.P')
-                nps = consid.xpath('.//NP[not(ancestor::NP)]')
-                text = np_text(nps) if nps else self.clean_text(consid)
+                # CONSIDs can be chained (nested inside each other); each
+                # recital only owns the points whose nearest CONSID is itself
+                nps = []
+                for np in consid.xpath('.//NP[not(ancestor::NP)]'):
+                    nearest = next((a for a in np.iterancestors()
+                                    if a.tag == 'CONSID'), None)
+                    if nearest is consid:
+                        nps.append(np)
+                no_p = nps[0].findtext('NO.P') if nps else consid.findtext('.//NO.P')
+                if nps:
+                    text = np_text(nps)
+                elif len(consid.xpath('.//CONSID')) == 0:
+                    text = self.clean_text(consid)
+                else:
+                    continue
                 recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
                                  'text': text})
-        else:
-            # Some acts list recitals as bare numbered points (LIST > ITEM >
-            # NP or direct NPs) instead of CONSID elements
-            for np in recitals_section.xpath('.//NP[not(ancestor::NP)]'):
-                no_p = np.findtext('NO.P')
-                text = np_text([np])
+            # Recital groups (DIV.CONSID) may additionally hold list items
+            # outside any CONSID
+            for item in recitals_section.xpath(
+                    './/ITEM[not(ancestor::CONSID) and not(ancestor::ITEM)]'):
+                no_p = item.findtext('.//NO.P')
+                parts = [self._render_annex_text(sub) for sub in item
+                         if isinstance(sub.tag, str)]
+                text = ' '.join(part for part in parts if part)
                 if text:
                     recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
                                      'text': text})
+        else:
+            # Some acts list recitals as list items (LIST > ITEM holding NP
+            # or plain P blocks) or as bare numbered points
+            items = recitals_section.xpath('.//ITEM[not(ancestor::ITEM)]')
+            if items:
+                for item in items:
+                    no_p = item.findtext('.//NO.P')
+                    parts = [self._render_annex_text(sub) for sub in item
+                             if isinstance(sub.tag, str)]
+                    text = ' '.join(part for part in parts if part)
+                    if text:
+                        recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
+                                         'text': text})
+            else:
+                for np in recitals_section.xpath('.//NP[not(ancestor::NP)]'):
+                    no_p = np.findtext('NO.P')
+                    text = np_text([np])
+                    if text:
+                        recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
+                                         'text': text})
 
         self.recitals = recitals
     
@@ -421,11 +523,14 @@ class Formex4Parser(XMLParser):
         counts diverge, a text-only analysis is applied instead.
         """
         if article_elem.xpath('.//QUOT.S | .//QUOT.START'):
-            elems = article_elem.xpath('.//ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]')
-        elif article_elem.xpath('.//PARAG[not(ancestor::QUOT.S)]'):
             elems = article_elem.xpath(
-                './/PARAG[not(ancestor::QUOT.S)]'
-                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA)]'
+                './/ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]'
+                ' | .//QUOT.S[not(ancestor::ALINEA) and not(ancestor::QUOT.S)]'
+            )
+        elif article_elem.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
+            elems = article_elem.xpath(
+                './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
             )
         else:
             elems = article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)]')
@@ -473,6 +578,7 @@ class Formex4Parser(XMLParser):
         self.conclusions = {}
         final_section = self.root.find('.//FINAL')
         if final_section is not None:
+            final_section = self._without_notes(final_section)
             # All concluding paragraphs outside the signature block
             paragraphs = final_section.xpath('.//P[not(ancestor::SIGNATURE)]')
             conclusion_text = ' '.join(
@@ -542,6 +648,27 @@ class Formex4Parser(XMLParser):
                 self.annexes.append(annex)
 
         return self.annexes
+
+    def _without_notes(self, element: etree._Element) -> etree._Element:
+        """
+        Returns a copy of the element with NOTE (footnote) bodies removed,
+        preserving each note's tail text. Footnotes are consistently
+        excluded from act content (preamble, articles, preface,
+        conclusions); annexes keep them.
+        """
+        copy = deepcopy(element)
+        for note in copy.findall('.//NOTE'):
+            parent = note.getparent()
+            if parent is None:
+                continue
+            if note.tail:
+                prev = note.getprevious()
+                if prev is not None:
+                    prev.tail = (prev.tail or '') + note.tail
+                else:
+                    parent.text = (parent.text or '') + note.tail
+            parent.remove(note)
+        return copy
 
     def _resolve_inclusions(self, element: etree._Element, base_dir: Optional[str], _depth: int = 0) -> None:
         """
@@ -785,10 +912,17 @@ class Formex4Parser(XMLParser):
             return self._title_text(element) or ''
 
         if tag == 'DLIST.ITEM':
-            term = element.find('TERM')
-            definition = element.find('DEFINITION')
-            parts = [self.clean_text(el) for el in (term, definition) if el is not None]
-            return ' — '.join(p for p in parts if p)
+            # An item may hold several TERM/DEFINITION pairs, in order
+            parts = []
+            for sub in element:
+                if not isinstance(sub.tag, str):
+                    continue
+                if sub.tag in ('TERM', 'DEFINITION'):
+                    text = (self.clean_text(sub) if sub.tag == 'TERM'
+                            else self._render_annex_text(sub) or self.clean_text(sub))
+                    if text:
+                        parts.append(f'— {text}' if sub.tag == 'DEFINITION' and parts else text)
+            return ' '.join(parts)
 
         if tag == 'QUOT.S':
             inner = ' '.join(
@@ -825,16 +959,27 @@ class Formex4Parser(XMLParser):
         do not run together) and stray quotation marks from QUOT.START
         markers around quoted annex titles are stripped.
         """
-        # Paragraphs inside NOTE are footnote bodies already covered by the
-        # enclosing paragraph's text — rendering them separately would
-        # duplicate them.
-        paragraphs = [p for p in element.findall('.//P')
-                      if not any(a.tag == 'NOTE' for a in p.iterancestors())]
-        if paragraphs:
-            parts = [self.clean_text(p) for p in paragraphs]
+        # Composite titles (TI + STI) are rendered part by part: the TI may
+        # be point-numbered (NP) while only the STI holds paragraphs — a
+        # flat .//P scan would drop the TI text.
+        sub_titles = [c for c in element
+                      if isinstance(c.tag, str) and c.tag in ('TI', 'STI')]
+        if sub_titles:
+            parts = [self._title_text(sub) for sub in sub_titles]
             text = ' '.join(p for p in parts if p)
         else:
-            text = self.clean_text(element)
+            # Paragraphs inside NOTE are footnote bodies already covered by
+            # the enclosing paragraph's text — rendering them separately
+            # would duplicate them.
+            paragraphs = [p for p in element.findall('.//P')
+                          if not any(a.tag == 'NOTE' for a in p.iterancestors())]
+            if paragraphs:
+                parts = [self.clean_text(p) for p in paragraphs]
+                text = ' '.join(p for p in parts if p)
+            else:
+                # Raw text: numbered titles like '1.Figure 1' must not be
+                # eaten by the point-number normalizer
+                text = self._cell_text(self._without_notes(element))
         return ' '.join(text.split()).strip("'‘’") or None
 
     def _analyze_amendment(self, element: etree._Element) -> Optional[dict[str, Any]]:
@@ -1033,6 +1178,19 @@ class Formex4Parser(XMLParser):
                     notes.append(text)
         return notes
 
+    def _cell_text(self, element: etree._Element) -> str:
+        """
+        Raw text of a table cell or block title. Unlike clean_text, this
+        does not run the point-number normalizer: a cell holding '(043)'
+        is data, not a point number to strip.
+        """
+        for sub in element.iter():
+            if sub.tag == 'QUOT.START':
+                sub.text = "'"
+            elif sub.tag == 'QUOT.END':
+                sub.text = "'"
+        return ' '.join(''.join(element.itertext()).split())
+
     def _table_rows(self, table: etree._Element) -> list[list[str]]:
         """
         Extracts a Formex TBL element as a list of rows of cell texts.
@@ -1049,18 +1207,25 @@ class Formex4Parser(XMLParser):
                 if not isinstance(child.tag, str):
                     continue
                 if child.tag == 'ROW':
-                    cells = [self.clean_text(cell) for cell in child.findall('CELL')]
+                    cells = [self._cell_text(cell) for cell in child.findall('CELL')]
                     if any(cells):
                         rows.append(cells)
                 elif child.tag in ('TI.BLK', 'STI.BLK'):
-                    title = self.clean_text(child)
+                    title = self._cell_text(child)
                     if title:
                         rows.append([title])
                 elif child.tag in ('CORPUS', 'BLK'):
                     walk(child)
+                elif child.tag in ('GR.SEQ', 'P', 'NP', 'LIST', 'DLIST', 'ITEM', 'TXT'):
+                    # Free content blocks inside a table become single-cell rows
+                    text = self._render_annex_text(child)
+                    if text:
+                        rows.append([text])
 
-        corpus = table.find('CORPUS')
-        walk(corpus if corpus is not None else table)
+        # Walk the whole table: content blocks (GR.SEQ, P, ...) can sit next
+        # to CORPUS, not only inside it. TITLE and GR.NOTES are handled
+        # separately as caption and notes.
+        walk(table)
         return rows
 
     def clean_text(self, element: etree._Element) -> str:

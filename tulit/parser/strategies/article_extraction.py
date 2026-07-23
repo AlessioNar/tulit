@@ -340,8 +340,13 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         
         # Check for amendments (quoted blocks or inline quotation markers)
         if article.xpath('.//QUOT.S | .//QUOT.START'):
-            # Extract ALINEAs that are NOT inside QUOT.S (keep amendments separate)
-            alineas = article.xpath('.//ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]')
+            # Extract ALINEAs that are NOT inside QUOT.S, plus quoted blocks
+            # that are not inside any ALINEA (their text would otherwise be
+            # lost), in document order
+            alineas = article.xpath(
+                './/ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]'
+                ' | .//QUOT.S[not(ancestor::ALINEA) and not(ancestor::QUOT.S)]'
+            )
             for idx, alinea in enumerate(alineas):
                 children.append({
                     'eId': f'para_{idx + 1}',
@@ -351,10 +356,10 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         
         # Extract PARAG elements (not inside QUOT.S), together with any
         # direct ALINEAs that sit outside a PARAG, in document order
-        elif article.xpath('.//PARAG[not(ancestor::QUOT.S)]'):
+        elif article.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
             parags = article.xpath(
-                './/PARAG[not(ancestor::QUOT.S)]'
-                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA)]'
+                './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
             )
             for idx, parag in enumerate(parags):
                 children.append({

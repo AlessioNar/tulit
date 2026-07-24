@@ -111,6 +111,7 @@ def test_get_articles(parser):
             "eId": "art_001",
             "num": "Article 1",
             "heading": None,
+            "parent": None,
             "children": [
                 {"eId": '001.001', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
                  "amendment": {
@@ -125,6 +126,7 @@ def test_get_articles(parser):
             "eId": "art_002",
             "num": "Article 2",
             "heading": None,
+            "parent": None,
             "children": [
                 {"eId": "002.001", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": None}
             ]

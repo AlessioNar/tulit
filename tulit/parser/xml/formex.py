@@ -255,31 +255,42 @@ class Formex4Parser(XMLParser):
                 recitals.append({'eId': f'rct_grp_{len(recitals) + 1}',
                                  'text': text})
 
+        def norm(text):
+            return ' '.join(text.split()) if text and text.strip() else None
+
         def consid_text(consid):
-            """Renders a recital's own content: numbered points without
-            their number, plus any sibling blocks (tables, quoted text,
-            lists), skipping nested CONSIDs (they are recitals of their
-            own in chained layouts)."""
-            parts = []
+            """Renders a recital's own content: leading text, numbered
+            points without their number, sibling blocks (tables, quoted
+            text, lists) and all tail text — skipping nested CONSIDs
+            (they are recitals of their own in chained layouts)."""
+            parts = [norm(consid.text)]
             for child in consid:
-                if not isinstance(child.tag, str) or child.tag == 'CONSID':
+                if not isinstance(child.tag, str):
+                    continue
+                if child.tag == 'CONSID':
+                    parts.append(norm(child.tail))
                     continue
                 if child.xpath('.//CONSID'):
                     # container of chained recitals: render only its
                     # non-CONSID pieces
+                    parts.append(norm(child.text))
                     for sub in child:
-                        if isinstance(sub.tag, str) and sub.tag != 'CONSID' \
-                                and not sub.xpath('.//CONSID'):
+                        if not isinstance(sub.tag, str):
+                            continue
+                        if sub.tag != 'CONSID' and not sub.xpath('.//CONSID'):
                             parts.append(self._render_annex_text(sub))
-                    continue
-                if child.tag == 'NP':
+                        parts.append(norm(sub.tail))
+                elif child.tag == 'NP':
                     for sub in child:
-                        if isinstance(sub.tag, str) and sub.tag != 'NO.P':
+                        if not isinstance(sub.tag, str):
+                            continue
+                        if sub.tag != 'NO.P':
                             parts.append(self._render_annex_text(sub))
-                elif child.tag == 'NO.P':
-                    continue
-                else:
+                        parts.append(norm(sub.tail))
+                elif child.tag != 'NO.P':
                     parts.append(self._render_annex_text(child))
+                if child.tag != 'CONSID':
+                    parts.append(norm(child.tail))
             return ' '.join(part for part in parts if part)
 
         consids = recitals_section.findall('.//CONSID')
@@ -373,6 +384,9 @@ class Formex4Parser(XMLParser):
 
         used_eids: set[str] = set()
         eid_by_division: dict = {}
+        # Kept for get_articles/_build_structure to attach articles to
+        # their enclosing division
+        self._division_eids = eid_by_division
 
         def classify(num_text):
             first = (num_text or '').split()[0].upper().rstrip('.') if num_text else ''
@@ -460,14 +474,18 @@ class Formex4Parser(XMLParser):
 
             # Add article-specific fields (heading from STI.ART) and
             # structured amendment objects, uniform with annex children
+            division_eids = getattr(self, '_division_eids', {})
+            self._article_elems = {}
             for article in self.articles:
                 matches = self.body.xpath(
                     f".//ARTICLE[@IDENTIFIER][starts-with(@IDENTIFIER, '{article['eId'][4:]}')"
                     f" or starts-with(@IDENTIFIER, '3{article['eId'][4:]}')]"
                 )
                 if not matches:
+                    article['parent'] = None
                     continue
                 article_elem = matches[0]
+                self._article_elems[article_elem] = article['eId']
                 # Heading: only the article's own STI.ART, never one inside
                 # quoted amendment content
                 sti = article_elem.xpath('.//STI.ART[not(ancestor::QUOT.S)]')
@@ -475,7 +493,13 @@ class Formex4Parser(XMLParser):
                     (sti[0].findtext('.//P') or ''.join(sti[0].itertext())).strip()
                     if sti else None
                 ) or None
+                # Hierarchy: the nearest enclosing division, if any
+                article['parent'] = next(
+                    (division_eids[anc] for anc in article_elem.iterancestors()
+                     if anc in division_eids), None)
                 self._attach_article_amendments(article, article_elem)
+
+            self._build_structure()
 
             # Fallback: enacting terms without ARTICLE elements (budget acts,
             # decisions organised as grouped sequences or plain blocks). The
@@ -504,8 +528,11 @@ class Formex4Parser(XMLParser):
                         'eId': 'enacting_terms',
                         'num': None,
                         'heading': None,
+                        'parent': None,
                         'children': children,
                     }]
+                    self.structure = [{'eId': 'enacting_terms',
+                                       'type': 'article'}]
             
             # Standardize children numbering to 001.001 format
             self._standardize_children_numbering()
@@ -541,6 +568,43 @@ class Formex4Parser(XMLParser):
                 }
                 children.append(child)
     
+    def _build_structure(self) -> None:
+        """
+        Builds the nested skeleton of the enacting terms: division nodes
+        ({eId, type, num, children}) with article leaves ({eId, type:
+        'article'}) in document order. Content stays in the flat 'articles'
+        and 'chapters' lists — the skeleton carries only references.
+        """
+        self.structure = []
+        if self.body is None:
+            return
+        division_eids = getattr(self, '_division_eids', {})
+        chapters_by_eid = {c['eId']: c for c in (self.chapters or [])}
+        article_elems = getattr(self, '_article_elems', {})
+
+        node_by_division = {}
+        for el in self.body.iter('DIVISION', 'ARTICLE'):
+            if any(a.tag == 'QUOT.S' for a in el.iterancestors()):
+                continue
+            parent_node = next(
+                (node_by_division[anc] for anc in el.iterancestors()
+                 if anc in node_by_division), None)
+            container = parent_node['children'] if parent_node else self.structure
+            if el.tag == 'DIVISION':
+                eid = division_eids.get(el)
+                if eid is None:
+                    continue
+                info = chapters_by_eid.get(eid, {})
+                node = {'eId': eid, 'type': info.get('type', 'division'),
+                        'num': info.get('num'), 'children': []}
+                node_by_division[el] = node
+                container.append(node)
+            else:
+                eid = article_elems.get(el)
+                if eid is None:
+                    continue
+                container.append({'eId': eid, 'type': 'article'})
+
     def _attach_article_amendments(self, article: dict[str, Any], article_elem: etree._Element) -> None:
         """
         Replaces the boolean 'amendment' of article children with the same

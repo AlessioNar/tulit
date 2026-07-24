@@ -117,6 +117,7 @@ class Parser(ABC):
         self.articles: list[dict[str, Any]] = []
         self.conclusions: Optional[dict[str, Any]] = None
         self.annexes: list[dict[str, Any]] = []
+        self.structure: list[dict[str, Any]] = []
 
     @abstractmethod
     def get_preface(self) -> Optional[str]:
@@ -351,6 +352,7 @@ class Parser(ABC):
                 'recitals': _serialize(self.recitals),
                 'final': _serialize(self.preamble_final),
             },
+            'structure': _serialize(self.structure),
             'chapters': _serialize(self.chapters),
             'articles': _serialize(self.articles),
             'conclusions': _serialize(self.conclusions),

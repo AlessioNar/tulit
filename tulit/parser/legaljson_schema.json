@@ -62,14 +62,15 @@
                     "object",
                     "string"
                 ]
-            }
+            },
+            "description": "Divisions above the article level (part/title/chapter/section/subsection), typed and ELI/AKN-named (part_, title_, chp_, sec_, subsec_), each with a parent link to its enclosing division."
         },
         "articles": {
             "type": "array",
             "items": {
                 "type": "object"
             },
-            "description": "Articles of the legal act. Children have eId (NNN.NNN), text, and the same structured 'amendment' field as annex children (null when the paragraph does not amend another act)."
+            "description": "Articles of the legal act, in document order. Each article carries eId (art_N), num, heading, parent (eId of the nearest enclosing division from 'chapters', or null when directly under the enacting terms) and children (NNN.NNN blocks with text and the structured 'amendment' field). Together with the parent links in 'chapters', this encodes the full enacting-terms hierarchy as a flat, navigable tree."
         },
         "conclusions": {
             "type": [
@@ -83,6 +84,10 @@
             "items": {
                 "type": "object"
             }
+        },
+        "structure": {
+            "type": "array",
+            "description": "Nested skeleton of the enacting terms, in document order: division nodes {eId, type, num, children} with article leaves {eId, type: 'article'}. References only — content lives in the flat 'chapters' and 'articles' lists (hybrid flat+tree representation)."
         }
     },
     "required": [

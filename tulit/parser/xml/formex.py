@@ -228,7 +228,7 @@ class Formex4Parser(XMLParser):
                     if text and text.lower().startswith('whereas'):
                         recitals.append({'eId': f'rct_{len(recitals) + 1}',
                                          'text': text})
-            self.recitals = recitals or None
+            self.recitals = recitals
             return None
 
         intro_el = self.preamble.find('.//GR.CONSID.INIT')

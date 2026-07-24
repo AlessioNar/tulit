@@ -342,11 +342,15 @@ class Parser(ABC):
 
         return {
             'preface': _serialize(self.preface),
-            'preamble': _serialize(self.preamble),
-            'formula': _serialize(self.formula),
-            'citations': _serialize(self.citations),
-            'recitals': _serialize(self.recitals),
-            'preamble_final': _serialize(self.preamble_final),
+            # The preamble is a structured container: serialising the raw
+            # element here would duplicate every part it holds
+            'preamble': {
+                'formula': _serialize(self.formula),
+                'citations': _serialize(self.citations),
+                'recitals_intro': _serialize(getattr(self, 'recitals_intro', None)),
+                'recitals': _serialize(self.recitals),
+                'final': _serialize(self.preamble_final),
+            },
             'chapters': _serialize(self.chapters),
             'articles': _serialize(self.articles),
             'conclusions': _serialize(self.conclusions),

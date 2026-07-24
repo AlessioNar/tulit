@@ -346,6 +346,7 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
             alineas = article.xpath(
                 './/ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]'
                 ' | .//QUOT.S[not(ancestor::ALINEA) and not(ancestor::QUOT.S)]'
+                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
             for idx, alinea in enumerate(alineas):
                 children.append({
@@ -360,6 +361,7 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
             parags = article.xpath(
                 './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
                 ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
+                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
             for idx, parag in enumerate(parags):
                 children.append({
@@ -370,7 +372,7 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         
         # Fallback to ALINEA elements
         elif article.findall('.//ALINEA'):
-            alineas = article.xpath('.//ALINEA[not(ancestor::ALINEA)]')
+            alineas = article.xpath('.//ALINEA[not(ancestor::ALINEA)] | .//SUBDIV/TITLE')
             for idx, alinea in enumerate(alineas):
                 children.append({
                     'eId': f'para_{idx + 1}',

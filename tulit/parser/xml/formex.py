@@ -255,28 +255,56 @@ class Formex4Parser(XMLParser):
                 recitals.append({'eId': f'rct_grp_{len(recitals) + 1}',
                                  'text': text})
 
+        def consid_text(consid):
+            """Renders a recital's own content: numbered points without
+            their number, plus any sibling blocks (tables, quoted text,
+            lists), skipping nested CONSIDs (they are recitals of their
+            own in chained layouts)."""
+            parts = []
+            for child in consid:
+                if not isinstance(child.tag, str) or child.tag == 'CONSID':
+                    continue
+                if child.xpath('.//CONSID'):
+                    # container of chained recitals: render only its
+                    # non-CONSID pieces
+                    for sub in child:
+                        if isinstance(sub.tag, str) and sub.tag != 'CONSID' \
+                                and not sub.xpath('.//CONSID'):
+                            parts.append(self._render_annex_text(sub))
+                    continue
+                if child.tag == 'NP':
+                    for sub in child:
+                        if isinstance(sub.tag, str) and sub.tag != 'NO.P':
+                            parts.append(self._render_annex_text(sub))
+                elif child.tag == 'NO.P':
+                    continue
+                else:
+                    parts.append(self._render_annex_text(child))
+            return ' '.join(part for part in parts if part)
+
         consids = recitals_section.findall('.//CONSID')
         if consids:
             for consid in consids:
-                # CONSIDs can be chained (nested inside each other); each
-                # recital only owns the points whose nearest CONSID is itself
-                nps = []
-                for np in consid.xpath('.//NP[not(ancestor::NP)]'):
-                    nearest = next((a for a in np.iterancestors()
-                                    if a.tag == 'CONSID'), None)
-                    if nearest is consid:
-                        nps.append(np)
-                no_p = nps[0].findtext('NO.P') if nps else consid.findtext('.//NO.P')
-                if nps:
-                    text = np_text(nps)
-                elif len(consid.xpath('.//CONSID')) == 0:
-                    text = self.clean_text(consid)
-                else:
+                direct_np = consid.find('NP')
+                no_p = (direct_np.findtext('NO.P') if direct_np is not None
+                        else consid.findtext('.//NO.P'))
+                text = consid_text(consid)
+                if not text:
                     continue
                 recitals.append({'eId': make_eid(no_p, len(recitals) + 1),
                                  'text': text})
-            # Recital groups (DIV.CONSID) may additionally hold list items
-            # outside any CONSID
+            # Recital groups (DIV.CONSID) may hold free-standing tables or
+            # quoted blocks outside any CONSID (e.g. injury-analysis tables
+            # in trade-defence decisions)
+            for block in recitals_section.xpath(
+                    './/TBL[not(ancestor::CONSID) and not(ancestor::TBL)]'
+                    ' | .//QUOT.S[not(ancestor::CONSID) and not(ancestor::QUOT.S)]'):
+                text = self._render_annex_text(block)
+                if text:
+                    recitals.append({'eId': f'rct_blk_{len(recitals) + 1}',
+                                     'text': text})
+
+            # ... and list items outside any CONSID
             for item in recitals_section.xpath(
                     './/ITEM[not(ancestor::CONSID) and not(ancestor::ITEM)]'):
                 no_p = item.findtext('.//NO.P')
@@ -526,14 +554,16 @@ class Formex4Parser(XMLParser):
             elems = article_elem.xpath(
                 './/ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]'
                 ' | .//QUOT.S[not(ancestor::ALINEA) and not(ancestor::QUOT.S)]'
+                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
         elif article_elem.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
             elems = article_elem.xpath(
                 './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
                 ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
+                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
         else:
-            elems = article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)]')
+            elems = article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)] | .//SUBDIV/TITLE')
 
         if len(elems) == len(article['children']):
             for child, elem in zip(article['children'], elems):
@@ -1172,7 +1202,7 @@ class Formex4Parser(XMLParser):
         Extracts the notes (GR.NOTES legend) of a Formex TBL element.
         """
         notes = []
-        for gr_notes in table.findall('GR.NOTES'):
+        for gr_notes in table.findall('GR.NOTES') + table.findall('GR.ANNOTATION'):
             for child in gr_notes:
                 if not isinstance(child.tag, str):
                     continue

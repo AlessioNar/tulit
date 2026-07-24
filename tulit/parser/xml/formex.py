@@ -32,13 +32,16 @@ _AMEND_FOLLOWS_RE = re.compile(r"as follows|the following|accordingly",
 
 # Division level names above the article, mapped to the eId prefixes of the
 # ELI/Akoma Ntoso naming convention
+# eId prefixes follow the EU Publications Office 'subdivision' authority
+# table (http://publications.europa.eu/resource/authority/subdivision),
+# lowercased as in ELI subdivision URIs: prt, tit, cpt, sct, sbs
 _DIVISION_TYPES = {
-    'PART': ('part', 'part'),
-    'TITLE': ('title', 'title'),
-    'CHAPTER': ('chapter', 'chp'),
-    'SECTION': ('section', 'sec'),
-    'SUBSECTION': ('subsection', 'subsec'),
-    'SUB-SECTION': ('subsection', 'subsec'),
+    'PART': ('part', 'prt'),
+    'TITLE': ('title', 'tit'),
+    'CHAPTER': ('chapter', 'cpt'),
+    'SECTION': ('section', 'sct'),
+    'SUBSECTION': ('subsection', 'sbs'),
+    'SUB-SECTION': ('subsection', 'sbs'),
 }
 
 _AMEND_ACTIONS = {
@@ -477,9 +480,10 @@ class Formex4Parser(XMLParser):
             division_eids = getattr(self, '_division_eids', {})
             self._article_elems = {}
             for article in self.articles:
+                identifier = article.pop('identifier', None) or article['eId'][4:]
                 matches = self.body.xpath(
-                    f".//ARTICLE[@IDENTIFIER][starts-with(@IDENTIFIER, '{article['eId'][4:]}')"
-                    f" or starts-with(@IDENTIFIER, '3{article['eId'][4:]}')]"
+                    f".//ARTICLE[@IDENTIFIER='{identifier}']"
+                    f" | .//ARTICLE[@IDENTIFIER='3{identifier}']"
                 )
                 if not matches:
                     article['parent'] = None
@@ -498,6 +502,7 @@ class Formex4Parser(XMLParser):
                     (division_eids[anc] for anc in article_elem.iterancestors()
                      if anc in division_eids), None)
                 self._attach_article_amendments(article, article_elem)
+                self._assign_child_eids(article, article_elem)
 
             self._build_structure()
 
@@ -524,6 +529,8 @@ class Formex4Parser(XMLParser):
                         }
                     children.append(child)
                 if children:
+                    for idx, child in enumerate(children, start=1):
+                        child['eId'] = f'unp_{idx}'
                     self.articles = [{
                         'eId': 'enacting_terms',
                         'num': None,
@@ -533,10 +540,7 @@ class Formex4Parser(XMLParser):
                     }]
                     self.structure = [{'eId': 'enacting_terms',
                                        'type': 'article'}]
-            
-            # Standardize children numbering to 001.001 format
-            self._standardize_children_numbering()
-            
+
             return self.articles
         else:
             print('No enacting terms XML tag has been found')
@@ -614,20 +618,7 @@ class Formex4Parser(XMLParser):
         strategy uses, so children and elements pair up positionally; if the
         counts diverge, a text-only analysis is applied instead.
         """
-        if article_elem.xpath('.//QUOT.S | .//QUOT.START'):
-            elems = article_elem.xpath(
-                './/ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]'
-                ' | .//QUOT.S[not(ancestor::ALINEA) and not(ancestor::QUOT.S)]'
-                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
-            )
-        elif article_elem.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
-            elems = article_elem.xpath(
-                './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
-                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
-                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
-            )
-        else:
-            elems = article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)] | .//SUBDIV/TITLE')
+        elems = self._select_article_children(article_elem)
 
         if len(elems) == len(article['children']):
             for child, elem in zip(article['children'], elems):
@@ -643,20 +634,54 @@ class Formex4Parser(XMLParser):
                     'quoted': [],
                 } if action else None)
 
-    def _standardize_children_numbering(self) -> None:
+    def _assign_child_eids(self, article: dict[str, Any], article_elem: etree._Element) -> None:
         """
-        Standardize article children numbering to format: 001.001, 001.002, etc.
-        where the first number is the article number and the second is the child index.
+        Assigns ELI-conformant eIds to article children: 'par_N' for
+        numbered paragraphs (PARAG with NO.PARAG, number as published),
+        'unp_N' for unnumbered blocks (ALINEA, quoted blocks, subdivision
+        titles), per the EU 'subdivision' authority table.
         """
-        import re
-        for article in self.articles:
-            # Extract article number from eId (format: art_1 -> 1)
-            article_num_match = re.search(r'art_(\d+)', article['eId'])
-            article_num = int(article_num_match.group(1)) if article_num_match else 0
-            
-            # Renumber all children with standardized format
-            for idx, child in enumerate(article['children'], start=1):
-                child['eId'] = f"{article_num:03d}.{idx:03d}"
+        elems = self._select_article_children(article_elem)
+        used: set[str] = set()
+        unnumbered = 0
+
+        def unique(eid):
+            base, n = eid, 2
+            while eid in used:
+                eid = f'{base}_{n}'
+                n += 1
+            used.add(eid)
+            return eid
+
+        children = article.get('children', [])
+        for idx, child in enumerate(children):
+            elem = elems[idx] if idx < len(elems) and len(elems) == len(children) else None
+            token = None
+            if elem is not None and elem.tag == 'PARAG':
+                no_parag = (elem.findtext('NO.PARAG') or '').strip().rstrip('.')
+                if re.fullmatch(r'[\w-]+', no_parag):
+                    token = no_parag.lower()
+            if token:
+                child['eId'] = unique(f'par_{token}')
+            else:
+                unnumbered += 1
+                child['eId'] = unique(f'unp_{unnumbered}')
+
+    def _select_article_children(self, article_elem: etree._Element) -> list:
+        """The element selection matching the article strategy's children."""
+        if article_elem.xpath('.//QUOT.S | .//QUOT.START'):
+            return article_elem.xpath(
+                './/ALINEA[not(ancestor::QUOT.S) and not(ancestor::ALINEA)]'
+                ' | .//QUOT.S[not(ancestor::ALINEA) and not(ancestor::QUOT.S)]'
+                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
+            )
+        if article_elem.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
+            return article_elem.xpath(
+                './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
+                ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
+            )
+        return article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)] | .//SUBDIV/TITLE')
     
     def get_conclusions(self) -> None:
         """

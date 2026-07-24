@@ -96,11 +96,11 @@ def test_get_chapters(iopa_parser):
     iopa_parser.get_body()
     iopa_parser.get_chapters()
     expected_first = {
-        'eId': 'chp_1', 'type': 'chapter', 'num': 'Chapter 1',
+        'eId': 'cpt_1', 'type': 'chapter', 'num': 'Chapter 1',
         'heading': 'General provisions', 'parent': None,
     }
     assert iopa_parser.chapters[0] == expected_first, "Chapters data does not match expected content"
-    assert [c['eId'] for c in iopa_parser.chapters] == [f'chp_{i}' for i in range(1, 7)]
+    assert [c['eId'] for c in iopa_parser.chapters] == [f'cpt_{i}' for i in range(1, 7)]
 
 
 def test_get_articles(parser):
@@ -108,12 +108,12 @@ def test_get_articles(parser):
     parser.get_articles()
     expected = [
         {
-            "eId": "art_001",
+            "eId": "art_1",
             "num": "Article 1",
             "heading": None,
             "parent": None,
             "children": [
-                {"eId": '001.001', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                {"eId": 'unp_1', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
                  "amendment": {
                      "action": "replace",
                      "instruction": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
@@ -123,12 +123,12 @@ def test_get_articles(parser):
             ]
         },
         {
-            "eId": "art_002",
+            "eId": "art_2",
             "num": "Article 2",
             "heading": None,
             "parent": None,
             "children": [
-                {"eId": "002.001", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": None}
+                {"eId": "unp_1", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": None}
             ]
         }
     ]
@@ -356,13 +356,13 @@ def test_get_articles_heading_fallback_to_p():
     p.body = body
 
     def fake_extract_articles(body_arg, remove_notes=True):
-        return [{'eId': 'art_1', 'children': [{'eId': '1'}]}]
+        return [{'eId': 'art_1', 'identifier': '1', 'children': [{'eId': '1'}]}]
 
     p.article_strategy.extract_articles = fake_extract_articles
     articles = p.get_articles()
 
     assert articles[0]['heading'] == 'Heading in P'
-    assert articles[0]['children'][0]['eId'] == '001.001'
+    assert articles[0]['children'][0]['eId'] == 'unp_1'
 
 
 def test__extract_elements_with_identifier():
@@ -518,33 +518,22 @@ def test_clean_text_replaces_both_quot_tags():
     assert 'quoted' in text
 
 
-def test__standardize_children_numbering():
-    """Test _standardize_children_numbering() renumbers children correctly."""
+def test__assign_child_eids_eli_paragraphs():
+    """Numbered paragraphs get par_N (ELI subdivision naming), others unp_N."""
     p = Formex4Parser()
-    p.articles = [
-        {'eId': 'art_2', 'children': [{'eId': 'x'}, {'eId': 'y'}, {'eId': 'z'}]},
-        {'eId': 'art_10', 'children': [{'eId': 'a'}]}
-    ]
-    
-    p._standardize_children_numbering()
-    
-    assert p.articles[0]['children'][0]['eId'] == '002.001'
-    assert p.articles[0]['children'][1]['eId'] == '002.002'
-    assert p.articles[0]['children'][2]['eId'] == '002.003'
-    assert p.articles[1]['children'][0]['eId'] == '010.001'
+    article_elem = etree.fromstring(
+        '<ARTICLE IDENTIFIER="001">'
+        '<ALINEA>Intro alinea.</ALINEA>'
+        '<PARAG><NO.PARAG>1.</NO.PARAG><ALINEA>First paragraph.</ALINEA></PARAG>'
+        '<PARAG><NO.PARAG>2.</NO.PARAG><ALINEA>Second paragraph.</ALINEA></PARAG>'
+        '</ARTICLE>'
+    )
+    article = {'eId': 'art_1', 'children': [{}, {}, {}]}
 
+    p._assign_child_eids(article, article_elem)
 
-def test__standardize_children_numbering_no_match():
-    """Test _standardize_children_numbering() handles non-matching eId format."""
-    p = Formex4Parser()
-    p.articles = [
-        {'eId': 'weird_format', 'children': [{'eId': 'x'}]}
-    ]
-    
-    p._standardize_children_numbering()
-    
-    # Should use 0 as article num when regex doesn't match
-    assert p.articles[0]['children'][0]['eId'] == '000.001'
+    # document order: intro alinea first, then the numbered paragraphs
+    assert [c['eId'] for c in article['children']] == ['unp_1', 'par_1', 'par_2']
 
 
 def test_get_conclusions_no_final_section():

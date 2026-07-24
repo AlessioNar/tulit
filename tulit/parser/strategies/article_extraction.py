@@ -302,7 +302,10 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
             else:
                 # Keep the ID as-is for normal article numbers (001, 300, etc.)
                 article_id = raw_id
-            article_eid = f'art_{article_id}'
+            # ELI-style article token: number as published, without
+            # zero-padding, letter suffixes lowercased (art_1, art_16a)
+            token = article_id.lstrip('0') or article_id
+            article_eid = f'art_{token.lower()}'
             
             # Extract article number from TI.ART element (never from
             # quoted amendment content)
@@ -315,6 +318,7 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
             
             articles.append({
                 'eId': article_eid,
+                'identifier': raw_id,
                 'num': article_num,
                 'heading': None,  # Formex typically doesn't have separate headings
                 'children': children

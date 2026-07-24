@@ -63,14 +63,14 @@
                     "string"
                 ]
             },
-            "description": "Divisions above the article level (part/title/chapter/section/subsection), typed and ELI/AKN-named (part_, title_, chp_, sec_, subsec_), each with a parent link to its enclosing division."
+            "description": "Divisions above the article level (part/title/chapter/section/subsection), typed, with eIds following the EU 'subdivision' authority table used by ELI subdivision URIs (prt_, tit_, cpt_, sct_, sbs_ + the number as published), each with a parent link to its enclosing division."
         },
         "articles": {
             "type": "array",
             "items": {
                 "type": "object"
             },
-            "description": "Articles of the legal act, in document order. Each article carries eId (art_N), num, heading, parent (eId of the nearest enclosing division from 'chapters', or null when directly under the enacting terms) and children (NNN.NNN blocks with text and the structured 'amendment' field). Together with the parent links in 'chapters', this encodes the full enacting-terms hierarchy as a flat, navigable tree."
+            "description": "Articles in document order. eIds are ELI-resolvable tokens (art_1, art_16a: number as published). Each article carries num, heading, parent (eId of the nearest enclosing division, or null) and children: par_N for numbered paragraphs, unp_N for unnumbered blocks, with text and the structured 'amendment' field."
         },
         "conclusions": {
             "type": [

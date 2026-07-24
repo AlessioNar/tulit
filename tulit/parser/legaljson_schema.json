@@ -3,6 +3,54 @@
     "title": "LegalJSON",
     "type": "object",
     "properties": {
+        "meta": {
+            "type": "object",
+            "description": "Document-level metadata, external to the text: identifiers, dates, status and work-level relations (from the Cellar/ELI metadata record).",
+            "properties": {
+                "celex": {
+                    "type": ["string", "null"],
+                    "description": "CELEX number, e.g. 32019R0943."
+                },
+                "eli": {
+                    "type": ["string", "null"],
+                    "description": "European Legislation Identifier URI, e.g. http://data.europa.eu/eli/reg/2019/943/oj."
+                },
+                "cellar_uuid": {
+                    "type": ["string", "null"],
+                    "description": "Cellar work UUID."
+                },
+                "date_document": {
+                    "type": ["string", "null"],
+                    "description": "Document date (ISO 8601)."
+                },
+                "in_force": {
+                    "type": ["boolean", "string", "null"]
+                },
+                "amends": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "CELEX numbers of acts this act amends."
+                },
+                "repeals": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "CELEX numbers of acts this act repeals."
+                },
+                "corrects": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "CELEX numbers of acts this act corrects."
+                },
+                "source": {
+                    "type": ["string", "null"],
+                    "description": "Path or URI of the source document(s) this JSON was parsed from."
+                },
+                "valid": {
+                    "type": ["boolean", "null"],
+                    "description": "Whether the source XML validated against its schema (e.g. formex4.xsd)."
+                }
+            }
+        },
         "preface": {
             "type": [
                 "string",

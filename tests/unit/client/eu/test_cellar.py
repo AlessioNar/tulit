@@ -75,14 +75,15 @@ class TestCellarClient(unittest.TestCase):
 
     @patch('tulit.client.client.requests.request')
     def test_fetch_content_request_exception(self, mock_request):
-        # Mock request to raise a RequestException
+        # Mock request to raise a RequestException (should be converted to NetworkError)
         mock_request.side_effect = requests.RequestException("Error sending GET request")
 
         url = 'http://publications.europa.eu/resource/cellar/e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1'
-        response = self.downloader.fetch_content(url)
-
-        # Check that the response is None when an exception is raised
-        self.assertIsNone(response)
+        
+        # Check that NetworkError is raised instead of RequestException
+        from tulit.parser.exceptions import NetworkError
+        with self.assertRaises(NetworkError):
+            self.downloader.fetch_content(url)
 
     def test_send_sparql_query(self):    
         sparql_query = """
@@ -118,6 +119,26 @@ class TestCellarClient(unittest.TestCase):
         self.assertIn('cellarURIs', first_binding)
         self.assertIn('format', first_binding)
         self.assertEqual(first_binding['format']['value'], 'fmx4')
+
+    def test_send_sparql_query_encodes_celex_parentheses(self):
+        query_template = "SELECT ... <http://publications.europa.eu/resource/celex/{CELEX}> ..."
+        with patch.object(self.downloader, 'get_results_table') as mock_grt:
+            mock_grt.return_value = {'results': {'bindings': []}}
+            self.downloader.send_sparql_query(query_template, celex="32012D0004(01)")
+
+        sent_query = mock_grt.call_args[0][0]
+        self.assertIn("32012D0004%2801%29", sent_query)
+        self.assertNotIn("{CELEX}", sent_query)
+
+    def test_download_defers_celex_substitution_to_send_sparql_query(self):
+        # download() must pass the raw template so parentheses get encoded
+        with patch.object(self.downloader, 'send_sparql_query') as mock_send:
+            mock_send.return_value = {'results': {'bindings': []}}
+            self.downloader.download("32012D0004(01)", format='fmx4', type_id='celex')
+
+        sent_query, sent_celex = mock_send.call_args[0]
+        self.assertIn("{CELEX}", sent_query)
+        self.assertEqual(sent_celex, "32012D0004(01)")
 
 if __name__ == "__main__":
     unittest.main()

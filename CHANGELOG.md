@@ -5,6 +5,96 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-07-24
+### Added
+
+- **Formex Annex Extraction**: `Formex4Parser` now extracts annexes, uniform with articles (`eId`, `num`, `heading`, `children`). Handles multi-file documents, `INCL.ELEMENT` file inclusions (resolved and deduplicated), standalone-annex and corrigendum documents, structured tables (`table` key with caption, rows and notes), definition lists, nested lists and annotation groups.
+
+- **Structured Amendment Representation**: Amending provisions in articles and annexes carry a structured `amendment` object modelled on the Akoma Ntoso mod/quotedText/quotedStructure pattern: `{action, instruction, amended_act, quoted: [{kind: structure|text, ...}]}`. Detection distinguishes genuine amendments from definitions and other quoted text (verb-frame plus structural-referent analysis; `QUOT.S` blocks as strong evidence).
+
+- **ELI-Resolvable Identifiers**: All eIds follow the EU Publications Office *subdivision* authority table used in ELI subdivision URIs: divisions `prt_`/`tit_`/`cpt_`/`sct_`/`sbs_`, articles `art_1`/`art_16a`, paragraphs `par_N`, unnumbered blocks `unp_N`, annexes by position — so JSON fragments map directly onto resolvable ELI URIs.
+
+- **Typed Division Hierarchy**: `chapters` now lists every division above article level (part/title/chapter/section/subsection) with `type`, `num`, `heading` and a `parent` link; each article carries a `parent` link to its nearest enclosing division.
+
+- **Hybrid Structure Tree**: New top-level `structure` key with the nested skeleton of the enacting terms (division nodes with article leaves, references only) alongside the flat `chapters`/`articles` lists.
+
+- **Structured Preamble**: `preamble` is now a container object `{formula, citations, recitals_intro, recitals, final}` instead of a raw text dump that duplicated its parts.
+
+- **Document Metadata Object**: New optional top-level `meta` object in the legalJSON schema (`celex`, `eli`, `cellar_uuid`, `date_document`, `in_force`, `amends`, `repeals`, `corrects`, `source`, `valid`) for enrichment from Cellar/ELI metadata records.
+
+- **Corpus-Scale Quality Verification**: The Formex parser was verified against the complete corpus of in-force EU legislation in Formex 4 format (29,790 documents): alphanumeric text coverage between 0.97 and 1.03 of the source for every act (n=27,988) and every annex set (n=15,102), zero parse errors, and 100% of the generated legalJSON validating against the schema.
+
+- **Enhanced Exception Hierarchy**: Added 8 new custom exception classes for granular error handling:
+  - `NetworkError`: Network-related failures (replaces generic `RequestException`)
+  - `AuthenticationError`: Authentication failures with APIs
+  - `RateLimitError`: API rate limit exceedances
+  - `SPARQLError`: SPARQL query execution failures
+  - `SchemaValidationError`: XML schema validation failures with detailed error messages
+  - `ContentTypeError`: Unexpected content type errors with content type information
+  - `ElementNotFoundError`: Missing XML/HTML elements with element name and XPath
+  - `ParserConfigurationError`: Parser misconfiguration errors
+
+- **Comprehensive Exception Testing**: Added 14 new tests covering:
+  - Exception hierarchy verification
+  - Individual exception class functionality
+  - Exception attribute validation
+  - Exception chaining and propagation
+  - Real-world usage in parsers and validators
+
+### Changed
+
+- **Improved Error Handling in Cellar Client**: 
+  - `fetch_content()` now raises `NetworkError` instead of returning `None`
+  - `send_sparql_query()` raises `SPARQLError` for query failures
+  - Better error messages with context information
+
+- **Enhanced XML Validation**: 
+  - `XMLValidator.validate()` now raises `SchemaValidationError` for validation failures
+  - `XMLValidator.load_schema()` raises `FileLoadError` for missing schemas
+  - Proper exception chaining preserves original error context
+
+- **Robust Parser Error Handling**:
+  - `AkomaNtosoParser.get_articles()` raises `ParserConfigurationError` for missing body
+  - `AKNArticleExtractor.extract_article_metadata()` raises `ElementNotFoundError` for missing elements
+  - `Parser.to_dict()` raises `ParseError` for serialization failures
+
+- **Improved Exception Propagation**:
+  - Specific exceptions are re-raised instead of being wrapped
+  - Better exception chaining with `from e` syntax
+  - More informative error messages throughout the codebase
+
+### Enhanced
+
+- **Documentation Improvements**:
+  - **Client Module**: Complete rewrite of `tulit/client/__init__.py` with:
+    - Comprehensive module overview
+    - Available clients organized by jurisdiction
+    - Usage examples for key clients
+    - Error handling and authentication notes
+  - **HTML Parser**: Extensive documentation for `HTMLParser` class including:
+    - Design patterns and key features
+    - Abstract methods and implementation requirements
+    - Usage examples with code snippets
+    - Performance considerations and best practices
+
+- **Error Messages with Context**:
+  - XML extractors include element names and XPath in error messages
+  - Parser methods include document and element IDs in error messages
+  - Validation errors include line numbers and specific issues
+
+### Fixed
+
+- **XML Schema Validation Actually Runs**: `XMLParser.validate()` previously called the validator with a wrong signature and silently skipped validation; it now parses the tree, validates it and records errors. Bare schema filenames (e.g. `formex4.xsd`) resolve against the package's bundled `assets` directory.
+- **Footnote Tail Text**: Removing `NOTE` elements no longer drops the remainder of the sentence following a footnote reference (fixed across article extraction, formula, titles and instruction text).
+- **Nested-Element Double Extraction**: Nested `ALINEA`/`PARAG`/`CONSID`/`NP` structures are extracted exactly once (ownership checks and `not(ancestor::…)` filters), and content quoted inside `QUOT.S` is no longer mistaken for the document's own numbering or headings.
+- **Table Cell Fidelity**: Table cells keep their separators and literal cell values such as `(043)` are no longer stripped by the point-number normalizer.
+- **Cellar CELEX Suffixes**: Fixed double `{CELEX}` placeholder replacement in Cellar SPARQL queries that prevented parenthesis encoding, so suffixed CELEX numbers (e.g. `32012D0004(01)`) download correctly.
+- **Empty Recitals**: Acts without whereas-clauses (e.g. old international agreements) emit an empty `recitals` list instead of `null`.
+- **Conclusions Uniformity**: `to_dict()` normalises string conclusions from HTML parsers into the schema's object form (`{conclusion_text}`); Formex conclusions carry `signature` details including a `signatories` list for multi-signatory acts.
+- **Exception Wrapping Issues**: Fixed cases where specific exceptions were being wrapped in generic `ParserConfigurationError`
+- **Local Variable Scope**: Fixed `UnboundLocalError` in `XMLValidator.load_schema()` by moving imports to method level
+- **Test Compatibility**: Updated existing tests to work with new exception-based error handling
+
 ## [0.4.6] - 2026-07-07
 ### Changed
 - **Dependencies**: Bumped `lxml` from `^5.3.0` to `^6.1.0` (resolves to 6.1.1). All lxml usage relies on the stable `etree` API; the full test suite passes unchanged.

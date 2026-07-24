@@ -94,47 +94,87 @@ class XMLParser(Parser):
     def load_schema(self, schema: str) -> None:
         """
         Load an XSD schema for XML validation.
-        
-        Delegates to XMLValidator for actual schema loading.
-        
+
+        Delegates to XMLValidator for actual schema loading. A schema given as
+        a bare filename or non-existing relative path is resolved against the
+        bundled ``assets`` directory of the package.
+
         Parameters
         ----------
         schema : str
-            Filename of the XSD schema file
-        
+            Path or filename of the XSD schema file
+
         Returns
         -------
         None
+        
+        Raises
+        ------
+        FileLoadError
+            If the schema file cannot be loaded
+        ParserConfigurationError
+            If the schema is invalid
         """
-        self._validator.load_schema(schema)
+        if not os.path.exists(schema):
+            bundled = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                'assets', os.path.basename(schema)
+            )
+            if os.path.exists(bundled):
+                schema = bundled
+        try:
+            self._validator.load_schema(schema)
+        except FileNotFoundError as e:
+            from tulit.parser.exceptions import FileLoadError
+            raise FileLoadError(f"Schema file not found: {schema}") from e
+        except Exception as e:
+            from tulit.parser.exceptions import ParserConfigurationError
+            raise ParserConfigurationError(f"Invalid schema configuration: {e}") from e
 
     def validate(self, file: str, format: str) -> bool:
         """
         Validate an XML file against the loaded schema.
-        
+
         Delegates to XMLValidator for actual validation.
-        
+
         Parameters
         ----------
         file : str
             Path to the XML file to validate
         format : str
             Name of the format for logging (e.g., 'Akoma Ntoso', 'Formex 4')
-        
+
         Returns
         -------
         bool
             True if valid, False otherwise. Also updates self.valid attribute.
+        
+        Raises
+        ------
+        SchemaValidationError
+            If the XML document fails schema validation
+        ParserConfigurationError
+            If validation setup fails
         """
         try:
-            is_valid, error_log = self._validator.validate(file, format_name=format)
+            tree = etree.parse(file, self._create_secure_parser())
+            is_valid = self._validator.validate(tree)
             self.valid = is_valid
-            self.validation_errors = error_log
+            self.validation_errors = self._validator.get_validation_errors()
+            self.format = format
+            if not is_valid:
+                self.logger.warning(f"{format} file failed schema validation: {file}")
             return is_valid
-        except ValidationError as e:
-            self.logger.error(str(e))
+            
+        except etree.XMLSyntaxError as e:
+            from tulit.parser.exceptions import ParseError
+            self.logger.error(f"XML syntax error in {file}: {e}")
             self.valid = False
-            return False
+            raise ParseError(f"Invalid XML syntax: {e}") from e
+        except Exception as e:
+            self.logger.error(f"Validation failed for {format} document {file}: {e}")
+            self.valid = False
+            raise
         
     def remove_node(self, tree, node):
         """
@@ -222,13 +262,14 @@ class XMLParser(Parser):
         None
             Updates the instance's preface attribute with the found preface element.
         """
+        paragraphs = []
         preface = self._extractor.find(self.root, preface_xpath)
         if preface is not None:
             # Extract text from all paragraph elements
             paragraphs = self._extractor.extract_text_from_all(preface, paragraph_xpath)
 
         # Join all paragraphs and normalize using strategy
-        self.preface = self.normalizer.normalize(' '.join(paragraphs))
+        self.preface = self.normalizer.normalize(' '.join(paragraphs)) or None
             
     def get_preamble(self, preamble_xpath, notes_xpath) -> None:
         """

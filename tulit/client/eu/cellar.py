@@ -49,27 +49,26 @@ class CellarClient(Client):
         """
 
         # Open SPARQL QUERY and print it to screen
-        try:            
-            
+        try:
             if celex is not None:
                 # URL encode parentheses in CELEX number for SPARQL query
                 # This is needed for documents with suffixes like (01), (02), etc.
-                import urllib.parse
                 celex_encoded = celex.replace("(", "%28").replace(")", "%29")
-                
-                sparql_query = sparql_query.replace("{CELEX}", celex_encoded) 
+                sparql_query = sparql_query.replace("{CELEX}", celex_encoded)
 
-                # send query to cellar endpoint and retrieve results
-                results = self.get_results_table(sparql_query)
+            # send query to cellar endpoint and retrieve results
+            results = self.get_results_table(sparql_query)
 
             return results
     
         except FileNotFoundError as e:
             self.logger.error(f"SPARQL query file not found: {e}")
-            raise e
+            from tulit.parser.exceptions import FileLoadError
+            raise FileLoadError(f"SPARQL query file not found: {e}") from e
         except Exception as e:
             self.logger.error(f"Error sending SPARQL query: {e}")
-            raise e
+            from tulit.parser.exceptions import SPARQLError
+            raise SPARQLError(f"SPARQL query execution failed: {e}") from e
 
     def get_results_table(self, sparql_query):
         """
@@ -117,7 +116,8 @@ class CellarClient(Client):
             return results
         except Exception as e:
             self.logger.error(f"Error retrieving SPARQL results: {e}")
-            raise e
+            from tulit.parser.exceptions import SPARQLError
+            raise SPARQLError(f"Failed to retrieve SPARQL results: {e}") from e
     
     def fetch_content(self, url) -> requests.Response:
         """
@@ -170,7 +170,8 @@ class CellarClient(Client):
             return response
         except requests.RequestException as e:
             self.logger.error(f"Error sending GET request: {e}")
-            return None
+            from tulit.parser.exceptions import NetworkError
+            raise NetworkError(f"Network request failed: {e}") from e
              
     def build_request_url(self, params):
         """
@@ -249,10 +250,10 @@ class CellarClient(Client):
         if format == 'fmx4':
             if type_id == 'eli':
                 sparql_query = files("tulit.client.eu.queries").joinpath("formex_eli_query.rq").read_text()
-                sparql_query = sparql_query.replace("{ELI}", celex)            
+                sparql_query = sparql_query.replace("{ELI}", celex)
             elif type_id == 'celex':
+                # {CELEX} is substituted (with parentheses encoded) by send_sparql_query
                 sparql_query = files("tulit.client.eu.queries").joinpath("formex_query.rq").read_text()
-                sparql_query = sparql_query.replace("{CELEX}", celex)                
         elif format == 'xhtml':
             sparql_query = files("tulit.client.eu.queries").joinpath("html_query.rq").read_text()
         elif format == 'html':

@@ -255,11 +255,22 @@ class XMLValidator:
         -------
         bool
             True if schema loaded successfully
+        
+        Raises
+        ------
+        FileLoadError
+            If the schema file cannot be found or read
+        ParserConfigurationError
+            If the schema is invalid or unsupported type
         """
+        # Import exceptions at the top of the method to avoid local variable issues
+        from tulit.parser.exceptions import FileLoadError, ParserConfigurationError
+        
         try:
             if not os.path.exists(schema_path):
-                self.logger.error(f"Schema file not found: {schema_path}")
-                return False
+                error_msg = f"Schema file not found: {schema_path}"
+                self.logger.error(error_msg)
+                raise FileLoadError(error_msg)
             
             schema_doc = etree.parse(schema_path)
             
@@ -270,14 +281,23 @@ class XMLValidator:
                 self.relaxng = etree.RelaxNG(schema_doc)
                 self.logger.info(f"Loaded RelaxNG schema: {schema_path}")
             else:
-                self.logger.error(f"Unknown schema type: {schema_type}")
-                return False
+                error_msg = f"Unknown schema type: {schema_type}"
+                self.logger.error(error_msg)
+                raise ParserConfigurationError(error_msg)
             
             return True
             
+        except etree.XMLSchemaParseError as e:
+            error_msg = f"Invalid XML schema: {e}"
+            self.logger.error(error_msg)
+            raise ParserConfigurationError(error_msg) from e
+        except FileLoadError:
+            # FileLoadError should be re-raised, not wrapped
+            raise
         except Exception as e:
-            self.logger.error(f"Failed to load schema: {e}")
-            return False
+            error_msg = f"Failed to load schema: {e}"
+            self.logger.error(error_msg)
+            raise ParserConfigurationError(error_msg) from e
     
     def validate(self, xml_tree: etree._Element) -> bool:
         """
@@ -292,31 +312,61 @@ class XMLValidator:
         -------
         bool
             True if validation succeeds
+        
+        Raises
+        ------
+        SchemaValidationError
+            If the XML document fails schema validation
+        ParserConfigurationError
+            If no schema is loaded or validation setup fails
         """
         if self.schema is None and self.relaxng is None:
-            self.logger.warning("No schema loaded for validation")
-            return True  # No schema means no validation
+            from tulit.parser.exceptions import ParserConfigurationError
+            error_msg = "No schema loaded for validation"
+            self.logger.warning(error_msg)
+            raise ParserConfigurationError(error_msg)
         
         try:
             if self.schema is not None:
                 is_valid = self.schema.validate(xml_tree)
                 if not is_valid:
-                    self.logger.error("XSD validation failed:")
+                    error_messages = []
                     for error in self.schema.error_log:
-                        self.logger.error(f"  Line {error.line}: {error.message}")
+                        error_msg = f"Line {error.line}: {error.message}"
+                        error_messages.append(error_msg)
+                        self.logger.error(f"XSD validation failed: {error_msg}")
+                    
+                    from tulit.parser.exceptions import SchemaValidationError
+                    raise SchemaValidationError(
+                        "XSD validation failed",
+                        validation_errors=error_messages
+                    )
                 return is_valid
             
             elif self.relaxng is not None:
                 is_valid = self.relaxng.validate(xml_tree)
                 if not is_valid:
-                    self.logger.error("RelaxNG validation failed:")
+                    error_messages = []
                     for error in self.relaxng.error_log:
-                        self.logger.error(f"  Line {error.line}: {error.message}")
+                        error_msg = f"Line {error.line}: {error.message}"
+                        error_messages.append(error_msg)
+                        self.logger.error(f"RelaxNG validation failed: {error_msg}")
+                    
+                    from tulit.parser.exceptions import SchemaValidationError
+                    raise SchemaValidationError(
+                        "RelaxNG validation failed",
+                        validation_errors=error_messages
+                    )
                 return is_valid
             
+        except SchemaValidationError:
+            # SchemaValidationError should be re-raised, not wrapped
+            raise
         except Exception as e:
-            self.logger.error(f"Validation error: {e}")
-            return False
+            from tulit.parser.exceptions import ParserConfigurationError
+            error_msg = f"Validation setup error: {e}"
+            self.logger.error(error_msg)
+            raise ParserConfigurationError(error_msg) from e
         
         return False
     

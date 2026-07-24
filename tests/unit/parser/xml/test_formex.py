@@ -12,6 +12,10 @@ file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "forme
 
 iopa = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.000101.fmx.xml")
 
+iopa_dir = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1")
+
+iopa_annex = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.002601.fmx.xml")
+
 
 @pytest.fixture
 def parser():
@@ -91,15 +95,12 @@ def test_get_body(parser):
 def test_get_chapters(iopa_parser):
     iopa_parser.get_body()
     iopa_parser.get_chapters()
-    expected_chapters = [
-        {'eId': "cpt_1", 'num': 'Chapter 1', 'heading': 'General provisions'},
-        {'eId': "cpt_2", 'num': 'Chapter 2', 'heading': 'European Interoperability enablers'},
-        {'eId': "cpt_3", 'num': 'Chapter 3', 'heading': 'Interoperable Europe support measures'},
-        {'eId': "cpt_4", 'num': 'Chapter 4', 'heading': 'Governance of cross-border interoperability'},
-        {'eId': "cpt_5", 'num': 'Chapter 5', 'heading': 'Interoperable Europe planning and monitoring'},
-        {'eId': "cpt_6", 'num': 'Chapter 6', 'heading': 'Final provisions'},
-    ]
-    assert iopa_parser.chapters[0] == expected_chapters[0], "Chapters data does not match expected content"
+    expected_first = {
+        'eId': 'cpt_1', 'type': 'chapter', 'num': 'Chapter 1',
+        'heading': 'General provisions', 'parent': None,
+    }
+    assert iopa_parser.chapters[0] == expected_first, "Chapters data does not match expected content"
+    assert [c['eId'] for c in iopa_parser.chapters] == [f'cpt_{i}' for i in range(1, 7)]
 
 
 def test_get_articles(parser):
@@ -107,19 +108,27 @@ def test_get_articles(parser):
     parser.get_articles()
     expected = [
         {
-            "eId": "art_001",
+            "eId": "art_1",
             "num": "Article 1",
             "heading": None,
+            "parent": None,
             "children": [
-                {"eId": '001.001', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.", "amendment": False}
+                {"eId": 'unp_1', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                 "amendment": {
+                     "action": "replace",
+                     "instruction": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                     "amended_act": "Regulation (EC) No 1484/95",
+                     "quoted": []
+                 }}
             ]
         },
         {
-            "eId": "art_002",
+            "eId": "art_2",
             "num": "Article 2",
             "heading": None,
+            "parent": None,
             "children": [
-                {"eId": "002.001", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": False}
+                {"eId": "unp_1", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": None}
             ]
         }
     ]
@@ -129,16 +138,16 @@ def test_get_articles(parser):
 def test_get_conclusions(iopa_parser):
     iopa_parser.get_body()
     iopa_parser.get_conclusions()
-    conclusions = {
-        "conclusion_text": "This Regulation shall be binding in its entirety and directly applicable in all Member States.",
-        "signature": {
-            "place": "Done at Strasbourg,",
-            "date": "13\xa0March 2024",  # Non-breaking space in date
-            "signatory": "For the European Parliament",
-            "title": "The President"
-        }
-    }
-    assert iopa_parser.conclusions == conclusions
+    assert iopa_parser.conclusions["conclusion_text"] == (
+        "This Regulation shall be binding in its entirety and directly applicable in all Member States."
+    )
+    signature = iopa_parser.conclusions["signature"]
+    assert signature["place"] == "Done at Strasbourg,"
+    assert signature["date"] == "13\xa0March 2024"  # Non-breaking space in date
+    assert signature["signatory"] == "For the European Parliament"
+    assert signature["title"] == "The President"
+    # Acts signed by both institutions keep the complete line sequence
+    assert "For the Council" in signature["signatories"]
 
 
 # ========== COVERAGE BOOST TESTS ==========
@@ -266,26 +275,37 @@ def test_parse_directory_no_xml_files(tmp_path):
     assert result is p
 
 
-def test_parse_annex_preface_clears_articles(tmp_path):
-    """Test parse() clears articles when preface indicates annex."""
+def test_parse_single_annex_document_extracts_annex(tmp_path):
+    """Test parse() clears articles and extracts the annex when the root is ANNEX."""
+    annex_xml = (
+        '<ANNEX><TITLE><TI><P>ANNEX I</P></TI><STI><P>Sample heading</P></STI></TITLE>'
+        '<CONTENTS><P>First paragraph.</P></CONTENTS></ANNEX>'
+    )
+
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX I'
         self.articles = ['will_be_cleared']
-        self.root = etree.fromstring('<ROOT/>')
+        self.root = etree.fromstring(annex_xml)
 
     with patch('tulit.parser.xml.xml.XMLParser.parse', new=fake_super_parse):
         p = Formex4Parser()
         ret = p.parse('somefile.xml')
 
     assert ret is p
+    # A standalone annex document carries no articles but exposes the annex content
     assert p.articles == []
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['eId'] == 'anx_1'
+    assert p.annexes[0]['num'] == 'ANNEX I'
+    assert p.annexes[0]['heading'] == 'Sample heading'
+    assert p.annexes[0]['children'][0]['text'] == 'First paragraph.'
 
 
-def test_parse_annex_preface_with_extra_words(tmp_path):
-    """Test parse() clears articles for annex with extra words."""
+def test_parse_non_annex_root_keeps_articles(tmp_path):
+    """Test parse() keeps articles when the document root is not an annex."""
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX VII TO'
-        self.articles = ['will_be_cleared']
+        self.articles = ['kept']
         self.root = etree.fromstring('<ROOT/>')
 
     with patch('tulit.parser.xml.xml.XMLParser.parse', new=fake_super_parse):
@@ -293,7 +313,8 @@ def test_parse_annex_preface_with_extra_words(tmp_path):
         ret = p.parse('somefile.xml')
 
     assert ret is p
-    assert p.articles == []
+    assert p.articles == ['kept']
+    assert p.annexes == []
 
 
 def test_parse_non_annex_preface_keeps_articles(tmp_path):
@@ -335,13 +356,13 @@ def test_get_articles_heading_fallback_to_p():
     p.body = body
 
     def fake_extract_articles(body_arg, remove_notes=True):
-        return [{'eId': 'art_1', 'children': [{'eId': '1'}]}]
+        return [{'eId': 'art_1', 'identifier': '1', 'children': [{'eId': '1'}]}]
 
     p.article_strategy.extract_articles = fake_extract_articles
     articles = p.get_articles()
 
     assert articles[0]['heading'] == 'Heading in P'
-    assert articles[0]['children'][0]['eId'] == '001.001'
+    assert articles[0]['children'][0]['eId'] == 'unp_1'
 
 
 def test__extract_elements_with_identifier():
@@ -497,33 +518,22 @@ def test_clean_text_replaces_both_quot_tags():
     assert 'quoted' in text
 
 
-def test__standardize_children_numbering():
-    """Test _standardize_children_numbering() renumbers children correctly."""
+def test__assign_child_eids_eli_paragraphs():
+    """Numbered paragraphs get par_N (ELI subdivision naming), others unp_N."""
     p = Formex4Parser()
-    p.articles = [
-        {'eId': 'art_2', 'children': [{'eId': 'x'}, {'eId': 'y'}, {'eId': 'z'}]},
-        {'eId': 'art_10', 'children': [{'eId': 'a'}]}
-    ]
-    
-    p._standardize_children_numbering()
-    
-    assert p.articles[0]['children'][0]['eId'] == '002.001'
-    assert p.articles[0]['children'][1]['eId'] == '002.002'
-    assert p.articles[0]['children'][2]['eId'] == '002.003'
-    assert p.articles[1]['children'][0]['eId'] == '010.001'
+    article_elem = etree.fromstring(
+        '<ARTICLE IDENTIFIER="001">'
+        '<ALINEA>Intro alinea.</ALINEA>'
+        '<PARAG><NO.PARAG>1.</NO.PARAG><ALINEA>First paragraph.</ALINEA></PARAG>'
+        '<PARAG><NO.PARAG>2.</NO.PARAG><ALINEA>Second paragraph.</ALINEA></PARAG>'
+        '</ARTICLE>'
+    )
+    article = {'eId': 'art_1', 'children': [{}, {}, {}]}
 
+    p._assign_child_eids(article, article_elem)
 
-def test__standardize_children_numbering_no_match():
-    """Test _standardize_children_numbering() handles non-matching eId format."""
-    p = Formex4Parser()
-    p.articles = [
-        {'eId': 'weird_format', 'children': [{'eId': 'x'}]}
-    ]
-    
-    p._standardize_children_numbering()
-    
-    # Should use 0 as article num when regex doesn't match
-    assert p.articles[0]['children'][0]['eId'] == '000.001'
+    # document order: intro alinea first, then the numbered paragraphs
+    assert [c['eId'] for c in article['children']] == ['unp_1', 'par_1', 'par_2']
 
 
 def test_get_conclusions_no_final_section():
@@ -583,3 +593,455 @@ def test_get_conclusions_with_full_signature():
     assert conclusions['signature']['date'] == '2024-12-20'
     assert 'Jane Smith' in conclusions['signature']['signatory']
     assert conclusions['signature']['title'] == 'Director'
+
+
+# ---------------------------------------------------------------------------
+# Annex extraction
+# ---------------------------------------------------------------------------
+
+def test_extract_annex_children_expands_lists():
+    """_extract_annex_children() turns top-level Ps and list items into children."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <P>Intro paragraph.</P>
+      <LIST TYPE="ARAB">
+        <ITEM><NP><NO.P>1.</NO.P><TXT>First item</TXT></NP></ITEM>
+        <ITEM><NP><NO.P>2.</NO.P><TXT>Second item</TXT></NP></ITEM>
+      </LIST>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=2)
+
+    assert len(children) == 3
+    assert children[0]['eId'] == '002.001'
+    assert children[0]['text'] == 'Intro paragraph.'
+    assert children[0]['amendment'] is None
+    # Numbered points keep their number, separated from the body
+    assert children[1]['eId'] == '002.002'
+    assert children[1]['text'] == '1. First item'
+    assert children[2]['text'] == '2. Second item'
+
+
+def test_extract_annex_children_renders_tables_with_structure():
+    """Tables become one child with row/cell separators and structured rows."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <TBL>
+        <TITLE><TI><P>List of products</P></TI></TITLE>
+        <CORPUS>
+          <ROW><CELL>2843909075</CELL><CELL>457-82-4</CELL><CELL>padeliporfin</CELL></ROW>
+          <ROW><CELL>2844403012</CELL><CELL>3748-56-1</CELL><CELL>iodofiltic acid</CELL></ROW>
+        </CORPUS>
+      </TBL>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert len(children) == 1
+    child = children[0]
+    # Cell values never run together in the text rendering
+    assert '2843909075 | 457-82-4 | padeliporfin' in child['text']
+    assert child['table']['caption'] == 'List of products'
+    assert child['table']['rows'] == [
+        ['2843909075', '457-82-4', 'padeliporfin'],
+        ['2844403012', '3748-56-1', 'iodofiltic acid'],
+    ]
+
+
+def test_extract_annex_children_amendment_flag_and_quotes():
+    """Annexes quoting amendment text mirror the article convention."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <P>The Annex is amended as follows:</P>
+      <LIST TYPE="ARAB">
+        <ITEM><NP><NO.P>(1)</NO.P><TXT>entry 73 is replaced by the following:</TXT>
+          <QUOT.S LEVEL="1"><P>73 | thiram | 30 April 2017</P></QUOT.S>
+        </NP></ITEM>
+      </LIST>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    # The intro is itself an amendment instruction
+    intro = children[0]
+    assert intro['amendment']['action'] == 'amend'
+    # The point carries the quoted payload as structured content
+    point = children[1]
+    assert point['text'].startswith('(1) entry 73 is replaced by the following:')
+    assert "'73 | thiram | 30 April 2017'" in point['text']
+    mod = point['amendment']
+    assert mod['action'] == 'replace'
+    assert mod['instruction'] == '(1) entry 73 is replaced by the following:'
+    assert mod['quoted'][0]['kind'] == 'structure'
+    assert mod['quoted'][0]['children'][0]['text'] == '73 | thiram | 30 April 2017'
+
+
+def test_extract_annex_children_definition_lists():
+    """DLIST items join term and definition."""
+    p = Formex4Parser()
+    contents = etree.fromstring('''
+    <CONTENTS>
+      <DLIST>
+        <DLIST.ITEM><TERM>ESCB</TERM><DEFINITION><P>European System of Central Banks</P></DEFINITION></DLIST.ITEM>
+      </DLIST>
+    </CONTENTS>
+    ''')
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert children[0]['text'] == 'ESCB — European System of Central Banks'
+
+
+def test_extract_annex_returns_none_for_non_annex():
+    """_extract_annex() returns None when the element is not an ANNEX."""
+    p = Formex4Parser()
+    assert p._extract_annex(etree.fromstring('<ACT/>'), 1) is None
+    assert p._extract_annex(None, 1) is None
+
+
+def test_get_annexes_skips_unparseable_files(tmp_path):
+    """get_annexes() logs and skips files that cannot be parsed."""
+    bad = tmp_path / "bad.xml"
+    bad.write_text("<ANNEX><TITLE>unclosed")  # malformed
+    good = tmp_path / "good.xml"
+    good.write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX I</P></TI></TITLE>'
+        '<CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+    )
+
+    p = Formex4Parser()
+    annexes = p.get_annexes([str(bad), str(good)])
+
+    assert len(annexes) == 1
+    assert annexes[0]['num'] == 'ANNEX I'
+
+
+def test_parse_directory_extracts_sibling_annex():
+    """parse() on a real DOC directory extracts both articles and sibling annexes."""
+    p = Formex4Parser().parse(iopa_dir)
+
+    # The legal act articles are still parsed
+    assert len(p.articles) > 0
+    # The sibling ANNEX file is extracted into annexes
+    assert len(p.annexes) == 1
+    annex = p.annexes[0]
+    assert annex['eId'] == 'anx_1'
+    assert annex['num'] == 'ANNEX'
+    assert 'CHECKLIST' in annex['heading'].upper()
+    assert len(annex['children']) > 0
+    assert all('eId' in c and 'text' in c for c in annex['children'])
+
+
+def test_parse_single_annex_file_real_fixture():
+    """parse() on a standalone annex file populates annexes and clears articles."""
+    p = Formex4Parser().parse(iopa_annex)
+
+    assert p.articles == []
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['num'] == 'ANNEX'
+
+
+def test_to_dict_includes_annexes():
+    """to_dict() exposes the annexes field."""
+    p = Formex4Parser()
+    p.annexes = [{'eId': 'anx_1', 'num': 'ANNEX I', 'heading': None, 'children': []}]
+    result = p.to_dict()
+
+    assert 'annexes' in result
+    assert result['annexes'][0]['eId'] == 'anx_1'
+
+
+# ---------------------------------------------------------------------------
+# Annex INCL.ELEMENT resolution and schema validation
+# ---------------------------------------------------------------------------
+
+def test_resolve_inclusions_grafts_external_content(tmp_path):
+    """get_annexes() resolves INCL.ELEMENT references to sibling files."""
+    (tmp_path / "included.xml").write_text(
+        '<DOC><BIB.DOC><PROD.ID>meta</PROD.ID></BIB.DOC>'
+        '<CONTENTS><P>Included quoted decision text.</P></CONTENTS></DOC>'
+    )
+    annex_file = tmp_path / "annex.xml"
+    annex_file.write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX</P></TI></TITLE>'
+        '<CONTENTS><QUOT.S LEVEL="1">'
+        '<INCL.ELEMENT FILEREF="included.xml" TYPE="FORMEX.DOC"/>'
+        '</QUOT.S></CONTENTS></ANNEX>'
+    )
+
+    annexes = Formex4Parser().get_annexes([str(annex_file)])
+
+    assert len(annexes) == 1
+    children = annexes[0]['children']
+    assert len(children) == 1
+    assert 'Included quoted decision text.' in children[0]['text']
+    # Bibliographic metadata of the included file is not extracted as content
+    assert 'meta' not in children[0]['text']
+
+
+def test_resolve_inclusions_missing_file_is_skipped(tmp_path):
+    """get_annexes() does not crash when an INCL.ELEMENT target is missing."""
+    annex_file = tmp_path / "annex.xml"
+    annex_file.write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX</P></TI></TITLE>'
+        '<CONTENTS><QUOT.S LEVEL="1">'
+        '<INCL.ELEMENT FILEREF="does_not_exist.xml" TYPE="FORMEX.DOC"/>'
+        '</QUOT.S></CONTENTS></ANNEX>'
+    )
+
+    annexes = Formex4Parser().get_annexes([str(annex_file)])
+
+    assert len(annexes) == 1
+    assert annexes[0]['children'] == []
+
+
+def test_parse_validates_against_bundled_schema():
+    """parse() resolves formex4.xsd from the package assets and validates."""
+    p = Formex4Parser().parse(iopa)
+
+    assert p.valid is True
+    assert p.validation_errors == []
+
+
+def test_extract_annex_children_inline_quot_start_flags_amendment():
+    """Inline QUOT.START/QUOT.END markers also flag amendment, as in articles."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>the date <QUOT.START/>31 July 2014<QUOT.END/> is replaced by '
+        '<QUOT.START/>30 April 2017<QUOT.END/>.</P></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    mod = children[0]['amendment']
+    assert mod is not None
+    assert mod['action'] == 'replace'
+    # Inline quoted spans are captured in document order
+    assert [q['text'] for q in mod['quoted']] == ['31 July 2014', '30 April 2017']
+
+
+def test_table_notes_are_extracted():
+    """GR.NOTES legends are kept in the table text and structured notes."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><TBL>'
+        '<GR.NOTES><NOTE NOTE.ID="E0001"><P>Quotas available pursuant to Regulation X.</P></NOTE></GR.NOTES>'
+        '<CORPUS><ROW><CELL>PT</CELL><CELL>ANE</CELL></ROW></CORPUS>'
+        '</TBL></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert 'Quotas available pursuant to Regulation X.' in children[0]['text']
+    assert children[0]['table']['notes'] == ['Quotas available pursuant to Regulation X.']
+
+
+def test_annex_num_joins_title_paragraphs_and_strips_quotes():
+    """Multi-paragraph TI joins with spaces; quote markers do not leak into num."""
+    p = Formex4Parser()
+    annex = etree.fromstring(
+        '<ANNEX><TITLE><TI><P>ANNEX</P><P>to be allocated for September</P></TI></TITLE>'
+        '<CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+    )
+    assert p._extract_annex(annex, 1)['num'] == 'ANNEX to be allocated for September'
+
+    quoted = etree.fromstring(
+        '<ANNEX><TITLE><TI><P><QUOT.START/>ANNEX I</P></TI></TITLE>'
+        '<CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+    )
+    assert p._extract_annex(quoted, 1)['num'] == 'ANNEX I'
+
+
+def test_parse_skips_annex_files_referenced_as_inclusions(tmp_path):
+    """A sibling annex file that is only an INCL.ELEMENT target is not duplicated."""
+    (tmp_path / "act.xml").write_text(
+        '<ACT><ENACTING.TERMS><ARTICLE IDENTIFIER="001"><TI.ART>Article 1</TI.ART>'
+        '<ALINEA>Text.</ALINEA></ARTICLE></ENACTING.TERMS></ACT>'
+    )
+    (tmp_path / "annex_wrapper.xml").write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX VII</P></TI></TITLE>'
+        '<CONTENTS><INCL.ELEMENT FILEREF="annex_content.xml" TYPE="FORMEX.DOC"/></CONTENTS></ANNEX>'
+    )
+    (tmp_path / "annex_content.xml").write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX VII</P></TI></TITLE>'
+        '<CONTENTS><P>Part 1 requirements.</P></CONTENTS></ANNEX>'
+    )
+
+    p = Formex4Parser().parse(str(tmp_path))
+
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['children'][0]['text'] == 'Part 1 requirements.'
+
+
+def test_annotation_table_notes_are_extracted():
+    """GR.NOTES containing GR.ANNOTATION blocks (not just NOTE) are kept."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><TBL>'
+        '<GR.NOTES><GR.ANNOTATION><ANNOTATION><NP><NO.P>(1)</NO.P>'
+        '<TXT>EFSA identified some information as unavailable.</TXT></NP>'
+        '</ANNOTATION></GR.ANNOTATION></GR.NOTES>'
+        '<CORPUS><ROW><CELL>A</CELL></ROW></CORPUS>'
+        '</TBL></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert 'EFSA identified some information as unavailable.' in children[0]['text']
+    assert any('EFSA' in n for n in children[0]['table']['notes'])
+
+
+def test_titleless_annex_wrapper_adopts_included_title(tmp_path):
+    """A wrapper annex without TITLE adopts the included annex's title."""
+    (tmp_path / "act.xml").write_text(
+        '<ACT><ENACTING.TERMS><ARTICLE IDENTIFIER="001"><TI.ART>Article 1</TI.ART>'
+        '<ALINEA>Text.</ALINEA></ARTICLE></ENACTING.TERMS></ACT>'
+    )
+    (tmp_path / "wrapper.xml").write_text(
+        '<ANNEX><CONTENTS><INCL.ELEMENT FILEREF="content.xml" TYPE="FORMEX.DOC"/></CONTENTS></ANNEX>'
+    )
+    (tmp_path / "content.xml").write_text(
+        '<ANNEX><TITLE><TI><P>ANNEX VII</P></TI></TITLE>'
+        '<CONTENTS><P>Part 1 requirements.</P></CONTENTS></ANNEX>'
+    )
+
+    p = Formex4Parser().parse(str(tmp_path))
+
+    assert len(p.annexes) == 1
+    assert p.annexes[0]['num'] == 'ANNEX VII'
+    assert p.annexes[0]['children'][0]['text'] == 'Part 1 requirements.'
+
+
+def test_table_block_titles_are_extracted():
+    """BLK groups in a table contribute their TI.BLK titles as rows."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><TBL><CORPUS>'
+        '<BLK><TI.BLK><HT TYPE="BOLD">Belgium:</HT></TI.BLK>'
+        '<ROW><CELL>Airport A</CELL><CELL>open</CELL></ROW></BLK>'
+        '<BLK><TI.BLK><HT TYPE="BOLD">Denmark:</HT></TI.BLK>'
+        '<ROW><CELL>Airport B</CELL><CELL>closed</CELL></ROW></BLK>'
+        '</CORPUS></TBL></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    rows = children[0]['table']['rows']
+    assert rows == [['Belgium:'], ['Airport A', 'open'], ['Denmark:'], ['Airport B', 'closed']]
+    assert 'Belgium:' in children[0]['text']
+
+
+# ---------------------------------------------------------------------------
+# Structured amendment representation
+# ---------------------------------------------------------------------------
+
+def test_amendment_quoted_table_keeps_structured_rows():
+    """A table quoted as amendment payload exposes structured rows."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><NP><NO.P>(1)</NO.P>'
+        '<TXT>the table in Part B is replaced by the following:</TXT>'
+        '<QUOT.S LEVEL="1"><TBL><CORPUS>'
+        '<ROW><CELL>73</CELL><CELL>thiram</CELL></ROW>'
+        '<ROW><CELL>74</CELL><CELL>ziram</CELL></ROW>'
+        '</CORPUS></TBL></QUOT.S></NP></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    mod = children[0]['amendment']
+    assert mod['action'] == 'replace'
+    payload = mod['quoted'][0]
+    assert payload['kind'] == 'structure'
+    assert payload['children'][0]['table']['rows'] == [['73', 'thiram'], ['74', 'ziram']]
+
+
+def test_amendment_sibling_quote_attaches_to_instruction():
+    """A QUOT.S sibling after an instruction ending with ':' is its payload."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>Annex III is amended as follows:</P>'
+        '<QUOT.S LEVEL="1"><P>New annex body.</P></QUOT.S></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    assert len(children) == 1
+    mod = children[0]['amendment']
+    assert mod['action'] == 'amend'
+    assert mod['quoted'][0]['children'][0]['text'] == 'New annex body.'
+    assert "'New annex body.'" in children[0]['text']
+
+
+def test_amendment_detected_from_text_without_markup():
+    """Amendments without QUOT markup are detected from the instruction text."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>In the sixth column, of entry 73, the date 31 July 2014 '
+        'is replaced by 30 April 2017.</P></CONTENTS>'
+    )
+
+    children = p._extract_annex_children(contents, annex_index=1)
+
+    mod = children[0]['amendment']
+    assert mod is not None
+    assert mod['action'] == 'replace'
+    assert mod['quoted'] == []
+
+
+def test_amendment_cited_act_extraction():
+    """The amended act citation is extracted from the instruction."""
+    p = Formex4Parser()
+    assert p._cited_act(
+        'Part A of the Annex to Implementing Regulation (EU) No 540/2011 is amended as follows:'
+    ) == 'Implementing Regulation (EU) No 540/2011'
+    assert p._cited_act('Annexes I and II to Directive 2009/128/EC are amended.') == 'Directive 2009/128/EC'
+    assert p._cited_act('This text cites no act.') is None
+
+
+def test_ordinary_content_has_no_amendment():
+    """Plain annex content gets amendment None; 'value added tax' is not an amendment."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS><P>The value added tax identification number of the operator.</P></CONTENTS>'
+    )
+    children = p._extract_annex_children(contents, annex_index=1)
+    assert children[0]['amendment'] is None
+
+
+def test_definitions_are_not_amendments():
+    """Definitions with quoted terms or 'is added to' phrasing are not amendments."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS>'
+        '<P><QUOT.START/>Resettlement<QUOT.END/> means the transfer of displaced persons.</P>'
+        '<P>additive means any substance which is added to feed or water.</P>'
+        '<P>For the purposes of this Regulation, the following definitions apply:</P>'
+        '</CONTENTS>'
+    )
+    children = p._extract_annex_children(contents, annex_index=1)
+    assert all(c['amendment'] is None for c in children), [c['amendment'] for c in children]
+
+
+def test_amendment_still_detected_with_referent_or_follows():
+    """Genuine amendment instructions keep being detected."""
+    p = Formex4Parser()
+    contents = etree.fromstring(
+        '<CONTENTS>'
+        '<P>Regulation (EC) No 1760/2000 is amended as follows:</P>'
+        '<P>In entry 73, the date <QUOT.START/>31 July 2014<QUOT.END/> is replaced by '
+        '<QUOT.START/>30 April 2017<QUOT.END/>.</P>'
+        '<P>The following Article 3a is inserted:</P>'
+        '</CONTENTS>'
+    )
+    children = p._extract_annex_children(contents, annex_index=1)
+    actions = [c['amendment'] and c['amendment']['action'] for c in children]
+    assert actions == ['amend', 'replace', 'insert']
+    # the inline spans are captured for the confirmed amendment
+    assert [q['text'] for q in children[1]['amendment']['quoted']] == ['31 July 2014', '30 April 2017']

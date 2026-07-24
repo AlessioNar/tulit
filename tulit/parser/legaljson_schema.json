@@ -1,29 +1,146 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "LegalJSON",
-  "type": "object",
-  "properties": {
-    "preface": {"type": ["string", "null"]},
-    "preamble": {"type": ["string", "null"]},
-    "formula": {"type": ["string", "null"]},
-    "citations": {
-      "type": "array",
-      "items": {"type": ["object", "string"]}
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "LegalJSON",
+    "type": "object",
+    "properties": {
+        "meta": {
+            "type": "object",
+            "description": "Document-level metadata, external to the text: identifiers, dates, status and work-level relations (from the Cellar/ELI metadata record).",
+            "properties": {
+                "celex": {
+                    "type": ["string", "null"],
+                    "description": "CELEX number, e.g. 32019R0943."
+                },
+                "eli": {
+                    "type": ["string", "null"],
+                    "description": "European Legislation Identifier URI, e.g. http://data.europa.eu/eli/reg/2019/943/oj."
+                },
+                "cellar_uuid": {
+                    "type": ["string", "null"],
+                    "description": "Cellar work UUID."
+                },
+                "date_document": {
+                    "type": ["string", "null"],
+                    "description": "Document date (ISO 8601)."
+                },
+                "in_force": {
+                    "type": ["boolean", "string", "null"]
+                },
+                "amends": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "CELEX numbers of acts this act amends."
+                },
+                "repeals": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "CELEX numbers of acts this act repeals."
+                },
+                "corrects": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "CELEX numbers of acts this act corrects."
+                },
+                "source": {
+                    "type": ["string", "null"],
+                    "description": "Path or URI of the source document(s) this JSON was parsed from."
+                },
+                "valid": {
+                    "type": ["boolean", "null"],
+                    "description": "Whether the source XML validated against its schema (e.g. formex4.xsd)."
+                }
+            }
+        },
+        "preface": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "preamble": {
+            "type": "object",
+            "description": "Structured preamble: opening formula, citations, recitals (with optional intro) and the final formula ('HAS ADOPTED THIS REGULATION:').",
+            "properties": {
+                "formula": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "citations": {
+                    "type": "array",
+                    "items": {
+                        "type": [
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "recitals_intro": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "recitals": {
+                    "type": "array",
+                    "items": {
+                        "type": [
+                            "object",
+                            "string"
+                        ]
+                    }
+                },
+                "final": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "citations",
+                "recitals"
+            ]
+        },
+        "chapters": {
+            "type": "array",
+            "items": {
+                "type": [
+                    "object",
+                    "string"
+                ]
+            },
+            "description": "Divisions above the article level (part/title/chapter/section/subsection), typed, with eIds following the EU 'subdivision' authority table used by ELI subdivision URIs (prt_, tit_, cpt_, sct_, sbs_ + the number as published), each with a parent link to its enclosing division."
+        },
+        "articles": {
+            "type": "array",
+            "items": {
+                "type": "object"
+            },
+            "description": "Articles in document order. eIds are ELI-resolvable tokens (art_1, art_16a: number as published). Each article carries num, heading, parent (eId of the nearest enclosing division, or null) and children: par_N for numbered paragraphs, unp_N for unnumbered blocks, with text and the structured 'amendment' field."
+        },
+        "conclusions": {
+            "type": [
+                "object",
+                "null"
+            ]
+        },
+        "annexes": {
+            "type": "array",
+            "description": "Annexes of the legal act, uniform with articles: eId, num, heading and children. Each child has eId (NNN.NNN), text (full readable text), and amendment — null for ordinary content, or a structured object {action: replace|insert|add|delete|amend|null, instruction, amended_act, quoted: [{kind: structure, children: [...]} | {kind: text, text}]} modelled on Akoma Ntoso mod/quotedText/quotedStructure. Tables carry a 'table' key with caption, rows and notes.",
+            "items": {
+                "type": "object"
+            }
+        },
+        "structure": {
+            "type": "array",
+            "description": "Nested skeleton of the enacting terms, in document order: division nodes {eId, type, num, children} with article leaves {eId, type: 'article'}. References only — content lives in the flat 'chapters' and 'articles' lists (hybrid flat+tree representation)."
+        }
     },
-    "recitals": {
-      "type": "array",
-      "items": {"type": ["object", "string"]}
-    },
-    "preamble_final": {"type": ["string", "null"]},
-    "chapters": {
-      "type": "array",
-      "items": {"type": ["object", "string"]}
-    },
-    "articles": {
-      "type": "array",
-      "items": {"type": "object"}
-    },
-    "conclusions": {"type": ["object", "null"]}
-  },
-  "required": ["preface", "citations", "recitals", "chapters", "articles"]
+    "required": [
+        "preface",
+        "preamble",
+        "articles"
+    ]
 }

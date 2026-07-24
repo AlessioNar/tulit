@@ -42,6 +42,25 @@ class CellarStandardHTMLParser(HTMLParser):
         In standard HTML, this is typically in the metadata or first heading.
         """
         try:
+            # Prefer the document's own title block: the paragraphs before
+            # the enacting-authority formula ('THE COUNCIL …,')
+            txt_te = self.root.find('txt_te') or self.root.find(
+                lambda tag: tag.name and tag.name.upper() == 'TXT_TE')
+            if txt_te:
+                title_lines = []
+                for p in txt_te.find_all('p')[:10]:
+                    text = self._clean_text(p.get_text())
+                    if not text:
+                        continue
+                    if re.match(r'^(THE [A-Z]|Having\s)', text):
+                        break
+                    title_lines.append(text)
+                if title_lines:
+                    self.preface = ' '.join(title_lines)
+                    self._preface_texts = set(title_lines)
+                    self.logger.info("Preface extracted from title block.")
+                    return
+
             # Try to find in meta description
             meta_desc = self.root.find('meta', attrs={'name': 'DC.description'})
             if meta_desc and meta_desc.get('content'):
@@ -149,11 +168,18 @@ class CellarStandardHTMLParser(HTMLParser):
             self.citations = []
             paragraphs = self.txt_te.find_all('p')
             citation_idx = 0
-            
+
+            citation_re = re.compile(
+                r'^(Having\s+\w+|Acting in accordance|After consult\w*|'
+                r'In cooperation with|With the approval of|After approval|'
+                r'In agreement with)', re.IGNORECASE)
             for p in paragraphs:
                 text = self._clean_text(p.get_text())
-                # Look for citation patterns
-                if text.startswith('Having regard to') or text.startswith('Having considered'):
+                # citations live in the preamble only — stop at the final
+                # formula or the first article
+                if self._is_recitals_end(text):
+                    break
+                if citation_re.match(text):
                     citation_idx += 1
                     self.citations.append({
                         'eId': f'cit_{citation_idx}',
@@ -198,7 +224,9 @@ class CellarStandardHTMLParser(HTMLParser):
     
     def _is_recitals_end(self, text: str) -> bool:
         """Check if text marks end of recitals section."""
-        return bool(re.match(r'^(HAS ADOPTED|HAS DECIDED|Article)', text, re.IGNORECASE))
+        return bool(re.match(r'^(HAS ADOPTED|HAS DECIDED|HAVE ADOPTED|'
+                             r'HAVE DECIDED|HAS AGREED|HAVE AGREED|Article|'
+                             r'Sole Article|Done at)', text, re.IGNORECASE))
     
     def _extract_numbered_recital(self, text: str):
         """Extract numbered recital from text like '(1) Some text'."""
@@ -211,26 +239,62 @@ class CellarStandardHTMLParser(HTMLParser):
         return None
     
     def _extract_recitals_from_paragraphs(self):
-        """Extract recitals from paragraph format."""
+        """Extract recitals from paragraph format: 'Whereas:' followed by
+        numbered '(N)' items, or (older acts) bare 'Whereas …' paragraphs.
+        Unmarked lines inside the whereas block continue the previous
+        recital."""
         recitals = []
         paragraphs = self.txt_te.find_all('p')
         in_recitals = False
-        
+        seen_preamble = False
+
+        formula_re = re.compile(r'^THE [A-Z][A-Z ,]+,?$')
+        citation_re = re.compile(r'^(Having\s+\w+|Acting in accordance|'
+                                 r'After consult\w*|In cooperation with)',
+                                 re.IGNORECASE)
         for p in paragraphs:
             text = self._clean_text(p.get_text())
-            
+            if not text:
+                continue
+
             if self._is_recitals_start(text):
                 in_recitals = True
+                self.recitals_intro = text
                 continue
-            
+
             if in_recitals and self._is_recitals_end(text):
                 break
-            
+
+            if not in_recitals and (formula_re.match(text) or citation_re.match(text)):
+                seen_preamble = True
+                continue
+
+            bare = re.match(r'^Whereas[,:]?\s+(.+)$', text, re.DOTALL)
+            if bare and not in_recitals:
+                in_recitals = True
+                recitals.append({'eId': f'rct_{len(recitals) + 1}',
+                                 'text': bare.group(1).strip()})
+                continue
+
+            # decisions with narrative reasoning open the recitals with
+            # '(1) …' directly, without any Whereas marker
+            if not in_recitals and seen_preamble and re.match(r'^\(\d+\)\s', text):
+                in_recitals = True
+
             if in_recitals:
                 recital = self._extract_numbered_recital(text)
+                if recital is None and bare:
+                    recital = {'eId': f'rct_{len(recitals) + 1}',
+                               'text': bare.group(1).strip()}
                 if recital:
                     recitals.append(recital)
-        
+                elif recitals:
+                    # continuation of the previous recital
+                    recitals[-1]['text'] += '\n' + text
+                else:
+                    recitals.append({'eId': f'rct_{len(recitals) + 1}',
+                                     'text': text})
+
         return recitals
     
     def get_recitals(self):
@@ -313,10 +377,12 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.logger.warning("No container found for article extraction.")
                 return
             
-            # Use strategy for extraction
+            # Use strategy for extraction. Only 'Done at' reliably marks
+            # the signature: 'For the …' / 'Brussels,' openings also occur
+            # in ordinary article prose and would truncate extraction
             self.articles = self.article_strategy.extract_articles(
                 self.txt_te,
-                stop_markers=['Done at', 'For the', 'Brussels,', 'Member of the Commission']
+                stop_markers=['Done at']
             )
             
             self.logger.info(f"Extracted {len(self.articles)} articles.")
@@ -555,34 +621,183 @@ class CellarStandardHTMLParser(HTMLParser):
         
         self.articles.append(article)
     
+    def _signature_block(self):
+        """Locate the 'Done at …' signature block: returns (start, end)
+        indices into the txt_te p/table flow, or (None, None). The block
+        runs from 'Done at' through the short signature lines that follow
+        (names, 'For the Council', 'The President')."""
+        flow = self._flow_elements()
+        start = None
+        for i, (kind, text) in enumerate(flow):
+            if kind == 'p' and re.match(r'^Done at', text, re.IGNORECASE):
+                start = i
+                break
+        if start is None:
+            return None, None
+        end = start + 1
+        while end < len(flow):
+            kind, text = flow[end]
+            if kind != 'p' or len(text) > 90 or self._is_footnote(text) or \
+                    self._is_attachment_header(text):
+                break
+            end += 1
+        return start, end
+
+    def _flow_elements(self):
+        """The document flow as [(kind, cleaned_text), …] for the direct
+        p/table sequence of the TXT_TE container (empty lines dropped)."""
+        if getattr(self, '_flow_cache', None) is not None:
+            return self._flow_cache
+        flow = []
+        if hasattr(self, 'txt_te') and self.txt_te:
+            elements = self.txt_te.find_all(['p', 'table'], recursive=False)
+            if not elements:
+                elements = self.txt_te.find_all(['p', 'table'])
+                elements = [e for e in elements if e.name == 'table' or
+                            e.find_parent('table') is None]
+            for el in elements:
+                if el.name == 'table':
+                    text = self._extract_table_text(el)
+                    kind = 'table'
+                else:
+                    text = self._clean_text(el.get_text())
+                    kind = 'p'
+                if text:
+                    flow.append((kind, text))
+        self._flow_cache = flow
+        return flow
+
+    _ATTACHMENT_HEADER_RE = re.compile(
+        r'^(ANNEX|APPENDIX|AGREEMENT|PROTOCOL|EXCHANGE OF LETTERS|'
+        r'CONVENTION|JOINT DECLARATION|DECLARATION|FINAL ACT)\b[\w\s./-]*$')
+
+    def _is_attachment_header(self, text: str) -> bool:
+        """A short all-caps heading opening an annex/agreement block."""
+        t = text.strip()
+        return len(t) < 80 and bool(self._ATTACHMENT_HEADER_RE.match(t)) \
+            and t == t.upper()
+
+    def _capture_leftover_blocks(self):
+        """Append any flow block not covered by an extracted component to
+        a trailing attachment annex. A block is covered when every one of
+        its lines appears in some extracted text."""
+        import re as _re
+
+        def _canon(s):
+            # extraction strips recital markers; canonicalise both sides so
+            # '(1) Whereas x' matches an extracted 'x'
+            s = _re.sub(r'^\s*\(\d+\)\s*', '', s or '')
+            s = _re.sub(r'^\s*Whereas[,:]?\s+', '', s, flags=_re.IGNORECASE)
+            return _re.sub(r'[^0-9A-Za-z]', '', s)
+
+        extracted = [self.preface, self.formula, self.preamble_final,
+                     getattr(self, 'recitals_intro', None),
+                     str(self.conclusions or '')]
+        # preface/conclusions join several flow blocks — cover the
+        # original per-block texts too
+        extracted += list(getattr(self, '_preface_texts', []) or [])
+        extracted += list(getattr(self, '_conclusion_texts', []) or [])
+        extracted += [c.get('text') for c in (self.citations or []) if isinstance(c, dict)]
+        extracted += [r.get('text') for r in (self.recitals or []) if isinstance(r, dict)]
+        for a in list(self.articles or []) + list(self.annexes or []):
+            extracted += [a.get('num'), a.get('heading')]
+            extracted += [c.get('text') for c in a.get('children', [])]
+        lines = set()
+        for text in extracted:
+            for line in str(text or '').split('\n'):
+                for variant in (line, self._clean_text(line)):
+                    key = _canon(variant)
+                    if key:
+                        lines.add(key)
+
+        leftovers = []
+        for _, block in self._flow_elements():
+            block_lines = [_canon(l) for l in block.split('\n')]
+            block_lines = [l for l in block_lines if l]
+            if block_lines and not all(l in lines for l in block_lines):
+                leftovers.append(block)
+        if leftovers:
+            n = len(self.annexes) + 1
+            self.annexes.append({
+                'eId': f'att_{n}',
+                'num': None,
+                'heading': None,
+                'children': [{'eId': f'{n:03d}.{i:03d}', 'text': t}
+                             for i, t in enumerate(leftovers, 1)],
+            })
+
     def get_conclusions(self):
         """
-        Extract conclusion text (e.g., "Done at Brussels, ...").
+        Extract the signature block ('Done at …' plus signatories).
         """
         try:
-            if not hasattr(self, 'txt_te') or not self.txt_te:
+            start, end = self._signature_block()
+            if start is None:
                 self.conclusions = None
+                self.logger.warning("No conclusions found.")
                 return
-            
-            paragraphs = self.txt_te.find_all('p')
-            
-            # Look for conclusion patterns, typically near the end
-            for i in range(len(paragraphs) - 1, max(len(paragraphs) - 20, -1), -1):
-                text = self._clean_text(paragraphs[i].get_text())
-                if re.match(r'^Done at', text, re.IGNORECASE):
-                    # Collect this and subsequent paragraphs as conclusion
-                    conclusion_parts = []
-                    for j in range(i, len(paragraphs)):
-                        conclusion_parts.append(self._clean_text(paragraphs[j].get_text()))
-                    self.conclusions = ' '.join(conclusion_parts)
-                    self.logger.info("Conclusions extracted.")
-                    return
-            
-            self.conclusions = None
-            self.logger.warning("No conclusions found.")
+            flow = self._flow_elements()
+            self._conclusion_texts = [text for _, text in flow[start:end]]
+            self.conclusions = ' '.join(self._conclusion_texts)
+            self.logger.info("Conclusions extracted.")
         except Exception as e:
             self.conclusions = None
             self.logger.error(f"Error extracting conclusions: {e}")
+
+    def get_annexes(self):
+        """
+        Extract annexes and attached texts (agreements, protocols,
+        exchanges of letters) that follow the signature block, split on
+        their headings. Footnote reference lists stay with the material
+        they follow.
+        """
+        self.annexes = []
+        try:
+            flow = self._flow_elements()
+            if not flow:
+                return
+            start, end = self._signature_block()
+            if start is None:
+                # no signature: attachments only when an explicit heading
+                # follows the enacting terms
+                tail = None
+                for i, (kind, text) in enumerate(flow):
+                    if kind == 'p' and self._is_attachment_header(text):
+                        tail = i
+                        break
+                if tail is None:
+                    return
+                region = flow[tail:]
+            else:
+                region = flow[end:]
+            if not region:
+                return
+
+            current = None
+            for kind, text in region:
+                if kind == 'p' and self._is_attachment_header(text):
+                    current = {
+                        'eId': f'anx_{len(self.annexes) + 1}',
+                        'num': text,
+                        'heading': None,
+                        'children': [],
+                    }
+                    self.annexes.append(current)
+                    continue
+                if current is None:
+                    current = {
+                        'eId': f'att_{len(self.annexes) + 1}',
+                        'num': None,
+                        'heading': None,
+                        'children': [],
+                    }
+                    self.annexes.append(current)
+                current['children'].append({
+                    'eId': f'{len(self.annexes):03d}.{len(current["children"]) + 1:03d}',
+                    'text': text,
+                })
+        except Exception as e:
+            self.logger.error(f"Error extracting annexes: {e}")
     
     def parse(self, file_path: str, **options) -> 'CellarStandardHTMLParser':
         """
@@ -621,6 +836,9 @@ class CellarStandardHTMLParser(HTMLParser):
         
         try:
             # Load and parse HTML
+            self._flow_cache = None
+            self._preface_texts = set()
+            self._conclusion_texts = []
             self.get_root(file_path)
             
             # Extract all components
@@ -634,7 +852,29 @@ class CellarStandardHTMLParser(HTMLParser):
             self.get_chapters()
             self.get_articles()
             self.get_conclusions()
-            
+            self.get_annexes()
+
+            # Non-legislative documents (merger decisions, resolutions,
+            # notices) have no act structure at all: keep the whole flow
+            # as a single pseudo-article so no text is lost
+            if not self.articles and not self.recitals and \
+                    not self.citations and not self.annexes:
+                preface_texts = getattr(self, '_preface_texts', set())
+                flow = [(k, t) for k, t in self._flow_elements()
+                        if t not in preface_texts]
+                if flow:
+                    self.articles = [{
+                        'eId': 'enacting_terms',
+                        'num': None,
+                        'heading': None,
+                        'children': [{'eId': f'unp_{i}', 'text': t}
+                                     for i, (_, t) in enumerate(flow, 1)],
+                    }]
+
+            # Lossless net: any flow block not routed to a component ends
+            # up in a trailing attachment, so no document text is dropped
+            self._capture_leftover_blocks()
+
             # Validate if requested — always against the canonical to_dict()
             # output, never a hand-rolled dict that can drift from the schema
             if validate:

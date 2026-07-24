@@ -195,30 +195,56 @@ class CellarHTMLParser(HTMLParser):
             for a in self.body.find_all('a'):
                 a.replace_with(' ')
 
+    # ELI subdivision id prefixes used by OJ HTML for divisions above
+    # article level, mapped to their type
+    _DIVISION_PREFIXES = {
+        'prt': 'part',
+        'tit': 'title',
+        'cpt': 'chapter',
+        'sct': 'section',
+        'sbs': 'subsection',
+    }
+
+    def _is_division_id(self, an_id: Optional[str]) -> bool:
+        return bool(an_id) and '.' not in an_id and \
+            an_id.split('_')[0] in self._DIVISION_PREFIXES
+
+    def _division_parent(self, element) -> Optional[str]:
+        """eId of the nearest enclosing division div, if any."""
+        for anc in element.find_parents('div', id=True):
+            if self._is_division_id(anc.get('id')):
+                return anc.get('id')
+        return None
+
     def get_chapters(self) -> None:
         """
-        Extracts chapters from the HTML, grouping them by their IDs and headings.
+        Extracts every division above article level (part/title/chapter/
+        section/subsection div ids), typed, with a parent link to the
+        enclosing division.
         """
-        
+
         if self.body is None:
             self.chapters = []
             self.logger.warning("No body element to extract chapters from")
             return
-        
-        chapters = self.body.find_all('div', id=lambda x: x and x.startswith('cpt_') and '.' not in x)
+
+        divisions = self.body.find_all('div', id=self._is_division_id)
         self.chapters = []
-        for chapter in chapters:
-            eId = chapter.get('id')
-            chapter_num_elem = chapter.find('p', class_="oj-ti-section-1")
-            chapter_title_elem = chapter.find('div', class_="eli-title")
-            if chapter_num_elem and chapter_title_elem:
-                chapter_num = chapter_num_elem.get_text(strip=True)
-                chapter_title = chapter_title_elem.get_text(strip=True)
-                self.chapters.append({
-                    'eId': eId,
-                    'num': chapter_num,
-                    'heading': chapter_title
-                })
+        for division in divisions:
+            eId = division.get('id')
+            num_elem = division.find('p', class_=lambda c: c and c.startswith('oj-ti-section'))
+            title_elem = division.find('div', class_='eli-title')
+            num = num_elem.get_text(strip=True) if num_elem else None
+            heading = title_elem.get_text(strip=True) if title_elem else None
+            if num is None and heading is None:
+                continue
+            self.chapters.append({
+                'eId': eId,
+                'type': self._DIVISION_PREFIXES[eId.split('_')[0]],
+                'num': num,
+                'heading': heading,
+                'parent': self._division_parent(division),
+            })
 
     def get_articles(self) -> None:
         """
@@ -299,6 +325,7 @@ class CellarHTMLParser(HTMLParser):
 
                                 children.append({
                                     'eId': number,
+                                    'par_num': number,
                                     'text': text
                                 })
                             except ValueError:
@@ -386,27 +413,69 @@ class CellarHTMLParser(HTMLParser):
                 'eId': eId,
                 'num': article_num,
                 'heading': article_title,
+                'parent': self._division_parent(article),
                 'children': children
             })
-        
-        # Standardize children numbering to 001.001 format
+
+        # ELI-style child eIds (par_N / unp_N)
         self._standardize_children_numbering()
+        self._build_structure()
 
 
     def _standardize_children_numbering(self) -> None:
         """
-        Standardize article children numbering to format: 001.001, 001.002, etc.
-        where the first number is the article number and the second is the child index.
+        Give article children ELI-style eIds: par_N for children whose
+        paragraph number is known (numbered-table rows) or whose text opens
+        with 'N.', unp_N for the rest.
         """
-        import re
         for article in self.articles:
-            # Extract article number from eId (format: art_1 -> 1, or art -> 0)
-            article_num_match = re.search(r'art_?(\d+)', article['eId'])
-            article_num = int(article_num_match.group(1)) if article_num_match else 0
-            
-            # Renumber all children with standardized format
-            for idx, child in enumerate(article['children'], start=1):
-                child['eId'] = f"{article_num:03d}.{idx:03d}"
+            used = set()
+            unp = 0
+            for child in article['children']:
+                token = None
+                par_num = child.pop('par_num', None)
+                if par_num is not None:
+                    # the numbered-table branch captured the real number
+                    token = str(par_num)
+                else:
+                    m = re.match(r'(\d+[a-z]?)\.\s', str(child.get('text') or ''))
+                    if m:
+                        token = m.group(1)
+                eid = f'par_{token}' if token else None
+                if eid is None or eid in used:
+                    unp += 1
+                    eid = f'unp_{unp}'
+                used.add(eid)
+                child['eId'] = eid
+
+    def _build_structure(self) -> None:
+        """Nested skeleton of the enacting terms: division nodes
+        {eId, type, num, children} with article leaves, in document order.
+        References only — content stays in chapters/articles."""
+        self.structure = []
+        if self.body is None:
+            return
+        info = {c['eId']: c for c in self.chapters}
+        article_ids = {a['eId'] for a in self.articles}
+        nodes = {}
+
+        def attach(element, node):
+            parent = self._division_parent(element)
+            if parent in nodes:
+                nodes[parent]['children'].append(node)
+            else:
+                self.structure.append(node)
+
+        for div in self.body.find_all('div', id=True):
+            an_id = div.get('id')
+            if an_id in info:
+                c = info[an_id]
+                node = {'eId': an_id, 'type': c['type'], 'num': c['num'],
+                        'children': []}
+                nodes[an_id] = node
+                attach(div, node)
+            elif an_id in article_ids:
+                attach(div, {'eId': an_id, 'type': 'article'})
     
     def get_conclusions(self) -> None:
         """

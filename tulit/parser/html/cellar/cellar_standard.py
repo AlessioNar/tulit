@@ -617,7 +617,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.logger.info(f"Found HTML document: {html_files[0].name}")
             else:
                 self.logger.error(f"No HTML files found in directory: {path}")
-                return {'articles': []}  # Return empty result
+                return self
         
         try:
             # Load and parse HTML
@@ -635,26 +635,11 @@ class CellarStandardHTMLParser(HTMLParser):
             self.get_articles()
             self.get_conclusions()
             
-            # Build result dictionary
-            result = {
-                'preface': self.preface,
-                'preamble': {
-                    'formula': self.formula,
-                    'citations': self.citations,
-                    'recitals': self.recitals,
-                    'preamble_final': self.preamble_final
-                },
-                'chapters': self.chapters,
-                'articles': self.articles,
-                'conclusions': self.conclusions
-            }
-            
-            # Validate if requested
+            # Validate if requested — always against the canonical to_dict()
+            # output, never a hand-rolled dict that can drift from the schema
             if validate:
-                validator = LegalJSONValidator()
-                is_valid, errors = validator.validate(result)
-                if not is_valid:
-                    self.logger.warning(f"Validation failed: {errors}")
+                if not LegalJSONValidator().validate(self.to_dict()):
+                    self.logger.warning("LegalJSON validation failed")
             
             return self
             

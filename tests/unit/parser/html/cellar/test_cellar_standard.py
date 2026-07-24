@@ -600,8 +600,9 @@ class TestCellarStandardHTMLParser:
         test_dir.mkdir()
         
         result = parser.parse(str(test_dir))
-        # Should return dict with empty articles
-        assert isinstance(result, dict)
+        # Returns the parser itself with nothing extracted
+        assert result is parser
+        assert result.articles == []
 
     def test_parse_full_workflow(self, parser, sample_standard_html):
         """Test complete parse workflow."""

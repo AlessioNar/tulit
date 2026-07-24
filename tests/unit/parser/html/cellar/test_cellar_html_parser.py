@@ -592,10 +592,10 @@ class TestCellarHTMLParser:
         cellar_parser.get_body()
         cellar_parser.get_articles()
         
-        # After standardization, children should have format 003.001, 003.002
+        # Unnumbered paragraphs get ELI-style unp_N eIds
         article = cellar_parser.articles[0]
-        assert article['children'][0]['eId'] == '003.001'
-        assert article['children'][1]['eId'] == '003.002'
+        assert article['children'][0]['eId'] == 'unp_1'
+        assert article['children'][1]['eId'] == 'unp_2'
 
     def test_get_conclusions_success(self, cellar_parser, tmp_path):
         """Test get_conclusions extracts oj-final div."""

@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-07-24
+### Added
+
+- **Parser Parity Across Formats**: The Akoma Ntoso and Cellar HTML parsers now emit the same legalJSON features as the Formex parser: typed divisions above article level (part/title/chapter/section/subsection) with parent links, ELI-resolvable eIds (`cpt_I`, `art_1`, `par_2`, `unp_N`), per-article `parent` links, and the hybrid `structure` skeleton tree.
+
+- **Cellar HTML Annexes and Attachments**: `CellarHTMLParser` extracts annexes (`anx_*` divs at any nesting) uniform with articles, plus attached material published with the act — agreements, joint declarations, additional acts in multi-act OJ pieces, and wrapper-level content — as `att_N` annex entries.
+
+- **Cellar HTML Corpus-Grade Extraction**: generic document-order block walk for OJ xhtml articles (mixed paragraph/table content folded into `par_N`/`unp_N` children), narrative preambles (State-aid decisions) mapped onto citations/recitals, enacting-terms content outside articles kept as a pseudo-article, conclusions from the final-provisions block, symmetric footnote policy (dropped act-side, kept annex-side, inline markers always preserved).
+
+- **Old-Format (TXT_TE) Extraction Rework**: title-block preface, generalized citation forms, all three recital styles ('Whereas:' + numbered, bare 'Whereas', narrative '(N)'), signature-block conclusions, annex/agreement capture after the signature, a whole-flow fallback for non-legislative documents and a lossless leftover net so no document text is dropped.
+
+- **AKN Variant Unification**: the three near-duplicate `get_articles` implementations (base, AKN4EU, Luxembourg) merged into one template with `_extractor_id_attr` and `_extract_article_children` hooks; AKN children are aggregated to paragraph level (`par_N`/`unp_N`) and quoted structures are excluded from article/division discovery.
+
+- **Corpus-Scale Verification (HTML)**: the Cellar HTML parser was verified against the in-force legislation HTML dump with the same alphanumeric-coverage gate used for Formex.
+
+### Fixed
+
+- **cellar_standard Validation Drift**: `parse(validate=True)` now validates the canonical `to_dict()` output instead of a hand-rolled dict that had drifted from the schema (and unpacked the validator's boolean as a tuple); `parse()` on an empty directory returns the parser, not a dict.
+- **Nested Table Double-Counting**: HTML tables render only their own rows; nested tables are no longer counted twice.
+- **Article Truncation in Old Format**: article extraction no longer stops at ordinary prose starting with 'For the …'.
+
 ## [0.5.0] - 2026-07-24
 ### Added
 

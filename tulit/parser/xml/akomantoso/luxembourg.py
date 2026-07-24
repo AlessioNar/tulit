@@ -105,42 +105,5 @@ class LuxembourgAKNParser(AkomaNtosoParser):
 
         return self
     
-    def get_articles(self) -> None:
-        """
-        Extract articles from the body using AKNArticleExtractor with 'id' attribute.
-        
-        Luxembourg documents use 'id' instead of 'eId' for element identification.
-        """
-        if self.body is None:
-            self.logger.warning("Body is None. Call get_body() first.")
-            return
-        
-        # Removing all authorialNote nodes
-        self.body = self.remove_node(self.body, './/akn:authorialNote')
-
-        # Use extractor for article processing with 'id' attribute
-        extractor = AKNArticleExtractor(self.namespaces, id_attr='id')
-
-        # Find all <article> elements in the XML
-        for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
-            metadata = extractor.extract_article_metadata(article)
-            children = extractor.extract_paragraphs_by_eid(article)
-
-            self.articles.append({
-                'eId': metadata['eId'],
-                'num': metadata['num'],
-                'heading': metadata['heading'],
-                'children': children
-            })
-        
-        # Also find all <section> elements (used in some jurisdictions like Finland)
-        for section in self.body.findall('.//akn:section', namespaces=self.namespaces):
-            metadata = extractor.extract_article_metadata(section)
-            children = extractor.extract_paragraphs_by_eid(section)
-
-            self.articles.append({
-                'eId': metadata['eId'],
-                'num': metadata['num'],
-                'heading': metadata['heading'],
-                'children': children
-            })
+    # Luxembourg documents use 'id' instead of 'eId' for identification
+    _extractor_id_attr = 'id'

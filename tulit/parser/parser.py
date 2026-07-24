@@ -341,6 +341,12 @@ class Parser(ABC):
             except Exception:
                 return str(obj)
 
+        # Some HTML parsers store conclusions as a bare string; legalJSON
+        # requires an object, so normalise here for every parser at once
+        conclusions = self.conclusions
+        if isinstance(conclusions, str):
+            conclusions = {'conclusion_text': conclusions}
+
         return {
             'preface': _serialize(self.preface),
             # The preamble is a structured container: serialising the raw
@@ -355,7 +361,7 @@ class Parser(ABC):
             'structure': _serialize(self.structure),
             'chapters': _serialize(self.chapters),
             'articles': _serialize(self.articles),
-            'conclusions': _serialize(self.conclusions),
+            'conclusions': _serialize(conclusions),
             'annexes': _serialize(self.annexes)
         }
 

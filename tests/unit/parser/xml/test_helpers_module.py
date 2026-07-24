@@ -46,11 +46,14 @@ class TestXMLHelpersAndParser(unittest.TestCase):
 
     def test_validator_no_schema(self):
         xml = etree.fromstring('<root><child/></root>')
-        # No schema loaded -> validate should return True
-        self.assertTrue(self.validator.validate(xml))
-        self.assertEqual(self.validator.get_validation_errors(), [])
-        # Loading non-existent schema should return False
-        self.assertFalse(self.validator.load_schema('nonexistent.xsd'))
+        # No schema loaded -> validate should raise ParserConfigurationError
+        from tulit.parser.exceptions import ParserConfigurationError
+        with self.assertRaises(ParserConfigurationError):
+            self.validator.validate(xml)
+        # Loading non-existent schema should raise FileLoadError
+        from tulit.parser.exceptions import FileLoadError
+        with self.assertRaises(FileLoadError):
+            self.validator.load_schema('nonexistent.xsd')
 
     def test_xmlparser_namespace_and_secure_parser(self):
         # namespaces property should sync with extractor
@@ -79,11 +82,11 @@ class TestXMLHelpersAndParser(unittest.TestCase):
         self.assertTrue(os.path.exists(schema), f"Schema not found: {schema}")
         loaded = self.validator.load_schema(schema)
         self.assertTrue(loaded, "Expected schema to load successfully")
-        # validate a small document that likely does not match the schema -> expect False
+        # validate a small document that likely does not match the schema -> expect SchemaValidationError
+        from tulit.parser.exceptions import SchemaValidationError
         xml = etree.fromstring('<root><invalid/></root>')
-        valid = self.validator.validate(xml)
-        # valid may be True if schema doesn't enforce anything for this doc; just ensure method returns bool
-        self.assertIsInstance(valid, bool)
+        with self.assertRaises(SchemaValidationError):
+            self.validator.validate(xml)
         # get_validation_errors returns list
         errors = self.validator.get_validation_errors()
         self.assertIsInstance(errors, list)
@@ -109,16 +112,19 @@ class TestXMLHelpersAndParser(unittest.TestCase):
             loaded = self.validator.load_schema(rng_path, schema_type='relaxng')
             self.assertTrue(loaded)
 
-            # Validate a non-matching document -> expect False
+            # Validate a non-matching document -> expect SchemaValidationError
+            from tulit.parser.exceptions import SchemaValidationError
             xml = etree.fromstring('<notroot/>')
-            valid = self.validator.validate(xml)
-            self.assertFalse(valid)
+            with self.assertRaises(SchemaValidationError):
+                self.validator.validate(xml)
             errs = self.validator.get_validation_errors()
             # errors should be a list (may be empty depending on lib), but allow either
             self.assertIsInstance(errs, list)
 
-            # unknown schema type should return False (file exists but type unknown)
-            self.assertFalse(self.validator.load_schema(rng_path, schema_type='unknown'))
+            # unknown schema type should raise ParserConfigurationError
+            from tulit.parser.exceptions import ParserConfigurationError
+            with self.assertRaises(ParserConfigurationError):
+                self.validator.load_schema(rng_path, schema_type='unknown')
         finally:
             try:
                 os.unlink(rng_path)

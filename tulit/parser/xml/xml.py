@@ -107,6 +107,13 @@ class XMLParser(Parser):
         Returns
         -------
         None
+        
+        Raises
+        ------
+        FileLoadError
+            If the schema file cannot be loaded
+        ParserConfigurationError
+            If the schema is invalid
         """
         if not os.path.exists(schema):
             bundled = os.path.join(
@@ -115,7 +122,14 @@ class XMLParser(Parser):
             )
             if os.path.exists(bundled):
                 schema = bundled
-        self._validator.load_schema(schema)
+        try:
+            self._validator.load_schema(schema)
+        except FileNotFoundError as e:
+            from tulit.parser.exceptions import FileLoadError
+            raise FileLoadError(f"Schema file not found: {schema}") from e
+        except Exception as e:
+            from tulit.parser.exceptions import ParserConfigurationError
+            raise ParserConfigurationError(f"Invalid schema configuration: {e}") from e
 
     def validate(self, file: str, format: str) -> bool:
         """
@@ -134,6 +148,13 @@ class XMLParser(Parser):
         -------
         bool
             True if valid, False otherwise. Also updates self.valid attribute.
+        
+        Raises
+        ------
+        SchemaValidationError
+            If the XML document fails schema validation
+        ParserConfigurationError
+            If validation setup fails
         """
         try:
             tree = etree.parse(file, self._create_secure_parser())
@@ -144,10 +165,16 @@ class XMLParser(Parser):
             if not is_valid:
                 self.logger.warning(f"{format} file failed schema validation: {file}")
             return is_valid
-        except ValidationError as e:
-            self.logger.error(str(e))
+            
+        except etree.XMLSyntaxError as e:
+            from tulit.parser.exceptions import ParseError
+            self.logger.error(f"XML syntax error in {file}: {e}")
             self.valid = False
-            return False
+            raise ParseError(f"Invalid XML syntax: {e}") from e
+        except Exception as e:
+            self.logger.error(f"Validation failed for {format} document {file}: {e}")
+            self.valid = False
+            raise
         
     def remove_node(self, tree, node):
         """

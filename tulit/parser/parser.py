@@ -300,38 +300,54 @@ class Parser(ABC):
         dict
             A dictionary containing all extracted elements from the document
             with JSON-serializable values.
+        
+        Raises
+        ------
+        ParseError
+            If serialization fails due to unsupported object types
         """
         def _serialize(obj: Any) -> Any:
             # Domain models with a to_dict() method
             if hasattr(obj, 'to_dict') and callable(getattr(obj, 'to_dict')):
                 try:
                     return obj.to_dict()
-                except Exception:
-                    return str(obj)
+                except Exception as e:
+                    from tulit.parser.exceptions import ParseError
+                    raise ParseError(f"Failed to serialize object with to_dict() method: {e}") from e
 
             # dicts and mappings
             if isinstance(obj, dict):
-                return {k: _serialize(v) for k, v in obj.items()}
+                try:
+                    return {k: _serialize(v) for k, v in obj.items()}
+                except Exception as e:
+                    from tulit.parser.exceptions import ParseError
+                    raise ParseError(f"Failed to serialize dictionary: {e}") from e
 
             # sequences
             if isinstance(obj, (list, tuple, set)):
-                return [_serialize(v) for v in obj]
+                try:
+                    return [_serialize(v) for v in obj]
+                except Exception as e:
+                    from tulit.parser.exceptions import ParseError
+                    raise ParseError(f"Failed to serialize sequence: {e}") from e
 
             # BeautifulSoup Tag -> extract text
             try:
                 from bs4.element import Tag
                 if isinstance(obj, Tag):
                     return obj.get_text()
-            except Exception:
-                pass
+            except Exception as e:
+                from tulit.parser.exceptions import ParseError
+                raise ParseError(f"Failed to serialize BeautifulSoup Tag: {e}") from e
 
             # lxml element -> concat text
             try:
                 from lxml.etree import _Element
                 if isinstance(obj, _Element):
                     return ''.join(obj.itertext())
-            except Exception:
-                pass
+            except Exception as e:
+                from tulit.parser.exceptions import ParseError
+                raise ParseError(f"Failed to serialize lxml element: {e}") from e
 
             # Basic types (str, int, float, bool, None) are JSON serializable as-is
             # For anything else, attempt json.dumps check; fall back to str()
@@ -339,6 +355,8 @@ class Parser(ABC):
                 json.dumps(obj)
                 return obj
             except Exception:
+                # For truly unknown types, log a warning but return string representation
+                self.logger.warning(f"Unknown object type {type(obj)} encountered during serialization, converting to string")
                 return str(obj)
 
         # Some HTML parsers store conclusions as a bare string; legalJSON
@@ -347,23 +365,27 @@ class Parser(ABC):
         if isinstance(conclusions, str):
             conclusions = {'conclusion_text': conclusions}
 
-        return {
-            'preface': _serialize(self.preface),
-            # The preamble is a structured container: serialising the raw
-            # element here would duplicate every part it holds
-            'preamble': {
-                'formula': _serialize(self.formula),
-                'citations': _serialize(self.citations),
-                'recitals_intro': _serialize(getattr(self, 'recitals_intro', None)),
-                'recitals': _serialize(self.recitals),
-                'final': _serialize(self.preamble_final),
-            },
-            'structure': _serialize(self.structure),
-            'chapters': _serialize(self.chapters),
-            'articles': _serialize(self.articles),
-            'conclusions': _serialize(conclusions),
-            'annexes': _serialize(self.annexes)
-        }
+        try:
+            return {
+                'preface': _serialize(self.preface),
+                # The preamble is a structured container: serialising the raw
+                # element here would duplicate every part it holds
+                'preamble': {
+                    'formula': _serialize(self.formula),
+                    'citations': _serialize(self.citations),
+                    'recitals_intro': _serialize(getattr(self, 'recitals_intro', None)),
+                    'recitals': _serialize(self.recitals),
+                    'final': _serialize(self.preamble_final),
+                },
+                'structure': _serialize(self.structure),
+                'chapters': _serialize(self.chapters),
+                'articles': _serialize(self.articles),
+                'conclusions': _serialize(conclusions),
+                'annexes': _serialize(self.annexes)
+            }
+        except Exception as e:
+            from tulit.parser.exceptions import ParseError
+            raise ParseError(f"Failed to convert parser data to dictionary: {e}") from e
 
 class LegalJSONValidator:
     """

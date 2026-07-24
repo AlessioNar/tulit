@@ -44,12 +44,35 @@ class AKNArticleExtractor:
         -------
         dict
             Dictionary with 'eId', 'num', and 'heading' keys.
+        
+        Raises
+        ------
+        ElementNotFoundError
+            If required article elements are missing
         """
         eId = article.get(self.id_attr, '')
+        if not eId:
+            from tulit.parser.exceptions import ElementNotFoundError
+            raise ElementNotFoundError(
+                f"Article element missing {self.id_attr} attribute",
+                element_name="article",
+                xpath=f"@{self.id_attr}"
+            )
         
         # Extract article number
         num_elem = article.find('akn:num', namespaces=self.namespaces)
-        num_text = ''.join(num_elem.itertext()).strip() if num_elem is not None else None
+        if num_elem is None:
+            from tulit.parser.exceptions import ElementNotFoundError
+            raise ElementNotFoundError(
+                "Article element missing required <num> element",
+                element_name="num",
+                xpath="akn:num"
+            )
+        
+        num_text = ''.join(num_elem.itertext()).strip()
+        if not num_text:
+            from tulit.parser.exceptions import ExtractionError
+            raise ExtractionError(f"Article number text is empty for article with eId={eId}")
         
         # Extract article heading/title
         heading_elem = article.find('akn:heading', namespaces=self.namespaces)

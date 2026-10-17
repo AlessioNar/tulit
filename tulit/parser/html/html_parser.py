@@ -200,5 +200,17 @@ class HTMLParser(Parser):
             self.logger.info("Conclusions parsed successfully")
         except Exception as e:
             self.logger.error(f"Error in get_conclusions: {e}", exc_info=True)
-        
+        try:
+            self.get_annexes()
+            self.logger.info(f"Annexes parsed successfully. Number of annexes: {len(self.annexes)}")
+        except Exception as e:
+            self.logger.error(f"Error in get_annexes: {e}", exc_info=True)
+
         return self
+
+    def get_annexes(self) -> None:
+        """
+        Extract annexes. Override in subclass if the format has annexes.
+        Default leaves self.annexes empty.
+        """
+        return None

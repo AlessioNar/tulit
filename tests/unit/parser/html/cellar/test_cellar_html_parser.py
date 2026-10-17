@@ -86,23 +86,26 @@ class TestCellarHTMLParser:
         parser_with_root.get_preamble()
         assert parser_with_root.preamble is not None
 
-    def test_get_preamble_removes_anchor_tags(self, cellar_parser, tmp_path):
-        """Test get_preamble removes all <a> tags."""
+    def test_get_preamble_removes_footnotes(self, cellar_parser, tmp_path):
+        """Test get_preamble drops footnote paragraphs but keeps inline
+        markers (anchor text stays with the sentence that carries it)."""
         html_file = tmp_path / "preamble_with_links.html"
         html_file.write_text(
             '''<html><body>
                 <div class="eli-subdivision" id="pbl_1">
-                    Text with <a href="#">link</a> removed
+                    Text with <a href="#">(1)</a> marker
+                    <p class="oj-note">(1) A footnote.</p>
                 </div>
             </body></html>''',
             encoding='utf-8'
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_preamble()
-        
-        # Check that anchor tag was decomposed
-        assert cellar_parser.preamble.find('a') is None
-        assert 'Text with' in cellar_parser.preamble.get_text()
+
+        # Footnote paragraph gone, inline marker text preserved
+        assert cellar_parser.preamble.find('p', class_='oj-note') is None
+        assert '(1)' in cellar_parser.preamble.get_text()
+        assert 'A footnote.' not in cellar_parser.preamble.get_text()
 
     def test_get_formula_success(self, parser_with_root):
         """Test get_formula extracts oj-normal paragraph from preamble."""
@@ -111,14 +114,16 @@ class TestCellarHTMLParser:
         assert parser_with_root.formula is not None
         assert isinstance(parser_with_root.formula, str)
 
-    def test_get_formula_with_mock(self, cellar_parser):
-        """Test get_formula extracts text from oj-normal p tag."""
-        mock_p = MagicMock()
-        mock_p.text = "Formula text"
-        
-        cellar_parser.preamble = MagicMock()
-        cellar_parser.preamble.find.return_value = mock_p
-        
+    def test_get_formula(self, cellar_parser):
+        """Test get_formula extracts the first loose preamble paragraph."""
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(
+            '<div id="pbl_1"><p class="oj-normal">Formula text</p>'
+            '<div id="cit_1"><p class="oj-normal">Having regard</p></div>'
+            '<p class="oj-normal">HAS ADOPTED THIS REGULATION:</p></div>',
+            'html.parser')
+        cellar_parser.preamble = soup.find('div', id='pbl_1')
+
         cellar_parser.get_formula()
         assert cellar_parser.formula == "Formula text"
 
@@ -253,17 +258,18 @@ class TestCellarHTMLParser:
         assert cellar_parser.body is not None
         assert "Using root as fallback" in caplog.text
 
-    def test_get_body_removes_anchors(self, cellar_parser, tmp_path):
-        """Test get_body replaces anchor tags with spaces."""
+    def test_get_body_keeps_anchor_text(self, cellar_parser, tmp_path):
+        """Test get_body preserves anchor text (inline markers and
+        citation references are content)."""
         html_file = tmp_path / "body_anchors.html"
         html_file.write_text(
-            '<html><body><div id="enc_1">Text <a href="#">link</a> more</div></body></html>',
+            '<html><body><div id="enc_1">Text <a href="#">(1)</a> more</div></body></html>',
             encoding='utf-8'
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
-        
-        assert cellar_parser.body.find('a') is None
+
+        assert '(1)' in cellar_parser.body.get_text()
 
     def test_get_chapters_success(self, parser_with_root, caplog):
         """Test get_chapters extracts cpt_ divs."""
@@ -490,8 +496,10 @@ class TestCellarHTMLParser:
         cellar_parser.get_articles()
         
         article = cellar_parser.articles[0]
-        # Should have intro + 2 table rows
-        assert len(article['children']) == 3
+        # Intro block plus the table folded into one block with both rows
+        assert len(article['children']) == 2
+        assert 'First row' in article['children'][1]['text']
+        assert 'Second row' in article['children'][1]['text']
 
     def test_get_articles_with_subdivisions(self, cellar_parser, tmp_path):
         """Test get_articles with nested div subdivisions."""
@@ -592,10 +600,10 @@ class TestCellarHTMLParser:
         cellar_parser.get_body()
         cellar_parser.get_articles()
         
-        # After standardization, children should have format 003.001, 003.002
+        # Unnumbered paragraphs get ELI-style unp_N eIds
         article = cellar_parser.articles[0]
-        assert article['children'][0]['eId'] == '003.001'
-        assert article['children'][1]['eId'] == '003.002'
+        assert article['children'][0]['eId'] == 'unp_1'
+        assert article['children'][1]['eId'] == 'unp_2'
 
     def test_get_conclusions_success(self, cellar_parser, tmp_path):
         """Test get_conclusions extracts oj-final div."""

@@ -19,8 +19,8 @@ Module Organization
 
 Example Usage
 -------------
->>> from tulit.parsers.xml.akomantoso import AkomaNtosoParser
->>> from tulit.parsers.registry import get_parser_registry
+>>> from tulit.parser.xml.akomantoso import AkomaNtosoParser
+>>> from tulit.parser.registry import get_parser_registry
 >>> 
 >>> # Direct instantiation
 >>> parser = AkomaNtosoParser()

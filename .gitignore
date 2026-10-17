@@ -9,6 +9,8 @@ database/
 
 # Coverage reports
 .coverage
+coverage.xml
+.github/badges/
 coverage_re/
 htmlcov/
 

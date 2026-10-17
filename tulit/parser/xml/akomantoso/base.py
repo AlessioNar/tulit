@@ -6,6 +6,8 @@ in the Akoma Ntoso 3.0 format. All variant parsers (AKN4EU, German LegalDocML,
 Luxembourg) inherit from this base class.
 """
 
+import re
+
 from tulit.parser.xml.xml import XMLParser
 from tulit.parser.xml.akomantoso.extractors import (
     AKNArticleExtractor,
@@ -14,6 +16,17 @@ from tulit.parser.xml.akomantoso.extractors import (
 )
 from typing import Optional, Any
 from lxml import etree
+
+
+# Division elements above article level, mapped to (type, ELI subdivision
+# token) per the EU 'subdivision' authority table used in ELI URIs
+_AKN_DIVISIONS = {
+    'part': ('part', 'prt'),
+    'title': ('title', 'tit'),
+    'chapter': ('chapter', 'cpt'),
+    'section': ('section', 'sct'),
+    'subsection': ('subsection', 'sbs'),
+}
 
 
 class AkomaNtosoParser(XMLParser):
@@ -144,18 +157,74 @@ class AkomaNtosoParser(XMLParser):
         """
         return super().get_body('.//akn:body')
     
+    def _is_division(self, elem: etree._Element) -> bool:
+        """True if elem is a division above article level (a section counts
+        only when it groups articles; article-like sections are handled by
+        get_articles)."""
+        if not isinstance(elem.tag, str):
+            return False
+        local = etree.QName(elem).localname
+        if local not in _AKN_DIVISIONS:
+            return False
+        if local == 'section' and elem.find('.//akn:article', namespaces=self.namespaces) is None:
+            return False
+        return True
+
+    def _in_quoted(self, elem: etree._Element) -> bool:
+        """True if elem sits inside quoted (amendment) content."""
+        for anc in elem.iterancestors():
+            if isinstance(anc.tag, str) and etree.QName(anc).localname in (
+                    'quotedStructure', 'embeddedStructure'):
+                return True
+        return False
+
+    def _division_parent_eid(self, elem: etree._Element) -> Optional[str]:
+        """eId of the nearest enclosing division, if any."""
+        for anc in elem.iterancestors():
+            eid = self._division_map.get(anc)
+            if eid is not None:
+                return eid
+        return None
+
     def get_chapters(self) -> None:
         """
-        Extract chapters from the body.
-        
-        Chapters structure the main content and may contain articles.
+        Extract every division above article level (part/title/chapter/
+        section/subsection) in document order, typed, with ELI-style eIds
+        and a parent link to the enclosing division.
         """
-        return super().get_chapters(
-            chapter_xpath='.//akn:chapter',
-            num_xpath='.//akn:num',
-            heading_xpath='.//akn:heading',
-            extract_eId=self.extract_eId
-        )
+        self.chapters = []
+        self._division_map = {}
+        if self.body is None:
+            return
+        used = set()
+        for elem in self.body.iter():
+            if not self._is_division(elem) or self._in_quoted(elem):
+                continue
+            div_type, token = _AKN_DIVISIONS[etree.QName(elem).localname]
+            num_el = elem.find('akn:num', namespaces=self.namespaces)
+            heading_el = elem.find('akn:heading', namespaces=self.namespaces)
+            num = ''.join(num_el.itertext()).strip() if num_el is not None else None
+            heading = ''.join(heading_el.itertext()).strip() if heading_el is not None else None
+            eid = None
+            if num:
+                tail = num.split()[-1].rstrip('.:')
+                if tail:
+                    eid = f"{token}_{tail}"
+            if not eid:
+                eid = self.extract_eId(elem) or f"{token}_{len(self.chapters) + 1}"
+            base_eid, n = eid, 2
+            while eid in used:
+                eid = f"{base_eid}-{n}"
+                n += 1
+            used.add(eid)
+            self._division_map[elem] = eid
+            self.chapters.append({
+                'eId': eid,
+                'type': div_type,
+                'num': num,
+                'heading': heading,
+                'parent': self._division_parent_eid(elem),
+            })
     
     def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         """
@@ -181,85 +250,158 @@ class AkomaNtosoParser(XMLParser):
             return f"art_{index}"
         return eid
     
+    # Native id attribute passed to AKNArticleExtractor; variants override
+    # (AKN4EU uses xml:id, Luxembourg uses id)
+    _extractor_id_attr = 'eId'
+
+    def _extract_article_children(self, extractor: AKNArticleExtractor,
+                                  element: etree._Element) -> list:
+        """Extract raw children for one article; variants may override."""
+        return extractor.extract_paragraphs_by_eid(element)
+
+    def _eli_article_eid(self, metadata: dict, index: int, used: set) -> str:
+        """ELI-style article eId (art_1, art_16a) from num or native eId."""
+        num = metadata.get('num') or ''
+        m = re.search(r'(\d+\s*[a-z]*)\s*\.?\s*$', num, re.IGNORECASE)
+        token = m.group(1).replace(' ', '').lower() if m else None
+        if not token:
+            native = str(metadata.get('eId') or '')
+            m = re.search(r'art_0*([0-9A-Za-z]+)', native)
+            token = m.group(1).lower() if m else str(index)
+        eid = f'art_{token}'
+        base, n = eid, 2
+        while eid in used:
+            eid = f'{base}-{n}'
+            n += 1
+        used.add(eid)
+        return eid
+
+    def _group_children_by_paragraph(self, children: list) -> list:
+        """Aggregate extractor children to paragraph level with ELI eIds:
+        par_N for numbered paragraphs (from the native para_N segment),
+        unp_N for content outside any numbered paragraph."""
+        out = []
+        by_key = {}
+        unp = 0
+        for child in children or []:
+            native = str(child.get('eId') or '')
+            text = child.get('text')
+            key = None
+            m = re.search(r'para_0*([0-9A-Za-z.]+)', native)
+            if m:
+                token = m.group(1).strip('.').lower()
+                if token:
+                    key = f'par_{token}'
+            if key is None:
+                unp += 1
+                key = f'unp_{unp}'
+            if key in by_key:
+                if text:
+                    prev = by_key[key].get('text')
+                    by_key[key]['text'] = f'{prev}\n{text}' if prev else text
+                continue
+            entry = {'eId': key, 'text': text}
+            by_key[key] = entry
+            out.append(entry)
+        return out
+
     def get_articles(self) -> None:
         """
-        Extract articles from the body using AKNArticleExtractor.
-        
-        Articles are the main structural units of legal documents. This method
-        uses AKNArticleExtractor to handle the extraction logic. Also handles
-        sections for jurisdictions that use sections instead of articles.
-        
-        Raises
-        ------
-        ParserConfigurationError
-            If body is not properly initialized
-        ExtractionError
-            If article extraction fails
+        Extract articles (and article-like sections, used in some
+        jurisdictions) in document order. Each article carries an
+        ELI-style eId, a parent link to its enclosing division, and
+        children aggregated to paragraph level (par_N / unp_N).
         """
         if self.body is None:
             from tulit.parser.exceptions import ParserConfigurationError
             error_msg = "Body is None. Call get_body() first to initialize the document body."
             self.logger.error(error_msg)
             raise ParserConfigurationError(error_msg)
-        
-        try:
-            # Removing all authorialNote nodes
-            self.body = self.remove_node(self.body, './/akn:authorialNote')
-            
-            # Use extractor for article processing
-            extractor = AKNArticleExtractor(self.namespaces)
 
-            # Find all <article> elements in the XML
-            article_elements = self.body.findall('.//akn:article', namespaces=self.namespaces)
-            if not article_elements:
-                self.logger.warning("No <article> elements found in document body")
-            
-            for article in article_elements:
-                try:
-                    metadata = extractor.extract_article_metadata(article)
-                    children = extractor.extract_paragraphs_by_eid(article)
+        # Removing all authorialNote nodes
+        self.body = self.remove_node(self.body, './/akn:authorialNote')
 
-                    self.articles.append({
-                        'eId': metadata['eId'],
-                        'num': metadata['num'],
-                        'heading': metadata['heading'],
-                        'children': children
-                    })
-                except Exception as e:
-                    from tulit.parser.exceptions import ExtractionError
-                    error_msg = f"Failed to extract article with eId={article.get('eId', 'unknown')}: {e}"
-                    self.logger.error(error_msg)
-                    raise ExtractionError(error_msg) from e
-        except Exception as e:
-            from tulit.parser.exceptions import ExtractionError
-            error_msg = f"Failed during article extraction: {e}"
-            self.logger.error(error_msg)
-            raise ExtractionError(error_msg) from e
-        
-        # Also find all <section> elements (used in some jurisdictions like Finland)
-        try:
-            section_elements = self.body.findall('.//akn:section', namespaces=self.namespaces)
-            for section in section_elements:
-                try:
-                    metadata = extractor.extract_article_metadata(section)
-                    children = extractor.extract_paragraphs_by_eid(section)
+        extractor = AKNArticleExtractor(self.namespaces,
+                                        id_attr=self._extractor_id_attr)
+        division_map = getattr(self, '_division_map', {})
+        self._article_map = {}
+        used = set()
 
-                    self.articles.append({
-                        'eId': metadata['eId'],
-                        'num': metadata['num'],
-                        'heading': metadata['heading'],
-                        'children': children
-                    })
-                except Exception as e:
-                    from tulit.parser.exceptions import ExtractionError
-                    error_msg = f"Failed to extract section with eId={section.get('eId', 'unknown')}: {e}"
-                    self.logger.error(error_msg)
-                    raise ExtractionError(error_msg) from e
-        except Exception as e:
-            from tulit.parser.exceptions import ExtractionError
-            error_msg = f"Failed during section extraction: {e}"
-            self.logger.error(error_msg)
-            raise ExtractionError(error_msg) from e
+        found_article = False
+        for element in self.body.iter():
+            if not isinstance(element.tag, str):
+                continue
+            local = etree.QName(element).localname
+            if local == 'article':
+                found_article = True
+            elif local == 'section':
+                # A section that groups articles is a division, not an article
+                if element.find('.//akn:article', namespaces=self.namespaces) is not None:
+                    continue
+            else:
+                continue
+            if self._in_quoted(element):
+                continue
+            try:
+                metadata = extractor.extract_article_metadata(element)
+                children = self._extract_article_children(extractor, element)
+            except Exception as e:
+                from tulit.parser.exceptions import ExtractionError
+                error_msg = (f"Failed to extract {local} with "
+                             f"{self._extractor_id_attr}="
+                             f"{element.get(self._extractor_id_attr, 'unknown')}: {e}")
+                self.logger.error(error_msg)
+                raise ExtractionError(error_msg) from e
+
+            eid = self._eli_article_eid(metadata, len(self.articles) + 1, used)
+            parent = None
+            for anc in element.iterancestors():
+                if anc in division_map:
+                    parent = division_map[anc]
+                    break
+            self._article_map[element] = eid
+            self.articles.append({
+                'eId': eid,
+                'num': metadata['num'],
+                'heading': metadata['heading'],
+                'parent': parent,
+                'children': self._group_children_by_paragraph(children),
+            })
+        if not found_article:
+            self.logger.warning("No <article> elements found in document body")
+
+        self._build_structure()
+
+    def _build_structure(self) -> None:
+        """Nested skeleton of the enacting terms (references only): division
+        nodes {eId, type, num, children} with article leaves, in document
+        order. Content stays in the flat chapters/articles lists."""
+        self.structure = []
+        if self.body is None:
+            return
+        division_map = getattr(self, '_division_map', {})
+        article_map = getattr(self, '_article_map', {})
+        info = {c['eId']: c for c in self.chapters}
+        nodes = {}
+
+        def attach(elem, node):
+            for anc in elem.iterancestors():
+                eid = division_map.get(anc)
+                if eid is not None and eid in nodes:
+                    nodes[eid]['children'].append(node)
+                    return
+            self.structure.append(node)
+
+        for elem in self.body.iter():
+            if elem in division_map:
+                eid = division_map[elem]
+                c = info.get(eid, {})
+                node = {'eId': eid, 'type': c.get('type'),
+                        'num': c.get('num'), 'children': []}
+                nodes[eid] = node
+                attach(elem, node)
+            elif elem in article_map:
+                attach(elem, {'eId': article_map[elem], 'type': 'article'})
     
     def get_conclusions(self) -> None:
         """

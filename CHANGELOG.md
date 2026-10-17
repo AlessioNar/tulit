@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+
+- **Latvia in `fetch`**: the original version from the official publication in Latvijas Vēstnesis (vestnesis.lv) and the consolidated version from likumi.lv, as in force today or on a date, by likumi.lv identifier or link. Laws, Cabinet regulations (with their attachments) and amending acts, whose amendments are structured.
+
 ## [0.9.0] - 2026-10-17
 ### Added
 

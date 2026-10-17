@@ -1,0 +1,695 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE act SYSTEM "legislation.dtd">
+<act>
+<metadata>
+<title>DATA PROTECTION ACT 2018</title>
+<number>7</number>
+<year>2018</year>
+<dateofenactment>20180524</dateofenactment>
+</metadata>
+<frontmatter>
+<p class="0 0 0 center 1 0" just="left"><graphic href="harp.jpg" quality="GOOD"/></p>
+<p class="0 0 0 center 1 0" just="left"><hr1/></p>
+<actnumber>
+<p class="0 0 0 center 1 0" just="left"><i>Number</i> 7 <i>of</i> 2018</p>
+</actnumber>
+<p class="0 0 0 center 1 0" just="left"><hr1/></p>
+<p class="0 0 0 center 1 0" just="left"><b>DATA PROTECTION ACT 2018</b></p>
+<p class="0 0 0 center 1 0" just="left"><hr1/></p>
+<p class="0 0 0 center 1 0" just="left"><hr1/></p>
+<actsreferredto>
+<title>
+<p class="0 0 0 center 1 0" just="left">Acts Referred to</p>
+</title>
+<p class="-3 11 0 left 1 0" just="left">Animal Health and Welfare Act 2013 (No. 15)</p>
+<p class="-3 11 0 left 1 0" just="left">Bankruptcy Act 1988 (No. 27)</p>
+<p class="-3 11 0 left 1 0" just="left">British-Irish Agreement Act 1999 (No. 1)</p>
+<p class="-3 11 0 left 1 0" just="left">Central Bank Act 1942 (No. 22)</p>
+<p class="-3 11 0 left 1 0" just="left">Central Bank Act 1997 (No. 8)</p>
+<p class="-3 11 0 left 1 0" just="left">Chemicals Act 2008 (No. 13)</p>
+<p class="-3 11 0 left 1 0" just="left">Children Act 2001 (No. 24)</p>
+<p class="-3 11 0 left 1 0" just="left">Civil Registration Act 2004 (No. 3)</p>
+<p class="-3 11 0 left 1 0" just="left">Civil Service Regulation Act 1956 (No. 46)</p>
+<p class="-3 11 0 left 1 0" just="left">Comhairle Act 2000 (No. 1)</p>
+<p class="-3 11 0 left 1 0" just="left">Commission To Inquire Into Child Abuse Act 2000 (No. 7)</p>
+<p class="-3 11 0 left 1 0" just="left">Commissions of Investigation Act 2004 (No. 23)</p>
+<p class="-3 11 0 left 1 0" just="left">Communications (Retention of Data) Act 2011 (No. 3)</p>
+<p class="-3 11 0 left 1 0" just="left">Communications Regulation (Postal Services) Act 2011 (No. 21)</p>
+<p class="-3 11 0 left 1 0" just="left">Companies Act 2014 (No. 38)</p>
+<p class="-3 11 0 left 1 0" just="left">Competition Act 2002 (No. 14)</p>
+<p class="-3 11 0 left 1 0" just="left">Comptroller and Auditor General (Amendment) Act 1993 (No. 8)</p>
+<p class="-3 11 0 left 1 0" just="left">Consumer Credit Act 1995 (No. 24)</p>
+<p class="-3 11 0 left 1 0" just="left">Control of Clinical Trials Act 1987 (No. 28)</p>
+<p class="-3 11 0 left 1 0" just="left">Credit Union and Co-operation with Overseas Regulators Act 2012 (No. 40)</p>
+<p class="-3 11 0 left 1 0" just="left">Criminal Justice (Forensic Evidence and DNA Database System) Act 2014 (No. 11)</p>
+<p class="-3 11 0 left 1 0" just="left">Criminal Justice (Miscellaneous Provisions) Act 2009 (No. 28)</p>
+<p class="-3 11 0 left 1 0" just="left">Criminal Justice (Money Laundering and Terrorist Financing) Act 2010 (No. 6)</p>
+<p class="-3 11 0 left 1 0" just="left">Criminal Justice (Mutual Assistance) Act 2008 (No. 7)</p>
+<p class="-3 11 0 left 1 0" just="left">Criminal Justice (Spent Convictions and Certain Disclosures) Act 2016 (No. 4)</p>
+<p class="-3 11 0 left 1 0" just="left">Customs Act 2015 (No. 18)</p>
+<p class="-3 11 0 left 1 0" just="left">Data Protection (Amendment) Act 2003 (No. 6)</p>
+<p class="-3 11 0 left 1 0" just="left">Data Protection Act 1988 (No. 25)</p>
+<p class="-3 11 0 left 1 0" just="left">Data Protection Acts 1988 and 2003</p>
+<p class="-3 11 0 left 1 0" just="left">Data Protection Acts 1988 to 2003</p>
+<p class="-3 11 0 left 1 0" just="left">Defence Act 1954 (No. 18)</p>
+<p class="-3 11 0 left 1 0" just="left">Dentists Act 1985 (No. 9)</p>
+<p class="-3 11 0 left 1 0" just="left">Disability Act 2005 (No. 14)</p>
+<p class="-3 11 0 left 1 0" just="left">Dormant Accounts Act 2001 (No. 32)</p>
+<p class="-3 11 0 left 1 0" just="left">Education (Welfare) Act 2000 (No. 22)</p>
+<p class="-3 11 0 left 1 0" just="left">Education Act 1998 (No. 51)</p>
+<p class="-3 11 0 left 1 0" just="left">Electoral (Amendment) Act 2006 (No. 33)</p>
+<p class="-3 11 0 left 1 0" just="left">Electoral Act 1992 (No. 23)</p>
+<p class="-3 11 0 left 1 0" just="left">Electricity Regulation Act 1999 (No. 23)</p>
+<p class="-3 11 0 left 1 0" just="left">European Parliament Elections Act 1997 (No. 2)</p>
+<p class="-3 11 0 left 1 0" just="left">Europol Act 2012 (No. 53)</p>
+<p class="-3 11 0 left 1 0" just="left">Financial Services and Pensions Ombudsman Act 2017 (No. 22)</p>
+<p class="-3 11 0 left 1 0" just="left">Firearms (Firearm Certificates For Non-Residents) Act 2000 (No. 20)</p>
+<p class="-3 11 0 left 1 0" just="left">Firearms Act 1925 (No. 17)</p>
+<p class="-3 11 0 left 1 0" just="left">Firearms and Offensive Weapons Act 1990 (No. 12)</p>
+<p class="-3 11 0 left 1 0" just="left">Freedom of Information Act 2014 (No. 30)</p>
+<p class="-3 11 0 left 1 0" just="left">Health (Alteration of Criteria for Eligibility) Act 2013 (No. 10)</p>
+<p class="-3 11 0 left 1 0" just="left">Health (Corporate Bodies) Act 1961 (No. 27)</p>
+<p class="-3 11 0 left 1 0" just="left">Health (Provision of Information) Act 1997 (No. 9)</p>
+<p class="-3 11 0 left 1 0" just="left">Health (Repayment Scheme) Act 2006 (No. 17)</p>
+<p class="-3 11 0 left 1 0" just="left">Health Act 2004 (No. 42)</p>
+<p class="-3 11 0 left 1 0" just="left">Health Identifiers Act 2014 (No. 15)</p>
+<p class="-3 11 0 left 1 0" just="left">Health Insurance Act 1994 (No. 16)</p>
+<p class="-3 11 0 left 1 0" just="left">Interception of Postal Packets and Telecommunications Messages (Regulation) Act 1993 (No. 10)</p>
+<p class="-3 11 0 left 1 0" just="left">Interpretation Act 2005 (No. 23)</p>
+<p class="-3 11 0 left 1 0" just="left">Irish Aviation Authority Act 1993 (No. 29)</p>
+<p class="-3 11 0 left 1 0" just="left">Irish Medicines Board Act 1995 (No. 29)</p>
+<p class="-3 11 0 left 1 0" just="left">Local Government Act 2001 (No. 37)</p>
+<p class="-3 11 0 left 1 0" just="left">Medical Practitioners Act 1978 (No. 4)</p>
+<p class="-3 11 0 left 1 0" just="left">Medical Practitioners Act 2007 (No. 25)</p>
+<p class="-3 11 0 left 1 0" just="left">Merchant Shipping (Investigation of Marine Casualties) Act 2000 (No. 14)</p>
+<p class="-3 11 0 left 1 0" just="left">Ministers and Secretaries (Amendment) Act 2011 (No. 10)</p>
+<p class="-3 11 0 left 1 0" just="left">Misuse of Drugs Act 1977 (No. 12)</p>
+<p class="-3 11 0 left 1 0" just="left">National Asset Management Agency Act 2009 (No. 34)</p>
+<p class="-3 11 0 left 1 0" just="left">National Shared Services Office Act 2017 (No. 26)</p>
+<p class="-3 11 0 left 1 0" just="left">Nursing Homes Support Scheme Act 2009 (No. 15)</p>
+<p class="-3 11 0 left 1 0" just="left">Official Languages Act 2003 (No. 32)</p>
+<p class="-3 11 0 left 1 0" just="left">Passports Act 2008 (No. 4)</p>
+<p class="-3 11 0 left 1 0" just="left">Personal Injuries Assessment Board Act 2003 (No. 46)</p>
+<p class="-3 11 0 left 1 0" just="left">Personal Insolvency Act 2012 (No. 44)</p>
+<p class="-3 11 0 left 1 0" just="left">Petty Sessions (Ireland) Act 1851 (14 &amp; 15 Vict., c.93)</p>
+<p class="-3 11 0 left 1 0" just="left">Pharmacy Act 2007 (No. 20)</p>
+<p class="-3 11 0 left 1 0" just="left">Planning and Development Act 2000 (No. 30)</p>
+<p class="-3 11 0 left 1 0" just="left">Prisons Acts 1826 to 2015</p>
+<p class="-3 11 0 left 1 0" just="left">Property Services (Regulation) Act 2011 (No. 40)</p>
+<p class="-3 11 0 left 1 0" just="left">Public Service Superannuation (Miscellaneous Provisions) Act 2004 (No. 7)</p>
+<p class="-3 11 0 left 1 0" just="left">Railway Safety Act 2005 (No. 31)</p>
+<p class="-3 11 0 left 1 0" just="left">Regulation of Lobbying Act 2015 (No. 5)</p>
+<p class="-3 11 0 left 1 0" just="left">Residential Institutions Redress Act 2002 (No. 13)</p>
+<p class="-3 11 0 left 1 0" just="left">Safety, Health and Welfare at Work Act 2005 (No. 10)</p>
+<p class="-3 11 0 left 1 0" just="left">Social Welfare Consolidation Act 2005 (No. 26)</p>
+<p class="-3 11 0 left 1 0" just="left">Sport Ireland Act 2015 (No. 15)</p>
+<p class="-3 11 0 left 1 0" just="left">Statistics Act 1993 (No. 21)</p>
+<p class="-3 11 0 left 1 0" just="left">Student Support Act 2011 (No. 4)</p>
+<p class="-3 11 0 left 1 0" just="left">Unclaimed Life Assurance Policies Act 2003 (No. 2)</p>
+<p class="-3 11 0 left 1 0" just="left">Vehicle Registration Data (Automated Searching and Exchange) Act 2018 (No. 5)</p>
+</actsreferredto>
+<p class="0 0 0 center 1 0" just="left"><graphic href="harp.jpg" quality="GOOD"/></p>
+<p class="0 0 0 center 1 0" just="left"><hr1/></p>
+<actnumber>
+<p class="0 0 0 center 1 0" just="left"><i>Number</i> 7 <i>of</i> 2018
+</p>
+</actnumber>
+<p class="0 6 4 center 1 0" just="left"><hr1/>
+</p>
+<p class="0 0 0 center 1 0" just="left"><b>DATA PROTECTION ACT 2018</b>
+</p>
+<p class="0 6 4 center 1 0" just="left"><hr1/>
+</p>
+<p class="0 8 0 left 1 0" just="left">An Act to establish a body to be known as An Coimisi<ufada/>n um Chosaint Sonra<ifada/> or, in the English language, the Data Protection Commission; to give further effect to Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016<fn><marker><su>1</su></marker><p class="-0 0 0 left 1 0" just="left"><font size="small" smallcaps="no"><su>1</su>OJ No. L 119, 4.5.2016, p.1</font></p></fn> on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation); to give effect to Directive (EU) 2016/680 of the European Parliament and of the Council of 27 April 2016<fn><marker><su>2</su></marker><p class="-0 0 0 left 1 0" just="left"><font size="small" smallcaps="no"><su>2</su>OJ No. L 119, 4.5.2016, p.89</font></p></fn> on the protection of natural persons with regard to the processing of personal data by competent authorities for the purposes of the prevention, investigation, detection or prosecution of criminal offences or the execution of criminal penalties, and on the free movement of such data, and repealing Council Framework Decision 2008/977/JHA; to give further effect to the Convention for the Protection of Individuals with regard to Automatic Processing of Personal Data done at Strasbourg on the 28th day of January 1981 and for those and other purposes to amend the Data Protection Act 1988; to provide for the consequential amendment of certain other enactments; and to provide for related matters. </p>
+<p class="0 8 0 left 1 0" just="left">[24<i>th May</i> , 2018] </p>
+<p class="-3 11 0 left 1 0" just="left"><b>Be it enacted by the Oireachtas as follows:</b></p>
+</frontmatter>
+<body>
+<part id="PART1">
+<title>
+<p class="0 0 0 center 1 0" just="left"><font size="large" smallcaps="no">PART 1</font></p>
+<p class="0 0 0 center 1 0" just="center">
+<font size="normal" smallcaps="yes">Preliminary and General</font></p>
+</title>
+<sect id="SEC1">
+<number>1.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Short title, citation and commencement</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>1.</b> (1) This Act may be cited as the Data Protection Act 2018.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) This Act and the Data Protection Acts 1988 and 2003 may be cited together as the Data Protection Acts 1988 to 2018.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) This Act shall come into operation on such day or days as the Minister may by order or orders appoint either generally or with reference to any particular purpose or provision and different days may be so appointed for different purposes or different provisions, and for the repeal of different enactments or provisions of enactments effected by <i>section 7</i>.</p>
+</sect>
+<sect id="SEC2">
+<number>2.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Interpretation</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>2.</b> (1) In this Act<emdash/></p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Act of 1988<cdq/> means the Data Protection Act 1988;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Act of 2014<cdq/> means the Companies Act 2014;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>authorised officer<cdq/> means a person appointed, or deemed to be appointed, to be an authorised officer under <i>section 129</i>;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>chairperson<cdq/> means the chairperson of the Commission;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>civil servant<cdq/> has the meaning assigned to it by the Civil Service Regulation Act 1956;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Commission<cdq/> has the meaning assigned to it by <i>section 10</i>;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Commissioner<cdq/> has the meaning assigned to it by <i>section 15</i> and includes a member of staff authorised to act in place of a Commissioner under <i>section 18</i>;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Data Protection Regulation<cdq/> means Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016<fn><marker><su>3</su></marker><p class="-0 0 0 left 1 0" just="left"><font size="small" smallcaps="no"><su>3</su>OJ No. L 119, 4.5.2016, p.1</font></p></fn> on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation);</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Directive<cdq/> means Directive (EU) 2016/680 of the European Parliament and of the Council of 27 April 2016<fn><marker><su>4</su></marker><p class="-0 0 0 left 1 0" just="left"><font size="small" smallcaps="no"><su>4</su>OJ No. L 119, 4.5.2016, p.89</font></p></fn> on the protection of natural persons with regard to the processing of personal data by competent authorities for the purposes of the prevention, investigation, detection or prosecution of criminal offences or the execution of criminal penalties, and on the free movement of such data, and repealing Council Framework Decision 2008/977/JHA;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>enactment<cdq/> has the same meaning as it has in the Interpretation Act 2005;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>local authority<cdq/> means a local authority within the meaning of section 2 of the Local Government Act 2001;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>Minister<cdq/> means the Minister for Justice and Equality;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>political party<cdq/> means a political party registered in the Register of Political Parties in accordance with section 25 of the Electoral Act 1992;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>prescribe<cdq/> means prescribe by regulations;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>public authority<cdq/> means<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) a Department of State,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) a regional assembly,</p>
+<p class="-3 14 0 left 1 0" just="left">(c) a local authority,</p>
+<p class="-3 14 0 left 1 0" just="left">(d) the office of the Director of Corporate Enforcement,</p>
+<p class="-3 14 0 left 1 0" just="left">(e) the Irish Auditing and Accounting Supervisory Authority,</p>
+<p class="-3 14 0 left 1 0" just="left">(f) any other person established by or under an enactment (other than the Act of 2014 or a former enactment relating to companies within the meaning of section 5 of that Act) other than<emdash/></p>
+<p class="-3 17 0 left 1 0" just="left">(i) a recognised school or board within the meaning of section 2 of the Education Act 1998 but including a recognised school established and maintained by an education and training board and a board of a school so established and maintained, and</p>
+<p class="-3 17 0 left 1 0" just="left">(ii) a management committee established under section 37(3) of the Education Act 1998,</p>
+<p class="-3 14 0 left 1 0" just="left">(g) a person with whom the Health Service Executive has, under section 38(1) of the Health Act 2004, entered into an arrangement for the provision of a health or personal social service by that person on behalf of the Executive,</p>
+<p class="-3 14 0 left 1 0" just="left">(h) the Garda S<ifada/>och<afada/>na;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>public body<cdq/> means<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) a company (within the meaning of the Act of 2014 or a former enactment relating to companies within the meaning of section 5 of that Act) a majority of the shares in which are held by or on behalf of a Minister of the Government,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) a subsidiary (within the meaning of section 7 of the Act of 2014) of a company referred to in <i>paragraph (a)</i>;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>special categories of personal data<cdq/>, other than in <i>Part 5</i>, means<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) personal data revealing<emdash/></p>
+<p class="-3 17 0 left 1 0" just="left">(i) the racial or ethnic origin of the data subject,</p>
+<p class="-3 17 0 left 1 0" just="left">(ii) the political opinions or the religious or philosophical beliefs of the data subject, or</p>
+<p class="-3 17 0 left 1 0" just="left">(iii) whether the data subject is a member of a trade union,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) genetic data,</p>
+<p class="-3 14 0 left 1 0" just="left">(c) biometric data for the purposes of uniquely identifying an individual,</p>
+<p class="-3 14 0 left 1 0" just="left">(d) data concerning health, or</p>
+<p class="-3 14 0 left 1 0" just="left">(e) personal data concerning an individual<csq/>s sex life or sexual orientation.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Subject to <i>subsection (1)</i>, a word or expression used in this Act, other than in <i>Part 5</i>, that is also used in the Data Protection Regulation has, unless the context otherwise requires, the same meaning in this Act as it has in that Regulation.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Unless the context otherwise requires, a reference in this Act (other than in <i>Part 5</i>) to a numbered Article is a reference to the Article so numbered of the Data Protection Regulation.</p>
+</sect>
+<sect id="SEC3">
+<number>3.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Designation by appropriate authority</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>3.</b> (1) An appropriate authority (within the meaning of the Civil Service Regulation Act 1956) may, as respects all or part of the personal data kept by the authority, designate a civil servant in relation to whom it is the appropriate authority to be a controller and while the designation is in force the civil servant so designated shall, other than for the purposes of <i>sections 105(3)</i> and <i>141(2)</i> and <i>(3)</i>, be deemed, for the purposes of this Act and the Data Protection Regulation, to be the controller in respect of the data concerned.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Without prejudice to <i>subsection (1)</i>, the Minister for Defence may, as respects all or part of the personal data kept by him in relation to the Defence Forces, designate an officer of the Permanent Defence Force who holds a commissioned rank therein to be a controller and while the designation is in force the officer so designated shall, other than for the purposes of <i>sections 105(3)</i> and <i>141(2)</i> and <i>(3)</i>, be deemed, for the purposes of this Act and the Data Protection Regulation, to be the controller in respect of the data concerned.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) For the purposes of this Act and the Data Protection Regulation<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) where a designation by the relevant appropriate authority under <i>subsection (1)</i> is not in force, a civil servant in relation to whom that authority is the appropriate authority shall be deemed to be its employee and, where such a designation is in force, such a civil servant (other than the civil servant the subject of the designation) shall be deemed to be an employee of the last mentioned civil servant,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) where a designation under <i>subsection (2)</i> is not in force, a member of the Defence Forces shall be deemed to be an employee of the Minister for Defence and, where such a designation is in force, such a member (other than the officer the subject of the designation) shall be deemed to be an employee of that officer, and</p>
+<p class="-3 14 0 left 1 0" just="left">(c) a member of the Garda S<ifada/>och<afada/>na (other than the Commissioner of the Garda S<ifada/>och<afada/>na) shall be deemed to be an employee of the Commissioner of the Garda S<ifada/>och<afada/>na.</p>
+</sect>
+<sect id="SEC4">
+<number>4.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Obligation not to require data subject to exercise right of access under Data Protection Regulation and Directive in certain circumstances</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>4.</b> (1) A person shall not, in connection with<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) the recruitment of an individual as an employee,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) the continued employment of the individual, or</p>
+<p class="-3 14 0 left 1 0" just="left">(c) a contract for the provision of services to the person by an individual,</p>
+<p class="0 11 0 left 1 0" just="left">require that individual to<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(i) make a request under Article 15 or under <i>section 91</i>, or</p>
+<p class="-3 14 0 left 1 0" just="left">(ii) supply the person with data relating to that individual obtained as a result of such a request.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) A person who contravenes <i>subsection (1)</i> shall be guilty of an offence and shall be liable<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) on summary conviction, to a class A fine or imprisonment for a term not exceeding 12 months or both, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) on conviction on indictment, to a fine not exceeding <euro/>50,000 or imprisonment for a term not exceeding 5 years or both.</p>
+</sect>
+<sect id="SEC5">
+<number>5.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Expenses</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>5.</b> The expenses incurred by the Commission and any Minister of the Government in the administration of this Act shall, to such an extent as may be sanctioned by the Minister for Public Expenditure and Reform, be paid out of moneys provided by the Oireachtas.</p>
+</sect>
+<sect id="SEC6">
+<number>6.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Regulations</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>6.</b> (1) Regulations made under this Act may contain such incidental, supplementary and consequential provisions as appear to the person making the regulations to be necessary or expedient for the purposes of the regulations.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Every regulation made under this Act, other than under <i>section 51</i>, <i>60</i> or <i>73</i>, shall be laid before each House of the Oireachtas as soon as may be after it is made.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Either House of the Oireachtas may, by a resolution passed within 21 sitting days after the day on which a regulation is laid before it under <i>subsection (2)</i>, annul the regulation.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) The annulment of a regulation under <i>subsection (3)</i> takes effect immediately on the passing of the resolution concerned but does not affect the validity of anything done under the regulation before the passing of the resolution.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) Regulations may be made under <i>section 51</i>, <i>60</i> or <i>73</i> only if<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) a draft of the proposed regulations has been laid before each House of the Oireachtas, and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) a resolution approving the draft has been passed by each House.</p>
+</sect>
+<sect id="SEC7">
+<number>7.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Repeals and revocations</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>7.</b> (1) Subject to <i>subsection (4)</i>, the following provisions of the Act of 1988 are repealed:</p>
+<p class="-3 14 0 left 1 0" just="left">(a) in section 1<emdash/></p>
+<p class="-3 17 0 left 1 0" just="left">(i) subsection (1), the definition of <odq/>direct marketing<cdq/>, <odq/>financial institution<cdq/> and <odq/>the register<cdq/>, and</p>
+<p class="-3 17 0 left 1 0" just="left">(ii) subsection (5);</p>
+<p class="-3 14 0 left 1 0" just="left">(b) section 2(7) and (8);</p>
+<p class="-3 14 0 left 1 0" just="left">(c) section 4(2), (6), (8) and (13);</p>
+<p class="-3 14 0 left 1 0" just="left">(d) section 5(1)(d);</p>
+<p class="-3 14 0 left 1 0" just="left">(e) section 9 and the Second Schedule;</p>
+<p class="-3 14 0 left 1 0" just="left">(f) section 11(3) and (4)(b);</p>
+<p class="-3 14 0 left 1 0" just="left">(g) sections 13, 14, 16, 17, 18, 19, 20, 22A and 33.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Subject to <i>subsection (4)</i>, section 14(2) of the Data Protection (Amendment) Act 2003 is repealed.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Subject to <i>subsection (4)</i>, the enactments specified in column (3) of <i>Schedule 1</i> are revoked to the extent specified in column (4) of that Schedule.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) The repeals and revocations effected by this section shall not apply for the purposes of <i>subsections (1)(b)</i>, <i>(2)</i> and <i>(3)</i> of <i>section 8</i>.</p>
+</sect>
+<sect id="SEC8">
+<number>8.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Application of Data Protection Act 1988</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>8.</b> (1) Subject to this section, the Act of 1988 shall, on and from the date on which this section comes into operation, cease to apply to the processing of personal data (within the meaning of that Act) other than<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) the processing of such data for the purposes of safeguarding the security of the State, the defence of the State or the international relations of the State, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) the processing of such data under the Criminal Justice (Forensic Evidence and DNA Database System) Act 2014 or the Vehicle Registration Data (Automated Searching and Exchange) Act 2018 to the extent that the Act of 1988 is applied in those Acts.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The Act of 1988 shall apply to<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) a complaint by an individual under section 10 of that Act made before the commencement of this section, and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) a contravention of that Act that occurred before such commencement.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) An investigation under section 10 of the Act of 1988 that was begun but not completed before the commencement of this section shall be completed in accordance with that Act and that Act shall apply to such an investigation.</p>
+</sect>
+</part>
+<part id="PART2">
+<title>
+<p class="0 0 0 center 1 0" just="left"><font size="large" smallcaps="no">PART 2</font></p>
+<p class="0 0 0 center 1 0" just="center"><font size="normal" smallcaps="yes">Data Protection Commission</font></p>
+</title>
+<sect id="SEC9">
+<number>9.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Establishment day</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>9.</b> The Minister shall, by order, appoint a day to be the establishment day for the purposes of this Act.</p>
+</sect>
+<sect id="SEC10">
+<number>10.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Establishment of Data Protection Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>10.</b> (1) On the establishment day there shall stand established a body to be known as An Coimisi<ufada/>n um Chosaint Sonra<ifada/> or, in the English language, the Data Protection Commission (in this Act referred to as the <odq/>Commission<cdq/>).</p>
+<p class="-3 11 0 left 1 0" just="left">(2) <i>Schedule 2</i> shall have effect in relation to the Commission.</p>
+</sect>
+<sect id="SEC11">
+<number>11.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Supervisory authority for Data Protection Regulation and Directive</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>11.</b> The Commission shall be the supervisory authority within the meaning of, and for the purposes specified in<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) the Data Protection Regulation, and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) the Directive.</p>
+</sect>
+<sect id="SEC12">
+<number>12.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Functions of Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>12.</b> (1) In addition to the functions assigned to the Commission by virtue of its being the supervisory authority for the purposes of the Data Protection Regulation and the Directive, the general functions of the Commission shall include<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) any functions assigned to it by or under this Act,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) functions transferred to the Commission under <i>section 14</i>, and</p>
+<p class="-3 14 0 left 1 0" just="left">(c) such other functions as may be assigned to it from time to time by or under any other enactment.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The Commission shall monitor the lawfulness of processing of personal data in accordance with<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) Regulation (EU) No 603/2013 of the European Parliament and of the Council of 26 June 2013<fn><marker><su>5</su></marker><p class="-0 0 0 left 1 0" just="left"><font size="small" smallcaps="no"><su>5</su>OJ No. L 180, 29.06.2013, p.1</font></p></fn> on the establishment of <osq/>Eurodac<csq/> for the comparison of fingerprints for the effective application of Regulation (EU) No 604/2013 establishing the criteria and mechanisms for determining the Member State responsible for examining an application for international protection lodged in one of the Member States by a third-country national or a stateless person and on requests for comparison with Eurodac data by Member States<csq/> law enforcement authorities and Europol for law enforcement purposes, and amending Regulation (EU) No 1077/2011 establishing a European Agency for the operational management of large-scale IT systems in the area of freedom, security and justice (recast), and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) Regulation (EU) No 604/2013 of the European Parliament and of the Council of 26 June 2013<fn><marker><su>6</su></marker><p class="-0 0 0 left 1 0" just="left"><font size="small" smallcaps="no"><su>6</su>OJ No. L 180, 29.06.2013, p.31</font></p></fn> establishing the criteria and mechanisms for determining the Member State responsible for examining an application for international protection lodged in one of the Member States by a third-country national or a stateless person (recast).</p>
+<p class="-3 11 0 left 1 0" just="left">(3) The Commission is designated for the purposes of Chapter IV (Mutual assistance) of the Convention for the Protection of Individuals with regard to Automatic Processing of Personal Data done at Strasbourg on the 28th day of January 1981.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) The Minister may, following consultation with the Commission, make any regulations that he or she considers necessary or expedient for the purpose of enabling Chapter IV (as referred to in <i>subsection (3)</i>) to have full effect.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) The Commission shall have all such powers as are necessary or expedient for the performance of its functions.</p>
+<p class="-3 11 0 left 1 0" just="left">(6) The Commission shall disseminate, to such extent and in such manner as it considers appropriate, information in relation to the functions performed by it.</p>
+<p class="-3 11 0 left 1 0" just="left">(7) The Commission shall be independent in the performance of its functions.</p>
+<p class="-3 11 0 left 1 0" just="left">(8) Subject to this Act, the Commission shall regulate its own procedures.</p>
+</sect>
+<sect id="SEC13">
+<number>13.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Performance of functions of Commission by Commissioner or member of staff</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>13.</b> (1) Where more than one Commissioner stands appointed under <i>section 15</i>, the functions of the Commission, other than the functions specified in <i>subsection (3)</i>, may be performed through or by a Commissioner where he or she is authorised in that behalf by the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The functions of the Commission, other than the functions specified in <i>subsection (3)</i>, may be performed through or by any member of staff of the Commission where he or she is authorised in that behalf by the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) The functions referred to in <i>subsections (1)</i> and <i>(2)</i> are the functions of the Commission under <i>sections 12(8)</i>, <i>21</i>, <i>28</i>, <i>43</i>, <i>84(9)</i> and <i>(10)</i>, <i>129</i>, <i>134(1)</i> and <i>(4)</i>, <i>135(1)</i>, <i>149</i> (other than <i>subsection (1)</i>), <i>paragraph 1</i> of <i>Schedule 2</i> and its function, as supervisory authority, under Article 35(4) and (5) of the Data Protection Regulation.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) A Commissioner or member of staff of the Commission who performs any of the functions of the Commission is presumed in any proceedings to have been authorised to do so on its behalf unless the contrary is shown.</p>
+</sect>
+<sect id="SEC14">
+<number>14.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Transfer of functions of Data Protection Commissioner to Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>14.</b> (1) All functions that, immediately before the establishment day, were vested in the Data Protection Commissioner are transferred to the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) A reference in any enactment or instrument under an enactment to the Data Protection Commissioner or to the Office of the Data Protection Commissioner shall be construed as a reference to the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) A reference in the Act of 1988 (other than in section 1(3)(c)(iii) in so far as it refers to to the Commissioner of the Garda S<ifada/>och<afada/>na) to the Commissioner shall be construed as a reference to the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) This section shall come into operation on the establishment day.</p>
+</sect>
+<sect id="SEC15">
+<number>15.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Membership of Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>15.</b> (1) The Commission shall consist of such and so many members (not being more than 3) as the Government determines.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Each member of the Commission shall be known as a Commissioner for Data Protection (in this Act referred to as a <odq/>Commissioner<cdq/>).</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Subject to <i>subsections (4)</i>, <i>(8)</i> and <i>(9)</i> and <i>section 18</i>, a Commissioner shall be appointed by the Government on the recommendation of the Public Appointments Service and the appointment shall be for a period of not less than 4 and not more than 5 years from the date of his or her appointment.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) If, immediately before the establishment day, there is a person holding office as the Data Protection Commissioner, he or she shall, on the establishment day, be a Commissioner for the remainder of the term of office, and upon the same terms and conditions, for which he or she was appointed as the Data Protection Commissioner.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) Subject to <i>subsection (7)</i>, the Public Appointments Service shall recommend a person for appointment as Commissioner following an open selection competition held by the Service for that purpose.</p>
+<p class="-3 11 0 left 1 0" just="left">(6) The Public Appointments Service shall appoint a selection panel to assist it in holding an open selection competition.</p>
+<p class="-3 11 0 left 1 0" just="left">(7) The Public Appointments Service shall ensure that a person is recommended under <i>subsection (5)</i> for appointment only if it is satisfied that the person has the qualifications, experience and skills necessary to enable the Commission to effectively perform its functions.</p>
+<p class="-3 11 0 left 1 0" just="left">(8) A Commissioner to whom <i>subsection (3)</i> applies and whose term of office expires by the efflux of time may be reappointed to the Commission by the Government for one further period of not less than 4 and not more than 5 years without the need for a further recommendation by the Public Appointments Service.</p>
+<p class="-3 11 0 left 1 0" just="left">(9) A Commissioner to whom <i>subsection (4)</i> applies and whose term of office expires by the efflux of time may be reappointed to the Commission by the Government for one further period of not less than 4 and not more than 5 years.</p>
+<p class="-3 11 0 left 1 0" just="left">(10) A Commissioner shall<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) act on a full-time basis subject to such terms and conditions (other than the payment of remuneration and allowances for expenses) as the Government may determine,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) be paid by the Commission such remuneration and allowances for expenses (if any) as the Minister may, with the consent of the Minister for Public Expenditure and Reform, from time to time determine,</p>
+<p class="-3 14 0 left 1 0" just="left">(c) not hold any other office or occupy any other position in respect of which emoluments are payable or carry on any business, and</p>
+<p class="-3 14 0 left 1 0" just="left">(d) cease to be a Commissioner on reaching the age of 70 years, but where the person is a new entrant (within the meaning of section 2 of the Public Service Superannuation (Miscellaneous Provisions) Act 2004) the requirement to cease to be a Commissioner on grounds of age shall not apply.</p>
+</sect>
+<sect id="SEC16">
+<number>16.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Appointment of chairperson of Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>16.</b> (1) The Minister shall, where the Commission consists of more than one Commissioner, appoint one of the Commissioners to be chairperson and such allowance (if any) may be paid by the Commission to the chairperson as the Minister may, with the consent of the Minister for Public Expenditure and Reform, from time to time determine.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The chairperson shall have a casting vote in the case of decisions to be taken by the Commission in the event of a tied vote.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Where a chairperson stands appointed under <i>subsection (1)</i>, and is unavailable to perform his or her duties due to absence or incapacity, the Minister shall appoint another existing Commissioner to act as chairperson for the duration of the period of absence or incapacity.</p>
+</sect>
+<sect id="SEC17">
+<number>17.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Resignation, removal, disqualification of Commissioner, ineligibility to become Commissioner</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>17.</b> (1) A Commissioner may resign from office by giving notice in writing to the Government of his or her resignation and the resignation shall take effect from such date as is specified in the notice which date shall be at least 90 days after the giving of the notice to the Government.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The Government may remove a Commissioner from office if they are satisfied that one or more of the grounds referred to in <i>subsection (3)</i> apply to the Commissioner.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) The grounds referred to in <i>subsection (2)</i> are that a Commissioner<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) has become incapable through ill health or otherwise of effectively performing the functions of the office, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) has engaged in serious misconduct.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) Where the Government propose to remove a Commissioner under <i>subsection (2)</i>, they shall notify the Commissioner concerned in writing of their proposal.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) A notification under <i>subsection (4)</i> shall include a statement<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) of the reasons for the proposed removal,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) that the Commissioner may, within a period of 30 working days from the sending of the notification or such other period as the Government may, having regard to the requirements of natural justice, specify in the notice, make representations to the Government in such form and manner as may be specified by the Government, as to why the Commissioner should not be removed from office, and</p>
+<p class="-3 14 0 left 1 0" just="left">(c) that where no representations are received within the period referred to in <i>paragraph (b)</i> the Government will, without further notice to the Commissioner, proceed with the removal of the Commissioner from office in accordance with this section.</p>
+<p class="-3 11 0 left 1 0" just="left">(6) In considering whether to remove a Commissioner from office under <i>subsection (2)</i>, the Government shall take into account<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) any representations made by the Commissioner under <i>subsection (5)(b)</i> within the period referred to in that subsection, and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) any other matter the Government consider relevant for the purpose of their decision.</p>
+<p class="-3 11 0 left 1 0" just="left">(7) Where, having taken into account the matters referred to in <i>subsection (6)</i>, the Government decide the Commissioner should be removed from office in accordance with this section, they shall notify the Commissioner in writing of their decision and the reasons for their decision.</p>
+<p class="-3 11 0 left 1 0" just="left">(8) Where the Government decide to remove a Commissioner from office in accordance with this section, they shall prepare a statement of the reason or reasons for such removal and cause that statement to be laid before each House of the Oireachtas as soon as practicable after the decision is made.</p>
+<p class="-3 11 0 left 1 0" just="left">(9) A Commissioner shall cease to hold office if he or she<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) is convicted on indictment of an offence,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) is convicted of an offence involving fraud or dishonesty,</p>
+<p class="-3 14 0 left 1 0" just="left">(c) has a declaration made against him or her under section 819 of the Act of 2014 or is deemed to be subject to such a declaration by virtue of Chapter 5 of Part 14 of that Act, or</p>
+<p class="-3 14 0 left 1 0" just="left">(d) is subject to, or is deemed to be subject to, a disqualification order within the meaning of Chapter 4 of Part 14 of the Act of 2014 whether by virtue of that Chapter or of any other provision of that Act.</p>
+<p class="-3 11 0 left 1 0" just="left">(10) A person shall not be eligible for appointment as a Commissioner if any of <i>paragraphs (a)</i> to <i>(d)</i> of <i>subsection (9)</i> are applicable in respect of the person.</p>
+</sect>
+<sect id="SEC18">
+<number>18.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Acting Commissioner</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>18.</b> (1) Where one Commissioner only stands appointed for the time being under <i>section 15</i>, the Minister may authorise a member of staff of the Commission to perform the functions of a Commissioner during any period when that Commissioner is absent from duty or absent from the State or is, for any other reason, unable to perform the functions of a Commissioner.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Where a vacancy occurs in the office of Commissioner and no Commissioner stands appointed for the time being under <i>section 15</i>, the Minister may authorise a member of staff of the Commission to perform the functions of a Commissioner during the period of that vacancy, but an authorisation under this subsection shall cease upon the appointment of a Commissioner under <i>section 15</i> whether or not such appointment was made for the purpose of filling that vacancy.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) An authorisation under <i>subsection (2)</i> shall not remain in force for a period of more than 6 months unless the Minister is satisfied that it is not reasonably practicable for an appointment under <i>section 15</i> to be made within that period, in which case he or she may extend that period by such further period as he or she is satisfied is a period within which it is reasonably practicable for an appointment to be made under that section.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) The Minister may at any time terminate an authorisation under this section.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) A member of staff of the Commission in respect of whom an authorisation under this section is in force may perform the functions of a Commissioner under this Act, and, for that purpose, references to a Commissioner in this Act (other than in <i>sections 15(3)</i>, <i>17(2)</i> to <i>(8)</i> and <i>22</i>) shall be construed as including references to such member of staff.</p>
+</sect>
+<sect id="SEC19">
+<number>19.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Accountability of Commissioner to Oireachtas Committees</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>19.</b> (1) In this section, <odq/>Committee<cdq/> means a Committee appointed by either House of the Oireachtas or jointly by both Houses of the Oireachtas (other than a committee referred to in section 19(1) of the Comptroller and Auditor General (Amendment) Act 1993 or the Committee on Members<csq/> Interests of D<afada/>il <Efada/>ireann or the Committee on Members<csq/> Interests of Seanad <Efada/>ireann) or a sub-committee of such a Committee.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Subject to <i>subsection (3)</i>, a Commissioner shall, at the request in writing of a Committee, attend before it to give account for the general administration of the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) The Commissioner shall not be required to give account before a Committee for any matter which is or has been or may at a future time be the subject of proceedings before a court or tribunal.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) Where the Commissioner is of the opinion that a matter in respect of which he or she is requested to give an account before a Committee is a matter to which <i>subsection (3)</i> applies, he or she shall inform the Committee of that opinion and the reasons for the opinion and, unless the information is conveyed to the Committee at a time when the Commissioner is before it, the information shall be so conveyed in writing.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) Where the Commissioner has informed a Committee of his or her opinion in accordance with <i>subsection (4)</i> and the Committee does not withdraw the request referred to in <i>subsection (2)</i> in so far as it relates to a matter the subject of that opinion<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) the Commissioner may, not later than 21 days after being informed by the Committee of its decision not to do so, apply to the High Court in a summary manner for determination of the question whether the matter is one to which <i>subsection (3)</i> applies, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) the Chairperson of the Committee may, on behalf of the Committee, make such an application,</p>
+<p class="-3 11 0 left 1 0" just="left">and the High Court shall determine the matter.</p>
+<p class="-3 11 0 left 1 0" just="left">(6) Pending the determination of an application under <i>subsection (5)</i>, the Commissioner shall not attend before the Committee to give account for the matter the subject of the application.</p>
+<p class="-3 11 0 left 1 0" just="left">(7) If the High Court determines that the matter concerned is one to which <i>subsection (3)</i> applies, the Committee shall withdraw the request referred to in <i>subsection (2)</i>, but if the High Court determines that <i>subsection (3)</i> does not apply, the Commissioner shall attend before the Committee and give account for the matter.</p>
+<p class="-3 11 0 left 1 0" just="left">(8) In this section, a reference to <odq/>Commissioner<cdq/> shall, where more than one Commissioner has been appointed under <i>section 15</i>, be taken to be a reference to the chairperson.</p>
+</sect>
+<sect id="SEC20">
+<number>20.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Assignment and transfer of staff to Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>20.</b> (1) Every civil servant who, immediately before the establishment day, stands assigned to act as a member of staff of the Data Protection Commissioner shall, on the establishment day, stand assigned to act as a member of staff of the Commission.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The Minister may, as he or she considers appropriate, designate in writing such and so many persons who stand assigned under <i>subsection (1)</i> to act as members of staff of the Commission to become and be members of staff of the Commission on and from such date as the Minister may specify in the designation (in this section referred to as the <odq/>effective date<cdq/>).</p>
+<p class="-3 11 0 left 1 0" just="left">(3) A member of staff designated in accordance with <i>subsection (2)</i> shall become and be a member of staff of the Commission on and from the effective date.</p>
+</sect>
+<sect id="SEC21">
+<number>21.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Staff of Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>21.</b> (1) The Commission may, subject to the approval of the Minister given with the consent of the Minister for Public Expenditure and Reform, appoint such number of persons to be members of its staff as it may determine.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The Commission shall, subject to the approval of the Minister given with the consent of the Minister for Public Expenditure and Reform, determine the grades of members of its staff and the numbers in each grade.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Members of staff of the Commission shall be civil servants.</p>
+</sect>
+<sect id="SEC22">
+<number>22.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Superannuation of Commissioners</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>22.</b> (1) The Minister may, with the consent of the Minister for Public Expenditure and Reform, make a scheme or schemes for<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) the granting of superannuation benefits to or in respect of a Commissioner ceasing to hold office, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) the making of contributions to a pension scheme approved of by the Minister with the consent of the Minister for Public Expenditure and Reform which has been entered into by the Commissioner.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The Minister may, with the consent of the Minister for Public Expenditure and Reform, make a scheme amending or revoking a scheme made under <i>subsection (1)</i>, including a scheme amended under this subsection.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) If any dispute arises as to the claim of a Commissioner to, or the amount of, any superannuation benefit payable in pursuance of a scheme made under <i>subsection (1)</i>, such dispute shall be submitted to the Minister who shall refer it to the Minister for Public Expenditure and Reform for determination by him or her.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) A scheme made under <i>subsection (1)</i> shall be carried out by the Minister in accordance with its terms.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) No superannuation benefit shall be granted by the Minister to or in respect of any Commissioner ceasing to hold office otherwise than<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) in accordance with a scheme under <i>subsection (1)</i>, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) with the consent of the Minister for Public Expenditure and Reform.</p>
+<p class="-3 11 0 left 1 0" just="left">(6) A scheme made under <i>subsection (1)</i> shall be laid before each House of the Oireachtas as soon as may be after it is made and, if a resolution annulling the scheme is passed by either such House within the next 21 days on which that House has sat after the scheme is laid before it, the scheme shall be annulled accordingly but without prejudice to the validity of anything previously done under that scheme prior to the resolution.</p>
+<p class="-3 11 0 left 1 0" just="left">(7) In this section, <odq/>superannuation benefits<cdq/> means pensions, gratuities and other allowances payable on resignation, retirement or death.</p>
+</sect>
+<sect id="SEC23">
+<number>23.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Accounts of Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>23.</b> (1) The Commission shall keep, in such form as may be approved by the Minister with the consent of the Minister for Public Expenditure and Reform, all proper and usual accounts of all money received or expended by it and, in particular, shall keep in such form as aforesaid all such special accounts as the Minister may, with the consent of the Minister for Public Expenditure and Reform, from time to time direct.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Accounts kept in accordance with this section shall be submitted, not later than 1 April in the year immediately following the financial year to which they relate or on such earlier date as the Minister may from time to time specify, by the Commission to the Comptroller and Auditor General for audit and, immediately after the audit, a copy of the accounts, and of such other special accounts (if any) kept in accordance with this section as the Minister, after consultation with the Minister for Public Expenditure and Reform, may direct and a copy of the Comptroller and Auditor General<csq/>s report on the accounts shall be presented to the Minister and the Commission shall, as soon as may be thereafter, cause copies thereof to be laid before each House of the Oireachtas.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Subject to <i>subsections (4)</i> and <i>(5)</i>, <i>subsections (1)</i> and <i>(2)</i> shall cease to have effect on the date of the coming into operation of <i>section 176(b)</i>.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) Accounts kept in accordance with this section that relate to the period specified under <i>subsection (5)</i> shall be submitted by the Commission to the Comptroller and Auditor General for audit not later than 3 months after the date of the coming into operation of <i>section 176(b)</i>.</p>
+<p class="-3 11 0 left 1 0" just="left">(5) The Minister may, for the purposes of <i>subsection (4)</i>, specify a period which<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) shall end on the date immediately preceding the date of the coming into operation of <i>section 176(b)</i>, and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) may be longer or shorter than a financial year of the Commission.</p>
+</sect>
+<sect id="SEC24">
+<number>24.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Annual report</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>24.</b> (1) The Commission shall, not later than 30 June in each year<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) prepare a report on its activities in the immediately preceding year, and</p>
+<p class="-3 14 0 left 1 0" just="left">(b) cause copies of the report to be laid before each House of the Oireachtas.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Notwithstanding <i>subsection (1)</i>, if but for this subsection, the first report under this section would relate to a period of less than 6 months, the report shall relate to that period and to the year immediately following that period and shall be made as soon as may be, but not later than 6 months after the end of that year.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) The Commission may, at any time after <i>subsection (1)(b)</i> has been complied with, publish its annual report in such form and manner as it considers appropriate.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) For the purposes of the law of defamation, a report under <i>subsection (1)</i> shall be absolutely privileged.</p>
+</sect>
+<sect id="SEC25">
+<number>25.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Accountability for accounts of Commission</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>25.</b> (1) The Commissioner, or where more than one Commissioner has been appointed under <i>section 15</i>, the chairperson, is the accounting officer in relation to the appropriation accounts of the Commission for the purpose of the Comptroller and Auditor General Acts 1866 to 1998.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) Section 19(2) of the Comptroller and Auditor General (Amendment) Act 1993 shall, in so far as it relates to data protection matters, not apply to the Commissioner or chairperson who is the accounting officer pursuant to <i>subsection (1)</i>.</p>
+</sect>
+<sect id="SEC26">
+<number>26.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Prohibition on disclosure of confidential information</b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>26.</b> (1) A relevant person shall not disclose confidential information obtained by him or her while performing functions under this Act or the Data Protection Regulation unless he or she is required or permitted by law, or duly authorised by the Commission, to do so.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) <i>Subsection (1)</i> shall not operate to prevent the disclosure by a relevant person of information<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) in a report to the Commission or a Commissioner,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) to a Minister of the Government, and</p>
+<p class="-3 14 0 left 1 0" just="left">(c) to a public authority, whether in the State or otherwise, for the purposes of facilitating cooperation between the Commission and such authority in the performance of their respective functions.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Subject to <i>section 154</i>, a person who contravenes <i>subsection (1)</i> commits an offence and is liable on summary conviction to a class A fine.</p>
+<p class="-3 11 0 left 1 0" just="left">(4) In this section<emdash/></p>
+<p class="0 11 0 left 1 0" just="left"><odq/>confidential information<cdq/> includes information that is expressed by the Commission to be confidential either as regards particular information or as regards information of a particular class or description;</p>
+<p class="0 11 0 left 1 0" just="left"><odq/>relevant person<cdq/> means<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) a Commissioner,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) a member of staff of the Commission,</p>
+<p class="-3 14 0 left 1 0" just="left">(c) an authorised officer,</p>
+<p class="-3 14 0 left 1 0" just="left">(d) any other person engaged under a contract for services by the Commission or a member of the staff of such a person, or</p>
+<p class="-3 14 0 left 1 0" just="left">(e) a person who has acted in a capacity referred to in any of <i>paragraphs (a)</i> to <i>(d)</i>.</p>
+</sect>
+<sect id="SEC27">
+<number>27.</number>
+<title>
+<p class="-3 11 0 left 1 0" just="left"><b>Civil proceedings for contravention of <i>section 26</i></b></p>
+</title>
+<p class="-3 11 0 left 1 0" just="left"><b>27</b>. (1) A person who suffers loss or harm as a result of a contravention of <i>section 26(1)</i> may, subject to <i>section 154</i>, bring proceedings against the person specified in <i>subsection (2)</i> seeking relief by way of<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) an injunction or declaration, or</p>
+<p class="-3 14 0 left 1 0" just="left">(b) damages,</p>
+<p class="-3 11 0 left 1 0" just="left">or both.</p>
+<p class="-3 11 0 left 1 0" just="left">(2) The person specified for the purposes of <i>subsection (1)</i> is<emdash/></p>
+<p class="-3 14 0 left 1 0" just="left">(a) where it is alleged that the contravention was committed by a Commissioner, member of staff of the Commission or an authorised officer and the applicant under that subsection is seeking an injunction or declaration, the Commissioner, member of staff or authorised officer concerned,</p>
+<p class="-3 14 0 left 1 0" just="left">(b) where it is alleged that the contravention was committed by a Commissioner, member of staff of the Commission or an authorised officer and the applicant under that subsection is seeking damages, the Commission, and</p>
+<p class="-3 14 0 left 1 0" just="left">(c) where it is alleged that the contravention was committed by a person other than a Commissioner, member of staff of the Commission or an authorised officer, that person.</p>
+<p class="-3 11 0 left 1 0" just="left">(3) Proceedings under <i>subsection (1)</i>, in so far as they seek the relief referred to in <i>paragraph (b)</i> of that subsection, shall be founded on tort.</p>
+</sect>
+</part>
+</body>
+<backmatter>
+<schedule id="SCHED1">
+<title>
+<p class="0 0 0 center 1 0" just="left">
+<font size="large" smallcaps="no">SCHEDULE 1</font></p>
+<p class="0 0 0 center 1 0" just="center"><font size="normal" smallcaps="yes">Statutory Instruments Revoked</font></p>
+</title>
+<p class="0 0 0 left 1 0" just="left">Section 7(3)</p>
+<table xmlns:x="http://www.w3.org/TR/REC-html40" width="100%" class="0 0 0 center 0 0"><colgroup><col width="40%"/><col width="60%"/></colgroup>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Item</p>
+<p class="-3 26 0 left 1 0" just="left">(1)</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. and Year</p>
+<p class="-3 26 0 left 1 0" just="left">(2)</p>
+<p class="0 0 0 left 1 0" just="left"/>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Short Title</p>
+<p class="-3 26 0 left 1 0" just="left">(3)</p>
+<p class="0 0 0 left 1 0" just="left"/>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Extent of Revocation</p>
+<p class="-3 26 0 left 1 0" just="left">(4)</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">1.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 347 of 1988</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Fees) Regulations 1988</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="0 0 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">2.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 350 of 1988</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Registration Period) Regulations 1988</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">3.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 351 of 1988</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Registration) Regulations 1988</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">4.</p>
+<p class="-3 26 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="-3 26 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 81 of 1989</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Restriction of section 4) Regulations 1989</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">5.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 95 of 1993 </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection Act 1988 (Section 5(1)(d)) (Specifications) Regulations 1993</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">6.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 657 of 2007</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection Act 1988 (Section 16(1)) Regulations 2007</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">7.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="-3 26 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 658 of 2007</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Fees) Regulations 2007</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">8.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 687 of 2007</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Processing of Genetic Data) Regulations 2007</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">9.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 421 of 2009</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection Act 1988 (Section 5(1)(d)) (Specification) Regulations 2009</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+<p class="-3 26 0 left 1 0" just="left"/>
+</td>
+</tr>
+<tr>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">10.</p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+<p class="0 0 0 left 1 0" just="left"> </p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">S.I. No. 426 of 2016</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">Data Protection (Section 2B) Regulations 2016</p>
+</td>
+<td colspan="1" rowspan="1" valign="top"><p class="0 0 0 left 1 0" just="left">The whole Regulations</p>
+<p class="-3 26 0 left 1 0" just="left"/>
+<p class="0 0 0 center 1 0" just="left"/>
+</td></tr>
+</table>
+</schedule>
+</backmatter>
+</act>

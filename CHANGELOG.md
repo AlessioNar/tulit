@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Docstrings of the DILA client render in the documentation.
+- The package declares its licence as `EUPL-1.2`, so PyPI shows the EUPL instead of "Other/Proprietary License".
+- The Python versions on PyPI (and the README badge) are the ones the tests run on: 3.11 to 3.14, each now tested in CI.
 
 ## [0.9.0] - 2026-10-17
 ### Added

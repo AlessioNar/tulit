@@ -134,13 +134,17 @@ class BodyBuilder:
         return self._stack[-1][2] if self._stack else None
 
     def division(self, type_: str, num: Optional[str] = None,
-                 heading: Optional[str] = None, token: Optional[str] = None) -> dict[str, Any]:
+                 heading: Optional[str] = None, token: Optional[str] = None,
+                 rank: Optional[int] = None) -> dict[str, Any]:
         """
         Open a division ('part', 'title', 'chapter', 'section', 'subsection').
 
         ``token`` overrides the number taken from ``num`` for the eId.
+        ``rank`` overrides the level of the type, for formats whose nesting
+        is explicit (e.g. its depth in the document tree).
         """
-        prefix, rank = DIVISION_TYPES.get(type_, GENERIC_DIVISION)
+        prefix, type_rank = DIVISION_TYPES.get(type_, GENERIC_DIVISION)
+        rank = type_rank if rank is None else rank
         while self._stack and self._stack[-1][0] >= rank:
             self._stack.pop()
         parent = self.current_division

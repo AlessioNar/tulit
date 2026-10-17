@@ -207,6 +207,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.xml.boe_consolidated import BOEConsolidatedParser
     from tulit.parser.xml.irish import IrishActParser
     from tulit.parser.xml.riigiteataja import RiigiTeatajaParser
+    from tulit.parser.html.sejm import SejmELIParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -227,6 +228,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('boe-consolidated', BOEConsolidatedParser, aliases=['es-boe-consolidated'])
     registry.register('ie-act', IrishActParser, aliases=['isb'])
     registry.register('riigiteataja', RiigiTeatajaParser, aliases=['ee-rt'])
+    registry.register('pl-eli', SejmELIParser, aliases=['sejm'])
 
 
 def get_parser_registry() -> ParserRegistry:

@@ -66,6 +66,16 @@ def test_page_header_in_articles():
     assert any('recurs in 8 articles' in p.message for p in warnings)
 
 
+def test_amending_formulas_are_not_page_headers():
+    # An amending act repeats its formulas in every article
+    formula = 'alcíme helyébe a következő alcím lép:'
+    articles = [{'eId': f'art_{n}', 'num': f'{n}. §', 'heading': None, 'parent': None,
+                 'children': [{'eId': 'unp_1', 'text': f'Az Infotv. {n}. {formula}',
+                               'amendment': {'action': 'replace', 'instruction': formula, 'quoted': []}}]}
+                for n in range(1, 9)]
+    assert check(_doc(articles=articles, chapters=[])) == []
+
+
 def test_metadata():
     doc = _doc(meta={'jurisdiction': 'XX', 'language': None, 'version': 'original', 'source': 'x',
                      'version_date': '21.06.2018'})

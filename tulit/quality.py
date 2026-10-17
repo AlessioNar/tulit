@@ -130,11 +130,14 @@ def check(doc: dict[str, Any], expect_articles: bool = True) -> list[Problem]:
         if text != text.strip():
             add(WARNING, where, 'the text has leading or trailing spaces')
 
-    # Page furniture (running headers, footers) repeated across articles
+    # Page furniture (running headers, footers) repeated across articles; amending
+    # provisions repeat their formulas ('... helyébe a következő alcím lép:')
     lines: Counter = Counter()
     for article in articles:
         seen = set()
         for child in article.get('children') or []:
+            if child.get('amendment'):
+                continue
             for sentence in re.split(r'(?<=[.;:])\s+', child.get('text') or ''):
                 if len(sentence) >= 25 and sentence not in seen:
                     seen.add(sentence)

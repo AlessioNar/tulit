@@ -1,0 +1,969 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<officiele-publicatie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://technische-documentatie.oep.overheid.nl/schema/op-xsd-2012-2">
+  <metadata>
+    <meta name="OVERHEIDop.externMetadataRecord" scheme="" content="https://zoek.officielebekendmakingen.nl/stb-2020-58/metadata.xml" />
+  </metadata>
+  <kop>
+    <titel>Staatsblad</titel>
+    <subtitel>van het Koninkrijk der Nederlanden</subtitel>
+  </kop>
+  <staatsblad>
+    <intitule>Besluit van 4 februari 2020 tot wijziging van het Besluit rechtspositie rechterlijke ambtenaren en enige andere besluiten ter formalisering van de Arbeidsvoorwaardenovereenkomst sector Rechterlijke Macht 2017 en enige andere aanpassingen</intitule>
+    <wet-besluit>
+      <aanhef>
+        <wij>Wij Willem-Alexander, bij de gratie Gods, Koning der Nederlanden, Prins van Oranje-Nassau, enz. enz. enz.</wij>
+        <considerans>
+          <considerans.al bevat="voordracht">Op de voordracht van Onze Minister voor Rechtsbescherming van 10 december 2019, nr. 2767699, Directie Wetgeving en Juridische Zaken</considerans.al>
+          <considerans.al bevat="grondslag">Gelet op de artikelen 7, derde lid, 9, tweede lid, en 19b van de Wet rechtspositie rechterlijke ambtenaren, de artikelen 14, vierde lid, en 73, derde lid, van de Wet op de rechterlijke organisatie en artikel VI van de Wet van 2 december 2015 tot wijziging van de Wet rechtspositie rechterlijke ambtenaren en enkele andere wetten in verband met een herziening van de opleiding van rechters en officieren van justitie;</considerans.al>
+          <considerans.al bevat="gehoord">De Afdeling advisering van de Raad van State gehoord (advies van 22 januari 2020, No. W16.19.0404/II);</considerans.al>
+          <considerans.al bevat="gezien">Gezien het nader rapport van Onze Minister voor Rechtsbescherming van 30 januari 2020, nr. 2808619, Directie Wetgeving en Juridische Zaken;</considerans.al>
+        </considerans>
+        <afkondiging>
+          <al>Hebben goedgevonden en verstaan:</al>
+        </afkondiging>
+      </aanhef>
+      <wettekst>
+        <wijzig-artikel status="goed">
+          <kop>
+            <label>ARTIKEL</label>
+            <nr status="officieel">I</nr>
+          </kop>
+          <wat type="wijziging">Het Besluit rechtspositie rechterlijke ambtenaren wordt als volgt gewijzigd:</wat>
+          <wijzig-lid>
+            <lidnr status="officieel">A</lidnr>
+            <wat>In artikel 6, tweede lid, onder a, wordt «categorieën 10 tot en met 12» vervangen door «categorieën 9a tot en met 11».</wat>
+          </wijzig-lid>
+          <wijzig-lid>
+            <lidnr status="officieel">B</lidnr>
+            <wat>Artikel 6a, eerste lid, wordt als volgt gewijzigd:</wat>
+            <wijziging>
+              <nr status="officieel">1.</nr>
+              <wat>In onderdeel a wordt «€ 506» vervangen door «€ 514».</wat>
+            </wijziging>
+            <wijziging>
+              <nr status="officieel">2.</nr>
+              <wat>In onderdeel b wordt «€ 387» vervangen door «€ 393».</wat>
+            </wijziging>
+            <wijziging>
+              <nr status="officieel">3.</nr>
+              <wat>In onderdeel c wordt «€ 294» vervangen door «€ 299».</wat>
+            </wijziging>
+          </wijzig-lid>
+          <wijzig-lid>
+            <lidnr status="officieel">C</lidnr>
+            <wat>In artikel 6h, eerste lid, aanhef, wordt «rechterlijke ambtenaar in opleiding» vervangen door «officier in opleiding».</wat>
+          </wijzig-lid>
+          <wijzig-lid>
+            <lidnr status="officieel">D</lidnr>
+            <wat>In artikel 8ca, eerste lid, aanhef, wordt «rechterlijke ambtenaren in opleiding» vervangen door «officieren in opleiding».</wat>
+          </wijzig-lid>
+          <wijzig-lid>
+            <lidnr status="officieel">E</lidnr>
+            <wat>De bijlage, bedoeld in artikel 5, eerste lid, komt te luiden:</wat>
+            <wijziging>
+              <wijzig-divisie soort="bijlage" opmaak="default">
+                <kop>
+                  <titel>Bijlage als bedoeld in artikel 5, eerste lid, van het Besluit rechtspositie rechterlijke ambtenaren</titel>
+                </kop>
+                <table tabstyle="xml2" frame="topbot" pgwide="1" rowsep="0" colsep="0">
+                  <tgroup tgroupstyle="xml2" cols="3" char="" charoff="50" align="left">
+                    <colspec colnum="1" colname="col1" colwidth="138*" />
+                    <colspec colnum="2" colname="col2" colwidth="138*" />
+                    <colspec colnum="3" colname="col3" colwidth="138*" align="right" />
+                    <thead valign="bottom">
+                      <row rowsep="1">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>Salariscategorie</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>per 1 januari 2017</al>
+                        </entry>
+                      </row>
+                    </thead>
+                    <tbody valign="top">
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>1</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>11.638,25</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>2</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>10.865,92</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>3</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>10.142,35</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>4</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>9.790,58</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>5</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>9.460,85</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>6</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>8.997,27</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>7</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>aanvang</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.224,26</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 1 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.691,28</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 2 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>8.244,76</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 3 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>8.533,72</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>8</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>aanvang</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.224,26</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 1 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.452,36</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 2 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.691,28</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 3 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.963,76</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>9</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>ingroeitrede</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.223,08</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>aanvang</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.600,99</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 1 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.751,61</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 2 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.899,52</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 3 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>6.057,75</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 4 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>6.219,74</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 5 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>6.385,53</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 6 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>6.585,47</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 7 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>6.792,44</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 8 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.005,37</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 9 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>7.224,26</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>9a</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>0</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>2.616,69</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>1</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>3.048,57</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>2</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>3.389,67</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>3</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>3.624,18</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>4</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>3.816,05</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>5</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>3.997,26</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>6</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.114,51</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>7</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.210,44</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>8</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.306,38</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>9</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.412,97</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>10</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.524,89</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>11</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.636,82</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>12</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.748,74</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>13</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.860,66</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>14</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.967,26</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>15</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.073,85</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>16</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.169,79</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>17</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.223,08</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>18</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.329,68</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>19</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.382,97</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>20</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.452,26</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>10</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>aanvang</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.800,73</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 1 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.919,94</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 2 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.034,24</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 3 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.154,00</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 4 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.302,47</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 5 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.451,99</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 6 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.600,99</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 7 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.751,61</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 8 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.822,04</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                          <al>11</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>aanvang</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.207,45</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 1 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.327,18</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 2 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.446,38</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 3 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.564,52</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 4 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.679,36</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 5 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.800,73</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 6 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>4.919,94</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 7 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.034,24</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 8 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.154,00</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 9 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.302,47</al>
+                        </entry>
+                      </row>
+                      <row rowsep="0">
+                        <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                        <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                          <al>na 10 jaar</al>
+                        </entry>
+                        <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                          <al>5.377,23</al>
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+              </wijzig-divisie>
+            </wijziging>
+          </wijzig-lid>
+        </wijzig-artikel>
+        <wijzig-artikel status="goed">
+          <kop>
+            <label>ARTIKEL</label>
+            <nr status="officieel">II</nr>
+          </kop>
+          <wat type="wijziging">In artikel 3, tweede lid, van het Besluit beëdiging en vergoeding buitengriffiers en waarnemend griffiers wordt «op uitzendovereenkomst» vervangen door «of uitzendovereenkomst».</wat>
+        </wijzig-artikel>
+        <wijzig-artikel status="goed">
+          <kop>
+            <label>ARTIKEL</label>
+            <nr status="officieel">III</nr>
+          </kop>
+          <wijziging>
+            <nr status="officieel">1.</nr>
+            <wat>De voor de rechterlijke ambtenaren in opleiding, bedoeld in artikel VI van de Wet van 2 december 2015 tot wijziging van de Wet rechtspositie rechterlijke ambtenaren en enkele andere wetten in verband met een herziening van de opleiding van rechters en officieren van justitie, geldende hoogten van salarissen luiden per 1 januari 2017 als volgt:</wat>
+            <artikeltekst>
+              <table tabstyle="xml2" frame="topbot" pgwide="1" rowsep="0" colsep="0">
+                <tgroup tgroupstyle="xml2" cols="3" char="" charoff="50" align="left">
+                  <colspec colnum="1" colname="col1" colwidth="138*" />
+                  <colspec colnum="2" colname="col2" colwidth="138*" />
+                  <colspec colnum="3" colname="col3" colwidth="138*" align="right" />
+                  <thead valign="bottom">
+                    <row rowsep="1">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                        <al>Salariscategorie</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>Per 1 januari 2017</al>
+                      </entry>
+                    </row>
+                  </thead>
+                  <tbody valign="top">
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0">
+                        <al>12</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>aanvang</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>2.616,69</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 1 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>2.735,86</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 2 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>3.109,74</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 3 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>3.483,59</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 4 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>3.612,00</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 5 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>3.731,74</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 6 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>3.840,10</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 7 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>3.953,34</al>
+                      </entry>
+                    </row>
+                    <row rowsep="0">
+                      <entry colsep="0" valign="top" align="left" colname="col1" morerows="0" rotate="0" />
+                      <entry colsep="0" valign="top" align="left" colname="col2" morerows="0" rotate="0">
+                        <al>na 8 jaar</al>
+                      </entry>
+                      <entry colsep="0" valign="top" align="right" colname="col3" morerows="0" rotate="0">
+                        <al>4.080,66</al>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </table>
+            </artikeltekst>
+          </wijziging>
+          <wijziging>
+            <nr status="officieel">2.</nr>
+            <wat>De rechterlijk ambtenaar in opleiding, die is aangesteld voor een minder dan volledige arbeidsduur of voor wie de arbeidsduur op basis van <extref doc="http://wetten.overheid.nl/BWBR0006530/2017-07-01#Hoofdstuk2c_Artikel8b" soort="URL" status="actief">artikel 8b, eerste lid</extref>, van het Besluit rechtspositie rechterlijke ambtenaren is vastgesteld op meer dan gemiddeld 36 uren per week, ontvangt een salaris overeenkomstig het eerste lid, vermenigvuldigd met de voor hem geldende arbeidsduurfactor.</wat>
+          </wijziging>
+        </wijzig-artikel>
+        <artikel status="goed">
+          <kop>
+            <label>ARTIKEL</label>
+            <nr status="officieel">IV</nr>
+          </kop>
+          <lid>
+            <lidnr status="officieel">1.</lidnr>
+            <al>Dit besluit treedt in werking met ingang van de dag na de datum van uitgifte van het Staatsblad waarin het wordt geplaatst.</al>
+          </lid>
+          <lid>
+            <lidnr status="officieel">2.</lidnr>
+            <al>Artikel I, onderdelen A en E, en artikel III werken terug tot en met 1 januari 2017.</al>
+          </lid>
+          <lid>
+            <lidnr status="officieel">3.</lidnr>
+            <al>Artikel I, onderdeel B, werkt terug tot en met 1 januari 2018.</al>
+          </lid>
+        </artikel>
+      </wettekst>
+      <wetsluiting status="goed">
+        <slotformulering>
+          <al>Lasten en bevelen dat dit besluit met de daarbij behorende nota van toelichting in het Staatsblad zal worden geplaatst.</al>
+        </slotformulering>
+        <gegeven>
+          <dagtekening>
+            <plaats>’s-Gravenhage,</plaats>
+            <datum isodatum="2020-02-04">4 februari 2020</datum>
+          </dagtekening>
+          <koning>Willem-Alexander</koning>
+        </gegeven>
+        <ondertekening>
+          <functie>De Minister voor Rechtsbescherming,</functie>
+          <naam>
+            <voornaam>S.</voornaam>
+            <achternaam>Dekker</achternaam>
+          </naam>
+        </ondertekening>
+        <uitgifte>
+          <datum isodatum="2020-02-14">Uitgegeven de <nadruk type="cur">veertiende</nadruk> februari 2020</datum>
+          <ondertekening>
+            <functie>De Minister van Justitie en Veiligheid,</functie>
+            <naam>
+              <voornaam>F.B.J.</voornaam>
+              <achternaam>Grapperhaus</achternaam>
+            </naam>
+          </ondertekening>
+        </uitgifte>
+      </wetsluiting>
+      <nota-toelichting>
+        <kop>
+          <titel>NOTA VAN TOELICHTING</titel>
+        </kop>
+        <divisie opmaak="default">
+          <kop>
+            <titel>Algemeen</titel>
+          </kop>
+          <divisie opmaak="default">
+            <kop>
+              <nr status="officieel">1.</nr>
+              <titel>Doel van de regeling</titel>
+            </kop>
+            <al>Dit besluit strekt tot uitvoering van de tussen de Minister voor Rechtsbescherming en de Nederlandse Vereniging voor Rechtspraak (hierna: NVvR) op 1 februari 2018 gesloten Arbeidsvoorwaardenovereenkomst sector Rechterlijke Macht 1/1/2017 – 31/12/2017 (hierna: arbeidsvoorwaardenovereenkomst). Deze arbeidsvoorwaardenovereenkomst ziet op verhoging van salarisbedragen voor rechterlijke ambtenaren met 1,4% met ingang van 1 januari 2017. Deze verhoging is doorgevoerd door het opnieuw vaststellen van de in artikel 5, eerste lid, van het Besluit rechtspositie rechterlijke ambtenaren (hierna: Brra) bedoelde bijlage. Voorts is van de gelegenheid gebruik gemaakt om enkele andere actualiseringen en verbeteringen door te voeren in het Brra.</al>
+          </divisie>
+          <divisie opmaak="default">
+            <kop>
+              <nr status="officieel">2.</nr>
+              <titel>Financiële gevolgen, administratieve lasten en bedrijfseffecten</titel>
+            </kop>
+            <al>De financiële gevolgen van de arbeidsvoorwaardenovereenkomst worden gedekt binnen de begroting van het Ministerie van Justitie en Veiligheid. Dit besluit brengt geen administratieve lasten voor bedrijven met zich.</al>
+          </divisie>
+          <divisie opmaak="default">
+            <kop>
+              <nr status="officieel">3.</nr>
+              <titel>Consultatie</titel>
+            </kop>
+            <al-groep>
+              <al>Een ontwerp van dit besluit is ter consultatie toegezonden aan de president van de Hoge Raad, de procureur-generaal bij de Hoge Raad, de Raad voor de rechtspraak, het College van procureurs-generaal, de Autoriteit persoonsgegevens, het Adviescollege Toetsing Regeldruk (ATR) en de NVvR. Van al deze organisaties is een reactie ontvangen. Daarnaast bestond voor een ieder de gelegenheid om via internetconsultatie op het concept te reageren. Dit heeft tot enkele reacties geleid.</al>
+              <al>Van het in consultatie gebrachte ontwerpbesluit maakte onderdeel uit een regeling, op te nemen in het Brra, inzake het melden en registreren van financiële belangen en effectentransacties door rechterlijke ambtenaren. De ontvangen consultatiereacties hadden inhoudelijk uitsluitend betrekking op de in het ontwerpbesluit opgenomen maatregel inzake het melden van financiële belangen en effectentransacties. In de consultatiereacties wordt de wenselijkheid van een regeling inzake het melden van financiële belangen en effectentransacties voor rechterlijke ambtenaren in algemene zin niet bestreden. Wel wordt er in het advies van de president van de Hoge Raad en de procureur-generaal bij de Hoge Raad, alsmede in het advies van de Autoriteit persoonsgegevens, op gewezen dat een regeling inzake het melden van financiële belangen en effectentransacties een zodanige inbreuk kan meebrengen op de persoonlijke levenssfeer van betrokkenen dat een voorafgaande (expliciete) wettelijke grondslag is vereist, welke op dit moment ontbreekt.</al>
+              <al>Deze adviezen hebben aanleiding gegeven tot heroverweging van dit onderdeel. Met name gelet op het feit dat een regeling inzake het melden en registreren van financiële belangen een inbreuk kan meebrengen op de persoonlijke levenssfeer van rechterlijke ambtenaren, wordt er bij nadere overweging voor gekozen de voornoemde maatregel niet op te nemen in dit besluit. Het voornemen bestaat dit onderwerp bij gelegenheid te regelen in de Wet rechtspositie rechterlijke ambtenaren (Wrra). Dit sluit bovendien beter aan bij de vergelijkbare regeling voor gewone ambtenaren, zoals deze met ingang van 1 januari 2020 komt te gelden op grond van artikel 5, eerste lid, onderdeel d, en artikel 8, eerste lid, onderdeel c, en tweede lid, onderdeel b, van de Ambtenarenwet 2017.</al>
+              <al>De NVvR heeft, onder verwijzing naar artikel 51, eerste lid, van de Wrra, aangegeven te kunnen instemmen met het besluit zoals dat is aangepast na verwerking van de consultatiereacties zoals hierboven besproken.</al>
+            </al-groep>
+          </divisie>
+        </divisie>
+        <divisie opmaak="default">
+          <kop>
+            <titel>Artikelgewijs</titel>
+          </kop>
+          <divisie opmaak="default">
+            <kop>
+              <titel>Artikel I</titel>
+            </kop>
+            <divisie opmaak="default">
+              <kop>
+                <titel>Onderdeel A (Wijziging artikel 6 Brra)</titel>
+              </kop>
+              <al>Met deze wijziging wordt een technisch herstel aangebracht. Met de invoering van de Wet van 2 december 2015 tot wijziging van de Wet rechtspositie rechterlijke ambtenaren en enkele andere wetten in verband met een herziening van de opleiding van rechters en officieren van justitie (<extref doc="stb-2015-456" soort="document" status="actief">Stb. 2015, 456</extref>; hierna: Wet opleidingshuis rechterlijke macht) op 1 januari 2017 is in artikel 7, tweede lid, Wrra de salariscategorie 12 komen te vervallen en is de nieuwe salariscategorie 9a ingevoerd. Per abuis is in artikel 6 Brra deze wijziging niet verwerkt. Dit wordt met voorliggend besluit hersteld. In artikel IV wordt voorzien in de terugwerkende kracht van deze aanpassing tot en met 1 januari 2017.</al>
+            </divisie>
+            <divisie opmaak="default">
+              <kop>
+                <titel>Onderdeel B (Wijziging artikel 6a Brra)</titel>
+              </kop>
+              <al>In het Arbeidsvoorwaardenakkoord sector Rechterlijke Macht 2001–2002 is overeengekomen de vergoedingen, bedoeld in artikel 9, tweede lid, Wrra, jaarlijks met ingang van 2004 per 1 januari te indexeren met het percentage van de in het voorgaande kalenderjaar gerealiseerde contractloonmutatie op jaarbasis in de Sector Rechterlijke Macht. De in artikel 9, tweede lid, Wrra bedoelde bedragen zijn vastgelegd in artikel 6a, eerste lid, Brra. Met onderdeel B worden in het licht van deze afspraak de in artikel 6a Brra opgenomen bedragen geïndexeerd per 1 januari 2018. Artikel IV regelt hiertoe een terugwerkende kracht tot en met 1 januari 2018.</al>
+            </divisie>
+            <divisie opmaak="default">
+              <kop>
+                <titel>Onderdelen C en D (wijziging artikelen 6h en 8ca Brra)</titel>
+              </kop>
+              <al>Sinds de invoering van de Wet opleidingshuis rechterlijke macht worden geen nieuwe rechterlijke ambtenaren in opleiding (raio’s) aangenomen. Betrokkenen worden bij de rechterlijke macht aangesteld als rechter in opleiding of als officier van justitie in opleiding. In de artikelen 6h en 8ca Brra is de term «rechterlijk ambtenaar in opleiding» abusievelijk blijven staan. Dit wordt met voorliggend besluit hersteld.</al>
+            </divisie>
+            <divisie opmaak="default">
+              <kop>
+                <titel>Onderdeel E (vaststellen nieuwe salaristabel)</titel>
+              </kop>
+              <al>In de Arbeidsvoorwaardenovereenkomst is vastgelegd dat de salarisbedragen van rechterlijke ambtenaren met ingang van 1 januari 2017 worden verhoogd met 1,4%. De bedoelde verhoging is in 2018 met terugwerkende kracht tot uitbetaling gekomen. Met onderdeel E wordt de in artikel 5, eerste lid, Brra bedoelde bijlage met salarisbedragen opnieuw vastgesteld, waarin de stijging van 1,4% is verwerkt. De verhoging van de salarisbedragen voor raio’s is afzonderlijk geregeld in artikel III.</al>
+            </divisie>
+          </divisie>
+          <divisie opmaak="default">
+            <kop>
+              <titel>Artikel II</titel>
+            </kop>
+            <al>Met het Besluit van 1 juni 2010 tot wijziging van het Besluit rechtspositie rechterlijke ambtenaren en enkele andere besluiten in verband met de flexibilisering en verduidelijking alsmede enkele aanvullingen van de regeling van de rechtspositie van rechterlijke ambtenaren en rechterlijke ambtenaren in opleiding (<extref doc="stb-2010-210" soort="document" status="actief">Stb. 2010, 210</extref>) is in artikel 3, tweede lid, van het Besluit beëdiging en vergoeding buitengriffiers en waarnemend griffiers per abuis de tekst «stage op uitzendovereenkomst» opgenomen, waar was bedoeld «stage <nadruk type="cur">of</nadruk> uitzendovereenkomst». Met artikel II wordt dit hersteld.</al>
+          </divisie>
+          <divisie opmaak="default">
+            <kop>
+              <titel>Artikel III</titel>
+            </kop>
+            <al>In het voorgaande is al aangegeven dat sinds de invoering van de Wet opleidingshuis rechterlijke macht geen raio’s meer worden aangesteld. De in de Arbeidsvoorwaardenovereenkomst afgesproken verhoging van salarisbedragen geldt ook voor de raio’s die nog binnen de rechterlijke organisatie werkzaam zijn. Op grond van artikel VI van de Wet opleidingshuis rechterlijke macht zijn op deze raio’s de artikelen van de ingevolge die wet gewijzigde wetten en de daarop berustende bepalingen, zoals deze luidden op de dag vóór de dag van inwerkingtreding van die wet, van toepassing gebleven. Daarmee is er ook een grondslag voor het doorvoeren van verhoging van salarisbedragen voor raio’s. Daarin wordt voorzien met artikel III van dit besluit. Op grond van artikel IV werkt deze verhoging terug tot en met 1 januari 2017.</al>
+          </divisie>
+          <divisie opmaak="default">
+            <kop>
+              <titel>Artikel V</titel>
+            </kop>
+            <al>Met artikel V wordt voorzien in de terugwerkende kracht van onderdelen van dit besluit. Op de achtergronden daarvan is in het voorgaande ingegaan.</al>
+          </divisie>
+        </divisie>
+        <ondertekening>
+          <functie>De Minister voor Rechtsbescherming,</functie>
+          <naam>
+            <voornaam>S.</voornaam>
+            <achternaam>Dekker</achternaam>
+          </naam>
+        </ondertekening>
+      </nota-toelichting>
+    </wet-besluit>
+  </staatsblad>
+</officiele-publicatie>

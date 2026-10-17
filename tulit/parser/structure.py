@@ -22,7 +22,7 @@ DIVISION_TYPES = {
 }
 GENERIC_DIVISION = ('div', 5)
 
-_TOKEN = re.compile(r'[0-9]+[a-zA-Z]*|\b[IVXLCDM]+\b|\b[a-zA-Z]\b')
+_TOKEN = re.compile(r'[0-9]+[a-zA-Z]*|\b[IVXLCDM]+[a-zA-Z]?\b|\b[a-zA-Z]\b')
 
 
 def eid_token(num: Optional[str]) -> Optional[str]:

@@ -5,7 +5,7 @@ Parsers that read a document element by element (rather than through a
 format-specific strategy) use ``BodyBuilder`` to get the same output as the
 Formex parser: typed divisions with parent links, the nested ``structure``
 skeleton, and eIds following the EU subdivision authority table used in ELI
-subdivision URIs (prt_, tit_, cpt_, sct_, sbs_, art_, par_, unp_).
+subdivision URIs (``prt_``, ``tit_``, ``cpt_``, ``sct_``, ``sbs_``, ``art_``, ``par_``, ``unp_``).
 """
 import re
 from typing import Any, Iterable, Optional

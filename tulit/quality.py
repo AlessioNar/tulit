@@ -136,7 +136,8 @@ def check(doc: dict[str, Any], expect_articles: bool = True) -> list[Problem]:
         seen = set()
         for child in article.get('children') or []:
             for sentence in re.split(r'(?<=[.;:])\s+', child.get('text') or ''):
-                if len(sentence) >= 25 and sentence not in seen:
+                # A piece cut at an abbreviation ('(Dz.', 'str.') is part of a citation, not a header
+                if len(sentence) >= 25 and sentence not in seen and not re.search(r'\b\w{1,3}\.$', sentence):
                     seen.add(sentence)
                     lines[sentence] += 1
     threshold = max(5, len(articles) // 4)

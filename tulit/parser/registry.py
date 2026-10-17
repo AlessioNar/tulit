@@ -203,6 +203,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.xml.lexdania import LexDaniaParser
     from tulit.parser.xml.bwb import BWBParser
     from tulit.parser.xml.metalex import MetaLexParser
+    from tulit.parser.xml.boe_consolidated import BOEConsolidatedParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -219,6 +220,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('lexdania', LexDaniaParser, aliases=['dk-lexdania'])
     registry.register('bwb', BWBParser, aliases=['nl-bwb'])
     registry.register('metalex', MetaLexParser, aliases=['sk-metalex'])
+    registry.register('boe-consolidated', BOEConsolidatedParser, aliases=['es-boe-consolidated'])
 
 
 def get_parser_registry() -> ParserRegistry:

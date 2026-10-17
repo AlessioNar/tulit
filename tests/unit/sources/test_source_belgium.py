@@ -41,6 +41,20 @@ def test_act_reference_rejects(identifier):
     ('Artikel 5 wordt opgeheven.', 'delete'),
     ('In artikel 2 worden de volgende wijzigingen aangebracht:', 'amend'),
     ("La présente loi règle une matière visée à l'article 74 de la Constitution.", None),
+    # loi 2018/07/30/2018040581
+    ('Dans les articles 3, 31 et 35 de la loi du 18 juillet 1991, les mots "a" sont chaque fois remplacés par '
+     'les mots "b".', 'replace'),
+    ('Dans le texte néerlandais de l\'article 108, les mots "de betekening van" sont supprimés.', 'delete'),
+    ("En l'absence de décision d'adéquation, ou lorsque celle-ci est abrogée, modifiée ou suspendue, un transfert "
+     "peut avoir lieu.", None),
+    ('Deze adviezen worden toegevoegd aan het protocol.', None),
+    ('De overeenkomsten blijven van kracht totdat zij worden gewijzigd, vervangen of herroepen.', None),
+    ('Dans l\'article 31, les mots ", ainsi que la Sûreté lorsque celles-ci ont une influence" sont abrogés.',
+     'delete'),
+    # the Constitution, articles 7 and 41
+    ('De grenzen van de Staat kunnen niet worden gewijzigd of gecorrigeerd dan krachtens een wet.', None),
+    ('De belangen worden door de gemeenteraden geregeld. Het advies is vervangen door een verslag.', None),
+    ('In artikel I.2 van hetzelfde decreet worden de woorden "a" vervangen door de woorden "b".', 'replace'),
 ])
 def test_amendment_action(instruction, action):
     assert amendment_action(instruction) == action
@@ -124,6 +138,84 @@ class TestEJusticeParser:
         page.write_text('<html><body><p>Attention</p></body></html>')
         with pytest.raises(FileLoadError, match='no act text'):
             EJusticeParser().parse(str(page))
+
+    @staticmethod
+    def _justel(tmp_path, text):
+        page = tmp_path / 'justel.html'
+        page.write_text('<html><body><div id="list-title-1"><p class="list-item--title">17 FEVRIER 1994. - La '
+                        f'Constitution coordonnée.</p></div><div id="list-title-3"><p>Texte</p>{text}</div>'
+                        '</body></html>', encoding='utf-8')
+        return EJusticeParser().parse(str(page))
+
+    def test_justel_quotation_left_open(self, tmp_path):
+        # The Constitution, article 82: a transitional rule opens a straight quote it never closes
+        parser = self._justel(tmp_path, (
+            "<A NAME='Art.82'>Art.</A> 82. Une commission règle les conflits.<BR>Disposition transitoire<BR>"
+            '"Une commission règle les conflits survenant entre les deux Chambres.<BR><BR>'
+            "<A NAME='Art.83'>Art.</A> 83. Toute proposition de loi précise s'il s'agit d'une matière visée.<BR><BR>"
+            "<A NAME='LNK0034'>TITRE IX.</A> - ENTREE EN VIGUEUR ET DISPOSITIONS TRANSITOIRES.<BR><BR>"
+            "<A NAME='Art.I'>Art.</A> I. Les dispositions de l'article 85 seront d'application.<BR>"
+            "<A NAME='Art.188'>Art.</A> 188. Les lois qui y sont contraires sont abrogées.<BR><BR>"
+            "<A NAME='LNK0035'>ANNEXES.</A><BR><BR>"
+            "<A NAME='Art.N1'>Art.</A> N1. Annexe 1. TABLEAU DE CORRESPONDANCE.<BR><BR>"
+            "<A NAME='Art.N2'>Art.</A> N2. Annexe 2. TABLEAU INVERSE.<BR>"))
+        assert [a['eId'] for a in parser.articles] == ['art_82', 'art_83', 'art_I', 'art_188']
+        assert [c['num'] for c in parser.chapters] == ['TITRE IX']
+        assert [(a['num'], a['heading']) for a in parser.annexes] == [
+            ('Annexe 1', 'TABLEAU DE CORRESPONDANCE.'), ('Annexe 2', 'TABLEAU INVERSE.')]
+        # a general repeal of whatever is contrary amends no act
+        assert parser.articles[3]['children'][0].get('amendment') is None
+
+    def test_justel_single_annex(self, tmp_path):
+        # decret/2025/01/23/2025000875: one annex, 'Art. N.' under the heading 'ANNEXE.'
+        parser = self._justel(tmp_path, (
+            "<A NAME='Art.33'>Art.</A> 33. Le présent décret entre en vigueur.<BR><BR>"
+            "<A NAME='LNK0015'>ANNEXE.</A><BR><BR><A NAME='Art.N'>Art.</A> N. <BR>"
+            '(Image non reprise pour des raisons techniques, voir M.B. du 06-02-2025, p. 24354)'))
+        assert [(a['num'], a['heading']) for a in parser.annexes] == [
+            ('ANNEXE', '(Image non reprise pour des raisons techniques, voir M.B. du 06-02-2025, p. 24354)')]
+
+    @staticmethod
+    def _moniteur(tmp_path, text):
+        page = tmp_path / 'moniteur.html'
+        page.write_text('<html><body><p class="intro-text">7 DECEMBER 2018. - Decreet tot wijziging</p>'
+                        f'<main class="article-text">{text}</main></body></html>', encoding='utf-8')
+        return EJusticeParser().parse(str(page))
+
+    def test_moniteur_annexes_after_the_notes(self, tmp_path):
+        # decreet/2018/12/07/2018015301: the annexes follow the parliamentary references
+        parser = self._moniteur(tmp_path, (
+            'Art. 65. Dit decreet treedt in werking op 1 januari 2019.<br>Kondigen dit decreet af.<br>'
+            'Brussel, 7 december 2018.<br>G. BOURGEOIS<br>_______<br>Nota<br>Zitting 2017-2018<br>'
+            'Bijlagen bij het decreet tot wijziging van de Vlaamse Codex Fiscaliteit<br>'
+            'Bijlage 1 bij het decreet van 7 december 2018<br>Tabel 4. Wetboek van 23 november 1965<br>'
+            'Bijlage 2 bij het decreet van 7 december 2018<br>Tabel 5. Koninklijk besluit van 8 juli 1970<br>'))
+        assert [(a['num'], a['heading']) for a in parser.annexes] == [
+            ('Bijlage 1', 'bij het decreet van 7 december 2018'), ('Bijlage 2', 'bij het decreet van 7 december 2018')]
+        assert parser.annexes[0]['children'][0]['text'] == 'Tabel 4. Wetboek van 23 november 1965'
+
+    def test_moniteur_quotation_left_open(self, tmp_path):
+        # decret/2025/01/23/2025000875: article 31 opens a guillemet it never closes
+        parser = self._moniteur(tmp_path, (
+            'CHAPITRE 12 - Dispositions modifiant le décret du 11 avril 2014<br>'
+            "Art. 31. Dans le décret du 11 avril 2014, l'article 5, § 3, est remplacé comme suit : « L'étudiant ne "
+            'remplit plus les conditions :<br>1° au terme de deux inscriptions ;<br>'
+            'CHAPITRE 13 - Dispositions modifiant le décret du 17 juillet 2020<br>'
+            "Art. 32. L'article 2 du décret du 17 juillet 2020 est remplacé par ce qui suit :<br>"
+            '« Art. 2. Pour l\'application de l\'article 5. »<br>'
+            'Art. 33. Le présent décret entre en vigueur.<br>Promulguons le présent décret.<br>'))
+        assert [a['eId'] for a in parser.articles] == ['art_31', 'art_32', 'art_33']
+        assert [c['num'] for c in parser.chapters] == ['CHAPITRE 12', 'CHAPITRE 13']
+
+    def test_justel_subtitle(self, tmp_path):
+        # loi 2018/07/30/2018040581: titre 3 holds sous-titres, which hold chapters
+        parser = self._justel(tmp_path, (
+            "<A NAME='LNK0022'>TITRE 3.</A> - De la protection par d'autres autorités.<BR><BR>"
+            "<A NAME='LNK0023'>SOUS-TITRE 1er.</A> -De la protection par les services de renseignements<BR><BR>"
+            "<A NAME='LNK0024'>CHAPITRE Ier.</A> - Définitions<BR><BR>"
+            "<A NAME='Art.73'>Art.</A> 73. Pour l'application du présent sous-titre, on entend par services.<BR>"))
+        assert [(c['eId'], c['type'], c['parent']) for c in parser.chapters] == [
+            ('tit_3', 'title', None), ('div_1', 'subtitle', 'tit_3'), ('cpt_I', 'chapter', 'div_1')]
 
 
 class TestEJusticeClient:

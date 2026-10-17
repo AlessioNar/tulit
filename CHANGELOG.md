@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Latvia in `fetch`**: the original version from the official publication in Latvijas Vēstnesis (vestnesis.lv) and the consolidated version from likumi.lv, as in force today or on a date, by likumi.lv identifier or link. Laws, Cabinet regulations (with their attachments) and amending acts, whose amendments are structured.
 - **Belgium in `fetch`**: acts as published in the Moniteur belge / Belgisch Staatsblad (from June 1997) and Justel's consolidated texts, in French and Dutch, by ELI (`https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581`) or 'loi/2018/07/30/2018040581'. The consolidated version in force on a date is chosen among Justel's archived versions (today's by default, as Justel's latest text can hold amendments not yet in force). Federal laws, royal and ministerial orders, Community and Regional decrees and ordinances, with structured amendments, tables and annexes.
+- **Cyprus in `fetch`**: laws as published in the Official Gazette of the Republic (Government Printing Office, PDF), by number ('125(I)/2018', 'Ν. 125(Ι)/2018'). The issue is found through the Gazette's full-text search (issues from about 2015) and the law cut out of it; section headings come from the margin notes. Cyprus publishes no official consolidated texts.
 
 ## [0.9.0] - 2026-10-17
 ### Added

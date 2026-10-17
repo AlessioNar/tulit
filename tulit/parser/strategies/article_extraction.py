@@ -253,7 +253,40 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
     Formex uses ARTICLE elements with IDENTIFIER attributes, and content
     is stored in PARAG, ALINEA, or LIST/ITEM elements.
     """
-    
+
+    # Block-level Formex elements: their text must not run into what follows
+    # (e.g. <NO.PARAG>1.</NO.PARAG><ALINEA>This ...). Inline elements such as
+    # HT, DATE or REF.DOC.OJ can sit inside a word and are joined as-is.
+    BLOCK_TAGS = frozenset({
+        'NO.PARAG', 'PARAG', 'ALINEA', 'P', 'NP', 'NO.P', 'TXT', 'LIST', 'ITEM',
+        'TITLE', 'TI', 'STI', 'TI.ART', 'STI.ART', 'SUBDIV', 'GR.SEQ', 'QUOT.S',
+        'TBL', 'ROW', 'CELL',
+    })
+
+    def _extract_text(self, element: etree._Element, normalize: bool = True) -> str:
+        """
+        Extract the text of a Formex element, separating block-level elements.
+        """
+        parts: List[str] = []
+
+        def walk(node: etree._Element) -> None:
+            if node.text:
+                parts.append(node.text)
+            for child in node:
+                if isinstance(child.tag, str):
+                    walk(child)
+                    tail = (child.tail or '').lstrip()
+                    if child.tag in self.BLOCK_TAGS and not tail.startswith((',', ';', '.', ':', ')', ']')):
+                        parts.append(' ')
+                if child.tail:
+                    parts.append(child.tail)
+
+        walk(element)
+        text = ''.join(parts)
+        if normalize:
+            text = ' '.join(text.split())
+        return text.strip()
+
     def extract_articles(self, document: etree._Element, **kwargs) -> List[Dict[str, Any]]:
         """
         Extract articles from Formex XML document.

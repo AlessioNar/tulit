@@ -71,6 +71,22 @@ class TestPisrsParser:
         assert (amendment['action'], amendment['amended_act']) == ('replace', 'Zakonu o davčnem postopku')
         assert amendment['quoted'][0]['text'].startswith('(4) Davčni organ sme upravičeni osebi')
 
+    def test_preamble_and_annexes(self, tmp_path):
+        page = tmp_path / 'ustava.html'
+        page.write_text(
+            '<html><body><div class="mainText">'
+            '<p class="zamik textJustify odstavek">Izhajajoč iz</p>'
+            '<p class="zamik textJustify odstavek">Temeljne ustavne listine sprejema Skupščina</p>'
+            '<p class="center bold uppercase naslov">USTAVO REPUBLIKE SLOVENIJE</p>'
+            '<p class="center bold clen">1. člen</p><p class="zamik textJustify odstavek">Slovenija je republika.</p>'
+            '<p class=" priloga"><a href="https://pisrs.si/api/datoteke/integracije/1">Priloga 1: Obrazec</a></p>'
+            '</div></body></html>', encoding='utf-8')
+        doc = PisrsParser().parse(str(page)).to_dict()
+        assert doc['preamble']['recitals'] == [
+            {'eId': 'rct_1', 'text': 'Izhajajoč iz Temeljne ustavne listine sprejema Skupščina'}]
+        assert [c['text'] for c in doc['articles'][0]['children']] == ['Slovenija je republika.']
+        assert doc['annexes'] == [{'eId': 'anx_1', 'num': 'Priloga 1', 'heading': 'Obrazec', 'children': []}]
+
     def test_page_without_text(self, tmp_path):
         page = tmp_path / 'page.html'
         page.write_text('<html><body><div>Napaka</div></body></html>')
@@ -137,6 +153,29 @@ class TestSloveniaSource:
         chosen = get_file.call_args.args[2]
         assert chosen['name'] == name
         assert doc['meta']['version_date'] == version_date
+
+    def test_undated_versions_on_a_date(self, tmp_path):
+        # PISRS dates only recent versions; an older one cannot apply before the acts it lists were published
+        def notice(until):
+            return ('<html><body><div class="mainText"><p>Neuradno prečiščeno besedilo obsega:</p>'
+                    f'<p>- Zakon (Uradni list RS, št. 1/01 z dne {until})</p><p class="naslov">ZAKON</p>'
+                    '<p class="clen">1. člen</p><p>Besedilo.</p></div></body></html>')
+        pages = {1: notice('2. 4. 2004'), 2: notice('14. 10. 2016')}
+        versions = [{'name': 'Osnovni', 'number': 0, 'html': 10, 'date': None},
+                    {'name': 'NPB 1', 'number': 1, 'html': 11, 'date': None},
+                    {'name': 'NPB 2', 'number': 2, 'html': 12, 'date': None}]
+
+        def download(self, act_id, version):
+            path = tmp_path / f"{act_id}_{version['number']}.html"
+            path.write_text(pages.get(version['number'], notice('25. 10. 2001')), encoding='utf-8')
+            return str(path)
+        record = {'evidencniPodatki': {'veljaOd': '2002-01-01', 'objavljeno': '2001-10-25'}}
+        with patch.object(PisrsClient, 'record', return_value=record), \
+                patch.object(PisrsClient, 'versions', return_value=versions), \
+                patch.object(PisrsClient, 'download', download):
+            doc = tulit.fetch('ZAKO1263', jurisdiction='SI', version='consolidated', date='2010-01-01',
+                              download_dir=str(tmp_path))
+        assert doc['meta']['consolidation'] == 'NPB 1'
 
     def test_date_before_entry_into_force(self, slovenia, record, tmp_path):
         with pytest.raises(FileLoadError, match='enters into force on 2022-06-04'):

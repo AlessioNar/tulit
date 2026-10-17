@@ -27,6 +27,21 @@ def _year(text: str) -> str:
     return ('19' if int(text) > 90 else '20') + text
 
 
+_PUBLISHED = re.compile(r'\(Uradni list RS, št\. [^)]*?z dne (\d{1,2})\. ?(\d{1,2})\. ?(\d{4})\)')
+
+
+def _consolidates_until(path: str) -> Optional[str]:
+    """ISO date the last act a consolidated version includes was published, from its notice ('... obsega:')."""
+    with open(path, encoding='utf-8', errors='replace') as f:
+        notice = re.sub(r'<[^>]+>', ' ', f.read()).split('obsega:', 1)
+    if len(notice) < 2:
+        return None
+    # The notice ends where the act's title begins
+    listed = _PUBLISHED.findall(' '.join(notice[1].split())[:20000].split('neuradno prečiščeno besedilo št.')[0])
+    dates = [f'{year}-{int(month):02d}-{int(day):02d}' for day, month, year in listed]
+    return max(dates) if dates else None
+
+
 def _validity(record: dict[str, Any]) -> dict[str, Any]:
     return record.get('evidencniPodatki') or {}
 
@@ -79,10 +94,14 @@ class SloveniaSource(Source):
             datetime.date.fromisoformat(target)
             if date and in_force and date < in_force:
                 raise FileLoadError(f"{act_id} enters into force on {in_force}, after {date}")
-            # The latest version that applies on the date (versions without a date keep their order)
+            # The latest version that applies on the date. PISRS dates only recent versions: an older one
+            # cannot apply before the last act it consolidates was published, which its notice lists.
             chosen = versions[0]
             for candidate in versions[1:]:
-                if candidate['date'] and candidate['date'] > target:
+                start = candidate['date']
+                if not start and date:
+                    start = _consolidates_until(client.download(act_id, candidate))
+                if start and start > target:
                     break
                 chosen = candidate
             version_date = chosen['date'] or (in_force if chosen['number'] == 0 else None)

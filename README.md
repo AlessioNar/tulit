@@ -86,21 +86,62 @@ doc = parser.parse("32014L0092.akn").to_dict()
 
 `chapters` and `articles` are flat lists for easy iteration; `structure` holds the nested skeleton of the enacting terms. The full schema is in [`tulit/parser/legaljson_schema.json`](tulit/parser/legaljson_schema.json).
 
-## Supported sources
+## Coverage
 
-| Jurisdiction | Source | Client | Parsed formats |
-|---|---|---|---|
-| European Union | Cellar / EUR-Lex | `CellarClient` | Formex 4, Akoma Ntoso (AKN4EU), XHTML, legacy HTML, legislative proposals |
-| Finland | Finlex | `FinlexClient` | Akoma Ntoso |
-| France | Légifrance | `LegifranceClient` | Légifrance JSON |
-| Germany | Rechtsinformationssystem | `GermanyClient` | LegalDocML (Akoma Ntoso) |
-| Ireland | Irish Statute Book | `IrishStatuteBookClient` | download only |
-| Italy | Normattiva | `NormattivaClient` | Akoma Ntoso |
-| Italy (Veneto) | Bollettino Ufficiale | `VenetoClient` | HTML |
-| Luxembourg | Legilux | `LegiluxClient` | Akoma Ntoso |
-| Malta | Legislation Malta | `MaltaLegislationClient` | download only |
-| Portugal | Diário da República | `PortugalDREClient` | download only |
-| Spain | BOE | `BOEClient` | BOE XML |
+The goal of tulit is to cover the legislation of all 27 EU Member States and the EU itself, from **official sources only**, with both the **original** text and the **consolidated** (in-force) text wherever the source publishes them.
+
+Status levels:
+
+- 🟢 **Parsed**: downloads and converts to schema-valid legalJSON with ELI-style identifiers
+- 🟡 **Partial**: downloads, parsing incomplete or limited to one text version
+- ⚪ **Planned**: not yet implemented
+
+| | Jurisdiction | Official source | Best format | Original | Consolidated | Status | Target |
+|---|---|---|---|---|---|---|---|
+| 🇪🇺 | European Union | Cellar / EUR-Lex | Formex 4, XHTML | ✅ | ✅ (Formex) | 🟢 Parsed (originals; verified on the full in-force corpus) | 0.8.0 consolidated |
+| 🇦🇹 | Austria | RIS | RIS XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
+| 🇧🇪 | Belgium | Justel / Moniteur belge | HTML | ✅ | ✅ | ⚪ Planned | 0.10.0 |
+| 🇧🇬 | Bulgaria | Държавен вестник | HTML | ✅ | — | ⚪ Planned | 0.10.0 |
+| 🇭🇷 | Croatia | Narodne novine | HTML + RDFa | ✅ | — | ⚪ Planned | 0.9.0 |
+| 🇨🇾 | Cyprus | Official Gazette | PDF | ✅ | — | ⚪ Planned | 0.10.0 |
+| 🇨🇿 | Czechia | e-Sbírka | JSON | ✅ | ✅ | ⚪ Planned | 0.9.0 |
+| 🇩🇰 | Denmark | Retsinformation | LexDania XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
+| 🇪🇪 | Estonia | Riigi Teataja | Riigi Teataja XML | ✅ | ✅ | ⚪ Planned | 0.9.0 |
+| 🇫🇮 | Finland | Finlex | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 consolidated |
+| 🇫🇷 | France | Légifrance (DILA) | LEGI XML, JSON | ✅ | ✅ | 🟡 Partial | 0.8.0 |
+| 🇩🇪 | Germany | Rechtsinformationen des Bundes | LegalDocML.de | ✅ | ✅ | 🟢 Parsed | 0.8.0 consolidated |
+| 🇬🇷 | Greece | Εθνικό Τυπογραφείο (ΦΕΚ) | PDF | ✅ | — | ⚪ Planned | 0.10.0 |
+| 🇭🇺 | Hungary | Nemzeti Jogszabálytár | HTML | ✅ | ✅ | ⚪ Planned | 0.10.0 |
+| 🇮🇪 | Ireland | Irish Statute Book / Revised Acts | XML | ✅ | ✅ | 🟡 Partial (download only) | 0.8.0 |
+| 🇮🇹 | Italy | Normattiva | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 new API |
+| 🇱🇻 | Latvia | Likumi.lv | HTML | ✅ | ✅ | ⚪ Planned | 0.10.0 |
+| 🇱🇹 | Lithuania | Teisės aktų registras / e-seimas | Text, DOCX | ✅ | ✅ | ⚪ Planned | 0.10.0 |
+| 🇱🇺 | Luxembourg | Legilux | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 consolidated |
+| 🇲🇹 | Malta | Legislation Malta | PDF | ✅ | ✅ | 🟡 Partial (download only) | 0.9.0 |
+| 🇳🇱 | Netherlands | wetten.overheid.nl (BWB) | BWB XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
+| 🇵🇱 | Poland | Dziennik Ustaw / ISAP | HTML, JSON, PDF | ✅ | ✅ (PDF) | ⚪ Planned | 0.9.0 |
+| 🇵🇹 | Portugal | Diário da República | PDF | ✅ | ✅ (JS only) | 🟡 Partial (download only) | 0.9.0 |
+| 🇷🇴 | Romania | Portal Legislativ | Text | ✅ | ✅ | ⚪ Planned | 0.10.0 |
+| 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
+| 🇸🇮 | Slovenia | PISRS | HTML (JS only) | ✅ | ✅ | ⚪ Planned | 0.10.0 |
+| 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed (originals) | 0.8.0 consolidated |
+| 🇸🇪 | Sweden | Riksdagen / Regeringskansliet | Text | ✅ | ✅ | ⚪ Planned | 0.9.0 |
+
+**Progress: 6 of 28 parsed, 4 partial, 18 planned.** Regional legislation is also available for Veneto (Italy). Sources published only as PDF or as JavaScript applications need the optional PDF and browser extras planned for 0.9.0.
+
+### Roadmap
+
+- **0.8.0**:
+  - one `tulit.fetch()` for every jurisdiction, addressed by ELI or national identifier, with a choice of original or consolidated text
+  - a common client interface and per-country tests
+  - updated clients for Italy, Finland, Spain, Ireland and Portugal
+  - Austria, Denmark, the Netherlands and Slovakia
+- **0.9.0**:
+  - optional `tulit[pdf]` and browser extras
+  - Croatia, Czechia, Estonia, Poland, Sweden, Malta and Portugal
+- **0.10.0**: Belgium, Bulgaria, Cyprus, Greece, Hungary, Latvia, Lithuania, Romania and Slovenia
+
+Legislation is public law: tulit treats the texts it retrieves as reusable under CC BY 4.0, with attribution to the official source.
 
 ## Documentation
 

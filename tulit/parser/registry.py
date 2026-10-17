@@ -221,6 +221,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.xml.legislatie_ro import LegislatieParser
     from tulit.parser.html.pisrs import PisrsParser
     from tulit.parser.html.njt import NJTParser
+    from tulit.parser.html.etar import TARParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -255,6 +256,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('ro-legislatie', LegislatieParser, aliases=['legislatie-just'])
     registry.register('si-pisrs', PisrsParser, aliases=['pisrs'])
     registry.register('hu-njt', NJTParser, aliases=['njt'])
+    registry.register('lt-tar', TARParser, aliases=['tar'])
 
 
 def get_parser_registry() -> ParserRegistry:

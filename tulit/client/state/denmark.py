@@ -91,6 +91,31 @@ class RetsinformationClient(Client):
                 f.write(content)
         return target
 
+    def download_html(self, identifier: str) -> str:
+        """
+        Download the HTML text of an act from the site's document service; returns the file path.
+
+        Older acts (e.g. the Constitution of 1953) have no text in their
+        LexDania XML, only in this HTML.
+        """
+        path = normalise_eli_path(identifier)
+        target = os.path.join(self.download_dir, 'DK', path.replace('/', '_') + '.html')
+        if not os.path.exists(target):
+            try:
+                response = self.session.post(f'{RETSINFORMATION}/api/document/eli/{path}',
+                                             json={'isRawHtml': False}, timeout=60)
+                response.raise_for_status()
+                documents = response.json()
+            except (requests.RequestException, ValueError) as e:
+                raise NetworkError(f"Retsinformation document request failed for {path}: {e}") from e
+            text = (documents[0].get('documentHtml') if documents else None) or ''
+            if not text.strip():
+                raise FileLoadError(f"Retsinformation has no text for {path}")
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with open(target, 'w', encoding='utf-8') as f:
+                f.write(text)
+        return target
+
     def search(self, text: str) -> list[dict[str, Any]]:
         """Documents matching ``text`` in the Retsinformation search."""
         response = self._get(f'{RETSINFORMATION}/api/documentsearch', params={'t': text})

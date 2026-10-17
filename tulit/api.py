@@ -100,14 +100,16 @@ def fetch(
         legalJSON schema.
     """
     source, identifier = _resolve(identifier, jurisdiction)
-    version = version or source.default_version
-    if version not in VERSIONS:
-        raise ValueError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
-    if version not in source.versions:
-        raise ValueError(
-            f"{source.name} ({source.source_name}) does not publish the {version} version; "
-            f"available: {', '.join(source.versions)}"
-        )
+    if version is None and not source.version_from_identifier:
+        version = source.default_version
+    if version is not None:
+        if version not in VERSIONS:
+            raise ValueError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
+        if version not in source.versions:
+            raise ValueError(
+                f"{source.name} ({source.source_name}) does not publish the {version} version; "
+                f"available: {', '.join(source.versions)}"
+            )
 
     if language and source.languages and language.lower() not in source.languages:
         raise ValueError(

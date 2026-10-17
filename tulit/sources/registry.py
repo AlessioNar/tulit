@@ -21,8 +21,9 @@ def _register_builtin_sources() -> None:
     _builtins_registered = True
     from tulit.sources.eu import EUSource
     from tulit.sources.at import AustriaSource
+    from tulit.sources.dk import DenmarkSource
 
-    for source in (EUSource(), AustriaSource()):
+    for source in (EUSource(), AustriaSource(), DenmarkSource()):
         _sources.setdefault(source.code, source)
 
 

@@ -69,6 +69,10 @@ class Source(ABC):
     options: Sequence[str] = ()
     """Names of the source-specific keyword options ``retrieve`` accepts."""
 
+    version_from_identifier: bool = False
+    """True when identifiers name a specific version (e.g. a consolidation document);
+    ``retrieve`` then gets version=None when none is requested and returns that document."""
+
     @property
     def default_version(self) -> str:
         return ORIGINAL if ORIGINAL in self.versions else self.versions[0]
@@ -103,8 +107,9 @@ class Source(ABC):
         ----------
         identifier : str
             The act's identifier in this source (see ``identifier_help``).
-        version : str
-            'original' or 'consolidated'.
+        version : str or None
+            'original' or 'consolidated'; None only for sources with
+            ``version_from_identifier``, meaning the version the identifier names.
         date : str or None
             ISO date: the consolidated version in force on that date. None means today.
         language : str or None

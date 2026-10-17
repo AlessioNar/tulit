@@ -1,0 +1,791 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:eli="http://data.europa.eu/eli/ontology#" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:gu="http://www.gazzettaufficiale.it/eli/" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:na="http://www.normattiva.it/eli/" xmlns:nakn="http://normattiva.it/akn/vocabulary" xmlns:nrdfa="http://www.normattiva.it/rdfa/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfa="http://www.w3.org/1999/xhtml#">
+    <act name="monovigente">
+        <meta>
+            <identification source="">
+                <FRBRWork>
+                    <FRBRthis value="/akn/it/act/decreto_legislativo/stato/2018-08-10/101/!main"/>
+                    <FRBRuri value="/akn/it/act/decreto_legislativo/stato/2018-08-10/101"/>
+                    <FRBRalias name="urn:nir" value="urn:nir:stato:decreto.legislativo:2018-08-10;101"/>
+                    <FRBRalias name="eli" value="eli/id/2018/09/04/18G00129/ORIGINAL"/>
+                    <FRBRdate date="2018-08-10" name=""/>
+                    <FRBRauthor as="#author" href=""/>
+                    <preservation>
+                        <nrdfa:eli about="na:id/2018/09/04/18G00129/ORIGINAL" aknrelname="eli/id/2018/09/04/18G00129/ORIGINAL">
+                            <nrdfa:span property="rdf:type" resource="eli:LegalResource"/>
+                            <nrdfa:span content="Disposizioni per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la direttiva 95/46/CE (regolamento generale sulla protezione dei dati). (18G00129)  " lang="it" property="eli:title" xml:lang="it"/>
+                            <nrdfa:span content="http://www.normattiva.it/eli/id/{yyyy}/{mm}/{dd}/{codiceRedazionale}/{tipoVersione}" property="eli:uri_schema"/>
+                            <nrdfa:span content="18G00129" property="eli:id_local"/>
+                            <nrdfa:span property="eli:type_document" resource="gu:tables/resource-type#DECRETO LEGISLATIVO"/>
+                            <nrdfa:span content="2018-08-10" datatype="xsd:date" property="eli:date_document"/>
+                            <nrdfa:span property="eli:version" resource="gu:tables/versions#ORIGINAL"/>
+                        </nrdfa:eli>
+                    </preservation>
+                    <FRBRcountry value="it"/>
+                </FRBRWork>
+                <FRBRExpression>
+                    <FRBRthis value="/akn/it/act/decreto_legislativo/stato/2018-08-10/101/ita@2018-09-19/!main"/>
+                    <FRBRuri value="/akn/it/act/decreto_legislativo/stato/2018-08-10/101/ita@2018-09-19"/>
+                    <FRBRdate date="2018-09-19" name=""/>
+                    <FRBRauthor as="#author" href=""/>
+                    <preservation>
+                        <nrdfa:eli about="na:id/2018/09/04/18G00129/ORIGINAL/ita">
+                            <nrdfa:span property="rdf:type" resource="eli:LegalExpression"/>
+                            <nrdfa:span property="eli:realizes" resource="na:id/2018/09/04/18G00129/ORIGINAL"/>
+                            <nrdfa:span property="eli:is_embodied_by" resource="na:id/2018/09/04/18G00129/ORIGINAL/ita/akn"/>
+                            <nrdfa:span property="eli:language" resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+                            <nrdfa:span property="eli:publisher_agent" resource="http://www.ipzs.it"/>
+                        </nrdfa:eli>
+                    </preservation>
+                    <FRBRlanguage language="ita"/>
+                </FRBRExpression>
+                <FRBRManifestation>
+                    <FRBRthis value="/akn/it/act/decreto_legislativo/stato/2018-08-10/101/ita@2018-09-19/!main.xml"/>
+                    <FRBRuri value="/akn/it/act/decreto_legislativo/stato/2018-08-10/101/ita@2018-09-19.xml"/>
+                    <FRBRdate date="2018-08-10" name=""/>
+                    <FRBRauthor as="#author" href=""/>
+                    <preservation>
+                        <nrdfa:eli about="na:id/2018/09/04/18G00129/ORIGINAL/ita/akn">
+                            <nrdfa:span property="rdf:type" resource="eli:Format"/>
+                            <nrdfa:span property="eli:format" resource="http://www.iana.org/assignments/media-types/xml"/>
+                        </nrdfa:eli>
+                    </preservation>
+                </FRBRManifestation>
+            </identification>
+            <publication date="2018-09-04" name="" number="205" showAs=""/>
+            <lifecycle source="">
+                <eventRef date="2018-09-04" eId="eventRef_0" source="ro1"/>
+            </lifecycle>
+            <proprietary source="">
+                <rdf:RDF>
+                    <rdf:Description rdf:about="na:id/2018/09/04/18G00129/ORIGINAL">
+                        <rdf:type rdf:resource="eli:LegalResource"/>
+                        <eli:title xml:lang="it">Disposizioni per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la direttiva 95/46/CE (regolamento generale sulla protezione dei dati). (18G00129)  </eli:title>
+                        <eli:uri_schema>http://www.normattiva.it/eli/id/{yyyy}/{mm}/{dd}/{codiceRedazionale}/{tipoVersione}</eli:uri_schema>
+                        <eli:id_local>18G00129</eli:id_local>
+                        <eli:type_document rdf:resource="gu:tables/resource-type#DECRETO LEGISLATIVO"/>
+                        <eli:date_document rdf:datatype="xsd:date">2018-08-10</eli:date_document>
+                        <eli:version rdf:resource="gu:tables/versions#ORIGINAL"/>
+                    </rdf:Description>
+                    <rdf:Description rdf:about="na:id/2018/09/04/18G00129/ORIGINAL/ita">
+                        <rdf:type rdf:resource="eli:LegalExpression"/>
+                        <eli:realizes rdf:resource="na:id/2018/09/04/18G00129/ORIGINAL"/>
+                        <eli:is_embodied_by rdf:resource="na:id/2018/09/04/18G00129/ORIGINAL/ita/akn"/>
+                        <eli:language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+                        <eli:publisher_agent rdf:resource="http://www.ipzs.it"/>
+                    </rdf:Description>
+                    <rdf:Description rdf:about="na:id/2018/09/04/18G00129/ORIGINAL/ita/akn">
+                        <rdf:type rdf:resource="eli:format"/>
+                        <eli:format rdf:resource="http://www.iana.org/assignments/media-types/xml"/>
+                    </rdf:Description>
+                </rdf:RDF>
+            </proprietary>
+        </meta>
+        <preface>
+            <p>
+                <docType>DECRETO LEGISLATIVO</docType>
+                <docDate date="2018-08-10">10 agosto 2018</docDate>
+                <docNumber>101</docNumber>
+                <docTitle>Disposizioni per l'adeguamento della normativa nazionale alle disposizioni del regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la direttiva 95/46/CE (regolamento generale sulla protezione dei dati). (18G00129) 
+</docTitle>
+            </p>
+            <p>
+                <authorialNote eId="atn1" placement="bottom">
+                    <p>Entrata in vigore del provvedimento: 19/09/2018</p>
+                </authorialNote>
+            </p>
+        </preface>
+        <preamble>
+            <formula name="formulaInizialePreambolo">
+                <p>IL PRESIDENTE DELLA REPUBBLICA</p>
+            </formula>
+            <citations eId="cits_1">
+                <citation eId="cits_1__cit_1">
+                    <p>Visti gli <ref eId="ref_1" href="/akn/it/act/costituzione/stato/1947-12-27/const/!main#art_76">articoli 76</ref> e <ref eId="ref_2" href="/akn/it/act/costituzione/stato/1947-12-27/const/!main#art_87">87 della Costituzione</ref>;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_2">
+                <citation eId="cits_2__cit_1">
+                    <p>Vista la <ref eId="ref_3" href="/akn/it/act/legge/stato/2017-10-25/163/!main">legge 25 ottobre 2017, n. 163</ref>, recante delega al Governo per il recepimento delle direttive europee e l'attuazione di altri atti dell'Unione europea - Legge di delegazione europea 2016-2017, e in particolare l'articolo 13, che delega il Governo all'emanazione di uno o piu' decreti legislativi di adeguamento del quadro normativo nazionale alle disposizioni del regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_3">
+                <citation eId="cits_3__cit_1">
+                    <p>Vista la <ref eId="ref_4" href="/akn/it/act/legge/stato/2012-12-24/234/!main">legge 24 dicembre 2012, n. 234</ref>, recante norme generali sulla partecipazione dell'Italia alla formazione e all'attuazione della normativa e delle politiche dell'Unione europea;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_4">
+                <citation eId="cits_4__cit_1">
+                    <p>Visto il <ref eId="ref_5" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">Codice in materia di protezione dei dati personali</ref> di cui al <ref eId="ref_6" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref>;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_5">
+                <citation eId="cits_5__cit_1">
+                    <p>Visto il Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la <ref eId="ref_7" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE (regolamento</ref> generale sulla protezione dei dati);</p>
+                </citation>
+            </citations>
+            <citations eId="cits_6">
+                <citation eId="cits_6__cit_1">
+                    <p>Vista la <ref eId="ref_8" href="/akn/it/act/direttivaUe/eu/2016/680/!main">direttiva (UE) 2016/680 del Parlamento europeo e del Consiglio, del 27 aprile 2016</ref>, relativa alla protezione delle persone fisiche con riguardo al trattamento dei dati personali da parte delle autorita' competenti a fini di prevenzione, indagine, accertamento e perseguimento di reati o esecuzione di sanzioni penali, nonche' alla libera circolazione di tali dati e che abroga la decisione quadro 2008/977/GAI del Consiglio;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_7">
+                <citation eId="cits_7__cit_1">
+                    <p>Vista la <ref eId="ref_9" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE del Parlamento europeo e del Consiglio, del 24 ottobre 1995</ref>, relativa alla tutela delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_8">
+                <citation eId="cits_8__cit_1">
+                    <p>Vista la <ref eId="ref_10" href="/akn/it/act/direttivaUe/eu/2002/58/!main">direttiva 2002/58/CE del Parlamento europeo e del Consiglio, del 12 luglio 2002</ref>, relativa al trattamento dei dati personali e alla tutela della vita privata nel settore delle comunicazioni elettroniche;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_9">
+                <citation eId="cits_9__cit_1">
+                    <p>Visto il <ref eId="ref_11" href="/akn/it/act/decretoLegislativo/stato/2018-05-18/51/!main">decreto legislativo 18 maggio 2018, n. 51</ref>, recante attuazione della <ref eId="ref_12" href="/akn/it/act/direttivaUe/eu/2016/680/!main">direttiva (UE) 2016/680 del Parlamento europeo e del Consiglio, del 27 aprile 2016</ref>, relativa alla protezione delle persone fisiche con riguardo al trattamento dei dati personali da parte delle autorita' competenti a fini di prevenzione, indagine, accertamento e perseguimento di reati o esecuzione di sanzioni penali, nonche' alla libera circolazione di tali dati e che abroga la decisione quadro 2008/977/GAI del Consiglio;</p>
+                </citation>
+            </citations>
+            <citations eId="cits_10">
+                <citation eId="cits_10__cit_1">
+                    <p>Vista la preliminare deliberazione del Consiglio dei ministri, adottata nella riunione del 21 marzo 2018;</p>
+                </citation>
+            </citations>
+            <p>Acquisito il parere del Garante per la protezione dei dati personali, adottato nell'adunanza del 22 maggio 2018;</p>
+            <p>Acquisiti i pareri delle competenti Commissioni parlamentari della Camera dei deputati e del Senato della Repubblica;</p>
+            <citations eId="cits_11">
+                <citation eId="cits_11__cit_1">
+                    <p>Vista la deliberazione del Consiglio dei ministri, adottata nella riunione dell'8 agosto 2018;</p>
+                </citation>
+            </citations>
+            <p>Sulla proposta del Presidente del Consiglio dei ministri e dei Ministri per gli affari europei e della giustizia, di concerto con i Ministri per la pubblica amministrazione, degli affari esteri e della cooperazione internazionale, dell'economia e delle finanze e dello sviluppo economico;</p>
+            <formula name="formulaFinalePreambolo">
+                <p>E M A N A il seguente decreto legislativo:</p>
+            </formula>
+        </preamble>
+        <body>
+            <chapter eId="chp_I">
+                <num>Capo I</num>
+                <heading>Modifiche al titolo e alle premesse del codice in materia di protezione dei dati personali di cui al decreto legislativo 30 giugno  2003, n. 196</heading>
+                <article eId="art_1">
+                    <num>Art. 1.</num>
+                    <heading> Modifiche al titolo e alle premesse 
+ del decreto legislativo 30 giugno 2003, n. 196</heading>
+                    <paragraph eId="art_1__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Al titolo del <ref eId="content__ref_13" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref>, dopo le parole «dati personali» sono aggiunte le seguenti: «, recante disposizioni per l'adeguamento dell'ordinamento nazionale al regolamento (UE) n. 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la <ref eId="content__ref_14" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE</ref>». 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_1__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Alle premesse del <ref eId="content__ref_15" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref>, dopo il terzo Visto sono inseriti i seguenti: 
+ «Vista la <ref eId="content__ref_16" href="/akn/it/act/legge/stato/2017-10-25/163/!main">legge 25 ottobre 2017, n. 163</ref>, recante delega al Governo per il recepimento delle direttive europee e l'attuazione di altri atti dell'Unione europea - Legge di delegazione europea 2016-2017» e, in particolare, l'articolo 13, che delega il Governo all'emanazione di uno o piu' decreti legislativi di adeguamento del quadro normativo nazionale alle disposizioni del Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016; 
+ Vista la <ref eId="content__ref_17" href="/akn/it/act/legge/stato/2012-12-24/234/!main">legge 24 dicembre 2012, n. 234</ref>, recante norme generali sulla partecipazione dell'Italia alla formazione e all'attuazione della normativa e delle politiche dell'Unione europea; 
+ Visto il Regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la <ref eId="content__ref_18" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE (regolamento</ref> generale sulla protezione dei dati);». 
+</p>
+                        </content>
+                    </paragraph>
+                    <section>
+                        <content>
+                            <p>
+                                <authorialNote eId="authorialNote_1" placement="bottom">
+                                    <p> N O T E 
+ 
+ Avvertenza: 
+ 
+ Il testo delle note qui pubblicato e' stato redatto dall'amministrazione competente per materia ai sensi dell'art. 10, commi 2 e 3, del testo unico delle disposizioni sulla promulgazione delle leggi, sull'emanazione dei decreti del Presidente della Repubblica e sulle pubblicazioni ufficiali della Repubblica italiana, approvato con <ref eId="content__ref_19" href="/akn/it/act/decretoDelPresidenteDellaRepubblica/stato/1985-12-28/1092/!main">decreto del Presidente della Repubblica 28 dicembre 1985, n. 1092</ref>, al solo fine di facilitare la lettura delle disposizioni di legge modificate o alle quali e' operato il rinvio. Restano invariati il valore e l'efficacia degli atti legislativi qui trascritti. 
+ Per gli atti dell'Unione europea vengono forniti gli estremi di pubblicazione nella Gazzetta Ufficiale dell'Unione Europea (GUUE). 
+ 
+ Note alle premesse 
+ 
+ L'<ref eId="content__ref_20" href="/akn/it/act/costituzione/stato/1947-12-27/const/!main#art_76">art. 76 della Costituzione</ref> stabilisce che l'esercizio della funzione legislativa non puo' essere delegato al Governo se non con determinazione di principi e criteri direttivi e soltanto per tempo limitato e per oggetti definiti. 
+ L'<ref eId="content__ref_21" href="/akn/it/act/costituzione/stato/1947-12-27/const/!main#art_87">art. 87 della Costituzione</ref> conferisce, tra l'altro, al Presidente della Repubblica il potere di promulgare le leggi e di emanare i decreti aventi valore di legge ed i regolamenti. 
+ La <ref eId="content__ref_22" href="/akn/it/act/legge/stato/2017-10-25/163/!main">legge 25 ottobre 2017, n. 163</ref> (Delega al Governo per il recepimento delle direttive europee e l'attuazione di altri atti dell'Unione europea - Legge di delegazione europea 2016-2017) e' pubblicata nella Gazzetta Ufficiale 6 novembre 2017, n. 259. 
+ La <ref eId="content__ref_23" href="/akn/it/act/legge/stato/2012-12-24/234/!main">legge 24 dicembre 2012 n. 234</ref> (Norme generali sulla partecipazione dell'Italia alla formazione e all'attuazione della normativa e delle politiche dell'Unione europea) e' pubblicata nella Gazzetta Ufficiale 4 gennaio 2013, n. 3. 
+ Il <ref eId="content__ref_24" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref> (<ref eId="content__ref_25" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">Codice in materia di protezione dei dati personali</ref>) e' pubblicato nella Gazzetta Ufficiale 29 luglio 2003, n. 174, S.O. 
+ Il regolamento (UE) n. 2016/679 del Parlamento europeo e del Consiglio, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la <ref eId="content__ref_26" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE (regolamento</ref> generale sulla protezione dei dati), e' pubblicato nella G.U.U.E. 9 novembre 2012, n. L 310. 
+ La <ref eId="content__ref_27" href="/akn/it/act/direttivaUe/eu/2016/680/!main">direttiva (UE) 2016/680 del Parlamento europeo e del Consiglio</ref>, relativa alla protezione delle persone fisiche con riguardo al trattamento dei dati personali da parte delle autorita' competenti a fini di prevenzione, indagine, accertamento e perseguimento di reati o esecuzione di sanzioni penali, nonche' alla libera circolazione di tali dati e che abroga la decisione quadro 2008/977/GAI del Consiglio, e' pubblicata nella G.U.U.E. 4 maggio 2016, n. L 119. 
+ La <ref eId="content__ref_28" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE del Parlamento europeo e del Consiglio</ref>, relativa alla tutela delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati, e' pubblicata nella G.U.U.E. 23 novembre 1995, n. L 281. 
+ La <ref eId="content__ref_29" href="/akn/it/act/direttivaUe/eu/2002/58/!main">direttiva 2002/58/CE del Parlamento europeo e del Consiglio</ref>, relativa al trattamento dei dati personali e alla tutela della vita privata nel settore delle comunicazioni elettroniche, e' pubblicata nella G.U.C.E. 31 luglio 2002, n. L 201. 
+ Il <ref eId="content__ref_30" href="/akn/it/act/decretoLegislativo/stato/2018-05-18/51/!main">decreto legislativo 18 maggio 2018, n. 51</ref> (Attuazione della <ref eId="content__ref_31" href="/akn/it/act/direttivaUe/eu/2016/680/!main">direttiva (UE) 2016/680 del Parlamento europeo e del Consiglio, del 27 aprile 2016</ref>, relativa alla protezione delle persone fisiche con riguardo al trattamento dei dati personali da parte delle autorita' competenti a fini di prevenzione, indagine, accertamento e perseguimento di reati o esecuzione di sanzioni penali, nonche' alla libera circolazione di tali dati e che abroga la decisione quadro 2008/977/GAI del Consiglio), e' pubblicato nella Gazzetta Ufficiale 24 maggio 2018, n. 119. 
+ 
+ Note all'art. 1: 
+ 
+ - Il titolo del <ref eId="content__ref_32" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref>, citato nelle note alle premesse, come modificato dal presente decreto, cosi' recita: 
+ «<ref eId="content__ref_33" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">Codice in materia di protezione dei dati personali</ref>, recante disposizioni per l'adeguamento dell'ordinamento nazionale al regolamento (UE) 2016/679 del Parlamento europeo e del Consiglio, del 27 aprile 2016, relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonche' alla libera circolazione di tali dati e che abroga la <ref eId="content__ref_34" href="/akn/it/act/direttivaUe/eu/1995/46/!main">direttiva 95/46/CE</ref>.» 
+</p>
+                                </authorialNote>
+                            </p>
+                        </content>
+                    </section>
+                </article>
+            </chapter>
+            <chapter eId="chp_V">
+                <num>Capo V</num>
+                <heading>Disposizioni processuali</heading>
+                <article eId="art_17">
+                    <num>Art. 17.</num>
+                    <heading> Modifiche al decreto legislativo 
+ 1° settembre 2011, n. 150</heading>
+                    <paragraph eId="art_17__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>L'<ref eId="content__ref_205" href="/akn/it/act/decretoLegislativo/stato/2011-09-01/150/!main#art_10">articolo 10 del decreto legislativo 1° settembre 2011, n. 150</ref>, e' sostituito dal seguente: 
+ «Art. 10 (Delle controversie in materia di applicazione delle disposizioni in materia di protezione dei dati personali). - 1. Le controversie previste dall'<ref eId="content__ref_206" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_152">articolo 152 del decreto legislativo 30 giugno 2003, n. 196</ref>, sono regolate dal rito del lavoro, ove non diversamente disposto dal presente articolo. 
+ 2. Sono competenti, in via alternativa, il tribunale del luogo in cui il titolare del trattamento risiede o ha sede ovvero il tribunale del luogo di residenza dell'interessato. 
+ 3. Il ricorso avverso i provvedimenti del Garante per la protezione dei dati personali, ivi compresi quelli emessi a seguito di un reclamo dell'interessato, e' proposto, a pena di inammissibilita', entro trenta giorni dalla data di comunicazione del provvedimento ovvero entro sessanta giorni se il ricorrente risiede all'estero. 
+ 4. Decorso il termine previsto per la decisione del reclamo dall'<ref eId="content__ref_207" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main#art_143-com3">articolo 143, comma 3, del decreto legislativo n. 196 del 2003</ref>, chi vi ha interesse puo', entro trenta giorni dalla scadenza del predetto termine, ricorrere al Tribunale competente ai sensi del presente articolo. La disposizione di cui al primo periodo si applica anche qualora sia scaduto il termine trimestrale di cui all'<ref eId="content__ref_208" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main#art_143-com3">articolo 143, comma 3, del decreto legislativo n. 196 del 2003</ref> senza che l'interessato sia stato informato dello stato del procedimento. 
+ 5. L'interessato puo' dare mandato a un ente del terzo settore soggetto alla disciplina del <ref eId="content__ref_209" href="/akn/it/act/decretoLegislativo/stato/2017-07-03/117/!main">decreto legislativo 3 luglio 2017, n. 117</ref>, che sia attivo nel settore della tutela dei diritti e delle liberta' degli interessati con riguardo alla protezione dei dati personali, di esercitare per suo conto l'azione, ferme le disposizioni in materia di patrocinio previste dal <ref eId="content__ref_210" href="/akn/it/act/codice.procedura.civile/stato/1940-10-28/1443/!main">codice di procedura civile</ref>. 
+ 6. Il giudice fissa l'udienza di comparizione delle parti con decreto con il quale assegna al ricorrente il termine perentorio entro cui notificarlo alle altre parti e al Garante. Tra il giorno della notificazione e l'udienza di comparizione intercorrono non meno di trenta giorni. 
+ 7. L'efficacia esecutiva del provvedimento impugnato puo' essere sospesa secondo quanto previsto dall'articolo 5. 
+ 8. Se alla prima udienza il ricorrente non compare senza addurre alcun legittimo impedimento, il giudice dispone la cancellazione della causa dal ruolo e dichiara l'estinzione del processo, ponendo a carico del ricorrente le spese di giudizio. 
+ 9. Nei casi in cui non sia parte in giudizio, il Garante puo' presentare osservazioni, da rendere per iscritto o in udienza, sulla controversia in corso con riferimento ai profili relativi alla protezione dei dati personali. Il giudice dispone che sia data comunicazione al Garante circa la pendenza della controversia, trasmettendo copia degli atti introduttivi, al fine di consentire l'eventuale presentazione delle osservazioni. 
+ 10. La sentenza che definisce il giudizio non e' appellabile e puo' prescrivere le misure necessarie anche in deroga al divieto di cui all'<ref eId="content__ref_211" href="/akn/it/act/legge/stato/1865-03-20/2248/!main#art_4">articolo 4 della legge 20 marzo 1865, n. 2248</ref>, allegato E), anche in relazione all'eventuale atto del soggetto pubblico titolare o responsabile dei dati, nonche' il risarcimento del danno.». 
+</p>
+                        </content>
+                    </paragraph>
+                    <section>
+                        <content>
+                            <p>
+                                <authorialNote eId="authorialNote_16" placement="bottom">
+                                    <p> Note all'<ref eId="content__ref_212" href="/akn/it/act/decretoLegislativo/stato/2011-09-01/150/!main#art_17">art. 17: 
+ 
+ - Il decreto legislativo 1° settembre 2011, n. 150</ref> (Disposizioni complementari al <ref eId="content__ref_213" href="/akn/it/act/codice.procedura.civile/stato/1940-10-28/1443/!main">codice di procedura civile</ref> in materia di riduzione e semplificazione dei procedimenti civili di cognizione, ai sensi dell'<ref eId="content__ref_214" href="/akn/it/act/legge/stato/2009-06-18/69/!main#art_54">art. 54 della legge 18 giugno 2009, n. 69</ref>) e' pubblicato nella Gazzetta Ufficiale 21 settembre 2011, n. 220. 
+</p>
+                                </authorialNote>
+                            </p>
+                        </content>
+                    </section>
+                </article>
+            </chapter>
+            <chapter eId="chp_VI">
+                <num>Capo VI</num>
+                <heading>Disposizioni transitorie, finali e finanziarie</heading>
+                <article eId="art_18">
+                    <num>Art. 18.</num>
+                    <heading>Definizione agevolata delle violazioni in materia di protezione dei dati personali</heading>
+                    <paragraph eId="art_18__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>In deroga all'<ref eId="content__ref_215" href="/akn/it/act/legge/stato/1981-11-24/689/!main#art_16">articolo 16 della legge 24 novembre 1981, n. 689</ref>, per i procedimenti sanzionatori riguardanti le violazioni di cui agli <ref eId="content__ref_216" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_161">articoli 161</ref>, <ref eId="content__ref_217" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_162">162</ref>, <ref eId="content__ref_218" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_162bis">162-bis</ref>, <ref eId="content__ref_219" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_162ter">162-ter</ref>, <ref eId="content__ref_220" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_163">163</ref>, <ref eId="content__ref_221" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_164">164</ref>, <ref eId="content__ref_222" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_164bis-com2">164-bis, comma 2, del Codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_223" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref>, e le violazioni delle misure di cui all'articolo 33 e 162, comma 2-bis, del medesimo Codice, che, alla data di applicazione del Regolamento, risultino non ancora definiti con l'adozione dell'ordinanza-ingiunzione, e' ammesso il pagamento in misura ridotta di un somma pari a due quinti del minimo edittale. Fatti salvi i restanti atti del procedimento eventualmente gia' adottati, il pagamento potra' essere effettuato entro novanta giorni dalla data di entrata in vigore del presente decreto. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_18__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Decorsi i termini previsti dal comma 1, l'atto con il quale sono stati notificati gli estremi della violazione o l'atto di contestazione immediata di cui all'<ref eId="content__ref_224" href="/akn/it/act/legge/stato/1981-11-24/689/!main#art_14">articolo 14 della legge 24 novembre 1981, n. 689</ref>, assumono il valore dell'ordinanza-ingiunzione di cui all'articolo 18 della predetta legge, senza obbligo di ulteriore notificazione, sempre che il contravventore non produca memorie difensive ai sensi del comma 4. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_18__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Nei casi di cui al comma 2, il contravventore e' tenuto a corrispondere gli importi indicati negli atti di cui al primo periodo del predetto comma entro sessanta giorni dalla scadenza del termine previsto dal comma 1. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_18__para_4">
+                        <num>4.</num>
+                        <content>
+                            <p>Entro il termine di cui al comma 3, il contravventore che non abbia provveduto al pagamento puo' produrre nuove memorie difensive.
+Il Garante, esaminate tali memorie, dispone l'archiviazione degli atti comunicandola all'organo che ha redatto il rapporto o, in alternativa, adotta specifica ordinanza-ingiunzione con la quale determina la somma dovuta per la violazione e ne ingiunge il pagamento, insieme con le spese, all'autore della violazione ed alle persone che vi sono obbligate solidalmente. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_18__para_5">
+                        <num>5.</num>
+                        <content>
+                            <p>L'entrata in vigore del presente decreto determina l'interruzione del termine di prescrizione del diritto a riscuotere le somme dovute a norma del presente articolo, di cui all'<ref eId="content__ref_225" href="/akn/it/act/legge/stato/1981-11-24/689/!main#art_28">art. 28 della legge 24 novembre 1981, n. 689</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_19">
+                    <num>Art. 19.</num>
+                    <heading> Trattazione di affari pregressi</heading>
+                    <paragraph eId="art_19__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Entro il termine di sessanta giorni dalla data di pubblicazione nella Gazzetta Ufficiale della Repubblica italiana dell'avviso di cui al comma 3, i soggetti che dichiarano il loro attuale interesse possono presentare al Garante per la protezione dei dati personali motivata richiesta di trattazione dei reclami, delle segnalazioni e delle richieste di verifica preliminare pervenuti entro la predetta data. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_19__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>La richiesta di cui al comma 1 non riguarda i reclami e le segnalazioni di cui si e' gia' esaurito l'esame o di cui il Garante per la protezione dei dati personali ha gia' esaminato nel corso del 2018 un motivato sollecito o una richiesta di trattazione, o per i quali il Garante medesimo e' a conoscenza, anche a seguito di propria denuncia, che sui fatti oggetto di istanza e' in corso un procedimento penale. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_19__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Entro quindici giorni dalla data di entrata in vigore del presente decreto il Garante per la protezione dei dati personali provvede a dare notizia di quanto previsto dai commi 1 e 2 mediante avviso pubblicato nel proprio sito istituzionale e trasmesso, altresi', all'Ufficio pubblicazioni leggi e decreti del Ministero della giustizia per la sua pubblicazione nella Gazzetta Ufficiale della Repubblica italiana. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_19__para_4">
+                        <num>4.</num>
+                        <content>
+                            <p>In caso di mancata presentazione di una richiesta di trattazione ai sensi del comma 1, e salvo quanto previsto dal comma 2, i relativi procedimenti di cui al comma 1 sono improcedibili. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_19__para_5">
+                        <num>5.</num>
+                        <content>
+                            <p>I ricorsi pervenuti al Garante per la protezione dei dati personali e non definiti, neppure nelle forme del rigetto tacito, alla data di applicazione del <ref eId="content__ref_234" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref> sono trattati come reclami ai sensi dell'articolo 77 del medesimo Regolamento. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_20">
+                    <num>Art. 20.</num>
+                    <heading> Codici di deontologia e di buona condotta vigenti 
+ alla data di entrata in vigore del presente decreto</heading>
+                    <paragraph eId="art_20__para_1">
+                        <num>1.</num>
+                        <list>
+                            <intro eId="art_20__para_1__intro_1">
+                                <p>Le disposizioni del codice di deontologia e di buona condotta di cui agli allegati A.5 e A.7 del <ref eId="content__ref_235" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_236" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, continuano a produrre effetti, sino alla definizione della procedura di approvazione cui alla lettera b), a condizione che si verifichino congiuntamente le seguenti condizioni: 
+ </p>
+                            </intro>
+                            <point eId="art_20__para_1.__point_a">
+                                <num>a)</num>
+                                <content>
+                                    <p>entro sei mesi dalla data di entrata in vigore del presente decreto le associazioni e gli altri organismi rappresentanti le categorie interessate sottopongano all'approvazione del Garante per la protezione dei dati personali, a norma dell'<ref eId="content__ref_237" href="/akn/it/act/regolamento//2016/679/!main#art_40">articolo 40 del Regolamento (UE) 2016/679</ref>, i codici di condotta elaborati a norma del paragrafo 2 del predetto articolo; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_20__para_1.__point_b">
+                                <num>b)</num>
+                                <content>
+                                    <p>la procedura di approvazione si concluda entro sei mesi dalla sottoposizione del codice di condotta all'esame del Garante per la protezione dei dati personali. 
+</p>
+                                </content>
+                            </point>
+                        </list>
+                    </paragraph>
+                    <paragraph eId="art_20__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Il mancato rispetto di uno dei termini di cui al comma 1, lettere a) e b) comporta la cessazione di efficacia delle disposizioni del codice di deontologia di cui al primo periodo a decorrere dalla scadenza del termine violato. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_20__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Le disposizioni contenute nei codici riportati negli allegati A.1, A.2, A.3, A.4 e A.6 del <ref eId="content__ref_238" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_239" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, continuano a produrre effetti fino alla pubblicazione delle disposizioni ai sensi del comma 4. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_20__para_4">
+                        <num>4.</num>
+                        <content>
+                            <p>Entro novanta giorni dalla data di entrata in vigore del presente decreto, il Garante per la protezione dei dati personali verifica la conformita' al <ref eId="content__ref_240" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref> delle disposizioni di cui al comma 3. Le disposizioni ritenute compatibili, ridenominate regole deontologiche, sono pubblicate nella Gazzetta Ufficiale della Repubblica italiana e, con decreto del Ministro della giustizia, sono successivamente riportate nell'allegato A del <ref eId="content__ref_241" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_242" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_20__para_5">
+                        <num>5.</num>
+                        <content>
+                            <p>Il Garante per la protezione dei dati personali promuove la revisione delle disposizioni dei codici di cui al comma 3 con le modalita' di cui all'<ref eId="content__ref_243" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_2quater">articolo 2-quater del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_244" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_21">
+                    <num>Art. 21.</num>
+                    <heading> Autorizzazioni generali del Garante 
+ per la protezione dei dati personali</heading>
+                    <paragraph eId="art_21__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Il Garante per la protezione dei dati personali, con provvedimento di carattere generale da porre in consultazione pubblica entro novanta giorni dalla data di entrata in vigore del presente decreto, individua le prescrizioni contenute nelle autorizzazioni generali gia' adottate, relative alle situazioni di trattamento di cui agli articoli 6, paragrafo 1, lettere c) ed e), 9, paragrafo 2, lettera b) e 4, nonche' al Capo IX del <ref eId="content__ref_246" href="/akn/it/act/regolamento//2016/679/!main">regolamento (UE) 2016/679</ref>, che risultano compatibili con le disposizioni del medesimo regolamento e del presente decreto e, ove occorra, provvede al loro aggiornamento. Il provvedimento di cui al presente comma e' adottato entro sessanta giorni dall'esito del procedimento di consultazione pubblica. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_21__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Le autorizzazioni generali sottoposte a verifica a norma del comma 1 che sono state ritenute incompatibili con le disposizioni del <ref eId="content__ref_247" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref> cessano di produrre effetti dal momento della pubblicazione nella Gazzetta Ufficiale della Repubblica italiana del provvedimento di cui al comma 1. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_21__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Le autorizzazioni generali del Garante per la protezione dei dati personali adottate prima della data di entrata in vigore del presente decreto e relative a trattamenti diversi da quelli indicati al comma 1 cessano di produrre effetti alla predetta data. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_21__para_4">
+                        <num>4.</num>
+                        <content>
+                            <p>Sino all'adozione delle regole deontologiche e delle misure di garanzia di cui agli <ref eId="content__ref_248" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_2quater">articoli 2-quater</ref> e <ref eId="content__ref_249" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_2septies">2-septies del Codice in materia di protezione dei dati personali</ref> di cui al <ref eId="content__ref_250" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">decreto legislativo 30 giugno 2003, n. 196</ref> producono effetti, per la corrispondente categoria di dati e di trattamenti, le autorizzazioni generali di cui al comma 2 e le pertinenti prescrizioni individuate con il provvedimento di cui al comma 1. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_21__para_5">
+                        <num>5.</num>
+                        <content>
+                            <p>Salvo che il fatto costituisca reato, le violazioni delle prescrizioni contenute nelle autorizzazioni generali di cui al presente articolo e nel provvedimento generale di cui al comma 1 sono soggette alla sanzione amministrativa di cui all'<ref eId="content__ref_251" href="/akn/it/act/regolamento//2016/679/!main#art_83-par5">articolo 83, paragrafo 5, del Regolamento (UE) 2016/679</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_22">
+                    <num>Art. 22.</num>
+                    <heading> Altre disposizioni transitorie e finali</heading>
+                    <paragraph eId="art_22__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Il presente decreto e le disposizioni dell'ordinamento nazionale si interpretano e si applicano alla luce della disciplina dell'Unione europea in materia di protezione dei dati personali e assicurano la libera circolazione dei dati personali tra Stati membri ai sensi dell'<ref eId="content__ref_252" href="/akn/it/act/regolamento//2016/679/!main#art_1-par3">articolo 1, paragrafo 3, del Regolamento (UE) 2016/679</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>A decorrere dal 25 maggio 2018 le espressioni «dati sensibili» e «dati giudiziari» utilizzate ai sensi dell'<ref eId="content__ref_253" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_4-com1-letd">articolo 4, comma 1, lettere d)</ref> ed <ref eId="content__ref_254" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_4-com1-lete">e), del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_255" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, ovunque ricorrano, si intendono riferite, rispettivamente, alle categorie particolari di dati di cui all'<ref eId="content__ref_256" href="/akn/it/act/regolamento//2016/679/!main#art_9">articolo 9 del Regolamento (UE) 2016/679</ref> e ai dati di cui all'articolo 10 del medesimo regolamento. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Sino all'adozione dei corrispondenti provvedimenti generali di cui all'<ref eId="content__ref_257" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_2quindecies">articolo 2-quinquiesdecies del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_258" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, i trattamenti di cui al medesimo articolo, gia' in corso alla data di entrata in vigore del presente decreto, possono proseguire qualora avvengano in base a espresse disposizioni di legge o regolamento o atti amministrativi generali, ovvero nel caso in cui siano stati sottoposti a verifica preliminare o autorizzazione del Garante per la protezione dei dati personali, che abbiano individuato misure e accorgimenti adeguati a garanzia dell'interessato. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_4">
+                        <num>4.</num>
+                        <content>
+                            <p>A decorrere dal 25 maggio 2018, i provvedimenti del Garante per la protezione dei dati personali continuano ad applicarsi, in quanto compatibili con il suddetto regolamento e con le disposizioni del presente decreto. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_5">
+                        <num>5.</num>
+                        <content>
+                            <p>A decorrere dal 25 maggio 2018, le disposizioni di cui ai <ref eId="content__ref_259" href="/akn/it/act/legge/stato/2017-12-27/205/!main#art_1-com1022">commi 1022</ref> e <ref eId="content__ref_260" href="/akn/it/act/legge/stato/2017-12-27/205/!main#art_1-com1023">1023 dell'articolo 1 della legge 27 dicembre 2017, n. 205</ref> si applicano esclusivamente ai trattamenti dei dati personali funzionali all'autorizzazione del cambiamento del nome o del cognome dei minorenni. Con riferimento a tali trattamenti, il Garante per la protezione dei dati personali puo', nei limiti e con le modalita' di cui all'<ref eId="content__ref_261" href="/akn/it/act/regolamento//2016/679/!main#art_36">articolo 36 del Regolamento (UE) 2016/679</ref>, adottare provvedimenti di carattere generale ai sensi dell'articolo 2-quinquiesdecies. Al fine di semplificare gli oneri amministrativi, i soggetti che rispettano le misure di sicurezza e gli accorgimenti prescritti con i provvedimenti di cui al secondo periodo sono esonerati dall'invio al Garante dell'informativa di cui al citato comma 1022. In sede di prima applicazione, le suddette informative, se dovute a norma del terzo periodo, sono inviate entro sessanta giorni dalla pubblicazione del provvedimento del Garante nella Gazzetta Ufficiale della Repubblica italiana. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_6">
+                        <num>6.</num>
+                        <content>
+                            <p>Dalla data di entrata in vigore del presente decreto, i rinvii alle disposizioni del <ref eId="content__ref_262" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_263" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, abrogate dal presente decreto, contenuti in norme di legge e di regolamento, si intendono riferiti alle corrispondenti disposizioni del <ref eId="content__ref_264" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref> e a quelle introdotte o modificate dal presente decreto, in quanto compatibili. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_7">
+                        <num>7.</num>
+                        <content>
+                            <p>All'<ref eId="content__ref_265" href="/akn/it/act/legge/stato/2017-12-27/205/!main#art_1-com233">articolo 1, comma 233, della legge 27 dicembre 2017, n. 205</ref>, dopo le parole «le modalita' di restituzione» sono inserite le seguenti: «in forma aggregata». 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_8">
+                        <num>8.</num>
+                        <content>
+                            <p>Il registro dei trattamenti di cui all'<ref eId="content__ref_266" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_37-com4">articolo 37, comma 4, del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_267" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, cessa di essere alimentato a far data dal 25 maggio 2018. Da tale data e fino al 31 dicembre 2019, il registro resta accessibile a chiunque secondo le modalita' stabilite nel suddetto <ref eId="content__ref_268" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main#art_37-com4">articolo 37, comma 4, del decreto legislativo n. 196 del 2003</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_9">
+                        <num>9.</num>
+                        <content>
+                            <p>Le disposizioni di legge o di regolamento che individuano il tipo di dati trattabili e le operazioni eseguibili al fine di autorizzare i trattamenti delle pubbliche amministrazioni per motivi di interesse pubblico rilevante trovano applicazione anche per i soggetti privati che trattano i dati per i medesimi motivi. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_10">
+                        <num>10.</num>
+                        <content>
+                            <p>La disposizione di cui all'<ref eId="content__ref_269" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_160-com4">articolo 160, comma 4, del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_270" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, nella parte in cui ha riguardo ai dati coperti da segreto di Stato, si applica fino alla data di entrata in vigore della disciplina relativa alle modalita' di opposizione al Garante per la protezione dei dati personali del segreto di Stato. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_11">
+                        <num>11.</num>
+                        <content>
+                            <p>Le disposizioni del <ref eId="content__ref_271" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_272" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, relative al trattamento di dati genetici, biometrici o relativi alla salute continuano a trovare applicazione, in quanto compatibili con il <ref eId="content__ref_273" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref>, sino all'adozione delle corrispondenti misure di garanzia di cui all'articolo 2-septies del citato codice, introdotto dall'articolo 2, comma 1, lett. e) del presente decreto. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_12">
+                        <num>12.</num>
+                        <content>
+                            <p>Sino alla data di entrata in vigore del decreto del Ministro della giustizia di cui all'<ref eId="content__ref_274" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_2octies-com2">articolo 2-octies, commi 2</ref> e <ref eId="content__ref_275" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_2octies-com6">6, del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_276" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, da adottarsi entro diciotto mesi dalla data di entrata in vigore del presente decreto, il trattamento dei dati di cui all'<ref eId="content__ref_277" href="/akn/it/act/regolamento//2016/679/!main#art_10">articolo 10 del Regolamento (UE) 2016/679</ref> e' consentito quando e' effettuato in attuazione di protocolli di intesa per la prevenzione e il contrasto dei fenomeni di criminalita' organizzata stipulati con il Ministero dell'interno o con le Prefetture - UTG, previo parere del Garante per la protezione dei dati personali, che specificano la tipologia dei dati trattati e delle operazioni eseguibili. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_13">
+                        <num>13.</num>
+                        <content>
+                            <p>Per i primi otto mesi dalla data di entrata in vigore del presente decreto, il Garante per la protezione dei dati personali tiene conto, ai fini dell'applicazione delle sanzioni amministrative e nei limiti in cui risulti compatibile con le disposizioni del <ref eId="content__ref_278" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref>, della fase di prima applicazione delle disposizioni sanzionatorie. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_22__para_14">
+                        <num>14.</num>
+                        <list>
+                            <intro eId="art_22__para_14__intro_1">
+                                <p>All'<ref eId="content__ref_279" href="/akn/it/act/legge/stato/2018-01-11/5/!main#art_1">articolo 1 della legge 11 gennaio 2018, n. 5</ref> sono apportate le seguenti modificazioni: 
+ </p>
+                            </intro>
+                            <point eId="art_22__para_14.__point_a">
+                                <num>a)</num>
+                                <content>
+                                    <p>al comma 9, le parole «di cui all'articolo 162, comma 2-bis» sono sostituite dalle seguenti: «di cui all'articolo 166, comma 2»; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_22__para_14.__point_b">
+                                <num>b)</num>
+                                <content>
+                                    <p>al comma 10, le parole «di cui all'articolo 162, comma 2-quater» sono sostituite dalle seguenti: «di cui all'articolo 166, comma 2». 
+</p>
+                                </content>
+                            </point>
+                        </list>
+                    </paragraph>
+                    <paragraph eId="art_22__para_15">
+                        <num>15.</num>
+                        <content>
+                            <p>All'<ref eId="content__ref_280" href="/akn/it/act/decretoLegislativo/stato/2013-03-14/33/!main#art_5ter-com1-letc">articolo 5-ter, comma 1, lettera c), del decreto legislativo 14 marzo 2013, n. 33</ref> le parole «di cui all'articolo 162, comma 2-bis» sono sostituite dalle seguenti: «di cui all'articolo 166, comma 2». 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_23">
+                    <num>Art. 23.</num>
+                    <heading> Disposizioni di coordinamento</heading>
+                    <paragraph eId="art_23__para_1">
+                        <num>1.</num>
+                        <list>
+                            <intro eId="art_23__para_1__intro_1">
+                                <p>A decorrere dalla data di entrata in vigore del presente decreto: 
+ </p>
+                            </intro>
+                            <point eId="art_23__para_1.__point_a">
+                                <num>a)</num>
+                                <content>
+                                    <p>all'articolo 37, comma 2, alinea, del <ref eId="content__ref_308" href="/akn/it/act/decretoLegislativo/stato/2018-05-18/51/!main">decreto legislativo 18 maggio 2018, n. 51</ref>, il riferimento all'<ref eId="content__ref_309" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_154">articolo 154 del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_310" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, si intende effettuato agli articoli 154 e 154-bis del medesimo codice; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_23__para_1.__point_b">
+                                <num>b)</num>
+                                <content>
+                                    <p>all'<ref eId="content__ref_311" href="/akn/it/act/decretoLegislativo/stato/2018-05-18/51/!main#art_39-com1">articolo 39, comma 1, del decreto legislativo 18 maggio 2018, n. 51</ref>, il riferimento agli <ref eId="content__ref_312" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_142">articoli 142</ref> e <ref eId="content__ref_313" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_143">143 del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_314" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref> si intende effettuato agli articoli 141, 142 e 143 del medesimo codice; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_23__para_1.__point_c">
+                                <num>c)</num>
+                                <content>
+                                    <p>all'<ref eId="content__ref_315" href="/akn/it/act/decretoLegislativo/stato/2018-05-18/51/!main#art_42">articolo 42 del decreto legislativo 18 maggio 2018, n. 51</ref>, il riferimento all'<ref eId="content__ref_316" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_165">articolo 165 del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_317" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, si intende effettuato all'articolo 166, comma 7, del medesimo codice; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_23__para_1.__point_d">
+                                <num>d)</num>
+                                <content>
+                                    <p>all'<ref eId="content__ref_318" href="/akn/it/act/decretoLegislativo/stato/2018-05-18/51/!main#art_45">articolo 45 del decreto legislativo 18 maggio 2018, n. 51</ref>, il riferimento all'<ref eId="content__ref_319" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main#art_143-com1-letc">articolo 143, comma 1, lettera c), del codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_320" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, si intende effettuato all'<ref eId="content__ref_321" href="/akn/it/act/regolamento//2016/679/!main#art_58-par2-letf">articolo 58, paragrafo 2, lettera f), del Regolamento (UE) 2016/679</ref>. 
+</p>
+                                </content>
+                            </point>
+                        </list>
+                    </paragraph>
+                    </article>
+                <article eId="art_24">
+                    <num>Art. 24.</num>
+                    <heading/>
+                    <paragraph>
+                        <content>
+                            <p>
+ 
+ 
+ Applicabilita' delle sanzioni amministrative 
+ alle violazioni anteriormente commesse 
+ 
+ </p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_24__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Le disposizioni del presente decreto che, mediante abrogazione, sostituiscono sanzioni penali con le sanzioni amministrative previste dal <ref eId="content__ref_330" href="/akn/it/act/regolamento//2016/679/!main">Regolamento (UE) 2016/679</ref> si applicano anche alle violazioni commesse anteriormente alla data di entrata in vigore del decreto stesso, sempre che il procedimento penale non sia stato definito con sentenza o con decreto divenuti irrevocabili. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_24__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Se i procedimenti penali per i reati depenalizzati dal presente decreto sono stati definiti, prima della sua entrata in vigore, con sentenza di condanna o decreto irrevocabili, il giudice dell'esecuzione revoca la sentenza o il decreto, dichiarando che il fatto non e' previsto dalla legge come reato e adotta i provvedimenti conseguenti. Il giudice dell'esecuzione provvede con l'osservanza delle disposizioni dell'<ref eId="content__ref_331" href="/akn/it/act/codice.procedura.penale/presidente.repubblica/1988-09-22/447/!main#art_667-com4">articolo 667, comma 4, del codice di procedura penale</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_24__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Ai fatti commessi prima della data di entrata in vigore del presente decreto non puo' essere applicata una sanzione amministrativa pecuniaria per un importo superiore al massimo della pena originariamente prevista o inflitta per il reato, tenuto conto del criterio di ragguaglio di cui all'<ref eId="content__ref_332" href="/akn/it/act/regioDecreto/stato/1930-10-19/1398/!main#art_135">articolo 135 del codice penale</ref>.
+A tali fatti non si applicano le sanzioni amministrative accessorie introdotte dal presente decreto, salvo che le stesse sostituiscano corrispondenti pene accessorie. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_25">
+                    <num>Art. 25.</num>
+                    <heading/>
+                    <paragraph>
+                        <content>
+                            <p>
+ 
+ 
+ Trasmissione degli atti all'autorita' amministrativa 
+ 
+ </p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_25__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Nei casi previsti dall'articolo 24, comma 1, l'autorita' giudiziaria, entro novanta giorni dalla data di entrata in vigore del presente decreto, dispone la trasmissione all'autorita' amministrativa competente degli atti dei procedimenti penali relativi ai reati trasformati in illeciti amministrativi, salvo che il reato risulti prescritto o estinto per altra causa alla medesima data. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_25__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Se l'azione penale non e' stata ancora esercitata, la trasmissione degli atti e' disposta direttamente dal pubblico ministero che, in caso di procedimento gia' iscritto, annota la trasmissione nel registro delle notizie di reato. Se il reato risulta estinto per qualsiasi causa, il pubblico ministero richiede l'archiviazione a norma del <ref eId="content__ref_335" href="/akn/it/act/codice.procedura.penale/presidente.repubblica/1988-09-22/447/!main">codice di procedura penale</ref>; la richiesta ed il decreto del giudice che la accoglie possono avere ad oggetto anche elenchi cumulativi di procedimenti. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_25__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Se l'azione penale e' stata esercitata, il giudice pronuncia, ai sensi dell'<ref eId="content__ref_336" href="/akn/it/act/codice.procedura.penale/presidente.repubblica/1988-09-22/447/!main#art_129">articolo 129 del codice di procedura penale</ref>, sentenza inappellabile perche' il fatto non e' previsto dalla legge come reato, disponendo la trasmissione degli atti a norma del comma 1.
+Quando e' stata pronunciata sentenza di condanna, il giudice dell'impugnazione, nel dichiarare che il fatto non e' previsto dalla legge come reato, decide sull'impugnazione ai soli effetti delle disposizioni e dei capi della sentenza che concernono gli interessi civili. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_25__para_4">
+                        <num>4.</num>
+                        <content>
+                            <p>L'autorita' amministrativa notifica gli estremi della violazione agli interessati residenti nel territorio della Repubblica entro il termine di novanta giorni e a quelli residenti all'estero entro il termine di trecentosettanta giorni dalla ricezione degli atti. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_25__para_5">
+                        <num>5.</num>
+                        <content>
+                            <p>Entro sessanta giorni dalla notificazione degli estremi della violazione l'interessato e' ammesso al pagamento in misura ridotta, pari alla meta' della sanzione irrogata, oltre alle spese del procedimento. Si applicano, in quanto compatibili, le disposizioni di cui all'<ref eId="content__ref_337" href="/akn/it/act/legge/stato/1981-11-24/689/!main#art_16">articolo 16 della legge 24 novembre 1981, n. 689</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_25__para_6">
+                        <num>6.</num>
+                        <content>
+                            <p>Il pagamento determina l'estinzione del procedimento. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_26">
+                    <num>Art. 26.</num>
+                    <heading> Disposizioni finanziarie</heading>
+                    <paragraph eId="art_26__para_1">
+                        <num>1.</num>
+                        <content>
+                            <p>Agli oneri derivanti dall'articolo 18 del presente decreto, pari ad € 600.000 per ciascuno degli anni dal 2019 al 2021, si provvede mediante corrispondente riduzione dell'autorizzazione di spesa di cui all'<ref eId="content__ref_344" href="/akn/it/act/legge/stato/2017-12-27/205/!main#art_1-com1025">articolo 1, comma 1025, della legge 27 dicembre 2017, n. 205</ref>. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_26__para_2">
+                        <num>2.</num>
+                        <content>
+                            <p>Dall'attuazione del presente decreto, ad esclusione dell'articolo 18, non devono derivare nuovi o maggiori oneri a carico della finanza pubblica. Le amministrazioni interessate provvedono agli adempimenti previsti con le risorse umane, strumentali e finanziarie disponibili a legislazione vigente. 
+</p>
+                        </content>
+                    </paragraph>
+                    <paragraph eId="art_26__para_3">
+                        <num>3.</num>
+                        <content>
+                            <p>Il Ministro dell'economia e delle finanze e' autorizzato ad apportare le occorrenti variazioni di bilancio. 
+</p>
+                        </content>
+                    </paragraph>
+                    </article>
+                <article eId="art_27">
+                    <num>Art. 27.</num>
+                    <heading> Abrogazioni</heading>
+                    <paragraph eId="art_27__para_1">
+                        <num>1.</num>
+                        <list>
+                            <intro eId="art_27__para_1__intro_1">
+                                <p>Sono abrogati i titoli, capi, sezioni, articoli e allegati del <ref eId="content__ref_347" href="/akn/it/act/decretoLegislativo/stato/2003-06-30/196/!main">codice in materia di protezione dei dati personali</ref>, di cui al <ref eId="content__ref_348" href="/akn/it/act/decretoLegislativo/stato/2003/196/!main">decreto legislativo n. 196 del 2003</ref>, di seguito elencati: 
+ </p>
+                            </intro>
+                            <point eId="art_27__para_1.__point_a">
+                                <num>a)</num>
+                                <content>
+                                    <p>alla parte I: 
+ 1) gli articoli 3, 4, 5 e 6; 
+ 2) il titolo II, il titolo III, il titolo IV, il titolo V, il titolo VI e il titolo VII; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_27__para_1.__point_b">
+                                <num>b)</num>
+                                <content>
+                                    <p>alla parte II: 
+ 1) il capo I del titolo I; 
+ 2) i capi III, IV e V del titolo IV; 
+ 3) gli articoli 76, 81, 83 e 84; 
+ 4) il capo III del titolo V; 
+ 5) gli articoli 87, 88 e 89; 
+ 6) il capo V del titolo V; 
+ 7) gli articoli 91, 94, 95, 98, 112, 117, 118 e 119; 
+ 8) i capi II e III del titolo X, il titolo XI e il titolo XIII; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_27__para_1.__point_c">
+                                <num>c)</num>
+                                <content>
+                                    <p>alla parte III: 
+ 1) la sezione III del capo I del titolo I; 
+ 2) gli articoli 161, 162, 162-bis, 162-ter, 163, 164, 164-bis,165 e 169; 
+ 3) gli articoli 173, 174, 175, commi 1 e 2, 176, 177, 178 e 179; 
+ 4) il capo II del titolo IV; 
+ 5) gli articoli 184 e 185; 
+</p>
+                                </content>
+                            </point>
+                            <point eId="art_27__para_1.__point_d">
+                                <num>d)</num>
+                                <content>
+                                    <p>gli allegati B e C. 
+ </p>
+                                </content>
+                            </point>
+                        </list>
+                    </paragraph>
+                    </article>
+            </chapter>
+        </body>
+        <conclusions>
+            <formula name="formulaFinaleConclusioni">
+                <p>Il presente decreto, munito del sigillo dello Stato, sara' inserito nella Raccolta ufficiale degli atti normativi della Repubblica italiana. E' fatto obbligo a chiunque spetti di osservarlo e di farlo osservare. </p>
+            </formula>
+            <p> Dato a Roma, addi' 10 agosto 2018 </p>
+            <p>MATTARELLA Conte, Presidente del Consiglio dei ministri Savona, Ministro per gli affari europei Bonafede, Ministro della giustizia Bongiorno, Ministro per la pubblica amministrazione Moavero Milanesi, Ministro degli affari esteri e della cooperazione internazionale Tria, Ministro dell'economia e delle finanze Di Maio, Ministro dello sviluppo economico Visto, il Guardasigilli: Bonafede</p>
+        </conclusions>
+    </act>
+</akomaNtoso>

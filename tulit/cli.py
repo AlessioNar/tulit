@@ -3,10 +3,16 @@ Command-line interface for tulit.
 
 Examples
 --------
-Download an EU act and write it as legalJSON::
+Download an act and write it as legalJSON::
 
     tulit get 32024R0903 -o 32024R0903.json
-    tulit get 32016R0679 --format xhtml --language FRA
+    tulit get 32016R0679 --format xhtml --language fra
+    tulit get 32013R0575 --version consolidated --date 2025-06-30
+    tulit get 10001597 --jurisdiction AT
+
+List the supported jurisdictions::
+
+    tulit sources
 
 Parse a local file::
 
@@ -26,6 +32,7 @@ from tulit import __version__
 from tulit.api import CELLAR_FORMATS, _validate, fetch
 from tulit.parser.exceptions import ParserError
 from tulit.parser.registry import get_parser, get_parser_registry
+from tulit.sources import VERSIONS, get_source, list_sources
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -37,15 +44,20 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument('-v', '--verbose', action='store_true', help='log progress to stderr')
     commands = parser.add_subparsers(dest='command', required=True)
 
-    get = commands.add_parser('get', help='download an EU act from Cellar as legalJSON')
-    get.add_argument('celex', help='CELEX number, e.g. 32024R0903')
-    get.add_argument('-f', '--format', choices=sorted(CELLAR_FORMATS), default='fmx4',
-                     help='Cellar format to download and parse (default: fmx4)')
-    get.add_argument('-l', '--language', default='ENG',
-                     help='three-letter language code (default: ENG)')
+    get = commands.add_parser('get', help='download an act from its official source as legalJSON')
+    get.add_argument('identifier',
+                     help='CELEX number (EU), national identifier, or ELI URI (see "tulit sources")')
+    get.add_argument('-j', '--jurisdiction',
+                     help='EU or a Member State code such as AT (default: inferred from an ELI, else EU)')
+    get.add_argument('--version', dest='text_version', choices=VERSIONS,
+                     help='original or consolidated text (default: original where published)')
+    get.add_argument('--date', help='ISO date of the consolidated version (default: today)')
+    get.add_argument('-l', '--language', help='ISO 639-3 language code, e.g. eng, fra, deu')
+    get.add_argument('-f', '--format', choices=sorted(CELLAR_FORMATS),
+                     help='EU only: Cellar format to download and parse (default: fmx4)')
     get.add_argument('--download-dir',
                      help='keep the downloaded source files in this directory')
-    get.add_argument('--no-meta', action='store_true', help='do not attach Cellar metadata')
+    get.add_argument('--no-meta', action='store_true', help='do not attach document metadata')
     _add_output_arguments(get)
 
     parse = commands.add_parser('parse', help='convert a local file or folder to legalJSON')
@@ -55,6 +67,7 @@ def build_parser() -> argparse.ArgumentParser:
     _add_output_arguments(parse)
 
     commands.add_parser('formats', help='list the parser formats and their aliases')
+    commands.add_parser('sources', help='list the supported jurisdictions and their sources')
     return parser
 
 
@@ -95,6 +108,16 @@ def _list_formats() -> None:
         sys.stdout.write(f"{format_id}{'  (' + extra + ')' if extra else ''}\n")
 
 
+def _list_sources() -> None:
+    for code in list_sources():
+        source = get_source(code)
+        sys.stdout.write(
+            f"{code}  {source.name}: {source.source_name}\n"
+            f"    versions: {', '.join(source.versions)}; languages: {', '.join(source.languages)}\n"
+            f"    identifier: {source.identifier_help}\n"
+        )
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = build_parser().parse_args(argv)
     if args.verbose:
@@ -104,14 +127,21 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if args.command == 'formats':
             _list_formats()
             return 0
+        if args.command == 'sources':
+            _list_sources()
+            return 0
         if args.command == 'get':
+            options = {'format': args.format} if args.format else {}
             doc = fetch(
-                args.celex,
-                format=args.format,
+                args.identifier,
+                jurisdiction=args.jurisdiction,
+                version=args.text_version,
+                date=args.date,
                 language=args.language,
                 download_dir=args.download_dir,
                 metadata=not args.no_meta,
                 validate=not args.no_validate,
+                **options,
             )
         else:
             doc = _parse_local(args.path, args.format)

@@ -284,6 +284,65 @@ class CellarClient(Client):
             meta[key].sort()
         return meta
 
+    def celex_from_eli(self, eli):
+        """
+        Resolve an EU ELI (e.g. http://data.europa.eu/eli/reg/2016/679/oj) to its CELEX number.
+
+        Returns None when Cellar has no work with that ELI.
+        """
+        eli = eli.replace('https://', 'http://').rstrip('/')
+        sparql_query = (
+            "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\n"
+            "SELECT DISTINCT ?celex WHERE {\n"
+            "  ?work cdm:resource_legal_eli ?eli ; cdm:resource_legal_id_celex ?celex .\n"
+            f'  FILTER(STR(?eli) = "{eli}")\n'
+            "}"
+        )
+        results = self.send_sparql_query(sparql_query)
+        celexes = sorted(row['celex']['value'] for row in results["results"]["bindings"])
+        return celexes[0] if celexes else None
+
+    def get_consolidated_celex(self, celex, date):
+        """
+        Find the consolidated version of an act in force on a given date.
+
+        Consolidated versions have CELEX numbers in sector 0 with the date
+        the version applies from, e.g. 02016R0679-20160504 for 32016R0679.
+
+        Parameters
+        ----------
+        celex : str
+            CELEX number of the original act.
+        date : str
+            ISO date (YYYY-MM-DD); the latest version applying on or before it is returned.
+
+        Returns
+        -------
+        tuple or None
+            (consolidated CELEX, ISO date of the version), or None if the act
+            has no consolidated version on or before that date.
+        """
+        prefix = '0' + celex[1:] + '-'
+        sparql_query = (
+            "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\n"
+            "SELECT DISTINCT ?celex WHERE {\n"
+            "  ?work cdm:resource_legal_id_celex ?celex .\n"
+            f'  FILTER(STRSTARTS(STR(?celex), "{prefix}"))\n'
+            "}"
+        )
+        results = self.send_sparql_query(sparql_query)
+        cutoff = date.replace('-', '')
+        versions = []
+        for row in results["results"]["bindings"]:
+            consolidated = row['celex']['value']
+            stamp = consolidated[len(prefix):len(prefix) + 8]
+            if len(stamp) == 8 and stamp.isdigit() and stamp <= cutoff:
+                versions.append((stamp, consolidated))
+        if not versions:
+            return None
+        stamp, consolidated = max(versions)
+        return consolidated, f'{stamp[:4]}-{stamp[4:6]}-{stamp[6:]}'
+
     def download(self, celex, format=None, type_id='celex', language='ENG'):
         """
         Download the documents of an act from Cellar.

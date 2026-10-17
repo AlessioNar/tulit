@@ -48,6 +48,23 @@
                 "valid": {
                     "type": ["boolean", "null"],
                     "description": "Whether the source XML validated against its schema (e.g. formex4.xsd)."
+                },
+                "jurisdiction": {
+                    "type": ["string", "null"],
+                    "description": "Jurisdiction of the act: 'EU' or the ISO 3166-1 alpha-2 code of a Member State (FRBR work country)."
+                },
+                "language": {
+                    "type": ["string", "null"],
+                    "description": "Language of this text as an ISO 639-3 code, e.g. 'eng', 'deu' (FRBR expression language)."
+                },
+                "version": {
+                    "type": ["string", "null"],
+                    "enum": ["original", "consolidated", null],
+                    "description": "'original' for the text as adopted, 'consolidated' for the text in force at version_date (FRBR expression)."
+                },
+                "version_date": {
+                    "type": ["string", "null"],
+                    "description": "ISO date of this version: the adoption or publication date for originals, the date a consolidated text applies from (FRBR expression date)."
                 }
             }
         },

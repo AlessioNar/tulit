@@ -199,6 +199,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     )
     from tulit.parser.html.veneto import VenetoHTMLParser
     from tulit.parser.json.legifrance import LegifranceParser
+    from tulit.parser.xml.ris import RISParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -211,6 +212,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('boe', BOEXMLParser)
     registry.register('veneto', VenetoHTMLParser)
     registry.register('legifrance', LegifranceParser)
+    registry.register('ris', RISParser, aliases=['at-ris'])
 
 
 def get_parser_registry() -> ParserRegistry:

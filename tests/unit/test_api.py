@@ -35,7 +35,7 @@ def test_fetch_returns_validated_legaljson_with_meta(cellar_item, tmp_path):
             patch.object(CellarClient, 'get_metadata', side_effect=lambda celex: dict(META)):
         doc = tulit.fetch('32024R0903', download_dir=str(tmp_path))
 
-    mock_download.assert_called_once_with('32024R0903', format='fmx4', language='ENG')
+    mock_download.assert_called_once_with('32024R0903', format='fmx4', language='eng')
     assert doc['articles'][0]['eId'] == 'art_1'
     assert len(doc['articles']) == 23
     assert doc['meta']['eli'] == META['eli']

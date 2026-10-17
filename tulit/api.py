@@ -2,8 +2,8 @@
 High-level entry points for tulit.
 
 ``fetch`` turns an identifier into validated legalJSON in one call: it
-downloads the act from its source, picks the matching parser and attaches
-the document metadata.
+downloads the act from its official source, picks the matching parser and
+attaches the document metadata.
 
 Example
 -------
@@ -11,60 +11,78 @@ Example
 >>> doc = tulit.fetch("32024R0903")
 >>> doc["meta"]["eli"]
 'http://data.europa.eu/eli/reg/2024/903/oj'
+>>> doc = tulit.fetch("10001597", jurisdiction="AT", version="consolidated")
 """
 import logging
-import os
 import tempfile
 from typing import Any, Optional
 
 import jsonschema
 
-from tulit.client.eu.cellar import CellarClient
-from tulit.parser.exceptions import FileLoadError, ValidationError
+from tulit.parser.exceptions import ValidationError
 from tulit.parser.parser import LegalJSONValidator
 from tulit.parser.registry import get_parser
+from tulit.sources import VERSIONS, Source, get_source, source_for_eli
+from tulit.sources.eu import CELLAR_FORMATS
 
 logger = logging.getLogger(__name__)
 
-CELLAR_RESOURCE = 'http://publications.europa.eu/resource/cellar/'
+__all__ = ['fetch', 'CELLAR_FORMATS']
 
-# Cellar download format -> registry format id of the parser that reads it
-CELLAR_FORMATS = {
-    'fmx4': 'formex',
-    'xhtml': 'cellar-xhtml',
-    'html': 'cellar-html',
+META_DEFAULTS = {
+    'celex': None,
+    'eli': None,
+    'cellar_uuid': None,
+    'date_document': None,
+    'in_force': None,
+    'amends': [],
+    'repeals': [],
+    'corrects': [],
+    'source': None,
+    'valid': None,
 }
 
 
 def fetch(
-    celex: str,
-    format: str = 'fmx4',
-    language: str = 'ENG',
+    identifier: str,
+    jurisdiction: Optional[str] = None,
+    version: Optional[str] = None,
+    date: Optional[str] = None,
+    language: Optional[str] = None,
     download_dir: Optional[str] = None,
     metadata: bool = True,
     validate: bool = True,
+    **options: Any,
 ) -> dict[str, Any]:
     """
-    Download an EU act from Cellar and return it as legalJSON.
+    Download an act from its official source and return it as legalJSON.
 
     Parameters
     ----------
-    celex : str
-        CELEX number of the act, e.g. '32024R0903'.
-    format : str, optional
-        Cellar format to download and parse: 'fmx4' (Formex 4, default),
-        'xhtml' or 'html'.
+    identifier : str
+        The act's identifier: a CELEX number for the EU, the national
+        identifier of the jurisdiction (see ``tulit.sources``), or an ELI URI.
+    jurisdiction : str, optional
+        'EU' or a Member State code ('AT', ...). Inferred from ELI URIs;
+        defaults to 'EU' otherwise.
+    version : str, optional
+        'original' (the text as adopted) or 'consolidated' (the text in force
+        on ``date``). Defaults to 'original' where the source publishes it.
+    date : str, optional
+        ISO date for consolidated versions; defaults to today.
     language : str, optional
-        Three-letter language code of the expression, e.g. 'ENG' (default),
-        'FRA', 'DEU'.
+        ISO 639-3 language code (e.g. 'eng', 'fra', 'deu'); defaults to the
+        source's main language.
     download_dir : str, optional
         Directory where the source files are kept. When omitted, files are
         downloaded to a temporary directory that is removed afterwards.
     metadata : bool, optional
-        Attach the Cellar work metadata (ELI, dates, in-force status,
-        amends/repeals/corrects) as the ``meta`` object. Default True.
+        Attach the ``meta`` object (identifiers, dates, version, language,
+        relations). Default True.
     validate : bool, optional
         Validate the result against the legalJSON schema. Default True.
+    **options
+        Source-specific options, e.g. ``format='xhtml'`` for the EU.
 
     Returns
     -------
@@ -74,58 +92,80 @@ def fetch(
     Raises
     ------
     ValueError
-        If ``format`` is not supported.
+        If the jurisdiction, version or a source option is not supported.
     FileLoadError
-        If Cellar has no document for the act in that format and language.
+        If the source has no document for the act.
     ValidationError
         If ``validate`` is True and the result does not conform to the
         legalJSON schema.
     """
-    if format not in CELLAR_FORMATS:
+    source, identifier = _resolve(identifier, jurisdiction)
+    version = version or source.default_version
+    if version not in VERSIONS:
+        raise ValueError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
+    if version not in source.versions:
         raise ValueError(
-            f"Unsupported format '{format}'. Choose one of: {', '.join(CELLAR_FORMATS)}"
+            f"{source.name} ({source.source_name}) does not publish the {version} version; "
+            f"available: {', '.join(source.versions)}"
         )
+
+    if language and source.languages and language.lower() not in source.languages:
+        raise ValueError(
+            f"{source.name} publishes in {', '.join(source.languages)}, not '{language}'"
+        )
+    unknown = sorted(set(options) - set(source.options))
+    if unknown:
+        raise ValueError(f"Unsupported option(s) for {source.name}: {', '.join(unknown)}")
 
     if download_dir is not None:
-        return _fetch_into(celex, format, language, download_dir, metadata, validate)
+        return _fetch_into(source, identifier, version, date, language, download_dir,
+                           metadata, validate, options)
     with tempfile.TemporaryDirectory(prefix='tulit-') as tmp_dir:
-        return _fetch_into(celex, format, language, tmp_dir, metadata, validate)
+        return _fetch_into(source, identifier, version, date, language, tmp_dir,
+                           metadata, validate, options)
 
 
-def _fetch_into(celex, format, language, download_dir, metadata, validate):
-    client = CellarClient(download_dir=download_dir)
-    paths = [p for p in (client.download(celex, format=format, language=language) or []) if p]
-    if not paths:
-        raise FileLoadError(
-            f"No {format} document found in Cellar for {celex} in language {language.upper()}"
-        )
+def _resolve(identifier: str, jurisdiction: Optional[str]) -> tuple[Source, str]:
+    if identifier.startswith(('http://', 'https://')):
+        if jurisdiction:
+            source = get_source(jurisdiction)
+            resolved = source.identifier_from_eli(identifier)
+            if resolved is None:
+                raise ValueError(f"{identifier} is not an ELI of {source.name}")
+            return source, resolved
+        found = source_for_eli(identifier)
+        if found is None:
+            raise ValueError(f"No supported source recognises the ELI {identifier}")
+        return found
+    return get_source(jurisdiction or 'EU'), identifier
 
-    parser = get_parser(CELLAR_FORMATS[format])
-    # A Formex act may be split over several items (DOC_1.xml, DOC_2.xml, ...);
-    # the Formex parser reads the whole folder and finds the act and its annexes
-    source_path = paths[0] if len(paths) == 1 else os.path.commonpath(paths)
-    parser.parse(source_path)
+
+def _fetch_into(source, identifier, version, date, language, download_dir,
+                metadata, validate, options):
+    retrieval = source.retrieve(identifier, version, date, language, download_dir,
+                                metadata=metadata, **options)
+    parser = get_parser(retrieval.parser, **retrieval.parser_options)
+    parser.parse(retrieval.path)
     doc = parser.to_dict()
 
     if metadata:
-        meta = client.get_metadata(celex)
-        meta['source'] = _source_uri(paths, download_dir)
+        meta = {key: (list(value) if isinstance(value, list) else value)
+                for key, value in META_DEFAULTS.items()}
+        meta.update(retrieval.meta)
+        meta.update({
+            'jurisdiction': source.code,
+            'language': retrieval.language,
+            'version': retrieval.version,
+            'version_date': retrieval.version_date,
+        })
         # Only XML parsers validate their source against an XSD
-        meta['valid'] = getattr(parser, 'valid', None)
+        if getattr(parser, 'valid', None) is not None:
+            meta['valid'] = parser.valid
         doc['meta'] = meta
 
     if validate:
         _validate(doc)
     return doc
-
-
-def _source_uri(paths, download_dir):
-    """Cellar URI of the downloaded item, or of the manifestation holding several items."""
-    ids = [os.path.relpath(p, download_dir).replace(os.sep, '/') for p in paths]
-    ids = [os.path.splitext(i)[0] if '/' in i else i for i in ids]
-    if len(ids) == 1:
-        return CELLAR_RESOURCE + ids[0]
-    return CELLAR_RESOURCE + os.path.commonprefix(ids).rstrip('/').rsplit('/', 1)[0]
 
 
 def _validate(doc):

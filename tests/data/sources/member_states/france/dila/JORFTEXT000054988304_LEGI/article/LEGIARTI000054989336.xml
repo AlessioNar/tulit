@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ARTICLE>
+<META>
+<META_COMMUN>
+<ID>LEGIARTI000054989336</ID>
+<ANCIEN_ID/>
+<ORIGINE>LEGI</ORIGINE>
+<URL>article/LEGI/ARTI/00/00/54/98/93/LEGIARTI000054989336.xml</URL>
+<NATURE>Article</NATURE>
+</META_COMMUN>
+<META_SPEC>
+<META_ARTICLE>
+
+<NUM>3</NUM>
+
+<ETAT>VIGUEUR</ETAT>
+
+<DATE_DEBUT>2026-10-17</DATE_DEBUT>
+<DATE_FIN>2999-01-01</DATE_FIN>
+
+
+
+<TYPE>AUTONOME</TYPE>
+</META_ARTICLE>
+</META_SPEC>
+</META>
+<CONTEXTE>
+<TEXTE autorite="" cid="JORFTEXT000054988304" date_publi="2026-10-16" date_signature="2026-10-15" ministere="Ministère de l'économie, des finances et de la souveraineté industrielle, énergétique et numérique" nature="DECRET" nor="ECOE2626788D" num="2026-959" num_parution_jo="0242">
+<TITRE_TXT c_titre_court="Décret n°2026-959 du 15 octobre 2026" debut="2999-01-01" fin="2999-01-01" id_txt="JORFTEXT000054988304">Décret n° 2026-959 du 15 octobre 2026 relatif à la création, aux conditions et aux modalités de versement d'une indemnité carburant</TITRE_TXT>
+<TITRE_TXT c_titre_court="Décret n°2026-959 du 15 octobre 2026" debut="2026-10-17" fin="2999-01-01" id_txt="LEGITEXT000054989322">Décret n° 2026-959 du 15 octobre 2026 relatif à la création, aux conditions et aux modalités de versement d'une indemnité carburant</TITRE_TXT>
+</TEXTE>
+</CONTEXTE>
+<VERSIONS>
+<VERSION etat="VIGUEUR">
+<LIEN_ART debut="2026-10-17" etat="VIGUEUR" fin="2999-01-01" id="LEGIARTI000054989336" num="3" origine="LEGI"/>
+</VERSION>
+<VERSION etat="">
+<LIEN_ART debut="2999-01-01" etat="" fin="2999-01-01" id="JORFARTI000054988318" num="3" origine="JORF"/>
+</VERSION>
+</VERSIONS>
+<NOTA>
+<CONTENU/>
+</NOTA>
+<BLOC_TEXTUEL>
+<CONTENU>
+<p>
+<br/>Critères</p>
+<p>
+<br/>Pour être éligibles au versement de l'indemnité, les demandeurs doivent appartenir à un foyer fiscal dont le revenu fiscal de référence par part au titre des revenus de l'année 2024 est inférieur ou égal à 22 770 €, et formuler leur demande au titre d'un véhicule à deux, trois ou quatre roues, à motorisation thermique ou hybride non rechargeable, utilisé à des fins professionnelles incluant les trajets domicile travail et respectant les conditions suivantes :</p>
+<p>
+<br/>- est régulièrement assuré à la date de la demande, à l'exclusion des quadricycles lourds à moteur, des véhicules agricoles, des poids lourds et des véhicules de fonction ou de service ;<br/>- n'est pas considéré comme un véhicule endommagé au sens des dispositions des articles L. 327-1 à L. 327-6 du code de la route.</p>
+<p>
+<br/>Les demandeurs doivent effectuer plus de 15 kilomètres par trajet entre leur domicile et leur lieu de travail ou plus de 8 000 kilomètres par an dans le cadre de leur activité professionnelle (cette condition incluant les trajets domicile-travail).<br/>Un demandeur ne peut bénéficier que d'une seule indemnité. Un même véhicule ne peut pas donner lieu au versement de plusieurs indemnités.<br/>Les contribuables redevables de l'impôt sur la fortune immobilière au titre de 2024 ne sont pas éligibles au versement de l'indemnité.</p>
+</CONTENU>
+</BLOC_TEXTUEL>
+<LIENS>
+<LIEN cidtexte="LEGITEXT000006074228" datesignatexte="2999-01-01" id="LEGISCTA000006159537" naturetexte="CODE" nortexte="" num="" numtexte="" sens="source" typelien="CITATION">Code de la route. -  Chapitre 7 : Véhicules endommagés.</LIEN>
+</LIENS>
+</ARTICLE>

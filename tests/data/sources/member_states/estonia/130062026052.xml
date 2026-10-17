@@ -1,0 +1,3234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oigusakt id="32cac778-b6be-4dd4-bbdb-caf4695bc648" xsi:schemaLocation="tyviseadus_1_10.02.2010 http://xmlr.eesti.ee/xml/schemas/oigusakt/tyviseadus_1_10.02.2010.xsd" xmlns="tyviseadus_1_10.02.2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<metaandmed>
+		<valjaandja>Riigikogu</valjaandja>
+		<dokumentLiik>seadus</dokumentLiik>
+		<tekstiliik>terviktekst</tekstiliik>
+		
+		<lyhend>IKS</lyhend><dokumentEtapp>avaldamine</dokumentEtapp>
+		<dokumentStaatus>avaldatud</dokumentStaatus>
+		<vastuvoetud>
+			<aktikuupaev>2018-12-12</aktikuupaev>
+			<avaldamismarge>
+				<RTosa>RT I</RTosa>
+				<avaldamineKuupaev>2019-01-04</avaldamineKuupaev>
+				<RTartikkel>11</RTartikkel>
+				<aktViide>104012019011</aktViide>
+			</avaldamismarge>
+			<joustumine>2019-01-15</joustumine>
+		</vastuvoetud>
+		<avaldamismarge><RTosa>RT I</RTosa><avaldamineKuupaev>2026-06-30</avaldamineKuupaev><RTaasta>2026</RTaasta><RTartikkel>52</RTartikkel><aktViide>130062026052</aktViide></avaldamismarge><kehtivus>
+			<kehtivuseAlgus>2026-10-01</kehtivuseAlgus>
+		</kehtivus>
+		<versioon>
+			<dokumentVersioon>1</dokumentVersioon>
+			<dokumentVersioonKuupaev>2018-12-23</dokumentVersioonKuupaev>
+		</versioon>
+		<skeemiNimi>tyviseadus_1_10.02.2010.xsd</skeemiNimi>
+		<globaalID>130062026052</globaalID>
+		<metaandmedVersioon>23</metaandmedVersioon>
+		<metaandmedVersioonKuupaev>2026-06-29</metaandmedVersioonKuupaev>
+		<metaandmedVersioonPohjustaja>Maret Mauer</metaandmedVersioonPohjustaja>
+		<terviktekstiGrupiID>1045568</terviktekstiGrupiID>
+		<eesmark>Tüviseaduse raamskeem XML struktuuri koostamiseks</eesmark>
+	</metaandmed>
+	<aktinimi>
+		<nimi>
+			<pealkiri>Isikuandmete kaitse seadus</pealkiri>
+			<normtehnmarkus>
+				<normtehnmarkusNr>1</normtehnmarkusNr>
+			</normtehnmarkus>
+		</nimi>
+	</aktinimi>
+	<muutmismarge>
+		<aktikuupaev>2023-02-22</aktikuupaev>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2023-03-11</avaldamineKuupaev>
+			<RTartikkel>1</RTartikkel>
+			<aktViide>111032023001</aktViide>
+		</avaldamismarge>
+		<joustumine>2023-11-01</joustumine>
+	</muutmismarge>
+	<muutmismarge>
+		<aktikuupaev>2024-12-11</aktikuupaev>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2024-12-30</avaldamineKuupaev>
+			<RTartikkel>1</RTartikkel>
+			<aktViide>130122024001</aktViide>
+		</avaldamismarge>
+		<joustumine>2025-01-01</joustumine>
+		<tavatekst>, Vabariigi Valitsuse seaduse § 105.19 lõike 12 alusel asendatud sõna „Justiitsministeerium” sõnadega „Justiits- ja Digiministeerium” vastavas käändes</tavatekst>
+	</muutmismarge>
+	<muutmismarge>
+		<aktikuupaev>2024-12-18</aktikuupaev>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2024-12-31</avaldamineKuupaev>
+			<RTartikkel>5</RTartikkel>
+			<aktViide>131122024005</aktViide>
+		</avaldamismarge>
+		<joustumine>2025-01-01</joustumine>
+	</muutmismarge>
+	<muutmismarge>
+		<aktikuupaev>2025-06-17</aktikuupaev>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2025-07-12</avaldamineKuupaev>
+			<RTartikkel>1</RTartikkel>
+			<aktViide>112072025001</aktViide>
+		</avaldamismarge>
+		<joustumine>2025-10-01</joustumine>
+	</muutmismarge>
+	<muutmismarge>
+		<aktikuupaev>2026-02-18</aktikuupaev>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2026-03-06</avaldamineKuupaev>
+			<RTartikkel>2</RTartikkel>
+			<aktViide>106032026002</aktViide>
+		</avaldamismarge>
+		<joustumine>2026-03-16</joustumine>
+	</muutmismarge>
+	<muutmismarge>
+		<aktikuupaev>2026-06-02</aktikuupaev>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2026-06-30</avaldamineKuupaev>
+			<RTartikkel>1</RTartikkel>
+			<aktViide>130062026001</aktViide>
+		</avaldamismarge>
+		<joustumine>2026-10-01</joustumine>
+	</muutmismarge>
+	<sisu>
+		<peatykk id="ptk1">
+			<peatykkNr>1</peatykkNr>
+			<kuvatavNr><![CDATA[1. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Üldsätted</peatykkPealkiri>
+			<paragrahv id="para1">
+				<paragrahvNr>1</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 1.]]></kuvatavNr>
+				<paragrahvPealkiri>Seaduse reguleerimisala</paragrahvPealkiri>
+				<loige id="para1lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesolev seadus reguleerib:</tavatekst>
+					</sisuTekst>
+					<alampunkt id="para1lg1p1">
+						<alampunktNr>1</alampunktNr>
+						<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>füüsiliste isikute kaitset isikuandmete töötlemisel ulatuses, milles see täpsustab ja täiendab sätteid, mis sisalduvad Euroopa Parlamendi ja nõukogu määruses (EL) 2016/679 füüsiliste isikute kaitse kohta isikuandmete töötlemisel ja selliste andmete vaba liikumise ning direktiivi 95/46/EÜ kehtetuks tunnistamise kohta (isikuandmete kaitse üldmäärus) (ELT L 119, 04.05.2016, lk 1–88);</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para1lg1p2">
+						<alampunktNr>2</alampunktNr>
+						<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>füüsiliste isikute kaitset isikuandmete töötlemisel õiguskaitseasutuste poolt süütegude tõkestamisel, avastamisel ja menetlemisel ning karistuste täideviimisel.</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+				</loige>
+				<loige id="para1lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesolev seadus sätestab:</tavatekst>
+					</sisuTekst>
+					<alampunkt id="para1lg2p1">
+						<alampunktNr>1</alampunktNr>
+						<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>normid, et rakendada Euroopa Parlamendi ja nõukogu määrust (EL) 2016/679;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para1lg2p2">
+						<alampunktNr>2</alampunktNr>
+						<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>normid, et üle võtta Euroopa Parlamendi ja nõukogu direktiiv (EL) 2016/680, mis käsitleb füüsiliste isikute kaitset seoses pädevates asutustes isikuandmete töötlemisega süütegude tõkestamise, uurimise, avastamise ja nende eest vastutusele võtmise või kriminaalkaristuste täitmisele pööramise eesmärgil ning selliste andmete vaba liikumist ning millega tunnistatakse kehtetuks nõukogu raamotsus 2008/977/JSK (ELT L 119, 04.05.2016, lk 89–131);</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para1lg2p3">
+						<alampunktNr>3</alampunktNr>
+						<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>isikuandmete töötlemise nõuete täitmise üle riikliku ja haldusjärelevalve teostamise korra;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para1lg2p4">
+						<alampunktNr>4</alampunktNr>
+						<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>vastutuse isikuandmete töötlemise nõuete rikkumise eest.</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para2">
+				<paragrahvNr>2</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 2.]]></kuvatavNr>
+				<paragrahvPealkiri>Seaduse ning Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 kohaldamisala erisused</paragrahvPealkiri>
+				<loige id="para2lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Käesolevat seadust ning Euroopa Parlamendi ja nõukogu määrust (EL) 2016/679 kohaldatakse:</tavatekst>
+					</sisuTekst>
+					<alampunkt id="para2lg1p1">
+						<alampunktNr>1</alampunktNr>
+						<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>süüteomenetlusele ja kohtumenetlusele menetlusseadustikes sätestatud erisustega;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para2lg1p2">
+						<alampunktNr>2</alampunktNr>
+						<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>põhiseaduslikele institutsioonidele niivõrd, kuivõrd see ei puuduta nende põhiseaduslike ülesannete täitmist ega ole reguleeritud neid puudutavates eriseadustes.</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para2b1">
+				<paragrahvNr ylaIndeks="1">2</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 2<sup>1</sup>.]]></kuvatavNr>
+				<paragrahvPealkiri>Andmekaitse Inspektsiooni pädevus kollektiivse esindushagi menetluses</paragrahvPealkiri>
+				<loige id="para2b1lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Andmekaitse Inspektsioon on pädev üksus tarbijakaitseseaduse §-de 60<sup>2</sup> ja 66<sup>2</sup> tähenduses ning võib pöörduda Eesti Vabariigi nimel andmesubjektide kollektiivsete huvide kaitseks riigisisese kollektiivse esindushagiga maakohtusse, samuti piiriülese kollektiivse esindushagiga teise Euroopa Liidu liikmesriigi kohtusse.</tavatekst>
+						<muutmismarge>
+							<avaldamismarge>
+								<RTosa>RT I</RTosa>
+								<avaldamineKuupaev>2024-12-31</avaldamineKuupaev>
+								<RTartikkel>5</RTartikkel>
+								<aktViide>131122024005</aktViide>
+							</avaldamismarge>
+							<joustumine>2025-01-01</joustumine>
+						</muutmismarge>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para3">
+				<paragrahvNr>3</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 3.]]></kuvatavNr>
+				<paragrahvPealkiri>Haldusmenetluse seaduse kohaldamine</paragrahvPealkiri>
+				<loige id="para3lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Käesolevas seaduses ettenähtud haldusmenetlusele kohaldatakse haldusmenetluse seaduse sätteid, arvestades käesoleva seaduse erisusi.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+		</peatykk>
+		<peatykk id="ptk2">
+			<peatykkNr>2</peatykkNr>
+			<kuvatavNr><![CDATA[2. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Isikuandmete töötlemise erialused</peatykkPealkiri>
+			<paragrahv id="para4">
+				<paragrahvNr>4</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 4.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine ajakirjanduslikul eesmärgil</paragrahvPealkiri>
+				<loige id="para4lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Isikuandmeid võib andmesubjekti nõusolekuta töödelda ajakirjanduslikul eesmärgil, eelkõige avalikustada meedias, kui selleks on avalik huvi ja see on kooskõlas ajakirjanduseetika põhimõtetega. Isikuandmete avalikustamine ei tohi ülemäära kahjustada andmesubjekti õigusi.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para5">
+				<paragrahvNr>5</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 5.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine akadeemilise, kunstilise ja kirjandusliku eneseväljenduse tarbeks</paragrahvPealkiri>
+				<loige id="para5lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Isikuandmeid võib andmesubjekti nõusolekuta töödelda akadeemilise, kunstilise ja kirjandusliku eneseväljenduse eesmärgil, eelkõige avalikustada, kui see ei kahjusta ülemäära andmesubjekti õigusi.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para6">
+				<paragrahvNr>6</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 6.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine teadus- ja ajaloouuringu ning riikliku statistika vajadusteks</paragrahvPealkiri>
+				<loige id="para6lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Isikuandmeid võib andmesubjekti nõusolekuta teadus- või ajaloouuringu või riikliku statistika vajadusteks töödelda eelkõige pseudonüümitud või samaväärset andmekaitse taset võimaldaval kujul. Enne isikuandmete üleandmist teadus- või ajaloouuringu või riikliku statistika vajadustel töötlemiseks asendatakse isikuandmed pseudonüümitud või samaväärset andmekaitse taset võimaldaval kujul andmetega.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para6lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Depseudonüümimine või muu viis, millega isikut mittetuvastavad andmed muudetakse uuesti isikut tuvastavaks, on lubatud ainult täiendavate teadus- või ajaloouuringute või riikliku statistika vajadusteks. Isikuandmete töötleja määrab nimeliselt isiku, kellel on juurdepääs depseudonüümimist võimaldavatele andmetele.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para6lg3">
+					<loigeNr>3</loigeNr>
+					<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Teadus- või ajaloouuringu või riikliku statistika vajadusteks andmesubjekti nõusolekuta tema kohta käivate andmete töötlemine andmesubjekti tuvastamist võimaldaval kujul on lubatud üksnes juhul, kui on täidetud järgmised tingimused:</tavatekst>
+					</sisuTekst>
+					<alampunkt id="para6lg3p1">
+						<alampunktNr>1</alampunktNr>
+						<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>pärast tuvastamist võimaldavate andmete eemaldamist ei ole andmetöötluse eesmärgid enam saavutatavad või neid oleks ebamõistlikult raske saavutada;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para6lg3p2">
+						<alampunktNr>2</alampunktNr>
+						<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>teadus- või ajaloouuringu või riikliku statistika tegija hinnangul on selleks ülekaalukas avalik huvi;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para6lg3p3">
+						<alampunktNr>3</alampunktNr>
+						<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>töödeldavate isikuandmete põhjal ei muudeta andmesubjekti kohustuste mahtu ega kahjustata muul viisil ülemäära andmesubjekti õigusi.</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+				</loige>
+				<loige id="para6lg4">
+					<loigeNr>4</loigeNr>
+					<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui teadus- või ajaloouuring põhineb eriliiki isikuandmetel, kontrollib seadusega või selle alusel moodustatud asjaomase valdkonna eetikakomitee enne uuringu tegemist käesolevas paragrahvis sätestatud tingimuste täitmist. Kui teadusvaldkonnas puudub eetikakomitee, kontrollib nõuete täitmist Andmekaitse Inspektsioon. Rahvusarhiivis säilitatavate isikuandmete suhtes on eetikakomitee õigused Rahvusarhiivil.</tavatekst>
+					</sisuTekst>
+					<muutmismarge>
+						<avaldamismarge>
+							<RTosa>RT I</RTosa>
+							<avaldamineKuupaev>2025-07-12</avaldamineKuupaev>
+							<RTartikkel>1</RTartikkel>
+							<aktViide>112072025001</aktViide>
+						</avaldamismarge>
+						<joustumine>2025-10-01</joustumine>
+					</muutmismarge>
+				</loige>
+				<loige id="para6lg5">
+					<loigeNr>5</loigeNr>
+					<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesoleva seaduse tähenduses loetakse teadusuuringuks ka täidesaatva riigivõimu analüüsid ja uuringud, mis tehakse poliitika kujundamise eesmärgil. Nende koostamiseks on täidesaatval riigivõimul õigus teha päringuid teise vastutava või volitatud töötleja andmekogusse ning töödelda saadud isikuandmeid. Andmekaitse Inspektsioon kontrollib enne nimetatud isikuandmete töötlemise algust käesolevas paragrahvis sätestatud tingimuste täitmist, välja arvatud juhul, kui poliitika kujundamiseks tehtava uuringu eesmärgid ja isikuandmete töötlemise ulatus tulenevad õigusaktist.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para6lg5b1">
+					<loigeNr ylaIndeks="1">5</loigeNr>
+					<kuvatavNr><![CDATA[(5<sup>1</sup>)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui seaduses ei ole sätestatud teisiti, ei kohaldata käesoleva paragrahvi lõikes 4 sätestatud eetikakomitee kontrolli kohustust lõikes 5 nimetatud täidesaatva riigivõimu analüüsidele ja uuringutele, mis tehakse poliitika kujundamise eesmärgil. Andmekaitse Inspektsioon võib konsulteerida teadus- ja arendustegevuse ning innovatsiooni korralduse seaduse §-s 26 nimetatud eetikakomiteega, kui Andmekaitse Inspektsiooni hinnangul vajab poliitika kujundamiseks tehtav uuring või analüüs eetilisuse hindamist.</tavatekst>
+					</sisuTekst>
+					<muutmismarge>
+						<avaldamismarge>
+							<RTosa>RT I</RTosa>
+							<avaldamineKuupaev>2025-07-12</avaldamineKuupaev>
+							<RTartikkel>1</RTartikkel>
+							<aktViide>112072025001</aktViide>
+						</avaldamismarge>
+						<joustumine>2025-10-01</joustumine>
+					</muutmismarge>
+				</loige>
+				<loige id="para6lg5b2">
+					<loigeNr ylaIndeks="2">5</loigeNr>
+					<kuvatavNr><![CDATA[(5<sup>2</sup>)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui Andmekaitse Inspektsioon konsulteerib käesoleva paragrahvi lõike 5<sup>1</sup> kohaselt eetikakomiteega, tasub eetikakomitee poolt konsultatsiooni eest küsitava tasu täidesaatva riigivõimu analüüside ja uuringute tellija.</tavatekst>
+					</sisuTekst>
+					<muutmismarge>
+						<avaldamismarge>
+							<RTosa>RT I</RTosa>
+							<avaldamineKuupaev>2025-07-12</avaldamineKuupaev>
+							<RTartikkel>1</RTartikkel>
+							<aktViide>112072025001</aktViide>
+						</avaldamismarge>
+						<joustumine>2025-10-01</joustumine>
+					</muutmismarge>
+				</loige>
+				<loige id="para6lg6">
+					<loigeNr>6</loigeNr>
+					<kuvatavNr><![CDATA[(6)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui isikuandmeid töödeldakse teadus- või ajaloouuringu või riikliku statistika eesmärgil, võib vastutav või volitatud töötleja Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklites 15, 16, 18 ja 21 sätestatud andmesubjekti õigusi piirata niivõrd, kuivõrd nende õiguste teostamine tõenäoliselt muudab võimatuks teadus- või ajaloouuringu või riikliku statistika eesmärgi saavutamise või takistab seda oluliselt.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para7">
+				<paragrahvNr>7</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 7.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine avalikes huvides tehtava arhiveerimise eesmärgil</paragrahvPealkiri>
+				<loige id="para7lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui isikuandmeid töödeldakse avalikes huvides tehtava arhiveerimise eesmärgil, võib vastutav või volitatud töötleja Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklites 15, 16 ja 18–21 sätestatud andmesubjekti õigusi piirata niivõrd, kuivõrd nende õiguste teostamine tõenäoliselt muudab võimatuks avalikes huvides tehtava arhiveerimise eesmärgi saavutamise või takistab seda oluliselt.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para7lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud andmesubjekti õigusi võib piirata selleks, et mitte ohustada arhivaalide seisundit, autentsust, usaldusväärsust, terviklikkust ja kasutatavust.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+		</peatykk>
+		<peatykk id="ptk3">
+			<peatykkNr>3</peatykkNr>
+			<kuvatavNr><![CDATA[3. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Muud juhud isikuandmete töötlemisel</peatykkPealkiri>
+			<paragrahv id="para8">
+				<paragrahvNr>8</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 8.]]></kuvatavNr>
+				<paragrahvPealkiri>Lapse isikuandmete töötlemine infoühiskonna teenuste pakkumisel</paragrahvPealkiri>
+				<loige id="para8lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui kohaldatakse Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 6 lõike 1 punkti a seoses infoühiskonna teenuste pakkumisega otse lapsele, on lapse isikuandmete töötlemine lubatud ainult juhul, kui laps on vähemalt 13-aastane.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para8lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Kui laps on noorem kui 13-aastane, on isikuandmete töötlemine lubatud üksnes sellisel juhul ja sellises ulatuses, milleks on nõusoleku andnud lapse seaduslik esindaja.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para9">
+				<paragrahvNr>9</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 9.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine pärast andmesubjekti surma</paragrahvPealkiri>
+				<loige id="para9lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Andmesubjekti nõusolek kehtib andmesubjekti eluajal ja 10 aastat pärast andmesubjekti surma, kui andmesubjekt ei ole otsustanud teisiti. Kui andmesubjekt on surnud alaealisena, siis kehtib tema nõusolek 20 aastat pärast andmesubjekti surma.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para9lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Pärast andmesubjekti surma on tema isikuandmete töötlemine lubatud andmesubjekti pärija nõusolekul, välja arvatud juhul, kui:</tavatekst>
+					</sisuTekst>
+					<alampunkt id="para9lg2p1">
+						<alampunktNr>1</alampunktNr>
+						<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>andmesubjekti surmast on möödunud 10 aastat;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para9lg2p2">
+						<alampunktNr>2</alampunktNr>
+						<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>alaealiselt surnud andmesubjekti surmast on möödunud 20 aastat;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para9lg2p3">
+						<alampunktNr>3</alampunktNr>
+						<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>isikuandmeid töödeldakse muul õiguslikul alusel.</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+				</loige>
+				<loige id="para9lg3">
+					<loigeNr>3</loigeNr>
+					<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Mitme pärija olemasolul on andmesubjekti isikuandmete töötlemine lubatud neist ükskõik kelle nõusolekul.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para9lg4">
+					<loigeNr>4</loigeNr>
+					<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud nõusolekut ei ole vaja, kui töödeldavateks isikuandmeteks on üksnes andmesubjekti nimi, sugu, sünni- ja surmaaeg, surma fakt ning matmise aeg ja koht.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para10">
+				<paragrahvNr>10</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 10.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine seoses võlasuhte rikkumisega</paragrahvPealkiri>
+				<loige id="para10lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Võlasuhte rikkumisega seotud isikuandmete edastamine kolmandale isikule ja edastatud andmete töötlemine kolmanda isiku poolt on lubatud andmesubjekti krediidivõimelisuse hindamise eesmärgil või muul samasugusel eesmärgil ning üksnes juhul, kui vastutav või volitatud töötleja on kontrollinud edastatavate andmete õigsust ja õiguslikku alust isikuandmete edastamiseks ning on registreerinud andmeedastuse.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para10lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud eesmärgil andmeid koguda ja kolmandale isikule edastada ei ole lubatud, kui:</tavatekst>
+					</sisuTekst>
+					<alampunkt id="para10lg2p1">
+						<alampunktNr>1</alampunktNr>
+						<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>tegemist on eriliiki isikuandmete töötlemisega Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 9 lõike 1 tähenduses;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para10lg2p2">
+						<alampunktNr>2</alampunktNr>
+						<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>tegemist on andmetega süüteo toimepanemise või selle ohvriks langemise kohta enne avalikku kohtuistungit või õigusrikkumise asjas otsuse langetamist või asja menetluse lõpetamist;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para10lg2p3">
+						<alampunktNr>3</alampunktNr>
+						<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>see kahjustaks ülemäära andmesubjekti õigusi või vabadusi;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para10lg2p4">
+						<alampunktNr>4</alampunktNr>
+						<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>lepingu rikkumisest on möödunud vähem kui 30 päeva;</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+					<alampunkt id="para10lg2p5">
+						<alampunktNr>5</alampunktNr>
+						<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>kohustuse rikkumise lõppemisest on möödunud rohkem kui viis aastat.</tavatekst>
+						</sisuTekst>
+					</alampunkt>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para11">
+				<paragrahvNr>11</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 11.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemine avalikus kohas</paragrahvPealkiri>
+				<loige id="para11lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Kui seadus ei sätesta teisiti, asendab avalikus kohas avalikustamise eesmärgil toimuva heli- või pildimaterjalina jäädvustamise puhul andmesubjekti nõusolekut tema teavitamine sellises vormis, mis võimaldab tal heli- või pildimaterjali jäädvustamise faktist aru saada ja enda jäädvustamist soovi korral vältida. Teavitamiskohustus ei kehti avalike ürituste puhul, mille avalikustamise eesmärgil jäädvustamist võib mõistlikult eeldada.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+		</peatykk>
+		<peatykk id="ptk4">
+			<peatykkNr>4</peatykkNr>
+			<kuvatavNr><![CDATA[4. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Isikuandmete töötlemine õiguskaitseasutuse poolt süüteo tõkestamisel, avastamisel ja menetlemisel ning karistuse täideviimisel</peatykkPealkiri>
+			<jagu id="jg1">
+				<jaguNr>1</jaguNr>
+				<kuvatavNr><![CDATA[1. jagu]]></kuvatavNr>
+				<jaguPealkiri>Üldsätted</jaguPealkiri>
+				<paragrahv id="para12">
+					<paragrahvNr>12</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 12.]]></kuvatavNr>
+					<paragrahvPealkiri>Käesoleva peatüki kohaldamine</paragrahvPealkiri>
+					<loige id="para12lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesolevat peatükki kohaldatakse isikuandmete töötlemisele õiguskaitseasutuse poolt süüteo tõkestamisel, avastamisel ja menetlemisel ning karistuse täideviimisel.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para12lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesolevat peatükki ei kohaldata isikuandmete töötlemisele riikliku järelevalve ega haldusjärelevalve teostamisel.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para12lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva peatükiga nähakse ette õiguskaitseasutusele kohaldatavad erisused. Õiguskaitseasutusele ei kohaldata Euroopa Parlamendi ja nõukogu määrust (EL) 2016/679, kui käesolevast seadusest ei tulene teisiti.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para13">
+					<paragrahvNr>13</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 13.]]></kuvatavNr>
+					<paragrahvPealkiri>Terminid</paragrahvPealkiri>
+					<loige id="para13lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesolevas peatükis kasutatakse termineid Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 4 ja artikli 9 lõike 1 tähenduses.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para13lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesolevas peatükis käsitatakse õiguskaitseasutusena asutust või asutuse struktuuriüksust, kes on pädev seaduse alusel süütegu tõkestama, avastama ja menetlema või karistust täide viima.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg2">
+				<jaguNr>2</jaguNr>
+				<kuvatavNr><![CDATA[2. jagu]]></kuvatavNr>
+				<jaguPealkiri>Põhimõtted</jaguPealkiri>
+				<paragrahv id="para14">
+					<paragrahvNr>14</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 14.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemise põhimõtted</paragrahvPealkiri>
+					<loige id="para14lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Isikuandmete töötlemisel tuleb järgida järgmisi põhimõtteid:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para14lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>seaduslikkus ja õiglus – isikuandmeid töödeldakse seaduslikult ja õiglaselt;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para14lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>eesmärgikohasus – isikuandmeid kogutakse täpselt ja selgelt kindlaksmääratud õiguspärastel eesmärkidel ning neid ei töödelda viisil, mis on nende eesmärkidega vastuolus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para14lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kvaliteet – isikuandmed peavad olema piisavad ja asjakohased ning ei tohi olla ülemäärased andmetöötluse eesmärke arvestades;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para14lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>õigsus – isikuandmed peavad olema õiged ja vajaduse korral ajakohastatud; mõistlike meetmetega tagatakse, et andmetöötluse eesmärgi seisukohast ebaõiged isikuandmed kustutatakse või parandatakse viivitamata;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para14lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>säilitamine – isikuandmeid säilitatakse kujul, mis võimaldab andmesubjekti tuvastada üksnes seni, kuni see on vajalik selle eesmärgi täitmiseks, milleks isikuandmeid töödeldakse;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para14lg1p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>turvalisus – isikuandmeid töödeldakse viisil, mis tagab nende turvalisuse, sealhulgas kaitseb loata või ebaseadusliku töötlemise eest ning juhusliku kadumise, hävimise või kahjustumise eest, rakendades asjakohaseid tehnilisi või korralduslikke meetmeid.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para15">
+					<paragrahvNr>15</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 15.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemise seaduslikkus</paragrahvPealkiri>
+					<loige id="para15lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Õiguskaitseasutus võib isikuandmeid töödelda seaduse alusel, kui nende töötlemine on vajalik süüteo tõkestamise, avastamise või menetlemise või karistuse täideviimise eesmärgist tuleneva ülesande täitmiseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para16">
+					<paragrahvNr>16</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 16.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemine algsest erineval eesmärgil</paragrahvPealkiri>
+					<loige id="para16lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Isikuandmete töötlemine sama või muu vastutava töötleja poolt muul käesoleva seaduse § 12 lõikes 1 sätestatud eesmärgil kui algne eesmärk, milleks isikuandmeid kogutakse, on lubatud niivõrd, kuivõrd:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para16lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutaval töötlejal on sellisel eesmärgil isikuandmete töötlemiseks olemas seadusest või Euroopa Liidu õigusaktist tulenev alus ja</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para16lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>selline isikuandmete töötlemine on seaduse või Euroopa Liidu õigusakti kohaselt vajalik ja seatud eesmärgiga proportsionaalne.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para16lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Õiguskaitseasutuse poolt käesoleva seaduse § 12 lõikes 1 sätestatud eesmärkidel kogutud või kogutavaid isikuandmeid ei tohi töödelda muul eesmärgil, välja arvatud käesoleva paragrahvi lõikes 1 sätestatud juhtudel või kui selline töötlemine on lubatud seaduse või Euroopa Liidu õigusaktiga. Kui isikuandmeid töödeldakse sellisel muul eesmärgil, kohaldatakse Euroopa Parlamendi ja nõukogu määrust (EL) 2016/679, välja arvatud juhul, kui isikuandmeid töödeldakse sellise tegevuse käigus, mis ei kuulu nimetatud määruse kohaldamisalasse. Olukorras, kus töötlemise eesmärk ei kuulu nimetatud määruse kohaldamisalasse, kohaldatakse Eesti õigust.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para16lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui õiguskaitseasutus täidab seaduse kohaselt ka muid ülesandeid kui need, mida täidetakse käesoleva seaduse § 12 lõikes 1 sätestatud eesmärkidel, kohaldatakse sellisel eesmärgil isikuandmete töötlemisele Euroopa Parlamendi ja nõukogu määrust (EL) 2016/679. Olukorras, kus töötlemise eesmärk ei kuulu nimetatud määruse kohaldamisalasse, kohaldatakse Eesti õigust.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para17">
+					<paragrahvNr>17</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 17.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete säilitamine</paragrahvPealkiri>
+					<loige id="para17lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Töödeldavatele isikuandmetele kehtestatakse seaduse või määrusega säilitamise tähtaeg. Erandjuhul, kui isikuandmete säilitamise tähtaega pole seaduse või määrusega kehtestatud, peab selle tähtaja kehtestama vastutav töötleja.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para17lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõike 1 alusel kehtestatud säilitamise tähtaega on lubatud pikendada üksnes põhjendatud juhul, välja arvatud siis, kui säilitamise tähtaeg on sätestatud õigustloovas aktis.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para17lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui konkreetset säilitamise tähtaega ei ole võimalik kehtestada, peab vastutav töötleja rakendama õiguslikke ja tehnoloogilisi meetmeid, mis võimaldavad pidevalt hinnata andmete jätkuva töötlemise vajalikkust.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para17lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui isikuandmete säilitamise tähtaeg lõpeb, on vastutav ja volitatud töötleja kohustatud isikuandmed jäädavalt kustutama. Selleks peab vastutav töötleja rakendama nõuetekohaseid õiguslikke ja tehnoloogilisi meetmeid.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para18">
+					<paragrahvNr>18</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 18.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjektide eri kategooriate eristamine</paragrahvPealkiri>
+					<loige id="para18lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Võimaluse korral ja asjakohasel juhul eristab vastutav töötleja isikuandmete töötlemisel andmesubjektide eri kategooriatena menetlusalused isikud, kahtlustatavad, süüdistatavad, kannatanud, tunnistajad, kinnipeetavad, arestialused, kriminaalhooldusalused ja teised isikud.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para19">
+					<paragrahvNr>19</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 19.]]></kuvatavNr>
+					<paragrahvPealkiri>Hinnangutel põhinevate isikuandmete eristamine</paragrahvPealkiri>
+					<loige id="para19lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja eristab võimaluste piires faktidel põhinevad isikuandmed isiklikel hinnangutel põhinevatest isikuandmetest.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para20">
+					<paragrahvNr>20</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 20.]]></kuvatavNr>
+					<paragrahvPealkiri>Eriliiki isikuandmete töötlemise erisused</paragrahvPealkiri>
+					<loige id="para20lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Eriliiki isikuandmete töötlemine on lubatud ainult siis, kui see on rangelt vajalik, ning üksnes järgmistel juhtudel:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para20lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>töötlemise lubatavus on sätestatud õigusaktis;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para20lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>töötlemine on vajalik andmesubjekti või teise füüsilise isiku eluliste huvide kaitseks või</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para20lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>töödeldakse isikuandmeid, mille andmesubjekt on ise ilmselgelt avalikustanud.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para20lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud eriliiki isikuandmete töötlemisele kohaldatakse andmesubjekti õiguste ja vabaduste kaitsmiseks asjakohaseid kaitsemeetmeid.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para21">
+					<paragrahvNr>21</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 21.]]></kuvatavNr>
+					<paragrahvPealkiri>Automatiseeritud töötlemine</paragrahvPealkiri>
+					<loige id="para21lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Keelatud on teha üksnes automatiseeritud töötlusel põhinevat otsust, sealhulgas profiilianalüüsi, kui see toob andmesubjektile kaasa teda puudutavaid kahjulikke õiguslikke tagajärgi või avaldab talle muud märkimisväärset mõju. Sellise otsuse võib teha, kui otsuse tegemine on lubatud seadusega, milles on sätestatud asjakohased meetmed andmesubjekti õiguste ja vabaduste ning õigustatud huvide kaitseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para21lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjektil on käesoleva paragrahvi lõikes 1 nimetatud otsuse kohta õigus esitada vastutavale töötlejale vastuväiteid oma õigustatud huvi kaitseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para21lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud otsus ei tohi põhineda eriliiki isikuandmetel, välja arvatud juhul, kui kohaldatakse sobivaid meetmeid andmesubjekti õiguste, vabaduste ja õigustatud huvide kaitsmiseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para21lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Keelatud on profiilianalüüsil põhinev otsus, mille tulemusel füüsilisi isikuid diskrimineeritakse eriliiki isikuandmete alusel.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg3">
+				<jaguNr>3</jaguNr>
+				<kuvatavNr><![CDATA[3. jagu]]></kuvatavNr>
+				<jaguPealkiri>Andmesubjekti õigused</jaguPealkiri>
+				<paragrahv id="para22">
+					<paragrahvNr>22</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 22.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjektile kättesaadavaks tehtav teave</paragrahvPealkiri>
+					<loige id="para22lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja on kohustatud avalikustama järgmise teabe:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para22lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemise kavandatud eesmärk;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para22lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isiku poolt enda andmetega tutvumise ning nende parandamise, kustutamise või piiramise õigus ja õiguste teostamise kord;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para22lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutava töötleja ning andmekaitsespetsialisti nimi ja kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para22lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>Andmekaitse Inspektsiooni kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para22lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>õigus esitada kaebus Andmekaitse Inspektsioonile, kui isikuandmete töötlemisel on rikutud andmesubjekti õigusi.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para22lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud avalikustamisena käsitatakse teabe avalikustamist vastutava töötleja veebilehel või muus andmesubjektile kergesti juurdepääsetavas asukohas.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para23">
+					<paragrahvNr>23</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 23.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjekti teavitamisel antav teave</paragrahvPealkiri>
+					<loige id="para23lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui seaduses on sätestatud kohustus teavitada andmesubjekti tema isikuandmete töötlemisest, annab vastutav töötleja andmesubjektile järgmise lisateabe:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para23lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>käesoleva seaduse § 22 lõikes 1 nimetatud teave;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemise õiguslik alus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete säilitamise tähtaeg või säilitamise tähtaja määramise alused;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>nende vastuvõtjate kategooriad, kellele on lubatud edastada isikuandmeid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vajaduse korral muu lisateave.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para23lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Seaduses sätestatud juhtudel võib vastutav töötleja käesoleva paragrahvi lõikes 1 nimetatud teabe andmesubjektile esitada hiljem, piirata selle esitamist või jätta selle esitamata, kui see võib:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para23lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>takistada või kahjustada süüteo tõkestamist, avastamist või menetlemist või karistuse täideviimist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kahjustada teise isiku õigusi ja vabadusi;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohustada riigi julgeolekut;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohustada avaliku korra kaitset;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para23lg2p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>takistada ametlikku uurimist või menetlust.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para24">
+					<paragrahvNr>24</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 24.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjekti õigus saada teavet ja enda kohta käivaid isikuandmeid</paragrahvPealkiri>
+					<loige id="para24lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjektil on õigus saada vastutavalt töötlejalt kinnitus selle kohta, et tema isikuandmeid töödeldakse. Andmesubjekti soovil peab vastutav töötleja andmesubjektile teatavaks tegema:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para24lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tema kohta käivad isikuandmed ja asjaomaste isikuandmete kategooriad;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete päritolu käsitleva olemasoleva teabe;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemise eesmärgi ja õigusliku aluse;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastuvõtjad või nende kategooriad, kellele andmesubjekti isikuandmeid on avalikustatud;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kavandatava isikuandmete säilitamise tähtaja või säilitamise tähtaja määramise alused;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg1p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>õiguse taotleda vastutavalt töötlejalt andmesubjekti isikuandmete parandamist, kustutamist või nende töötlemise piiramist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg1p7">
+							<alampunktNr>7</alampunktNr>
+							<kuvatavNr><![CDATA[7)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>õiguse esitada Andmekaitse Inspektsioonile kaebus ning Andmekaitse Inspektsiooni kontaktandmed.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para24lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Seaduses sätestatud juhtudel võib vastutav töötleja käesoleva paragrahvi lõikes 1 nimetatud teabe andmesubjektile esitada hiljem, piirata selle esitamist või keelduda selle väljastamisest, kui see võib:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para24lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>takistada või kahjustada süüteo tõkestamist, avastamist või menetlemist või karistuse täideviimist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kahjustada teise isiku õigusi ja vabadusi;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohustada riigi julgeolekut;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohustada avaliku korra kaitset;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para24lg2p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>takistada ametlikku uurimist või menetlust.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para24lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja teavitab andmesubjekti viivitamata kirjalikult käesoleva paragrahvi lõikes 1 nimetatud teabega tutvumise piiramisest või sellise teabega tutvumisest keeldumisest ja selle põhjustest. Vastutav töötleja võib jätta põhjendused esitamata, kui sellise teabe andmine põhjustaks mõne käesoleva paragrahvi lõikes 2 nimetatud asjaolu esinemise.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para24lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjekti teavitamisel käesoleva paragrahvi lõike 3 kohaselt teavitab vastutav töötleja andmesubjekti tema õigusest pöörduda otsuse vaidlustamiseks Andmekaitse Inspektsiooni või kohtu poole.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para24lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja dokumenteerib käesoleva paragrahvi lõike 2 alusel tehtud otsuse faktilised ja õiguslikud alused ning vajaduse korral teeb teabe kättesaadavaks Andmekaitse Inspektsioonile.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para25">
+					<paragrahvNr>25</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 25.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjekti õigus nõuda isikuandmete parandamist ja kustutamist</paragrahvPealkiri>
+					<loige id="para25lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjektil on õigus nõuda vastutavalt töötlejalt teda puudutavate ebaõigete faktidel põhinevate isikuandmete parandamist.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para25lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjektil on õigus nõuda vastutavalt töötlejalt teda puudutavate mittetäielike isikuandmete täiendamist, kui see on isikuandmete töötlemise eesmärki arvestades asjakohane.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para25lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjektil on õigus vastutavalt töötlejalt nõuda kogutud isikuandmete kustutamist, kui:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para25lg3p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemine ei ole seaduse alusel lubatud;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para25lg3p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemisel ei arvestatud isikuandmete töötlemise põhimõtteid või</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para25lg3p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutav töötleja on kohustatud andmed kustutama täitmaks seadusest, kohtuotsusest, välislepingust või muust siduvast kokkuleppest tulenevat kohustust.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para25lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja piirab isikuandmete kustutamise asemel nende töötlemist, kui:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para25lg4p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjekt vaidlustab isikuandmete õigsuse ning nende õigsust või ebaõigsust ei ole võimalik kindlaks teha või</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para25lg4p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmeid tuleb säilitada tõendamise eesmärgil.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para25lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui vastutav töötleja on isikuandmete kustutamise asemel rakendanud käesoleva paragrahvi lõike 4 punktis 1 sätestatud isikuandmete töötlemise piiramist, peab vastutav töötleja teavitama andmesubjekti sellise piirangu eemaldamisest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para25lg6">
+						<loigeNr>6</loigeNr>
+						<kuvatavNr><![CDATA[(6)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja on kohustatud andmesubjekti viivitamata kirjalikult teavitama, kui ta keeldub isikuandmeid parandamast või kustutamast või nende töötlemist piiramast, ning esitama keeldumise põhjused. Vastutav töötleja võib jätta põhjendused esitamata, kui sellise teabe andmine põhjustaks mõne käesoleva seaduse § 24 lõikes 2 nimetatud asjaolu esinemise.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para25lg7">
+						<loigeNr>7</loigeNr>
+						<kuvatavNr><![CDATA[(7)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjekti teavitamisel käesoleva paragrahvi lõike 6 kohaselt teavitab vastutav töötleja andmesubjekti tema õigusest pöörduda otsuse vaidlustamiseks Andmekaitse Inspektsiooni või kohtu poole.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para26">
+					<paragrahvNr>26</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 26.]]></kuvatavNr>
+					<paragrahvPealkiri>Vastutava töötleja kohustus teavitada isikuandmete parandamisest, kustutamisest ja nende töötlemise piiramisest</paragrahvPealkiri>
+					<loige id="para26lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja on isikuandmete parandamise korral kohustatud parandamisest ja paranduse sisust viivitamata teavitama pädevat asutust, kellelt on ebaõiged isikuandmed saadud.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para26lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui isikuandmeid on käesoleva seaduse § 25 alusel parandatud või kustutatud või nende töötlemist on piiratud, on vastutav töötleja kohustatud teavitama vastuvõtjaid, kellele andmed olid varem edastatud.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para26lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 2 nimetatud vastuvõtjad on kohustatud parandama või kustutama nende vastutusalasse kuuluvad isikuandmed või piirama nende töötlemist.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para27">
+					<paragrahvNr>27</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 27.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjekti õiguste teostamise kord</paragrahvPealkiri>
+					<loige id="para27lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja on kohustatud vastama andmesubjekti taotlusele kokkuvõtlikus, arusaadavas ja hõlpsasti kättesaadavas vormis, kasutades selget ning lihtsat sõnastust. Andmesubjekti taotlusele vastatakse võimaluse korral andmesubjekti soovitud viisil.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para27lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja teavitab andmesubjekti põhjendamatu viivituseta ühe kuu jooksul pärast taotluse saamist andmesubjekti taotluse alusel tehtud toimingutest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para27lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja võib andmesubjektilt küsida taotluse täitmisega kaasnevate seaduses või seaduse alusel antud õigusaktis sätestatud mõistlike kulude hüvitamist või keelduda taotletud meetmete võtmisest, kui andmesubjekti taotlus on põhjendamatu või ülemäärane.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para27lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja tuvastab andmesubjekti isiku ning tema õiguse saada teavet ja tema kohta käivaid isikuandmeid või õiguse nõuda isikuandmete parandamist ja kustutamist.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para28">
+					<paragrahvNr>28</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 28.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjekti õigus pöörduda Andmekaitse Inspektsiooni poole</paragrahvPealkiri>
+					<loige id="para28lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui andmesubjekt leiab, et isikuandmete töötlemisel rikutakse tema õigusi, on tal õigus pöörduda kaebusega Andmekaitse Inspektsiooni poole.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para28lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon teavitab andmesubjekti tema kaebuse alusel tehtud otsusest ja õigusest pöörduda Andmekaitse Inspektsiooni otsuse vaidlustamiseks kohtusse.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para28lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui andmesubjekti kaebust on pädev lahendama teise Euroopa Liidu liikmesriigi pädev järelevalveasutus, suunab Andmekaitse Inspektsioon andmesubjekti kaebuse esitamiseks teise Euroopa Liidu liikmesriigi pädeva järelevalveasutuse poole.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg4">
+				<jaguNr>4</jaguNr>
+				<kuvatavNr><![CDATA[4. jagu]]></kuvatavNr>
+				<jaguPealkiri>Vastutava ja volitatud töötleja kohustused</jaguPealkiri>
+				<paragrahv id="para29">
+					<paragrahvNr>29</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 29.]]></kuvatavNr>
+					<paragrahvPealkiri>Vastutav ja volitatud töötleja</paragrahvPealkiri>
+					<loige id="para29lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja rakendab asjakohaseid tehnilisi ja korralduslikke meetmeid, et tagada isikuandmete töötlemisel käesoleva seaduse nõuete täitmine. Vastutav töötleja on kohustatud vajaduse korral tõendama käesolevas seaduses sätestatud nõuete täitmist.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para29lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja annab volitatud töötlejale isikuandmete töötlemiseks kohustuslikke juhiseid ja vastutab selle eest, et volitatud töötleja täidab isikuandmete töötlemise nõudeid.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para29lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja võib kasutada üksnes niisuguseid volitatud töötlejaid, kes annavad piisava tagatise, et nad rakendavad asjakohaseid tehnilisi ja korralduslikke meetmeid sellisel viisil, et isikuandmete töötlemine vastab käesoleva seaduse nõuetele, ning tagab andmesubjekti õiguste kaitse.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para29lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Volitatud töötleja võib kaasata isikuandmete töötlemisse teisi volitatud töötlejaid üksnes seaduse või seaduse alusel antud õigusakti alusel või vastutava töötleja kirjalikul loal ning tingimusel, et ei ületata volitatud töötlejale antud volituste ulatust. Kirjaliku loa alusel antud volituse korral peab volitatud töötleja teavitama vastutavat töötlejat alati teise volitatud töötleja lisamisest või asendamisest. Vastutav töötleja võib sel juhul muudatuste kohta vastuväiteid esitada.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para29lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui volitatud töötleja määrab kindlaks isikuandmete töötlemise eesmärgid ja vahendid käesolevat seadust rikkudes, siis on kõnealune volitatud töötleja selle töötlemise suhtes vastutav töötleja.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para30">
+					<paragrahvNr>30</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 30.]]></kuvatavNr>
+					<paragrahvPealkiri>Volitatud töötleja määramine ja kohustused</paragrahvPealkiri>
+					<loige id="para30lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja võib määrata volitatud töötleja isikuandmeid töötlema seaduse, seaduse alusel antud õigusakti või kirjaliku lepingu alusel, milles sätestatakse isikuandmete töötlemise sisu ja kestus, laad ning eesmärk, töödeldavate isikuandmete kategooriad ja andmesubjektide kategooriad ning vastutava töötleja kohustused ja õigused.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para30lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud seaduses, seaduse alusel antud õigusaktis või lepingus sätestatakse eelkõige, et volitatud töötleja on kohustatud:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para30lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tegutsema üksnes vastutava töötleja juhiste alusel;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para30lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagama, et isikuandmeid töötlema volitatud isik hoiab saladuses tööülesannete täitmisel teatavaks saanud isikuandmeid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para30lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagama andmesubjekti õiguste kaitse;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para30lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>pärast andmetöötlusteenuse osutamise lõppu kustutama või tagastama vastutavale töötlejale tema valikul kõik isikuandmed ja kustutama olemasolevad koopiad, kui seaduses ei ole sätestatud teisiti;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para30lg2p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tegema vastutavale töötlejale kättesaadavaks isikuandmete töötlemisega seonduva teabe, mis on vajalik käesolevas paragrahvis sätestatud nõuete täitmise tõendamiseks;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para30lg2p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>järgima käesoleva seaduse § 29 lõikes 4 ja käesolevas paragrahvis sätestatud tingimusi teise volitatud töötleja kaasamiseks.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para31">
+					<paragrahvNr>31</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 31.]]></kuvatavNr>
+					<paragrahvPealkiri>Kaasvastutavad töötlejad</paragrahvPealkiri>
+					<loige id="para31lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui kaks või enam vastutavat töötlejat määravad ühiselt kindlaks isikuandmete töötlemise eesmärgid ja vahendid, on nad kaasvastutavad töötlejad.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para31lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kaasvastutava töötleja vastutus ja kohustuste ulatus määratakse seaduses, seaduse alusel antud õigusaktis või kaasvastutavate töötlejate vahel sõlmitud lepingus.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para31lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 2 nimetatud lepingus määratakse andmesubjektide jaoks kindlaks kontaktpunkt, mille kaudu on andmesubjektil võimalik oma õigusi teostada.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para31lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmesubjekt võib käesolevast seadusest tulenevaid õigusi kasutada iga vastutava töötleja suhtes.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para32">
+					<paragrahvNr>32</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 32.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemine vastutava ja volitatud töötleja nimel</paragrahvPealkiri>
+					<loige id="para32lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Isik, kes töötleb isikuandmeid vastutava või volitatud töötleja nimel, on kohustatud neid töötlema üksnes vastutava töötleja antud juhiste kohaselt, kui seaduses ei ole sätestatud teisiti.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para32lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Isiku õigus töödelda isikuandmeid vastutava või volitatud töötleja nimel peab tulenema seadusest, seaduse alusel antud õigusaktist, vastutava või volitatud töötleja ja isiku vahel sõlmitud lepingust või teenistussuhet reguleerivast aktist.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para33">
+					<paragrahvNr>33</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 33.]]></kuvatavNr>
+					<paragrahvPealkiri>Lõimitud andmekaitse ja vaikimisi andmekaitse</paragrahvPealkiri>
+					<loige id="para33lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav ja volitatud töötleja võtavad töötlemisvahendite kindlaksmääramiseks ning isikuandmete töötlemiseks asjakohaseid tehnilisi ja korralduslikke meetmeid ning rakendavad neid järjepidevalt.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para33lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav ja volitatud töötleja rakendavad asjakohaseid tehnilisi ning korralduslikke meetmeid, millega tagatakse, et vaikimisi töödeldakse ainult töötlemise iga konkreetse eesmärgi saavutamiseks vajalikke isikuandmeid.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para34">
+					<paragrahvNr>34</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 34.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemise nõuded</paragrahvPealkiri>
+					<loige id="para34lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Vastutav ja volitatud töötleja on isikuandmete töötlemisel kohustatud:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para34lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>parandama ebaõiged isikuandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para34lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kustutama isikuandmed, kui isikuandmete töötlemine ei ole seaduse alusel lubatud või see ei vasta isikuandmete töötlemise põhimõtetele;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para34lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>teavitama vastuvõtjat, kui isikuandmed on edastatud ebaseaduslikult või on edastatud ebaõiged isikuandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para34lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tegema koostööd Andmekaitse Inspektsiooniga.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para35">
+					<paragrahvNr>35</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 35.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete edastamise nõuded</paragrahvPealkiri>
+					<loige id="para35lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja on kohustatud võtma ja rakendama asjakohaseid meetmeid selleks, et mittetäielikke, ebaõigeid või aegunud isikuandmeid ei edastataks ega tehtaks kättesaadavaks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para35lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja lisab isikuandmete edastamisel võimaluse korral vajaliku teabe, mis võimaldab andmeid vastuvõtval pädeval asutusel hinnata isikuandmete õigsust, täielikkust, usaldusväärsust ja ajakohasust.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para35lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui isikuandmete töötlemisele kohaldatakse eritingimusi, teavitab vastutav töötleja selliste isikuandmete edastamisel vastuvõtjat kõnealustest tingimustest ja nende järgimise nõudest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para35lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Isikuandmete edastamisel teistele Euroopa Liidus asuvatele vastuvõtjatele ning Euroopa Liidu toimimise lepingu V jaotise 4. ja 5. peatüki kohaselt loodud asutustele ei kohaldata täiendavaid isikuandmete töötlemise eritingimusi võrreldes nendega, mida kohaldatakse isikuandmete edastamisele riigisiseselt.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para36">
+					<paragrahvNr>36</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 36.]]></kuvatavNr>
+					<paragrahvPealkiri>Logimine</paragrahvPealkiri>
+					<loige id="para36lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav ja volitatud töötleja peavad logisid vähemalt järgmiste automatiseeritud süsteemides tehtavate isikuandmete töötlemise toimingute kohta:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para36lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kogumine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para36lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>muutmine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para36lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>lugemine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para36lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>avalikustamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para36lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>edastamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para36lg1p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ühendamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para36lg1p7">
+							<alampunktNr>7</alampunktNr>
+							<kuvatavNr><![CDATA[7)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kustutamine.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para36lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Lugemist, avalikustamist ja edastamist kajastavad logid peavad võimaldama kindlaks teha nimetatud toimingute tegemise põhjenduse, kuupäeva ja kellaaja ning teabe isikuandmeid lugenud, avalikustanud või edastanud isiku kohta, samuti selliste isikuandmete vastuvõtjate nimed.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para36lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Logisid on lubatud kasutada isikuandmete töötlemise toimingute seaduslikkuse kontrollimiseks, siseseireks, isikuandmete terviklikkuse ja turvalisuse tagamiseks ning süüteomenetluse läbiviimiseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para36lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni taotlusel teevad vastutav ja volitatud töötleja käesoleva paragrahvi lõikes 1 nimetatud teabe Andmekaitse Inspektsioonile kättesaadavaks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para36lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja kehtestab logide säilitamise tähtajad.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para37">
+					<paragrahvNr>37</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 37.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemise toimingute registreerimine</paragrahvPealkiri>
+					<loige id="para37lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja registreerib kõik tema vastutusel tehtavate isikuandmete töötlemise toimingute liigid. Registreerida tuleb järgmine teave:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para37lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutava töötleja ning asjakohasel juhul kaasvastutava töötleja nimi ja kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmekaitsespetsialisti nimi ja kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemise eesmärgid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastuvõtjad või nende kategooriad, kellele isikuandmeid on avalikustatud või avalikustatakse;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjektide kategooriate ja isikuandmete kategooriate kirjeldus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>asjakohasel juhul profiilianalüüsi kasutamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p7">
+							<alampunktNr>7</alampunktNr>
+							<kuvatavNr><![CDATA[7)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>asjakohasel juhul isikuandmete kolmandale riigile või rahvusvahelisele organisatsioonile edastamise liigid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p8">
+							<alampunktNr>8</alampunktNr>
+							<kuvatavNr><![CDATA[8)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>teave isikuandmete töötlemise õigusliku aluse kohta;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p9">
+							<alampunktNr>9</alampunktNr>
+							<kuvatavNr><![CDATA[9)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>võimaluse korral eriliiki isikuandmete kustutamiseks ettenähtud tähtajad;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg1p10">
+							<alampunktNr>10</alampunktNr>
+							<kuvatavNr><![CDATA[10)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>võimaluse korral käesoleva seaduse § 43 alusel võetud isikuandmete töötlemise organisatsiooniliste ja tehniliste turvameetmete kirjeldus.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para37lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Volitatud töötleja registreerib kõik vastutava töötleja nimel tehtavate isikuandmete töötlemisega seotud toimingute liigid. Registreerida tuleb järgmine teave:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para37lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>volitatud töötleja nimi ja kontaktandmed, samuti selle vastutava töötleja nimi ja kontaktandmed, kelle nimel volitatud töötleja tegutseb;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>asjakohasel juhul andmekaitseametniku nimi ja kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutava töötleja nimel tehtava isikuandmete töötlemise liigid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>asjakohasel juhul isikuandmete edastamine kolmandale riigile või rahvusvahelisele organisatsioonile, sealhulgas andmed kõnealuse kolmanda riigi või rahvusvahelise organisatsiooni tuvastamiseks;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para37lg2p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>võimaluse korral käesoleva seaduse § 43 alusel võetud isikuandmete töötlemise organisatsiooniliste ja tehniliste turvameetmete kirjeldus.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para37lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõigetes 1 ja 2 nimetatud teave registreeritakse kirjalikku taasesitamist võimaldavas vormis.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para37lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni taotlusel teeb vastutav või volitatud töötleja käesoleva paragrahvi lõigetes 1 ja 2 nimetatud dokumendid Andmekaitse Inspektsioonile kättesaadavaks.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para38">
+					<paragrahvNr>38</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 38.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitsealane mõjuhinnang</paragrahvPealkiri>
+					<loige id="para38lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja hindab enne isikuandmete töötlemist kavandatava isikuandmete töötlemise toimingute mõju isikuandmete kaitsele, kui isikuandmete töötlemise tulemusena võib töötlemise laadi, ulatust, konteksti ja eesmärke arvesse võttes kaasneda suur oht füüsilise isiku õigustele ning vabadustele.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para38lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Mõjuhinnang peab hõlmama vähemalt järgmist:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para38lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kavandatud isikuandmete töötlemise toimingute ja töötlemise eesmärkide süstemaatiline kirjeldus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para38lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>hinnang isikuandmete töötlemise toimingute vajalikkuse ja proportsionaalsuse kohta, arvestades isikuandmete töötlemise eesmärke;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para38lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjekti õigusi ja vabadusi puudutavate ohtude hinnang;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para38lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohtude käsitlemiseks kavandatud meetmed, sealhulgas tagatised, turvameetmed ja mehhanismid isikuandmete kaitse tagamiseks ning käesoleva seaduse järgimise tõendamiseks, võttes arvesse andmesubjekti ja teiste asjaomaste isikute õigusi ning õigustatud huve.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para39">
+					<paragrahvNr>39</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 39.]]></kuvatavNr>
+					<paragrahvPealkiri>Konsulteerimine Andmekaitse Inspektsiooniga</paragrahvPealkiri>
+					<loige id="para39lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui vastutav või volitatud töötleja kavatseb töödelda isikuandmeid, mis kantakse uude loodavasse andmete kogumisse, peab ta enne konsulteerima Andmekaitse Inspektsiooniga järgmistel juhtudel:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para39lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>käesoleva seaduse § 38 alusel antud andmekaitsealasest mõjuhinnangust nähtub, et isikuandmete töötlemise tulemusena tekiks vastutava töötleja poolt ohu leevendamiseks võetavate meetmete puudumise korral suur oht;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para39lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete töötlemise laadiga kaasneb suur oht andmesubjekti õigustele ja vabadustele.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para39lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Isikuandmete töötlemise nõuetele vastavuse hindamiseks esitab vastutav töötleja Andmekaitse Inspektsioonile järgmise teabe:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para39lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>käesoleva seaduse §-s 38 sätestatud andmekaitsealase mõjuhinnangu;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para39lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kavandatud isikuandmete töötlemise eesmärgi ja vahendid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para39lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjekti õiguste ja vabaduste kaitseks ettenähtud meetmed ning tagatised;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para39lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>asjakohasel juhul andmekaitseametniku kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para39lg2p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>asjakohasel juhul vastutava töötleja, kaasvastutavate töötlejate ja volitatud töötlejate vastutuse valdkonnad isikuandmete töötlemisel;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para39lg2p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>muu Andmekaitse Inspektsiooni taotletud teabe.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para39lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui Andmekaitse Inspektsiooni hinnangul rikuks käesoleva paragrahvi lõikes 1 nimetatud kavandatav isikuandmete töötlemine käesoleva seaduse nõudeid, annab Andmekaitse Inspektsioon vastutavale ja asjakohasel juhul volitatud töötlejale kirjalikku nõu, kuidas viia andmetöötlus kooskõlla käesoleva seaduse nõuetega.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para39lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon annab vastutavale või volitatud töötlejale nõu kuue nädala jooksul käesoleva paragrahvi lõikes 2 nimetatud teabe kättesaamisest arvates.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para39lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 4 nimetatud tähtaega võib pikendada ühe kuu võrra, arvestades kavandatud isikuandmete töötlemise keerukust. Andmekaitse Inspektsioon teavitab vastutavat või volitatud töötlejat tähtaja pikendamisest ühe kuu jooksul konsulteerimise taotluse saamisest arvates. Tähtaja pikendamist tuleb põhjendada.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para39lg6">
+						<loigeNr>6</loigeNr>
+						<kuvatavNr><![CDATA[(6)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon võib koostada loetelu isikuandmete töötlemise toimingutest, mille puhul on käesoleva paragrahvi lõikes 1 nimetatud varasem konsulteerimine vajalik.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg5">
+				<jaguNr>5</jaguNr>
+				<kuvatavNr><![CDATA[5. jagu]]></kuvatavNr>
+				<jaguPealkiri>Andmekaitsespetsialist</jaguPealkiri>
+				<paragrahv id="para40">
+					<paragrahvNr>40</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 40.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitsespetsialisti määramine</paragrahvPealkiri>
+					<loige id="para40lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Õiguskaitseasutus määrab andmekaitsespetsialisti. Sellest kohustusest on vabastatud kohtud õigusemõistmise funktsiooni täites.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para40lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Õiguskaitseasutus võib mitme asutuse või organi jaoks määrata ühe andmekaitsespetsialisti olenevalt nende organisatsioonilisest struktuurist ja suurusest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para40lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitsespetsialisti määramisel lähtutakse tema kutseoskustest ja eksperditeadmistest andmekaitsealaste õigusaktide ja tava kohta ning suutlikkusest täita käesoleva seaduse §-s 41 sätestatud ülesandeid.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para40lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitsespetsialist võib olla õiguskaitseasutuse teenistuses olev ametnik või töötaja või täita ülesandeid teenuslepingu alusel.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para41">
+					<paragrahvNr>41</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 41.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitsespetsialisti ülesanded</paragrahvPealkiri>
+					<loige id="para41lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitsespetsialist täidab vähemalt järgmisi ülesandeid:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para41lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>teavitab ja nõustab õiguskaitseasutust ning tema ülesandel isikuandmeid töötlevaid ametnikke ja töötajaid seoses nende kohustustega, mis tulenevad käesolevast seadusest ning muudest Euroopa Liidu või selle liikmesriikide andmekaitsenormidest;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para41lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagab kooskõla käesoleva seaduse, vajaduse korral muude Euroopa Liidu või selle liikmesriikide andmekaitsenormidega ja vastutava töötleja sise-eeskirjadega, mis käsitlevad isikuandmete kaitse põhimõtteid ning isikuandmete töötlemises osalevate ametnike ja töötajate teadlikkuse suurendamist ning koolitamist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para41lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>annab nõu seoses andmekaitsealase mõjuhinnanguga ja jälgib selle toimimist käesoleva seaduse § 38 kohaselt;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para41lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>teeb koostööd Andmekaitse Inspektsiooniga;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para41lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tegutseb isikuandmete töötlemise küsimustes Andmekaitse Inspektsiooni kontaktisikuna, sealhulgas käesoleva seaduse §-s 39 sätestatud varasema konsulteerimise käigus, ning konsulteerib vajaduse korral ka muudes küsimustes.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para41lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kohtu andmekaitsespetsialist ei täida käesoleva paragrahvi lõikes 1 nimetatud ülesandeid kohtu õigusemõistmisega seotud tegevuste suhtes.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para41lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitsespetsialist võib täita muid ülesandeid ja kohustusi. Vastutav töötleja või volitatud töötleja tagab, et sellised ülesanded ja kohustused ei põhjusta andmekaitsespetsialistil huvide konflikti.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para42">
+					<paragrahvNr>42</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 42.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitsespetsialisti ametiseisund</paragrahvPealkiri>
+					<loige id="para42lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja tagab andmekaitsespetsialisti nõuetekohase ja õigeaegse kaasamise kõikidesse isikuandmete kaitse küsimustesse.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para42lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja toetab andmekaitsespetsialisti käesoleva seaduse §-s 41 osutatud ülesannete täitmisel, andes talle kõnealuste ülesannete täitmiseks ja eksperditeadmiste taseme hoidmiseks vajalikud vahendid ning juurdepääsu isikuandmetele ja nende töötlemise toimingutele.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para42lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitsespetsialisti ametiseisundile kohaldatakse Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 38 lõigetes 3–6 sätestatut.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg6">
+				<jaguNr>6</jaguNr>
+				<kuvatavNr><![CDATA[6. jagu]]></kuvatavNr>
+				<jaguPealkiri>Isikuandmete töötlemise turvameetmed ja isikuandmetega seotud rikkumisest teavitamine</jaguPealkiri>
+				<paragrahv id="para43">
+					<paragrahvNr>43</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 43.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete töötlemise turvameetmed</paragrahvPealkiri>
+					<loige id="para43lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Vastutav ja volitatud töötleja on kohustatud võtma ning rakendama organisatsioonilisi ja tehnilisi turvameetmeid isikuandmete kaitseks, et:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para43lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>keelata volitamata isikute juurdepääs isikuandmete töötlemiseks kasutatavatele andmetöötlusseadmetele;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ära hoida andmekandjate omavoliline lugemine, kopeerimine, muutmine ja kõrvaldamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ära hoida isikuandmete omavoliline sisestamine ja säilitatavate isikuandmetega tutvumine, nende muutmine või kustutamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ära hoida andmetöötlussüsteemi kasutamine andmesidevahendite abil volitamata isikute poolt;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagada juurdepääs automatiseeritud andmetöötlussüsteemi kasutamise luba omavale kasutajale üksnes nendele isikuandmetele, mida hõlmab tema juurdepääsuluba;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagada võimalus tõendada ja kindlaks määrata, millistele asutustele on isikuandmeid andmesidevahendite kaudu edastatud või kättesaadavaks tehtud ja millistele asutustele võib neid edastada või kättesaadavaks teha;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p7">
+							<alampunktNr>7</alampunktNr>
+							<kuvatavNr><![CDATA[7)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagada võimalus tõendada ja kindlaks teha, milliseid isikuandmeid on automatiseeritud andmetöötlussüsteemi sisestatud ning millal ja kes need on sisestanud;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p8">
+							<alampunktNr>8</alampunktNr>
+							<kuvatavNr><![CDATA[8)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ära hoida isikuandmete loata lugemine, kopeerimine, muutmine või kustutamine isikuandmete edastamise või andmekandjate vedamise ajal;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p9">
+							<alampunktNr>9</alampunktNr>
+							<kuvatavNr><![CDATA[9)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagada võimalus paigaldatud andmetöötlussüsteeme katkestuse korral taastada;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p10">
+							<alampunktNr>10</alampunktNr>
+							<kuvatavNr><![CDATA[10)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>tagada andmetöötlussüsteemi toimimine ja selle ilmnevatest toimimisvigadest teavitamine;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para43lg1p11">
+							<alampunktNr>11</alampunktNr>
+							<kuvatavNr><![CDATA[11)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ära hoida isikuandmete moonutamine süsteemirikete tagajärjel.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para44">
+					<paragrahvNr>44</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 44.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni teavitamine isikuandmetega seotud rikkumisest</paragrahvPealkiri>
+					<loige id="para44lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui isikuandmetega seotud rikkumine kujutab endast tõenäoliselt ohtu füüsilise isiku õigustele ja vabadustele, teatab vastutav töötleja rikkumisest Andmekaitse Inspektsioonile viivitamata, võimaluse korral 72 tunni jooksul pärast sellest teada saamist.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para44lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Volitatud töötleja teavitab vastutavat töötlejat viivitamata pärast isikuandmetega seotud rikkumisest teada saamist.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para44lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud teates tuleb esitada järgmine teave:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para44lg3p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>rikkumise sisu, sealhulgas isikuandmetega seotud rikkumise laad, võimaluse korral asjaomaste andmesubjektide kategooriad ja ligikaudne arv ning asjaomaste isikuandmete kategooriad ja ligikaudne arv;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para44lg3p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmekaitseametniku nimi ja kontaktandmed;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para44lg3p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmetega seotud rikkumise võimalike tagajärgede kirjeldus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para44lg3p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutava töötleja võetud või kavandatud meetmed isikuandmetega seotud rikkumiste lahendamiseks, sealhulgas meetmed rikkumise võimalike tagajärgede kahjuliku mõju leevendamiseks.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para44lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui Andmekaitse Inspektsiooni teavitatakse isikuandmetega seotud rikkumisest pärast 72 tunni möödumist sellest teada saamisest, esitatakse selle kohta põhjendus.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para44lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui isikuandmetega seotud rikkumine puudutab isikuandmeid, mis on edastatud teise Euroopa Liidu liikmesriigi vastutava töötleja poolt või teise Euroopa Liidu liikmesriigi vastutavale töötlejale, edastatakse käesoleva paragrahvi lõikes 3 osutatud teave põhjendamatu viivituseta kõnealuse liikmesriigi vastutavale töötlejale.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para44lg6">
+						<loigeNr>6</loigeNr>
+						<kuvatavNr><![CDATA[(6)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav töötleja dokumenteerib kõik käesoleva paragrahvi lõikes 1 nimetatud isikuandmetega seotud rikkumised, sealhulgas rikkumise asjaolud, mõju ja võetud parandusmeetmed.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para45">
+					<paragrahvNr>45</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 45.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmesubjekti teavitamine isikuandmetega seotud rikkumisest</paragrahvPealkiri>
+					<loige id="para45lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui rikkumine kujutab endast tõenäoliselt suurt ohtu füüsilise isiku õigustele ja vabadustele, teavitab vastutav töötleja viivitamata andmesubjekti isikuandmetega seotud rikkumisest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para45lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud teavitamisel kirjeldatakse selges ja lihtsas keeles isikuandmetega seotud rikkumise laadi ning esitatakse vähemalt käesoleva seaduse § 44 lõike 3 punktides 2–4 nimetatud teave.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para45lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud teavitamine ei ole nõutav, kui on täidetud vähemalt üks järgmistest tingimustest:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para45lg3p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutav töötleja on rakendanud asjakohaseid tehnoloogilisi ja korralduslikke kaitsemeetmeid ning neid on kohaldatud isikuandmetega seotud rikkumisest mõjutatud isikuandmetele;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para45lg3p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutav töötleja on võtnud hilisemad meetmed, mis välistavad käesoleva paragrahvi lõikes 1 nimetatud suure ohu realiseerumise andmesubjekti õigustele ja vabadustele;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para45lg3p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjekti individuaalne teavitamine tooks kaasa ebaproportsionaalsed kulud ja rikkumisest on üldsust teavitatud.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para45lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui vastutav töötleja ei ole isikuandmetega seotud rikkumisest andmesubjekti veel teavitanud, võib Andmekaitse Inspektsioon pärast rikkumise raskuse hindamist otsustada, kas andmesubjekti teavitamine isikuandmetega seotud rikkumisest on nõutav või esineb mõni käesoleva paragrahvi lõikes 3 nimetatud juhtudest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para45lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõikes 1 nimetatud rikkumisest võib andmesubjekti teavitada hiljem, piiratud ulatuses või jätta ta teavitamata, kui see võib:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para45lg5p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>takistada või kahjustada süüteo tõkestamist, avastamist või menetlemist või karistuse täideviimist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para45lg5p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kahjustada teise isiku õigusi ja vabadusi;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para45lg5p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohustada riigi julgeolekut;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para45lg5p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>ohustada avaliku korra kaitset;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para45lg5p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>takistada ametlikku uurimist või menetlust.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg7">
+				<jaguNr>7</jaguNr>
+				<kuvatavNr><![CDATA[7. jagu]]></kuvatavNr>
+				<jaguPealkiri>Isikuandmete edastamine kolmandale riigile ja rahvusvahelisele organisatsioonile</jaguPealkiri>
+				<paragrahv id="para46">
+					<paragrahvNr>46</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 46.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete kolmandale riigile ja rahvusvahelisele organisatsioonile edastamise üldtingimused</paragrahvPealkiri>
+					<loige id="para46lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Isikuandmeid on lubatud edastada kolmandale riigile või rahvusvahelisele organisatsioonile üksnes juhul, kui on täidetud kõik järgmised tingimused:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para46lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>edastamine on vajalik süüteo tõkestamiseks, avastamiseks või menetlemiseks või karistuse täideviimiseks;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para46lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmeid edastatakse vastutavale töötlejale kolmandas riigis või rahvusvahelises organisatsioonis, kes on pädev süütegu tõkestama, avastama ja menetlema või karistust täide viima;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para46lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>teise Euroopa Liidu liikmesriigi nõusolek andmete edasiseks kasutamiseks, kui edastatavad andmed on saadud sellest liikmesriigist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para46lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>Euroopa Komisjon on vastu võtnud Euroopa Parlamendi ja nõukogu direktiivi (EL) 2016/680 artikli 36 kohaselt otsuse kaitse piisavuse kohta või sellise otsuse puudumisel on võetud käesoleva seaduse §-s 47 nimetatud piisavad kaitsemeetmed või nende puudumisel kohaldatakse käesoleva seaduse §-s 48 nimetatud erandit;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para46lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete edastamisel tagatakse, et andmeid edastav vastutav töötleja on isikuandmete edasiseks edastamiseks muule kolmandale riigile või rahvusvahelisele organisatsioonile andnud varasema nõusoleku.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para46lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui käesoleva paragrahvi lõike 1 punktis 3 nimetatud luba isikuandmete edastamiseks ei ole võimalik õigel ajal saada ning isikuandmete edastamine on vajalik riigi või kolmanda riigi avalikku korda ähvardava vahetu ja tõsise ohu vältimiseks või riigi olulise huvi kaitseks, siis võib isikuandmeid edastada ilma käesoleva paragrahvi lõike 1 punktis 3 nimetatud loata. Käesolevas lõikes sätestatud andmevahetusest teavitatakse viivitamata isikuandmeid edastanud Euroopa Liidu liikmesriigi pädevat asutust.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para46lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesoleva paragrahvi lõike 1 punktis 5 nimetatud nõusoleku andmisel võtab vastutav või volitatud töötleja muu hulgas arvesse süüteo raskust, isikuandmete algse edastamise eesmärki ja isikuandmete kaitse taset selles kolmandas riigis või rahvusvahelises organisatsioonis, kuhu isikuandmed edasi saadetakse.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para46lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui Euroopa Komisjon on vastu võtnud Euroopa Parlamendi ja nõukogu direktiivi (EL) 2016/680 artikli 36 lõikes 5 nimetatud otsuse, võib isikuandmeid edastada kolmandale riigile või rahvusvahelisele organisatsioonile käesoleva seaduse §-de 47 ja 48 alusel.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para47">
+					<paragrahvNr>47</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 47.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete edastamine asjakohaste kaitsemeetmete kohaldamisel</paragrahvPealkiri>
+					<loige id="para47lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Kui puudub käesoleva seaduse § 46 lõike 1 punktis 4 nimetatud Euroopa Komisjoni otsus kaitse piisavuse kohta, võib isikuandmeid edastada kolmandale riigile või rahvusvahelisele organisatsioonile järgmistel juhtudel:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para47lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete kaitseks võetavad asjakohased kaitsemeetmed on sätestatud õiguslikult siduvas aktis;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para47lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastutav töötleja on hinnanud kõiki isikuandmete edastamisega seotud asjaolusid ning leidnud, et on võetud kõik isikuandmete kaitse seisukohalt asjakohased kaitsemeetmed.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para48">
+					<paragrahvNr>48</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 48.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete edastamine erandlikel juhtudel</paragrahvPealkiri>
+					<loige id="para48lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui puudub käesoleva seaduse § 46 lõike 1 punktis 4 nimetatud Euroopa Komisjoni otsus kaitse piisavuse kohta või puuduvad §-s 47 nimetatud asjakohased kaitsemeetmed, on isikuandmete edastamine kolmandale riigile või rahvusvahelisele organisatsioonile lubatud, kui see on vajalik:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para48lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjekti või teise isiku õiguste ja vabaduste kaitsmiseks;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para48lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>andmesubjekti õiguspäraste huvide kaitsmiseks;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para48lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>avalikku korda ähvardava vahetu ja tõsise ohu ennetamiseks;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para48lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>konkreetse süüteo tõkestamiseks, avastamiseks või menetlemiseks või karistuse täideviimiseks või</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para48lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>konkreetse süüteo tõkestamise, avastamise või menetlemise või karistuse täideviimise eesmärgiga seotud konkreetse õigusnõude koostamiseks, esitamiseks või kaitsmiseks.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para48lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui andmesubjekti õigused on kaalukamad, kui on käesoleva paragrahvi lõike 1 punktides 4 ja 5 sätestatud huvi, ei ole isikuandmete edastamine lubatud.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para49">
+					<paragrahvNr>49</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 49.]]></kuvatavNr>
+					<paragrahvPealkiri>Isikuandmete edastamine kolmandas riigis asuvale vastuvõtjale</paragrahvPealkiri>
+					<loige id="para49lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Isikuandmeid võib edastada vahetult kolmandas riigis asuvale vastuvõtjale, kui on täidetud kõik järgmised tingimused:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para49lg1p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>edastamine on rangelt vajalik isikuandmeid edastava õiguskaitseasutuse ülesande täitmiseks süüteo tõkestamise, avastamise või menetlemise või karistuse täideviimise eesmärgil;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para49lg1p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>avalik huvi on kaalukam kui andmesubjekti õigused ja vabadused;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para49lg1p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>isikuandmete edastamine kolmanda riigi asutusele, kes on pädev süütegu tõkestama, avastama ja menetlema või karistust täide viima, ei ole tõhus või asjakohane;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para49lg1p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kolmanda riigi asutust, kes on pädev süütegu tõkestama, avastama ja menetlema või karistust täide viima, teavitatakse viivitamata, välja arvatud juhul, kui see ei ole tõhus või asjakohane;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para49lg1p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>vastuvõtjat teavitatakse isikuandmete töötlemise konkreetsest eesmärgist ja suunatakse isikuandmeid töötlema ainult nimetatud eesmärgil.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para50">
+					<paragrahvNr>50</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 50.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni teavitamine ja isikuandmete edastamise dokumenteerimine</paragrahvPealkiri>
+					<loige id="para50lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Vastutav või volitatud töötleja annab ülevaate Andmekaitse Inspektsioonile käesoleva seaduse § 47 punkti 2 ja § 49 alusel toimunud isikuandmete edastamisest vähemalt üks kord aastas.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para50lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui isikuandmeid edastatakse käesoleva seaduse § 47 punkti 2, § 48 lõike 1 või § 49 alusel, dokumenteerib vastutav või volitatud töötleja sellise edastamise, sealhulgas edastamise kuupäeva ja kellaaja, vastuvõtva pädeva asutuse andmed, edastamise selgituse ning edastatud isikuandmed.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para50lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni taotlusel teeb vastutav või volitatud töötleja käesoleva paragrahvi lõikes 2 nimetatud dokumendid talle kättesaadavaks.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+		</peatykk>
+		<peatykk id="ptk5">
+			<peatykkNr>5</peatykkNr>
+			<kuvatavNr><![CDATA[5. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Riiklik ja haldusjärelevalve</peatykkPealkiri>
+			<jagu id="jg8">
+				<jaguNr>1</jaguNr>
+				<kuvatavNr><![CDATA[1. jagu]]></kuvatavNr>
+				<jaguPealkiri>Järelevalveasutus</jaguPealkiri>
+				<paragrahv id="para51">
+					<paragrahvNr>51</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 51.]]></kuvatavNr>
+					<paragrahvPealkiri>Sõltumatu järelevalveasutuse moodustamine</paragrahvPealkiri>
+					<loige id="para51lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Sõltumatu järelevalveasutus Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 51 lõike 1 ning Euroopa Parlamendi ja nõukogu direktiivi (EL) 2016/680 artikli 41 tähenduses on Andmekaitse Inspektsioon.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para51lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon on oma ülesannete täitmisel sõltumatu ja tegutseb, lähtudes käesolevast seadusest, Euroopa Parlamendi ja nõukogu määrusest (EL) 2016/679, muudest seadustest ja nende alusel kehtestatud õigusaktidest.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para52">
+					<paragrahvNr>52</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 52.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni juhi ametisse nimetamiseks nõutav kvalifikatsioon</paragrahvPealkiri>
+					<loige id="para52lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni juhina võib töötada juhtimiskogemusega kõrgharidusega isik, kellel on teadmised isikuandmete kaitse õiguslikust regulatsioonist ning info- ja kommunikatsioonitehnoloogiast, sealhulgas infosüsteemidest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para52lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni juht ei tohi ametisoleku ajal osaleda erakondade tegevuses ega töötada muul palgalisel töö- või ametikohal, välja arvatud pedagoogiline ja teadustöö.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para53">
+					<paragrahvNr>53</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 53.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni juhi kandidaadi julgeolekukontroll</paragrahvPealkiri>
+					<loige id="para53lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni juhi kandidaat peab enne Andmekaitse Inspektsiooni juhiks nimetamist läbima julgeolekukontrolli, välja arvatud juhul, kui tal on kehtiv täiesti salajase taseme riigisaladusele juurdepääsu luba või kui ta on kandidaadiks saamise ajal ametikohal, millel on ametikohajärgne õigus juurdepääsuks kõigile riigisaladuse tasemetele.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para53lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni juhi kandidaadi julgeolekukontrolli teeb Kaitsepolitseiamet julgeolekuasutuste seaduses ettenähtud korras.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para53lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Julgeolekukontrolli läbimiseks täidab Andmekaitse Inspektsiooni juhi kandidaat riigisaladusele juurdepääsu loa taotleja ankeedi ja allkirjastab nõusoleku, millega lubab julgeolekukontrolli tegeval asutusel saada julgeolekukontrolli tegemise ajal enda kohta teavet füüsilistelt ja juriidilistelt isikutelt ning riigi- ja kohaliku omavalitsuse asutustelt ja organitelt, ning esitab need Justiits- ja Digiministeeriumi kaudu Kaitsepolitseiametile.</tavatekst>
+							<muutmismarge>
+								<avaldamismarge>
+									<RTosa>RT I</RTosa>
+									<avaldamineKuupaev>2024-12-30</avaldamineKuupaev>
+									<RTartikkel>1</RTartikkel>
+									<aktViide>130122024001</aktViide>
+								</avaldamismarge>
+								<joustumine>2025-01-01</joustumine>
+								<tavatekst>, Vabariigi Valitsuse seaduse § 105.19 lõike 12 alusel asendatud sõna „Justiitsministeerium” sõnadega „Justiits- ja Digiministeerium” vastavas käändes</tavatekst>
+							</muutmismarge>
+						</sisuTekst>
+					</loige>
+					<loige id="para53lg4">
+						<loigeNr>4</loigeNr>
+						<kuvatavNr><![CDATA[(4)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kaitsepolitseiamet edastab julgeolekukontrolli tulemusena kogutud andmed valdkonna eest vastutavale ministrile kolme kuu jooksul arvates käesoleva paragrahvi lõikes 3 nimetatud dokumentide saamisest, lisades oma arvamuse Andmekaitse Inspektsiooni juhi kandidaadi vastavuse kohta riigisaladusele juurdepääsu loa saamise tingimustele.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para53lg5">
+						<loigeNr>5</loigeNr>
+						<kuvatavNr><![CDATA[(5)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui Andmekaitse Inspektsiooni juhi volitused on lõppenud enne tähtaja lõppu, tuleb julgeolekukontroll Andmekaitse Inspektsiooni juhi kandidaadi suhtes teha kolme kuu jooksul arvates käesoleva paragrahvi lõikes 3 nimetatud dokumentide saamisest. Julgeolekukontrolli tegeva asutuse juhi loal võib julgeolekukontrolli tegemise tähtaega pikendada ühe kuu võrra, kui esineb riigisaladuse ja salastatud välisteabe seaduse § 33 lõike 4 punktis 1 või 2 nimetatud asjaolu või kui ühe kuu jooksul on võimalik sama lõike punktis 3 või 4 nimetatud asjaolu ilmnemine.</tavatekst>
+							<muutmismarge>
+								<avaldamismarge>
+									<RTosa>RT I</RTosa>
+									<avaldamineKuupaev>2026-06-30</avaldamineKuupaev>
+									<RTartikkel>1</RTartikkel>
+									<aktViide>130062026001</aktViide>
+								</avaldamismarge>
+								<joustumine>2026-10-01</joustumine>
+							</muutmismarge>
+						</sisuTekst>
+					</loige>
+					<loige id="para53lg6">
+						<loigeNr>6</loigeNr>
+						<kuvatavNr><![CDATA[(6)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Tehtud julgeolekukontrolli käigus kogutud andmetele tuginedes võib Andmekaitse Inspektsiooni juhi kandidaadi ametisse nimetada üheksa kuu jooksul arvates ajast, kui Kaitsepolitseiamet edastas julgeolekukontrolli käigus kogutud teabe valdkonna eest vastutavale ministrile. Nimetatud tähtajast hiljem võib Andmekaitse Inspektsiooni juhi kandidaadi ametisse nimetada pärast uue julgeolekukontrolli läbimist.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para54">
+					<paragrahvNr>54</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 54.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni juhi ametisse nimetamine ja ametist vabastamine</paragrahvPealkiri>
+					<loige id="para54lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni juhi nimetab valdkonna eest vastutava ministri ettepanekul viieks aastaks ametisse Vabariigi Valitsus, olles enne ära kuulanud Riigikogu põhiseaduskomisjoni seisukoha.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para54lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Enne Andmekaitse Inspektsiooni juhi ennetähtaegset ametist vabastamist kuulatakse ära Riigikogu põhiseaduskomisjoni seisukoht.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para55">
+					<paragrahvNr>55</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 55.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni pädevus sertifitseerimisasutuse akrediteerimisel</paragrahvPealkiri>
+					<loige id="para55lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Pädev asutus Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 43 lõike 1 tähenduses, kes on pädev akrediteerima sertifitseerimisasutusi, millel on andmekaitse vallas asjakohased eksperditeadmised, on Andmekaitse Inspektsioon.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+			<jagu id="jg9">
+				<jaguNr>2</jaguNr>
+				<kuvatavNr><![CDATA[2. jagu]]></kuvatavNr>
+				<jaguPealkiri>Riikliku ja haldusjärelevalve teostamine</jaguPealkiri>
+				<paragrahv id="para56">
+					<paragrahvNr>56</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 56.]]></kuvatavNr>
+					<paragrahvPealkiri>Andmekaitse Inspektsiooni pädevus riikliku ja haldusjärelevalve teostamisel</paragrahvPealkiri>
+					<loige id="para56lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Käesolevas seaduses, selle alusel kehtestatud õigusaktides ning Euroopa Parlamendi ja nõukogu määruses (EL) 2016/679 sätestatud nõuete ning muudes seadustes isikuandmete töötlemisele kehtestatud nõuete täitmise üle teostab riiklikku ja haldusjärelevalvet Andmekaitse Inspektsioon.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para56lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Lisaks Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklis 57 sätestatule on Andmekaitse Inspektsiooni pädevuses:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para56lg2p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>suurendada üldsuse, vastutavate töötlejate ja volitatud töötlejate teadlikkust ning arusaamist isikuandmete töötlemisel esinevatest ohtudest, töötlemise kohta kehtivatest normidest ja kaitsemeetmetest ning isikuandmete töötlemisega seotud õigustest; selle ülesande täitmiseks võib Andmekaitse Inspektsioon anda soovituslikke juhiseid;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>anda andmesubjektile taotluse korral teavet tema käesolevast seadusest tulenevate õiguste teostamise kohta ja teha asjakohasel juhul sel eesmärgil koostööd teiste Euroopa Liidu liikmesriikide järelevalveasutustega;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>algatada vajaduse korral väärteomenetlus ja kohaldada karistust, juhul kui teiste haldusõiguslike meetmetega ei ole võimalik saavutada seaduses või Euroopa Parlamendi ja nõukogu määruses (EL) 2016/679 sätestatud nõuete täitmist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>teha koostööd rahvusvaheliste andmekaitse järelevalve organisatsioonidega ja teiste andmekaitse järelevalve asutuste ning välisriikide muude pädevate asutuste ja isikutega;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>jälgida asjaomaseid suundumusi niivõrd, kuivõrd need mõjutavad isikuandmete kaitset, eelkõige info- ja kommunikatsioonitehnoloogia arengut;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>anda nõu käesoleva seaduse §-s 39 osutatud isikuandmete töötlemise toimingute kohta;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p7">
+							<alampunktNr>7</alampunktNr>
+							<kuvatavNr><![CDATA[7)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>osaleda Euroopa Andmekaitsenõukogus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p8">
+							<alampunktNr>8</alampunktNr>
+							<kuvatavNr><![CDATA[8)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>rakendada haldussundi seadustes ettenähtud alustel, ulatuses ja korras;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p9">
+							<alampunktNr>9</alampunktNr>
+							<kuvatavNr><![CDATA[9)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>esitada omal algatusel või taotluse alusel isikuandmete kaitsega seotud küsimustes arvamusi Riigikogule, Vabariigi Valitsusele, õiguskantslerile ja muudele asutustele ning avalikkusele;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg2p10">
+							<alampunktNr>10</alampunktNr>
+							<kuvatavNr><![CDATA[10)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>täita muid seadustest tulenevaid ülesandeid.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+					<loige id="para56lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Lisaks Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklis 57 sätestatule on Andmekaitse Inspektsioonil õigus:</tavatekst>
+						</sisuTekst>
+						<alampunkt id="para56lg3p1">
+							<alampunktNr>1</alampunktNr>
+							<kuvatavNr><![CDATA[1)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>hoiatada vastutavat töötlejat ja volitatud töötlejat, et kavandatavad isikuandmete töötlemise toimingud rikuvad tõenäoliselt käesolevat seadust;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p2">
+							<alampunktNr>2</alampunktNr>
+							<kuvatavNr><![CDATA[2)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>nõuda isikuandmete parandamist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p3">
+							<alampunktNr>3</alampunktNr>
+							<kuvatavNr><![CDATA[3)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>nõuda isikuandmete kustutamist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p4">
+							<alampunktNr>4</alampunktNr>
+							<kuvatavNr><![CDATA[4)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>nõuda isikuandmete töötlemise piiramist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p5">
+							<alampunktNr>5</alampunktNr>
+							<kuvatavNr><![CDATA[5)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>nõuda isikuandmete töötlemise lõpetamist, sealhulgas hävitamist või arhiivi edastamist;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p6">
+							<alampunktNr>6</alampunktNr>
+							<kuvatavNr><![CDATA[6)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>rakendada isiku õiguste ja vabaduste kahjustamise ärahoidmiseks vajaduse korral asendustäitmise ja sunniraha seaduses sätestatud korras viivitamata isikuandmete kaitseks organisatsioonilisi, füüsilisi ning infotehnilisi turvameetmeid, välja arvatud juhul, kui isikuandmeid töötleb riigiasutus;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p7">
+							<alampunktNr>7</alampunktNr>
+							<kuvatavNr><![CDATA[7)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>kehtestada ajutine või alaline isikuandmete töötlemise piirang, sealhulgas isikuandmete töötlemise keeld;</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+						<alampunkt id="para56lg3p8">
+							<alampunktNr>8</alampunktNr>
+							<kuvatavNr><![CDATA[8)]]></kuvatavNr>
+							<sisuTekst>
+								<tavatekst>algatada järelevalvemenetlus kaebuse alusel või omal algatusel.</tavatekst>
+							</sisuTekst>
+						</alampunkt>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para57">
+					<paragrahvNr>57</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 57.]]></kuvatavNr>
+					<paragrahvPealkiri>Riikliku järelevalve erimeetmed</paragrahvPealkiri>
+					<loige id="para57lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon võib käesolevas seaduses sätestatud riikliku järelevalve teostamiseks kohaldada korrakaitseseaduse §-des 30–32, 44 ja 49–53 sätestatud riikliku järelevalve erimeetmeid korrakaitseseaduses sätestatud alusel ja korras.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para58">
+					<paragrahvNr>58</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 58.]]></kuvatavNr>
+					<paragrahvPealkiri>Riikliku järelevalve erisused</paragrahvPealkiri>
+					<loige id="para58lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon võib riikliku järelevalve teostamiseks rakendada Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklis 58 sätestatud meetmeid.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para58lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon võib teha päringu elektroonilise side ettevõtjale üldkasutatava elektroonilise side võrgus kasutatavate identifitseerimistunnustega seotud lõppkasutaja tuvastamiseks vajalike andmete kohta, välja arvatud sõnumi edastamise faktiga seotud andmed, kui muul viisil ei ole võimalik identifitseerimistunnustega seotud lõppkasutajat tuvastada.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para59">
+					<paragrahvNr>59</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 59.]]></kuvatavNr>
+					<paragrahvPealkiri>Haldusjärelevalve erisused</paragrahvPealkiri>
+					<loige id="para59lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon võib haldusjärelevalve teostamisel kooskõlas Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 83 lõikega 7 ning Vabariigi Valitsuse seaduse §-des 75<sup>1</sup> ja 75<sup>2</sup> sätestatu kohaselt antud ettekirjutuse täitmata jätmise korral pöörduda ettekirjutuse saaja kõrgemalseisva asutuse, isiku või kogu poole teenistusliku järelevalve korraldamiseks või ametniku suhtes distsiplinaarmenetluse algatamiseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para59lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Teenistusliku järelevalve teostaja või distsiplinaarmenetluse algatamise õigust omav isik on kohustatud taotluse läbi vaatama selle saamisest arvates ühe kuu jooksul ja esitama oma põhjendatud arvamuse Andmekaitse Inspektsioonile. Teenistusliku järelevalve või distsiplinaarmenetluse algatamise korral on järelevalve teostajal või distsiplinaarmenetluse algatamise õigust omaval isikul kohustus teavitada Andmekaitse Inspektsiooni viivitamata asjakohase menetluse tulemustest.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para59lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui riigiasutusest isikuandmete töötleja ei ole Andmekaitse Inspektsiooni ettekirjutust selles määratud tähtaja jooksul täitnud, pöördub Andmekaitse Inspektsioon halduskohtumenetluse seadustikus sätestatud korras protestiga halduskohtusse.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para60">
+					<paragrahvNr>60</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 60.]]></kuvatavNr>
+					<paragrahvPealkiri>Sunniraha määr</paragrahvPealkiri>
+					<loige id="para60lg1">
+						<loigeNr/>
+						<kuvatavNr/>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsiooni ettekirjutuse täitmata jätmise korral on asendustäitmise ja sunniraha seaduses sätestatud korras rakendatava sunniraha kohaldamise igakordne ülemmäär kuni 20 000 000 eurot või ettevõtja puhul kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+				<paragrahv id="para61">
+					<paragrahvNr>61</paragrahvNr>
+					<kuvatavNr><![CDATA[§ 61.]]></kuvatavNr>
+					<paragrahvPealkiri>Kaebuse läbivaatamise tähtaeg</paragrahvPealkiri>
+					<loige id="para61lg1">
+						<loigeNr>1</loigeNr>
+						<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Andmekaitse Inspektsioon lahendab kaebuse 30 päeva jooksul kaebuse Andmekaitse Inspektsioonile esitamisest arvates.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para61lg2">
+						<loigeNr>2</loigeNr>
+						<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kaebuse lahendamiseks vajalike asjaolude täiendavaks selgitamiseks võib Andmekaitse Inspektsioon kaebuse läbivaatamise tähtaega pikendada kuni 60 päeva võrra. Tähtaja pikendamisest tuleb kaebuse esitajale kirjalikult teatada.</tavatekst>
+						</sisuTekst>
+					</loige>
+					<loige id="para61lg3">
+						<loigeNr>3</loigeNr>
+						<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+						<sisuTekst>
+							<tavatekst>Kui kaebuse lahendamiseks on vaja teha koostööd teiste asjaomaste järelevalveasutustega, siis pikeneb kaebuse läbivaatamine mõistliku aja võrra, mis on vajalik koostööd tegevate järelevalveasutuste arvamuse ärakuulamiseks või oma arvamuse andmiseks.</tavatekst>
+						</sisuTekst>
+					</loige>
+				</paragrahv>
+			</jagu>
+		</peatykk>
+		<peatykk id="ptk6">
+			<peatykkNr>6</peatykkNr>
+			<kuvatavNr><![CDATA[6. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Vastutus</peatykkPealkiri>
+			<paragrahv id="para62">
+				<paragrahvNr>62</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 62.]]></kuvatavNr>
+				<paragrahvPealkiri>Vastutava töötleja ja volitatud töötleja kohustuse rikkumine</paragrahvPealkiri>
+				<loige id="para62lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklites 8, 11, 25–39, 42 ja 43 sätestatud vastutava töötleja või volitatud töötleja kohustuse rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 10 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para62lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 10 000 000 eurot või kuni 2 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para63">
+				<paragrahvNr>63</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 63.]]></kuvatavNr>
+				<paragrahvPealkiri>Sertifitseerimiskorra rikkumine</paragrahvPealkiri>
+				<loige id="para63lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklites 42 ja 43 sätestatud sertifitseerimiskorra rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 10 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para63lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 10 000 000 eurot või kuni 2 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para64">
+				<paragrahvNr>64</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 64.]]></kuvatavNr>
+				<paragrahvPealkiri>Toimimisjuhendi järgimise üle järelevalve teostamise korra rikkumine</paragrahvPealkiri>
+				<loige id="para64lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 41 lõikes 4 sätestatud toimimisjuhendi järgimise üle järelevalve teostamise korra rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 10 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para64lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 10 000 000 eurot või kuni 2 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para65">
+				<paragrahvNr>65</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 65.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemise põhimõtete rikkumine</paragrahvPealkiri>
+				<loige id="para65lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklis 5 sätestatud isikuandmete töötlemise põhimõtete rikkumise eest, samuti nimetatud määruse artiklites 5–7 ja 9 sätestatud andmesubjekti nõusoleku andmise korra rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para65lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para66">
+				<paragrahvNr>66</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 66.]]></kuvatavNr>
+				<paragrahvPealkiri>Andmesubjekti õiguste rikkumine</paragrahvPealkiri>
+				<loige id="para66lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklites 12–22 sätestatud andmesubjekti õiguse rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para66lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para67">
+				<paragrahvNr>67</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 67.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete edastamise korra rikkumine</paragrahvPealkiri>
+				<loige id="para67lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artiklites 44–49 sätestatud isikuandmete edastamise korra rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para67lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para68">
+				<paragrahvNr>68</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 68.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlemise erialuste kohta sätestatud korra rikkumine</paragrahvPealkiri>
+				<loige id="para68lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesoleva seaduse 2. peatükis sätestatud isikuandmete töötlemise erialuste kohta sätestatud korra rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para68lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para69">
+				<paragrahvNr>69</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 69.]]></kuvatavNr>
+				<paragrahvPealkiri>Andmekaitse Inspektsiooni korralduse täitmata jätmine</paragrahvPealkiri>
+				<loige id="para69lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 58 lõikes 2 sätestatud korralduse täitmata jätmise eest –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para69lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para70">
+				<paragrahvNr>70</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 70.]]></kuvatavNr>
+				<paragrahvPealkiri>Andmekaitse Inspektsiooni juurdepääsu võimaldamise rikkumine</paragrahvPealkiri>
+				<loige id="para70lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2016/679 artikli 58 lõikes 1 sätestatud uurimisvolituse alusel antud korralduse täitmata jätmise eest, kui sellega ei võimaldata Andmekaitse Inspektsioonile juurdepääsu isikuandmetele, muule teabele või ruumidele, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para70lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni 4 protsenti tema eelmise majandusaasta ülemaailmsest aastasest kogukäibest, olenevalt sellest, kumb summa on suurem.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para71">
+				<paragrahvNr>71</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 71.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete ebaseaduslik töötlemine töö- või teenistusülesannete väliselt</paragrahvPealkiri>
+				<loige id="para71lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Isikuandmete ebaseadusliku kogumise, vaatamise, lugemise, kasutamise, nendele juurdepääsu või nende kohta päringute või väljavõtete tegemise eest isiku poolt, kellel on juurdepääs isikuandmetele oma töö- või teenistusülesannetest lähtudes, kui puuduvad karistusseadustiku §-des 157 ja 157<sup>1</sup> sätestatud süüteokoosseisud, –<reavahetus/>karistatakse rahatrahviga kuni 200 trahviühikut.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para71b1">
+				<paragrahvNr ylaIndeks="1">71</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 71<sup>1</sup>.]]></kuvatavNr>
+				<paragrahvPealkiri>Suunamis- ja reklaamiedastusmeetodite nõuete rikkumine seoses internetipõhise poliitreklaami tegemisega</paragrahvPealkiri>
+				<loige id="para71b1lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Euroopa Parlamendi ja nõukogu määruse (EL) 2024/900 poliitreklaami läbipaistvuse ja suunamise kohta (ELT L, 2024/900, 20.03.2024) artiklites 18 ja 19 sätestatud nõuete rikkumise eest –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para71b1lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Sama teo eest, kui selle on toime pannud juriidiline isik, –<reavahetus/>karistatakse rahatrahviga kuni 20 000 000 eurot või kuni neli protsenti tema eelmise majandusaasta ülemaailmsest kogukäibest.</tavatekst>
+					</sisuTekst>
+					<muutmismarge>
+						<avaldamismarge>
+							<RTosa>RT I</RTosa>
+							<avaldamineKuupaev>2026-03-06</avaldamineKuupaev>
+							<RTartikkel>2</RTartikkel>
+							<aktViide>106032026002</aktViide>
+						</avaldamismarge>
+						<joustumine>2026-03-16</joustumine>
+					</muutmismarge>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para72">
+				<paragrahvNr>72</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 72.]]></kuvatavNr>
+				<paragrahvPealkiri>Muude isikuandmete töötlemise nõuete rikkumine</paragrahvPealkiri>
+				<loige id="para72lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Isikuandmete kaitse nõuete rikkumise eest, kui puuduvad käesoleva seaduse §-des 62–71<sup>1</sup> ning karistusseadustiku §-des 157 ja 157<sup>1</sup> sätestatud süüteokoosseisud, –<reavahetus/>karistatakse rahatrahviga kuni 200 trahviühikut.</tavatekst>
+					</sisuTekst>
+					<muutmismarge>
+						<avaldamismarge>
+							<RTosa>RT I</RTosa>
+							<avaldamineKuupaev>2026-03-06</avaldamineKuupaev>
+							<RTartikkel>2</RTartikkel>
+							<aktViide>106032026002</aktViide>
+						</avaldamismarge>
+						<joustumine>2026-03-16</joustumine>
+					</muutmismarge>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para73">
+				<paragrahvNr>73</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 73.]]></kuvatavNr>
+				<paragrahvPealkiri>Menetlus</paragrahvPealkiri>
+				<loige id="para73lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesolevas peatükis sätestatud väärtegude aegumistähtaeg on kolm aastat.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para73lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Käesolevas peatükis sätestatud väärtegude kohtuväline menetleja on Andmekaitse Inspektsioon.</tavatekst>
+					</sisuTekst>
+					<muutmismarge>
+						<avaldamismarge>
+							<RTosa>RT I</RTosa>
+							<avaldamineKuupaev>2023-03-11</avaldamineKuupaev>
+							<RTartikkel>1</RTartikkel>
+							<aktViide>111032023001</aktViide>
+						</avaldamismarge>
+						<joustumine>2023-11-01</joustumine>
+					</muutmismarge>
+				</loige>
+			</paragrahv>
+		</peatykk>
+		<peatykk id="ptk7">
+			<peatykkNr>7</peatykkNr>
+			<kuvatavNr><![CDATA[7. peatükk]]></kuvatavNr>
+			<peatykkPealkiri>Rakendussätted</peatykkPealkiri>
+			<paragrahv id="para74">
+				<paragrahvNr>74</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 74.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete töötlejate ja isikuandmete kaitse eest vastutavate isikute register</paragrahvPealkiri>
+				<loige id="para74lg1">
+					<loigeNr>1</loigeNr>
+					<kuvatavNr><![CDATA[(1)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Isikuandmete töötlejate ja isikuandmete kaitse eest vastutavate isikute registri andmeid säilitatakse arhiveerituna kuni viis aastat käesoleva seaduse jõustumisest arvates. Tähtaja saabumisel registriandmed kustutatakse.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para74lg2">
+					<loigeNr>2</loigeNr>
+					<kuvatavNr><![CDATA[(2)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Registriandmetele juurdepääsuks esitatakse taotlus Andmekaitse Inspektsioonile.</tavatekst>
+					</sisuTekst>
+				</loige>
+				<loige id="para74lg3">
+					<loigeNr>3</loigeNr>
+					<kuvatavNr><![CDATA[(3)]]></kuvatavNr>
+					<sisuTekst>
+						<tavatekst>Delikaatsete isikuandmete töötlemise registrikandel on informatiivne tähendus sellele esialgu määratud kehtivusaja lõpuni.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+			<paragrahv id="para75">
+				<paragrahvNr>75</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 75.]]></kuvatavNr>
+				<paragrahvPealkiri>Isikuandmete kaitse seaduse kehtetuks tunnistamine</paragrahvPealkiri>
+				<sisuTekst>
+					<tavatekst>[Käesolevast tekstist välja jäetud.]</tavatekst>
+				</sisuTekst>
+			</paragrahv>
+			<paragrahv id="para76">
+				<paragrahvNr>76</paragrahvNr>
+				<kuvatavNr><![CDATA[§ 76.]]></kuvatavNr>
+				<paragrahvPealkiri>Seaduse jõustumine</paragrahvPealkiri>
+				<loige id="para76lg1">
+					<loigeNr/>
+					<kuvatavNr/>
+					<sisuTekst>
+						<tavatekst>Käesolev seadus jõustub 2019. aasta 15. jaanuaril.</tavatekst>
+					</sisuTekst>
+				</loige>
+			</paragrahv>
+		</peatykk>
+	</sisu>
+	<normtehnmarkus>
+		<normtehnmarkusNr>1</normtehnmarkusNr>
+		<normtehnmarkusTekst> Euroopa Parlamendi ja nõukogu direktiiv (EL) 2016/680, mis käsitleb füüsiliste isikute kaitset seoses pädevates asutustes isikuandmete töötlemisega süütegude tõkestamise, uurimise, avastamise ja nende eest vastutusele võtmise või kriminaalkaristuste täitmisele pööramise eesmärgil ning selliste andmete vaba liikumist ning millega tunnistatakse kehtetuks nõukogu raamotsus 2008/977/JSK (ELT L 119, 04.05.2016, lk 89–131).</normtehnmarkusTekst>
+	</normtehnmarkus>
+</oigusakt>

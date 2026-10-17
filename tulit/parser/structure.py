@@ -77,9 +77,13 @@ class ChildrenBuilder:
         self._used: set[str] = set()
         self._unnumbered = 0
 
-    def add(self, text: str, number: Optional[str] = None) -> dict[str, Any]:
-        """Start a new child; ``number`` is the published paragraph number, if any."""
-        token = eid_token(number)
+    def add(self, text: str, number: Optional[str] = None, token: Optional[str] = None) -> dict[str, Any]:
+        """
+        Start a new child; ``number`` is the published paragraph number, if any.
+
+        ``token`` overrides the number taken from ``number`` for the eId.
+        """
+        token = token or eid_token(number)
         if token:
             eid = self._unique(f'par_{token.lower()}')
         else:

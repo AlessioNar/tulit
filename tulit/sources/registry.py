@@ -29,10 +29,11 @@ def _register_builtin_sources() -> None:
     from tulit.sources.lu import LuxembourgSource
     from tulit.sources.ie import IrelandSource
     from tulit.sources.de import GermanySource
+    from tulit.sources.ee import EstoniaSource
 
     for source in (EUSource(), AustriaSource(), DenmarkSource(), NetherlandsSource(),
                    SlovakiaSource(), FinlandSource(), SpainSource(), LuxembourgSource(),
-                   IrelandSource(), GermanySource()):
+                   IrelandSource(), GermanySource(), EstoniaSource()):
         _sources.setdefault(source.code, source)
 
 

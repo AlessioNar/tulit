@@ -43,3 +43,34 @@ jobs:
         path: dist/
     - name: Publish package to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+  github-release:
+    name: Create GitHub release
+    needs:
+    - publish-to-pypi
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # create the release and upload the distributions
+    steps:
+    - uses: actions/checkout@v5
+    - name: Download all the dists
+      uses: actions/download-artifact@v7
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Release notes from the changelog
+      run: |
+        version="${GITHUB_REF_NAME#v}"
+        awk -v v="$version" '
+          index($0, "## [" v "]") == 1 { found = 1; next }
+          found && /^## \[/ { exit }
+          found { print }
+        ' CHANGELOG.md > notes.md
+        [ -s notes.md ] || echo "See CHANGELOG.md." > notes.md
+    - name: Create the release
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh release create "$GITHUB_REF_NAME" dist/* \
+          --title "tulit ${GITHUB_REF_NAME#v}" \
+          --notes-file notes.md \
+          --verify-tag

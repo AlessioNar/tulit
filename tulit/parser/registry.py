@@ -209,6 +209,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.xml.riigiteataja import RiigiTeatajaParser
     from tulit.parser.html.sejm import SejmELIParser
     from tulit.parser.html.riksdagen import RiksdagenSFSParser
+    from tulit.parser.html.narodne_novine import NarodneNovineParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -231,6 +232,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('riigiteataja', RiigiTeatajaParser, aliases=['ee-rt'])
     registry.register('pl-eli', SejmELIParser, aliases=['sejm'])
     registry.register('se-sfs', RiksdagenSFSParser, aliases=['riksdagen'])
+    registry.register('hr-nn', NarodneNovineParser, aliases=['narodne-novine'])
 
 
 def get_parser_registry() -> ParserRegistry:

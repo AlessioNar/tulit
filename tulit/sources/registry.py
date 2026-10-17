@@ -32,11 +32,12 @@ def _register_builtin_sources() -> None:
     from tulit.sources.ee import EstoniaSource
     from tulit.sources.pl import PolandSource
     from tulit.sources.se import SwedenSource
+    from tulit.sources.hr import CroatiaSource
 
     for source in (EUSource(), AustriaSource(), DenmarkSource(), NetherlandsSource(),
                    SlovakiaSource(), FinlandSource(), SpainSource(), LuxembourgSource(),
                    IrelandSource(), GermanySource(), EstoniaSource(), PolandSource(),
-                   SwedenSource()):
+                   SwedenSource(), CroatiaSource()):
         _sources.setdefault(source.code, source)
 
 

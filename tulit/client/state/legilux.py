@@ -1,7 +1,7 @@
 import logging
 import requests
-import sys
 from tulit.client.client import Client
+from tulit.parser.exceptions import NetworkError
 
 class LegiluxClient(Client):
     def __init__(self, download_dir, log_dir=None, proxies=None):
@@ -51,6 +51,5 @@ class LegiluxClient(Client):
             return file_paths
         else:
             self.logger.error(f"Failed to download document. Status code: {response.status_code}")
-            self.logger.error(f"Failed to download document. Status code: {response.status_code}")
-            sys.exit(1)
+            raise NetworkError(f"Failed to download document. Status code: {response.status_code}")
             return None

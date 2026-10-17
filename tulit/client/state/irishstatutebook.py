@@ -1,9 +1,8 @@
 import logging
 import requests
 from tulit.client.client import Client
-import argparse
+from tulit.parser.exceptions import ContentTypeError
 import os
-import sys
 
 class IrishStatuteBookClient(Client):
     """
@@ -30,20 +29,19 @@ class IrishStatuteBookClient(Client):
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
             if fmt == 'xml' and 'xml' not in content_type:
-                self.logger.error(f"Expected XML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
             if fmt == 'pdf' and 'pdf' not in content_type:
-                self.logger.error(f"Expected PDF response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
             if fmt == 'html' and 'html' not in content_type:
-                self.logger.error(f"Expected HTML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
             filename = f"isb_{year}_act_{act_number}.{fmt}"
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)
             self.logger.info(f"Downloaded ISB act to {file_path}")
             return file_path
+        except ContentTypeError:
+            raise
         except requests.HTTPError as e:
             self.logger.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None

@@ -1,9 +1,8 @@
 import requests
 from tulit.client.client import Client
-import argparse
+from tulit.parser.exceptions import ContentTypeError
 import os
 import logging
-import sys
 
 class PortugalDREClient(Client):
     """
@@ -88,30 +87,25 @@ class PortugalDREClient(Client):
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
             if fmt == 'pdf' and 'pdf' not in content_type:
-                self.logger.error(f"Expected PDF response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
             if fmt == 'xml' and 'xml' not in content_type:
-                self.logger.error(f"Expected XML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
             if fmt == 'html' and 'html' not in content_type:
-                self.logger.error(f"Expected HTML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
             if fmt == 'json' and 'json' not in content_type:
-                self.logger.error(f"Expected JSON response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected JSON response but got: {content_type}", content_type)
             if fmt == 'txt' and 'plain' not in content_type:
-                self.logger.error(f"Expected TXT response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected TXT response but got: {content_type}", content_type)
             if fmt == 'xhtml' and 'xhtml' not in content_type:
-                self.logger.error(f"Expected XHTML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected XHTML response but got: {content_type}", content_type)
             if fmt == 'zip' and 'zip' not in content_type:
-                self.logger.error(f"Expected ZIP response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected ZIP response but got: {content_type}", content_type)
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)
             return file_path
+        except ContentTypeError:
+            raise
         except requests.HTTPError as e:
             logging.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None

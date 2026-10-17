@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 from tulit.client.state.normattiva import NormattivaClient
+from tulit.parser.exceptions import ContentTypeError
 
 from tests.conftest import locate_data_dir, locate_tests_dir
 
@@ -86,7 +87,7 @@ class TestNormattivaClient(unittest.TestCase):
         mock_response.headers = {'Content-Type': 'text/plain'}
         mock_get.return_value = mock_response
         
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ContentTypeError):
             self.downloader.download(dataGU='20210101', codiceRedaz='12345', dataVigenza='20211231', fmt='xml')
 
     @patch('tulit.client.state.normattiva.requests.get')
@@ -96,7 +97,7 @@ class TestNormattivaClient(unittest.TestCase):
         mock_response.headers = {'Content-Type': 'text/plain'}
         mock_get.return_value = mock_response
         
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ContentTypeError):
             self.downloader.download(dataGU='20210101', codiceRedaz='12345', dataVigenza='20211231', fmt='pdf')
 
     @patch('tulit.client.state.normattiva.requests.get')

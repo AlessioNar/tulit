@@ -4,6 +4,7 @@ import os
 import tempfile
 from pathlib import Path
 from tulit.client.state.legilux import LegiluxClient
+from tulit.parser.exceptions import NetworkError
 
 class TestLegiluxClient(unittest.TestCase):
     def setUp(self):
@@ -95,8 +96,8 @@ class TestLegiluxClient(unittest.TestCase):
 
         eli = "https://legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo"
 
-        # The download method calls sys.exit(1) on error, so we need to catch SystemExit
-        with self.assertRaises(SystemExit):
+        # A failed download raises instead of exiting the caller's program
+        with self.assertRaises(NetworkError):
             self.client.download(eli)
 
     def test_filename_cleaning(self):

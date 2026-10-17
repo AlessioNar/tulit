@@ -11,6 +11,8 @@ import logging
 import os
 import re
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from tulit.client.client import Client
 from tulit.parser.exceptions import ContentTypeError, FileLoadError, NetworkError
 
@@ -18,11 +20,24 @@ CONSOLIDATED_API = 'https://www.boe.es/datosabiertos/api/legislacion-consolidada
 GAZETTE_XML = 'https://www.boe.es/diario_boe/xml.php'
 USER_AGENT = 'tulit (+https://github.com/AlessioNar/tulit)'
 _BOE_ID = re.compile(r'^BOE-[AB]-\d{4}-\d+$')
+_ELI = re.compile(r'^(https?://www\.boe\.es/eli/es/[^?#]+?)(?:/(?:dof|con(?:/\d{8})?)(?:/[a-z]{3})?)?/?$')
+_ELI_LOCAL_ID = re.compile(r'eli/ontology#id_local"\s+content="(BOE-[AB]-\d{4}-\d+)"')
+
+
+def _session():
+    # The BOE resets connections now and then, mostly on large acts
+    retry = Retry(total=5, connect=5, read=5, backoff_factor=2, status_forcelist=(429, 500, 502, 503, 504),
+                  allowed_methods=('GET',))
+    session = requests.Session()
+    session.mount('https://', HTTPAdapter(max_retries=retry))
+    return session
+
 
 class BOEClient(Client):
     def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir=download_dir, log_dir=log_dir, proxies=proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.session = _session()
 
     def download(self, id, fmt=None):
         try:
@@ -62,8 +77,8 @@ class BOEClient(Client):
             url = f'{CONSOLIDATED_API}/{boe_id}/{part}'
             try:
                 # The API answers 400 without an explicit Accept header
-                response = requests.get(url, headers={'Accept': 'application/xml', 'User-Agent': USER_AGENT},
-                                        timeout=60)
+                response = self.session.get(url, headers={'Accept': 'application/xml', 'User-Agent': USER_AGENT},
+                                            timeout=60)
             except requests.RequestException as e:
                 raise NetworkError(f"BOE request failed for {url}: {e}") from e
             if response.status_code == 404 or b'<code>404</code>' in response.content[:500]:
@@ -80,8 +95,8 @@ class BOEClient(Client):
         target = os.path.join(self.download_dir, 'ES', f'{boe_id}.xml')
         if not os.path.exists(target):
             try:
-                response = requests.get(GAZETTE_XML, params={'id': boe_id},
-                                        headers={'User-Agent': USER_AGENT}, timeout=60)
+                response = self.session.get(GAZETTE_XML, params={'id': boe_id},
+                                            headers={'User-Agent': USER_AGENT}, timeout=60)
                 response.raise_for_status()
             except requests.RequestException as e:
                 raise NetworkError(f"BOE request failed for {boe_id}: {e}") from e
@@ -90,10 +105,29 @@ class BOEClient(Client):
                 f.write(response.content)
         return target
 
+    def resolve_eli(self, uri):
+        """The BOE identifier of an ELI URI ('https://www.boe.es/eli/es/lo/2018/12/05/3' -> 'BOE-A-2018-16673')."""
+        match = _ELI.match(uri.strip())
+        if not match:
+            raise ValueError(f"'{uri}' is not a BOE ELI URI")
+        try:
+            response = self.session.get(match.group(1), headers={'User-Agent': USER_AGENT}, timeout=60)
+        except requests.RequestException as e:
+            raise NetworkError(f"BOE request failed for {uri}: {e}") from e
+        if response.status_code == 404:
+            raise FileLoadError(f"No act has the ELI {uri}")
+        found = _ELI_LOCAL_ID.search(response.text)
+        if response.status_code != 200 or not found:
+            raise NetworkError(f"Cannot resolve the ELI {uri} (HTTP {response.status_code})")
+        return found.group(1)
+
+
+def is_eli(identifier):
+    return bool(_ELI.match(identifier.strip()))
+
 
 def _check_id(boe_id):
     boe_id = boe_id.strip()
     if not _BOE_ID.match(boe_id):
         raise ValueError(f"'{boe_id}' is not a BOE identifier (e.g. 'BOE-A-2018-16673')")
     return boe_id
-

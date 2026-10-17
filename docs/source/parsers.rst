@@ -9,7 +9,9 @@ The formats currently supported are:
   
   * Formex 4 (EU legislative documents)
   * Akoma Ntoso 3.0 (multiple variants: EU, German LegalDocML, Luxembourg CSD13)
-  * BOE XML (Spanish Official Gazette)
+  * BOE XML (Spanish Official Gazette) and BOE consolidated legislation
+  * RIS XML (Austria), LexDania (Denmark), BWB XML (Netherlands),
+    MetaLex (Slovakia) and the Irish Statute Book XML
 
 * **HTML Formats:**
   
@@ -125,6 +127,62 @@ BOE Parser
     :members:
     :undoc-members:
     :show-inheritance:
+
+BOE Consolidated Parser
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.boe_consolidated
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Austrian RIS Parser
+~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.ris
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Danish LexDania Parser
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.lexdania
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Dutch BWB Parser
+~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.bwb
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Slovak MetaLex Parser
+~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.metalex
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Irish Act Parser
+~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.irish
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Structure Builders
+~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.structure
+     :members:
+     :undoc-members:
+     :show-inheritance:
 
 HTML Parsers
 ------------

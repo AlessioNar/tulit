@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/github/AlessioNar/tulit/graph/badge.svg?token=IBLO3JZCZ5)](https://codecov.io/github/AlessioNar/tulit)
 [![License: EUPL 1.2](https://img.shields.io/badge/license-EUPL%201.2-blue)](LICENSE)
 
-`tulit` retrieves legislation from official sources in the EU and its Member States and turns it into **legalJSON**: one structured, schema-validated representation of a legal act, whatever format it was published in.
+`tulit` retrieves legislation from the official sources of the EU and its Member States and turns it into **legalJSON**: one structured, schema-validated representation of a legal act, whatever format it was published in.
 
 - **Retrieve** documents from the EU Publications Office (Cellar) and from national and regional legislation portals.
 - **Parse** Formex 4, Akoma Ntoso, EUR-Lex HTML and national formats into the same structure: preface, preamble (citations and recitals), divisions, articles, paragraphs, conclusions and annexes.
@@ -37,13 +37,26 @@ print(article["eId"], article["heading"])  # art_1 Subject matter and scope
 print(doc["meta"]["eli"])                  # http://data.europa.eu/eli/reg/2024/903/oj
 ```
 
-`fetch` downloads the act from Cellar (Formex by default, or `format="xhtml"` / `"html"`), in any language (`language="FRA"`), parses it and attaches its metadata: ELI, document date, in-force status and the acts it amends, repeals or corrects.
+`fetch` downloads the act from Cellar (Formex by default, or `format="xhtml"` / `"html"`), in any language (`language="fra"`), parses it and attaches its metadata: ELI, document date, in-force status and the acts it amends, repeals or corrects.
+
+The same call works for every supported Member State, with the national identifier or an ELI, and either the text as adopted or the consolidated text in force:
+
+```python
+dsgvo_at = tulit.fetch("10001597", jurisdiction="AT")                  # Datenschutzgesetz, in force today
+lopd = tulit.fetch("BOE-A-2018-16673", jurisdiction="ES",
+                   version="consolidated", date="2021-01-01")          # as in force on that date
+dpa_ie = tulit.fetch("http://www.irishstatutebook.ie/eli/2018/act/7")  # jurisdiction inferred from the ELI
+
+print(lopd["meta"]["jurisdiction"], lopd["meta"]["version"], lopd["meta"]["version_date"])
+```
 
 From the command line:
 
 ```console
 tulit get 32024R0903 -o 32024R0903.json
-tulit get 32016R0679 --format xhtml --language FRA
+tulit get 32016R0679 --format xhtml --language fra
+tulit get BOE-A-2018-16673 -j ES --version consolidated --date 2021-01-01
+tulit sources
 tulit parse --format akn 32014L0092.akn
 tulit formats
 ```
@@ -92,54 +105,57 @@ The goal of tulit is to cover the legislation of all 27 EU Member States and the
 
 Status levels:
 
-- 🟢 **Parsed**: downloads and converts to schema-valid legalJSON with ELI-style identifiers
-- 🟡 **Partial**: downloads, parsing incomplete or limited to one text version
+- 🟢 **Parsed**: available through `tulit.fetch()`, converted to schema-valid legalJSON with ELI-style identifiers
+- 🟡 **Partial**: a client or parser exists, but the jurisdiction is not yet available through `fetch`
 - ⚪ **Planned**: not yet implemented
 
-| | Jurisdiction | Official source | Best format | Original | Consolidated | Status | Target |
-|---|---|---|---|---|---|---|---|
-| 🇪🇺 | European Union | Cellar / EUR-Lex | Formex 4, XHTML | ✅ | ✅ (Formex) | 🟢 Parsed (originals; verified on the full in-force corpus) | 0.8.0 consolidated |
-| 🇦🇹 | Austria | RIS | RIS XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
-| 🇧🇪 | Belgium | Justel / Moniteur belge | HTML | ✅ | ✅ | ⚪ Planned | 0.10.0 |
-| 🇧🇬 | Bulgaria | Държавен вестник | HTML | ✅ | — | ⚪ Planned | 0.10.0 |
-| 🇭🇷 | Croatia | Narodne novine | HTML + RDFa | ✅ | — | ⚪ Planned | 0.9.0 |
-| 🇨🇾 | Cyprus | Official Gazette | PDF | ✅ | — | ⚪ Planned | 0.10.0 |
-| 🇨🇿 | Czechia | e-Sbírka | JSON | ✅ | ✅ | ⚪ Planned | 0.9.0 |
-| 🇩🇰 | Denmark | Retsinformation | LexDania XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
-| 🇪🇪 | Estonia | Riigi Teataja | Riigi Teataja XML | ✅ | ✅ | ⚪ Planned | 0.9.0 |
-| 🇫🇮 | Finland | Finlex | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 consolidated |
-| 🇫🇷 | France | Légifrance (DILA) | LEGI XML, JSON | ✅ | ✅ | 🟡 Partial | 0.8.0 |
-| 🇩🇪 | Germany | Rechtsinformationen des Bundes | LegalDocML.de | ✅ | ✅ | 🟢 Parsed | 0.8.0 consolidated |
-| 🇬🇷 | Greece | Εθνικό Τυπογραφείο (ΦΕΚ) | PDF | ✅ | — | ⚪ Planned | 0.10.0 |
-| 🇭🇺 | Hungary | Nemzeti Jogszabálytár | HTML | ✅ | ✅ | ⚪ Planned | 0.10.0 |
-| 🇮🇪 | Ireland | Irish Statute Book / Revised Acts | XML | ✅ | ✅ | 🟡 Partial (download only) | 0.8.0 |
-| 🇮🇹 | Italy | Normattiva | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 new API |
-| 🇱🇻 | Latvia | Likumi.lv | HTML | ✅ | ✅ | ⚪ Planned | 0.10.0 |
-| 🇱🇹 | Lithuania | Teisės aktų registras / e-seimas | Text, DOCX | ✅ | ✅ | ⚪ Planned | 0.10.0 |
-| 🇱🇺 | Luxembourg | Legilux | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 consolidated |
-| 🇲🇹 | Malta | Legislation Malta | PDF | ✅ | ✅ | 🟡 Partial (download only) | 0.9.0 |
-| 🇳🇱 | Netherlands | wetten.overheid.nl (BWB) | BWB XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
-| 🇵🇱 | Poland | Dziennik Ustaw / ISAP | HTML, JSON, PDF | ✅ | ✅ (PDF) | ⚪ Planned | 0.9.0 |
-| 🇵🇹 | Portugal | Diário da República | PDF | ✅ | ✅ (JS only) | 🟡 Partial (download only) | 0.9.0 |
-| 🇷🇴 | Romania | Portal Legislativ | Text | ✅ | ✅ | ⚪ Planned | 0.10.0 |
-| 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | ⚪ Planned | 0.8.0 |
-| 🇸🇮 | Slovenia | PISRS | HTML (JS only) | ✅ | ✅ | ⚪ Planned | 0.10.0 |
-| 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed (originals) | 0.8.0 consolidated |
-| 🇸🇪 | Sweden | Riksdagen / Regeringskansliet | Text | ✅ | ✅ | ⚪ Planned | 0.9.0 |
+In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that version, ⏳ that the source publishes it and support is planned, and — that the source does not publish it.
 
-**Progress: 6 of 28 parsed, 4 partial, 18 planned.** Regional legislation is also available for Veneto (Italy). Sources published only as PDF or as JavaScript applications need the optional PDF and browser extras planned for 0.9.0.
+| | Jurisdiction | Official source | Format | Original | Consolidated | Status | Release |
+|---|---|---|---|---|---|---|---|
+| 🇪🇺 | European Union | Cellar (Publications Office) | Formex 4, XHTML | ✅ | ✅ | 🟢 Parsed | 0.7.0 |
+| 🇦🇹 | Austria | RIS | RIS XML | ⏳ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇧🇪 | Belgium | Justel / Moniteur belge | HTML | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇧🇬 | Bulgaria | Държавен вестник | HTML | ⏳ | — | ⚪ Planned | 0.10.0 |
+| 🇭🇷 | Croatia | Narodne novine | HTML + RDFa | ⏳ | — | ⚪ Planned | 0.9.0 |
+| 🇨🇾 | Cyprus | Official Gazette | PDF | ⏳ | — | ⚪ Planned | 0.10.0 |
+| 🇨🇿 | Czechia | e-Sbírka | JSON | ⏳ | ⏳ | ⚪ Planned | 0.9.0 |
+| 🇩🇰 | Denmark | Retsinformation | LexDania XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇪🇪 | Estonia | Riigi Teataja | Riigi Teataja XML | ⏳ | ⏳ | ⚪ Planned | 0.9.0 |
+| 🇫🇮 | Finland | Finlex | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇫🇷 | France | Légifrance (DILA) | LEGI XML, JSON | ⏳ | ⏳ | 🟡 Partial (client and parser) | 0.9.0 |
+| 🇩🇪 | Germany | Rechtsinformationen des Bundes (test phase) | LegalDocML.de | ⏳ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇬🇷 | Greece | Εθνικό Τυπογραφείο (ΦΕΚ) | PDF | ⏳ | — | ⚪ Planned | 0.10.0 |
+| 🇭🇺 | Hungary | Nemzeti Jogszabálytár | HTML | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇮🇪 | Ireland | Irish Statute Book / Revised Acts | ISB XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇮🇹 | Italy | Normattiva | Akoma Ntoso | ⏳ | ⏳ | 🟡 Partial (client and parser) | 0.9.0 |
+| 🇱🇻 | Latvia | Likumi.lv | HTML | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇱🇹 | Lithuania | Teisės aktų registras / e-seimas | Text, DOCX | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇱🇺 | Luxembourg | Legilux | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇲🇹 | Malta | Legislation Malta | PDF | ⏳ | ⏳ | 🟡 Partial (download only) | 0.9.0 |
+| 🇳🇱 | Netherlands | wetten.overheid.nl (BWB) | BWB XML | ⏳ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇵🇱 | Poland | Dziennik Ustaw / ISAP | HTML, JSON, PDF | ⏳ | ⏳ | ⚪ Planned | 0.9.0 |
+| 🇵🇹 | Portugal | Diário da República | PDF | ⏳ | ⏳ | 🟡 Partial (download only) | 0.9.0 |
+| 🇷🇴 | Romania | Portal Legislativ | Text | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇸🇮 | Slovenia | PISRS | HTML (JS only) | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇸🇪 | Sweden | Riksdagen / Regeringskansliet | Text | ⏳ | ⏳ | ⚪ Planned | 0.9.0 |
+
+**Progress: 10 of 28 parsed, 4 partial, 14 planned.** Regional legislation is also available for Veneto (Italy). Sources published only as PDF or as JavaScript applications need the optional PDF and browser extras planned for 0.9.0. `tulit sources` lists what the installed version supports.
 
 ### Roadmap
 
-- **0.8.0**:
+- **0.8.0** (this release):
   - one `tulit.fetch()` for every jurisdiction, addressed by ELI or national identifier, with a choice of original or consolidated text
-  - a common client interface and per-country tests
-  - updated clients for Italy, Finland, Spain, Ireland and Portugal
-  - Austria, Denmark, the Netherlands and Slovakia
+  - FRBR metadata in `meta` (`jurisdiction`, `language`, `version`, `version_date`)
+  - Austria, Denmark, Finland, Germany, Ireland, Luxembourg, the Netherlands, Slovakia and Spain; EU consolidated texts
 - **0.9.0**:
   - optional `tulit[pdf]` and browser extras
+  - Italy and France in `fetch`; original versions for Austria, Germany and the Netherlands
   - Croatia, Czechia, Estonia, Poland, Sweden, Malta and Portugal
 - **0.10.0**: Belgium, Bulgaria, Cyprus, Greece, Hungary, Latvia, Lithuania, Romania and Slovenia
+- **1.0.0**: export of every legalJSON document to Akoma Ntoso and `.leg` packages
 
 ### Access to law and reuse
 

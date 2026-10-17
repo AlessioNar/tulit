@@ -18,6 +18,9 @@ beautifulsoup4 = "^4.9.3"
 lxml = "^6.1.0"
 
 jsonschema = "^4.24.0"
+[tool.poetry.scripts]
+tulit = "tulit.cli:main"
+
 [[tool.poetry.include]]
 path = "tulit/client/eu/queries/*.rq"
 

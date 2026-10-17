@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.6.0] - 2026-07-24
+## [0.6.0] - 2026-10-17
 ### Added
 
 - **Parser Parity Across Formats**: The Akoma Ntoso and Cellar HTML parsers now emit the same legalJSON features as the Formex parser: typed divisions above article level (part/title/chapter/section/subsection) with parent links, ELI-resolvable eIds (`cpt_I`, `art_1`, `par_2`, `unp_N`), per-article `parent` links, and the hybrid `structure` skeleton tree.
@@ -25,6 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **cellar_standard Validation Drift**: `parse(validate=True)` now validates the canonical `to_dict()` output instead of a hand-rolled dict that had drifted from the schema (and unpacked the validator's boolean as a tuple); `parse()` on an empty directory returns the parser, not a dict.
 - **Nested Table Double-Counting**: HTML tables render only their own rows; nested tables are no longer counted twice.
 - **Article Truncation in Old Format**: article extraction no longer stops at ordinary prose starting with 'For the …'.
+- **PyPI Release Workflow**: publishing now uses PyPI trusted publishing (`pypa/gh-action-pypi-publish`) and runs only on tag pushes; the previous job failed on every release because Poetry was not installed in the publish job.
+- **Test Isolation**: client tests download into a temporary directory instead of overwriting tracked fixtures in `tests/data`, and the obsolete coverage-badge hook no longer writes `.github/badges/` on every run.
+
+### Changed
+
+- CI runs unit tests on `development-*` branches too, and GitHub Actions are updated to Node 24 versions.
+- `coverage.xml` is no longer tracked (coverage is reported through Codecov).
 
 ## [0.5.0] - 2026-07-24
 ### Added

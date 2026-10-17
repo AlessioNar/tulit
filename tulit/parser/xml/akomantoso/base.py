@@ -295,7 +295,8 @@ class AkomaNtosoParser(XMLParser):
             native = str(child.get('eId') or '')
             text = child.get('text')
             key = None
-            m = re.search(r'para_0*([0-9A-Za-z.]+)', native)
+            m = re.search(r'para_0*([0-9A-Za-z.]+)', native) or \
+                re.search(r'(?:^|_)abs-z0*([0-9]+[a-z]*)(?:_|$)', native)  # German LegalDocML: Absatz
             if m:
                 token = m.group(1).strip('.').lower()
                 if token:

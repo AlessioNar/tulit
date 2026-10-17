@@ -53,7 +53,8 @@ def detect_akn_format(file_path: str) -> str:
             namespace = elem.nsmap.get(None) or elem.nsmap.get('akn', '')
             
             # Detect format based on namespace
-            if 'LegalDocML.de' in namespace:
+            if 'LegalDocML.de' in namespace or 'rechtsinformationen.bund.de/schema/norm' in namespace:
+                # LegalDocML.de, also as served by the federal legal information portal
                 return 'german'
             elif 'CSD13' in namespace or 'CSD' in namespace:
                 # Luxembourg and other jurisdictions using Committee Specification Drafts

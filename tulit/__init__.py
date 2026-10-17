@@ -6,3 +6,7 @@ jurisdictions and formats, with support for EU Cellar, Legifrance, and other leg
 """
 
 __version__ = "0.6.0"
+
+from tulit.api import fetch
+
+__all__ = ["fetch", "__version__"]

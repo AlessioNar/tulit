@@ -332,15 +332,14 @@ def test_parse_non_annex_preface_keeps_articles(tmp_path):
     assert p.articles == ['kept']
 
 
-def test_get_articles_when_body_is_none(capsys):
-    """Test get_articles() returns empty list and prints message when body is None."""
+def test_get_articles_when_body_is_none(caplog):
+    """Test get_articles() returns empty list and logs a warning when body is None."""
     p = Formex4Parser()
     p.body = None
     result = p.get_articles()
 
     assert result == []
-    captured = capsys.readouterr()
-    assert 'No enacting terms XML tag has been found' in captured.out
+    assert 'No enacting terms XML tag has been found' in caplog.text
 
 
 def test_get_articles_heading_fallback_to_p():

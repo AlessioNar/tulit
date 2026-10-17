@@ -12,7 +12,7 @@ class MaltaLegislationClient(Client):
     """
     BASE_URL = "https://legislation.mt/eli"
 
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.session = requests.Session()
         if proxies:

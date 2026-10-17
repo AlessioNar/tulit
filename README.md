@@ -25,36 +25,36 @@ pip install tulit
 
 ## Quick start
 
-Download an EU regulation from Cellar and convert it to legalJSON:
+Fetch an EU act as validated legalJSON in one call:
 
 ```python
-from tulit.client.eu.cellar import CellarClient
-from tulit.parser.xml.formex import Formex4Parser
+import tulit
 
-client = CellarClient(download_dir="./database", log_dir="./logs")
-paths = client.download(celex="32024R0903", format="fmx4")  # Interoperable Europe Act
-
-doc = Formex4Parser().parse(paths[0]).to_dict()
+doc = tulit.fetch("32024R0903")  # Interoperable Europe Act
 
 article = doc["articles"][0]
-print(article["eId"], article["heading"])   # art_1 Subject matter and scope
+print(article["eId"], article["heading"])  # art_1 Subject matter and scope
+print(doc["meta"]["eli"])                  # http://data.europa.eu/eli/reg/2024/903/oj
 ```
 
-Akoma Ntoso documents are parsed the same way; the variant (AKN4EU, German LegalDocML, Luxembourg) is detected automatically:
+`fetch` downloads the act from Cellar (Formex by default, or `format="xhtml"` / `"html"`), in any language (`language="FRA"`), parses it and attaches its metadata: ELI, document date, in-force status and the acts it amends, repeals or corrects.
+
+From the command line:
+
+```console
+tulit get 32024R0903 -o 32024R0903.json
+tulit get 32016R0679 --format xhtml --language FRA
+tulit parse --format akn 32014L0092.akn
+tulit formats
+```
+
+Local files are parsed through the parser registry; Akoma Ntoso variants (AKN4EU, German LegalDocML, Luxembourg) are detected automatically:
 
 ```python
-from tulit.parser.xml.akomantoso import create_akn_parser
+from tulit.parser.registry import get_parser
 
-parser = create_akn_parser(file_path="32014L0092.akn")
+parser = get_parser("akn", file_path="32014L0092.akn")
 doc = parser.parse("32014L0092.akn").to_dict()
-```
-
-Validate any output against the legalJSON schema:
-
-```python
-from tulit.parser.parser import LegalJSONValidator
-
-LegalJSONValidator().validate(doc)  # True
 ```
 
 ## legalJSON at a glance
@@ -75,10 +75,12 @@ LegalJSONValidator().validate(doc)  # True
   "chapters": [{"eId": "cpt_1", "type": "chapter", "num": "Chapter 1", "heading": "General provisions", "parent": null}],
   "articles": [
     {"eId": "art_1", "num": "Article 1", "heading": "Subject matter and scope", "parent": "cpt_1",
-     "children": [{"eId": "par_1", "text": "This Regulation lays down ...", "amendment": null}]}
+     "children": [{"eId": "par_1", "text": "1. This Regulation lays down ...", "amendment": null}]}
   ],
   "conclusions": {"conclusion_text": "...", "signature": "..."},
-  "annexes": [{"eId": "anx_1", "num": "ANNEX", "heading": "...", "children": []}]
+  "annexes": [{"eId": "anx_1", "num": "ANNEX", "heading": "...", "children": []}],
+  "meta": {"celex": "32024R0903", "eli": "http://data.europa.eu/eli/reg/2024/903/oj",
+           "date_document": "2024-03-13", "in_force": true, "amends": [], "repeals": []}
 }
 ```
 

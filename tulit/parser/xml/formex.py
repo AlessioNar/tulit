@@ -543,7 +543,7 @@ class Formex4Parser(XMLParser):
 
             return self.articles
         else:
-            print('No enacting terms XML tag has been found')
+            self.logger.warning('No enacting terms XML tag has been found')
             return []
             
     def _extract_elements(self, parent: etree._Element, xpath: str, children: list[dict[str, Any]]) -> None:

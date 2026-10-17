@@ -4,7 +4,7 @@ import sys
 from tulit.client.client import Client
 
 class LegiluxClient(Client):
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
         #self.endpoint = "https://legilux.public.lu/eli/etat/leg/loi"
@@ -47,10 +47,10 @@ class LegiluxClient(Client):
         if response.status_code == 200:
             file_paths.append(self.handle_response(response, filename=filename))
             self.logger.info(f"Document downloaded successfully and saved to {file_paths}")
-            print(f"Document downloaded successfully and saved to {file_paths}")
+            self.logger.info(f"Document downloaded successfully and saved to {file_paths}")
             return file_paths
         else:
             self.logger.error(f"Failed to download document. Status code: {response.status_code}")
-            print(f"Failed to download document. Status code: {response.status_code}")
+            self.logger.error(f"Failed to download document. Status code: {response.status_code}")
             sys.exit(1)
             return None

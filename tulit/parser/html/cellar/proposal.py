@@ -78,9 +78,9 @@ class ProposalHTMLParser(HTMLParser):
             if title:
                 self.metadata['title'] = title.get_text(separator=' ', strip=True)
             
-            print(f"Metadata extracted successfully. Keys: {list(self.metadata.keys())}")
+            self.logger.info(f"Metadata extracted successfully. Keys: {list(self.metadata.keys())}")
         except Exception as e:
-            print(f"Error extracting metadata: {e}")
+            self.logger.error(f"Error extracting metadata: {e}")
     
     def _get_deepest_subsection_em(self, current_section):
         """Get the deepest available subsection for adding content."""
@@ -261,9 +261,9 @@ class ProposalHTMLParser(HTMLParser):
             
             self.explanatory_memorandum['sections'] = sections
             
-            print(f"Explanatory Memorandum extracted successfully. Number of sections: {len(sections)}")
+            self.logger.info(f"Explanatory Memorandum extracted successfully. Number of sections: {len(sections)}")
         except Exception as e:
-            print(f"Error extracting explanatory memorandum: {e}")
+            self.logger.error(f"Error extracting explanatory memorandum: {e}")
             import traceback
             traceback.print_exc()
     
@@ -294,9 +294,9 @@ class ProposalHTMLParser(HTMLParser):
                 parts.append(title.get_text(separator=' ', strip=True))
             
             self.preface = ' '.join(parts) if parts else None
-            print(f"Preface extracted: {self.preface[:100] if self.preface else None}...")
+            self.logger.info(f"Preface extracted: {self.preface[:100] if self.preface else None}...")
         except Exception as e:
-            print(f"Error extracting preface: {e}")
+            self.logger.error(f"Error extracting preface: {e}")
     
     def get_preamble(self) -> None:
         """
@@ -314,9 +314,9 @@ class ProposalHTMLParser(HTMLParser):
             # For proposals, preamble is null as the structure starts directly with formula
             # The formula, citations, and recitals are extracted as separate components
             self.preamble = None
-            print("Preamble set to null (proposals have no introductory preamble text).")
+            self.logger.info("Preamble set to null (proposals have no introductory preamble text).")
         except Exception as e:
-            print(f"Error extracting preamble: {e}")
+            self.logger.error(f"Error extracting preamble: {e}")
             self.preamble = None
     
     def get_formula(self) -> None:
@@ -333,13 +333,13 @@ class ProposalHTMLParser(HTMLParser):
                 formula_elem = self.preamble.find('p', class_='Institutionquiagit')
                 if formula_elem:
                     self.formula = formula_elem.get_text(strip=True)
-                    print(f"Formula extracted: {self.formula}")
+                    self.logger.info(f"Formula extracted: {self.formula}")
                 else:
                     self.formula = None
             else:
                 self.formula = None
         except Exception as e:
-            print(f"Error extracting formula: {e}")
+            self.logger.error(f"Error extracting formula: {e}")
     
     def get_citations(self) -> None:
         """
@@ -385,9 +385,9 @@ class ProposalHTMLParser(HTMLParser):
                         if next_div:
                             current = next_div.find('p')
             
-            print(f"Citations extracted: {len(self.citations)}")
+            self.logger.info(f"Citations extracted: {len(self.citations)}")
         except Exception as e:
-            print(f"Error extracting citations: {e}")
+            self.logger.error(f"Error extracting citations: {e}")
     
     def get_recitals(self) -> None:
         """
@@ -424,9 +424,9 @@ class ProposalHTMLParser(HTMLParser):
                 })
                 recital_counter += 1
             
-            print(f"Recitals extracted: {len(self.recitals)}")
+            self.logger.info(f"Recitals extracted: {len(self.recitals)}")
         except Exception as e:
-            print(f"Error extracting recitals: {e}")
+            self.logger.error(f"Error extracting recitals: {e}")
     
     def get_preamble_final(self) -> None:
         """
@@ -442,13 +442,13 @@ class ProposalHTMLParser(HTMLParser):
                 formula_elem = self.preamble.find('p', class_='Formuledadoption')
                 if formula_elem:
                     self.preamble_final = formula_elem.get_text(strip=True)
-                    print(f"Preamble final extracted: {self.preamble_final}")
+                    self.logger.info(f"Preamble final extracted: {self.preamble_final}")
                 else:
                     self.preamble_final = None
             else:
                 self.preamble_final = None
         except Exception as e:
-            print(f"Error extracting preamble final: {e}")
+            self.logger.error(f"Error extracting preamble final: {e}")
     
     def get_body(self) -> None:
         """
@@ -467,13 +467,13 @@ class ProposalHTMLParser(HTMLParser):
                 if formula:
                     # Body is in the same div after the formula
                     self.body = formula.find_parent('div', class_='content')
-                    print("Body element found.")
+                    self.logger.info("Body element found.")
                 else:
                     self.body = None
             else:
                 self.body = None
         except Exception as e:
-            print(f"Error extracting body: {e}")
+            self.logger.error(f"Error extracting body: {e}")
     
     def _is_after_fait(self, article_elem, fait_elem) -> bool:
         """Check if article element comes after Fait section."""
@@ -901,9 +901,9 @@ class ProposalHTMLParser(HTMLParser):
                 
                 self.articles.append(article_dict)
             
-            print(f"Articles extracted: {len(self.articles)}")
+            self.logger.info(f"Articles extracted: {len(self.articles)}")
         except Exception as e:
-            print(f"Error extracting articles: {e}")
+            self.logger.error(f"Error extracting articles: {e}")
     
     def get_conclusions(self) -> None:
         """
@@ -927,11 +927,11 @@ class ProposalHTMLParser(HTMLParser):
                     parts.append(signature.get_text(separator=' ', strip=True))
                 
                 self.conclusions = ' '.join(parts)
-                print("Conclusions extracted.")
+                self.logger.info("Conclusions extracted.")
             else:
                 self.conclusions = None
         except Exception as e:
-            print(f"Error extracting conclusions: {e}")
+            self.logger.error(f"Error extracting conclusions: {e}")
     
     def parse(self, file: str) -> "ProposalHTMLParser":
         """
@@ -954,9 +954,9 @@ class ProposalHTMLParser(HTMLParser):
         """
         try:
             self.get_root(file)
-            print("Root element loaded successfully.")
+            self.logger.info("Root element loaded successfully.")
         except Exception as e:
-            print(f"Error in get_root: {e}")
+            self.logger.error(f"Error in get_root: {e}")
             return self
         
         # Check if this is an annex document - fail early if so
@@ -973,7 +973,7 @@ class ProposalHTMLParser(HTMLParser):
         try:
             self.get_metadata()
         except Exception as e:
-            print(f"Error in get_metadata: {e}")
+            self.logger.error(f"Error in get_metadata: {e}")
         
         # Skip explanatory memorandum parsing - not relevant for analysis
         # try:
@@ -985,46 +985,46 @@ class ProposalHTMLParser(HTMLParser):
         try:
             self.get_preamble()
         except Exception as e:
-            print(f"Error in get_preamble: {e}")
+            self.logger.error(f"Error in get_preamble: {e}")
         
         try:
             self.get_preface()
         except Exception as e:
-            print(f"Error in get_preface: {e}")
+            self.logger.error(f"Error in get_preface: {e}")
         
         try:
             self.get_formula()
         except Exception as e:
-            print(f"Error in get_formula: {e}")
+            self.logger.error(f"Error in get_formula: {e}")
         
         try:
             self.get_citations()
         except Exception as e:
-            print(f"Error in get_citations: {e}")
+            self.logger.error(f"Error in get_citations: {e}")
         
         try:
             self.get_recitals()
         except Exception as e:
-            print(f"Error in get_recitals: {e}")
+            self.logger.error(f"Error in get_recitals: {e}")
         
         try:
             self.get_preamble_final()
         except Exception as e:
-            print(f"Error in get_preamble_final: {e}")
+            self.logger.error(f"Error in get_preamble_final: {e}")
         
         try:
             self.get_body()
         except Exception as e:
-            print(f"Error in get_body: {e}")
+            self.logger.error(f"Error in get_body: {e}")
         
         try:
             self.get_articles()
         except Exception as e:
-            print(f"Error in get_articles: {e}")
+            self.logger.error(f"Error in get_articles: {e}")
         
         try:
             self.get_conclusions()
         except Exception as e:
-            print(f"Error in get_conclusions: {e}")
+            self.logger.error(f"Error in get_conclusions: {e}")
         
         return self

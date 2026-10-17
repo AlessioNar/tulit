@@ -6,6 +6,7 @@ and creating appropriate parser instances.
 """
 
 from tulit.parser.registry import ParserRegistry
+from tulit.parser.exceptions import ParserError
 from tulit.parser.xml.xml import XMLParser
 from typing import Optional
 from lxml import etree
@@ -108,7 +109,7 @@ def create_akn_parser(file_path: Optional[str] = None, format: Optional[str] = N
     # Use registry to get parser (fallback to 'akn' if not found)
     try:
         return _akn_registry.create(format or 'akn')
-    except KeyError:
+    except ParserError:
         # Fallback to standard parser if format not registered
         return _akn_registry.create('akn')
 

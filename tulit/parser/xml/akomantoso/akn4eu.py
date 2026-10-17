@@ -57,47 +57,10 @@ class AKN4EUParser(AkomaNtosoParser):
             return f"art_{index}"
         return xml_id
 
-    def get_articles(self) -> None:
-        """
-        Extract articles from the body using AKNArticleExtractor with xml:id.
-        
-        AKN4EU documents use xml:id attribute instead of eId, so we need to
-        pass the correct id_attr to the extractor.
-        """
-        if self.body is None:
-            self.logger.warning("Body is None. Call get_body() first.")
-            return
-        
-        # Remove all authorialNote nodes
-        self.body = self.remove_node(self.body, './/akn:authorialNote')
+    # AKN4EU uses xml:id instead of eId; content extraction chains list
+    # intros with their points (see AKNArticleExtractor)
+    _extractor_id_attr = '{http://www.w3.org/XML/1998/namespace}id'
 
-        # Use extractor with xml:id attribute for AKN4EU
-        extractor = AKNArticleExtractor(
-            self.namespaces, 
-            id_attr='{http://www.w3.org/XML/1998/namespace}id'
-        )
-
-        # Find all <article> elements in the XML
-        for article in self.body.findall('.//akn:article', namespaces=self.namespaces):
-            metadata = extractor.extract_article_metadata(article)
-            # Use flat extraction with intro chained to points
-            children = extractor.extract_content_with_chained_intro(article)
-
-            self.articles.append({
-                'eId': metadata['eId'],
-                'num': metadata['num'],
-                'heading': metadata['heading'],
-                'children': children
-            })
-        
-        # Also find all <section> elements (used in some jurisdictions)
-        for section in self.body.findall('.//akn:section', namespaces=self.namespaces):
-            metadata = extractor.extract_article_metadata(section)
-            children = extractor.extract_content_with_chained_intro(section)
-
-            self.articles.append({
-                'eId': metadata['eId'],
-                'num': metadata['num'],
-                'heading': metadata['heading'],
-                'children': children
-            })
+    def _extract_article_children(self, extractor: AKNArticleExtractor,
+                                  element: etree._Element) -> list:
+        return extractor.extract_content_with_chained_intro(element)

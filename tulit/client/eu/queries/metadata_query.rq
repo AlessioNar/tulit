@@ -1,0 +1,17 @@
+PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT DISTINCT ?work ?eli ?date ?inForce ?rel ?target
+WHERE {
+    ?work owl:sameAs <http://publications.europa.eu/resource/celex/{CELEX}> .
+    OPTIONAL { ?work cdm:resource_legal_eli ?eli . }
+    OPTIONAL { ?work cdm:work_date_document ?date . }
+    OPTIONAL { ?work cdm:resource_legal_in-force ?inForce . }
+    OPTIONAL {
+        VALUES ?rel { cdm:resource_legal_amends_resource_legal
+                      cdm:resource_legal_repeals_resource_legal
+                      cdm:resource_legal_corrects_resource_legal }
+        ?work ?rel ?targetWork .
+        ?targetWork cdm:resource_legal_id_celex ?target .
+    }
+}

@@ -5,7 +5,7 @@ Welcome to tulit's documentation!
 
 The library provides:
 
-* **Clients** for downloading documents from official legal databases (EU Cellar, Legifrance, etc.)
+* **Clients** for downloading documents from official legal databases (EU Cellar and the official portals of the Member States)
 * **Parsers** for converting legal documents into structured JSON (Akoma Ntoso, Formex, HTML formats)
 * **Modern architecture** following best practices and design patterns
 

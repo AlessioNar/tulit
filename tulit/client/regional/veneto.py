@@ -1,12 +1,11 @@
 import logging
 import requests
 from tulit.client.client import Client
-import argparse
+from tulit.parser.exceptions import ContentTypeError
 import os
-import sys
 
 class VenetoClient(Client):
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir=download_dir, log_dir=log_dir, proxies=proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
@@ -18,14 +17,11 @@ class VenetoClient(Client):
             content_type = response.headers.get('Content-Type', '')
             if fmt:
                 if fmt == 'html' and 'html' not in content_type:
-                    self.logger.error(f"Expected HTML response but got: {content_type}")
-                    sys.exit(1)
+                    raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
                 if fmt == 'xml' and 'xml' not in content_type:
-                    self.logger.error(f"Expected XML response but got: {content_type}")
-                    sys.exit(1)
+                    raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
                 if fmt == 'pdf' and 'pdf' not in content_type:
-                    self.logger.error(f"Expected PDF response but got: {content_type}")
-                    sys.exit(1)
+                    raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
             self.logger.info(f"Successfully retrieved Veneto HTML from {url}")
             return response.text
         except requests.RequestException as e:

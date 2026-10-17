@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class CellarClient(Client):
     
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.endpoint = 'http://publications.europa.eu/resource/cellar/'
         self.sparql_endpoint = "http://publications.europa.eu/webapi/rdf/sparql"
@@ -229,24 +229,143 @@ class CellarClient(Client):
 
         return cellar_ids
 
-    def download(self, celex, format=None, type_id='celex'):
+    _RELATIONS = {
+        'resource_legal_amends_resource_legal': 'amends',
+        'resource_legal_repeals_resource_legal': 'repeals',
+        'resource_legal_corrects_resource_legal': 'corrects',
+    }
+
+    def get_metadata(self, celex):
         """
-        Sends a REST query to the specified source APIs and downloads the documents
-        corresponding to the given results.
+        Retrieve work-level metadata of an act from Cellar.
 
         Parameters
         ----------
-        results : dict
-            A dictionary containing the JSON results from the APIs.
-        format : str, optional
-            The format of the documents to download.        
+        celex : str
+            CELEX number of the act.
+
+        Returns
+        -------
+        dict
+            A legalJSON ``meta`` object with ``celex``, ``eli``, ``cellar_uuid``,
+            ``date_document``, ``in_force``, ``amends``, ``repeals`` and
+            ``corrects``. Fields Cellar does not record are None (or empty
+            lists for relations).
+        """
+        sparql_query = files("tulit.client.eu.queries").joinpath("metadata_query.rq").read_text()
+        results = self.send_sparql_query(sparql_query, celex)
+
+        meta = {
+            'celex': celex,
+            'eli': None,
+            'cellar_uuid': None,
+            'date_document': None,
+            'in_force': None,
+            'amends': [],
+            'repeals': [],
+            'corrects': [],
+        }
+        for row in results["results"]["bindings"]:
+            if meta['cellar_uuid'] is None and 'work' in row:
+                meta['cellar_uuid'] = row['work']['value'].split("cellar/")[-1]
+            if meta['eli'] is None and 'eli' in row:
+                meta['eli'] = row['eli']['value']
+            if meta['date_document'] is None and 'date' in row:
+                meta['date_document'] = row['date']['value']
+            if meta['in_force'] is None and 'inForce' in row:
+                meta['in_force'] = row['inForce']['value'] in ('1', 'true')
+            if 'rel' in row and 'target' in row:
+                key = self._RELATIONS.get(row['rel']['value'].split('#')[-1])
+                target = row['target']['value']
+                if key and target not in meta[key]:
+                    meta[key].append(target)
+
+        for key in ('amends', 'repeals', 'corrects'):
+            meta[key].sort()
+        return meta
+
+    def celex_from_eli(self, eli):
+        """
+        Resolve an EU ELI (e.g. http://data.europa.eu/eli/reg/2016/679/oj) to its CELEX number.
+
+        Returns None when Cellar has no work with that ELI.
+        """
+        eli = eli.replace('https://', 'http://').rstrip('/')
+        sparql_query = (
+            "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\n"
+            "SELECT DISTINCT ?celex WHERE {\n"
+            "  ?work cdm:resource_legal_eli ?eli ; cdm:resource_legal_id_celex ?celex .\n"
+            f'  FILTER(STR(?eli) = "{eli}")\n'
+            "}"
+        )
+        results = self.send_sparql_query(sparql_query)
+        celexes = sorted(row['celex']['value'] for row in results["results"]["bindings"])
+        return celexes[0] if celexes else None
+
+    def get_consolidated_celex(self, celex, date):
+        """
+        Find the consolidated version of an act in force on a given date.
+
+        Consolidated versions have CELEX numbers in sector 0 with the date
+        the version applies from, e.g. 02016R0679-20160504 for 32016R0679.
+
+        Parameters
+        ----------
+        celex : str
+            CELEX number of the original act.
+        date : str
+            ISO date (YYYY-MM-DD); the latest version applying on or before it is returned.
+
+        Returns
+        -------
+        tuple or None
+            (consolidated CELEX, ISO date of the version), or None if the act
+            has no consolidated version on or before that date.
+        """
+        prefix = '0' + celex[1:] + '-'
+        sparql_query = (
+            "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>\n"
+            "SELECT DISTINCT ?celex WHERE {\n"
+            "  ?work cdm:resource_legal_id_celex ?celex .\n"
+            f'  FILTER(STRSTARTS(STR(?celex), "{prefix}"))\n'
+            "}"
+        )
+        results = self.send_sparql_query(sparql_query)
+        cutoff = date.replace('-', '')
+        versions = []
+        for row in results["results"]["bindings"]:
+            consolidated = row['celex']['value']
+            stamp = consolidated[len(prefix):len(prefix) + 8]
+            if len(stamp) == 8 and stamp.isdigit() and stamp <= cutoff:
+                versions.append((stamp, consolidated))
+        if not versions:
+            return None
+        stamp, consolidated = max(versions)
+        return consolidated, f'{stamp[:4]}-{stamp[4:6]}-{stamp[6:]}'
+
+    def download(self, celex, format=None, type_id='celex', language='ENG'):
+        """
+        Download the documents of an act from Cellar.
+
+        Parameters
+        ----------
+        celex : str
+            CELEX number of the act, or its ELI when ``type_id='eli'``.
+        format : str
+            The format of the documents to download: 'fmx4', 'xhtml' or 'html'.
+        type_id : str, optional
+            Identifier type of ``celex``: 'celex' (default) or 'eli' (Formex only).
+        language : str, optional
+            Three-letter language code of the expression, e.g. 'ENG', 'FRA',
+            'DEU'. Defaults to 'ENG'.
 
         Returns
         -------
         list
             A list of paths to the downloaded documents.
         """
-        self.logger.info(f"Downloading document for celex: {celex}, format: {format}")
+        language = language.upper()
+        self.logger.info(f"Downloading document for celex: {celex}, format: {format}, language: {language}")
         if format == 'fmx4':
             if type_id == 'eli':
                 sparql_query = files("tulit.client.eu.queries").joinpath("formex_eli_query.rq").read_text()
@@ -262,6 +381,7 @@ class CellarClient(Client):
             self.logger.error('No valid format provided. Please choose one between fmx4, xhtml, or html')
             return None
             
+        sparql_query = sparql_query.replace("{LANG}", language)
         results = self.send_sparql_query(sparql_query, celex)
         cellar_ids = self.get_cellar_ids_from_json_results(results, format=format)
         

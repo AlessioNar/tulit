@@ -1,9 +1,8 @@
 import logging
 import requests
 from tulit.client.client import Client
-import argparse
+from tulit.parser.exceptions import ContentTypeError
 import os
-import sys
 
 class MaltaLegislationClient(Client):
     """
@@ -12,7 +11,7 @@ class MaltaLegislationClient(Client):
     """
     BASE_URL = "https://legislation.mt/eli"
 
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.session = requests.Session()
         if proxies:
@@ -37,14 +36,11 @@ class MaltaLegislationClient(Client):
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
             if fmt == 'pdf' and 'pdf' not in content_type:
-                self.logger.error(f"Expected PDF response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
             if fmt == 'xml' and 'xml' not in content_type:
-                self.logger.error(f"Expected XML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
             if fmt == 'html' and 'html' not in content_type:
-                self.logger.error(f"Expected HTML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
             ext = fmt if fmt else 'pdf' if 'pdf' in url else 'html'
             filename = f"malta_{eli_path.replace('/', '_')}{'_' + lang if lang else ''}.{ext}"
             if fmt == 'pdf':
@@ -55,14 +51,15 @@ class MaltaLegislationClient(Client):
                     self.logger.info(f"PDF downloaded successfully: {file_path}")
                     return file_path
                 else:
-                    self.logger.error(f"Expected PDF but got {content_type}. Not saving file.")
-                    sys.exit(1)
+                    raise ContentTypeError(f"Expected PDF but got {content_type}. Not saving file.", content_type)
             # For non-PDF, save as usual
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)
             self.logger.info(f"File downloaded successfully: {file_path}")
             return file_path
+        except ContentTypeError:
+            raise
         except requests.HTTPError as e:
             self.logger.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None

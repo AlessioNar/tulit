@@ -1,12 +1,12 @@
 from tulit.client.client import Client
+from tulit.parser.exceptions import ContentTypeError
 import requests
 import logging
 from datetime import datetime
-import sys
 
 
 class NormattivaClient(Client):
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.endpoint = "https://www.normattiva.it/do/atto/caricaAKN"
         self.logger = logging.getLogger(self.__class__.__name__)
@@ -83,14 +83,11 @@ class NormattivaClient(Client):
             return None
         content_type = response.headers.get('Content-Type', '')
         if fmt == 'xml' and 'xml' not in content_type:
-            self.logger.error(f"Expected XML response but got: {content_type}")
-            sys.exit(1)
+            raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
         if fmt == 'pdf' and 'pdf' not in content_type:
-            self.logger.error(f"Expected PDF response but got: {content_type}")
-            sys.exit(1)
+            raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
         if fmt == 'html' and 'html' not in content_type:
-            self.logger.error(f"Expected HTML response but got: {content_type}")
-            sys.exit(1)
+            raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
         
         file_path = self.handle_response(response=response, filename=f"{params['dataGU']}_{params['codiceRedaz']}_VIGENZA_{params['dataVigenza']}")
         document_paths.append(file_path)

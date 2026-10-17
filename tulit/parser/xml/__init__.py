@@ -13,7 +13,7 @@ All XML parsers inherit from XMLParser base class and use shared utilities:
 
 Example Usage
 -------------
->>> from tulit.parsers.xml import AkomaNtosoParser
+>>> from tulit.parser.xml import AkomaNtosoParser
 >>> parser = AkomaNtosoParser()
 >>> parser.parse('document.xml')
 """

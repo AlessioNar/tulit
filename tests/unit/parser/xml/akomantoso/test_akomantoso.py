@@ -96,22 +96,30 @@ class TestAkomaNtosoParser(unittest.TestCase):
         self.parser.get_chapters()
 
         expected_chapters = [
-            {'eId': 'chp_I',   'num': 'CHAPTER I',   'heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS'},
-            {'eId': 'chp_II',  'num': 'CHAPTER II',  'heading': 'COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS'},
-            {'eId': 'chp_III', 'num': 'CHAPTER III', 'heading': 'SWITCHING'},
-            {'eId': 'chp_IV',  'num': 'CHAPTER IV',  'heading': 'ACCESS TO PAYMENT ACCOUNTS'},
-            {'eId': 'chp_V',   'num': 'CHAPTER V',   'heading': 'COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION'},
-            {'eId': 'chp_VI',  'num': 'CHAPTER VI',  'heading': 'SANCTIONS'},
-            {'eId': 'chp_VII', 'num': 'CHAPTER VII', 'heading': 'FINAL PROVISIONS'}
+            {'eId': 'cpt_I',   'type': 'chapter', 'num': 'CHAPTER I',   'heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS', 'parent': None},
+            {'eId': 'cpt_II',  'type': 'chapter', 'num': 'CHAPTER II',  'heading': 'COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS', 'parent': None},
+            {'eId': 'cpt_III', 'type': 'chapter', 'num': 'CHAPTER III', 'heading': 'SWITCHING', 'parent': None},
+            {'eId': 'cpt_IV',  'type': 'chapter', 'num': 'CHAPTER IV',  'heading': 'ACCESS TO PAYMENT ACCOUNTS', 'parent': None},
+            {'eId': 'cpt_V',   'type': 'chapter', 'num': 'CHAPTER V',   'heading': 'COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION', 'parent': None},
+            {'eId': 'cpt_VI',  'type': 'chapter', 'num': 'CHAPTER VI',  'heading': 'SANCTIONS', 'parent': None},
+            {'eId': 'cpt_VII', 'type': 'chapter', 'num': 'CHAPTER VII', 'heading': 'FINAL PROVISIONS', 'parent': None}
         ]
         self.assertEqual(self.parser.chapters, expected_chapters, "Chapters data does not match expected content")
 
     def test_get_articles(self):
         """Test retrieval of articles within the body."""
         self.parser.get_body()
+        self.parser.get_chapters()
         self.parser.get_articles()
-        
+
         self.assertEqual(len(self.parser.articles), 31, "Incorrect number of articles extracted")
+        first = self.parser.articles[0]
+        self.assertEqual(first['eId'], 'art_1')
+        self.assertEqual(first['parent'], 'cpt_I')
+        self.assertTrue(all(c['eId'].startswith(('par_', 'unp_')) for c in first['children']))
+        # structure tree mirrors the chapter/article nesting
+        self.assertEqual(self.parser.structure[0]['eId'], 'cpt_I')
+        self.assertEqual(self.parser.structure[0]['children'][0], {'eId': 'art_1', 'type': 'article'})
     
     def test_get_conclusions(self):
         # Expected output

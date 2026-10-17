@@ -1,0 +1,2077 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE act SYSTEM "legislation.dtd" [
+<!ENTITY updatedtodate "16 July 2026">
+<!ENTITY lastact "<i>Garda Síochána (Recording Devices) (Amendment) Act 2026</i> (26/2026), enacted 16 July 2026">
+<!ENTITY lastsi "<i>Data Protection Act 2018 (Section 51(3)) (Commission of Investigation into the Handling of Historical Child Sexual Abuse in Day and Boarding Schools) Regulations 2026</i> (S.I. No. 352 of 2026), made 16 July 2026">
+]>
+<act>
+   <metadata>
+      <title>Data Protection Act 2018</title>
+      <number>7</number>
+      <year>2018</year>
+      <dateofenactment>20180524</dateofenactment>
+   </metadata>
+   <frontmatter>
+      <coverpage>
+         <pc>
+            <graphic href="harp.jpg" quality="GOOD"/>
+         </pc>
+         <p just="center" fli="0" li="0" ri="0" before="2" after="1"><hr1/></p>
+         <p just="center" fli="0" li="0" ri="0" before="1" after="1"><i>Number</i> 7<i> of
+            </i>2018</p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+         <p just="center" fli="0" li="0" ri="0" before="1" after="1"><b>DATA PROTECTION ACT
+            2018</b></p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>REVISED</b></p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>Updated to
+               16 July 2026</b></p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="2"><hr1/></p>
+         <p just="left" fli="0" li="0" ri="0" before="2" after="1">This Revised Act is an
+            administrative consolidation of the <i>Data Protection Act 2018</i>. It is prepared by
+            the Law Reform Commission in accordance with its function under the <i>Law Reform
+               Commission Act 1975</i> (3/1975) to keep the law under review and to undertake
+            revision and consolidation of statute law.</p>
+         <p after="20" just="left">All Acts up to and including the <i>Garda Síochána (Recording Devices) (Amendment) Act 2026</i> (26/2026), enacted 16 July 2026, and all statutory
+            instruments up to and including the <i>Data Protection Act 2018 (Section 51(3)) (Commission of Investigation into the Handling of Historical Child Sexual Abuse in Day and Boarding Schools) Regulations 2026</i> (S.I. No. 352 of 2026), made 16 July 2026, were considered in the preparation of this
+            Revised Act.</p>
+         <p just="left" fli="0" li="0" ri="0" before="15" after="0">Disclaimer: While every care has
+            been taken in the preparation of this Revised Act, the Law Reform Commission can assume
+            no responsibility for and give no guarantees, undertakings or warranties concerning the
+            accuracy, completeness or up to date nature of the information provided and does not
+            accept any liability whatsoever arising from any errors or omissions. Please notify any
+            errors, omissions and comments by email to revisedacts@lawreform.ie.</p>
+      </coverpage>
+      <narrative visibility="always">
+         <pc>
+            <graphic href="harp.jpg" quality="GOOD"/>
+         </pc>
+         <p just="center" fli="0" li="0" ri="0" before="2" after="1"><hr1/></p>
+         <p just="center" fli="0" li="0" ri="0" before="1" after="1"><i>Number</i> 7<i> of</i>
+            2018</p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+         <p just="center" fli="0" li="0" ri="0" before="1" after="1"><b>DATA PROTECTION ACT
+            2018</b></p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>REVISED</b></p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>Updated to
+               16 July 2026</b></p>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="2"><hr1/></p>
+         <p just="left" fli="0" li="0" ri="0" before="1" after="1"><b>Introduction</b></p>
+         <p after="1" before="0" just="left">This Revised Act presents the text of the Act as it has
+            been amended since enactment, and preserves the format in which it was passed.</p>
+         <p after="1" before="1" fli="0" li="0" just="left"><b>Related legislation</b></p>
+         <p after="1" before="0" just="left"><i><b>Data Protection Acts 1988 to 2018</b></i>: this
+            Act is one of a group of Acts included in this collective citation (<i>Data Protection
+               Act 2018</i> (s. 1(2)). The Acts in the group are:</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 1988</i> (25/1988)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2003</i> (6/2003)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="1"><bull/>
+            <i>Data Protection Act 2018</i> (7/2018)</p>
+      </narrative>
+      <narrative visibility="only_when_annotations_off">
+         <p after="1" before="1" just="left"><b>Annotations</b></p>
+         <p after="1" just="left">This Revised Act is not annotated and only shows textual
+            amendments. An annotated version of this revision is also available which shows textual
+            and non-textual amendments and their sources. It also shows editorial notes including
+            statutory instruments made pursuant to the Act and previous affecting provisions.</p>
+         <p after="1" before="1" just="left"><b>Material not updated in this revision</b></p>
+         <p after="0" just="left">Where other legislation is amended by this Act, those amendments
+            may have been superseded by other amendments in other legislation, or the amended
+            legislation may have been repealed or revoked. This information is not represented in
+            this revision but will be reflected in a revision of the amended legislation if one is
+            available. A list of legislative changes to any Act, and to statutory instruments from
+            1972, may be found linked from the page of the Act or statutory instrument at</p>
+         <p after="1" just="left">www.irishstatutebook.ie.</p>
+      </narrative>
+      <narrative visibility="only_when_annotations_on">
+         <p just="left" fli="0" li="0" ri="0" before="1" after="1"><b>Annotations</b></p>
+         <p after="1" just="left">This Revised Act is annotated and includes textual and non-textual
+            amendments, statutory instruments made pursuant to the Act and previous affecting
+            provisions. </p>
+         <p after="0" just="left">An explanation of how to read annotations is available at </p>
+         <p after="1" just="left">www.lawreform.ie/annotations.</p>
+         <p after="1" before="1" just="left"><b>Material not updated in this revision</b></p>
+         <p after="1" just="left">Where other legislation is amended by this Act, those amendments
+            may have been superseded by other amendments in other legislation, or the amended
+            legislation may have been repealed or revoked. This information is not represented in
+            this revision but will be reflected in a revision of the amended legislation if one is
+            available.</p>
+         <p after="1" just="left">Where legislation or a fragment of legislation is referred to in
+            annotations, changes to this legislation or fragment may not be reflected in this
+            revision but will be reflected in a revision of the legislation referred to if one is
+            available.</p>
+         <p after="0" just="left"> A list of legislative changes to any Act, and to statutory
+            instruments from 1972, may be found linked from the page of the Act or statutory
+            instrument at</p>
+         <p after="1" just="left"> www.irishstatutebook.ie.</p>
+         <p just="left" fli="0" li="0" ri="0" before="1" after="1"><b>Acts which affect or
+               previously affected this revision</b></p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Údarás na Gaeltachta (Amendment) Act 2026</i> (18/2026)</p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>International Protection Act 2026</i> (9/2026)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Local Government (Mayor of Limerick) and Miscellaneous Provisions Act 2024</i>
+            (7/2024)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Representative Actions for the Protection of the Collective Interests of Consumers
+               Act 2023</i> (22/2023)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Courts and Civil Law (Miscellaneous Provisions) Act 2023</i> (18/2023)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Electoral Reform Act 2022</i> (30/2022)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Greyhound Racing Act 2019</i> (15/2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Sharing and Governance Act 2019</i> (5/2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="1"><bull/>
+            <i>Public Service Superannuation (Age of Retirement) Act 2018</i> (39/2018)</p>
+         <p after="1" before="0" fli="0" li="0" just="left">All Acts up to and including <i>Garda Síochána (Recording Devices) (Amendment) Act 2026</i> (26/2026), enacted 16 July 2026,
+            were considered in the preparation of this revision.</p>
+         <p just="left" fli="0" li="0" ri="0" before="1" after="1"><b>Statutory instruments which
+               affect or previously affected this revision</b></p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 51(3)) (Commission of Investigation into the
+               Handling of Historical Child Sexual Abuse in Day and Boarding Schools) Regulations
+               2026</i> (S.I. No. 352 of 2026)</p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 38(4)(b)) (Commission of Investigation into the
+               Handling of Historical Child Sexual Abuse in Day and Boarding Schools) Regulations
+               2026</i> (S.I. No. 351 of 2026)</p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Commission of Investigation into the
+               Handling of Historical Child Sexual Abuse in Day and Boarding Schools) Regulations
+               2026</i> (S.I. No. 350 of 2026)</p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Scoping Exercise in Response to Requests
+               from Dignity4Patients) (Amendment) Regulations 2026</i> (S.I. No. 301 of 2026)</p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 51(3)) (Scoping Exercise in Response to Requests
+               from Dignity4Patients) (Amendment) Regulations 2026</i> (S.I. No. 300 of 2026)</p>
+         <p just="left" fli="-3" li="3" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 38(4)(b)) (Scoping Exercise in Response to Requests
+               from Dignity4Patients) (Amendment) Regulations 2026</i> (S.I. No. 299 of 2026)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Scoping Exercise in Response to Requests
+               from Dignity4Patients) Regulations 2026</i> (S.I. No. 147 of 2026)</p>
+         <p fli="-3" li="3"><bull/>
+            <i>Data Protection Act 2018 (Section 51(3)) (Scoping Exercise in Response to Requests
+               from Dignity4Patients) Regulations 2026</i> (S.I. No. 146 of 2026)</p>
+         <p fli="-3" li="3"><bull/>
+            <i>Data Protection Act 2018 (Section 38(4)(b)) (Scoping Exercise in Response to Requests
+               from Dignity4Patients) Regulations 2026</i> (S.I. No. 145 of 2026)</p>
+         <p fli="-3" li="3"><bull/>
+            <i>Data Protection Act 2018 (Section 51(3)) (Children’s Health Ireland Inquiry into
+               Spina Bifida and Complex Scoliosis Services Scoping Exercise) Regulations 2026</i>
+            (S.I. No. 144 of 2026)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Children’s Health Ireland Inquiry into
+               Spina Bifida and Complex Scoliosis Services Scoping Exercise) Regulations 2026</i>
+            (S.I. No. 143 of 2026)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 38(4)(b)) (Children’s Health Ireland Inquiry into
+               Spina Bifida and Complex Scoliosis Services Scoping Exercise) Regulations 2026</i>
+            (S.I. No. 142 of 2026)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(3)) (Amendment) Rules 2025</i> (S.I. No. 692 of
+            2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Good Agricultural Practice for Protection of Waters) Regulations
+               2025</i> (S.I. No. 588 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Administrative Cooperation in the Field of Taxation) Regulations
+               2025</i> (S.I. No. 584 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Political Advertising) Regulations 2025</i> (S.I. No. 474 of
+            2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Inquiry into the Licensing and Use of
+               Sodium Valproate in Women of Child-Bearing Potential in the State) Regulations
+               2025</i> (S.I. No. 352 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 51(3)) (Inquiry into the Licensing and Use of
+               Sodium Valproate in Women of Child-Bearing Potential in the State) Regulations
+               2025</i> (S.I. No. 351 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 38(4)(b)) (Inquiry into the Licensing and Use of
+               Sodium Valproate in Women of Child-Bearing Potential in the State) Regulations
+               2025</i> (S.I. No. 350 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Defence Forces Tribunal of Inquiry)
+               Regulations 2025</i> (S.I. No. 338 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(4)) (Data Protection Commission) Regulations
+               2025</i> (S.I. No. 321 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(4)) (Information Commissioner) Regulations
+               2025</i> (S.I. No. 320 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(4)) (Comptroller and Auditor General)
+               Regulations 2025</i> (S.I. No. 319 of 2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(2))(Amendment) Rules 2025</i> (S.I. No. 270 of
+            2025)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(1))(Amendment) Rules 2024</i> (S.I. No. 760 of
+            2024)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Control of Data for the Inquiry into the Historical
+               Licensing and Use of Sodium Valproate) Regulations 2024</i> (S.I. No. 752 of
+            2024)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 38(4)(b)) (Defence Forces Tribunal of Inquiry)
+               Regulations 2024</i> (S.I. No. 624 of 2024)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 51(3)) (Defence Forces Tribunal of Inquiry)
+               Regulations 2024</i> (S.I. No. 623 of 2024)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Data Protection Act 2018) (Amendment of section 60) Regulations
+               2024</i> (S.I. No. 610 of 2024)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Competition and Consumer Protection
+               Commission) Regulations 2022</i> (S.I. No. 603 of 2022)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Corporate Enforcement Authority)
+               Regulations 2022</i> (S.I. No. 602 of 2022)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Irish Auditing and Accounting Supervisory
+               Authority) Regulations 2022</i> (S.I. No. 601 of 2022)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 60(6)) (Office of the Ombudsman) Regulations
+               2022</i> (S.I. No. 221 of 2022)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Access Modification) (Health) Regulations 2022</i> (S.I.
+            No. 121 of 2022)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Enforcement of data subjects’ rights on transfer of personal data
+               outside the European Union) Regulations 2021</i> (S.I. No. 297 of 2021)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 36(2)) (Health Research) (Amendment) Regulations
+               2021</i> (S.I. No. 18 of 2021)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Imports of Animals and Animal Products from Third Countries)
+               Regulations 2020</i> (S.I. No. 656 of 2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Official Controls in relation to Food Legislation) (Imports of Food
+               of Non-Animal Origin) Regulations 2020</i> (S.I. No. 575 of 2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (section 60(6)) (Central Bank of Ireland) Regulations
+               2020</i> (S.I. No. 534 of 2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Plant Health) Regulations 2020</i> (S.I. No. 459 of 2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Official Controls in Relation to Food Legislation) Regulations
+               2020</i> (S.I. No. 79 of 2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Food and Feed Hygiene) Regulations 2020</i> (S.I. No. 22 of 2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0">
+            <bull/>
+            <i>European Union (Temporary Increase of Official Controls and Emergency Measures on
+               Imports of Food and Feed of Non-Animal Origin) Regulations 2020</i> (S.I. No. 9 of
+            2020)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>European Union (Food and Feed Hygiene) Regulations 2019</i> (S.I. No. 674 of
+            2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Commencement) (No. 2) Order 2019</i> (S.I. No. 570 of
+            2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (section 60(6)) (Central Bank of Ireland) Regulations
+               2019</i> (S.I. No. 537 of 2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Commencement) Order 2019</i> (S.I. No. 532 of 2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 36(2)) (Health Research) (Amendment) Regulations
+               2019</i> (S.I. No. 188 of 2019)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(4)) Rules 2018</i> (S.I. No. 665 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(7): District Court) Rules 2018</i> (S.I. No.
+            664 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(3)) Rules 2018</i> (S.I. No. 663 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(7): Circuit Court) Rules 2018</i> (S.I. No. 662
+            of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(2)) Rules 2018</i> (S.I. No. 661 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(7): Superior Courts) Rules 2018</i> (S.I. No.
+            660 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 159(1)) Rules 2018</i> (S.I. No. 659 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 158(3)) Rules 2018</i> (S.I. No. 658 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Section 36(2)) (Health Research) Regulations 2018</i> (S.I.
+            No. 314 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Establishment Day) Order 2018</i> (S.I. No. 175 of
+            2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="0"><bull/>
+            <i>Data Protection Act 2018 (Commencement) Order 2018</i> (S.I. No. 174 of 2018)</p>
+         <p just="left" fli="-3" li="3" ri="0" before="0" after="1"><bull/>
+            <i>European Communities (Sustainable Use of Pesticides) Regulations 2012</i> (S.I. No.
+            155 of 2012)</p>
+         <p after="1" before="0" fli="0" li="0" just="left">All statutory instruments up to and
+            including <i>Data Protection Act 2018 (Section 51(3)) (Commission of Investigation into the Handling of Historical Child Sexual Abuse in Day and Boarding Schools) Regulations 2026</i> (S.I. No. 352 of 2026), made 16 July 2026, were considered in the preparation of this revision.</p>
+      </narrative>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><graphic href="harp.jpg" quality="GOOD"/></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+      <actnumber>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><i>Number</i> 7 <i>of</i>
+            2018</p>
+      </actnumber>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>DATA PROTECTION ACT
+         2018</b></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>REVISED</b></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>Updated to
+         16 July 2026</b></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+      <actsreferredto>
+         <title>
+            <p just="center" fli="0" li="0" ri="0" before="0" after="1">Acts Referred to</p>
+         </title>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2013.0015" xml:link="simple" show="replace" value1="">Animal Health and Welfare Act 2013</xref>
+            (No. 15)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1988.0027" xml:link="simple" show="replace" value1="">Bankruptcy Act 1988</xref> (No. 27)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1999.0001" xml:link="simple" show="replace" value1="">British-Irish Agreement Act 1999</xref>
+            (No. 1)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1942.0022" xml:link="simple" show="replace" value1="">Central Bank Act 1942</xref> (No. 22)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1997.0008" xml:link="simple" show="replace" value1="">Central Bank Act 1997</xref> (No. 8)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2008.0013" xml:link="simple" show="replace" value1="">Chemicals Act 2008</xref> (No. 13)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2001.0024" xml:link="simple" show="replace" value1="">Children Act 2001</xref> (No. 24)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2004.0003" xml:link="simple" show="replace" value1="">Civil Registration Act 2004</xref> (No.
+            3)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1956.0046" xml:link="simple" show="replace" value1="">Civil Service Regulation Act 1956</xref>
+            (No. 46)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2000.0001" xml:link="simple" show="replace" value1="">Comhairle Act 2000</xref> (No. 1)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2000.0007" xml:link="simple" show="replace" value1="">Commission To Inquire Into Child Abuse Act
+               2000</xref> (No. 7)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2004.0023" xml:link="simple" show="replace" value1="">Commissions of Investigation Act
+               2004</xref> (No. 23)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2011.0003" xml:link="simple" show="replace" value1="">Communications (Retention of Data) Act
+               2011</xref> (No. 3)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2011.0021" xml:link="simple" show="replace" value1="">Communications Regulation (Postal
+               Services) Act 2011</xref> (No. 21)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2014.0038" xml:link="simple" show="replace" value1="">Companies Act 2014</xref> (No. 38)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2002.0014" xml:link="simple" show="replace" value1="">Competition Act 2002</xref> (No. 14)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1993.0008" xml:link="simple" show="replace" value1="">Comptroller and Auditor General
+               (Amendment) Act 1993</xref> (No. 8)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1995.0024" xml:link="simple" show="replace" value1="">Consumer Credit Act 1995</xref> (No.
+            24)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1987.0028" xml:link="simple" show="replace" value1="">Control of Clinical Trials Act 1987</xref>
+            (No. 28)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2012.0040" xml:link="simple" show="replace" value1="">Credit Union and Co-operation with
+               Overseas Regulators Act 2012</xref> (No. 40)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2014.0011" xml:link="simple" show="replace" value1="">Criminal Justice (Forensic Evidence and
+               DNA Database System) Act 2014</xref> (No. 11)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2009.0028" xml:link="simple" show="replace" value1="">Criminal Justice (Miscellaneous
+               Provisions) Act 2009</xref> (No. 28)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2010.0006" xml:link="simple" show="replace" value1="">Criminal Justice (Money Laundering and
+               Terrorist Financing) Act 2010</xref> (No. 6)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2008.0007" xml:link="simple" show="replace" value1="">Criminal Justice (Mutual Assistance) Act
+               2008</xref> (No. 7)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2016.0004" xml:link="simple" show="replace" value1="">Criminal Justice (Spent Convictions and
+               Certain Disclosures) Act 2016</xref> (No. 4)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2015.0018" xml:link="simple" show="replace" value1="">Customs Act 2015</xref> (No. 18)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2003.0006" xml:link="simple" show="replace" value1="">Data Protection (Amendment) Act
+               2003</xref> (No. 6)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1988.0025" xml:link="simple" show="replace" value1="">Data Protection Act 1988</xref> (No.
+            25)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1">Data Protection Acts 1988 and
+            2003</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1">Data Protection Acts 1988 to
+            2003</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1954.0018" xml:link="simple" show="replace" value1="">Defence Act 1954</xref> (No. 18)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1985.0009" xml:link="simple" show="replace" value1="">Dentists Act 1985</xref> (No. 9)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2005.0014" xml:link="simple" show="replace" value1="">Disability Act 2005</xref> (No. 14)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2001.0032" xml:link="simple" show="replace" value1="">Dormant Accounts Act 2001</xref> (No.
+            32)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2000.0022" xml:link="simple" show="replace" value1="">Education (Welfare) Act 2000</xref> (No.
+            22)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1998.0051" xml:link="simple" show="replace" value1="">Education Act 1998</xref> (No. 51)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2006.0033" xml:link="simple" show="replace" value1="">Electoral (Amendment) Act 2006</xref> (No.
+            33)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1992.0023" xml:link="simple" show="replace" value1="">Electoral Act 1992</xref> (No. 23)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1999.0023" xml:link="simple" show="replace" value1="">Electricity Regulation Act 1999</xref>
+            (No. 23)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1997.0002" xml:link="simple" show="replace" value1="">European Parliament Elections Act
+               1997</xref> (No. 2)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2012.0053" xml:link="simple" show="replace" value1="">Europol Act 2012</xref> (No. 53)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2017.0022" xml:link="simple" show="replace" value1="">Financial Services and Pensions Ombudsman
+               Act 2017</xref> (No. 22)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2000.0020" xml:link="simple" show="replace" value1="">Firearms (Firearm Certificates For
+               Non-Residents) Act 2000</xref> (No. 20)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1925.0017" xml:link="simple" show="replace" value1="">Firearms Act 1925</xref> (No. 17)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1990.0012" xml:link="simple" show="replace" value1="">Firearms and Offensive Weapons Act
+               1990</xref> (No. 12)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2014.0030" xml:link="simple" show="replace" value1="">Freedom of Information Act 2014</xref>
+            (No. 30)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2013.0010" xml:link="simple" show="replace" value1="">Health (Alteration of Criteria for
+               Eligibility) Act 2013</xref> (No. 10)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1961.0027" xml:link="simple" show="replace" value1="">Health (Corporate Bodies) Act 1961</xref>
+            (No. 27)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1997.0009" xml:link="simple" show="replace" value1="">Health (Provision of Information) Act
+               1997</xref> (No. 9)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2006.0017" xml:link="simple" show="replace" value1="">Health (Repayment Scheme) Act 2006</xref>
+            (No. 17)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2004.0042" xml:link="simple" show="replace" value1="">Health Act 2004</xref> (No. 42)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2014.0015" xml:link="simple" show="replace" value1="">Health Identifiers Act 2014</xref> (No.
+            15)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1994.0016" xml:link="simple" show="replace" value1="">Health Insurance Act 1994</xref> (No.
+            16)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1993.0010" xml:link="simple" show="replace" value1="">Interception of Postal Packets and
+               Telecommunications Messages (Regulation) Act 1993</xref> (No. 10)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2005.0023" xml:link="simple" show="replace" value1="">Interpretation Act 2005</xref> (No.
+            23)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1993.0029" xml:link="simple" show="replace" value1="">Irish Aviation Authority Act 1993</xref>
+            (No. 29)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1995.0029" xml:link="simple" show="replace" value1="">Irish Medicines Board Act 1995</xref> (No.
+            29)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2001.0037" xml:link="simple" show="replace" value1="">Local Government Act 2001</xref> (No.
+            37)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1978.0004" xml:link="simple" show="replace" value1="">Medical Practitioners Act 1978</xref> (No.
+            4)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2007.0025" xml:link="simple" show="replace" value1="">Medical Practitioners Act 2007</xref> (No.
+            25)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2000.0014" xml:link="simple" show="replace" value1="">Merchant Shipping (Investigation of Marine
+               Casualties) Act 2000</xref> (No. 14)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2011.0010" xml:link="simple" show="replace" value1="">Ministers and Secretaries (Amendment) Act
+               2011</xref> (No. 10)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1977.0012" xml:link="simple" show="replace" value1="">Misuse of Drugs Act 1977</xref> (No.
+            12)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2009.0034" xml:link="simple" show="replace" value1="">National Asset Management Agency Act
+               2009</xref> (No. 34)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2017.0026" xml:link="simple" show="replace" value1="">National Shared Services Office Act
+               2017</xref> (No. 26)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2009.0015" xml:link="simple" show="replace" value1="">Nursing Homes Support Scheme Act
+               2009</xref> (No. 15)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2003.0032" xml:link="simple" show="replace" value1="">Official Languages Act 2003</xref> (No.
+            32)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2008.0004" xml:link="simple" show="replace" value1="">Passports Act 2008</xref> (No. 4)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2003.0046" xml:link="simple" show="replace" value1="">Personal Injuries Assessment Board Act
+               2003</xref> (No. 46)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2012.0044" xml:link="simple" show="replace" value1="">Personal Insolvency Act 2012</xref> (No.
+            44)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1851.0093" xml:link="simple" show="replace" value1="">Petty Sessions (Ireland) Act 1851</xref>
+            (14 &amp; 15 Vict., c.93)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2007.0020" xml:link="simple" show="replace" value1="">Pharmacy Act 2007</xref> (No. 20)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2000.0030" xml:link="simple" show="replace" value1="">Planning and Development Act 2000</xref>
+            (No. 30)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1">Prisons Acts 1826 to 2015</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2011.0040" xml:link="simple" show="replace" value1="">Property Services (Regulation) Act
+               2011</xref> (No. 40)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2004.0007" xml:link="simple" show="replace" value1="">Public Service Superannuation
+               (Miscellaneous Provisions) Act 2004</xref> (No. 7)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2005.0031" xml:link="simple" show="replace" value1="">Railway Safety Act 2005</xref> (No.
+            31)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2015.0005" xml:link="simple" show="replace" value1="">Regulation of Lobbying Act 2015</xref>
+            (No. 5)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2002.0013" xml:link="simple" show="replace" value1="">Residential Institutions Redress Act
+               2002</xref> (No. 13)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2005.0010" xml:link="simple" show="replace" value1="">Safety, Health and Welfare at Work Act
+               2005</xref> (No. 10)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2005.0026" xml:link="simple" show="replace" value1="">Social Welfare Consolidation Act
+               2005</xref> (No. 26)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2015.0015" xml:link="simple" show="replace" value1="">Sport Ireland Act 2015</xref> (No. 15)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.1993.0021" xml:link="simple" show="replace" value1="">Statistics Act 1993</xref> (No. 21)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2011.0004" xml:link="simple" show="replace" value1="">Student Support Act 2011</xref> (No.
+            4)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2003.0002" xml:link="simple" show="replace" value1="">Unclaimed Life Assurance Policies Act
+               2003</xref> (No. 2)</p>
+         <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><xref href="EN.ACT.2018.0005" xml:link="simple" show="replace" value1="">Vehicle Registration Data (Automated
+               Searching and Exchange) Act 2018</xref> (No. 5)</p>
+      </actsreferredto>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><graphic href="harp.jpg" quality="GOOD"/></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><hr1/></p>
+      <actnumber>
+         <p just="center" fli="0" li="0" ri="0" before="0" after="1"><i>Number</i> 7 <i>of</i> 2018
+         </p>
+      </actnumber>
+      <p just="center" fli="0" li="6" ri="4" before="0" after="1"><hr1/>
+      </p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>DATA PROTECTION ACT 2018</b>
+      </p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>REVISED</b></p>
+      <p just="center" fli="0" li="0" ri="0" before="0" after="1"><b>Updated to
+         16 July 2026</b></p>
+      <p just="center" fli="0" li="6" ri="4" before="0" after="1"><hr1/>
+      </p>
+      <p just="left" fli="0" li="11" ri="0" before="0" after="1">An Act to establish a body to be
+         known as An Coimisi<ufada/>n um Chosaint Sonra<ifada/> or, in the English language, the
+         Data Protection Commission; to give further effect to Regulation (EU) 2016/679 of the
+         European Parliament and of the Council of 27 April 2016<fn>
+            <marker><su>1</su></marker>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>1</su> OJ No. L 119, 4.5.2016, p.1</font></p>
+         </fn> on the protection of natural persons with regard to the processing of personal data
+         and on the free movement of such data, and repealing Directive 95/46/EC (General Data
+         Protection Regulation); to give effect to Directive (EU) 2016/680 of the European
+         Parliament and of the Council of 27 April 2016<fn>
+            <marker><su>2</su></marker>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>2</su> OJ No. L 119, 4.5.2016, p.89</font></p>
+         </fn> on the protection of natural persons with regard to the processing of personal data
+         by competent authorities for the purposes of the prevention, investigation, detection or
+         prosecution of criminal offences or the execution of criminal penalties, and on the free
+         movement of such data, and repealing Council Framework Decision 2008/977/JHA; to give
+         further effect to the Convention for the Protection of Individuals with regard to Automatic
+         Processing of Personal Data done at Strasbourg on the 28th day of January 1981 and for
+         those and other purposes to amend the Data Protection Act 1988; to provide for the
+         consequential amendment of certain other enactments; and to provide for related matters. </p>
+      <p just="left" fli="0" li="8" ri="0" before="0" after="1">[24<i>th May</i> , 2018] </p>
+      <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>Be it enacted by the Oireachtas
+            as follows:</b></p>
+      <div class="annotations">
+         <p just="left" fli="0" li="0" ri="0" before="0" after="2"><b>Annotations</b></p>
+         <div class="c-notes">
+            <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Modifications (not altering
+                  text):</b></p>
+            <div class="c-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1">Application of collectively
+                  cited <i>Data Protection Acts</i> restricted (1.01.2026) by <i>European Union
+                     (Good Agricultural Practice for Protection of Waters) Regulations 2025</i>
+                  (S.I. No. 588 of 2025), reg. 32, in operation as per art. 1(d).</p>
+               <p just="left" fli="0" li="0" before="0" after="1"><i>Compliance with Data Protection
+                     Acts</i></p>
+               <p just="left" fli="2" li="0" before="0" after="1"> 32. The provision of information
+                  by a local authority, the Agency or the Minister for Agriculture, Food and the
+                  Marine in accordance with Article 28, 30 or 31 of these Regulations shall not be a
+                  breach of the Data Protection Acts, 1988, 2003 and 2018.</p>
+            </div>
+            <div class="c-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1">Application of Act extended
+                  by <i>Taxes Consolidation Act 1997</i> (39/1997), s. 891M(18)(f), as inserted
+                  (31.12.2025) by <i>European Union (Administrative Cooperation in the Field of
+                     Taxation) Regulations 2025</i> (S.I. No. 584 of 2025), reg. 2(g), in operation
+                  as per reg. 1(2).</p>
+               <p just="left" fli="0" li="0" before="0" after="1"><b>Implementation of paragraphs
+                     (6) and (19) of Article 1 of Council Directive (EU) 2023/2226/EU of 17 October
+                     2023 as regards mandatory automatic exchange of information in the field of
+                     taxation in relation to Reporting Crypto-Asset Service Providers</b></p>
+               <p just="left" fli="2" li="0" before="0" after="1"><b>891M.</b><emdash/> ...</p>
+               <p just="left" fli="-5" li="9" before="0" after="1">(f) The Data Protection Act 2018
+                  shall apply to the access that this subsection affords to an authorised DAC
+                  officer in respect of the information in the registers or information systems
+                  referred to in paragraph (c)(i) and the information referred to in paragraph
+                  (c)(ii).</p>
+               <p just="left" fli="2" li="0" before="0" after="1">...</p>
+            </div>
+         </div>
+         <div class="e-notes">
+            <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Editorial Notes:</b></p>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1">Act is a relevant enactment
+                  for purposes of <i>Representative Actions for the Protection of the Collective
+                     Interests of Consumers Act 2023</i> as provided (30.04.2024) by
+                     <i>Representative Actions for the Protection of the Collective Interests of
+                     Consumers Act 2023</i> (22/2023), s. 2 and sch. part 1, S.I. No. 181 of
+                  2024.</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  supplied in certain circumstances as provided (9.03.2022) by <i>European Union
+                     (Good Agricultural Practice for Protection of Waters) Regulations 2022</i>
+                  (S.I. No. 113 of 2022), art. 2.</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (17.12.2020) by <i>European Union
+                     (Imports of Animals and Animal Products from Third Countries) Regulations
+                     2020</i> (S.I. No. 656 of 2020), reg. 38.</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (3.12.2020) by <i>European Union
+                     (Official Controls in relation to Food Legislation) (Imports of Food of
+                     Non-Animal Origin) Regulations 2020</i> (S.I. No. 575 of 2020), reg. 4(3).</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (23.10.2020) by <i>European Union
+                     (Plant Health) Regulations 2020</i> (S.I. No. 459 of 2020), reg. 73(1).</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (13.03.2020) by <i>European Union
+                     (Official Controls in Relation to Food Legislation) Regulations 2020</i> (S.I.
+                  No. 79 of 2020), reg. 3(5).</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (1.10.2020) by <i>Greyhound Racing
+                     Act 2019</i> (15/2019), s. 58, S.I. No. 399 of 2020.</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (27.01.2020) by <i>European Union
+                     (Food and Feed Hygiene) Regulations 2020</i> (S.I. No. 22 of 2020), reg.
+                  22.</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided (14.01.2020) by <i>European Union
+                     (Temporary Increase of Official Controls and Emergency Measures on Imports of
+                     Food and Feed of Non-Animal Origin) Regulations 2020</i> (S.I. No. 9 of 2020),
+                  reg. 20.</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Personal data may be
+                  exchanged in certain circumstances as provided by <i>European Communities
+                     (Sustainable Use of Pesticides) Regulations 2012</i> (S.I. No. 155 of 2012),
+                  reg. 11(8) as substituted (29.08.2019) by <i>European Communities (Sustainable Use
+                     of Pesticides) (Amendment) Regulations 2019</i> (S.I. No. 438 of 2019), reg.
+                  2(e).</p>
+            </div>
+            <div class="e-note">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="1"> Previous affecting
+                  provision: personal data may be exchanged in certain circumstances as provided
+                  (19.12.2019) by <i>European Union (Food and Feed Hygiene) Regulations 2019</i>
+                  (S.I. No. 674 of 2019), reg. 22; revoked (22.01.2020) by <i>European Union (Food
+                     and Feed Hygiene) Regulations 2020</i> (S.I. No. 22 of 2020), reg. 37(1).</p>
+            </div>
+         </div>
+      </div>
+   </frontmatter>
+   <body>
+      <part id="PART1">
+         <title>PART 1 Preliminary and General<p just="center" fli="0" li="0" ri="0" before="0" after="1"><font size="large" smallcaps="no">PART 1</font></p>
+            <p just="center" fli="0" li="0" ri="0" before="0" after="1">
+               <font size="normal" smallcaps="yes">Preliminary and General</font></p>
+         </title>
+         <sect id="SEC1">
+            <number>1</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Short title, citation
+                     and commencement</b></p>
+            </title>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>1.</b> (1) This Act may be
+               cited as the Data Protection Act 2018.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) This Act and the Data
+               Protection Acts 1988 and 2003 may be cited together as the Data Protection Acts 1988
+               to 2018.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) This Act shall come into
+               operation on such day or days as the Minister may by order or orders appoint either
+               generally or with reference to any particular purpose or provision and different days
+               may be so appointed for different purposes or different provisions, and for the
+               repeal of different enactments or provisions of enactments effected by <i><xref href="##SEC7" xml:link="simple" show="replace" value1="">section
+               7</xref></i>.</p>
+            <div class="annotations">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="2"><b>Annotations</b></p>
+               <div class="e-notes">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Editorial
+                     Notes:</b></p>
+                  <div class="e-note">
+                     <p after="1"> Power pursuant to subs. (3) exercised (1.01.2020) by <i>Data
+                           Protection Act 2018 (Commencement) (No. 2) Order 2019</i> (S.I. No. 570
+                        of 2019).</p>
+                     <p just="left" fli="2" li="0" ri="0" before="0" after="1">2. The 1st day of
+                        January 2020 is appointed as the day on which the following provisions of
+                        the Data Protection Act 2018 (No. 7 of 2018) shall come into operation: </p>
+                     <p just="left" fli="-5" li="9" ri="0" before="0" after="1">(a) section 25; </p>
+                     <p just="left" fli="-5" li="9" ri="0" before="0" after="1">(b) section 176(b).
+                     </p>
+                  </div>
+                  <div class="e-note">
+                     <p after="1"> Power pursuant to subs. (3) exercised (30.10.2019) by <i>Data
+                           Protection Act 2018 (Commencement) Order 2019</i> (S.I. No. 532 of
+                        2019).</p>
+                     <p just="left" fli="2" li="0" ri="0" before="0" after="1">2. The 30th day of
+                        October 2019 is appointed as the day on which section 7(3), insofar as it
+                        relates to the revocation of the Data Protection Act 1988 (Section 5(1)(d))
+                        (Specification) Regulations 1993 (S.I. No. 95 of 1993), insofar as those
+                        Regulations relate to the functions of the Central Bank of Ireland to which
+                        Regulation 3 of those Regulations applies, of the Data Protection Act 2018
+                        (No. 7 of 2018) shall come into operation.</p>
+                  </div>
+                  <div class="e-note">
+                     <p after="1"> Power pursuant to subs. (3) exercised (24.05.2018, 25.05.2018) by
+                           <i>Data Protection Act 2018 (Commencement) Order 2018</i> (S.I. No. 174
+                        of 2018).</p>
+                     <p just="left" fli="2" li="0" before="0" after="1">2. The 24th day of May 2018
+                        is appointed as the day on which sections 1 and 9 of the Data Protection Act
+                        2018 shall come into operation. </p>
+                     <p just="left" fli="2" li="0" before="0" after="1">3. The 25th day of May 2018
+                        is appointed as the day on which the Data Protection Act 2018 , other
+                        than<emdash/>
+                     </p>
+                     <p just="left" fli="-5" li="9" ri="0" before="0" after="1">(a) section 7(3)
+                        (insofar as it relates to the revocation of the Data Protection Act 1988
+                        (Section 5(1)(d)) (Specification) Regulations 1993 ( S.I. No. 95 of 1993 ),
+                        insofar as those Regulations relate to the functions of the Central Bank of
+                        Ireland to which Regulation 3 of those Regulations applies), </p>
+                     <p just="left" fli="-5" li="9" ri="0" before="0" after="1">(b) section 25, </p>
+                     <p just="left" fli="-5" li="9" ri="0" before="0" after="1">(c) section 30, and </p>
+                     <p just="left" fli="-5" li="9" ri="0" before="0" after="1">(d) section 176(b), </p>
+                     <p just="left" fli="2" li="0" before="0" after="1">insofar as it is not already
+                        in operation, shall come into operation. </p>
+                  </div>
+               </div>
+            </div>
+         </sect>
+         <sect id="SEC2">
+            <number>2</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Interpretation</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>2.</b> (1) In this
+               Act<emdash/></p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Act of 1988<cdq/> means
+               the <xref href="EN.ACT.1988.0025" xml:link="simple" show="replace" value1="">Data
+                  Protection Act 1988</xref>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Act of 2014<cdq/> means
+               the <xref href="EN.ACT.2014.0038" xml:link="simple" show="replace" value1="">Companies Act 2014</xref>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>authorised
+               officer<cdq/> means a person appointed, or deemed to be appointed, to be an
+               authorised officer under <i><xref href="##SEC129" xml:link="simple" show="replace" value1="">section 129</xref></i>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>chairperson<cdq/> means
+               the chairperson of the Commission;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>civil servant<cdq/> has
+               the meaning assigned to it by the <xref href="EN.ACT.1956.0046" xml:link="simple" show="replace" value1="">Civil Service Regulation Act 1956</xref>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Commission<cdq/> has
+               the meaning assigned to it by <i><xref href="##SEC10" xml:link="simple" show="replace" value1="">section 10</xref></i>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Commissioner<cdq/> has
+               the meaning assigned to it by <i><xref href="##SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i> and includes a member of staff
+               authorised to act in place of a Commissioner under <i><xref href="##SEC18" xml:link="simple" show="replace" value1="">section 18</xref></i>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Data Protection
+               Regulation<cdq/> means Regulation (EU) 2016/679 of the European Parliament and of the
+               Council of 27 April 2016<fn>
+                  <marker><su>3</su></marker>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>3</su> OJ No. L 119, 4.5.2016, p.1</font></p>
+               </fn> on the protection of natural persons with regard to the processing of personal
+               data and on the free movement of such data, and repealing Directive 95/46/EC (General
+               Data Protection Regulation);</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Directive<cdq/> means
+               Directive (EU) 2016/680 of the European Parliament and of the Council of 27 April 2016<fn>
+                  <marker><su>4</su></marker>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>4</su> OJ No. L 119, 4.5.2016, p.89</font></p>
+               </fn> on the protection of natural persons with regard to the processing of personal
+               data by competent authorities for the purposes of the prevention, investigation,
+               detection or prosecution of criminal offences or the execution of criminal penalties,
+               and on the free movement of such data, and repealing Council Framework Decision
+               2008/977/JHA;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>enactment<cdq/> has the
+               same meaning as it has in the <xref href="EN.ACT.2005.0023" xml:link="simple" show="replace" value1="">Interpretation Act 2005</xref>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>local authority<cdq/>
+               means a local authority within the meaning of <xref href="EN.ACT.2001.0037#SEC2" xml:link="simple" show="replace" value1="">section 2</xref> of the <xref href="EN.ACT.2001.0037" xml:link="simple" show="replace" value1="">Local
+                  Government Act 2001</xref>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><?change id="106799" type="subs" mark="start" ?><odq/>Mayor of Limerick<cdq/> has
+               the meaning assigned to it by <xref href="EN.ACT.2024.0007#SEC9" xml:link="simple" show="replace">section 9</xref> of the <xref href="EN.ACT.2024.0007" xml:link="simple" show="replace">Local Government (Mayor of Limerick) and
+                  Miscellaneous Provisions Act
+               2024</xref>;<?change id="106799" type="subs" mark="end" ?></p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>Minister<cdq/> means
+               the Minister for Justice and Equality;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>political party<cdq/>
+               means a political party registered in the Register of Political Parties in accordance
+               with <xref href="EN.ACT.1992.0023#SEC25" xml:link="simple" show="replace" value1="">section 25</xref> of the <xref href="EN.ACT.1992.0023" xml:link="simple" show="replace" value1="">Electoral Act 1992</xref>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>prescribe<cdq/> means
+               prescribe by regulations;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>public authority<cdq/>
+               means<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) a Department of
+               State,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) a regional assembly,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) a local authority,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(d) the office of the
+               Director of Corporate Enforcement,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(e) the Irish Auditing and
+               Accounting Supervisory Authority,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(f) any other person
+               established by or under an enactment (other than the Act of 2014 or a former
+               enactment relating to companies within the meaning of section 5 of that Act) other
+               than<emdash/></p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(i) a recognised school or
+               board within the meaning of <xref href="EN.ACT.1998.0051#SEC2" xml:link="simple" show="replace" value1="">section 2</xref> of the <xref href="EN.ACT.1998.0051" xml:link="simple" show="replace" value1="">Education Act 1998</xref> but including
+               a recognised school established and maintained by an education and training board and
+               a board of a school so established and maintained, and</p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(ii) a management committee
+               established under <xref href="EN.ACT.1998.0051#SEC37" xml:link="simple" show="replace" value1="">section 37</xref>(3) of the <xref href="EN.ACT.1998.0051" xml:link="simple" show="replace" value1="">Education Act 1998</xref>,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(g) a person with whom the
+               Health Service Executive has, under <xref href="EN.ACT.2004.0042#SEC38" xml:link="simple" show="replace" value1="">section 38</xref>(1) of the <xref href="EN.ACT.2004.0042" xml:link="simple" show="replace" value1="">Health Act
+                  2004</xref>, entered into an arrangement for the provision of a health or personal
+               social service by that person on behalf of the Executive,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(h) the Garda
+               S<ifada/>och<afada/>na;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>public body<cdq/>
+               means<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) a company (within the
+               meaning of the Act of 2014 or a former enactment relating to companies within the
+               meaning of section 5 of that Act) a majority of the shares in which are held by or on
+               behalf of a Minister of the Government,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) a subsidiary (within the
+               meaning of section 7 of the Act of 2014) of a company referred to in <i>paragraph
+                  (a)</i>;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>special categories of
+               personal data<cdq/>, other than in <i><xref href="#PART5" xml:link="simple" show="replace" value1="">Part 5</xref></i>, means<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) personal data
+               revealing<emdash/></p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(i) the racial or ethnic
+               origin of the data subject,</p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(ii) the political opinions
+               or the religious or philosophical beliefs of the data subject, or</p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(iii) whether the data
+               subject is a member of a trade union,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) genetic data,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) biometric data for the
+               purposes of uniquely identifying an individual,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(d) data concerning health,
+               or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(e) personal data concerning
+               an individual<csq/>s sex life or sexual orientation.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Subject to <i>subsection
+                  (1)</i>, a word or expression used in this Act, other than in <i><xref href="#PART5" xml:link="simple" show="replace" value1="">Part 5</xref></i>,
+               that is also used in the Data Protection Regulation has, unless the context otherwise
+               requires, the same meaning in this Act as it has in that Regulation.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Unless the context
+               otherwise requires, a reference in this Act (other than in <i><xref href="#PART5" xml:link="simple" show="replace" value1="">Part 5</xref></i>) to a numbered
+               Article is a reference to the Article so numbered of the Data Protection
+               Regulation.</p>
+            <div class="annotations">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="2"><b>Annotations:</b></p>
+               <div class="f-notes">
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Amendments:</b></p>
+                  <div class="f-note 106799">
+                     <p just="left" fli="0" li="0" ri="0" before="0" after="1">Inserted (31.03.2024)
+                        by <i>Local Government (Mayor of Limerick) and Miscellaneous Provisions Act
+                           2024</i> (7/2024), s. 44(a), S.I. No. 123 of 2024.</p>
+                  </div>
+               </div>
+            </div>
+         </sect>
+         <sect id="SEC3">
+            <number>3</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Designation by
+                     appropriate authority</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>3.</b> (1) An appropriate
+               authority (within the meaning of the <xref href="EN.ACT.1956.0046" xml:link="simple" show="replace" value1="">Civil Service Regulation Act 1956</xref>) may, as
+               respects all or part of the personal data kept by the authority, designate a civil
+               servant in relation to whom it is the appropriate authority to be a controller and
+               while the designation is in force the civil servant so designated shall, other than
+               for the purposes of <i><xref href="#SEC105" xml:link="simple" show="replace" value1="">sections 105</xref>(3)</i> and <i><xref href="#SEC141" xml:link="simple" show="replace" value1="">141</xref>(2)</i> and <i>(3)</i>, be
+               deemed, for the purposes of this Act and the Data Protection Regulation, to be the
+               controller in respect of the data concerned.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Without prejudice to
+                  <i>subsection (1)</i>, the Minister for Defence may, as respects all or part of
+               the personal data kept by him in relation to the Defence Forces, designate an officer
+               of the Permanent Defence Force who holds a commissioned rank therein to be a
+               controller and while the designation is in force the officer so designated shall,
+               other than for the purposes of <i><xref href="#SEC105" xml:link="simple" show="replace" value1="">sections 105</xref>(3)</i> and <i><xref href="#SEC141" xml:link="simple" show="replace" value1="">141</xref>(2)</i> and <i>(3)</i>, be
+               deemed, for the purposes of this Act and the Data Protection Regulation, to be the
+               controller in respect of the data concerned.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) For the purposes of this
+               Act and the Data Protection Regulation<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) where a designation by
+               the relevant appropriate authority under <i>subsection (1)</i> is not in force, a
+               civil servant in relation to whom that authority is the appropriate authority shall
+               be deemed to be its employee and, where such a designation is in force, such a civil
+               servant (other than the civil servant the subject of the designation) shall be deemed
+               to be an employee of the last mentioned civil servant,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) where a designation
+               under <i>subsection (2)</i> is not in force, a member of the Defence Forces shall be
+               deemed to be an employee of the Minister for Defence and, where such a designation is
+               in force, such a member (other than the officer the subject of the designation) shall
+               be deemed to be an employee of that officer, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) a member of the Garda
+               S<ifada/>och<afada/>na (other than the Commissioner of the Garda
+               S<ifada/>och<afada/>na) shall be deemed to be an employee of the Commissioner of the
+               Garda S<ifada/>och<afada/>na.</p>
+         </sect>
+         <sect id="SEC4">
+            <number>4</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Obligation not to
+                     require data subject to exercise right of access under Data Protection
+                     Regulation and Directive in certain circumstances</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>4.</b> (1) A person shall
+               not, in connection with<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) the recruitment of an
+               individual as an employee,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) the continued employment
+               of the individual, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) a contract for the
+               provision of services to the person by an individual,</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1">require that individual
+               to<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(i) make a request under
+               Article 15 or under <i><xref href="#SEC91" xml:link="simple" show="replace" value1="">section 91</xref></i>, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(ii) supply the person with
+               data relating to that individual obtained as a result of such a request.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) A person who contravenes
+                  <i>subsection (1)</i> shall be guilty of an offence and shall be
+               liable<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) on summary conviction,
+               to a class A fine or imprisonment for a term not exceeding 12 months or both, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) on conviction on
+               indictment, to a fine not exceeding <euro/>50,000 or imprisonment for a term not
+               exceeding 5 years or both.</p>
+         </sect>
+         <sect id="SEC5">
+            <number>5</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Expenses</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>5.</b> The expenses
+               incurred by the Commission and any Minister of the Government in the administration
+               of this Act shall, to such an extent as may be sanctioned by the Minister for Public
+               Expenditure and Reform, be paid out of moneys provided by the Oireachtas.</p>
+         </sect>
+         <sect id="SEC6">
+            <number>6</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Regulations</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>6.</b> (1) Regulations
+               made under this Act may contain such incidental, supplementary and consequential
+               provisions as appear to the person making the regulations to be necessary or
+               expedient for the purposes of the regulations.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Every regulation made
+               under this Act, other than under <i><xref href="#SEC51" xml:link="simple" show="replace" value1="">section 51</xref></i>, <i><xref href="#SEC60" xml:link="simple" show="replace" value1="">60</xref></i> or <i><xref href="#SEC73" xml:link="simple" show="replace" value1="">73</xref></i>, shall
+               be laid before each House of the Oireachtas as soon as may be after it is made.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Either House of the
+               Oireachtas may, by a resolution passed within 21 sitting days after the day on which
+               a regulation is laid before it under <i>subsection (2)</i>, annul the regulation.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) The annulment of a
+               regulation under <i>subsection (3)</i> takes effect immediately on the passing of the
+               resolution concerned but does not affect the validity of anything done under the
+               regulation before the passing of the resolution.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) Regulations may be made
+               under <i><xref href="#SEC51" xml:link="simple" show="replace" value1="">section
+                     51</xref></i>, <i><xref href="#SEC60" xml:link="simple" show="replace" value1="">60</xref></i> or <i><xref href="#SEC73" xml:link="simple" show="replace" value1="">73</xref></i> only if<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) a draft of the proposed
+               regulations has been laid before each House of the Oireachtas, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) a resolution approving
+               the draft has been passed by each House.</p>
+         </sect>
+         <sect id="SEC7">
+            <number>7</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Repeals and
+                     revocations</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>7.</b> (1) Subject to
+                  <i>subsection (4)</i>, the following provisions of the Act of 1988 are
+               repealed:</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) in section
+               1<emdash/></p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(i) subsection (1), the
+               definition of <odq/><?source id="101515" type="amends" mark="start"?>direct
+               marketing<?source id="101515" type="amends" mark="end"?><cdq/>,
+               <odq/><?source id="101517" type="amends" mark="start"?>financial
+               institution<?source id="101517" type="amends" mark="end"?><cdq/> and <odq/>the
+               register<cdq/>, and</p>
+            <p just="left" fli="-3" li="17" ri="0" before="0" after="1">(ii) subsection (5);</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b)
+               <?source id="101524" type="amends" mark="start"?>section 2(7) and
+               (8);<?source id="101524" type="amends" mark="end"?></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c)
+               <?source id="101527" type="amends" mark="start"?>section 4(2), (6), (8) and
+               (13);<?source id="101527" type="amends" mark="end"?></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(d)
+               <?source id="101532" type="amends" mark="start"?>section
+               5(1)(d);<?source id="101532" type="amends" mark="end"?></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(e)
+               <?source id="101534" type="amends" mark="start"?>section
+               9<?source id="101534" type="amends" mark="end"?> and the
+               <?source id="101567" type="amends" mark="start"?>Second
+               Schedule<?source id="101567" type="amends" mark="end"?>;</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(f)
+               <?source id="101536" type="amends" mark="start"?>section 11(3) and
+               (4)(b)<?source id="101536" type="amends" mark="end"?>;</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(g) sections
+               <?source id="101539" type="amends" mark="start"?>13<?source id="101539" type="amends" mark="end"?>,
+               <?source id="101541" type="amends" mark="start"?>14<?source id="101541" type="amends" mark="end"?>,
+               <?source id="101543" type="amends" mark="start"?>16<?source id="101543" type="amends" mark="end"?>,
+               <?source id="101545" type="amends" mark="start"?>17<?source id="101545" type="amends" mark="end"?>,
+               <?source id="101547" type="amends" mark="start"?>18<?source id="101547" type="amends" mark="end"?>,
+               <?source id="101549" type="amends" mark="start"?>19<?source id="101549" type="amends" mark="end"?>,
+               <?source id="101551" type="amends" mark="start"?>20<?source id="101551" type="amends" mark="end"?>,
+               <?source id="101553" type="amends" mark="start"?>22A<?source id="101553" type="amends" mark="end"?>
+               and
+               <?source id="101555" type="amends" mark="start"?>33<?source id="101555" type="amends" mark="end"?>.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Subject to <i>subsection
+                  (4)</i>, <xref href="EN.ACT.2003.0006#SEC14" xml:link="simple" show="replace" value1="">section 14</xref>(2) of the <xref href="EN.ACT.2003.0006" xml:link="simple" show="replace" value1="">Data Protection (Amendment) Act
+                  2003</xref> is repealed.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Subject to <i>subsection
+                  (4)</i>, the enactments specified in column (3) of <i><xref href="#SCHED1" xml:link="simple" show="replace" value1="">Schedule 1</xref></i> are revoked to
+               the extent specified in column (4) of that Schedule.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) The repeals and
+               revocations effected by this section shall not apply for the purposes of
+                  <i>subsections (1)(b)</i>, <i>(2)</i> and <i>(3)</i> of <i><xref href="#SEC8" xml:link="simple" show="replace" value1="">section 8</xref></i>.</p>
+         </sect>
+         <sect id="SEC8">
+            <number>8</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Application of Data
+                     Protection Act 1988</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>8.</b> (1) Subject to
+               this section, the Act of 1988 shall, on and from the date on which this section comes
+               into operation, cease to apply to the processing of personal data (within the meaning
+               of that Act) other than<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) the processing of such
+               data for the purposes of safeguarding the security of the State, the defence of the
+               State or the international relations of the State, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) the processing of such
+               data under the <xref href="EN.ACT.2014.0011" xml:link="simple" show="replace" value1="">Criminal Justice (Forensic Evidence and DNA Database System) Act
+                  2014</xref> or the <xref href="EN.ACT.2018.0005" xml:link="simple" show="replace" value1="">Vehicle Registration Data (Automated Searching and Exchange) Act
+                  2018</xref> to the extent that the Act of 1988 is applied in those Acts.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The Act of 1988 shall
+               apply to<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) a complaint by an
+               individual under section 10 of that Act made before the commencement of this section,
+               and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) a contravention of that
+               Act that occurred before such commencement.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) An investigation under
+               section 10 of the Act of 1988 that was begun but not completed before the
+               commencement of this section shall be completed in accordance with that Act and that
+               Act shall apply to such an investigation.</p>
+         </sect>
+      </part>
+      <part id="PART2">
+         <title>PART 2Data Protection Commission<p just="center" fli="0" li="0" ri="0" before="0" after="1"><font size="large" smallcaps="no">PART 2</font></p>
+            <p just="center" fli="0" li="0" ri="0" before="0" after="1"><font size="normal" smallcaps="yes">Data Protection Commission</font></p>
+         </title>
+         <sect id="SEC9">
+            <number>9</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Establishment
+                  day</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>9.</b> The Minister
+               shall, by order, appoint a day to be the establishment day for the purposes of this
+               Act.</p>
+            <div class="annotations">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="2"><b>Annotations</b></p>
+               <div class="e-notes">
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Editorial
+                     Notes:</b></p>
+                  <div class="e-note">
+                     <p after="1"> Power pursuant to section exercised (25.05.2018) by <i>Data
+                           Protection Act 2018 (Establishment Day) Order 2018</i> (S.I. No. 175 of
+                        2018).</p>
+                  </div>
+               </div>
+            </div>
+         </sect>
+         <sect id="SEC10">
+            <number>10</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Establishment of Data
+                     Protection Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>10.</b> (1) On the
+               establishment day there shall stand established a body to be known as An
+               Coimisi<ufada/>n um Chosaint Sonra<ifada/> or, in the English language, the Data
+               Protection Commission (in this Act referred to as the <odq/>Commission<cdq/>).</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) <i><xref href="#SCHED2" xml:link="simple" show="replace" value1="">Schedule 2</xref></i> shall have
+               effect in relation to the Commission.</p>
+         </sect>
+         <sect id="SEC11">
+            <number>11</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Supervisory authority
+                     for Data Protection Regulation and Directive</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>11.</b> The Commission
+               shall be the supervisory authority within the meaning of, and for the purposes
+               specified in<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) the Data Protection
+               Regulation, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) the Directive.</p>
+         </sect>
+         <sect id="SEC12">
+            <number>12</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Functions of
+                     Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>12.</b> (1) In addition
+               to the functions assigned to the Commission by virtue of its being the supervisory
+               authority for the purposes of the Data Protection Regulation and the Directive, the
+               general functions of the Commission shall include<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) any functions assigned
+               to it by or under this Act,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) functions transferred to
+               the Commission under <i><xref href="#SEC14" xml:link="simple" show="replace" value1="">section 14</xref></i>, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) such other functions as
+               may be assigned to it from time to time by or under any other enactment.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The Commission shall
+               monitor the lawfulness of processing of personal data in accordance with<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1"><?change id="106803" type="subs" mark="start" ?>(a) Regulation (EU) 2024/1358 of the
+               European Parliament and of the Council of 14 May 2024<fn>
+                  <marker><su>29</su></marker>
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>29</su> OJ L, 2024/1358, 22.5.2024</font></p>
+               </fn> on the establishment of “Eurodac” for the comparison of biometric data in order
+               to effectively apply Regulations (EU) 2024/1351 and (EU) 2024/1350 of the European
+               Parliament and of the Council and Council Directive 2001/55/EC and to identify
+               illegally staying third-country nationals and stateless persons and on requests for
+               the comparison with Eurodac data by Member States<csq/> law enforcement authorities
+               and Europol for law enforcement purposes, amending Regulations (EU) 2018/1240 and
+               (EU) 2019/818 of the European Parliament and of the Council and repealing Regulation
+               (EU) No 603/2013 of the European Parliament and of the
+               Council,<?change id="106803" type="subs" mark="end" ?></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) Regulation (EU) No
+               604/2013 of the European Parliament and of the Council of 26 June 2013<fn>
+                  <marker><su>6</su></marker>
+                  <p just="left" fli="-0" li="0" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>6</su> OJ No. L 180, 29.06.2013, p.31</font></p>
+               </fn> establishing the criteria and mechanisms for determining the Member State
+               responsible for examining an application for international protection lodged in one
+               of the Member States by a third-country national or a
+               <?change id="106804" type="subs" mark="start" ?>stateless person (recast),
+               and<?change id="106804" type="subs" mark="end" ?></p>
+            <p just="left" fli="-3" li="14" before="0" after="1"><?change id="106805" type="addition" mark="start" ?>(c) Regulation (EU) 2024/1351 of
+               the European Parliament and of the Council of 14 May 2024<fn>
+                  <marker><su>30</su></marker>
+                  <p just="left" fli="-0" li="0" ri="0" before="0" after="0"><font size="small" smallcaps="no"><su>30</su> OJ L, 2024/1351, 22.5.2024</font></p>
+               </fn> on asylum and migration management, amending Regulations (EU) 2021/1147 and
+               (EU) 2021/1060 and repealing Regulation (EU) No
+               604/2013.<?change id="106805" type="addition" mark="end" ?></p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) The Commission is
+               designated for the purposes of Chapter IV (Mutual assistance) of the Convention for
+               the Protection of Individuals with regard to Automatic Processing of Personal Data
+               done at Strasbourg on the 28th day of January 1981.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) The Minister may,
+               following consultation with the Commission, make any regulations that he or she
+               considers necessary or expedient for the purpose of enabling Chapter IV (as referred
+               to in <i>subsection (3)</i>) to have full effect.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) The Commission shall
+               have all such powers as are necessary or expedient for the performance of its
+               functions.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(6) The Commission shall
+               disseminate, to such extent and in such manner as it considers appropriate,
+               information in relation to the functions performed by it.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(7) The Commission shall be
+               independent in the performance of its functions.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(8) Subject to this Act, the
+               Commission shall regulate its own procedures.</p>
+            <div class="annotations">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="2"><b>Annotations:</b></p>
+               <div class="f-notes">
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Amendments:</b></p>
+                  <div class="f-note 106803 106804">
+                     <p just="left" fli="0" li="0" ri="0" before="0" after="1">Substituted
+                        (12.06.2026) by <i>International Protection Act 2026</i> (9/2026), s.
+                        309(a), (b), S.I. No. 244 of 2026.</p>
+                  </div>
+                  <div class="f-note 106805">
+                     <p just="left" fli="0" li="0" ri="0" before="0" after="1">Inserted (12.06.2026)
+                        by <i>International Protection Act 2026</i> (9/2026), s. 309(c), S.I. No.
+                        244 of 2026.</p>
+                  </div>
+               </div>
+            </div>
+         </sect>
+         <sect id="SEC13">
+            <number>13</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Performance of
+                     functions of Commission by Commissioner or member of staff</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>13.</b> (1) Where more
+               than one Commissioner stands appointed under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i>, the functions of the
+               Commission, other than the functions specified in <i>subsection (3)</i>, may be
+               performed through or by a Commissioner where he or she is authorised in that behalf
+               by the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The functions of the
+               Commission, other than the functions specified in <i>subsection (3)</i>, may be
+               performed through or by any member of staff of the Commission where he or she is
+               authorised in that behalf by the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) The functions referred
+               to in <i>subsections (1)</i> and <i>(2)</i> are the functions of the Commission under
+                     <i><xref href="#SEC12" xml:link="simple" show="replace" value1="">sections
+                     12</xref>(8)</i>, <i><xref href="#SEC21" xml:link="simple" show="replace" value1="">21</xref></i>, <i><xref href="#SEC28" xml:link="simple" show="replace" value1="">28</xref></i>, <i><xref href="#SEC43" xml:link="simple" show="replace" value1="">43</xref></i>, <i><xref href="#SEC84" xml:link="simple" show="replace" value1="">84</xref>(9)</i> and
+                  <i>(10)</i>, <i><xref href="#SEC129" xml:link="simple" show="replace" value1="">129</xref></i>, <i><xref href="#SEC134" xml:link="simple" show="replace" value1="">134</xref>(1)</i> and <i>(4)</i>, <i><xref href="#SEC135" xml:link="simple" show="replace" value1="">135</xref>(1)</i>, <i><xref href="#SEC149" xml:link="simple" show="replace" value1="">149</xref></i> (other
+               than <i>subsection (1)</i>), <i>paragraph 1</i> of <i><xref href="#SCHED2" xml:link="simple" show="replace" value1="">Schedule 2</xref></i> and its
+               function, as supervisory authority, under Article 35(4) and (5) of the Data
+               Protection Regulation.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) A Commissioner or member
+               of staff of the Commission who performs any of the functions of the Commission is
+               presumed in any proceedings to have been authorised to do so on its behalf unless the
+               contrary is shown.</p>
+         </sect>
+         <sect id="SEC14">
+            <number>14</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Transfer of functions
+                     of Data Protection Commissioner to Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>14.</b> (1) All functions
+               that, immediately before the establishment day, were vested in the Data Protection
+               Commissioner are transferred to the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) A reference in any
+               enactment or instrument under an enactment to the Data Protection Commissioner or to
+               the Office of the Data Protection Commissioner shall be construed as a reference to
+               the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) A reference in the Act
+               of 1988 (other than in section 1(3)(c)(iii) in so far as it refers to to the
+               Commissioner of the Garda S<ifada/>och<afada/>na) to the Commissioner shall be
+               construed as a reference to the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) This section shall come
+               into operation on the establishment day.</p>
+         </sect>
+         <sect id="SEC15">
+            <number>15</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Membership of
+                     Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>15.</b> (1) The
+               Commission shall consist of such and so many members (not being more than 3) as the
+               Government determines.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Each member of the
+               Commission shall be known as a Commissioner for Data Protection (in this Act referred
+               to as a <odq/>Commissioner<cdq/>).</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Subject to
+                  <i>subsections (4)</i>, <i>(8)</i> and <i>(9)</i> and <i><xref href="#SEC18" xml:link="simple" show="replace" value1="">section 18</xref></i>, a
+               Commissioner shall be appointed by the Government on the recommendation of the Public
+               Appointments Service and the appointment shall be for a period of not less than 4 and
+               not more than 5 years from the date of his or her appointment.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) If, immediately before
+               the establishment day, there is a person holding office as the Data Protection
+               Commissioner, he or she shall, on the establishment day, be a Commissioner for the
+               remainder of the term of office, and upon the same terms and conditions, for which he
+               or she was appointed as the Data Protection Commissioner.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) Subject to <i>subsection
+                  (7)</i>, the Public Appointments Service shall recommend a person for appointment
+               as Commissioner following an open selection competition held by the Service for that
+               purpose.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(6) The Public Appointments
+               Service shall appoint a selection panel to assist it in holding an open selection
+               competition.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(7) The Public Appointments
+               Service shall ensure that a person is recommended under <i>subsection (5)</i> for
+               appointment only if it is satisfied that the person has the qualifications,
+               experience and skills necessary to enable the Commission to effectively perform its
+               functions.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(8) A Commissioner to whom
+                  <i>subsection (3)</i> applies and whose term of office expires by the efflux of
+               time may be reappointed to the Commission by the Government for one further period of
+               not less than 4 and not more than 5 years without the need for a further
+               recommendation by the Public Appointments Service.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(9) A Commissioner to whom
+                  <i>subsection (4)</i> applies and whose term of office expires by the efflux of
+               time may be reappointed to the Commission by the Government for one further period of
+               not less than 4 and not more than 5 years.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(10) A Commissioner
+               shall<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) act on a full-time basis
+               subject to such terms and conditions (other than the payment of remuneration and
+               allowances for expenses) as the Government may determine,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) be paid by the
+               Commission such remuneration and allowances for expenses (if any) as the Minister
+               may, with the consent of the Minister for Public Expenditure and Reform, from time to
+               time determine,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) not hold any other
+               office or occupy any other position in respect of which emoluments are payable or
+               carry on any business, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1"><?change id="106491" type="subs" mark="start"?>(d) cease to be a Commissioner on
+               attaining the age of 70 years or, where a higher age is prescribed by order under
+               section 3A(2) of the <xref href="EN.ACT.2004.0007" xml:link="simple" show="replace" value1="">Public Service Superannuation (Miscellaneous Provisions) Act 2004</xref>
+               for the purposes of that Act, that age but, where the person is a new entrant (within
+               the meaning of that Act) appointed on or after 1 April 2004, the requirement to cease
+               to be a Commissioner on grounds of age shall not
+               apply.<?change id="106491" type="subs" mark="end"?></p>
+            <div class="annotations">
+               <p fli="0" li="0" ri="0" just="left" before="0" after="2"><b>Annotations</b></p>
+               <div class="f-notes">
+                  <p fli="0" li="0" ri="0" just="left" before="0" after="1"><b>Amendments:</b></p>
+                  <div class="f-note 106491">
+                     <p after="1">Substituted by <i>Public Service Superannuation (Miscellaneous
+                           Provisions) Act 2004</i> (7/2004), s. 3A and sch. 2 part 3, as inserted
+                        (26.12.2018) by <i>Public Service Superannuation (Age of Retirement) Act
+                           2018</i> (39/2018), ss. 3, 7 and sch., commenced on enactment.</p>
+                  </div>
+               </div>
+            </div>
+         </sect>
+         <sect id="SEC16">
+            <number>16</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Appointment of
+                     chairperson of Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>16.</b> (1) The Minister
+               shall, where the Commission consists of more than one Commissioner, appoint one of
+               the Commissioners to be chairperson and such allowance (if any) may be paid by the
+               Commission to the chairperson as the Minister may, with the consent of the Minister
+               for Public Expenditure and Reform, from time to time determine.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The chairperson shall
+               have a casting vote in the case of decisions to be taken by the Commission in the
+               event of a tied vote.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Where a chairperson
+               stands appointed under <i>subsection (1)</i>, and is unavailable to perform his or
+               her duties due to absence or incapacity, the Minister shall appoint another existing
+               Commissioner to act as chairperson for the duration of the period of absence or
+               incapacity.</p>
+         </sect>
+         <sect id="SEC17">
+            <number>17</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Resignation, removal,
+                     disqualification of Commissioner, ineligibility to become Commissioner</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>17.</b> (1) A
+               Commissioner may resign from office by giving notice in writing to the Government of
+               his or her resignation and the resignation shall take effect from such date as is
+               specified in the notice which date shall be at least 90 days after the giving of the
+               notice to the Government.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The Government may
+               remove a Commissioner from office if they are satisfied that one or more of the
+               grounds referred to in <i>subsection (3)</i> apply to the Commissioner.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) The grounds referred to
+               in <i>subsection (2)</i> are that a Commissioner<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) has become incapable
+               through ill health or otherwise of effectively performing the functions of the
+               office, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) has engaged in serious
+               misconduct.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) Where the Government
+               propose to remove a Commissioner under <i>subsection (2)</i>, they shall notify the
+               Commissioner concerned in writing of their proposal.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) A notification under
+                  <i>subsection (4)</i> shall include a statement<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) of the reasons for the
+               proposed removal,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) that the Commissioner
+               may, within a period of 30 working days from the sending of the notification or such
+               other period as the Government may, having regard to the requirements of natural
+               justice, specify in the notice, make representations to the Government in such form
+               and manner as may be specified by the Government, as to why the Commissioner should
+               not be removed from office, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) that where no
+               representations are received within the period referred to in <i>paragraph (b)</i>
+               the Government will, without further notice to the Commissioner, proceed with the
+               removal of the Commissioner from office in accordance with this section.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(6) In considering whether
+               to remove a Commissioner from office under <i>subsection (2)</i>, the Government
+               shall take into account<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) any representations made
+               by the Commissioner under <i>subsection (5)(b)</i> within the period referred to in
+               that subsection, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) any other matter the
+               Government consider relevant for the purpose of their decision.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(7) Where, having taken into
+               account the matters referred to in <i>subsection (6)</i>, the Government decide the
+               Commissioner should be removed from office in accordance with this section, they
+               shall notify the Commissioner in writing of their decision and the reasons for their
+               decision.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(8) Where the Government
+               decide to remove a Commissioner from office in accordance with this section, they
+               shall prepare a statement of the reason or reasons for such removal and cause that
+               statement to be laid before each House of the Oireachtas as soon as practicable after
+               the decision is made.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(9) A Commissioner shall
+               cease to hold office if he or she<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) is convicted on
+               indictment of an offence,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) is convicted of an
+               offence involving fraud or dishonesty,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) has a declaration made
+               against him or her under section 819 of the Act of 2014 or is deemed to be subject to
+               such a declaration by virtue of Chapter 5 of Part 14 of that Act, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(d) is subject to, or is
+               deemed to be subject to, a disqualification order within the meaning of Chapter 4 of
+               Part 14 of the Act of 2014 whether by virtue of that Chapter or of any other
+               provision of that Act.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(10) A person shall not be
+               eligible for appointment as a Commissioner if any of <i>paragraphs (a)</i> to
+                  <i>(d)</i> of <i>subsection (9)</i> are applicable in respect of the person.</p>
+         </sect>
+         <sect id="SEC18">
+            <number>18</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Acting
+                  Commissioner</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>18.</b> (1) Where one
+               Commissioner only stands appointed for the time being under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i>, the Minister
+               may authorise a member of staff of the Commission to perform the functions of a
+               Commissioner during any period when that Commissioner is absent from duty or absent
+               from the State or is, for any other reason, unable to perform the functions of a
+               Commissioner.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Where a vacancy occurs
+               in the office of Commissioner and no Commissioner stands appointed for the time being
+               under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section
+                     15</xref></i>, the Minister may authorise a member of staff of the Commission
+               to perform the functions of a Commissioner during the period of that vacancy, but an
+               authorisation under this subsection shall cease upon the appointment of a
+               Commissioner under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i> whether or not such appointment was made for the purpose
+               of filling that vacancy.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) An authorisation under
+                  <i>subsection (2)</i> shall not remain in force for a period of more than 6 months
+               unless the Minister is satisfied that it is not reasonably practicable for an
+               appointment under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i> to be made within that period, in which case he or she
+               may extend that period by such further period as he or she is satisfied is a period
+               within which it is reasonably practicable for an appointment to be made under that
+               section.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) The Minister may at any
+               time terminate an authorisation under this section.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) A member of staff of the
+               Commission in respect of whom an authorisation under this section is in force may
+               perform the functions of a Commissioner under this Act, and, for that purpose,
+               references to a Commissioner in this Act (other than in <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">sections 15</xref>(3)</i>, <i><xref href="#SEC17" xml:link="simple" show="replace" value1="">17</xref>(2)</i> to
+                  <i>(8)</i> and <i><xref href="#SEC22" xml:link="simple" show="replace" value1="">22</xref></i>) shall be construed as including references to such member of
+               staff.</p>
+         </sect>
+         <sect id="SEC19">
+            <number>19</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Accountability of
+                     Commissioner to Oireachtas Committees</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>19.</b> (1) In this
+               section, <odq/>Committee<cdq/> means a Committee appointed by either House of the
+               Oireachtas or jointly by both Houses of the Oireachtas (other than a committee
+               referred to in <xref href="EN.ACT.1993.0008#SEC19" xml:link="simple" show="replace" value1="">section 19</xref>(1) of the <xref href="EN.ACT.1993.0008" xml:link="simple" show="replace" value1="">Comptroller and Auditor General
+                  (Amendment) Act 1993</xref> or the Committee on Members<csq/> Interests of
+               D<afada/>il <Efada/>ireann or the Committee on Members<csq/> Interests of Seanad
+               <Efada/>ireann) or a sub-committee of such a Committee.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Subject to <i>subsection
+                  (3)</i>, a Commissioner shall, at the request in writing of a Committee, attend
+               before it to give account for the general administration of the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) The Commissioner shall
+               not be required to give account before a Committee for any matter which is or has
+               been or may at a future time be the subject of proceedings before a court or
+               tribunal.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) Where the Commissioner
+               is of the opinion that a matter in respect of which he or she is requested to give an
+               account before a Committee is a matter to which <i>subsection (3)</i> applies, he or
+               she shall inform the Committee of that opinion and the reasons for the opinion and,
+               unless the information is conveyed to the Committee at a time when the Commissioner
+               is before it, the information shall be so conveyed in writing.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) Where the Commissioner
+               has informed a Committee of his or her opinion in accordance with <i>subsection
+                  (4)</i> and the Committee does not withdraw the request referred to in
+                  <i>subsection (2)</i> in so far as it relates to a matter the subject of that
+               opinion<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) the Commissioner may,
+               not later than 21 days after being informed by the Committee of its decision not to
+               do so, apply to the High Court in a summary manner for determination of the question
+               whether the matter is one to which <i>subsection (3)</i> applies, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) the Chairperson of the
+               Committee may, on behalf of the Committee, make such an application,</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1">and the High Court shall
+               determine the matter.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(6) Pending the
+               determination of an application under <i>subsection (5)</i>, the Commissioner shall
+               not attend before the Committee to give account for the matter the subject of the
+               application.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(7) If the High Court
+               determines that the matter concerned is one to which <i>subsection (3)</i> applies,
+               the Committee shall withdraw the request referred to in <i>subsection (2)</i>, but if
+               the High Court determines that <i>subsection (3)</i> does not apply, the Commissioner
+               shall attend before the Committee and give account for the matter.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(8) In this section, a
+               reference to <odq/>Commissioner<cdq/> shall, where more than one Commissioner has
+               been appointed under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i>, be taken to be a reference to the
+               chairperson.</p>
+         </sect>
+         <sect id="SEC20">
+            <number>20</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Assignment and transfer
+                     of staff to Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>20.</b> (1) Every civil
+               servant who, immediately before the establishment day, stands assigned to act as a
+               member of staff of the Data Protection Commissioner shall, on the establishment day,
+               stand assigned to act as a member of staff of the Commission.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The Minister may, as he
+               or she considers appropriate, designate in writing such and so many persons who stand
+               assigned under <i>subsection (1)</i> to act as members of staff of the Commission to
+               become and be members of staff of the Commission on and from such date as the
+               Minister may specify in the designation (in this section referred to as the
+               <odq/>effective date<cdq/>).</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) A member of staff
+               designated in accordance with <i>subsection (2)</i> shall become and be a member of
+               staff of the Commission on and from the effective date.</p>
+         </sect>
+         <sect id="SEC21">
+            <number>21</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Staff of
+                  Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>21.</b> (1) The
+               Commission may, subject to the approval of the Minister given with the consent of the
+               Minister for Public Expenditure and Reform, appoint such number of persons to be
+               members of its staff as it may determine.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The Commission shall,
+               subject to the approval of the Minister given with the consent of the Minister for
+               Public Expenditure and Reform, determine the grades of members of its staff and the
+               numbers in each grade.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Members of staff of the
+               Commission shall be civil servants.</p>
+         </sect>
+         <sect id="SEC22">
+            <number>22</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Superannuation of
+                     Commissioners</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>22.</b> (1) The Minister
+               may, with the consent of the Minister for Public Expenditure and Reform, make a
+               scheme or schemes for<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) the granting of
+               superannuation benefits to or in respect of a Commissioner ceasing to hold office,
+               or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) the making of
+               contributions to a pension scheme approved of by the Minister with the consent of the
+               Minister for Public Expenditure and Reform which has been entered into by the
+               Commissioner.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The Minister may, with
+               the consent of the Minister for Public Expenditure and Reform, make a scheme amending
+               or revoking a scheme made under <i>subsection (1)</i>, including a scheme amended
+               under this subsection.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) If any dispute arises as
+               to the claim of a Commissioner to, or the amount of, any superannuation benefit
+               payable in pursuance of a scheme made under <i>subsection (1)</i>, such dispute shall
+               be submitted to the Minister who shall refer it to the Minister for Public
+               Expenditure and Reform for determination by him or her.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) A scheme made under
+                  <i>subsection (1)</i> shall be carried out by the Minister in accordance with its
+               terms.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) No superannuation
+               benefit shall be granted by the Minister to or in respect of any Commissioner ceasing
+               to hold office otherwise than<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) in accordance with a
+               scheme under <i>subsection (1)</i>, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) with the consent of the
+               Minister for Public Expenditure and Reform.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(6) A scheme made under
+                  <i>subsection (1)</i> shall be laid before each House of the Oireachtas as soon as
+               may be after it is made and, if a resolution annulling the scheme is passed by either
+               such House within the next 21 days on which that House has sat after the scheme is
+               laid before it, the scheme shall be annulled accordingly but without prejudice to the
+               validity of anything previously done under that scheme prior to the resolution.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(7) In this section,
+               <odq/>superannuation benefits<cdq/> means pensions, gratuities and other allowances
+               payable on resignation, retirement or death.</p>
+         </sect>
+         <sect id="SEC23">
+            <number>23</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Accounts of
+                     Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>23.</b> (1) The
+               Commission shall keep, in such form as may be approved by the Minister with the
+               consent of the Minister for Public Expenditure and Reform, all proper and usual
+               accounts of all money received or expended by it and, in particular, shall keep in
+               such form as aforesaid all such special accounts as the Minister may, with the
+               consent of the Minister for Public Expenditure and Reform, from time to time
+               direct.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Accounts kept in
+               accordance with this section shall be submitted, not later than 1 April in the year
+               immediately following the financial year to which they relate or on such earlier date
+               as the Minister may from time to time specify, by the Commission to the Comptroller
+               and Auditor General for audit and, immediately after the audit, a copy of the
+               accounts, and of such other special accounts (if any) kept in accordance with this
+               section as the Minister, after consultation with the Minister for Public Expenditure
+               and Reform, may direct and a copy of the Comptroller and Auditor General<csq/>s
+               report on the accounts shall be presented to the Minister and the Commission shall,
+               as soon as may be thereafter, cause copies thereof to be laid before each House of
+               the Oireachtas.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Subject to
+                  <i>subsections (4)</i> and <i>(5)</i>, <i>subsections (1)</i> and <i>(2)</i> shall
+               cease to have effect on the date of the coming into operation of <i><xref href="#SEC176" xml:link="simple" show="replace" value1="">section
+                  176</xref>(b)</i>.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) Accounts kept in
+               accordance with this section that relate to the period specified under <i>subsection
+                  (5)</i> shall be submitted by the Commission to the Comptroller and Auditor
+               General for audit not later than 3 months after the date of the coming into operation
+               of <i><xref href="#SEC176" xml:link="simple" show="replace" value1="">section
+                     176</xref>(b)</i>.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(5) The Minister may, for
+               the purposes of <i>subsection (4)</i>, specify a period which<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) shall end on the date
+               immediately preceding the date of the coming into operation of <i><xref href="#SEC176" xml:link="simple" show="replace" value1="">section
+                  176</xref>(b)</i>, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) may be longer or shorter
+               than a financial year of the Commission.</p>
+         </sect>
+         <sect id="SEC24">
+            <number>24</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Annual report</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>24.</b> (1) The
+               Commission shall, not later than 30 June in each year<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) prepare a report on its
+               activities in the immediately preceding year, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) cause copies of the
+               report to be laid before each House of the Oireachtas.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) Notwithstanding
+                  <i>subsection (1)</i>, if but for this subsection, the first report under this
+               section would relate to a period of less than 6 months, the report shall relate to
+               that period and to the year immediately following that period and shall be made as
+               soon as may be, but not later than 6 months after the end of that year.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) The Commission may, at
+               any time after <i>subsection (1)(b)</i> has been complied with, publish its annual
+               report in such form and manner as it considers appropriate.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) For the purposes of the
+               law of defamation, a report under <i>subsection (1)</i> shall be absolutely
+               privileged.</p>
+         </sect>
+         <sect id="SEC25">
+            <number>25</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Accountability for
+                     accounts of Commission</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>25.</b> (1) The
+               Commissioner, or where more than one Commissioner has been appointed under <i><xref href="#SEC15" xml:link="simple" show="replace" value1="">section 15</xref></i>,
+               the chairperson, is the accounting officer in relation to the appropriation accounts
+               of the Commission for the purpose of the Comptroller and Auditor General Acts 1866 to
+               1998.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) <xref href="EN.ACT.1993.0008#SEC19" xml:link="simple" show="replace" value1="">Section
+                  19</xref>(2) of the <xref href="EN.ACT.1993.0008" xml:link="simple" show="replace" value1="">Comptroller and Auditor General (Amendment) Act 1993</xref> shall, in so
+               far as it relates to data protection matters, not apply to the Commissioner or
+               chairperson who is the accounting officer pursuant to <i>subsection (1)</i>.</p>
+         </sect>
+         <sect id="SEC26">
+            <number>26</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Prohibition on
+                     disclosure of confidential information</b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>26.</b> (1) A relevant
+               person shall not disclose confidential information obtained by him or her while
+               performing functions under this Act or the Data Protection Regulation unless he or
+               she is required or permitted by law, or duly authorised by the Commission, to do
+               so.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) <i>Subsection (1)</i>
+               shall not operate to prevent the disclosure by a relevant person of
+               information<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) in a report to the
+               Commission or a Commissioner,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) to a Minister of the
+               Government, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) to a public authority,
+               whether in the State or otherwise, for the purposes of facilitating cooperation
+               between the Commission and such authority in the performance of their respective
+               functions.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Subject to <i><xref href="#SEC154" xml:link="simple" show="replace" value1="">section
+                  154</xref></i>, a person who contravenes <i>subsection (1)</i> commits an offence
+               and is liable on summary conviction to a class A fine.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(4) In this
+               section<emdash/></p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>confidential
+               information<cdq/> includes information that is expressed by the Commission to be
+               confidential either as regards particular information or as regards information of a
+               particular class or description;</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1"><odq/>relevant person<cdq/>
+               means<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) a Commissioner,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) a member of staff of the
+               Commission,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) an authorised
+               officer,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(d) any other person engaged
+               under a contract for services by the Commission or a member of the staff of such a
+               person, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(e) a person who has acted
+               in a capacity referred to in any of <i>paragraphs (a)</i> to <i>(d)</i>.</p>
+         </sect>
+         <sect id="SEC26A">
+            <?change id="106788" type="addition" mark="start" ?>
+            <title>
+               <p just="left" fli="0" li="11" before="0" after="1"><b>Prohibition on disclosure of
+                     confidential information by persons engaging with Commission in connection with
+                     relevant function</b></p>
+            </title>
+            <number>26A</number>
+            <p just="left" fli="-3" li="11" before="0" after="1"><b>26A.</b> (1) The Commission may,
+               where it or an authorised officer is authorised by law to provide information to a
+               person (in this section referred to as a “relevant person”) in connection with the
+               performance of a relevant function, by notice in writing given to the person— </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(a) identify information that is
+               provided, or to be provided, to the person by the Commission or an authorised
+               officer, as the case may be, in connection with the performance of a relevant
+               function by the Commission, an authorised officer, or both, as confidential
+               information, </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(b) specify, by reference to
+                  <i>paragraph (a)</i>, <i>(b)</i> or <i>(c)</i> of the definition of “confidential
+               information”, the reason the information so identified is confidential, and </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(c) direct that the person shall,
+               subject to <i>subsection (2)</i>, not disclose that confidential information. </p>
+            <p just="left" fli="-3" li="11" before="0" after="1">(2) A relevant person who receives
+               a notice under <i>subsection (1)</i> may disclose confidential information referred
+               to in the notice where such disclosure is— </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(a) required or permitted by law,
+               or </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(b) authorised by the Commission in
+               writing. </p>
+            <p just="left" fli="-3" li="11" before="0" after="1">(3) A relevant person who fails to
+               comply with a direction under <i>subsection (1)(c)</i> commits an offence and is
+               liable on summary conviction to a class A fine. </p>
+            <p just="left" fli="-3" li="11" before="0" after="1">(4) Where information, specified in
+               a notice under <i>subsection (1)</i>, is confidential by reference to <i>paragraph
+                  (c)</i> only of the definition of “confidential information”, the information
+               shall cease to be confidential and the direction under <i>subsection (1)(c)</i> shall
+               cease to apply to the relevant person concerned— </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(a) subject to <i>paragraph
+               (b)</i>, where the information is confidential by reason of the fact disclosure could
+               reasonably be expected to prejudice the effectiveness of the performance by an
+               authorised officer of a relevant function, upon the completion of the performance by
+               the authorised officer of the function, or </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(b) where the information is
+               confidential by reason of the fact disclosure could reasonably be expected to
+               prejudice the effectiveness of the performance by the Commission of a relevant
+               function or the effectiveness of the performance by the Commission of a relevant
+               function and an authorised officer of a relevant function, upon the completion of the
+               performance by the Commission of its relevant function. </p>
+            <p just="left" fli="-3" li="11" before="0" after="1">(5) In this section— </p>
+            <p just="left" fli="0" li="11" before="0" after="1">“confidential information” means— </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(a) commercially sensitive
+               information within the meaning of <i>section 149(7)</i>, </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(b) information given in confidence
+               and on the understanding that it will be treated by the Commission or an authorised
+               officer, as the case may be, as confidential and where, in the opinion of the
+               Commission— </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(i) the disclosure of such
+               information would be likely to prejudice the giving to the Commission or an
+               authorised officer of further information by the person or information by another
+               person, and </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(ii) it is important that the
+               Commission or an authorised officer, as the case may be, continues to receive such
+               information for the purpose of the performance of a relevant function, </p>
+            <p just="left" fli="0" li="14" before="0" after="1">or </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(c) information the disclosure of
+               which could, in the opinion of the Commission, reasonably be expected to prejudice
+               the effectiveness of the performance of a relevant function by it, an authorised
+               officer, or both, as the case may be; </p>
+            <p just="left" fli="0" li="11" before="0" after="1">“relevant function” means a
+               function— </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(a) of the Commission in relation
+               to— </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(i) carrying out an investigation
+               within the meaning of <i>section 105</i>, </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(ii) handling a complaint within
+               the meaning of <i>section 107</i>, </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(iii) conducting an inquiry within
+               the meaning of <i>section 107</i>, </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(iv) handling a complaint within
+               the meaning of <i>section 118</i>, </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(v) conducting an inquiry within
+               the meaning of <i>section 118</i>, </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(vi) carrying out an audit under
+                  <i>section 136(1)</i>, or </p>
+            <p just="left" fli="-3" li="17" before="0" after="1">(vii) carrying out a data
+               protection audit within the meaning of <i>section 136(4)</i>, </p>
+            <p just="left" fli="0" li="14" before="0" after="1">or </p>
+            <p just="left" fli="-3" li="14" before="0" after="1">(b) of an authorised officer under
+                  <i>section 137(5)</i> or
+               <i>139(1)</i>.<?change id="106788" type="addition" mark="end" ?></p>
+            <div class="annotations">
+               <p just="left" fli="0" li="0" ri="0" before="0" after="2"><b>Annotations:</b></p>
+               <div class="f-notes">
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Amendments:</b></p>
+                  <div class="f-note 106788">
+                     <p just="left" fli="0" li="0" ri="0" before="0" after="1">Inserted (31.07.2023)
+                        by <i>Courts and Civil Law (Miscellaneous Provisions) Act 2023</i>
+                        (18/2023), s. 74, S.I. No. 389 of 2023.</p>
+                  </div>
+               </div>
+               <div class="e-notes">
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"><b>Editorial
+                     Notes:</b></p>
+                  <div class="e-note">
+                     <p just="left" fli="0" li="0" ri="0" before="0" after="1">The section heading
+                        is taken from the amending section in the absence of one included in the
+                        amendment.</p>
+                  </div>
+               </div>
+            </div>
+         </sect>
+         <sect id="SEC27">
+            <number>27</number>
+            <title>
+               <p just="left" fli="0" li="11" ri="0" before="0" after="1"><b>Civil proceedings for
+                     contravention of <i><xref href="#SEC26" xml:link="simple" show="replace" value1="">section 26</xref></i></b></p>
+            </title>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1"><b>27</b>. (1) A person who
+               suffers loss or harm as a result of a contravention of <i><xref href="#SEC26" xml:link="simple" show="replace" value1="">section 26</xref>(1)</i> may,
+               subject to <i><xref href="#SEC154" xml:link="simple" show="replace" value1="">section
+                     154</xref></i>, bring proceedings against the person specified in <i>subsection
+                  (2)</i> seeking relief by way of<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) an injunction or
+               declaration, or</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) damages,</p>
+            <p just="left" fli="0" li="11" ri="0" before="0" after="1">or both.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(2) The person specified for
+               the purposes of <i>subsection (1)</i> is<emdash/></p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(a) where it is alleged that
+               the contravention was committed by a Commissioner, member of staff of the Commission
+               or an authorised officer and the applicant under that subsection is seeking an
+               injunction or declaration, the Commissioner, member of staff or authorised officer
+               concerned,</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(b) where it is alleged that
+               the contravention was committed by a Commissioner, member of staff of the Commission
+               or an authorised officer and the applicant under that subsection is seeking damages,
+               the Commission, and</p>
+            <p just="left" fli="-3" li="14" ri="0" before="0" after="1">(c) where it is alleged that
+               the contravention was committed by a person other than a Commissioner, member of
+               staff of the Commission or an authorised officer, that person.</p>
+            <p just="left" fli="-3" li="11" ri="0" before="0" after="1">(3) Proceedings under
+                  <i>subsection (1)</i>, in so far as they seek the relief referred to in
+                  <i>paragraph (b)</i> of that subsection, shall be founded on tort.</p>
+         </sect>
+      </part>
+      </body>
+   <backmatter>
+      <schedule id="SCHED1">
+         <title>
+            <p just="center" fli="0" li="0" ri="0" before="0" after="1">
+               <font size="large" smallcaps="no">SCHEDULE 1</font></p>
+            <p just="center" fli="0" li="0" ri="0" before="0" after="1"><font size="normal" smallcaps="yes">Statutory Instruments Revoked</font></p>
+         </title>
+         <p just="left" fli="0" li="11" ri="0" before="0" after="1">Section 7(3)</p>
+         <table width="100%" class="0 0 0 center 0 0">
+            <colgroup>
+               <col width="40%"/>
+               <col width="60%"/>
+            </colgroup>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Item</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1">(1)</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">S.I. No. and Year</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1">(2)</p>
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"/>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Short Title</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1">(3)</p>
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"/>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Extent of
+                     Revocation</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1">(4)</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">1.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.1988.0347" xml:link="simple" show="replace" value1="">S.I. No.
+                        347 of 1988</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection (Fees)
+                     Regulations 1988</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="0" li="0" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">2.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.1988.0350" xml:link="simple" show="replace" value1="">S.I. No.
+                        350 of 1988</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection
+                     (Registration Period) Regulations 1988</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">3.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.1988.0351" xml:link="simple" show="replace" value1="">S.I. No.
+                        351 of 1988</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection
+                     (Registration) Regulations 1988</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">4.</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.1989.0081" xml:link="simple" show="replace" value1="">S.I. No.
+                        81 of 1989</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection
+                     (Restriction of section 4) Regulations 1989</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">5.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.1993.0095" xml:link="simple" show="replace" value1="">S.I. No.
+                        95 of 1993</xref>
+                  </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection Act
+                     1988 (Section 5(1)(d)) (Specifications) Regulations 1993</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">6.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.2007.0657" xml:link="simple" show="replace" value1="">S.I. No.
+                        657 of 2007</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection Act
+                     1988 (Section 16(1)) Regulations 2007</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">7.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.2007.0658" xml:link="simple" show="replace" value1="">S.I. No.
+                        658 of 2007</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection (Fees)
+                     Regulations 2007</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">8.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.2007.0687" xml:link="simple" show="replace" value1="">S.I. No.
+                        687 of 2007</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection
+                     (Processing of Genetic Data) Regulations 2007</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">9.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.2009.0421" xml:link="simple" show="replace" value1="">S.I. No.
+                        421 of 2009</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection Act
+                     1988 (Section 5(1)(d)) (Specification) Regulations 2009</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+            <tr>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">10.</p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"> </p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1"><xref href="EN.SI.2016.0426" xml:link="simple" show="replace" value1="">S.I. No.
+                        426 of 2016</xref></p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">Data Protection
+                     (Section 2B) Regulations 2016</p>
+               </td>
+               <td colspan="1" rowspan="1" valign="top">
+                  <p just="left" fli="0" li="11" ri="0" before="0" after="1">The whole
+                     Regulations</p>
+                  <p just="left" fli="-3" li="26" ri="0" before="0" after="1"/>
+                  <p just="center" fli="0" li="0" ri="0" before="0" after="1"/>
+               </td>
+            </tr>
+         </table>
+      </schedule>
+      </backmatter>
+</act>

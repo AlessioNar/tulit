@@ -6,6 +6,7 @@ and creating appropriate parser instances.
 """
 
 from tulit.parser.registry import ParserRegistry
+from tulit.parser.exceptions import ParserError
 from tulit.parser.xml.xml import XMLParser
 from typing import Optional
 from lxml import etree
@@ -52,7 +53,8 @@ def detect_akn_format(file_path: str) -> str:
             namespace = elem.nsmap.get(None) or elem.nsmap.get('akn', '')
             
             # Detect format based on namespace
-            if 'LegalDocML.de' in namespace:
+            if 'LegalDocML.de' in namespace or 'rechtsinformationen.bund.de/schema/norm' in namespace:
+                # LegalDocML.de, also as served by the federal legal information portal
                 return 'german'
             elif 'CSD13' in namespace or 'CSD' in namespace:
                 # Luxembourg and other jurisdictions using Committee Specification Drafts
@@ -108,7 +110,7 @@ def create_akn_parser(file_path: Optional[str] = None, format: Optional[str] = N
     # Use registry to get parser (fallback to 'akn' if not found)
     try:
         return _akn_registry.create(format or 'akn')
-    except KeyError:
+    except ParserError:
         # Fallback to standard parser if format not registered
         return _akn_registry.create('akn')
 

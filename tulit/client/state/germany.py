@@ -1,8 +1,6 @@
 import logging
 import requests
-import argparse
 import os
-import sys
 from tulit.client.client import Client
 from datetime import datetime
 from typing import Optional, List, Dict
@@ -21,7 +19,7 @@ class GermanyClient(Client):
     API Documentation: https://docs.rechtsinformationen.bund.de/
     """
     
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         """
         Initialize the Germany RIS client.
         
@@ -263,3 +261,35 @@ class GermanyClient(Client):
             filename = f"literature_{document_number}"
             
         return self.handle_response(response, filename)
+
+    def current_expression(self, work_eli: str) -> Optional[Dict]:
+        """
+        The current version (expression) of a federal act, from its work ELI.
+
+        ``work_eli`` is e.g. 'eli/bund/bgbl-1/2009/s2704'. Returns the search
+        result item (with 'legislationIdentifier', 'encoding', 'exampleOfWork',
+        'legislationLegalForce'), or None if the portal does not hold the act.
+        """
+        work_eli = work_eli.strip('/')
+        response = self._make_request(self._build_url('legislation'), params={'eli': work_eli, 'size': 10})
+        for member in response.json().get('member', []):
+            item = member.get('item', {})
+            if item.get('exampleOfWork', {}).get('legislationIdentifier') == work_eli:
+                return item
+        return None
+
+    def download_expression_xml(self, expression: Dict) -> str:
+        """Download the LegalDocML.de XML of an expression returned by current_expression."""
+        url = next((e['contentUrl'] for e in expression.get('encoding', [])
+                    if e.get('encodingFormat') == 'application/xml'), None)
+        if url is None:
+            from tulit.parser.exceptions import FileLoadError
+            raise FileLoadError(f"No XML for {expression.get('legislationIdentifier')}")
+        target = os.path.join(self.download_dir, 'DE', url.strip('/').replace('/', '_'))
+        if not os.path.exists(target):
+            response = self._make_request(f'{self.base_url}{url}', headers={'Accept': 'application/xml'})
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with open(target, 'wb') as f:
+                f.write(response.content)
+        return target
+

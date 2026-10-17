@@ -5,6 +5,87 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-10-17
+### Added
+
+- **One `fetch` for every jurisdiction**: `tulit.fetch(identifier, jurisdiction=..., version=..., date=..., language=...)` retrieves an act from the official source of the EU or a Member State, addressed by its national identifier or ELI (the jurisdiction is inferred from ELI URIs), in its **original** version (as adopted) or its **consolidated** version (in force on a date). Unsupported versions, languages and options raise `ValueError` before anything is downloaded.
+- **Sources** (`tulit.sources`): one `Source` per jurisdiction with a common interface (`retrieve()` returning a `Retrieval`), a registry (`get_source`, `list_sources`, `source_for_eli`) and the `tulit sources` command. The CLI `get` command takes `-j/--jurisdiction`, `--version` and `--date`.
+- **New jurisdictions**, each with a parser to legalJSON and per-country tests:
+  - Austria: consolidated federal law from RIS (OGD API), parsed from RIS XML.
+  - Denmark: acts and consolidations (lovbekendtgørelser) from Retsinformation, parsed from LexDania XML.
+  - Finland: original and consolidated statutes from the Finlex Akoma Ntoso API, in Finnish or Swedish.
+  - Germany: the version in force of federal acts from Rechtsinformationen des Bundes (test phase), parsed from LegalDocML.de.
+  - Ireland: Acts as enacted from the Irish Statute Book and Revised Acts from the Law Reform Commission, parsed from their XML.
+  - Luxembourg: original and consolidated acts from Legilux, choosing the consolidation in force on a date.
+  - The Netherlands: consolidated acts from the Basiswettenbestand (SRU), parsed from BWB XML.
+  - Slovakia: original and consolidated acts from Slov-Lex, parsed from MetaLex XML.
+  - Spain: original and consolidated acts from the BOE consolidated-legislation API, choosing the version in force on a date.
+- **EU consolidated texts**: `fetch("32016R0679", version="consolidated", date=...)` finds the consolidated version in Cellar. EU ELIs are accepted as identifiers.
+- **FRBR metadata**: `meta` records `jurisdiction`, `language`, `version` and `version_date`, identifying the expression of the act, in preparation for Akoma Ntoso and `.leg` export.
+- **Structure builders** (`tulit.parser.structure`): shared helpers that number divisions, articles and their children with ELI-style eIds, used by the new parsers.
+- **Access to law**: the README explains the basis for reusing legislation retrieved by tulit, and tracks coverage of the 27 Member States and the EU.
+
+### Fixed
+
+- **Clients no longer exit the program**: the Finlex, Normattiva, Veneto, Legilux, Portugal, Irish Statute Book and Malta clients raised `SystemExit` on errors; they now raise `NetworkError`, `FileLoadError` or `ContentTypeError`.
+- **Finlex**: requests send a User-Agent (the API rejects them otherwise); Akoma Ntoso sections and subsections count as divisions only when they contain articles.
+- **Portugal**: the Diário da República HTML is now a JavaScript application with no text, so the client downloads PDF by default and reports the HTML shell as `ContentTypeError`.
+- **German LegalDocML parser**: documents from the federal portal produced no output (the namespace was hard-coded and the document root was never loaded). The parser now reads the namespace from the document, keeps title and short title apart, and returns one child per Absatz with its list items in order.
+- **Akoma Ntoso parser**: a missing preamble no longer raises when the preface is read.
+
+### Known limitations
+
+- Austria, Germany and the Netherlands provide consolidated texts only; original versions (BGBl, Staatsblad) are planned for 0.9.0.
+- Denmark, Finland, Ireland and Germany return the current consolidated version; a date cannot be selected.
+- Italy and France have clients and parsers but are not yet available through `fetch`.
+- In EU consolidated texts, the divisions above article level (chapters, sections) are not yet recognised. The children of annexes and of legacy Cellar HTML documents use positional eIds.
+
+## [0.7.0] - 2026-10-17
+### Added
+
+- **`tulit.fetch()`**: one call turns a CELEX number into validated legalJSON. It downloads the act from Cellar in the requested format (`fmx4`, `xhtml`, `html`) and language, parses it with the matching parser, attaches the work metadata as `meta` and validates the result against the legalJSON schema.
+- **Command-line interface**: `tulit get <CELEX>` downloads an act as legalJSON, `tulit parse <path> --format <id>` converts local files, and `tulit formats` lists the available parsers. Also available as `python -m tulit`.
+- **Cellar metadata**: `CellarClient.get_metadata()` returns the legalJSON `meta` object for an act: ELI, Cellar UUID, document date, in-force status and the acts it amends, repeals and corrects.
+- **Language selection**: `CellarClient.download()` takes a `language` argument (three-letter code, default `ENG`) instead of always downloading English.
+
+### Fixed
+
+- **Parser registry**: `get_parser_registry()` returned an empty registry, so `get_parser()` could not work. The built-in parsers are now registered under format ids and aliases (`formex`/`fmx4`, `akn`, `xhtml`, `html`, ...). `register_parser()` no longer raises `TypeError`, and `create_akn_parser()` falls back to the standard parser as intended.
+- **Logging**: clients no longer call `logging.basicConfig`, which printed INFO logs in every application using tulit; the proposal, Veneto and Formex parsers and the Legilux client log through loggers instead of `print()`. `log_dir` is now optional for all clients.
+- **Formex paragraph text**: block elements are separated when article text is flattened, so paragraphs read `1. This Regulation ...` instead of `1.This Regulation ...` and list points `(a) first` instead of `(a)first`.
+
+### Changed
+
+- The getting-started guide is rewritten around `fetch`, the CLI and the legalJSON structure, with examples checked against the current API.
+
+## [0.6.0] - 2026-10-17
+### Added
+
+- **Parser Parity Across Formats**: The Akoma Ntoso and Cellar HTML parsers now emit the same legalJSON features as the Formex parser: typed divisions above article level (part/title/chapter/section/subsection) with parent links, ELI-resolvable eIds (`cpt_I`, `art_1`, `par_2`, `unp_N`), per-article `parent` links, and the hybrid `structure` skeleton tree.
+
+- **Cellar HTML Annexes and Attachments**: `CellarHTMLParser` extracts annexes (`anx_*` divs at any nesting) uniform with articles, plus attached material published with the act — agreements, joint declarations, additional acts in multi-act OJ pieces, and wrapper-level content — as `att_N` annex entries.
+
+- **Cellar HTML Corpus-Grade Extraction**: generic document-order block walk for OJ xhtml articles (mixed paragraph/table content folded into `par_N`/`unp_N` children), narrative preambles (State-aid decisions) mapped onto citations/recitals, enacting-terms content outside articles kept as a pseudo-article, conclusions from the final-provisions block, symmetric footnote policy (dropped act-side, kept annex-side, inline markers always preserved).
+
+- **Old-Format (TXT_TE) Extraction Rework**: title-block preface, generalized citation forms, all three recital styles ('Whereas:' + numbered, bare 'Whereas', narrative '(N)'), signature-block conclusions, annex/agreement capture after the signature, a whole-flow fallback for non-legislative documents and a lossless leftover net so no document text is dropped.
+
+- **AKN Variant Unification**: the three near-duplicate `get_articles` implementations (base, AKN4EU, Luxembourg) merged into one template with `_extractor_id_attr` and `_extract_article_children` hooks; AKN children are aggregated to paragraph level (`par_N`/`unp_N`) and quoted structures are excluded from article/division discovery.
+
+- **Corpus-Scale Verification (HTML)**: the Cellar HTML parser was verified against the in-force legislation HTML dump with the same alphanumeric-coverage gate used for Formex.
+
+### Fixed
+
+- **cellar_standard Validation Drift**: `parse(validate=True)` now validates the canonical `to_dict()` output instead of a hand-rolled dict that had drifted from the schema (and unpacked the validator's boolean as a tuple); `parse()` on an empty directory returns the parser, not a dict.
+- **Nested Table Double-Counting**: HTML tables render only their own rows; nested tables are no longer counted twice.
+- **Article Truncation in Old Format**: article extraction no longer stops at ordinary prose starting with 'For the …'.
+- **PyPI Release Workflow**: publishing now uses PyPI trusted publishing (`pypa/gh-action-pypi-publish`) and runs only on tag pushes; the previous job failed on every release because Poetry was not installed in the publish job.
+- **Test Isolation**: client tests download into a temporary directory instead of overwriting tracked fixtures in `tests/data`, and the obsolete coverage-badge hook no longer writes `.github/badges/` on every run.
+
+### Changed
+
+- CI runs unit tests on `development-*` branches too, and GitHub Actions are updated to Node 24 versions.
+- `coverage.xml` is no longer tracked (coverage is reported through Codecov).
+
 ## [0.5.0] - 2026-07-24
 ### Added
 

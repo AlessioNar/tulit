@@ -1,16 +1,39 @@
 import unittest
 from unittest.mock import patch, Mock
+import logging
 import os
+import shutil
+import tempfile
 from tulit.client.client import Client
-from tests.conftest import locate_data_dir, locate_tests_dir
+from tests.conftest import locate_tests_dir
 
 class TestClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        data_root = locate_data_dir(__file__)
         tests_root = locate_tests_dir(__file__)
-        self.downloader = Client(download_dir=str(data_root / 'formex'), log_dir=str(tests_root / 'logs'))
+        # Write into a scratch directory so tests never touch tracked fixtures
+        download_dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, download_dir, ignore_errors=True)
+        self.downloader = Client(download_dir=download_dir, log_dir=str(tests_root / 'logs'))
         
+    def test_does_not_configure_root_logging(self):
+        root = logging.getLogger()
+        handlers_before = list(root.handlers)
+        Client(download_dir=self.downloader.download_dir)
+        self.assertEqual(root.handlers, handlers_before)
+
+    def test_log_dir_adds_one_file_handler(self):
+        log_dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, log_dir, ignore_errors=True)
+        first = Client(download_dir=self.downloader.download_dir, log_dir=log_dir)
+        Client(download_dir=self.downloader.download_dir, log_dir=log_dir)
+        file_handlers = [h for h in first.logger.handlers if isinstance(h, logging.FileHandler)
+                         and h.baseFilename == os.path.join(os.path.abspath(log_dir), 'client.log')]
+        self.assertEqual(len(file_handlers), 1)
+        for handler in file_handlers:
+            first.logger.removeHandler(handler)
+            handler.close()
+
     def test_get_extension_from_content_type(self):
         content_type_mapping = {
             'text/html': 'html',
@@ -43,14 +66,13 @@ class TestClient(unittest.TestCase):
         mock_zip.extractall.assert_called_once_with(folder_path)
     
     @patch('tulit.client.client.Client.extract_zip')
-    @patch('tulit.client.client.os.makedirs')
-    def test_handle_response(self, mock_makedirs, mock_extract_zip):
+    def test_handle_response(self, mock_extract_zip):
         # Mock response object
         response = Mock()
         response.headers = {'Content-Type': 'application/zip'}
         response.content = b'fake zip content'
 
-        cellar_id = 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04\\DOC_1'
+        cellar_id = os.path.join('e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04', 'DOC_1')
         target_path = os.path.join(self.downloader.download_dir, cellar_id)
 
         # Test handling zip content

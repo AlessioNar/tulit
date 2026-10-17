@@ -4,233 +4,269 @@ Getting Started
 Installation
 ------------
 
-To use tulit, first install it using poetry:
-
-.. code-block:: console
-
-    $ poetry shell
-    $ poetry install
-
-This will install the package and its dependencies.
-
-Alternatively, you can install the package using pip:
+Install the package from PyPI:
 
 .. code-block:: console
 
     $ pip install tulit
 
+tulit requires Python 3.11 or later. To work on tulit itself, clone the
+repository and install it with Poetry:
 
-Basic usage
+.. code-block:: console
+
+    $ git clone https://github.com/AlessioNar/tulit.git
+    $ cd tulit
+    $ poetry install
+
+
+Quick start
 -----------
 
-The `tulit` package has two main components:
+``tulit.fetch`` downloads an act from its official source, parses it and
+returns validated legalJSON with its metadata:
 
-* **Client**: Query and retrieve data from legal sources across Europe:
-  
-  * EU: Cellar (EU Publications Office)
-  * Member States: Finland, France, Germany, Ireland, Italy, Luxembourg, Malta, Portugal, Spain
-  * Regional: Italian regions (Veneto)
+.. code-block:: python
 
-* **Parser**: Convert legal documents from various formats to JSON:
-  
-  * XML: Akoma Ntoso, FORMEX 4, BOE XML
-  * HTML: Cellar variants, Regional parsers
-  * JSON: Legifrance
+    import tulit
 
-Retrieving legal documents
----------------------------
+    doc = tulit.fetch("32024R0903")  # Interoperable Europe Act
 
-EU Cellar Client
-~~~~~~~~~~~~~~~~
+    doc["meta"]["eli"]          # 'http://data.europa.eu/eli/reg/2024/903/oj'
+    doc["meta"]["in_force"]     # True
+    article = doc["articles"][0]
+    article["eId"], article["heading"]   # ('art_1', 'Subject matter and scope')
 
-Retrieve documents from the EU Publications Office:
+Options:
+
+* ``jurisdiction``: ``'EU'`` (default) or a Member State code (``'AT'``,
+  ``'ES'``, ...). It is inferred when the identifier is an ELI URI.
+* ``version``: ``'original'`` (the text as adopted) or ``'consolidated'``
+  (the text in force). Defaults to ``'original'`` where the source
+  publishes it.
+* ``date``: ISO date of the consolidated version; defaults to today.
+* ``language``: ISO 639-3 language code (``'eng'``, ``'fra'``, ``'deu'``,
+  ...); defaults to the source's main language.
+* ``download_dir``: keep the source files in this directory. By default they
+  go to a temporary directory that is removed afterwards.
+* ``metadata``: attach the metadata as ``meta`` (default ``True``).
+* ``validate``: validate the result against the legalJSON schema (default
+  ``True``); raises ``tulit.parser.exceptions.ValidationError`` otherwise.
+* source-specific options, such as ``format`` for the EU: ``'fmx4'``
+  (Formex 4, default), ``'xhtml'`` or ``'html'``.
+
+.. code-block:: python
+
+    gdpr_fr = tulit.fetch("32016R0679", format="xhtml", language="fra")
+    gdpr_fr["meta"]["repeals"]   # ['31995L0046']
+
+    # Member States: national identifier or ELI, original or consolidated
+    dsg = tulit.fetch("10001597", jurisdiction="AT")
+    lopd = tulit.fetch("BOE-A-2018-16673", jurisdiction="ES",
+                       version="consolidated", date="2021-01-01")
+    dpa = tulit.fetch("http://www.irishstatutebook.ie/eli/2018/act/7")
+    lopd["meta"]["version_date"]   # '2019-06-25'
+
+
+Sources
+-------
+
+Each jurisdiction has one source: EU (Cellar), Austria (RIS), Denmark
+(Retsinformation), Finland (Finlex), Germany (Rechtsinformationen des
+Bundes), Ireland (Irish Statute Book and Revised Acts), Luxembourg
+(Legilux), the Netherlands (Basiswettenbestand), Slovakia (Slov-Lex) and
+Spain (BOE). ``tulit sources`` lists them with the versions, languages and
+identifiers they accept:
+
+.. code-block:: python
+
+    from tulit.sources import get_source, list_sources
+
+    for code in list_sources():
+        source = get_source(code)
+        print(code, source.name, source.versions)
+    get_source("DK").identifier_help
+
+Some sources publish only one version or cannot select a date; ``fetch``
+raises ``ValueError`` when a request cannot be met. The coverage table in the
+README tracks the progress towards all 27 Member States.
+
+
+Command line
+------------
+
+The same is available from the command line:
+
+.. code-block:: console
+
+    $ tulit get 32024R0903 -o 32024R0903.json
+    $ tulit get 32016R0679 --format xhtml --language fra
+    $ tulit get BOE-A-2018-16673 -j ES --version consolidated --date 2021-01-01
+    $ tulit parse --format akn 32014L0092.akn -o 32014L0092.json
+    $ tulit formats
+    $ tulit sources
+
+``tulit get`` writes to standard output unless ``-o`` is given. Run
+``tulit <command> --help`` for all options, and add ``-v`` to log progress.
+
+
+The legalJSON structure
+-----------------------
+
+Every parser returns the same structure from ``to_dict()``:
+
+* ``preface``: the title of the act.
+* ``preamble``: ``formula``, ``citations``, ``recitals_intro``, ``recitals``
+  and ``final`` (e.g. "HAVE ADOPTED THIS REGULATION:").
+* ``chapters``: every division above article level (part, title, chapter,
+  section, subsection) with ``eId``, ``type``, ``num``, ``heading`` and a
+  ``parent`` link.
+* ``articles``: ``eId``, ``num``, ``heading``, ``parent`` and ``children``;
+  each child has an ``eId`` (``par_N`` for numbered paragraphs, ``unp_N``
+  for unnumbered blocks), its ``text`` and an ``amendment`` object when it
+  amends another act.
+* ``structure``: the nested skeleton of the enacting terms, referencing
+  divisions and articles by ``eId``.
+* ``conclusions``: ``conclusion_text`` and ``signature``.
+* ``annexes``: annexes with ``eId``, ``num``, ``heading`` and ``children``.
+* ``meta`` (added by ``fetch``): ``jurisdiction``, ``language``,
+  ``version`` and ``version_date`` (the FRBR expression of the text),
+  ``eli``, ``date_document``, ``in_force``, ``source`` and ``valid``; for EU
+  acts also ``celex``, ``cellar_uuid``, ``amends``, ``repeals`` and
+  ``corrects``.
+
+The identifiers follow the EU Publications Office subdivision authority
+table, so ``art_5`` / ``par_2`` can be appended to an act's ELI. The full
+schema is in ``tulit/parser/legaljson_schema.json``.
+
+.. code-block:: python
+
+    for article in doc["articles"]:
+        print(article["eId"], article["num"], article["heading"])
+        for child in article["children"]:
+            print("  ", child["eId"], child["text"][:80])
+
+
+Parsing local files
+-------------------
+
+Parsers are available from the registry by format id or alias
+(``tulit formats`` lists them):
+
+.. code-block:: python
+
+    from tulit.parser.registry import get_parser
+
+    parser = get_parser("formex")
+    doc = parser.parse("path/to/DOC_1").to_dict()   # a Formex file or folder
+
+    # Akoma Ntoso: the variant (AKN4EU, German LegalDocML, Luxembourg) is
+    # detected from the file
+    akn = get_parser("akn", file_path="32014L0092.akn")
+    doc = akn.parse("32014L0092.akn").to_dict()
+
+The parser classes can also be used directly:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Format id
+     - Class
+     - Documents
+   * - ``formex``
+     - ``tulit.parser.xml.formex.Formex4Parser``
+     - Formex 4 (EU Publications Office)
+   * - ``akn``
+     - ``tulit.parser.xml.akomantoso.create_akn_parser``
+     - Akoma Ntoso, variant detected automatically
+   * - ``cellar-xhtml``
+     - ``tulit.parser.html.cellar.CellarHTMLParser``
+     - EUR-Lex XHTML
+   * - ``cellar-html``
+     - ``tulit.parser.html.cellar.CellarStandardHTMLParser``
+     - EUR-Lex legacy HTML
+   * - ``eu-proposal``
+     - ``tulit.parser.html.cellar.ProposalHTMLParser``
+     - Commission legislative proposals
+   * - ``boe``
+     - ``tulit.parser.xml.boe.BOEXMLParser``
+     - Spanish Official Gazette XML
+   * - ``veneto``
+     - ``tulit.parser.html.veneto.VenetoHTMLParser``
+     - Veneto regional legislation
+   * - ``legifrance``
+     - ``tulit.parser.json.legifrance.LegifranceParser``
+     - Légifrance JSON
+
+Validate any result against the legalJSON schema:
+
+.. code-block:: python
+
+    from tulit.parser.parser import LegalJSONValidator
+
+    LegalJSONValidator().validate(doc)   # True or False
+
+
+Downloading from other sources
+------------------------------
+
+Each source has a client. ``log_dir`` is optional; when given, the client
+also writes a ``client.log`` file there.
+
+**EU Cellar** (used by ``tulit.fetch``):
 
 .. code-block:: python
 
     from tulit.client.eu.cellar import CellarClient
-    
-    client = CellarClient(download_dir='./database', log_dir='./logs')
 
-    file_format = 'fmx4'  # Or 'xhtml', 'pdfa', etc.
-    celex = "32024R0903"
+    client = CellarClient(download_dir="./database")
+    paths = client.download(celex="32024R0903", format="fmx4", language="ENG")
+    meta = client.get_metadata("32024R0903")
 
-    documents = client.download(celex=celex, format=file_format)
-    print(f"Downloaded: {documents}")
-
-Member State Clients
-~~~~~~~~~~~~~~~~~~~~
-
-**Italy (Normattiva):**
+**Italy (Normattiva)**:
 
 .. code-block:: python
 
-    from tulit.client.state.normattiva import NormativaClient
-    
-    client = NormativaClient(download_dir='./database')
-    # Download by URN
-    client.download(urn='urn:nir:stato:decreto.legge:2024-01-01;1')
+    from tulit.client.state.normattiva import NormattivaClient
 
-**Luxembourg (Legilux):**
+    client = NormattivaClient(download_dir="./database")
+    client.download(dataGU="20241231", codiceRedaz="24G00229", fmt="xml")
+
+**Luxembourg (Legilux)**:
 
 .. code-block:: python
 
     from tulit.client.state.legilux import LegiluxClient
-    
-    client = LegiluxClient(download_dir='./database')
-    client.download(eli='eli/etat/leg/code/travail')
 
-**Germany (RIS):**
+    client = LegiluxClient(download_dir="./database")
+    client.download(eli="http://data.legilux.public.lu/eli/etat/leg/loi/2006/07/31/n2/jo")
+
+**Germany (Rechtsinformationssystem)**:
 
 .. code-block:: python
 
     from tulit.client.state.germany import GermanyClient
-    
-    client = GermanyClient(download_dir='./database')
-    client.download(doc_type='bgbl', year='2024', number='145')
 
-Regional Clients
-~~~~~~~~~~~~~~~~
+    client = GermanyClient(download_dir="./database")
+    client.download(
+        document_type="legislation", format="html",
+        jurisdiction="bund", agent="bgbl-1", year="1979",
+        natural_identifier="s1325", point_in_time="2020-06-19",
+        version="2", language="deu",
+        point_in_time_manifestation="2020-06-19", subtype="regelungstext-1",
+    )
 
-**Veneto (Italy):**
+Clients for Finland, France, Ireland, Malta, Portugal, Spain and the Veneto
+region are documented in :doc:`client`.
 
-.. code-block:: python
 
-    from tulit.client.regional.veneto import VenetoClient
-    
-    client = VenetoClient(download_dir='./database')
-    client.download(bur_number='1', year='2024')
+Logging
+-------
 
-Parsing legal documents
------------------------
-
-The `tulit` parsers support legislative documents in the following formats:
-
-**XML Formats:**
-
-  * Akoma Ntoso 3.0 (EU, German LegalDocML, Luxembourg variants)
-  * FORMEX 4 (EU legislative documents)
-  * BOE XML (Spanish Official Gazette)
-
-**HTML Formats:**
-
-  * Cellar XHTML (semantic structure)
-  * Cellar Standard HTML (simple structure)
-  * EU Legislative Proposals
-  * Veneto Regional HTML
-
-**JSON Formats:**
-
-  * Legifrance JSON
-
-Parsing XML Documents
-~~~~~~~~~~~~~~~~~~~~~
-
-**Akoma Ntoso:** The package automatically detects variants (EU, German, Luxembourg):
-
-.. code-block:: python
-    
-    from tulit.parser.xml.akomantoso import AKN4EUParser, GermanLegalDocMLParser
-    
-    eu_parser = AKN4EUParser()
-    eu_parser.parse('tests/data/akn/eu/32014L0092.akn')
-    
-    german_parser = GermanLegalDocMLParser()
-    german_parser.parse('tests/data/akn/germany/document.akn')
-
-**FORMEX 4:** Parse EU legislative documents in FORMEX format:
+tulit logs through the standard :mod:`logging` module and does not configure
+handlers itself. To see progress messages:
 
 .. code-block:: python
 
-    from tulit.parser.xml.formex import Formex4Parser
-
-    parser = Formex4Parser()
-    formex_file = 'tests/data/formex/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02/DOC_1/L_202400903EN.000101.fmx.xml'
-    result = parser.parse(formex_file)
-    
-    # Access parsed content
-    print(f"Found {len(parser.articles)} articles")
-    for article in parser.articles:
-        print(f"Article {article.number}: {article.title}")
-
-Parsing HTML Documents
-~~~~~~~~~~~~~~~~~~~~~~
-
-**Cellar HTML:** Parse documents from EU Cellar in semantic XHTML format:
-
-.. code-block:: python
-
-    from tulit.parser.html.cellar import CellarHTMLParser
-    
-    parser = CellarHTMLParser()
-    html_file = 'tests/data/html/c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.03/DOC_1.html'
-    parser.parse(html_file)
-
-**Cellar Standard HTML:** Parse documents with simple <TXT_TE> structure:
-
-.. code-block:: python
-
-    from tulit.parser.html.cellar import CellarStandardHTMLParser
-    
-    parser = CellarStandardHTMLParser()
-    parser.parse('document.html')
-
-**EU Proposals:** Parse legislative proposals with special structure:
-
-.. code-block:: python
-
-    from tulit.parser.html.cellar import ProposalHTMLParser
-    
-    parser = ProposalHTMLParser()
-    parser.parse('proposal.html')
-
-**Veneto Regional:** Parse Italian regional legislation:
-
-.. code-block:: python
-
-    from tulit.parser.html.veneto import VenetoHTMLParser
-    
-    parser = VenetoHTMLParser()
-    parser.parse('tests/data/html/veneto/esg.html')
-
-
-Accessing Parsed Content
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-After parsing, the document structure is available through parser attributes:
-
-.. code-block:: python
-    
-    # Parse a document
-    from tulit.parser.xml.formex import Formex4Parser
-    parser = Formex4Parser()
-    parser.parse('document.fmx.xml')
-    
-    # Metadata and preface
-    print(f"Title: {parser.preface}")
-    
-    # Preamble components
-    for citation in parser.citations:
-        print(f"Citation: {citation.content}")
-    
-    for recital in parser.recitals:
-        print(f"Recital {recital.number}: {recital.content}")
-    
-    print(f"Formula: {parser.formula}")
-    print(f"Preamble final: {parser.preamble_final}")
-    
-    # Body structure
-    for chapter in parser.chapters:
-        print(f"Chapter {chapter.number}: {chapter.title}")
-    
-    for article in parser.articles:
-        print(f"Article {article.number}: {article.title}")
-        print(f"Content: {article.content}")
-        for child in article.children:
-            print(f"  {child.type} {child.number}: {child.content}")
-    
-    # Conclusions
-    print(f"Conclusions: {parser.conclusions}")
-    
-    # Export to JSON
-    json_output = parser.export_to_json()
-    print(json_output)
+    import logging
+    logging.basicConfig(level=logging.INFO)

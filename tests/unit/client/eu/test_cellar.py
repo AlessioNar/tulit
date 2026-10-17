@@ -5,6 +5,8 @@ import os
 from unittest.mock import patch, Mock
 import requests
 import io
+import shutil
+import tempfile
 
 from tests.conftest import locate_data_dir
 from tests.conftest import locate_tests_dir
@@ -17,16 +19,18 @@ class TestCellarClient(unittest.TestCase):
                 
     def test_download(self):
         celex = "32008R1137"
-        
-        # Download the documents                           
+
+        # Download into a scratch directory so the live download never overwrites tracked fixtures
+        download_dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, download_dir, ignore_errors=True)
+        self.downloader.download_dir = download_dir
+
+        # Download the documents
         document_paths = self.downloader.download(celex, format='fmx4')
 
-        data_root = locate_data_dir(__file__)
         expected = [
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_1.xml'),
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_2.xml'),
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_3.xml'),
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_4.xml'),
+            os.path.join(download_dir, 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04', f'DOC_{n}.xml')
+            for n in range(1, 5)
         ]
 
         self.assertEqual(document_paths, expected)
@@ -139,6 +143,57 @@ class TestCellarClient(unittest.TestCase):
         sent_query, sent_celex = mock_send.call_args[0]
         self.assertIn("{CELEX}", sent_query)
         self.assertEqual(sent_celex, "32012D0004(01)")
+
+    def test_download_substitutes_language(self):
+        for language, expected in ((None, 'ENG'), ('fra', 'FRA')):
+            kwargs = {} if language is None else {'language': language}
+            with patch.object(self.downloader, 'send_sparql_query') as mock_send:
+                mock_send.return_value = {'results': {'bindings': []}}
+                self.downloader.download("32024R0903", format='fmx4', **kwargs)
+
+            sent_query = mock_send.call_args[0][0]
+            self.assertIn(f'str(?langCode)="{expected}"', sent_query)
+            self.assertNotIn("{LANG}", sent_query)
+
+    def test_get_metadata(self):
+        work = 'http://publications.europa.eu/resource/cellar/48b32722-8e7c-11e9-9369-01aa75ed71a1'
+        cdm = 'http://publications.europa.eu/ontology/cdm#'
+        base = {
+            'work': {'value': work},
+            'eli': {'value': 'http://data.europa.eu/eli/reg/2019/943/oj'},
+            'date': {'value': '2019-06-05'},
+            'inForce': {'value': '1'},
+        }
+        bindings = [
+            {**base, 'rel': {'value': cdm + 'resource_legal_repeals_resource_legal'}, 'target': {'value': '32009R0714'}},
+            {**base, 'rel': {'value': cdm + 'resource_legal_amends_resource_legal'}, 'target': {'value': '32013R0543'}},
+            {**base, 'rel': {'value': cdm + 'resource_legal_amends_resource_legal'}, 'target': {'value': '32013R0347'}},
+        ]
+        with patch.object(self.downloader, 'get_results_table') as mock_grt:
+            mock_grt.return_value = {'results': {'bindings': bindings}}
+            meta = self.downloader.get_metadata('32019R0943')
+
+        self.assertIn('32019R0943', mock_grt.call_args[0][0])
+        self.assertEqual(meta, {
+            'celex': '32019R0943',
+            'eli': 'http://data.europa.eu/eli/reg/2019/943/oj',
+            'cellar_uuid': '48b32722-8e7c-11e9-9369-01aa75ed71a1',
+            'date_document': '2019-06-05',
+            'in_force': True,
+            'amends': ['32013R0347', '32013R0543'],
+            'repeals': ['32009R0714'],
+            'corrects': [],
+        })
+
+    def test_get_metadata_unknown_act(self):
+        with patch.object(self.downloader, 'get_results_table') as mock_grt:
+            mock_grt.return_value = {'results': {'bindings': []}}
+            meta = self.downloader.get_metadata('39999R9999')
+
+        self.assertEqual(meta['celex'], '39999R9999')
+        self.assertIsNone(meta['eli'])
+        self.assertIsNone(meta['in_force'])
+        self.assertEqual(meta['amends'], [])
 
 if __name__ == "__main__":
     unittest.main()

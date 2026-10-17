@@ -1,9 +1,8 @@
 import requests
 from tulit.client.client import Client
-import argparse
+from tulit.parser.exceptions import ContentTypeError
 import os
 import logging
-import sys
 
 class PortugalDREClient(Client):
     """
@@ -12,14 +11,14 @@ class PortugalDREClient(Client):
     """
     BASE_URL = "http://data.dre.pt/eli"
 
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.session = requests.Session()
         if proxies:
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None, month=None, day=None, region=None, cons_date=None, lang='pt', fmt='html'):
+    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None, month=None, day=None, region=None, cons_date=None, lang='pt', fmt='pdf'):
         """
         Download documents from the Portuguese DRE ELI portal.
         
@@ -48,7 +47,8 @@ class PortugalDREClient(Client):
         lang : str, optional
             Language (default 'pt')
         fmt : str, optional
-            Format: 'html' or 'pdf' (default 'html')
+            Format: 'pdf' (default) or 'html'. The site now renders HTML with
+            JavaScript, so HTML requests fail with ContentTypeError; PDF works.
             
         Returns
         -------
@@ -88,30 +88,31 @@ class PortugalDREClient(Client):
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
             if fmt == 'pdf' and 'pdf' not in content_type:
-                self.logger.error(f"Expected PDF response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
             if fmt == 'xml' and 'xml' not in content_type:
-                self.logger.error(f"Expected XML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
             if fmt == 'html' and 'html' not in content_type:
-                self.logger.error(f"Expected HTML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
+            if fmt in ('html', 'xhtml') and b'OutSystemsApp' in response.content and b'reactContainer' in response.content:
+                # diariodarepublica.pt now renders its pages with JavaScript: the HTML
+                # holds no legal text, only the PDF can be retrieved directly
+                raise ContentTypeError(
+                    "Diário da República returned a JavaScript application page without the text; "
+                    "use fmt='pdf'", content_type)
             if fmt == 'json' and 'json' not in content_type:
-                self.logger.error(f"Expected JSON response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected JSON response but got: {content_type}", content_type)
             if fmt == 'txt' and 'plain' not in content_type:
-                self.logger.error(f"Expected TXT response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected TXT response but got: {content_type}", content_type)
             if fmt == 'xhtml' and 'xhtml' not in content_type:
-                self.logger.error(f"Expected XHTML response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected XHTML response but got: {content_type}", content_type)
             if fmt == 'zip' and 'zip' not in content_type:
-                self.logger.error(f"Expected ZIP response but got: {content_type}")
-                sys.exit(1)
+                raise ContentTypeError(f"Expected ZIP response but got: {content_type}", content_type)
             file_path = os.path.join(self.download_dir, filename)
             with open(file_path, "wb") as f:
                 f.write(response.content)
             return file_path
+        except ContentTypeError:
+            raise
         except requests.HTTPError as e:
             logging.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
             return None

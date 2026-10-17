@@ -1,0 +1,1203 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Dokument id="ida1d70342-5e13-4caa-8475-f5c973cb606a" SchemaLocation="http://www.retsinformation.dk/offentlig/xml/schemas/2022/05/17/LBKH.Retsinfo.LexDania_2.1.xsd">
+  <Meta id="id8bff7ab0-9c1a-4bbc-a9e5-0397aaa68e41">
+    <DocumentType>LBK H#LOKDOK03</DocumentType>
+    <Rank>A</Rank>
+    <AccessionNumber>A20240028929</AccessionNumber>
+    <DocumentId>AA014041</DocumentId>
+    <UniqueDocumentId>241483</UniqueDocumentId>
+    <DocumentTitle>Bekendtgørelse af lov om supplerende bestemmelser til forordning om beskyttelse af fysiske personer i forbindelse med behandling af personoplysninger og om fri udveksling af sådanne oplysninger (databeskyttelsesloven)</DocumentTitle>
+    <Year>2024</Year>
+    <DiesSigni>2024-03-08</DiesSigni>
+    <DateOfSubmit id="submit_1"/>
+    <StartDate REFid="submit_1">2024-03-21</StartDate>
+    <EndDate REFid="submit_1">2025-03-22</EndDate>
+    <Status>Valid</Status>
+    <Number>289</Number>
+    <PopularTitle>Databeskyttelsesloven</PopularTitle>
+    <AnnouncedIn>Lovtidende A</AnnouncedIn>
+    <DiesEdicti>2024-03-21</DiesEdicti>
+    <EuReferences>32016R0679</EuReferences>
+    <Republished>Nej</Republished>
+    <Sign id="sign"/>
+    <Signature REFid="sign">Peter Hummelgaard</Signature>
+    <Sub-Sign id="subsign"/>
+    <Signature REFid="subsign">Louise Black Mogensen</Signature>
+    <PlaceOfSignature>Justitsministeriet</PlaceOfSignature>
+    <JournalNumber>Justitsmin., j.nr. 2023-03268</JournalNumber>
+    <Ministry>Justitsministeriet</Ministry>
+  </Meta>
+  <TitelGruppe id="id03ad2df5-fe23-48b6-af19-f85498dab471">
+    <Titel id="id727490b6-a525-4139-9e1c-7992c3616d80">
+      <Linea>
+        <Char>Bekendtgørelse af lov om supplerende bestemmelser til forordning om beskyttelse af fysiske personer i forbindelse med behandling af personoplysninger og om fri udveksling af sådanne oplysninger (databeskyttelsesloven)</Char>
+      </Linea>
+      <Nota id="id2b8d673e-0506-4de8-975a-1c162f34b786" formaNo="EU">
+        <Explicatus>1)</Explicatus>
+        <Exitus>
+          <Linea>
+            <Char>Som bilag til loven er medtaget Europa-Parlamentets og Rådets forordning nr. 679 af 27. april 2016 om beskyttelse af fysiske personer i forbindelse med behandling af personoplysninger og om fri udveksling af sådanne oplysninger og om ophævelse af direktiv 95/46/EF (generel forordning om databeskyttelse), EU-Tidende 2016, nr. L 119, side 1.</Char>
+          </Linea>
+          <Linea>
+            <Char>Ifølge artikel 288 i EUF-traktaten gælder en forordning umiddelbart i hver medlemsstat.</Char>
+          </Linea>
+          <Linea>
+            <Char>Gengivelsen af forordningen i lovens bilag er således udelukkende begrundet i praktiske hensyn og berører ikke forordningens umiddelbare gyldighed i Danmark.</Char>
+          </Linea>
+        </Exitus>
+      </Nota>
+    </Titel>
+  </TitelGruppe>
+  <DokumentIndhold id="idde11b992-3e68-49a3-b561-4ee33c001986">
+    <Indledning id="id769e2582-e60b-4c7b-9d4f-07fa61a2dc81">
+      <Exitus>
+        <Linea>
+          <Char>Herved bekendtgøres lov nr. 502 af 23. maj 2018 om supplerende bestemmelser til forordning om beskyttelse af fysiske personer i forbindelse med behandling af personoplysninger og om fri udveksling af sådanne oplysninger (databeskyttelsesloven) med de ændringer, der følger af lov nr. 1783 af 28. december 2023 og § 1 i lov nr. 1784 af 28. december 2023.</Char>
+        </Linea>
+      </Exitus>
+    </Indledning>
+    <Bog id="id8bef4c9b-8a40-4713-9f53-76ac8171e058">
+      <Afsnit id="id37a47156-21c4-4069-b3b3-97332b874dff" localId="I">
+        <Explicatus>Afsnit I</Explicatus>
+        <Rubrica id="idd4d6d64b-ae66-4a26-9297-c69a7e80e897">
+          <Linea>
+            <Char>Indledende bestemmelser</Char>
+          </Linea>
+        </Rubrica>
+        <Kapitel id="id10349e83-52e5-47bc-806b-0387812a6fe6" localId="1">
+          <Explicatus>Kapitel 1</Explicatus>
+          <Rubrica id="idf5caccda-109e-40f2-b075-426af2d09799">
+            <Linea>
+              <Char>Lovens materielle anvendelsesområde</Char>
+            </Linea>
+          </Rubrica>
+          <ParagrafGruppe>
+            <Paragraf id="iddaa9743d-2048-41e8-95e8-0acd180f60fb" localId="1">
+              <Explicatus>§ 1.</Explicatus>
+              <Stk id="id2d859d91-b4d6-4c62-ba10-8a4b7f4ef1b3">
+                <Exitus>
+                  <Linea>
+                    <Char>Loven supplerer og gennemfører Europa-Parlamentets og Rådets forordning nr. 2016/679 af 27. april 2016 om beskyttelse af fysiske personer i forbindelse med behandling af personoplysninger og om fri udveksling af sådanne oplysninger (databeskyttelsesforordningen), jf. bilag 1 til denne lov.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idf105076f-14ad-4387-8c8d-4cd18d9d2393">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen gælder for al behandling af personoplysninger, der helt eller delvis foretages ved hjælp af automatisk databehandling, og for anden ikkeautomatisk behandling af personoplysninger, der er eller vil blive indeholdt i et register.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen gælder dog ikke i de tilfælde, der er nævnt i databeskyttelsesforordningens artikel 2, stk. 2, litra b-d, og lovens § 3.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="ide0defb46-a493-4af3-b519-d8ef8fbcc72b">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Regler om behandling af personoplysninger i anden lovgivning, som ligger inden for databeskyttelsesforordningens rammer for særregler om behandling af person­oplysninger, går forud for reglerne i denne lov.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id29622470-ff40-40c9-abde-59f906fb1774" localId="2">
+              <Explicatus>§ 2.</Explicatus>
+              <Stk id="id934fbbe5-bab4-4796-a2d3-c147266a34d7">
+                <Exitus>
+                  <Linea>
+                    <Char>Lovens §§ 6-8 og 10 og § 11, stk. 1, og databeskyttelsesforordningens artikel 5, stk. 1, litra a-c, artikel 6, artikel 7, stk. 3, 1. og 2. pkt., artikel 9 og 10 og artikel 77, stk. 1, gælder også for manuel videregivelse af personoplysning­er til en anden forvaltningsmyndighed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Datatilsynet fører i overensstemmelse med lovens kapitel 10 tilsyn med videregivelse som nævnt i 1. pkt.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id89911c01-a4fd-4dcd-a4c4-0068afad957c">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen gælder endvidere for behandling af oplysninger om virksomheder m.v., hvis denne behandling udføres for kreditoplysningsbureauer.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Tilsvarende gælder, for så vidt angår behandlinger, som er omfattet af § 26, stk. 1, nr. 1.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idb24551e7-f15a-4973-9e48-a85afc6d944e">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Kapitel 4 gælder også for behandling af oplysninger om virksomheder m.v., jf. § 1, stk. 1.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idc188dfae-e2ae-4ba4-bcbd-ec84b3c097c4">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen gælder for enhver form for behandling af personoplysninger i forbindelse med tv-overvågning.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id2da94c35-642e-4ba6-b205-1871cfe7add1">
+                <Explicatus>Stk. 5.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen finder anvendelse på oplysninger om afdøde personer i 10 år efter vedkommendes død.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idd09b21ef-b751-4e8e-8410-77d87f862dd6">
+                <Explicatus>Stk. 6.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Justitsministeren kan efter forhandling med ved­kommende minister fastsætte regler om, at loven og databeskyttelsesforordningen helt eller delvis skal finde anvendelse på oplysninger om afdøde personer i en længere eller kortere periode end angivet i stk. 5.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id4d248be1-f341-474b-ba98-8ba7da67ed64">
+                <Explicatus>Stk. 7.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Uden for de tilfælde, der er nævnt i stk. 2, kan justitsministeren fastsætte regler om, at lovens regler helt eller delvis skal finde anvendelse på behandling af oplysninger om virksomheder m.v., som udføres for private.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idf3541e31-c55a-437d-b1ec-0cef5ca954fc">
+                <Explicatus>Stk. 8.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Uden for de tilfælde, der er nævnt i stk. 3, kan vedkommende minister fastsætte regler om, at lovens regler helt eller delvis skal finde anvendelse på behandling af oplysninger om virksomheder m.v., som udføres for den offentlige forvaltning.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id9a42d0c7-dbee-4e53-8ae1-7648dc81afb6" localId="3">
+              <Explicatus>§ 3.</Explicatus>
+              <Stk id="id94cfa85b-3206-4695-877c-44d15f2609b3">
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen finder ikke anvendelse, hvis det vil være i strid med artikel 10 i Den Europæiske Menneskerettighedskonvention eller artikel 11 i Den Europæiske Unions Charter om Grundlæggende Rettigheder.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id5bcc8418-206c-4e8a-9ac9-f544616470f5">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen finder ikke anvendelse på den behandling af personoplysninger, som udføres for eller af politiets og forsvarets efterretningstjenester.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id9db4323a-cd29-4a24-888b-a922eaa0ccd7">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen finder ikke anvendelse på behandling af oplysninger, der foretages som led i Folketingets parlamentariske arbejde.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id631b37d4-f1f4-4343-bcc0-87885e4405df">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningen finder ikke anvendelse på behandlinger, der er omfattet af lov om massemediers informationsdatabaser.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id1af1aa77-b2d0-4c8d-b6ed-4e4130a35d37">
+                <Explicatus>Stk. 5.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningens kapitel II-VII og kapitel IX finder ikke anvendelse på informationsdatabaser, hvori der udelukkende er indlagt allerede offentliggjorte periodiske skrifter eller lyd- og billedprogrammer, der er omfattet af medieansvarslovens § 1, nr. 1 eller 2, eller dele heraf, når indlæggelsen i informationsdatabasen er sket uændret i forhold til offentliggørelsen.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Dog gælder bestemmelserne i databeskyttelsesforordningens artikel 28 og 32.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id60ebe49c-369a-4159-bab0-e9526efc57cc">
+                <Explicatus>Stk. 6.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningens kapitel II-VII og kapitel IX gælder ikke for informationsdatabaser, hvori der udelukkende er indlagt allerede offentliggjorte tekster, billeder og lydprogrammer, der omfattes af medieansvarslovens § 1, nr. 3, eller dele heraf, når indlæggelsen i informationsdatabasen er sket uændret i forhold til offentliggørelsen.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Dog gælder bestemmelserne i databeskyttelsesforordningens artikel 28 og 32.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id51c268e4-dd0b-4e0c-96d4-21f5ac4babb0">
+                <Explicatus>Stk. 7.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningens kapitel II-VII og kapitel IX finder ikke anvendelse på manuelle arkiver over udklip fra offentliggjorte trykte artikler, som udelukkende behandles i journalistisk øjemed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Dog gælder bestemmelserne i databeskyttelsesforordningens artikel 28 og 32.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idb34184e0-ba82-4c60-ada4-1d99c3431599">
+                <Explicatus>Stk. 8.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og databeskyttelsesforordningens kapitel II-VII og kapitel IX finder ikke anvendelse ved behandling af oplysninger, som i øvrigt udelukkende finder sted i journalistisk øjemed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Dog gælder bestemmelserne i databeskyttelsesforordningens artikel 28 og 32.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>1. og 2. pkt. gælder tilsvarende for behandling af oplysninger, som udelukkende sker med henblik på kunstnerisk eller litterær virksomhed.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id92d3f3f3-bfb0-4462-a145-494d45e5a43b">
+                <Explicatus>Stk. 9.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Justitsministeren kan efter forhandling med ved­kommende minister fastsætte regler om, at personoplysninger, der behandles i nærmere bestemte it-systemer, og som føres for den offentlige forvaltning, helt eller delvis alene må opbevares her i landet.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id1d4bb4fe-2e13-41ef-93d8-0398c7435ebb">
+                <Explicatus>Stk. 10.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Forsvarsministeren kan fastsætte regler om, at loven og databeskyttelsesforordningen helt eller delvis ikke finder anvendelse på forsvarets behandling af personoplysninger i forbindelse med forsvarets internationale operative virke.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+          </ParagrafGruppe>
+        </Kapitel>
+        <Kapitel id="id1e0fe9b6-cafa-4ee6-8d6f-e1e26f30b142" localId="2">
+          <Explicatus>Kapitel 2</Explicatus>
+          <Rubrica id="id55b1e3c4-3e7d-4026-9511-20fcdcaa12a1">
+            <Linea>
+              <Char>Lovens geografiske anvendelsesområde</Char>
+            </Linea>
+          </Rubrica>
+          <ParagrafGruppe>
+            <Paragraf id="id9328c3ca-965b-4f3a-9352-45c32463ed4e" localId="4">
+              <Explicatus>§ 4.</Explicatus>
+              <Stk id="idc5e185de-c63f-4da3-bc77-766ae449672d">
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og regler udstedt i medfør af loven gælder for behandling af personoplysninger, som foretages som led i aktiviteter, der udføres for en dataansvarlig eller en databehandler, som er etableret i Danmark, uanset om behandlingen finder sted i EU.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id1a13a7d0-b2fe-4fd1-b0e1-fa743aa03f3e">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og regler udstedt i medfør af loven gælder endvidere for den behandling, som udføres for danske diplomatiske repræsentationer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id37a25cdc-77bf-45fc-8102-9997553bb56b">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Loven og regler udstedt i medfør af loven gælder for behandling af personoplysninger om registrerede, der befinder sig i Danmark, som foretages af en dataansvarlig eller databehandler, der ikke er etableret i EU, hvis behandlingsaktiviteterne vedrører</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="id076acef3-af38-40e4-8151-b02bd923aed6">
+                  <Index>
+                    <Indentatio id="id9e84e991-abb0-47c5-b0a8-52b8c8eedcee" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>udbud af varer eller tjenester til sådanne registrerede, der befinder sig i Danmark, uanset om betaling fra den registrerede er påkrævet, eller</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id3e353b91-a249-4e84-bede-d6cea0e73411" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>overvågning af sådanne registreredes adfærd, for så vidt deres adfærd finder sted i Danmark.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+          </ParagrafGruppe>
+        </Kapitel>
+      </Afsnit>
+      <Afsnit id="id895e6340-eff7-4d7b-8525-d35eace38c6c" localId="II">
+        <Explicatus>Afsnit II</Explicatus>
+        <Rubrica id="id5e9f8ca8-68f0-41cd-aa75-4d0450637138">
+          <Linea>
+            <Char>Behandlingsregler</Char>
+          </Linea>
+        </Rubrica>
+        <Kapitel id="idefaf65c9-7148-4284-8119-74fc457ec18a" localId="3">
+          <Explicatus>Kapitel 3</Explicatus>
+          <Rubrica id="idc20bdc06-379c-4b1f-a2e0-4614adb4a024">
+            <Linea>
+              <Char>Behandling af oplysninger</Char>
+            </Linea>
+          </Rubrica>
+          <ParagrafGruppe>
+            <Paragraf id="id946feb00-2339-43e8-a862-bc889bea70a9" localId="5">
+              <Explicatus>§ 5.</Explicatus>
+              <Stk id="idae9ebc20-4e65-4c21-939e-ebf3e46e0d64">
+                <Exitus>
+                  <Linea>
+                    <Char>Personoplysninger skal indsamles til udtrykkeligt angivne og legitime formål og må ikke viderebehandles på en måde, der er uforenelig med disse formål.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idc1dcde24-7457-415f-80e8-43e25713b63d">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>For at afgøre, om behandling til et andet formål er forenelig med det formål, som personoplysningerne oprindelig blev indsamlet til, jf. stk. 1, tager den dataansvarlige efter databeskyttelsesforordningens artikel 6, stk. 4, bl.a. hensyn til</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="idcbd40cad-0cba-41a7-8ba3-4c9b4672d8a6">
+                  <Index>
+                    <Indentatio id="id7ccec279-2280-4e69-8352-e38f7d9abc5a" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>enhver forbindelse mellem det formål, som personoplys­ningerne er indsamlet til, og formålet med den påtænkte viderebehandling,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id02c8e023-a06f-431d-88aa-3ed2da87b336" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>den sammenhæng, hvori personoplysningerne er blevet indsamlet, navnlig med hensyn til forholdet mellem den registrerede og den dataansvarlige,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="idb85ceee8-70ab-4168-b93a-2c1e7b457d13" formaInd="Nummer">
+                      <Explicatus>3)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>personoplysningernes art, navnlig om særlige kategorier af personoplysninger behandles, jf. artikel 9, eller om personoplysninger vedrørende straffedomme og lovovertrædelser behandles, jf. artikel 10,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id3aa5c12a-6692-4a93-998d-7d7dbeec19cc" formaInd="Nummer">
+                      <Explicatus>4)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>den påtænkte viderebehandlings mulige konsekvenser for de registrerede og</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id3f1b7f19-b724-49f7-a596-fddd5ca3e677" formaInd="Nummer">
+                      <Explicatus>5)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>tilstedeværelse af fornødne garantier, som kan omfatte kryptering eller pseudonymisering.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+              <Stk id="idff87ba7f-41f6-46b9-a7fd-f070421b6869">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Uanset stk. 1 og 2 kan vedkommende minister efter forhandling med justitsministeren og inden for rammerne af databeskyttelsesforordningens artikel 23 fastsætte nærmere regler om, at personoplysninger af offentlige myndigheder må viderebehandles til andre formål, end de oprindelig var indsamlet til, uafhængigt af formålenes forenelighed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>1. pkt. finder ikke anvendelse på behandling af oplysninger i medfør af § 10.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>For så vidt angår helbredsoplysninger og genetiske data nævnt i databeskyttelsesforordningens artikel 9, stk. 1, som er indsamlet i medfør af denne lovs § 7, stk. 3, eller i medfør af sundhedslovgivningen, finder 1. pkt. alene anvendelse, i det omfang formålet med den videre anvendelse af disse oplysninger er foreneligt med det formål, som disse personoplysninger oprindelig blev indsamlet til.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id0e7ad03b-8c56-4d82-be7a-2f3f05beb925" localId="6">
+              <Explicatus>§ 6.</Explicatus>
+              <Stk id="id98d7089c-ab00-4024-83b2-cd5de97e1890">
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af personoplysninger må finde sted, hvis mindst en af betingelserne i databeskyttelsesforordningens artikel 6, stk. 1, litra a-f, er opfyldt.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id5bba749a-7097-4e2c-b7c4-60ff11990034">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Finder databeskyttelsesforordningens artikel 6, stk. 1, litra a, anvendelse i forbindelse med udbud af informa‌tionssamfundstjenester direkte til børn, er behandling af personoplysninger om et barn lovlig, hvis barnet er mindst 15 år.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id1e1ae81b-bc48-48af-81e4-9cd37e7f1f78">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Er barnet under 15 år, er behandling kun lovlig, hvis og i det omfang samtykke gives eller godkendes af indehaveren af forældremyndigheden over barnet.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="idf14bec6c-c2d0-475f-a214-2f0519a65a80" localId="7">
+              <Explicatus>§ 7.</Explicatus>
+              <Stk id="idc3f668bd-573c-44b1-9e42-38c70897edd3">
+                <Exitus>
+                  <Linea>
+                    <Char>Forbuddet mod behandling af følsomme personoplysninger omfattet af databeskyttelsesforordningens artikel 9, stk. 1, gælder ikke i tilfælde, hvor betingelserne for behandling af personoplysninger i databeskyttelsesforordningens artikel 9, stk. 2, litra a, c, d, e eller f, er opfyldt.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="iddc36c73a-070b-4027-93fc-a685dd23785c">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af oplysninger omfattet af databeskyttelsesforordningens artikel 9, stk. 1, kan ske, hvis behandling er nødvendig for at overholde den dataansvarliges eller den registreredes arbejdsretlige forpligtelser og specifikke rettigheder, jf. databeskyttelsesforordningens artikel 9, stk. 2, litra b.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id6d8e84e8-6d5a-4fc4-b5d5-8c36f1c5da4f">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af oplysninger omfattet af databeskyttelsesforordningens artikel 9, stk. 1, kan ske, hvis behandling af oplysninger er nødvendig med henblik på forebyggende sygdomsbekæmpelse, medicinsk diagnose, sygepleje eller patientbehandling eller forvaltning af læge- og sundhedstjenester og behandlingen af oplysningerne foretages af en person inden for sundhedssektoren, der efter lovgivningen er undergivet tavshedspligt, jf. databeskyttelsesforordningens artikel 9, stk. 2, litra h.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idbe563248-a4af-4512-9830-a39f183fa7bf">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af oplysninger omfattet af databeskyttelsesforordningens artikel 9, stk. 1, kan ske, hvis behandling af oplysninger er nødvendig af hensyn til væsentlige samfundsinteresser, jf. databeskyttelsesforordningens artikel 9, stk. 2, litra g.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Tilsynsmyndigheden giver tilladelse hertil, hvis behandlingen efter 1. pkt. ikke foretages for en offentlig myndighed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Der kan i en tilladelse efter 2. pkt. fastsættes nærmere vilkår for behandlingen.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id4cbe5ac8-f1c9-4098-96b0-760d4c3d46fe">
+                <Explicatus>Stk. 5.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Uden for de i stk. 1-4 nævnte tilfælde kan vedkommende minister efter forhandling med justitsministeren og inden for databeskyttelsesforordningens rammer fastsætte nærmere regler om behandling af personoplysninger omfattet af databeskyttelsesforordningens artikel 9, stk. 1.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="iddfc4553d-d7f9-4e1b-9db5-8e6818189ca0" localId="8">
+              <Explicatus>§ 8.</Explicatus>
+              <Stk id="idbe23c63d-6f27-4508-94da-8452975cd755">
+                <Exitus>
+                  <Linea>
+                    <Char>For den offentlige forvaltning må der ikke behandles oplysninger om strafbare forhold, medmindre det er nødvendigt for varetagelsen af myndighedens opgaver.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idb6a572d9-4148-454f-9c95-65e64ee23db3">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>De oplysninger, der er nævnt i stk. 1, må ikke videregives.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Videregivelse kan dog ske, hvis</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="idcef3499d-83df-48b2-a959-ad59b8f96d41">
+                  <Index>
+                    <Indentatio id="idb3a2312b-c608-4a47-8528-1f89915a770f" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>den registrerede har givet sit udtrykkelige samtykke til videregivelsen,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id4a0dea20-a9f6-4a5a-a0fa-c001122bd4a3" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>videregivelsen sker til varetagelse af private eller offentlige interesser, der klart overstiger hensynet til de interesser, der begrunder hemmeligholdelse, herunder hensynet til den, oplysningen angår,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="ida21c6e32-8778-41a1-bc43-f63db20009ea" formaInd="Nummer">
+                      <Explicatus>3)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>videregivelsen er nødvendig for udførelsen af en myndigheds virksomhed eller påkrævet for en afgørelse, som myndigheden skal træffe, eller</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id932122ff-7ce2-429e-9e5a-e026c087f72f" formaInd="Nummer">
+                      <Explicatus>4)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>videregivelsen er nødvendig for udførelsen af en persons eller virksomheds opgaver for det offentlige.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+              <Stk id="id6b8a5f65-07f9-4fc8-839e-f4727aa87a05">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Private må behandle oplysninger om strafbare forhold, hvis den registrerede har givet sit udtrykkelige samtykke hertil.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Herudover kan behandling ske, hvis det er nødvendigt til varetagelse af en berettiget interesse og denne interesse klart overstiger hensynet til den registrerede.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id9e657549-75de-4501-bd76-f98b94eccc48">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>De oplysninger, der er nævnt i stk. 3, må ikke videregives uden den registreredes udtrykkelige samtykke.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Videregivelse kan dog ske uden samtykke, når det sker til varetagelse af offentlige eller private interesser, herunder hensynet til den pågældende selv, der klart overstiger hensynet til de interesser, der begrunder hemmeligholdelse.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idccb75a95-bb00-4712-8273-20b9953ab1f1">
+                <Explicatus>Stk. 5.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af oplysninger i de tilfælde, der er reguleret i stk. 1-4, kan i øvrigt finde sted, hvis betingelserne i § 7 er opfyldt.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id618babec-7c90-49d0-805d-f46f3a499042" localId="9">
+              <Explicatus>§ 9.</Explicatus>
+              <Stk id="idaaba3601-2a66-4a22-875a-e52c37846618">
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger omfattet af databeskyttelsesforordningens artikel 9, stk. 1, og artikel 10 må behandles, hvis dette alene sker med henblik på at føre retsinformationssystemer af væsentlig samfundsmæssig betydning, og hvis behandlingen er nødvendig for førelsen af systemerne.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idbb22164b-dd04-45dd-9515-0a72c0b3a703">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger omfattet af stk. 1 må ikke senere behandles i andet øjemed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Det samme gælder behandling af andre oplysninger, som alene foretages med henblik på at føre retsinformationssystemer efter forordningens artikel 6.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="ide5db7cdf-f072-4b92-919c-160061ba1286">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Tilsynsmyndigheden kan meddele nærmere vilkår for de behandlinger, der er nævnt i stk. 1.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Tilsvarende gælder for de oplysninger, der er nævnt i forordningens artikel 6, og som alene behandles i forbindelse med førelsen af rets‌informationssystemer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id2e149aea-33c4-42d4-a766-6e356a2b7b23" localId="10">
+              <Explicatus>§ 10.</Explicatus>
+              <Stk id="id86001766-2b62-4938-8757-541a2a45de3e">
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger som nævnt i databeskyttelsesforordningens artikel 9, stk. 1, og artikel 10 må behandles, hvis dette alene sker med henblik på at udføre statistiske eller videnskabelige undersøgelser af væsentlig samfundsmæssig betydning, og hvis behandlingen er nødvendig af hensyn til udførelsen af undersøgelserne.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idd5316863-5721-4753-b12f-4e568f0104f1">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>De oplysninger, der er omfattet af stk. 1, må ikke senere behandles i andet end videnskabeligt eller statistisk øjemed.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Det samme gælder behandling af andre oplysninger, som alene foretages i statistisk eller videnskabeligt øjemed efter databeskyttelsesforordningens artikel 6.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idced9b3cd-b293-4a06-959d-dbc9038887cb">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Videregivelse af oplysninger omfattet af stk. 1 og 2 til tredjemand kræver forudgående tilladelse fra tilsynsmyndigheden, når videregivelsen</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="id61d448e2-8ee3-4ab6-9c71-410cc3614e83">
+                  <Index>
+                    <Indentatio id="id395c9d1e-70bd-4a31-b636-0681d5312ea0" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>sker til behandling uden for databeskyttelsesforordningens territoriale anvendelsesområde, jf. databeskyttelsesforordningens artikel 3,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="idfd59ec16-dd9b-494e-976e-7cb56163adca" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>vedrører biologisk materiale eller</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="idf468467a-5719-47ba-96b1-d5f9c69735ff" formaInd="Nummer">
+                      <Explicatus>3)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>sker med henblik på offentliggørelse i et anerkendt videnskabeligt tidsskrift el.lign.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+              <Stk id="idabc7451d-4d5f-4e10-b97b-46102184f3c4">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Tilsynsmyndigheden kan fastsætte generelle vil­kår for videregivelse af oplysninger omfattet af stk. 1 og 2, herunder for videregivelse, der ikke kræver tilladelse efter stk. 3.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Tilsynsmyndigheden kan endvidere fastsætte nærmere vilkår for videregivelse af oplysninger efter stk. 3.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id0847fbb2-7788-4470-aeba-13388145dbad">
+                <Explicatus>Stk. 5.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Sundhedsministeren kan efter forhandling med justitsministeren uanset stk. 2 fastsætte regler om, at oplysninger omfattet af stk. 1 og 2, som er behandlet med henblik på at udføre sundhedsfaglige statistiske og videnskabelige undersøgelser, senere kan behandles i andet end statistisk eller videnskabeligt øjemed, hvis behandlingen er nødvendig af hensyn til varetagelse af den registreredes vitale interesser.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id699cd4ae-72a8-4e69-8194-eae32895bfff" localId="11">
+              <Explicatus>§ 11.</Explicatus>
+              <Stk id="idaae0538f-57da-45b1-9b18-c559cf1a066f">
+                <Exitus>
+                  <Linea>
+                    <Char>Offentlige myndigheder kan behandle oplysninger om personnummer med henblik på en entydig identifikation eller som journalnummer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id466dbd0b-53ee-4106-8737-17126150ae2c">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Private må behandle oplysninger om personnummer, når</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="idd9175da4-e5c9-4d84-9196-407343a316ef">
+                  <Index>
+                    <Indentatio id="idbf32e008-fda1-4150-b6d4-5897fff94885" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>det følger af lovgivningen,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id490c49d8-5f5b-41cf-853a-56b1b1e93467" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>den registrerede har givet samtykke hertil i overensstemmelse med databeskyttelsesforordningens artikel 7,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="idc4be44aa-ec27-4eaf-911a-92bc6a8f2beb" formaInd="Nummer">
+                      <Explicatus>3)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>behandlingen alene finder sted til videnskabelige eller statistiske formål, eller hvis der er tale om videregivelse af oplysninger om personnummer, når videregivelsen er et naturligt led i den normale drift af virksomheder m.v. af den pågældende art, og når videregivelsen er af afgørende betydning for at sikre en entydig identifikation af den registrerede eller videregivelsen kræves af en offentlig myndighed eller</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="ida4860928-1af0-4f61-8e2c-9cbcc3836ff9" formaInd="Nummer">
+                      <Explicatus>4)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>betingelserne i § 7 er opfyldt.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+              <Stk id="id1f2b7100-976d-4466-ba2d-925184013a82">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Uanset bestemmelsen i stk. 2, nr. 3, må personnummer ikke offentliggøres, medmindre der er givet samtykke i overensstemmelse med databeskyttelsesforordningens artikel 7.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id0d00e884-aa88-4b5b-929b-5b0f800e4f01" localId="12">
+              <Explicatus>§ 12.</Explicatus>
+              <Stk id="idfa766234-0488-42dd-8f0d-b381c7413728">
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af personoplysninger i forbindelse med ansættelsesforhold omfattet af artikel 6, stk. 1, og artikel 9, stk. 1, i databeskyttelsesforordningen kan finde sted, hvis behandlingen er nødvendig for at overholde den dataansvarliges eller den registreredes arbejdsretlige forpligtelser eller rettigheder som fastlagt i anden lovgivning eller kollektive overenskomster.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id80fe2042-09b6-4389-8d7e-3b3503c7a49b">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af oplysninger som nævnt i stk. 1 må også finde sted, hvis behandlingen er nødvendig for, at den dataansvarlige eller en tredjemand kan forfølge en legitim interesse, som udspringer af anden lovgivning eller kollektive overenskomster, medmindre den registreredes interesser eller grundlæggende rettigheder og frihedsrettigheder går forud herfor.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id3c7a2dc8-258a-442b-ad4c-39e97267362f">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Behandling af personoplysninger i ansættelsesforhold kan finde sted på baggrund af den registreredes samtykke i overensstemmelse med artikel 7 i databeskyttelsesforordningen.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id87ce7428-7822-4ee6-8446-f4f3e82d3742" localId="13">
+              <Explicatus>§ 13.</Explicatus>
+              <Stk id="idf31e4641-170b-4990-b86e-a382ca129269">
+                <Exitus>
+                  <Linea>
+                    <Char>Inden en virksomhed videregiver oplysninger om en forbruger til en anden virksomhed med henblik på direkte markedsføring eller anvender oplysningerne på vegne af en anden virksomhed i dette øjemed, skal den undersøge i CPR, om forbrugeren har frabedt sig henvendelser i markedsføringsøjemed.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id521534ef-ca40-4e73-a8bb-ca4e02c8ae36" localId="14">
+              <Explicatus>§ 14.</Explicatus>
+              <Stk id="idd4c4d96b-3e1a-4007-9aeb-3d991f3c541d">
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger, der er omfattet af denne lov, kan overføres til opbevaring i arkiv efter reglerne i arkivlovgivningen.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+          </ParagrafGruppe>
+        </Kapitel>
+        <Kapitel id="id28138721-f5b3-4c4d-96a2-133fa570acad" localId="4">
+          <Explicatus>Kapitel 4</Explicatus>
+          <Rubrica id="id2bd51607-58c4-42c3-8479-927a574158bb">
+            <Linea>
+              <Char>Videregivelse til kreditoplysningsbureauer af oplysninger om gæld til det offentlige</Char>
+            </Linea>
+          </Rubrica>
+          <ParagrafGruppe>
+            <Paragraf id="idf3d56be0-63ff-475e-9c7a-55c8444ac231" localId="15">
+              <Explicatus>§ 15.</Explicatus>
+              <Stk id="id63341e53-223d-44e4-b68f-64de60cf86ca">
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger om gæld til det offentlige kan efter bestemmelserne i dette kapitel videregives til kreditoplysningsbureauer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id39acd97d-5bc7-4688-ae69-abfcfcfe3236">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger som nævnt i databeskyttelsesforordningens artikel 9, stk. 1, eller artikel 10 må ikke videregives til kreditoplysningsbureauer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id3a2e6cee-7797-43c3-857f-0105d1a451bd">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Fortrolige oplysninger, som videregives efter reglerne i dette kapitel, anses ikke som følge af videregivelsen som offentligt tilgængelige.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="idd17e1aa5-1805-43cd-ab67-68ae8b97d8c3" localId="16">
+              <Explicatus>§ 16.</Explicatus>
+              <Stk id="ida5c5c39f-aacd-4d2a-9359-bcc97a98a006">
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger om gæld til det offentlige kan videregives til et kreditoplysningsbureau, hvis</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="idba03c587-5570-4b4a-b1b9-de98ca85bbfa">
+                  <Index>
+                    <Indentatio id="id86bf6dc3-2625-4d2a-abf8-c916cb81bf30" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>det følger af lov eller bestemmelser fastsat i henhold til lov eller</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id61eac640-d0bc-47e2-a46e-b55adb70bfee" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>den samlede gæld er forfalden og overstiger 7.500 kr., idet der dog ikke heri må indgå gældsposter, der er omfattet af en overholdt aftale om henstand eller afdragsvis betaling, jf. dog stk. 2 og 3.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+              <Stk id="idf54cf04e-3cd5-4706-acb5-0c8d684cf1fd">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Det er en betingelse for videregivelse efter stk. 1, nr. 2, at den samlede gæld administreres af samme inddrivelsesmyndighed.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id8fa7551b-151b-4df2-b083-08a6a8357cfb">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Det er endvidere en betingelse for videregivelse efter stk. 1, nr. 2, at</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="id239f6e0a-da7a-4619-98ef-e7952eed291d">
+                  <Index>
+                    <Indentatio id="id08f2d73e-9e37-4deb-b940-e0a166d9b919" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>gælden kan inddrives ved udpantning og der er fremsendt to rykkere til skyldneren,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id0ba0d6c7-5eb1-4c9c-99fd-05b07fea40db" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>der er foretaget eller forsøgt foretaget udlæg for kravet,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id50829e0f-9163-4e04-96bf-e7e660308682" formaInd="Nummer">
+                      <Explicatus>3)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>kravet er fastslået ved endelig dom eller</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="idd85f70bc-4dfe-4032-88e0-5f32a2df904f" formaInd="Nummer">
+                      <Explicatus>4)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>det offentlige har erhvervet skyldnerens skriftlige erkendelse af den forfaldne gæld.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id5ccde6da-fc2e-4ecd-91fc-27e733249f2b" localId="17">
+              <Explicatus>§ 17.</Explicatus>
+              <Stk id="id02edb0de-f232-4e68-96a8-6b61419ee9ad">
+                <Exitus>
+                  <Linea>
+                    <Char>Myndigheden skal give skyldneren skriftlig meddelelse, forinden videregivelse finder sted.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Videregivelse må tidligst ske, 4 uger efter at denne meddelelse er givet.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id7772eacf-19b8-4ed6-84d3-aa8c9aa2abc3">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Den meddelelse, der er nævnt i stk. 1, skal indeholde oplysninger om,</Char>
+                  </Linea>
+                </Exitus>
+                <Exitus id="id0d694ec8-df56-4c00-b58b-2b1f0a1be8f5">
+                  <Index>
+                    <Indentatio id="id53644ccb-e756-4e2a-87b4-f8e2349895f9" formaInd="Nummer">
+                      <Explicatus>1)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>hvilke oplysninger der vil blive videregivet,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="idca9c5b94-92e5-425a-8872-acdf0992f513" formaInd="Nummer">
+                      <Explicatus>2)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>til hvilket kreditoplysningsbureau videregivelsen vil ske,</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id755aa106-1f85-4551-8979-554adf04e107" formaInd="Nummer">
+                      <Explicatus>3)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>hvornår videregivelse vil finde sted, og</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                    <Indentatio id="id79347b9c-8d86-4981-995d-d300742b1339" formaInd="Nummer">
+                      <Explicatus>4)</Explicatus>
+                      <Exitus>
+                        <Linea>
+                          <Char>at videregivelse ikke vil ske, hvis betaling af gælden sker inden videregivelsen eller der indrømmes henstand eller indgås og overholdes en aftale om afdragsvis betaling.</Char>
+                        </Linea>
+                      </Exitus>
+                    </Indentatio>
+                  </Index>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="idb70a7071-395a-411e-ad2d-07c332f6a5dc" localId="18">
+              <Explicatus>§ 18.</Explicatus>
+              <Stk id="idcaf3fb2c-8d8c-4a90-b3fe-302a09d34b0c">
+                <Exitus>
+                  <Linea>
+                    <Char>Vedkommende minister kan fastsætte nærmere regler om fremgangsmåden ved videregivelse til kreditoplysningsbureauer af oplysninger om gæld til det offentlige.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Der kan i den forbindelse fastsættes regler om, at oplysninger om visse former for gæld til det offentlige ikke må videregives eller kun må videregives, hvis yderligere betingelser end dem, der er nævnt i § 16, er opfyldt.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+          </ParagrafGruppe>
+        </Kapitel>
+        <Kapitel id="idcdbf6b3f-e3b3-4099-a0b2-356743e459cc" localId="5">
+          <Explicatus>Kapitel 5</Explicatus>
+          <Rubrica id="id3b43f577-1435-4883-bf9f-06f95acb79ab">
+            <Linea>
+              <Char>Kreditoplysningsbureauer</Char>
+            </Linea>
+          </Rubrica>
+          <ParagrafGruppe>
+            <Paragraf id="id6877fd46-8624-4d46-8089-70a1f2d08fd9" localId="19">
+              <Explicatus>§ 19.</Explicatus>
+              <Stk id="ida412843e-6200-4cbd-b617-ddfb04262d62">
+                <Exitus>
+                  <Linea>
+                    <Char>Den, som ønsker at drive virksomhed med behandling af oplysninger til bedømmelse af økonomisk soliditet og kreditværdighed med henblik på videregivelse (kreditoplysningsbureau), skal indhente tilladelse hertil fra Datatilsynet, inden behandlingen påbegyndes, jf. § 26, stk. 1, nr. 2.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id46d1fe6c-5fda-4c26-b9fb-9502add79da7" localId="20">
+              <Explicatus>§ 20.</Explicatus>
+              <Stk id="ida08fb63a-6465-4976-826e-297a12171138">
+                <Exitus>
+                  <Linea>
+                    <Char>Kreditoplysningsbureauer må kun behandle oplysninger, som efter deres art er af betydning for bedømmelse af økonomisk soliditet og kreditværdighed.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idc8e02b28-16d2-4aa0-8fe6-7762b26c2481">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Kreditoplysningsbureauer må ikke behandle oplysninger som nævnt i databeskyttelsesforordningens artikel 9, stk. 1, eller artikel 10.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idbd14e619-17ab-4597-84b3-331079de6fb7">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger om forhold, der taler imod kreditværdighed, og som er mere end 5 år gamle, må ikke behandles, medmindre det i det enkelte tilfælde er åbenbart, at forholdet er af afgørende betydning for bedømmelsen af den pågældendes økonomiske soliditet og kreditværdighed.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="id564c213b-c935-4271-905a-a2a0bfd0a5d2">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Databeskyttelsesforordningens artikel 12-19 skal overholdes ved behandling af oplysninger om virksomheder m.v., hvis denne behandling udføres for kreditoplysningsbureauer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+            <Paragraf id="id74c6d864-10ea-4b4f-926d-86987dea01d5" localId="21">
+              <Explicatus>§ 21.</Explicatus>
+              <Stk id="id23d766c7-b8e3-4592-9e71-c9f73c41ad57">
+                <Exitus>
+                  <Linea>
+                    <Char>Oplysninger om økonomisk soliditet og kreditværdighed til abonnenter må kun meddeles skriftligt.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Kreditoplysningsbureauet kan dog meddele summariske oplysninger mundtligt eller på lignende måde, hvis spørgerens navn og adresse noteres og opbevares i mindst 6 måneder.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="ide30abff4-9781-40e3-99e5-1e2c5f71eb68">
+                <Explicatus>Stk. 2.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Kreditoplysningsbureauers publikationer må kun indeholde oplysninger i summarisk form og kun udsendes til personer eller virksomheder, der abonnerer på meddelelser fra bureauet.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Publikationerne må ikke indeholde oplysninger om de registreredes personnummer.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="idb80e3b0f-da73-4480-8e13-0c70d06c2d6e">
+                <Explicatus>Stk. 3.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Summariske oplysninger om skyldforhold må kun videregives, hvis oplysningerne hidrører fra Statstidende, er indberettet af en offentlig myndighed efter reglerne i kapitel 4, eller hvis oplysningerne vedrører skyldforhold til samme kreditor på mere end 1.000 kr. og kreditor enten har erhvervet den registreredes skriftlige erkendelse af en forfalden gæld eller der er foretaget retslige skridt mod den pågældende.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>Oplysninger om endelig godkendt gældssanering må dog ikke videregives.</Char>
+                  </Linea>
+                  <Linea>
+                    <Char>De regler, der er nævnt i 1. og 2. pkt., gælder tillige for videregivelse af summariske oplysninger om skyldforhold i forbindelse med udarbejdelse af bredere kreditbedømmelser.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+              <Stk id="ida55b4daa-0a8f-45a3-801e-040ac00e5682">
+                <Explicatus>Stk. 4.</Explicatus>
+                <Exitus>
+                  <Linea>
+                    <Char>Videregivelse af summariske oplysninger om enkeltpersoners skyldforhold må kun ske på en sådan måde, at oplysningerne ikke kan danne grundlag for vurderingen af økonomisk soliditet og kreditværdighed for andre end de pågældende enkeltpersoner.</Char>
+                  </Linea>
+                </Exitus>
+              </Stk>
+            </Paragraf>
+          </ParagrafGruppe>
+        </Kapitel>
+      </Afsnit>
+      </Bog>
+    <Ikraft id="id6b4bfd1d-3d64-4bc3-8863-bf9b89203bb2">
+      <Exitus>
+        <Linea>
+          <Char>Lov nr. 1783 af 28. december 2023 om ændring af databeskyttelsesloven (Justering af aldersgrænsen for samtykke til behandling af personoplysninger i forbindelse med udbud af informationssamfundstjenester)</Char>
+        </Linea>
+        <Nota id="id6dbdb189-0b8e-4a9f-909d-fe38407d0a28">
+          <Explicatus>2)</Explicatus>
+          <Exitus>
+            <Linea>
+              <Char>Lovændringen vedrører § 6, stk. 2 og 3.</Char>
+            </Linea>
+          </Exitus>
+        </Nota>
+        <Linea>
+          <Char>indeholder følgende ikrafttrædelses- og overgangsbestemmelse:</Char>
+        </Linea>
+      </Exitus>
+      <IkraftCentreretParagraf id="id2620db83-c438-480f-8c77-f064c502b7dc">
+        <Explicatus>§ 2</Explicatus>
+        <Stk id="ida76e3e74-15c6-48b0-9357-56555a263d67">
+          <Explicatus>Stk. 1.</Explicatus>
+          <Exitus>
+            <Linea>
+              <Char>Loven træder i kraft den 1. januar 2024.</Char>
+            </Linea>
+          </Exitus>
+        </Stk>
+        <Stk id="ida102e25c-6651-4105-aaf2-d7488ca98cd4">
+          <Explicatus>Stk. 2.</Explicatus>
+          <Exitus>
+            <Linea>
+              <Char>Loven finder ikke anvendelse på et samtykke afgivet før lovens ikrafttræden.</Char>
+            </Linea>
+            <Linea>
+              <Char>For et sådant samtykke finder de hidtil gældende regler anvendelse.</Char>
+            </Linea>
+          </Exitus>
+        </Stk>
+      </IkraftCentreretParagraf>
+    </Ikraft>
+    <Ikraft id="id8e3401b4-906b-4dd5-a1f0-c3b3cf41d461">
+      <Exitus>
+        <Linea>
+          <Char>Lov nr. 1784 af 28. december 2023 om ændring af databeskyttelsesloven og lov om Det Centrale Personregister (Ophævelse af bestemmelser om behandling af personoplysninger i forbindelse med markedsføring, undtagelse fra oplysningspligten og indsigtsretten hos Procesbevillingsnævnet og tilpasning af indsigtsretten hos Folketingets Ombudsmand)</Char>
+        </Linea>
+        <Nota id="id3140743e-32cf-4a5f-8701-33f59505e960">
+          <Explicatus>3)</Explicatus>
+          <Exitus>
+            <Linea>
+              <Char>Lovændringen vedrører § 13, stk. 1-3 og 5-9, § 22, stk. 7 og 8, og § 41, stk. 2, nr. 1.</Char>
+            </Linea>
+          </Exitus>
+        </Nota>
+        <Linea>
+          <Char>indeholder følgende ikrafttrædelsesbestemmelse:</Char>
+        </Linea>
+      </Exitus>
+      <IkraftCentreretParagraf id="id803145b8-b482-4eb8-b1f0-8d952f89c626">
+        <Explicatus>§ 3</Explicatus>
+        <Stk id="id84ebed3d-a86d-4d48-a857-36ad3dd847fc">
+          <Exitus>
+            <Linea>
+              <Char>Loven træder i kraft den 1. januar 2024.</Char>
+            </Linea>
+          </Exitus>
+        </Stk>
+      </IkraftCentreretParagraf>
+    </Ikraft>
+  </DokumentIndhold>
+  <UnderskriftGruppe id="id613a707e-c87c-40b9-90d1-dddf894178f1">
+    <UnderskriftStedDato/>
+    <Underskriver/>
+  </UnderskriftGruppe>
+  <Bilag id="id1a9542d4-0f5c-4502-8b1f-3f0081a7fc50" localId="1">
+    <Explicatus>Bilag 1</Explicatus>
+    <Rubrica id="id7ed73c9c-ad21-414f-b728-6a15181478e2">
+      <Linea>
+        <Char>EUROPA-PARLAMENTETS OG RÅDETS FORORDNING (EU) 2016/679 af 27. april 2016</Char>
+      </Linea>
+    </Rubrica>
+    <BilagIndhold id="id8f51dee7-be97-4a50-b1f4-b9037dee6b8e">
+      <TekstGruppe id="id08515b8a-b1fc-4b59-9a56-bd2037655380">
+        <Exitus formaEx="Center">
+          <Linea>
+            <Char formaChar="Bold">om beskyttelse af fysiske personer i forbindelse med behandling af personoplysninger og om fri udveksling af sådanne oplysninger og om ophævelse af direktiv 95/46/EF (generel forordning om databeskyttelse)</Char>
+          </Linea>
+        </Exitus>
+        <Exitus formaEx="Center"/>
+        <Exitus formaEx="Center">
+          <Linea>
+            <Char formaChar="Bold">(EØS-relevant tekst)</Char>
+          </Linea>
+        </Exitus>
+        <Exitus>
+          <Linea>
+            <Char>EUROPA-PARLAMENTET OG RÅDET FOR DEN EUROPÆISKE UNION HAR —</Char>
+          </Linea>
+        </Exitus>
+        <Exitus>
+          <Linea>
+            <Char>under henvisning til traktaten om Den Europæiske Unions funktionsmåde, særlig artikel 16,</Char>
+          </Linea>
+        </Exitus>
+        <Exitus>
+          <Linea>
+            <Char>under henvisning til forslag fra Europa-Kommissionen,</Char>
+          </Linea>
+        </Exitus>
+        </TekstGruppe>
+    </BilagIndhold>
+  </Bilag>
+</Dokument>

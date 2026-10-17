@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch, Mock
 import os
 from tulit.client.state.finlex import FinlexClient
+from tulit.parser.exceptions import ContentTypeError
 from tests.conftest import locate_data_dir, locate_tests_dir
 
 class TestFinlexClient(unittest.TestCase):
@@ -81,8 +82,8 @@ class TestFinlexClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        # Should exit with code 1 for wrong content type
-        with self.assertRaises(SystemExit):
+        # A wrong content type raises instead of exiting the caller's program
+        with self.assertRaises(ContentTypeError):
             self.client.download(year=2024, number=123, fmt='xml')
 
     @patch('tulit.client.state.finlex.requests.Session.get')
@@ -94,7 +95,7 @@ class TestFinlexClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ContentTypeError):
             self.client.download(year=2024, number=123, fmt='pdf')
 
     @patch('tulit.client.state.finlex.requests.Session.get')

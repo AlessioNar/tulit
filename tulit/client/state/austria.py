@@ -7,9 +7,14 @@ annex. The client downloads every unit in force on a given date and writes
 an ``index.json`` listing them in document order, which ``RISParser``
 reads.
 
+Laws as adopted are published in the authentic electronic Federal Law
+Gazette (BGBl.), one XML document per gazette issue from 2004 on, read by
+``BGBlParser``.
+
 API documentation: https://data.bka.gv.at/ris/api/v2.6/
 Licence: CC BY 4.0.
 """
+import datetime
 import json
 import os
 from typing import Any, Optional
@@ -23,6 +28,9 @@ from tulit.parser.exceptions import FileLoadError, NetworkError
 
 RIS_API = 'https://data.bka.gv.at/ris/api/v2.6/Bundesrecht'
 RIS_ELI = 'https://www.ris.bka.gv.at/eli/'
+BGBL_AUTH = 'https://www.ris.bka.gv.at/Dokumente/BgblAuth'
+# The authentic electronic Federal Law Gazette starts in 2004
+BGBL_AUTH_FROM = 2004
 USER_AGENT = 'tulit (+https://github.com/AlessioNar/tulit)'
 
 
@@ -125,6 +133,50 @@ class AustriaRISClient(Client):
             json.dump(index, f, ensure_ascii=False, indent=2)
         self.logger.info("Downloaded %d RIS units of %s to %s", len(units), gesetzesnummer, folder)
         return folder
+
+    def gazette_reference(self, gesetzesnummer: str) -> Optional[tuple[str, str, str]]:
+        """
+        The gazette issue that first published a law, as (part, year, number).
+
+        '10001597' (Datenschutzgesetz) -> ('I', '1999', '165'); None if the
+        law was not published in the federal law gazette.
+        """
+        references = self.search(gesetzesnummer, datetime.date.today().isoformat())
+        for reference in references[:1]:
+            consolidated = reference['Data']['Metadaten']['Bundesrecht'].get('BrKons', {})
+            gazette = consolidated.get('StammnormPublikationsorgan') or ''
+            number = consolidated.get('StammnormBgblnummer') or ''
+            part = gazette.replace('BGBl.', '').replace('Nr.', '').strip().upper()
+            if gazette.startswith('BGBl.') and '/' in number:
+                issue, year = number.split('/', 1)
+                return (part or 'I'), year, issue
+        return None
+
+    def download_gazette(self, part: str, year: str, number: str) -> str:
+        """
+        Download an issue of the authentic Federal Law Gazette, e.g. ('I', '2024', '5') for BGBl. I Nr. 5/2024.
+
+        Returns the path of the XML file.
+        """
+        if int(year) < BGBL_AUTH_FROM:
+            raise FileLoadError(
+                f"BGBl. {part} Nr. {number}/{year} predates the authentic electronic gazette "
+                f"({BGBL_AUTH_FROM}); RIS publishes it only as a scanned PDF")
+        name = f'BGBLA_{year}_{part}_{number}'
+        path = os.path.join(self.download_dir, 'AT', 'bgbl', f'{name}.xml')
+        if not os.path.exists(path):
+            try:
+                response = self.session.get(f'{BGBL_AUTH}/{name}/{name}.xml', timeout=60)
+            except requests.RequestException as e:
+                raise NetworkError(f"Failed to download BGBl. {part} Nr. {number}/{year}: {e}") from e
+            if response.status_code == 404 or b'risdok' not in response.content[:500]:
+                raise FileLoadError(f"No authentic XML for BGBl. {part} Nr. {number}/{year}")
+            if response.status_code != 200:
+                raise NetworkError(f"RIS returned HTTP {response.status_code} for BGBl. {part} Nr. {number}/{year}")
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, 'wb') as f:
+                f.write(response.content)
+        return path
 
     def _save(self, url: str, path: str) -> None:
         if os.path.exists(path):

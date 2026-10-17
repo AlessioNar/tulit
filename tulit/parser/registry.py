@@ -200,6 +200,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.veneto import VenetoHTMLParser
     from tulit.parser.json.legifrance import LegifranceParser
     from tulit.parser.xml.ris import RISParser
+    from tulit.parser.xml.bgbl_at import BGBlParser
     from tulit.parser.xml.lexdania import LexDaniaParser
     from tulit.parser.xml.bwb import BWBParser
     from tulit.parser.xml.metalex import MetaLexParser
@@ -218,6 +219,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('veneto', VenetoHTMLParser)
     registry.register('legifrance', LegifranceParser)
     registry.register('ris', RISParser, aliases=['at-ris'])
+    registry.register('ris-bgbl', BGBlParser, aliases=['at-bgbl'])
     registry.register('lexdania', LexDaniaParser, aliases=['dk-lexdania'])
     registry.register('bwb', BWBParser, aliases=['nl-bwb'])
     registry.register('metalex', MetaLexParser, aliases=['sk-metalex'])

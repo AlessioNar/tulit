@@ -64,9 +64,9 @@ Member State Clients
 
 .. code-block:: python
 
-    from tulit.client.state.normattiva import NormativaClient
+    from tulit.client.state.normattiva import NormattivaClient
     
-    client = NormativaClient(download_dir='./database')
+    client = NormattivaClient(download_dir='./database')
     # Download by URN
     client.download(urn='urn:nir:stato:decreto.legge:2024-01-01;1')
 

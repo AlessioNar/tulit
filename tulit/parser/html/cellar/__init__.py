@@ -14,7 +14,7 @@ The parsers extract structured legal document components including:
 
 Example Usage
 -------------
->>> from tulit.parsers.html.cellar import CellarHTMLParser, ProposalHTMLParser
+>>> from tulit.parser.html.cellar import CellarHTMLParser, ProposalHTMLParser
 >>> parser = CellarHTMLParser()
 >>> parser.parse('document.html')
 """

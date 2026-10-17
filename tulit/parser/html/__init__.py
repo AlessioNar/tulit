@@ -8,7 +8,7 @@ This package provides HTML-based parsers for legal documents from various source
 
 Example Usage
 -------------
->>> from tulit.parsers.html import CellarHTMLParser
+>>> from tulit.parser.html import CellarHTMLParser
 >>> parser = CellarHTMLParser()
 >>> parser.parse('document.html')
 """
@@ -18,7 +18,7 @@ from tulit.parser.html.cellar import CellarHTMLParser, CellarStandardHTMLParser,
 from tulit.parser.html.veneto import VenetoHTMLParser
 
 # Backward compatibility: maintain old import paths
-# Users can still import from tulit.parsers.html.xhtml
+# Users can still import from tulit.parser.html.xhtml
 xhtml = None  # Placeholder for old module reference
 
 __all__ = [

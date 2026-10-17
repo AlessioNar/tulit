@@ -93,6 +93,19 @@ Malta and Portugal publish only PDF; reading them needs the ``pdf`` extra:
     tulit.fetch("IKS", jurisdiction="EE", version="consolidated", date="2024-06-01")
     tulit.fetch("BGBl. I Nr. 5/2024", jurisdiction="AT")                 # law as adopted
 
+Some acts exist only as scanned PDFs without text: the Moniteur belge
+before June 1997 and the Cypriot Official Gazette before about 2015.
+``fetch`` cannot parse them and says so; ``tulit.download`` returns the
+official file of any act, scanned or not, without parsing it:
+
+.. code-block:: python
+
+    scan = tulit.download("constitution/1994/02/17/1994021048", jurisdiction="BE",
+                          download_dir="acts")
+    scan["path"], scan["parser"]   # ('acts/BE/1994021048_fra_scan.pdf', None)
+    scan["meta"]["page"]           # 2: where the act starts in the issue
+    tulit.download("4252, 23.7.2010", jurisdiction="CY")   # Gazette issue holding a 2010 law
+
 The sources are listed in code as well:
 
 .. code-block:: python

@@ -114,5 +114,62 @@ class TestCyprusSource:
             tulit.fetch('125(I)/2018', jurisdiction='CY', version='consolidated', download_dir=str(tmp_path))
 
     def test_bad_identifier(self, tmp_path):
-        with pytest.raises(ValueError, match='not a Cypriot law number'):
+        with pytest.raises(ValueError, match='neither a Cypriot law number'):
             tulit.fetch('data protection law', jurisdiction='CY', download_dir=str(tmp_path))
+
+
+VIEW = '/mof/gpo/gazette.nsf/dmlgazette_archive_gr/dmlgazette_archive_gr?OpenForm&Start=1&Count=9999'
+ARCHIVE_YEARS = f'''<html><body><table>
+<tr><td><a href="{VIEW}&Expand=16&Seq=1">2011</a></td></tr>
+<tr><td><a href="{VIEW}&Expand=17&Seq=1">2010</a></td></tr>
+</table></body></html>'''
+ARCHIVE_MONTH = '''<html><body><table>
+<tr><td></td><td><a href="/mof/gpo/gazette.nsf/All/2A853FB2F2C03848C225872C003C952E?OpenDocument">
+Παρασκευή - 23/07/2010 - ΠΑΡΑΡΤΗΜΑ ΤΡΙΤΟ - ΜΕΡΟΣ (Ι) - Αρ. 4252</a></td></tr>
+<tr><td></td><td><a href="/mof/gpo/gazette.nsf/All/05685C5CBA23148BC225872C003C952D?OpenDocument">
+Παρασκευή - 23/07/2010 - - Αρ. 4252</a></td></tr>
+</table></body></html>'''
+
+
+class TestOlderIssues:
+    def test_find_issue_in_archive(self, tmp_path):
+        client = CyprusGazetteClient(download_dir=str(tmp_path))
+        pages = [Mock(status_code=200, content=ARCHIVE_YEARS.encode('utf-8')),
+                 Mock(status_code=200, content=ARCHIVE_MONTH.encode('utf-8'))]
+        with patch.object(client.session, 'get', side_effect=pages) as get:
+            link = client.find_issue('4252', 2010, 7)
+        assert 'Expand=17.7.2' in get.call_args_list[1].args[0]
+        # The Annex One issue, not another annex's issue with the same number
+        assert link == 'https://www.mof.gov.cy/mof/gpo/gazette.nsf/All/05685C5CBA23148BC225872C003C952D?OpenDocument'
+
+    @pytest.mark.parametrize('identifier, month', [('4252/2010', None), ('4252, 23.7.2010', 7),
+                                                   ('Αρ. 4252/2010', None)])
+    def test_issue_reference(self, cyprus, tmp_path, identifier, month):
+        details = {'pdf': 'https://www.mof.gov.cy/x.pdf', 'issue': '4252', 'date_publication': '2010-07-23'}
+        with patch.object(CyprusGazetteClient, 'find_issue', return_value='https://link') as find_issue, \
+                patch.object(CyprusGazetteClient, 'download_issue',
+                             return_value=(str(cyprus / '5096_p1.pdf'), details)), \
+                patch('tulit.sources.cy._has_text', return_value=False):
+            found = tulit.download(identifier, 'CY', download_dir=str(tmp_path))
+            with pytest.raises(FileLoadError, match='only as a scanned document'):
+                tulit.fetch(identifier, 'CY', download_dir=str(tmp_path))
+        find_issue.assert_called_with('4252', 2010, month)
+        assert found['parser'] is None
+        assert found['path'].endswith('5096_p1.pdf')
+        assert (found['version_date'], found['meta']['gazette_issue'], found['meta']['scanned']) == (
+            '2010-07-23', '4252', True)
+
+    def test_issue_link_with_law_number(self, cyprus, tmp_path):
+        details = {'pdf': 'https://www.mof.gov.cy/x.pdf', 'issue': '5096', 'date_publication': '2026-09-17'}
+        link = 'https://www.mof.gov.cy/mof/gpo/gazette.nsf/All/5601BC24BB819A11C2258E750053FF80?OpenDocument'
+        with patch.object(CyprusGazetteClient, 'download_issue',
+                          return_value=(str(cyprus / '5096_p1.pdf'), details)) as download_issue:
+            doc = tulit.fetch(link, number='125(Ι)/2026', download_dir=str(tmp_path))
+        download_issue.assert_called_once_with(link)
+        assert doc['meta']['jurisdiction'] == 'CY'
+        assert doc['meta']['number'] == '125(I)/2026'
+
+    def test_old_law_number_points_to_issues(self, tmp_path):
+        with patch.object(CyprusGazetteClient, 'search', return_value=[]):
+            with pytest.raises(FileLoadError, match="give the Annex One issue"):
+                tulit.fetch('64(I)/2010', 'CY', download_dir=str(tmp_path))

@@ -69,9 +69,18 @@ class BelgiumSource(Source):
             except FileLoadError as e:
                 if 'only as PDF' not in str(e):
                     raise
-                # Published before June 1997, as PDF only: Justel's first version of the text
-                path = self._first_justel_version(client, doc_type, act_date, numac, language)
-                meta['source'] = client.eli(doc_type, act_date, numac, language, 'justel')
+                # Published before June 1997, as PDF only: Justel's first version of the text, or else
+                # the scanned issue of the Moniteur, which tulit.download returns
+                try:
+                    path = self._first_justel_version(client, doc_type, act_date, numac, language)
+                    meta['source'] = client.eli(doc_type, act_date, numac, language, 'justel')
+                except FileLoadError:
+                    path, page = client.download_scan(doc_type, act_date, numac, language)
+                    meta.update(source=client.scan_url, scanned=True)
+                    if page:
+                        meta['page'] = page
+                    return Retrieval(path=path, parser=None, version=ORIGINAL, language=language,
+                                     version_date=act_date, meta=meta)
             if metadata:
                 try:
                     found = client.metadata(client.download(doc_type, act_date, numac, language, consolidated=True))

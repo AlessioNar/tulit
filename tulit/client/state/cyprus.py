@@ -6,12 +6,16 @@ the Gazette as PDF on https://www.mof.gov.cy/mof/gpo/gazette.nsf; laws appear
 in Annex One (Παράρτημα Πρώτο): Part I for general laws, Part II for budgets
 and Part III for laws ratifying treaties. The site's full-text search covers
 the PDFs, so a law is found by its number ('Αριθμός 125(Ι) του 2018').
+
+Issues before about 2015 are scanned images without text, out of reach of
+the search; the archive lists every issue from 2004 by year and month, so
+those are found by their issue number ('Αρ. 4252', 23 July 2010) instead.
 """
 import datetime
 import os
 import re
 import urllib.parse
-from typing import Any
+from typing import Any, Optional
 
 import requests
 from lxml import html
@@ -26,6 +30,7 @@ USER_AGENT = 'tulit (+https://github.com/AlessioNar/tulit)'
 _PDF = re.compile(rb'href="(?:\.\./)?(?P<path>[0-9A-F]{32}/\$file/[^"]+\.pdf)"', re.IGNORECASE)
 _DETAILS = re.compile(r'Αριθμός Εφημερίδας:\s*(?P<issue>\w+)\s*Σελίδες:\s*(?P<pages>[\d\-–]+)\s*'
                       r'Ημερομηνία:\s*(?P<date>\d{2}/\d{2}/\d{4})')
+_ARCHIVE_ROW = re.compile(r'(?P<date>\d{2}/\d{2}/\d{4}) - (?P<label>.*?) ?- Αρ\. (?P<issue>\w+)\b')
 # Annex One part where each kind of law appears: I general, II budgets, III ratifications
 PARTS = {'I': 'ΜΕΡΟΣ (Ι)', 'II': 'ΜΕΡΟΣ (ΙΙ)', 'III': 'ΜΕΡΟΣ (ΙΙΙ)'}
 
@@ -94,8 +99,42 @@ class CyprusGazetteClient(Client):
 
     def download(self, number: str, part: str, year: str) -> tuple[str, dict[str, Any]]:
         """Download the Gazette issue holding a law; returns its path and the issue's details."""
-        details = self.issue(self.find_law(number, part, year))
-        name = f"{details.get('issue') or year}.pdf"
+        return self.download_issue(self.find_law(number, part, year))
+
+    def archive_years(self) -> dict[int, str]:
+        """The archive's years and the view position that expands each."""
+        response = self._get(f'{GAZETTE}/dmlgazette_archive_gr/dmlgazette_archive_gr?OpenForm')
+        root = html.fromstring(response.content.decode('utf-8', errors='replace'))
+        years: dict[int, str] = {}
+        for row in root.xpath('//tr'):
+            text = ' '.join(row.text_content().split())
+            link = next((href for href in row.xpath('.//a/@href') if 'Expand=' in href), None)
+            if re.fullmatch(r'\d{4}', text) and link:
+                years.setdefault(int(text), re.search(r'Expand=([\d.]+)', link).group(1))
+        return years
+
+    def find_issue(self, issue: str, year: int, month: Optional[int] = None) -> str:
+        """The page of Annex One issue ``issue`` of ``year`` (in ``month``, when known), from the archive."""
+        position = self.archive_years().get(year)
+        if position is None:
+            raise FileLoadError(f"The Official Gazette archive has no year {year}")
+        for number in ([month] if month else range(1, 13)):
+            # Each month lists its main part (.1) and its annexes (.2)
+            response = self._get(f'{GAZETTE}/dmlgazette_archive_gr/dmlgazette_archive_gr?OpenForm&Start=1'
+                                 f'&Count=9999&Expand={position}.{number}.2&Seq=4')
+            root = html.fromstring(response.content.decode('utf-8', errors='replace'))
+            for row in root.xpath('//tr'):
+                match = _ARCHIVE_ROW.search(' '.join(row.text_content().split()))
+                links = [href for href in row.xpath('.//a/@href') if '/All/' in href]
+                if match and links and match.group('issue') == issue and (
+                        not match.group('label').strip(' -') or 'ΠΑΡΑΡΤΗΜΑ ΠΡΩΤΟ' in match.group('label')):
+                    return urllib.parse.urljoin(GAZETTE + '/', links[0])
+        raise FileLoadError(f"The Official Gazette archive has no Annex One issue {issue} in {year}")
+
+    def download_issue(self, link: str) -> tuple[str, dict[str, Any]]:
+        """Download the PDF of a Gazette issue page; returns its path and the issue's details."""
+        details = self.issue(link)
+        name = f"{details.get('issue') or re.search(r'All/([0-9A-F]+)', link).group(1)}.pdf"
         target = os.path.join(self.download_dir, 'CY', name)
         if not os.path.exists(target):
             response = self._get(details['pdf'])

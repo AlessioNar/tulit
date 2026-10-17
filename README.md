@@ -49,6 +49,10 @@ lopd = tulit.fetch("BOE-A-2018-16673", jurisdiction="ES",
 dpa_ie = tulit.fetch("http://www.irishstatutebook.ie/eli/2018/act/7")  # jurisdiction inferred from the ELI
 
 print(lopd["meta"]["jurisdiction"], lopd["meta"]["version"], lopd["meta"]["version_date"])
+
+# The official file itself, without parsing (also for scanned PDFs tulit cannot read)
+scan = tulit.download("constitution/1994/02/17/1994021048", jurisdiction="BE")
+scan["path"], scan["meta"]["source"]
 ```
 
 From the command line:

@@ -233,3 +233,35 @@ class TestBelgiumSource:
             with pytest.raises(FileLoadError, match='only the articles changed'):
                 tulit.fetch('arrete/2020/05/04/2020030839', jurisdiction='BE', version='consolidated',
                             date='2020-05-20', download_dir=str(tmp_path))
+
+
+class TestScannedPublication:
+    def test_download_scan(self, tmp_path):
+        client = EJusticeClient(download_dir=str(tmp_path))
+        page = Mock(status_code=404, content=b'<main class="article-text"><p>Attention</p><p>Les textes publi\xe9s '
+                    b'avant le 1 juin 1997 sont consultables uniquement au format PDF</p>'
+                    b'<a href="/mopdf/1994/02/17_2.pdf#page=2   ">Image</a></main>')
+        pdf = Mock(status_code=200, content=b'%PDF-1.4 scan')
+        with patch.object(client.session, 'get', side_effect=[page, pdf]) as get:
+            path, first = client.download_scan('constitution', '1994-02-17', '1994021048')
+        assert get.call_args_list[1].args[0] == 'https://www.ejustice.just.fgov.be/mopdf/1994/02/17_2.pdf'
+        assert path.endswith('1994021048_fra_scan.pdf') and first == 2
+
+    def test_original_before_1997(self, tmp_path):
+        def download(doc_type, date, numac, language='fra', consolidated=False):
+            if consolidated:
+                raise FileLoadError('not consolidated')
+            raise FileLoadError('eJustice publishes x only as PDF (texts published before June 1997)')
+
+        def scan(self, *args):
+            self.scan_url = 'https://www.ejustice.just.fgov.be/mopdf/1994/02/17_2.pdf'
+            return str(tmp_path / 'scan.pdf'), 2
+
+        with patch.object(EJusticeClient, 'download', side_effect=download), \
+                patch.object(EJusticeClient, 'download_scan', autospec=True, side_effect=scan):
+            found = tulit.download('constitution/1994/02/17/1994021048', 'BE', download_dir=str(tmp_path))
+            with pytest.raises(FileLoadError, match='only as a scanned document'):
+                tulit.fetch('constitution/1994/02/17/1994021048', 'BE', download_dir=str(tmp_path))
+        assert found['parser'] is None
+        assert (found['meta']['source'], found['meta']['page']) == (
+            'https://www.ejustice.just.fgov.be/mopdf/1994/02/17_2.pdf', 2)

@@ -124,6 +124,34 @@ class EJusticeClient(Client):
         url = self.eli(doc_type, date, numac, language, 'justel' if consolidated else 'publication')
         return self._save(os.path.basename(target), self._get(url))
 
+    def download_scan(self, doc_type: str, date: str, numac: str, language: str = 'fra') -> tuple[str, Optional[int]]:
+        """
+        Download the scanned issue of the Moniteur belge that published an act before June 1997.
+
+        Returns the PDF's path and the page where the act starts.
+        """
+        url = self.eli(doc_type, date, numac, language, 'publication')
+        try:
+            page = self.session.get(url, timeout=180)
+        except requests.RequestException as e:
+            raise NetworkError(f"eJustice request failed for {url}: {e}") from e
+        match = re.search(rb'href="(/mopdf/[^"#]+\.pdf)(?:#page=(\d+))?', page.content)
+        if not match:
+            raise FileLoadError(f"eJustice gives no scanned issue for {url}")
+        target = os.path.join(self.download_dir, 'BE', f'{numac}_{language}_scan.pdf')
+        if not os.path.exists(target):
+            try:
+                response = self.session.get(EJUSTICE + match.group(1).decode(), timeout=600)
+            except requests.RequestException as e:
+                raise NetworkError(f"eJustice request failed for {match.group(1).decode()}: {e}") from e
+            if not response.content.startswith(b'%PDF'):
+                raise FileLoadError(f"eJustice did not return a PDF for {match.group(1).decode()}")
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with open(target, 'wb') as f:
+                f.write(response.content)
+        self.scan_url = EJUSTICE + match.group(1).decode()
+        return target, int(match.group(2)) if match.group(2) else None
+
     @staticmethod
     def archive_link(path: str) -> Optional[tuple[int, str]]:
         """The number and link of the latest archive named on a Justel page, if any."""

@@ -75,6 +75,13 @@ def test_recurring_citation_is_not_a_page_header():
                                'amendment': None}]}
                 for n in range(1, 9)]
     assert check(_doc(articles=articles, chapters=[])) == []
+    # The piece after the cut too: '... č. 199/2004 Z. z. Colný zákon a o zmene a doplnení ...'
+    articles = [{'eId': f'art_{n}', 'num': f'{n}.', 'heading': None, 'parent': None,
+                 'children': [{'eId': 'unp_1', 'text': f'{n}) Zákon č. 199/2004 Z. z. Colný zákon a o zmene a '
+                                                       'doplnení niektorých zákonov v znení neskorších predpisov.',
+                               'amendment': None}]}
+                for n in range(1, 9)]
+    assert check(_doc(articles=articles, chapters=[])) == []
 
 
 def test_metadata():

@@ -25,19 +25,28 @@ ORIGINAL_FILE = 'vyhlasene_znenie'
 
 _CITATION = re.compile(r'^(\d+)\s*/\s*(\d{4})(\s*(Z\.\s*z\.|Zb\.))?$')
 _PATH = re.compile(r'^(?:SK/ZZ/)?(\d{4})/(\d+)$')
+# 'https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2018/18/20180525'
+_URL = re.compile(r'^https?://(?:www\.)?slov-lex\.sk/(?:[\w-]+/)*SK/ZZ/(\d{4})/(\d+)(?:/(\d{8}))?/?(?:[?#].*)?$')
+
+
+def version_in_url(identifier: str) -> Optional[str]:
+    """The ISO date of the version a Slov-Lex URL names ('.../SK/ZZ/2018/18/20180525'), or None."""
+    match = _URL.match(identifier.strip())
+    stamp = match.group(3) if match else None
+    return f'{stamp[:4]}-{stamp[4:6]}-{stamp[6:]}' if stamp else None
 
 
 def act_path(identifier: str) -> str:
     """
     The Slov-Lex path of an act.
 
-    '18/2018', '18/2018 Z. z.', '2018/18' and 'SK/ZZ/2018/18' -> 'SK/ZZ/2018/18'.
+    '18/2018', '18/2018 Z. z.', '2018/18', 'SK/ZZ/2018/18' and Slov-Lex URLs -> 'SK/ZZ/2018/18'.
     """
     text = identifier.strip().strip('/')
     match = _CITATION.match(text)
     if match:
         return f'SK/ZZ/{match.group(2)}/{match.group(1)}'
-    match = _PATH.match(text)
+    match = _PATH.match(text) or _URL.match(identifier.strip())
     if match:
         return f'SK/ZZ/{match.group(1)}/{match.group(2)}'
     raise ValueError(

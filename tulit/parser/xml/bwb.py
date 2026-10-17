@@ -11,6 +11,12 @@ Parser for consolidated Dutch legislation in the BWB toestand XML format.
 - the closing formula, date and signatures (``wetsluiting``) give the
   conclusions, and ``bijlage`` elements the annexes;
 - ``meta-data`` blocks are left out.
+
+The same parser reads acts as published in the Staatsblad (officiele-
+publicatie XML), which share the vocabulary. Their amending articles
+(``wijzig-artikel``) become articles whose lettered parts (``wijzig-lid``)
+carry a structured ``amendment``; the explanatory memorandum
+(``nota-toelichting``) is left out.
 """
 import re
 from typing import Any, Optional
@@ -21,9 +27,27 @@ from tulit.parser.exceptions import FileLoadError
 from tulit.parser.parser import Parser
 from tulit.parser.structure import BodyBuilder, ChildrenBuilder, element_text, eid_token
 
-BLOCK_TAGS = ('al', 'lid', 'lidnr', 'lijst', 'li', 'li.nr', 'kop', 'label', 'nr', 'titel',
+BLOCK_TAGS = ('al', 'lid', 'lidnr', 'lijst', 'li', 'li.nr', 'kop', 'label', 'nr', 'titel', 'wat', 'wijziging',
               'tabel', 'row', 'entry', 'considerans.al', 'ondertekening', 'functie', 'naam')
 SKIP_TAGS = ('meta-data', 'jcis', 'jci')
+# Elements holding text quoted by an amendment, not part of the act itself
+QUOTED_TAGS = ('wijziging', 'wijzig-divisie')
+
+# Amending verbs, checked in order
+ACTIONS = (
+    ('vervalt', 'delete'), ('vervallen', 'delete'), ('komt te luiden', 'replace'),
+    ('komen te luiden', 'replace'), ('vervangen', 'replace'), ('ingevoegd', 'insert'),
+    ('toegevoegd', 'add'), ('gewijzigd', 'amend'),
+)
+
+
+def amendment_action(instruction: str) -> Optional[str]:
+    """'In artikel 6 wordt «a» vervangen door «b».' -> 'replace'; '... komt te luiden:' -> 'replace'."""
+    lowered = instruction.lower()
+    for verb, action in ACTIONS:
+        if verb in lowered:
+            return action
+    return None
 
 DIVISIONS = {
     'boek': 'part',
@@ -96,6 +120,40 @@ class BWBParser(Parser):
                 self._walk(child, body)
             elif child.tag == 'artikel':
                 self._read_article(child, body)
+            elif child.tag == 'wijzig-artikel':
+                self._read_amending_article(child, body)
+
+    def _read_amending_article(self, article: etree._Element, body: BodyBuilder) -> None:
+        """An article amending another act: the introduction names the act, each part amends it."""
+        children = ChildrenBuilder()
+        amended_act = None
+        for block in article:
+            if not isinstance(block.tag, str) or block.tag in ('kop',) + SKIP_TAGS:
+                continue
+            text = _text(block)
+            if not text:
+                continue
+            if block.tag == 'wat' and not children.children:
+                children.add(text)
+                amended_act = re.sub(r'\s+(wordt|worden)\s+als volgt gewijzigd:?$', '', text) or None
+                continue
+            instruction = _text(block.find('wat')) if block.tag != 'wat' else text
+            quoted = [{'kind': 'text', 'text': _text(change)} for change in block.findall('wijziging')
+                      if _text(change)]
+            child = children.add(text, number=block.findtext('lidnr') if block.tag == 'wijzig-lid' else None)
+            child['amendment'] = {
+                'action': amendment_action(instruction),
+                'instruction': instruction,
+                'amended_act': amended_act,
+                'quoted': quoted,
+            }
+        heading = article.find('kop')
+        body.article(
+            article.get('label') or _text(heading, skip=('titel',)) or None,
+            (_text(heading.find('titel')) or None) if heading is not None else None,
+            children.children,
+            token=_number(article),
+        )
 
     def _read_article(self, article: etree._Element, body: BodyBuilder) -> None:
         children = ChildrenBuilder()
@@ -143,7 +201,9 @@ class BWBParser(Parser):
 
     def _read_annexes(self) -> None:
         self.annexes = []
-        for position, annex in enumerate(self.root.iter('bijlage'), start=1):
+        annexes = [a for a in self.root.iter('bijlage')
+                   if not any(p.tag in QUOTED_TAGS for p in a.iterancestors())]
+        for position, annex in enumerate(annexes, start=1):
             heading = annex.find('kop')
             children = ChildrenBuilder()
             for block in annex:

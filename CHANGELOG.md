@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-10-17
+### Added
+
+- **Seven new jurisdictions in `fetch`**, each with a parser to legalJSON and per-country tests (17 of 28 now):
+  - Croatia: acts as published in Narodne novine, with their ELI metadata (dates, repealed and amended acts). Croatia publishes no official consolidated texts.
+  - Czechia: original and consolidated versions from e-Sbírka, the version in force on any date; consolidated versions are legally binding since 2024.
+  - Estonia: the original text and every consolidated text from Riigi Teataja, by abbreviation ('IKS'), text id or URL, the text in force on a date.
+  - Malta: consolidated Chapters ('Cap. 586', in English or Maltese) and Acts as passed ('Act XII of 2018') from Legislation Malta PDFs; the original of a Chapter is the Act that enacted it. Article headings come from the side notes.
+  - Poland: acts as published in the Journal of Laws and their official consolidated texts (tekst jednolity) through the Sejm ELI API, by 'Dz.U. 2018 poz. 1000', 'DU/2018/1000' or ELI.
+  - Portugal: acts as published in the Diário da República PDF, by citation ('Lei n.º 58/2019, de 8 de agosto') or ELI, in the current layout and the older two-column one.
+  - Sweden: consolidated statutes (SFS) from the Riksdag open data; where an amendment is pending, the version of each section in force on the date is kept.
+- **Original versions for Austria and the Netherlands**: laws as adopted from the authentic Federal Law Gazette (BGBl., from 2004) and from the Staatsblad (from 1995), by gazette reference or from a consolidated law's identifier.
+- **`pdf` extra**: `pip install 'tulit[pdf]'` installs pdfplumber for sources published only as PDF. `tulit.parser.pdf.layout` reads positioned lines, two-column pages column by column, and side notes apart from the body.
+- **Structured amendments** in the new parsers (Austria BGBl., Netherlands Staatsblad, Estonia, Poland, Croatia, Czechia, Portugal): each amending instruction carries its action (replace, insert, add, delete), the amended act and the quoted new text.
+- **GitHub releases**: the publish workflow creates a GitHub release for each tag, with the package files and the version's changelog section.
+- `BodyBuilder.division` accepts an explicit nesting rank and `ChildrenBuilder.add` an eId token, for formats whose structure is explicit; eIds accept Roman numbers with a letter suffix (`art_XIIIA`).
+
+### Changed
+
+- Read the Docs builds the package from the repository instead of installing it from PyPI, so the API reference matches the code of each version.
+- Austria and the Netherlands infer the version from the identifier: a gazette reference gives the law as adopted, a consolidated identifier the law in force.
+
+### Known limitations
+
+- Italy (Normattiva's new API) and France (Légifrance, which needs PISTE API credentials) are still not in `fetch`.
+- Portuguese consolidated texts are published only as a JavaScript application; Swedish originals only as PDF.
+- Maltese Acts and Legal Notices are printed in Maltese and English side by side: use `language='eng'`.
+- Polish consolidated texts are the official teksty jednolite: amendments published after the latest one are not included; one without HTML yet falls back to the previous one.
+- Austrian gazette issues before 2004 and Dutch Staatsblad issues before 1995 are scanned PDFs and not available.
+
 ## [0.8.0] - 2026-10-17
 ### Added
 

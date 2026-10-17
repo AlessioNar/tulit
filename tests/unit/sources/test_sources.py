@@ -69,7 +69,7 @@ class TestRegistry:
 class TestFetchValidation:
     def test_version_not_published(self):
         with pytest.raises(ValueError, match='does not publish the original version'):
-            tulit.fetch('10001597', jurisdiction='AT', version='original')
+            tulit.fetch('eli/bund/bgbl-1/2009/s2704', jurisdiction='DE', version='original')
 
     def test_unknown_version(self):
         with pytest.raises(ValueError, match="Unknown version 'latest'"):

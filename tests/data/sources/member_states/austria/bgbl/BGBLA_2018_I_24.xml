@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?><risdok stylesheet="RISJudikaturXML2XHTML11.xsl" h-version="4.0.0_14.12.2017" h-creator="PWRIVIE25.Vorhaben2RIS.Vorhaben2RISConverter_15.05.2018_14:28:56" h-created="15. Mai 2018, 14:28:56" xmlns="http://www.bka.gv.at">
+  <metadaten />
+  <nutzdaten>
+    <abschnitt nr="1" typ="ns" paperf="h" endnhier="true">
+      <kzinhalt typ="p">
+        <absatz typ="kz" halign="j"><tab align="z" position="212.65" leader="o" />BGBl. I - Ausgegeben am 15. Mai 2018 - Nr. 24<tab align="r" position="425.25" leader="o" /><feld code="+PAGE++%5c*+Arabic++%5c*+MERGEFORMAT+">1</feld> von <feld code="+NUMPAGES++%5c*+Arabic++%5c*+MERGEFORMAT+">2</feld></absatz>
+      </kzinhalt>
+      <kzinhalt typ="f">
+        <absatz typ="kz" halign="j"><tab align="z" position="212.65" leader="o" /><tab align="r" position="425.25" leader="o" /><feld code="+PAGE++%5c*+MERGEFORMAT+">1</feld> von <feld code="+NUMPAGES++%5c*+MERGEFORMAT+">1</feld></absatz>
+      </kzinhalt>
+      <fzinhalt typ="p">
+        <absatz typ="fz" halign="j">www.ris.bka.gv.at</absatz>
+      </fzinhalt>
+      <fzinhalt typ="f">
+        <absatz typ="fz" halign="j">www.ris.bka.gv.at</absatz>
+      </fzinhalt>
+      <ueberschrift typ="bdgesblatt" halign="c">BUNDESGESETZBLATT</ueberschrift>
+      <ueberschrift typ="repoesterr" halign="c">FÜR DIE REPUBLIK ÖSTERREICH</ueberschrift>
+      <ausgabe>
+        <adtext>Jahrgang 2018</adtext>
+        <addat>Ausgegeben am 15. Mai 2018</addat>
+        <adid>Teil I</adid>
+      </ausgabe>
+      <ueberschrift typ="kurztitel" halign="j">24. Bundesgesetz:<tab position="134.65" />Datenschutz-Deregulierungs-Gesetz 2018</ueberschrift>
+      <ueberschrift typ="kurztitel" halign="j"><tab position="134.65" />(NR: GP XXVI IA 189/A AB 98 S. 21. BR: AB 9948 S. 879.)</ueberschrift>
+      <ueberschrift typ="titel" halign="j">24. Bundesgesetz, mit dem das Datenschutzgesetz geändert wird (Datenschutz-Deregulierungs-Gesetz 2018)</ueberschrift>
+      <absatz typ="promkleinlsatz" halign="j">Der Nationalrat hat beschlossen:</absatz>
+      <absatz typ="promkleinlsatz" halign="j">Das Bundesgesetz zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten (Datenschutzgesetz – DSG), BGBl. I Nr. 165/1999, zuletzt geändert durch das Datenschutz-Anpassungsgesetz 2018, BGBl. I Nr. 120/2017, wird wie folgt geändert:</absatz>
+      <absatz typ="novao1" halign="j">1. Im Inhaltsverzeichnis lautet der Eintrag zu § 11:</absatz>
+      <table id="Tabelle1" class="c3cb20afc-ba74-478c-b1d8-32dd97b6a5e2">
+        <tr>
+          <td class="c2873b849-4737-4d1e-b900-fe8fd414fd67">
+            <inhaltsvz typ="eintrag" halign="l">„§ 11.</inhaltsvz>
+          </td>
+          <td class="c2873b849-4737-4d1e-b900-fe8fd414fd67">
+            <inhaltsvz typ="eintrag" halign="l">Verwarnung durch die Datenschutzbehörde“</inhaltsvz>
+          </td>
+        </tr>
+        <tr class="cd91eec60-dfde-4a39-ac48-882f24290de0">
+          <td class="cb65d2c1b-809b-44cd-92b8-648259b3cd7e" />
+          <td class="cd92120c3-9532-4464-8cd5-3646941011a2" />
+        </tr>
+      </table>
+      <absatz typ="novao1" halign="j">2. § 4 Abs. 1 lautet:</absatz>
+      <absatz typ="abs" halign="j">„(1) Die Bestimmungen der Verordnung (EU) 2016/679 zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten, zum freien Datenverkehr und zur Aufhebung der Richtlinie 95/46/EG (Datenschutz-Grundverordnung), ABl. Nr. L 119 vom 4.5.2016 S. 1, (im Folgenden: DSGVO) und dieses Bundesgesetzes gelten für die ganz oder teilweise automatisierte Verarbeitung personenbezogener Daten natürlicher Personen sowie für die nichtautomatisierte Verarbeitung personenbezogener Daten natürlicher Personen, die in einem Dateisystem gespeichert sind oder gespeichert werden sollen, soweit nicht die spezifischeren Bestimmungen des 3. Hauptstücks dieses Bundesgesetzes vorgehen.“</absatz>
+      <absatz typ="novao1" halign="j">3. § 4 Abs. 5 lautet:</absatz>
+      <absatz typ="abs" halign="j">„(5) Das Recht auf Auskunft der betroffenen Person gemäß Art. 15 DSGVO besteht gegenüber einem hoheitlich tätigen Verantwortlichen unbeschadet anderer gesetzlicher Beschränkungen dann nicht, wenn durch die Erteilung dieser Auskunft die Erfüllung einer dem Verantwortlichen gesetzlich übertragenen Aufgabe gefährdet wird.“</absatz>
+      <absatz typ="novao1" halign="j">4. Dem § 4 werden folgende Abs. 6 und 7 angefügt:</absatz>
+      <absatz typ="abs" halign="j">„(6) Das Recht auf Auskunft der betroffenen Person gemäß Art. 15 DSGVO besteht gegenüber einem Verantwortlichen unbeschadet anderer gesetzlicher Beschränkungen in der Regel dann nicht, wenn durch die Erteilung dieser Auskunft ein Geschäfts- oder Betriebsgeheimnis des Verantwortlichen bzw. Dritter gefährdet würde.</absatz>
+      <absatz typ="abs" halign="j">(7) Soweit manuell, dh. nichtautomatisiert geführte Dateisysteme für Zwecke solcher Angelegenheiten bestehen, in denen die Zuständigkeit zur Gesetzgebung Bundessache ist, gelten sie als Datenverarbeitungen im Sinne der DSGVO und dieses Bundesgesetzes.“</absatz>
+      <absatz typ="novao2" halign="j">5. In § 5 Abs. 3 erster Satz wird nach dem Ausdruck <n>„im öffentlichen Bereich“</n> der Klammerausdruck <n>„(in Formen des öffentlichen Rechts eingerichtet, insbesondere auch als Organ einer Gebietskörperschaft)“</n> eingefügt.</absatz>
+      <absatz typ="novao2" halign="j">6. In § 5 Abs. 5 wird der Ausdruck <n>„Abs. 3“</n> durch den Ausdruck <n>„Abs. 4“</n> ersetzt.</absatz>
+      <absatz typ="novao1" halign="j">7. § 9 samt Überschrift lautet:</absatz>
+      <ueberschrift typ="para" halign="c">„ Freiheit der Meinungsäußerung und Informationsfreiheit</ueberschrift>
+      <absatz typ="abs" halign="j"><tab position="35.4" /><gldsym>§ 9.</gldsym> (1) Auf die Verarbeitung von personenbezogenen Daten durch Medieninhaber, Herausgeber, Medienmitarbeiter und Arbeitnehmer eines Medienunternehmens oder Mediendienstes im Sinne des Mediengesetzes – MedienG, BGBl. Nr. 314/1981, zu journalistischen Zwecken des Medienunternehmens oder Mediendienstes finden die Bestimmungen dieses Bundesgesetzes sowie von der DSGVO die Kapitel II (Grundsätze), III (Rechte der betroffenen Person), IV (Verantwortlicher und Auftragsverarbeiter), V (Übermittlung personenbezogener Daten an Drittländer oder an internationale Organisationen), VI (Unabhängige Aufsichtsbehörden), VII (Zusammenarbeit und Kohärenz) und IX (Vorschriften für besondere Verarbeitungssituationen) keine Anwendung. Die Datenschutzbehörde hat bei Ausübung ihrer Befugnisse gegenüber den im ersten Satz genannten Personen den Schutz des Redaktionsgeheimnisses (§ 31 MedienG) zu beachten.</absatz>
+      <absatz typ="abs" halign="j">(2) Soweit dies erforderlich ist, um das Recht auf Schutz der personenbezogenen Daten mit der Freiheit der Meinungsäußerung und der Informationsfreiheit in Einklang zu bringen, finden von der DSGVO die Kapitel II (Grundsätze), mit Ausnahme des Art. 5, Kapitel III (Rechte der betroffenen Person), Kapitel IV (Verantwortlicher und Auftragsverarbeiter), mit Ausnahme der Art. 28, 29 und 32, Kapitel V (Übermittlung personenbezogener Daten an Drittländer oder an internationale Organisationen), Kapitel VI (Unabhängige Aufsichtsbehörden), Kapitel VII (Zusammenarbeit und Kohärenz) und Kapitel IX (Vorschriften für besondere Verarbeitungssituationen) auf die Verarbeitung, die zu wissenschaftlichen, künstlerischen oder literarischen Zwecken erfolgt, keine Anwendung. Von den Bestimmungen dieses Bundesgesetzes ist in solchen Fällen § 6 (Datengeheimnis) anzuwenden.“</absatz>
+      <absatz typ="novao1" halign="j">8. § 11 samt Überschrift lautet:</absatz>
+      <ueberschrift typ="para" halign="c">„Verwarnung durch die Datenschutzbehörde</ueberschrift>
+      <absatz typ="abs" halign="j"><gldsym>§ 11.</gldsym> Die Datenschutzbehörde wird den Katalog des Art. 83 Abs. 2 bis 6 DSGVO so zur Anwendung bringen, dass die Verhältnismäßigkeit gewahrt wird. Insbesondere bei erstmaligen Verstößen wird die Datenschutzbehörde im Einklang mit Art. 58 DSGVO von ihren Abhilfebefugnissen insbesondere durch Verwarnen Gebrauch machen.“</absatz>
+      <absatz typ="novao2" halign="j">9. In § 12 Abs. 3 Z 2 entfällt die Wortfolge <n>„und kein gelinderes geeignetes Mittel zur Verfügung steht“</n>.</absatz>
+      <absatz typ="novao2" halign="j">10. In § 12 Abs. 4 Z 3 wird nach der Wortfolge <n>„von mittels Bildaufnahmen gewonnenen personenbezogenen Daten“</n> die Wortfolge <n>„ohne ausdrückliche Einwilligung und für das Erstellen von Persönlichkeitsprofilen“</n> eingefügt.</absatz>
+      <absatz typ="novao2" halign="j">11. In § 14 Abs. 1, § 15 Abs. 3, Abs. 5 Z 1 und 2, Abs. 6, 7 und 8, § 16 Abs. 3 Z 2 und § 69 Abs. 7 wird jeweils die Bezeichnung <n>„Bundeskanzleramt“</n> durch die Bezeichnung <n>„Bundesministerium für Verfassung, Reformen, Deregulierung und Justiz“</n> ersetzt; in § 16 Abs. 5 wird die Bezeichnung <n>„Bundeskanzleramtes“</n> durch die Bezeichnung <n>„Bundesministeriums für Verfassung, Reformen, Deregulierung und Justiz“</n> ersetzt.</absatz>
+      <absatz typ="novao2" halign="j">12. In § 15 Abs. 1 Z 5, § 16 Abs. 5, § 19 Abs. 2 und 3 sowie § 23 Abs. 1 wird jeweils die Bezeichnung <n>„Bundeskanzler“</n> durch die Bezeichnung <n>„Bundesminister für Verfassung, Reformen, Deregulierung und Justiz“</n> ersetzt.</absatz>
+      <absatz typ="novao2" halign="j">13. In § 15 Abs. 5 Z 1 wird das Wort <n>„entsendenden“</n> durch das Wort <n>„entsendende“</n> und das Wort <n>„schriftliche“</n> durch <n>„schriftlichen“</n> ersetzt.</absatz>
+      <absatz typ="novao1" halign="j">14. Der Einleitungsteil des § 26 Abs. 1 lautet:</absatz>
+      <absatz typ="satz" halign="j">„Unbeschadet des § 5 Abs. 3 sind Verantwortliche des öffentlichen Bereichs alle Verantwortlichen,“</absatz>
+      <absatz typ="novao2" halign="j">15. In § 28 wird der Beistrich nach dem Wort <n>„einzureichen“</n> durch ein <n>„und“</n> ersetzt und entfällt die Wortfolge <n>„und das Recht auf Schadenersatz gemäß § 29 in Anspruch zu nehmen.“</n></absatz>
+      <absatz typ="novao2" halign="j">16. In § 30 Abs. 3 entfällt die Wortfolge <n>„und keine besonderen Umstände vorliegen, die einem Absehen von der Bestrafung entgegen stehen“</n></absatz>
+      <absatz typ="novao1" halign="j">17. § 30 Abs. 5 lautet:</absatz>
+      <absatz typ="abs" halign="j">„(5) Gegen Behörden und öffentliche Stellen, wie insbesondere in Formen des öffentlichen Rechts sowie des Privatrechts eingerichtete Stellen, die im gesetzlichen Auftrag handeln, und gegen Körperschaften des öffentlichen Rechts können keine Geldbußen verhängt werden.“</absatz>
+      <absatz typ="novao2" halign="j">18. In § 32 Abs. 1 Z 1 wird die Wortfolge <n>„Durchführungsvorschriften zur Richtlinie (EU) 2016/680 vom“</n> durch die Wortfolge <n>„der Durchführungsvorschriften zur Richtlinie (EU) 2016/680“</n> ersetzt.</absatz>
+      <absatz typ="novao2" halign="j">19. In § 36 Abs. 1 wird das Wort <n>„militärische“</n> durch das Wort <n>„militärischen“</n> ersetzt.</absatz>
+      <absatz typ="novao1" halign="j">20. § 36 Abs. 2 Z 7 lautet:</absatz>
+      <liste>
+        <aufzaehlung ebene="1" art="normal">
+          <listelem><symbol stellen="3">„7.</symbol>„zuständige Behörde“</listelem>
+        </aufzaehlung>
+        <aufzaehlung ebene="2" art="normal">
+          <listelem><symbol stellen="2">a)</symbol>eine staatliche Stelle, die für die Verhütung, Ermittlung, Aufdeckung oder Verfolgung von Straftaten oder die Strafvollstreckung, einschließlich des Schutzes vor und der Abwehr von Gefahren für die öffentliche Sicherheit, die nationale Sicherheit, den Nachrichtendienst oder die militärische Eigensicherung zuständig ist, oder</listelem>
+          <listelem><symbol stellen="2">b)</symbol>eine andere Stelle oder Einrichtung, der durch das Recht der Mitgliedstaaten die Ausübung öffentlicher Gewalt und hoheitlicher Befugnisse zur Verhütung, Ermittlung, Aufdeckung oder Verfolgung von Straftaten oder zur Strafvollstreckung, einschließlich des Schutzes vor und der Abwehr von Gefahren für die öffentliche Sicherheit, zum Zweck der nationalen Sicherheit, des Nachrichtendienstes oder der militärischen Eigensicherung übertragen wurde;“</listelem>
+        </aufzaehlung>
+      </liste>
+      <absatz typ="novao2" halign="j">21. § 44 Abs. 2 erster Satz entfällt.</absatz>
+      <absatz typ="novao2" halign="j">22. § 45 Abs. 7 entfällt.</absatz>
+      <absatz typ="novao2" halign="j">23. In § 49 Abs. 1 wird der Ausdruck <n>„Abs. 2 lit. c“</n> durch den Ausdruck <n>„Abs. 2 lit. d“</n> ersetzt.</absatz>
+      <absatz typ="novao1" halign="j">24. Dem § 49 wird folgender Abs. 3 angefügt:</absatz>
+      <absatz typ="abs" halign="j">„(3) Jeder Auftragsverarbeiter hat ein Verzeichnis zu allen Kategorien von im Auftrag eines Verantwortlichen durchgeführten Verarbeitungstätigkeiten zu führen, das Folgendes enthält:</absatz>
+      <liste>
+        <aufzaehlung ebene="1" art="normal">
+          <listelem><symbol stellen="2">1.</symbol>Name und Kontaktdaten des Auftragsverarbeiters oder der Auftragsverarbeiter, jedes Verantwortlichen, in dessen Auftrag der Auftragsverarbeiter tätig ist, sowie eines etwaigen Datenschutzbeauftragten,</listelem>
+          <listelem><symbol stellen="2">2.</symbol>die Kategorien von Verarbeitungen, die im Auftrag jedes Verantwortlichen durchgeführt werden,</listelem>
+          <listelem><symbol stellen="2">3.</symbol>gegebenenfalls Übermittlungen von personenbezogenen Daten an ein Drittland oder an eine internationale Organisation, wenn vom Verantwortlichen entsprechend angewiesen, einschließlich der Identifizierung des Drittlandes oder der internationalen Organisation,</listelem>
+          <listelem><symbol stellen="2">4.</symbol>wenn möglich, eine allgemeine Beschreibung der technischen und organisatorischen Maßnahmen gemäß § 54 Abs. 1.“</listelem>
+        </aufzaehlung>
+      </liste>
+      <absatz typ="novao2" halign="j">25. In § 56 Abs. 1 entfällt das Wort <n>„der“</n> und wird das Wort <n>„personenbezogener“</n> durch das Wort <n>„personenbezogenen“</n> ersetzt.</absatz>
+      <absatz typ="novao2" halign="j">26. In § 56 Abs. 1 entfällt der zweite Satz.</absatz>
+      <absatz typ="novao2" halign="j">27. In § 64 Abs. 2 wird das Wort <n>„Diese“</n> durch das Wort <n>„Dieses“</n> ersetzt.</absatz>
+      <absatz typ="novao2" halign="j">28. In § 68 wird vor der Wortfolge <n>„der Bundeskanzler“</n> die Wortfolge <n>„der Bundesminister für Verfassung, Reformen, Deregulierung und Justiz sowie“</n> eingefügt.</absatz>
+      <absatz typ="novao1" halign="j">29. Dem § 69 Abs. 5 wird folgender Satz angefügt:</absatz>
+      <absatz typ="satz" halign="j">„Ein strafbarer Tatbestand, der vor dem Inkrafttreten dieses Bundesgesetzes verwirklicht wurde, ist nach jener Rechtslage zu beurteilen, die für den Täter in ihrer Gesamtauswirkung günstiger ist; dies gilt auch für das Rechtsmittelverfahren.“</absatz>
+      <absatz typ="novao2" halign="j">30. In § 70 erhalten die Abs. 1 und 2 die Absatzbezeichnungen <n>„(7)“</n> und <n>„(8)“</n>.</absatz>
+      <absatz typ="novao2" halign="j">31. Die Abs. 2 bis 7 des § 60 erhalten die Absatzbezeichnungen <n>„(1)“</n> bis <n>„(6)“</n> und werden nach der Paragraphenbezeichnung des § 70 eingereiht.</absatz>
+      <absatz typ="novao2" halign="j">32. Paragraphenüberschrift und Paragraphenbezeichnung des § 60 entfallen.</absatz>
+      <absatz typ="novao1" halign="j">33. Dem § 70 wird folgender Abs. 9 angefügt:</absatz>
+      <absatz typ="abs" halign="j">„(9) Das Inhaltsverzeichnis, § 4 Abs. 1, 5 bis 7, § 5 Abs. 3 erster Satz und Abs. 5, § 9 samt Überschrift, § 11 samt Überschrift, § 12 Abs. 3 Z 2 und Abs. 4 Z 3, § 14 Abs. 1, § 15 Abs. 1 Z 5, Abs. 3, Abs. 5 Z 1 und 2, Abs. 6, 7 und 8, § 16 Abs. 3 Z 2 und Abs. 5, § 19 Abs. 2 und 3, § 23 Abs. 1, § 26 Abs. 1, § 28, § 30 Abs. 3 und 5, § 32 Abs. 1 Z 1, § 36 Abs. 1 und 2 Z 7, § 44 Abs. 2, § 49 Abs. 1 und 3, § 56 Abs. 1, § 64 Abs. 2, § 68 sowie § 69 Abs. 5 und 7 in der Fassung des Bundesgesetzes BGBl. I Nr. 24/2018 treten mit 25. Mai 2018 in Kraft. Gleichzeitig tritt § 45 Abs. 7 in der Fassung vor der Novelle BGBl. I Nr. 24/2018 außer Kraft. § 70 Abs. 1 bis 8 in der Fassung des Bundesgesetzes BGBl. I Nr. 24/2018 tritt mit dem auf die Kundmachung folgenden Tag in Kraft. Soweit sich die im Bundesgesetz BGBl. I Nr. 24/2018 getroffenen Anordnungen auf durch das Datenschutz-Anpassungsgesetz 2018, BGBl. I Nr. 120/2017, geschaffene Vorschriften beziehen, gehen die Regelungen des Bundesgesetzes BGBl. I Nr. 24/2018 jenen des Datenschutz-Anpassungsgesetzes 2018, BGBl. I Nr. 120/2017, vor.“</absatz>
+      <unterschrift typ="links" halign="l">Van der Bellen</unterschrift>
+      <unterschrift typ="links" halign="l">Kurz</unterschrift>
+    </abschnitt>
+  </nutzdaten>
+  <layoutdaten paperf="7" paperh="841.9" paperw="595.3" margl="85.05" margr="85.05" margt="85.05" margb="85.05" headerd="28.35" footerd="65.2" gutter="0" gutterpos="0" deftab="35.4">
+    <classes>.c3cb20afc-ba74-478c-b1d8-32dd97b6a5e2 {border-spacing:0;border-collapse:collapse;margin-left:-6pt;margin-right:-6pt;}
+.cd91eec60-dfde-4a39-ac48-882f24290de0 {height:0;}
+.c2873b849-4737-4d1e-b900-fe8fd414fd67 {vertical-align:top;padding:0pt 5.4pt 0pt 5.4pt;}
+.cb65d2c1b-809b-44cd-92b8-648259b3cd7e {width:75px;border:none;width:56.27pt;}
+.cd92120c3-9532-4464-8cd5-3646941011a2 {width:493px;border:none;width:370.07pt;}
+</classes>
+  </layoutdaten>
+</risdok>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oigusakt id="d54fa5f9-6301-42b2-a6e9-28c696852e1f" xsi:schemaLocation="muutmisseadus_1_10.02.2010 http://xmlr.eesti.ee/xml/schemas/oigusakt/muutmisseadus_1_10.02.2010.xsd" xmlns="muutmisseadus_1_10.02.2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<metaandmed>
+		<valjaandja>Riigikogu</valjaandja>
+		<dokumentLiik>seadus</dokumentLiik>
+		<tekstiliik>algtekst</tekstiliik>
+		<dokumentEtapp>avaldamine</dokumentEtapp>
+		<dokumentStaatus>avaldatud</dokumentStaatus>
+		<vastuvoetud>
+			<aktikuupaev>2023-02-22</aktikuupaev>
+		</vastuvoetud>
+		<valjakuulutamine>
+			<valjakuulutatud>
+				<kellepoolt>Vabariigi President</kellepoolt>
+				<kuupaev>2023-03-01</kuupaev>
+				<otsusnr>270</otsusnr>
+			</valjakuulutatud>
+		</valjakuulutamine>
+		<avaldamismarge>
+			<RTosa>RT I</RTosa>
+			<avaldamineKuupaev>2023-03-11+02:00</avaldamineKuupaev>
+			<RTaasta>2023</RTaasta>
+			<RTartikkel>1</RTartikkel>
+			<aktViide>111032023001</aktViide>
+		</avaldamismarge>
+		<kehtivus>
+			<kehtivuseAlgus>2023-11-01</kehtivuseAlgus>
+		</kehtivus>
+		<versioon>
+			<dokumentVersioon>1</dokumentVersioon>
+			<dokumentVersioonKuupaev>2023-03-02</dokumentVersioonKuupaev>
+		</versioon>
+		<skeemiNimi>muutmisseadus_1_10.02.2010.xsd</skeemiNimi>
+		<globaalID>111032023001</globaalID>
+		<metaandmedVersioon>5</metaandmedVersioon>
+		<metaandmedVersioonKuupaev>2023-09-08</metaandmedVersioonKuupaev>
+		<metaandmedVersioonPohjustaja>Imre Sobnin</metaandmedVersioonPohjustaja>
+		<eesmark>Muutmisseaduse raamskeem XML struktuuri koostamiseks</eesmark>
+	</metaandmed>
+	<aktinimi>
+		<nimi>
+			<pealkiri>Karistusseadustiku muutmise ja sellega seonduvalt teiste seaduste muutmise seadus (Euroopa Liidu õigusest tulenevad rahatrahvid)</pealkiri>
+		</nimi>
+	</aktinimi>
+	<sisu>
+		<paragrahv id="para1">
+			<paragrahvNr>1</paragrahvNr>
+			<kuvatavNr><![CDATA[§ 1.]]></kuvatavNr>
+			<paragrahvPealkiri>Karistusseadustiku muutmine</paragrahvPealkiri>
+			<sisuTekst>
+				<tavatekst>Karistusseadustikus tehakse järgmised muudatused:<reavahetus/>
+				</tavatekst>
+			</sisuTekst>
+			<sisuTekst>
+				<HTMLKonteiner><![CDATA[<p><b>1)</b> paragrahv 14 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„<b>§ 14. Juriidilise isiku vastutus</b></p>
+<p>(1) Juriidiline isik vastutab seaduses sätestatud juhtudel teo eest, mille on tema huvides või tema õiguslikke kohustusi rikkudes toime pannud:<br/>
+1) tema organ, selle liige, juhtivtöötaja või pädev esindaja või<br/>
+2) mistahes isik käesoleva lõike punktis 1 nimetatud organi või isiku korraldusel või juriidilise isiku puuduliku töökorralduse või järelevalve tõttu.</p>
+<p>(2) Kui juriidiline isik on õiguslikult kohustatud tegutsema, vastutab ta käesoleva paragrahvi lõikes 1 sätestatud alustel tegevusetuse eest, sõltumata sellest, kas juriidilise isiku kõrval on õiguslikult kohustatud tegutsema ka lõikes&#160;1 nimetatud organ või isik.</p>
+<p>(3) Juriidilise isiku vastutuselevõtmine ei välista süüteo toimepannud füüsilise isiku vastutuselevõtmist, kui seaduses on ette nähtud ka füüsilise isiku vastutus.</p>
+<p>(4) Käesolevas paragrahvis sätestatut ei kohaldata riigile, riikidevahelisele organisatsioonile, kohaliku omavalitsuse üksusele ja avalik-õiguslikule juriidilisele isikule.”;</p>
+<p><b>2)</b> paragrahv 37<sup>1</sup> muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„<b>§ 37<sup>1</sup>. Juriidilise isiku süü puudumine</b></p>
+<p>Juriidilisel isikul puudub süü, kui käesoleva seadustiku § 14 lõikes 1 nimetatud organi või isiku tegu oli juriidilise isiku jaoks vältimatu.”;</p>
+<p><b>3)</b> paragrahvi 44 lõige 8 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„(8) Juriidilisele isikule võib kohus mõista rahalise karistuse 4000–40 000 000 eurot, kui käesoleva paragrahvi lõikest 9 ei tulene teisiti.”;</p>
+<p><b>4)</b> paragrahvi 44 lõike 9 teine lause tunnistatakse kehtetuks;</p>
+<p><b>5)</b> paragrahvi 47 täiendatakse lõikega 4 järgmises sõnastuses:</p>
+<p>„(4) Käesoleva seadustiku eriosa või muu seadus võib ette näha rahatrahvi kohaldamise käesoleva paragrahvi lõigetes&#160;1 ja&#160;2 sätestatust erineval alusel ja määras, võttes arvesse reguleeritava valdkonna eripära.”;</p>
+<p><b>6)</b> paragrahvi 72 lõiget 1 täiendatakse pärast sõna „rahatrahvi” tekstiosaga „ja käesoleva paragrahvi lõikest&#160;4 ei tulene teisiti”;</p>
+<p><b>7)</b> paragrahvi 72 täiendatakse lõikega 4 järgmises sõnastuses:</p>
+
+
+<p>„(4) Käesoleva seadustiku §-s 47 lõikes 4 sätestatud rahatrahvi ei asendata.”;
+
+<br/>08.09.2023 15:46<br/>Veaparandus - Parandatud ilmne ebatäpsus, lisatud lõike 4 teksti „§-s 47“ järele „lõikes 4“, Riigi Teataja seaduse § 10 lõike 3 alusel. 
+
+</p>
+
+
+
+<p><b>8)</b> paragrahvi 81 lõikes 3 asendatakse sõna „kolmeaastast” sõnadega „kuni viieaastast”;</p>
+<p><b>9)</b> paragrahvi 81 lõige 8 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„(8) Käesoleva paragrahvi lõike 7 punktides 1 ja 2 sätestatud juhtudel ei uuene aegumine, kui kuriteo lõpuleviimisest on möödunud viisteist aastat. Väärteo aegumine ei uuene, kui väärteo lõpuleviimisest on möödunud käesoleva paragrahvi lõikes&#160;3 sätestatust aasta võrra pikem aeg.”;</p>
+<p><b>10)</b> paragrahvi 82 lõike 2 punkt 3 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„3) ajaks, mil isikule kohaldatud karistus on määratud tasumiseks või kandmiseks ositi, karistuse täitmisele pööramine on edasi lükatud või karistuse täitmise tähtaega on pikendatud või see on ajatatud;”;</p>
+<p><b>11)</b> paragrahvi 398 lõikes 1 ja § 398<sup>1</sup> lõikes 1 asendatakse tekstiosa „300 trahviühikut” tekstiosaga „5&#160;000&#160;000&#160;eurot või kuni kolmekordses väärteo tulemusel teenitud kasule või ära hoitud kahjule vastavas summas”;</p>
+<p><b>12)</b> paragrahvi 398 lõikes 3 ja § 398<sup>1</sup> lõikes 3 asendatakse tekstiosa „400 000 eurot” tekstiosaga „15&#160;000&#160;000&#160;eurot või kuni kolmekordses väärteo tulemusel teenitud kasule või ära hoitud kahjule vastavas summas või kuni 15&#160;protsenti juriidilise isiku või tema konsolideerimisgrupi konsolideeritud käibest”;</p>
+<p><b>13)</b> seadustiku 21. peatüki 6. jagu täiendatakse §-ga 398<sup>2</sup> järgmises sõnastuses:</p>
+<p>„<b>§ 398<sup>2</sup>. Juriidilise isiku ja konsolideerimisgrupi käive</b></p>
+<p>Käesolevas jaos nimetatud juriidilise isiku või tema konsolideerimisgrupi käive on Euroopa Parlamendi ja nõukogu määruse (EL) nr&#160;596/2014, mis käsitleb turukuritarvitusi (turukuritarvituse määrus) ning millega tunnistatakse kehtetuks Euroopa Parlamendi ja nõukogu direktiiv 2003/6/EÜ ja komisjoni direktiivid 2003/124/EÜ, 2003/125/EÜ ja 2004/72/EÜ (ELT L&#160;173, 12.06.2014, lk&#160;1–61), artikli&#160;30 lõikes&#160;2 nimetatud käive.”.</p>]]></HTMLKonteiner>
+			</sisuTekst>
+		</paragrahv>
+		<paragrahv id="para2">
+			<paragrahvNr>2</paragrahvNr>
+			<kuvatavNr><![CDATA[§ 2.]]></kuvatavNr>
+			<paragrahvPealkiri>Isikuandmete kaitse seaduse muutmine</paragrahvPealkiri>
+			<sisuTekst>
+				<tavatekst>Isikuandmete kaitse seaduse § 73 tekst loetakse lõikeks 2 ja paragrahvi täiendatakse lõikega 1 järgmises sõnastuses:<reavahetus/>
+				</tavatekst>
+			</sisuTekst>
+			<sisuTekst>
+				<tavatekst>„(1) Käesolevas peatükis sätestatud väärtegude aegumistähtaeg on kolm aastat.”.</tavatekst>
+			</sisuTekst>
+		</paragrahv>
+		<paragrahv id="para3">
+			<paragrahvNr>3</paragrahvNr>
+			<kuvatavNr><![CDATA[§ 3.]]></kuvatavNr>
+			<paragrahvPealkiri>Süüteomenetluses tekitatud kahju hüvitamise seaduse muutmine</paragrahvPealkiri>
+			<sisuTekst>
+				<tavatekst>Süüteomenetluses tekitatud kahju hüvitamise seaduse § 5 lõiget 2 täiendatakse punktiga 3 järgmises sõnastuses:<reavahetus/>
+				</tavatekst>
+			</sisuTekst>
+			<sisuTekst>
+				<tavatekst>„3) vara arestimise või äravõtmisega.”.</tavatekst>
+			</sisuTekst>
+		</paragrahv>
+		<paragrahv id="para4">
+			<paragrahvNr>4</paragrahvNr>
+			<kuvatavNr><![CDATA[§ 4.]]></kuvatavNr>
+			<paragrahvPealkiri>Täitemenetluse seadustiku muutmine</paragrahvPealkiri>
+			<sisuTekst>
+				<tavatekst>Täitemenetluse seadustikus tehakse järgmised muudatused:<reavahetus/>
+				</tavatekst>
+			</sisuTekst>
+			<sisuTekst>
+				<HTMLKonteiner><![CDATA[<p><b>1)</b> paragrahv 203 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„<b>§ 203. Täitemenetluse lõpetamine rahatrahvi sissenõudes füüsilise isiku surma korral</b></p>
+<p>Füüsilise isiku surma korral ei pöörata sissenõuet füüsilise isiku pärija varale ning täitemenetlus lõpetatakse.”;</p>
+<p><b>2)</b> paragrahv 208 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„<b>§ 208. Täitemenetluse lõpetamine rahalise karistuse ja varalise karistuse sissenõudes füüsilise isiku surma korral</b></p>
+<p>Füüsilise isiku surma korral ei pöörata sissenõuet füüsilise isiku pärija varale ja täitemenetlus lõpetatakse.”.</p>]]></HTMLKonteiner>
+			</sisuTekst>
+		</paragrahv>
+		<paragrahv id="para5">
+			<paragrahvNr>5</paragrahvNr>
+			<kuvatavNr><![CDATA[§ 5.]]></kuvatavNr>
+			<paragrahvPealkiri>Väärteomenetluse seadustiku muutmine</paragrahvPealkiri>
+			<sisuTekst>
+				<tavatekst>Väärteomenetluse seadustikus tehakse järgmised muudatused:<reavahetus/>
+				</tavatekst>
+			</sisuTekst>
+			<sisuTekst>
+				<HTMLKonteiner><![CDATA[<p><b>1)</b> paragrahvi 19 lõiget 1 täiendatakse punktiga 4<sup>1</sup> järgmises sõnastuses:</p>
+<p>„4<sup>1</sup>) taotleda rahatrahvi tasumist või aresti kandmist ositi;”;</p>
+<p><b>2)</b> paragrahv 36 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„<b>§ 36. Varalise nõude tagamine</b></p>
+<p>(1) Väärteomenetluses on keelatud vara arestida, välja arvatud käesoleva paragrahvi lõikes 2 sätestatud juhul.</p>
+<p>(2) Konfiskeerimise või rahatrahvi tagamiseks võib juriidilisest isikust menetlusaluse isiku suhtes kohaldada kriminaalmenetluse seadustiku §-des&#160;141<sup>4</sup> ja&#160;142 sätestatud meetmeid kriminaalmenetluse nõuete kohaselt, arvestades väärteomenetluse erisusi.</p>
+<p>(3) Käesoleva paragrahvi lõikes 2 sätestatud meetmeid kohaldatakse kohtuvälise menetleja taotlusel maakohtu määruse alusel.”;</p>
+<p><b>3)</b> paragrahvi 57 lõike 1 punkti 13, § 74 lõike 1 punkti 14 ja § 75 lõike 3 punkti 3 täiendatakse pärast sõna „kasutatava” sõnaga „, arestitud”;</p>
+<p><b>4)</b> paragrahvi 57 lõike 1 punktis 16, § 74 lõike 1 punktis 17 ning § 204 lõike 1 punktides 1 ja 2 asendatakse arv „15” arvuga „45”;</p>
+<p><b>5)</b> paragrahvi 57 lõike 1 punktis 17 asendatakse tekstiosa „otsuse kättesaamisest alates 15 päeva jooksul” sõnaga „tähtaegselt”;</p>
+<p><b>6)</b> paragrahvi 74 lõike 1 punkt 18 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„18) teave sellest, et otsus rahatrahvi kohta pööratakse täitmisele, kui menetlusalune isik ei ole rahatrahvi täies ulatuses tähtaegselt tasunud, välja arvatud juhul, kui menetlusalune isik või tema kaitsja on otsuse peale tähtaegselt kaebuse esitanud;”;</p>
+<p><b>7)</b> paragrahvi 111 punkti 7 täiendatakse pärast sõna „asitõenditega” sõnadega „, arestitud varaga”;</p>
+<p><b>8)</b> paragrahvi 111 punktis 10 asendatakse sõnad „edasikaebamise tähtaja jooksul,” tekstiosaga „45&#160;päeva jooksul”;</p>
+<p><b>9)</b> paragrahvi 111 punkt 11 muudetakse ja sõnastatakse järgmiselt:</p>
+<p>„11) teave sellest, et kohtuotsus rahatrahvi kohta pööratakse täitmisele, kui menetlusalune isik ei ole rahatrahvi täies ulatuses tähtaegselt tasunud, välja arvatud juhul, kui menetlusalune isik või tema kaitsja on otsuse peale tähtaegselt kaebuse esitanud.”;</p>
+<p><b>10)</b> paragrahvi 203 lõiget 2 täiendatakse teise lausega järgmises sõnastuses:</p>
+<p>„Kohtuvälise menetleja otsuse ja kohtuotsuse, millega karistati süüdlast rahatrahviga, täitmisele pööramise erisused on sätestatud käesoleva seadustiku §-s&#160;204.”;</p>
+<p><b>11)</b> paragrahvi 204 lõikes 3 asendatakse sõnad „kohtuotsuse peale edasikaebamise tähtaja jooksul” tekstiosaga „45&#160;päeva jooksul arvates päevast, kui kohtuotsus tehti kohtumenetluse pooltele kohtus tutvumiseks kättesaadavaks,”;</p>
+<p><b>12)</b> paragrahvi 208 lõiked 1 ja 2 muudetakse ning sõnastatakse järgmiselt:</p>
+<p>„(1) Kui isikult, kelle suhtes on väärteomenetlus lõpetatud, on ära võetud dokumente või asju või kui on arestitud tema vara, saadab kohtuotsust täitmisele pöörav maakohus jõustunud lahendi asjaomasele asutusele vara aresti alt vabastamiseks või nende dokumentide või asjade tagastamiseks omanikule või seadusjärgsele valdajale.</p>
+<p>(2) Kui isikult, kelle suhtes on väärteomenetlus lõpetatud, on ära võetud dokumente või asju või kui on arestitud tema vara, tagastab otsust täitmisele pöörav kohtuväline menetleja äravõetud asjad omanikule või seadusjärgsele valdajale, vabastab vara aresti alt või saadab jõustunud lahendi asjaomasele asutusele vara aresti alt vabastamiseks või nende dokumentide või asjade tagastamiseks omanikule või seadusjärgsele valdajale.”.</p>]]></HTMLKonteiner>
+			</sisuTekst>
+		</paragrahv>
+		<paragrahv id="para6">
+			<paragrahvNr>6</paragrahvNr>
+			<kuvatavNr><![CDATA[§ 6.]]></kuvatavNr>
+			<paragrahvPealkiri>Seaduse jõustumine</paragrahvPealkiri>
+			<sisuTekst>
+				<tavatekst>Käesolev seadus jõustub 2023. aasta 1. novembril.</tavatekst>
+			</sisuTekst>
+		</paragrahv>
+	</sisu>
+	<allkiri>
+		<allkiriKoht/>
+		<allkirjastaja>
+			<ametinimetus>Riigikogu esimees</ametinimetus>
+			<eesnimi>Jüri</eesnimi>
+			<perekonnanimi>Ratas</perekonnanimi>
+		</allkirjastaja>
+	</allkiri>
+</oigusakt>

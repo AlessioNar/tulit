@@ -621,3 +621,39 @@ class TestCellarStandardHTMLParser:
         
         result = parser.parse(str(html_file), validate=False)
         assert result == parser
+
+
+def test_legacy_regulation_headings_formula_and_merged_points(parser, tmp_path):
+    """Pre-1999 OJ HTML (Regulation No 17/1962): heading on its own line, points
+    merged into their paragraph, and the binding formula before 'Done at'."""
+    html_file = tmp_path / "reg17.html"
+    html_file.write_text(
+        '''<html><body><TXT_TE>
+            <p>REGULATION No 17 First Regulation implementing Articles 85 and 86 of the Treaty</p>
+            <p> THE COUNCIL OF THE EUROPEAN ECONOMIC COMMUNITY, </p>
+            <p> Whereas competition shall not be distorted; </p>
+            <p> HAS ADOPTED THIS REGULATION:</p>
+            <p> Article 4</p>
+            <p> Notification of new agreements, decisions and practices </p>
+            <p> 2. Paragraph 1 shall not apply where:    (1) the only parties are from one Member State; </p>
+            <p>      (2) not more than two undertakings are party thereto, and the agreements only:      (a) restrict prices ; or </p>
+            <p>          (b) impose restrictions on industrial property rights; </p>
+            <p> Article 5</p>
+            <p> Final provision </p>
+            <p> This Regulation shall enter into force on the day of its publication. </p>
+            <p>   This Regulation shall be binding in its entirety and directly applicable in all Member States. </p>
+            <p> Done at Brussels, 6 February 1962. </p>
+            <p> For the Council </p>
+        </TXT_TE></body></html>''',
+        encoding='utf-8'
+    )
+
+    parser.parse(str(html_file))
+
+    assert [(a['num'], a['heading']) for a in parser.articles] == [
+        ('Article 4', 'Notification of new agreements, decisions and practices'),
+        ('Article 5', 'Final provision')]
+    assert [c['text'] for c in parser.articles[1]['children']] == [
+        'This Regulation shall enter into force on the day of its publication.']
+    assert parser.conclusions.startswith('This Regulation shall be binding')
+    assert parser.annexes == []

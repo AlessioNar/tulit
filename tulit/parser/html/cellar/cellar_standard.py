@@ -7,6 +7,9 @@ from tulit.parser.parser import LegalJSONValidator, create_html_normalizer
 from tulit.parser.strategies.article_extraction import CellarStandardArticleStrategy
 import logging
 
+# Closing formula of a regulation, after its last article
+_BINDING_FORMULA = 'This Regulation shall be binding in its entirety'
+
 
 class CellarStandardHTMLParser(HTMLParser):
     """
@@ -382,7 +385,7 @@ class CellarStandardHTMLParser(HTMLParser):
             # in ordinary article prose and would truncate extraction
             self.articles = self.article_strategy.extract_articles(
                 self.txt_te,
-                stop_markers=['Done at']
+                stop_markers=['Done at', _BINDING_FORMULA]
             )
             
             self.logger.info(f"Extracted {len(self.articles)} articles.")
@@ -634,6 +637,10 @@ class CellarStandardHTMLParser(HTMLParser):
                 break
         if start is None:
             return None, None
+        # A regulation's binding formula closes the enacting terms, just before 'Done at'
+        if start > 0 and flow[start - 1][0] == 'p' and \
+                flow[start - 1][1].upper().startswith(_BINDING_FORMULA.upper()):
+            start -= 1
         end = start + 1
         while end < len(flow):
             kind, text = flow[end]
@@ -709,12 +716,15 @@ class CellarStandardHTMLParser(HTMLParser):
                     key = _canon(variant)
                     if key:
                         lines.add(key)
+        # Extraction may also join several flow blocks into one text (points
+        # merged into their paragraph): a block inside such a text is covered
+        joined = '|'.join(lines)
 
         leftovers = []
         for _, block in self._flow_elements():
             block_lines = [_canon(l) for l in block.split('\n')]
             block_lines = [l for l in block_lines if l]
-            if block_lines and not all(l in lines for l in block_lines):
+            if block_lines and not all(l in lines or l in joined for l in block_lines):
                 leftovers.append(block)
         if leftovers:
             n = len(self.annexes) + 1

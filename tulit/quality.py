@@ -20,7 +20,10 @@ ERROR = 'error'
 WARNING = 'warning'
 
 ACTIONS = {'replace', 'insert', 'add', 'delete', 'amend', 'repeal', 'renumber', 'substitute'}
-_MARKUP = re.compile(r'<\s*/?\s*[a-zA-Z][a-zA-Z0-9:_-]*(\s[^<>]*)?/?>|&(?:[a-zA-Z]{2,8}|#\d{2,5}|#x[0-9a-fA-F]{2,4});')
+# A tag is bare ('<b>', '</p>', '<br/>') or has an attribute ('<span class="x">'); legal texts
+# also use angle brackets around placeholders ('<state route of exposure>'), which are not markup
+_MARKUP = re.compile(r'<\s*/?\s*[a-zA-Z][a-zA-Z0-9:_-]*\s*/?>|<\s*[a-zA-Z][a-zA-Z0-9:_-]*\s[^<>]*=[^<>]*>'
+                     r'|&(?:[a-zA-Z]{2,8}|#\d{2,5}|#x[0-9a-fA-F]{2,4});')
 _DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 _ABBREVIATION = re.compile(r'\b[^\W\d_]{1,3}\.$')
 _BAD_CHARACTERS = re.compile(r'[�\x00-\x08\x0b\x0c\x0e-\x1f]')
@@ -114,7 +117,11 @@ def check(doc: dict[str, Any], expect_articles: bool = True) -> list[Problem]:
             amendment = child.get('amendment')
             if amendment:
                 where = f"{eid}/{child.get('eId')}"
-                if amendment.get('action') not in ACTIONS:
+                # None: the parser saw quoted text but could not classify the
+                # verb (e.g. an instruction in a language it has no verbs for)
+                if amendment.get('action') is None:
+                    add(WARNING, where, 'the amendment action is not identified')
+                elif amendment['action'] not in ACTIONS:
                     add(ERROR, where, f"unknown amendment action {amendment.get('action')!r}")
                 if not (amendment.get('instruction') or '').strip():
                     add(ERROR, where, 'the amendment has no instruction')

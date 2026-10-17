@@ -42,6 +42,17 @@ _DIVISION_TYPES = {
     'SECTION': ('section', 'sct'),
     'SUBSECTION': ('subsection', 'sbs'),
     'SUB-SECTION': ('subsection', 'sbs'),
+    # German, French, Italian, Spanish, Portuguese and Dutch versions
+    'TEIL': ('part', 'prt'), 'PARTIE': ('part', 'prt'), 'PARTE': ('part', 'prt'), 'DEEL': ('part', 'prt'),
+    'TITEL': ('title', 'tit'), 'TITRE': ('title', 'tit'), 'TITOLO': ('title', 'tit'),
+    'TÍTULO': ('title', 'tit'),
+    'KAPITEL': ('chapter', 'cpt'), 'CHAPITRE': ('chapter', 'cpt'), 'CAPO': ('chapter', 'cpt'),
+    'CAPITOLO': ('chapter', 'cpt'), 'CAPÍTULO': ('chapter', 'cpt'), 'HOOFDSTUK': ('chapter', 'cpt'),
+    'ABSCHNITT': ('section', 'sct'), 'SEZIONE': ('section', 'sct'), 'SECCIÓN': ('section', 'sct'),
+    'SECÇÃO': ('section', 'sct'), 'AFDELING': ('section', 'sct'),
+    'UNTERABSCHNITT': ('subsection', 'sbs'), 'SOUS-SECTION': ('subsection', 'sbs'),
+    'SUBSECCIÓN': ('subsection', 'sbs'), 'SUBSECÇÃO': ('subsection', 'sbs'),
+    'ONDERAFDELING': ('subsection', 'sbs'),
 }
 
 _AMEND_ACTIONS = {
@@ -816,7 +827,8 @@ class Formex4Parser(XMLParser):
         # content reference — only resolve inclusions in the document body.
         for incl in element.xpath('.//INCL.ELEMENT[not(ancestor::BIB.INSTANCE)]'):
             fileref = incl.get('FILEREF')
-            if not fileref:
+            # Images (TYPE="TIFF", ...) have no text to graft
+            if not fileref or not fileref.lower().endswith('.xml'):
                 continue
             path = os.path.join(base_dir, fileref)
             if not os.path.exists(path):
@@ -872,12 +884,14 @@ class Formex4Parser(XMLParser):
         dict or None
             Annex dictionary, or None if the element is not an annex.
         """
-        if annex_root is None or annex_root.tag != 'ANNEX':
+        if annex_root is None or annex_root.tag not in ('ANNEX', 'CONS.ANNEX'):
             return None
 
         self._resolve_inclusions(annex_root, base_dir)
 
-        title = annex_root.find('.//TITLE')
+        # A consolidated annex (CONS.ANNEX) has its title as a direct child;
+        # searching deeper would pick up the title of its first part
+        title = annex_root.find('TITLE') if annex_root.tag == 'CONS.ANNEX' else annex_root.find('.//TITLE')
         num = None
         heading = None
         if title is not None:
@@ -1432,7 +1446,7 @@ class Formex4Parser(XMLParser):
         # Files that are only the target of an INCL.ELEMENT reference in
         # another annex are skipped: their content is grafted into the
         # referencing annex, so extracting them separately would duplicate it.
-        annex_files = self._drop_included_annex_files(annex_files)
+        annex_files = self._order_annex_files(self._drop_included_annex_files(annex_files))
 
         # If the parsed document is itself an annex (e.g. a standalone annex
         # file, or a corrigendum directory where no legal act was found),
@@ -1451,8 +1465,38 @@ class Formex4Parser(XMLParser):
         # Extract any annex files found alongside the legal act
         if annex_files:
             self.get_annexes(annex_files)
+        elif self.root is not None and self.root.find('.//CONS.ANNEX') is not None:
+            # A consolidated act (CONS.ACT) carries its annexes inline as CONS.ANNEX
+            base_dir = os.path.dirname(os.path.abspath(str(file)))
+            cons_annexes = self.root.findall('.//CONS.ANNEX')
+            self.annexes = [
+                annex for annex in (
+                    self._extract_annex(element, index, base_dir=base_dir)
+                    for index, element in enumerate(cons_annexes, start=1)
+                ) if annex is not None
+            ]
 
         return self
+
+    def _order_annex_files(self, annex_files: list[str]) -> list[str]:
+        """
+        Puts annex files in Official Journal order.
+
+        Cellar numbers the downloaded items (DOC_3.xml, DOC_6.xml, ...) in no
+        particular order, so an appendix can come before its annex. Each
+        annex declares its place in BIB.INSTANCE/NO.SEQ ('0004.0001',
+        '0004.0001.0001', ...); when every file has one, they are sorted by it.
+        """
+        keys = []
+        for annex_file in annex_files:
+            try:
+                no_seq = etree.parse(annex_file).getroot().findtext('BIB.INSTANCE/NO.SEQ')
+            except Exception:
+                no_seq = None
+            if not no_seq or not re.fullmatch(r'\d+(\.\d+)*', no_seq.strip()):
+                return annex_files
+            keys.append(tuple(int(n) for n in no_seq.strip().split('.')))
+        return [f for _, f in sorted(zip(keys, annex_files), key=lambda pair: pair[0])]
 
     def _drop_included_annex_files(self, annex_files: list[str]) -> list[str]:
         """

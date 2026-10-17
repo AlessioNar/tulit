@@ -38,5 +38,18 @@ class TestIrishStatuteBookClient(unittest.TestCase):
         file_path = self.client.download(year=2012, act_number=999999)
         self.assertIsNone(file_path)
 
+    @patch('tulit.client.state.irishstatutebook.requests.Session.get')
+    def test_missing_revised_act_logs_status_not_page(self, mock_get):
+        import requests
+        page = Mock(text='<!DOCTYPE html><html><style>body{}</style>Not Found</html>')
+        mock_response = Mock()
+        mock_response.raise_for_status.side_effect = requests.HTTPError('404 Client Error: Not Found', response=page)
+        mock_get.return_value = mock_response
+        with self.assertLogs(self.client.logger, level='ERROR') as logs:
+            self.assertIsNone(self.client.download(year=2005, act_number=23, status='revised'))
+        self.assertIn('404 Client Error', logs.output[0])
+        self.assertNotIn('DOCTYPE', logs.output[0])
+
+
 if __name__ == "__main__":
     unittest.main()

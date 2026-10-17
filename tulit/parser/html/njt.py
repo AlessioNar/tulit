@@ -9,10 +9,12 @@ paragraph 1) and a class naming its kind:
 - the number and title (``h1``, ``h2``) give the preface, the preamble
   (``preambulum``) the formula ('... a következő törvényt alkotja:') and the
   recitals before it;
-- parts (``resz``, 'ELSŐ RÉSZ'), chapters (``fejezet``, 'I. Fejezet'),
+- books (``konyv``, 'ELSŐ KÖNYV'), parts (``resz``, 'ELSŐ RÉSZ'), titles
+  (``focim``, 'I. CÍM'), chapters (``fejezet``, 'I. Fejezet'),
   numbered subtitles (``alcim``, '1. A törvény célja') and unnumbered
   headings (``tagoloCim``) become divisions;
-- each section (``szakasz``, '1. §') becomes an article; its paragraphs
+- each section (``szakasz``, '1. §'), and each article of the Alaptörvény
+  ('A) cikk', 'I. cikk', '1. cikk'), becomes an article; its paragraphs
   (``bekezdesNyito``, '(1)') become par_N, with points ('a)', '1.') folded
   into them;
 - text an amending act quotes (``idezet``) stays in the amending paragraph,
@@ -37,7 +39,12 @@ _BLOCKS = ('p', 'div', 'br', 'tr', 'td', 'th', 'li', 'table')
 _ROMAN = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 _ORDINALS = ('ELSŐ', 'MÁSODIK', 'HARMADIK', 'NEGYEDIK', 'ÖTÖDIK', 'HATODIK', 'HETEDIK', 'NYOLCADIK', 'KILENCEDIK',
              'TIZEDIK', 'TIZENEGYEDIK', 'TIZENKETTEDIK', 'TIZENHARMADIK', 'TIZENNEGYEDIK', 'TIZENÖTÖDIK')
-_SECTION = re.compile(r'^(?P<num>(?P<first>\d+(?:/[A-Z]+)?)(?:\s*[–-]\s*\d+(?:/[A-Z]+)?)?\.\s*§)\s*')
+# '1. §', '184/A. §', '1:1. §' (book and section of the Civil Code), '10-12. §'
+_ARTICLES = ('cikkBetu', 'cikkRomai', 'cikkArab', 'rendelkezes')
+# Division classes: könyv, rész, főcím ('I. CÍM'), fejezet
+_DIVISIONS = {'konyv': 'book', 'resz': 'part', 'focim': 'title', 'fejezet': 'chapter'}
+_SECTION = re.compile(r'^(?P<num>(?P<first>(?:\d+:)?\d+(?:/[A-Z]+)?)(?:\s*[–-]\s*(?:\d+:)?\d+(?:/[A-Z]+)?)?\.\s*§)'
+                      r'\s*')
 _PARAGRAPH = re.compile(r'^\((?P<num>\d+[a-z]?)\)\s*')
 _PROMULGATED = re.compile(r'kihirdetés napja:\s*(\d{4})\.\s*(\w+)\s*(\d{1,2})\.')
 _ADOPTED = re.compile(r'(\d{4})\.\s*(\w+)\s*(\d{1,2})-[ai]\s*ülésnapján fogadta el')
@@ -64,6 +71,18 @@ def amendment_action(text: str) -> Optional[str]:
         if re.search(pattern, text, re.IGNORECASE):
             return action
     return None
+
+
+def names_legislation(text: str, action: str) -> bool:
+    """
+    Whether an amending phrase is about legislation: a section, annex or act
+    named before the verb, or anywhere for a repeal. 'A végrendelet hatályát
+    veszti, ha ...' in the Civil Code amends nothing.
+    """
+    pattern = next(pattern for pattern, name in ACTIONS if name == action)
+    match = re.search(pattern, text, re.IGNORECASE)
+    scope = text if action == 'delete' or match is None else text[:match.end()]
+    return bool(re.search(r'§|mellékle|szövegrész', scope) or _AMENDED_ACT.search(scope))
 
 
 def roman(text: str) -> int:
@@ -160,7 +179,8 @@ class NJTParser(Parser):
         def flush() -> None:
             nonlocal section
             if section is not None:
-                body.article(section['num'], None, section['children'].children, token=section['token'])
+                body.article(section['num'], section.get('heading'), section['children'].children,
+                             token=section['token'])
             section = None
 
         def add(text: str, anchor: str) -> None:
@@ -177,7 +197,7 @@ class NJTParser(Parser):
                     if found:
                         abbreviations[short.strip()] = found.group(1).strip()
                 action = amendment_action(text)
-                if action:
+                if action and names_legislation(text, action):
                     act = _AMENDED_ACT.search(text)
                     named = act.group(1).strip() if act else next(
                         (full for short, full in abbreviations.items() if re.search(rf'\b{re.escape(short)}', text)),
@@ -224,6 +244,36 @@ class NJTParser(Parser):
                     continue
             if not text:
                 continue
+            if any(name in classes for name in _ARTICLES):
+                # An article of the Alaptörvény ('A) cikk', 'I. cikk', '1. cikk') or a closing provision ('1.')
+                flush()
+                token = re.match(r'^(?:(\d+(?:/[A-Z])?|[IVXLC]+)\.|([A-Z])\))', text)
+                section = {'num': text, 'children': ChildrenBuilder(),
+                           'token': (token.group(1) or token.group(2)).replace('/', '-') if token else None}
+                continue
+            if 'szoveg' in classes and (section is not None or body.articles):
+                # The closing statement of the Alaptörvény
+                signature.append(text)
+                continue
+            if 'szoveg' in classes:
+                # The preamble of the Alaptörvény (Nemzeti hitvallás)
+                paragraphs = [_text(p) for p in element.xpath('.//p')] or [text]
+                self.recitals += [{'eId': f'rct_{len(self.recitals) + n}', 'text': p}
+                                  for n, p in enumerate((p for p in paragraphs if p), start=1)]
+                continue
+            if 'alaptorvenyFejezet' in classes:
+                following = element.getnext()
+                while following is not None and (not isinstance(following.tag, str) or 'jhId' in _classes(following)):
+                    following = following.getnext()
+                if following is not None and 'szoveg' in _classes(following):
+                    continue  # The title of the preamble
+                flush()
+                division = body.division('part' if text.isupper() else 'chapter', None, heading=text)
+                continue
+            if 'szelet' in classes and anchor.startswith('RR'):
+                # The closing statement and signatures of the Alaptörvény (other slices are text)
+                signature.append(text.lstrip('* '))
+                continue
             if 'preambulum' in classes:
                 paragraphs = [_text(p) for p in element.xpath('.//p')] or [text]
                 if re.search(r'(alkotja|rendeli el|rendelem el|állapítja meg|határozza el)[:.]?$', paragraphs[-1]):
@@ -251,15 +301,17 @@ class NJTParser(Parser):
                 else:
                     annex.add(text)
                 continue
-            if 'resz' in classes or 'fejezet' in classes:
+            kind = next((kind for name, kind in _DIVISIONS.items() if name in classes), None)
+            if kind:
                 flush()
-                kind = 'part' if 'resz' in classes else 'chapter'
                 number = re.match(r'^([IVXLCDM]+)\.?\s', text)
                 ordinal = next((str(i) for i, word in enumerate(_ORDINALS, start=1) if text.upper().startswith(word)),
                                None)
-                division = body.division(kind, text, token=number.group(1) if number else ordinal)
+                # Books (könyv) of the Civil Code enclose its parts
+                division = body.division(kind, text, token=number.group(1) if number else ordinal,
+                                         rank=-1 if kind == 'book' else None)
                 continue
-            if 'reszcim' in classes or 'fejezetCim' in classes:
+            if any(name in classes for name in ('konyvcim', 'reszcim', 'focimCim', 'fejezetCim')):
                 if division is not None:
                     division['heading'] = f"{division['heading']} {text}" if division.get('heading') else text
                 continue
@@ -278,13 +330,18 @@ class NJTParser(Parser):
                 match = _SECTION.match(text)
                 if match:
                     section['num'] = match.group('num')
-                    section['token'] = match.group('first').replace('/', '-')
+                    section['token'] = match.group('first').replace('/', '-').replace(':', '-')
                     text = text[match.end():]
+                    heading = re.match(r'^\[([^\[\]]+)\](?:\s*\])?$', text)  # a stray ']' in 6:147. §
+                    if heading:
+                        # The title of the section ('1:1. § [A törvény hatálya]')
+                        section['heading'] = heading.group(1)
+                        continue
                     if not text:
                         continue
             add(text, anchor)
         flush()
-        self.preface = ' '.join(title) or None
+        self.preface = ' '.join(t for t in title if t) or None
         # An amending act names the act it amends in its title ('... rendelet módosításáról')
         subtitle = ' '.join(title[1:])
         titled = _AMENDED_ACT.search(subtitle) if re.search(r'módosításáról$', subtitle) else None

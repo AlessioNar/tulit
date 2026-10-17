@@ -42,13 +42,21 @@ _ARTICLE = re.compile(r'^(?:Articolul|Art\.)\s+(?P<num>\d+(?:\^\d+)?|[IVXLC]+(?:
                       r'^(?P<sole>ARTICOL UNIC|Articol unic|Articolul UNIC)$')
 _DIVISION = re.compile(r'^(?P<kind>Partea|Cartea|Titlul|Capitolul|Secțiunea|Secţiunea|Subsecțiunea|Subsecţiunea)'
                        r'\s+(?:a\s+)?(?P<num>[^\s-]+)(?:-a)?$', re.IGNORECASE)
+_EDITOR_NOTE = re.compile(r'-{5,}\s+NOT[ĂA] C\.T\.C\.E\.[\s\S]*?(?=\s*\n[\t ]*\xa0\+\xa0|$)')
+# An entry of the table of contents the database prints after a part's heading: 'Titlul I - ...  art. 1-14'
+_CONTENTS = re.compile(r'^(?:Titlul|Capitolul|Secțiunea|Secţiunea|Subsecțiunea|Subsecţiunea)\b.* - .*'
+                       r'\bart\. \d+(?:\^\d+)?(?:-\d+(?:\^\d+)?)?$')
+# An article run into the heading block of a division ('Secţiunea a 3-a   Cecul   ART 2.655  ...')
+_RUN_IN_ARTICLE = re.compile(r'\s{3,}(?:Articolul|ART\.?|Art\.)\s+(?P<num>\d{1,3}(?:\.\d{3})*)\b\.?\s+')
 _ANNEX = re.compile(r'^(ANEX[AĂ]|Anex[aă])(\s+nr\.\s*\S+)?\b')
 _PARAGRAPH = re.compile(r'^\((?P<num>\d+(?:\^\d+)?)\)\s*')
 _POINT = re.compile(r'^(?P<num>\d+(?:\^\d+)?)\.\s+')
 _LETTER = re.compile(r'^[a-z](\^\d+)?\)\s')
 _CLOSING = re.compile(r'^(Această lege a fost adoptată|Aceasta lege a fost adoptata|PRIM-MINISTRU|PREȘEDINTELE|'
+                      r'Constituția României a fost adoptată|Constituţia României a fost adoptată|'
                       r'PREŞEDINTELE|p\. PREȘEDINTELE|p\. PREŞEDINTELE|PREȘEDINTELE ROMÂNIEI|Contrasemnează)')
-_FORMULA = re.compile(r'(adoptă prezenta|adoptă prezentul|hotărăște:?$|hotărăşte:?$|decretează:?$|'
+_FORMULA = re.compile(r'(adopt[ăa] prezenta|adopt[ăa] prezentul|adopt[ăa] constitu[țţ]ia|'
+                      r'hotărăște:?$|hotărăşte:?$|decretează:?$|'
                       r'emite (următorul|prezentul)|'
                       r'emite următoarea|adoptă următoarea)', re.IGNORECASE)
 _QUOTE_START = re.compile(r'(cuprins|conținut|conţinut|redactare|următoarea formă)\s*:$')
@@ -63,6 +71,7 @@ ACTIONS = (
     (r'se modific[ăa] (și|şi) va avea|se modific[ăa] (și|şi) vor avea|se înlocuiește|se înlocuieşte', 'replace'),
     (r'se completeaz[ăa]', 'add'),
     (r'se modific[ăa]', 'amend'),
+    (r'\bv(?:a|or) avea următorul cuprins', 'replace'),
 )
 
 
@@ -85,7 +94,8 @@ def _amended_act(text: str) -> Optional[str]:
 
 def _unbalanced(text: str) -> bool:
     """Whether a paragraph opens (or closes) a quotation it does not close (or open)."""
-    return text.count('"') % 2 == 1 or text.count('„') != text.count('”')
+    # Romanian quotes close with ” or “ („Gheorghe Ionescu-Șișești“)
+    return text.count('"') % 2 == 1 or text.count('„') != text.count('”') + text.count('“')
 
 
 def _number(number: str) -> Optional[int]:
@@ -131,6 +141,8 @@ class LegislatieParser(Parser):
         text = root.findtext(f'.//{{{NS}}}Text')
         if not text or not text.strip():
             raise FileLoadError(f"{file} holds no act text")
+        # Notes of the database's editor are not part of the act
+        text = _EDITOR_NOTE.sub('', text)
         blocks = [block for block in _BLOCK.split(text) if block.strip()]
         self._read_front(blocks[0])
         self._read_body(blocks[1:])
@@ -208,6 +220,16 @@ class LegislatieParser(Parser):
             division = _DIVISION.match(first)
             if division:
                 tokens = [token for item in items for token in item]
+                if any(_CONTENTS.match(token) for token in tokens[1:]):
+                    continue
+                run_in = _RUN_IN_ARTICLE.search(block)
+                if run_in:
+                    # Read the article as a block of its own, after the division
+                    blocks.insert(index + 1, f"Articolul {run_in.group('num').replace('.', '')}     "
+                                             f"{block[run_in.end():]}")
+                    block = block[:run_in.start()]
+                    tokens = [token for item in _ITEM.split(block) for token in _tokens(item)]
+                    following = (_tokens(blocks[index + 1]) or [''])[0]
                 heading = (' '.join(tokens[2:]) or None) if _ARTICLE.match(following) else None
                 body.division(DIVISIONS.get(division.group('kind').lower(), 'chapter'), first,
                               heading=tokens[1] if len(tokens) > 1 else None,
@@ -230,8 +252,11 @@ class LegislatieParser(Parser):
             if article_heading is None and len(items[0]) > 1:
                 # Older texts print the title after the number, two spaces before the text
                 inline = _INLINE_HEADING.match(_GAP.split(_ITEM.split(block)[0].strip(), 1)[-1].strip())
+                # The title is the start of the first paragraph, which it does not run past
                 if inline and not re.search(r'\b(din|de|la|a|al|ale|în|cu|și|şi|prin|privind|pentru)$',
-                                            inline.group('heading')):
+                                            inline.group('heading')) and not _GAP.search(inline.group('heading')) \
+                        and items[0][1].startswith(' '.join(inline.group('heading').split())) \
+                        and len(items[0][1]) > len(' '.join(inline.group('heading').split())):
                     article_heading = ' '.join(inline.group('heading').split())
                     items[0][1] = items[0][1][len(article_heading):].strip()
                 elif (len(items[0]) > 2 or len(items) > 1) and len(items[0][1]) < 200 \
@@ -258,7 +283,8 @@ class LegislatieParser(Parser):
                          token='1' if sole else number.replace('^', '-'))
         self.chapters, self.articles, self.structure = body.chapters, body.articles, body.structure
         if self._closing:
-            adopted = [t for t in self._closing if t.startswith(('Această lege', 'Aceasta lege'))]
+            adopted = [t for t in self._closing
+                       if t.startswith(('Această lege', 'Aceasta lege', 'Constituția', 'Constituţia'))]
             signature = [t for t in self._closing if t not in adopted and not re.fullmatch(r'-+', t)]
             self.conclusions = {'conclusion_text': ' '.join(adopted) or None, 'signature': ' '.join(signature) or None}
 
@@ -313,4 +339,5 @@ class LegislatieParser(Parser):
                                       else []}
             # Quoted text follows an instruction ending '... cu următorul cuprins:', or opens with a quotation mark
             self._quote_mark = _unbalanced(token)
-            self._quoting = bool(_QUOTE_START.search(token)) or self._quote_mark
+            # ('... cu acelaşi conţinut:' in a provision that amends nothing introduces no quotation)
+            self._quoting = bool(_QUOTE_START.search(token) and action) or self._quote_mark

@@ -106,6 +106,32 @@ class TestDarzhavenVestnikParser:
         assert parser.annexes[0]['num'].startswith('УСТРОЙСТВЕН ПРАВИЛНИК на Изпълнителната агенция')
         assert parser.conclusions['signature'].startswith('Министър-председател: Румен Радев')
 
+    def test_code_title_and_quoted_annexes(self, tmp_path):
+        # Trimmed from the Изборен кодекс (2014) and Постановление № 372 (2025): a code titled by an
+        # adjective, and annexes replaced in full whose quotation is never closed in the text
+        page = tmp_path / 'material.html'
+        page.write_text('''<html><body><table>
+            <tr><td><span class="tdHead1">Изборен кодекс</span></td></tr>
+            <tr><td><div>
+              <p align="center">ИЗБОРЕН КОДЕКС</p>
+              <p align="center">Глава първа</p><p align="center">ОБЩИ ПОЛОЖЕНИЯ</p>
+              <p>Чл. 1. Този кодекс урежда изборите.</p>
+              <p>§ 1. Приложение № 1 към чл. 7 се изменя така:</p>
+              <p align="right">„Приложение № 1 към чл. 7</p>
+              <p>ВИЖ приложението</p>
+              <p>§ 2. Приложение № 3 се изменя така:</p>
+              <p align="right">„Приложение № 3</p>
+              <p align="center">Заключителни разпоредби</p>
+              <p>§ 3. Кодексът влиза в сила от деня на обнародването.</p>
+              <p align="right">Министър-председател: Росен Желязков</p>
+            </div></td></tr></table></body></html>''', encoding='utf-8')
+        parser = DarzhavenVestnikParser().parse(str(page))
+        assert parser.preface == 'ИЗБОРЕН КОДЕКС'
+        assert [a['num'] for a in parser.articles] == ['Чл. 1.', '§ 1.', '§ 2.', '§ 3.']
+        assert parser.articles[1]['children'][0]['text'].endswith('„Приложение № 1 към чл. 7 ВИЖ приложението')
+        assert parser.articles[3]['parent'] == parser.chapters[-1]['eId']
+        assert parser.conclusions['signature'] == 'Министър-председател: Росен Желязков'
+
     def test_page_without_material(self, tmp_path):
         page = tmp_path / 'page.html'
         page.write_text('<html><body><p>Държавен вестник</p></body></html>', encoding='utf-8')

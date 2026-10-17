@@ -44,7 +44,8 @@ class EseimasClient(Client):
         super().__init__(download_dir, log_dir, proxies)
         self.session = requests.Session()
         self.session.headers['User-Agent'] = USER_AGENT
-        retry = Retry(total=4, backoff_factor=1, status_forcelist=(429, 500, 502, 503, 504),
+        # Cloudflare in front of e-seimas answers 52x when the portal is slow
+        retry = Retry(total=4, backoff_factor=1, status_forcelist=(429, 500, 502, 503, 504, 520, 522, 524),
                       allowed_methods=('GET', 'POST'))
         self.session.mount('https://', HTTPAdapter(max_retries=retry))
         if proxies:

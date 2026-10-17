@@ -118,6 +118,62 @@ class TestTARParser:
         assert point[1]['eId'] == 'par_1-1'
         assert parser.conclusions['conclusion_text'].startswith('Laikinai einanti Ministro Pirmininko pareigas')
 
+    @staticmethod
+    def _act(tmp_path, *lines):
+        """An act from its lines; a line starting with '^' is centred."""
+        paragraphs = ''.join(
+            f'<p class="MsoNormal" style="text-align:center">{line[1:]}</p>' if line.startswith('^')
+            else f'<p class="MsoNormal">{line}</p>' for line in lines)
+        page = tmp_path / 'act.html'
+        page.write_text(f'<html><body>{paragraphs}</body></html>', encoding='utf-8')
+        return TARParser().parse(str(page))
+
+    def test_code_after_approval_law(self, tmp_path):
+        parser = self._act(
+            tmp_path, '^LIETUVOS RESPUBLIKOS DARBO KODEKSO PATVIRTINIMO ĮSTATYMAS',
+            '^2016 m. rugsėjo 14 d. Nr. XII-2603',
+            '1 straipsnis. Lietuvos Respublikos darbo kodekso patvirtinimas',
+            'Patvirtinti Lietuvos Respublikos darbo kodeksą (pridedama).',
+            'Skelbiu šį Lietuvos Respublikos Seimo priimtą įstatymą.', 'Respublikos Prezidentė Dalia Grybauskaitė',
+            'PATVIRTINTA', '2016 m. rugsėjo 14 d.', 'įstatymu Nr. XII-2603',
+            '^LIETUVOS RESPUBLIKOS DARBO KODEKSAS', '^I dalis',
+            '^<span style="text-transform: uppercase">Bendrosios nuostatos</span>',
+            '1 straipsnis. Kodekso paskirtis',
+            '1. Pakeisti būtinąsias darbo sutarties sąlygas galima tik šalių susitarimu.',
+            '4 skirsnis. Neteko galios nuo 2017-07-01',
+            '^Pirmasis SKIRSNIS', '^Darbo sutartis',
+            '2 straipsnis. Darbo sutartis', 'Darbo sutartis sudaroma raštu.')
+        # The code keeps its own eIds; the approval law's article comes first
+        assert [(a['eId'], a['num']) for a in parser.articles] == [
+            ('art_1_2', '1 straipsnis'), ('art_1', '1 straipsnis'), ('art_2', '2 straipsnis')]
+        assert [(c['eId'], c['num'], c['heading'], c['parent']) for c in parser.chapters] == [
+            ('prt_I', 'I dalis', 'BENDROSIOS NUOSTATOS', None),
+            ('sct_1', 'Pirmasis SKIRSNIS', 'Darbo sutartis', 'prt_I')]
+        assert parser.conclusions['signature'] == 'Respublikos Prezidentė Dalia Grybauskaitė'
+        # Not an amending act: a provision using an amending verb holds no amendment; a repealed section is left out
+        assert [c['text'] for c in parser.articles[1]['children']] == [
+            '1. Pakeisti būtinąsias darbo sutarties sąlygas galima tik šalių susitarimu.']
+        assert parser.articles[1]['children'][0]['amendment'] is None
+
+    def test_constitution(self, tmp_path):
+        parser = self._act(
+            tmp_path, '^LIETUVOS RESPUBLIKOS', '^K O N S T I T U C I J A', 'LIETUVIŲ TAUTA',
+            '^I SKIRSNIS', '^LIETUVOS VALSTYBĖ', '1 straipsnis', 'Lietuvos valstybė yra nepriklausoma.',
+            '^VI SKIRSNIS', '^RESPUBLIKOS PREZIDENTAS',
+            '77 straipsnis', 'Respublikos Prezidentas yra valstybės vadovas.',
+            'Respublikos Prezidentas negali skelbti pirmalaikių Seimo rinkimų.',
+            'LIETUVOS RESPUBLIKOS', 'AUKŠČIAUSIOSIOS TARYBOS', 'PIRMININKAS VYTAUTAS LANDSBERGIS')
+        assert parser.preface == 'LIETUVOS RESPUBLIKOS KONSTITUCIJA'
+        assert [(a['eId'], a['heading'], len(a['children'])) for a in parser.articles] == [
+            ('art_1', None, 1), ('art_77', None, 2)]
+        assert parser.chapters[1]['heading'] == 'RESPUBLIKOS PREZIDENTAS'
+        assert parser.conclusions == {'conclusion_text': 'LIETUVOS RESPUBLIKOS',
+                                      'signature': 'AUKŠČIAUSIOSIOS TARYBOS PIRMININKAS VYTAUTAS LANDSBERGIS'}
+
+    def test_letter_spaced_word(self, tmp_path):
+        parser = self._act(tmp_path, '^ĮSAKYMAS', '1. T v i r t i n u aprašą (pridedama).')
+        assert parser.articles[0]['children'][0]['text'] == 'Tvirtinu aprašą (pridedama).'
+
     def test_page_without_text(self, tmp_path):
         page = tmp_path / 'page.html'
         page.write_text('<html><body><div></div></body></html>')

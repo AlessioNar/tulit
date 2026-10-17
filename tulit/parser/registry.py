@@ -216,6 +216,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.likumi import LikumiParser
     from tulit.parser.html.ejustice import EJusticeParser
     from tulit.parser.pdf.cyprus import CyprusGazetteParser
+    from tulit.parser.xml.dila import DilaParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -245,6 +246,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('lv-likumi', LikumiParser, aliases=['likumi'])
     registry.register('be-ejustice', EJusticeParser, aliases=['ejustice', 'justel'])
     registry.register('cy-gazette-pdf', CyprusGazetteParser, aliases=['cy-gazette'])
+    registry.register('fr-dila', DilaParser, aliases=['dila', 'legi', 'jorf'])
 
 
 def get_parser_registry() -> ParserRegistry:

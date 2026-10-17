@@ -1,0 +1,654 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<toestand xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bwb-ng-vast-deel="http://wetten.overheid.nl/id/BWBR0040940/2026-09-01/0" xsi:noNamespaceSchemaLocation="https://repository.officiele-overheidspublicaties.nl/Schema/BWB-toestand/2016-1/xsd/toestand_2016-1.xsd" bwb-id="BWBR0040940" inwerkingtreding="2026-09-01"><bwb-inputbestand/><bwb-wijzigingen/><redactionele-correcties/><wetgeving dtdversie="2.0" soort="wet" stam-id="14616273" versie-id="25027542" id="C35792591" label-id="14570354" inwerkingtredingsdatum="2018-05-25">
+  <intitule bwb-ng-variabel-deel="/Intitule" stam-id="14616303" versie-id="25026832" id="C35791881" label-id="14569644" inwerking="2018-05-25" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">Wet van 16 mei 2018, houdende regels ter uitvoering van Verordening (EU) 2016/679 van het Europees Parlement en de Raad van 27 april 2016 betreffende de bescherming van natuurlijke personen in verband met de verwerking van persoonsgegevens en betreffende het vrije verkeer van die gegevens en tot intrekking van Richtlijn 95/46/EG (algemene verordening gegevensbescherming) (PbEU 2016, L 119) (Uitvoeringswet Algemene verordening gegevensbescherming)<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata></meta-data></intitule>
+  <citeertitel bwb-ng-variabel-deel="/Citeertitel" status="officieel" stam-id="14616313" versie-id="25026842" id="C35791891" label-id="14569654" inwerking="2018-05-25" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22">Uitvoeringswet Algemene verordening gegevensbescherming<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata></meta-data></citeertitel>
+  <wet-besluit>
+    <aanhef bwb-ng-variabel-deel="/Aanhef" stam-id="14616323" versie-id="25026852" id="C38804101" label-id="14569664" inwerking="2018-05-25" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <wij>Wij Willem-Alexander, bij de gratie Gods, Koning der Nederlanden, Prins van Oranje-Nassau, enz. enz. enz.</wij>
+  <considerans>
+    <considerans.al>Allen, die deze zullen zien of horen lezen, saluut! doen te weten:</considerans.al>
+    <considerans.al>Alzo Wij in overweging genomen hebben, dat het noodzakelijk is te voorzien in wettelijke regels ter uitvoering van Verordening (EU) 2016/679 van het Europees Parlement en de Raad van 27 april 2016 betreffende de bescherming van natuurlijke personen in verband met de verwerking van persoonsgegevens en betreffende het vrije verkeer van die gegevens en tot intrekking van Richtlijn 95/46/EG (algemene verordening gegevensbescherming) (PbEU 2016, L 119);</considerans.al>
+    <considerans.al bevat="grondslag">Gelet op <extref doc="jci1.3:c:BWBR0001840&amp;artikel=10" label-id="2940594" verwijzing-id="2880181" bwb-id="BWBR0001840">artikel 10, tweede en derde lid, van de Grondwet</extref>;</considerans.al>
+  </considerans>
+  <afkondiging>
+    <al>Zo is het, dat Wij, de Afdeling advisering van de Raad van State gehoord, en met gemeen overleg der Staten-Generaal, hebben goedgevonden en verstaan, gelijk Wij goedvinden en verstaan bij deze:</al>
+  </afkondiging>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata></meta-data></aanhef>
+    <wettekst>
+      <hoofdstuk bwb-ng-variabel-deel="/Hoofdstuk1" stam-id="14616393" versie-id="25026922" id="C35791971" label-id="14569734" inwerking="2018-05-25" label="Hoofdstuk 1" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Hoofdstuk</label>
+    <nr status="officieel">1</nr>
+    <titel status="officieel">Algemene bepalingen</titel>
+  </kop><artikel bwb-ng-variabel-deel="/Hoofdstuk1/Artikel1" stam-id="14616333" versie-id="31659262" id="C45267571" label-id="14569674" inwerking="2026-09-01" label="Artikel 1" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">1</nr>
+    <titel status="officieel">Definities</titel>
+  </kop>
+  <al>In deze wet en de daarop berustende bepalingen wordt verstaan onder:</al>
+  <lijst level="single" nr-sluiting="." start="1" type="ongemarkeerd">
+    <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel1/Onderdeel_1">
+      <al>
+        <nadruk type="cur">bijzondere categorieën van persoonsgegevens:</nadruk> de categorieën van persoonsgegevens, bedoeld in artikel 9, eerste lid, van de verordening</al>
+    </li>
+    <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel1/Onderdeel_2">
+      <al>
+        <nadruk type="cur">Onze Minister:</nadruk> Onze Minister voor Rechtsbescherming;</al>
+    </li>
+    <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel1/Onderdeel_3">
+      <al>
+        <nadruk type="cur">persoonsgegevens van strafrechtelijke aard:</nadruk> persoonsgegevens betreffende strafrechtelijke veroordelingen en strafbare feiten of daarmee verband houdende veiligheidsmaatregelen als bedoeld in artikel 10 van de verordening;</al>
+    </li>
+    <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel1/Onderdeel_4">
+      <al>
+        <nadruk type="cur">verordening:</nadruk> verordening (EU) 2016/679 van het Europees Parlement en de Raad van 27 april 2016 betreffende de bescherming van natuurlijke personen in verband met verwerking van persoonsgegevens en betreffende het vrije verkeer van die gegevens en tot intrekking van Richtlijn 95/46/EG (algemene verordening gegevensbescherming) (PbEU 2016, L 119).</al>
+    </li>
+  </lijst>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=1&amp;g=2026-09-01" onderdeel="artikel=1" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=1"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=1" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=1"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk1/Artikel2" stam-id="14616343" versie-id="31659242" id="C45267701" label-id="14569684" inwerking="2026-09-01" label="Artikel 2" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">2</nr>
+    <titel status="officieel">Materiële reikwijdte</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel2/Lid1" label-id="14569684L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Deze wet en de daarop berustende bepalingen zijn van toepassing op de geheel of gedeeltelijk geautomatiseerde verwerking van persoonsgegevens, alsmede op de verwerking van persoonsgegevens die in een bestand zijn opgenomen of die bestemd zijn om daarin te worden opgenomen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=2&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel2/Lid2" label-id="14569684L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>In afwijking van het eerste lid, is deze wet niet van toepassing op de verwerking van persoonsgegevens voor zover daarop de <extref doc="jci1.3:c:BWBR0033715" label-id="12296744" verwijzing-id="2880182" bwb-id="BWBR0033715">Wet basisregistratie personen</extref> of de <extref doc="jci1.3:c:BWBR0004627" label-id="2072514" verwijzing-id="2880183" bwb-id="BWBR0004627">Kieswet</extref> van toepassing is.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=2&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel2/Lid3" label-id="14569684L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>Behoudens het bepaalde in <intref doc="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;z=2026-09-01&amp;g=2026-09-01" label-id="14569704" verwijzing-id="2880256" bwb-id="BWBR0040940" bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3">artikel 3</intref>, is deze wet niet van toepassing op de verwerking van persoonsgegevens, bedoeld in artikel 2, tweede lid, van de verordening.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=2&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=2&amp;g=2026-09-01" onderdeel="artikel=2" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=2"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=2" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=2"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk1/Artikel2a" stam-id="14616353" versie-id="25026882" id="C35805751" label-id="14569694" inwerking="2018-05-25" label="Artikel 2a" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">2a</nr>
+    <titel status="officieel">Inachtneming behoeften kleine, middelgrote en micro-ondernemingen</titel>
+  </kop>
+  <al>De Autoriteit persoonsgegevens neemt bij de toepassing van de verordening de specifieke behoeften van kleine, middelgrote en micro-ondernemingen als bedoeld in artikel 2 van de bijlage bij Aanbeveling 2003/361/EG van de Commissie van 6 mei 2003 betreffende de definitie van kleine, middelgrote en micro-ondernemingen (PbEU 2003 L124) in aanmerking.</al>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=2a&amp;g=2026-09-01" onderdeel="artikel=2a" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=2a"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=2a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=2a" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=2a"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3" stam-id="14616363" versie-id="31659232" id="C45267641" label-id="14569704" inwerking="2026-09-01" label="Artikel 3" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">3</nr>
+    <titel status="officieel">Schakelbepaling verwerkingen buiten werkingssfeer verordening</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid1" label-id="14569704L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Deze wet en de daarop berustende bepalingen zijn mede van toepassing op de verwerking van persoonsgegevens:</al>
+    <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid1/Onderdeela">
+        <li.nr>a.</li.nr>
+        <al>in het kader van activiteiten die buiten de werkingssfeer van het Unierecht vallen;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=1&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid1/Onderdeelb">
+        <li.nr>b.</li.nr>
+        <al>door de krijgsmacht bij de uitvoering van activiteiten die binnen de werkingssfeer van titel V, hoofdstuk 2, van het Verdrag betreffende de Europese Unie vallen.</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=1&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+    </lijst>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid2" label-id="14569704L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>De verordening is van overeenkomstige toepassing op de verwerking van persoonsgegevens, bedoeld in het eerste lid.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid3" label-id="14569704L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>Het eerste en het tweede lid zijn niet van toepassing op:</al>
+    <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid3/Onderdeela">
+        <li.nr>a.</li.nr>
+        <al>de verwerking van persoonsgegevens door de krijgsmacht, voor zover Onze Minister van Defensie daartoe bij besluit of bij ministeriële regeling beslist met het oog op de inzet of het ter beschikking stellen van de krijgsmacht ter uitvoering van de in <extref doc="jci1.3:c:BWBR0001840&amp;artikel=97" label-id="2941554" verwijzing-id="2880185" bwb-id="BWBR0001840">artikel 97 van de Grondwet</extref> omschreven taken;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=3&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid3/Onderdeelb">
+        <li.nr>b.</li.nr>
+        <al>de verwerking van persoonsgegevens voor zover daarop de <extref doc="jci1.3:c:BWBR0039896" label-id="14096804" verwijzing-id="2880186" bwb-id="BWBR0039896">Wet op de inlichtingen- en veiligheidsdiensten 2017</extref> van toepassing is.</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=3&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+    </lijst>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid4" label-id="14569704L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>In een besluit of ministeriële regeling als bedoeld in het derde lid, onderdeel a, kunnen beperkingen en voorschriften worden gegeven.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel3/Lid5" label-id="14569704L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>Van een besluit of ministeriële regeling als bedoeld in het derde lid, onderdeel a, wordt zo spoedig mogelijk mededeling gedaan aan de Autoriteit persoonsgegevens.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=3&amp;g=2026-09-01" onderdeel="artikel=3" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=3"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=3" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=3"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk1/Artikel4" stam-id="14616373" versie-id="25026902" id="C35805771" label-id="14569714" inwerking="2018-05-25" label="Artikel 4" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">4</nr>
+    <titel status="officieel">Territoriale reikwijdte</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel4/Lid1" label-id="14569714L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Deze wet en de daarop berustende bepalingen zijn van toepassing op de verwerking van persoonsgegevens in het kader van activiteiten van een vestiging van een verwerkingsverantwoordelijke of een verwerker in Nederland.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=4&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel4/Lid2" label-id="14569714L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Deze wet en de daarop berustende bepalingen zijn van toepassing op verwerking van persoonsgegevens van betrokkenen die zich in Nederland bevinden door een niet in de Europese Unie gevestigde verwerkingsverantwoordelijke of verwerker, wanneer de verwerking verband houdt met:</al>
+    <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel4/Lid2/Onderdeela">
+        <li.nr>a.</li.nr>
+        <al>het aanbieden van goederen of diensten aan deze betrokkenen in Nederland, ongeacht of een betaling door de betrokkenen is vereist; of</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=4&amp;lid=2&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel4/Lid2/Onderdeelb">
+        <li.nr>b.</li.nr>
+        <al>het monitoren van hun gedrag, voor zover dit gedrag in Nederland plaatsvindt.</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=4&amp;lid=2&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+    </lijst>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=4&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=4&amp;g=2026-09-01" onderdeel="artikel=4" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=4"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=4" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=4"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5" stam-id="14616383" versie-id="31659212" id="C45267771" label-id="14569724" inwerking="2026-09-01" label="Artikel 5" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">5</nr>
+    <titel status="officieel">Toestemming van wettelijk vertegenwoordiger</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid1" label-id="14569724L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Indien artikel 8 van de verordening niet van toepassing is en sprake is van toestemming als bedoeld in artikel 4, onderdeel elf, van de verordening en de betrokkene heeft de leeftijd van zestien jaren nog niet bereikt, is in plaats van toestemming van de betrokkene, de toestemming van zijn wettelijk vertegenwoordiger vereist.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid2" label-id="14569724L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Indien de betrokkene onder curatele is gesteld, dan wel ten behoeve van de betrokkene een bewind of mentorschap is ingesteld, geldt voor iedere toestemming als bedoeld in artikel 4, onderdeel elf, van de verordening dat, in de plaats van de toestemming van de betrokkene, die van zijn wettelijk vertegenwoordiger is vereist, voor zover het een aangelegenheid betreft waarvoor de betrokkene onbekwaam dan wel onbevoegd is.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid3" label-id="14569724L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>Toestemming kan te allen tijde worden ingetrokken door:</al>
+    <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid3/Onderdeela">
+        <li.nr>a.</li.nr>
+        <al>de wettelijk vertegenwoordiger;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=3&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid3/Onderdeelb">
+        <li.nr>b.</li.nr>
+        <al>de betrokkene die de leeftijd van twaalf jaren heeft bereikt, en</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=3&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid3/Onderdeelc">
+        <li.nr>c.</li.nr>
+        <al>de wettelijk vertegenwoordiger, indien de betrokkene onder curatele is gesteld, dan wel ten behoeve van de betrokkene een bewind of mentorschap is ingesteld, voor zover het een aangelegenheid betreft waarvoor de betrokkene onbekwaam dan wel onbevoegd is.</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=3&amp;o=c&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=c"/></jcis></meta-data></li>
+    </lijst>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid4" label-id="14569724L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>Ten aanzien van de rechten van de betrokkene, bedoeld in hoofdstuk III van de verordening, geldt het volgende:</al>
+    <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid4/Onderdeela">
+        <li.nr>a.</li.nr>
+        <al>indien de betrokkene de leeftijd van twaalf jaren nog niet heeft bereikt, worden deze rechten uitgeoefend door diens wettelijke vertegenwoordiger;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=4&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid4/Onderdeelb">
+        <li.nr>b.</li.nr>
+        <al>indien de betrokkene de leeftijd van twaalf jaren, maar nog niet die van zestien jaren heeft bereikt, kunnen deze rechten, behalve door de betrokkene ook uitgeoefend worden door diens wettelijk vertegenwoordiger;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=4&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid4/Onderdeelc">
+        <li.nr>c.</li.nr>
+        <al>indien de betrokkene onder curatele is gesteld of ten behoeve van hem een bewind of mentorschap is ingesteld, worden deze rechten uitgeoefend door diens wettelijk vertegenwoordiger, voor zover het een aangelegenheid betreft waarvoor de betrokkene onbekwaam dan wel onbevoegd is.</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=4&amp;o=c&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=c"/></jcis></meta-data></li>
+    </lijst>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid5" label-id="14569724L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>Onverminderd <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:21" label-id="2815814" verwijzing-id="3453052" bwb-id="BWBR0005537">artikel 8:21, tweede lid van de Algemene wet bestuursrecht</extref>, kan de minderjarige betrokkene die de leeftijd van zestien jaren heeft bereikt in zaken betreffende een schending van zijn rechten uit hoofde van de AVG ten gevolge van een verwerking van zijn persoonsgegevens, zonder bijstand van zijn wettelijk vertegenwoordiger in rechte optreden.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid6" label-id="14569724L6">
+    <lidnr status="officieel">6</lidnr>
+    <al>Dit artikel is niet van toepassing op hulp- en adviesdiensten die rechtstreeks en kosteloos aan een minderjarige of een onder curatele gestelde of een persoon ten behoeve van wie een bewind of mentorschap is ingesteld worden aangeboden.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=6&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=6"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk1/Artikel5/Lid7" label-id="14569724L7">
+    <lidnr status="officieel">7</lidnr>
+    <al>Het eerste tot en met vierde lid zijn niet van toepassing voor zover een bijzondere regeling geldt op grond van<extref doc="jci1.3:c:BWBR0005290&amp;titeldeel=7" label-id="2912914" verwijzing-id="3453051" bwb-id="BWBR0005290"> Afdeling 5, titel 7, van Boek 7 van het Burgerlijk Wetboek</extref>.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;lid=7&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=7"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=5&amp;g=2026-09-01" onderdeel="artikel=5" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=5"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;artikel=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=5" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=5"/></jcis></meta-data></artikel><meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;hoofdstuk=1&amp;g=2026-09-01" onderdeel="hoofdstuk=1" korte-verwijzing="1.0:c:BWBR0040940&amp;hoofdstuk=1"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="hoofdstuk=1" korte-verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=1"/></jcis></meta-data></hoofdstuk>
+      <hoofdstuk bwb-ng-variabel-deel="/Hoofdstuk2" stam-id="14616583" versie-id="25027112" id="C35792161" label-id="14569924" inwerking="2018-05-25" label="Hoofdstuk 2" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Hoofdstuk</label>
+    <nr status="officieel">2</nr>
+    <titel status="officieel">De Autoriteit persoonsgegevens</titel>
+  </kop><paragraaf bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1" stam-id="14616483" versie-id="25027012" id="C35792061" label-id="14569824" inwerking="2018-05-25" label="Paragraaf 2.1" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Paragraaf</label>
+    <nr status="officieel">2.1</nr>
+    <titel status="officieel">Oprichting en inrichting van de Autoriteit persoonsgegevens</titel>
+  </kop><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel6" stam-id="14616403" versie-id="25029252" id="C36477831" label-id="14569744" inwerking="2019-01-01" label="Artikel 6" bron="Stb.2018-144" effect="wijziging" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-12-28" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">6</nr>
+    <titel status="officieel">Oprichting en aanwijzing als toezichthoudende autoriteit</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel6/Lid1" label-id="14569744L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Er is een Autoriteit persoonsgegevens. De Autoriteit persoonsgegevens bezit rechtspersoonlijkheid.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=6&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel6/Lid2" label-id="14569744L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>De Autoriteit persoonsgegevens is de toezichthoudende autoriteit, bedoeld in artikel 51, eerste lid, van de verordening.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=6&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel6/Lid3" label-id="14569744L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>Onverminderd artikel 57 van de verordening, heeft de Autoriteit persoonsgegevens tot taak toe te zien op de verwerking van persoonsgegevens overeenkomstig het bij en krachtens de verordening of de wet bepaalde.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=6&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel6/Lid4" label-id="14569744L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>Ter uitvoering van een bindende EU-rechtshandeling kunnen, gehoord de Autoriteit persoonsgegevens, bij regeling van Onze Minister aan de Autoriteit persoonsgegevens taken worden opgedragen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=6&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-518"><publicatiejaar>2018</publicatiejaar><publicatienr>518</publicatienr><uitgiftedatum isodatum="2018-12-28">28-12-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-12-19">19-12-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2019-01-01">01-01-2019</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=6&amp;g=2026-09-01" onderdeel="artikel=6" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=6"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=6&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=6" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=6"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7" stam-id="14616413" versie-id="31659202" id="C45267761" label-id="14569754" inwerking="2026-09-01" label="Artikel 7" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">7</nr>
+    <titel status="officieel">Samenstelling</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid1" label-id="14569754L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens bestaat uit een voorzitter en twee andere leden.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid2" label-id="14569754L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Bij de Autoriteit persoonsgegevens kunnen voorts buitengewone leden worden benoemd. Bij de benoeming van buitengewone leden wordt spreiding over de onderscheidene sectoren van de maatschappij nagestreefd.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid3" label-id="14569754L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De voorzitter, de andere leden en de buitengewone leden van de Autoriteit persoonsgegevens worden bij koninklijk besluit, op voordracht van Onze Minister, benoemd.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid4" label-id="14569754L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>De voorzitter voldoet aan de bij of krachtens <extref doc="jci1.3:c:BWBR0008365&amp;artikel=5" label-id="195144" verwijzing-id="2880187" bwb-id="BWBR0008365">artikel 5 van de Wet rechtspositie rechterlijke ambtenaren</extref> gestelde vereisten voor benoembaarheid tot rechter in een rechtbank.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid5" label-id="14569754L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>Bij ministeriële regeling worden voorwaarden gesteld en vereiste kwalificaties benoemd waaraan een kandidaat dient te voldoen respectievelijk waarover deze dient te beschikken, om benoemd te kunnen worden als lid van de Autoriteit persoonsgegevens, alsmede regels ten aanzien van de procedure die tot een benoeming als bedoeld in het derde lid leidt.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid6" label-id="14569754L6">
+    <lidnr status="officieel">6</lidnr>
+    <al>De benoeming, bedoeld in het derde lid, geldt voor een tijdvak van vijf jaar.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=6&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=6"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid7" label-id="14569754L7">
+    <lidnr status="officieel">7</lidnr>
+    <al>De voorzitter, de andere leden en de buitengewone leden van de Autoriteit persoonsgegevens kunnen eenmaal worden herbenoemd voor een tijdvak van vijf jaar.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=7&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=7"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid8" label-id="14569754L8">
+    <lidnr status="officieel">8</lidnr>
+    <al>Op eigen verzoek worden de voorzitter, de andere leden en de buitengewone leden van de Autoriteit persoonsgegevens door Onze Minister ontslagen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=8&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=8"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid9" label-id="14569754L9">
+    <lidnr status="officieel">9</lidnr>
+    <al>
+      <extref doc="jci1.3:c:BWBR0020495&amp;artikel=12" label-id="8725844" verwijzing-id="2880188" bwb-id="BWBR0020495">Artikel 12 van de Kaderwet zelfstandige bestuursorganen</extref> is niet van toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=9&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=9"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel7/Lid10" label-id="14569754L10">
+    <lidnr status="officieel">10</lidnr>
+    <al>Er is een Raad van advies die de Autoriteit persoonsgegevens adviseert over algemene aspecten van de bescherming van persoonsgegevens. De leden zijn afkomstig uit de onderscheidene sectoren van de maatschappij en worden benoemd door Onze Minister, op voordracht van de voorzitter van de Autoriteit persoonsgegevens. De leden worden benoemd voor ten hoogste vier jaar. Herbenoeming kan tweemaal en telkens voor ten hoogste vier jaar plaatsvinden. Bij ministeriële regeling wordt de vergoeding van de kosten aan de leden van de Raad van advies vastgesteld.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;lid=10&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=10"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=7&amp;g=2026-09-01" onderdeel="artikel=7" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=7"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=7&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=7" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=7"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel8" stam-id="14616423" versie-id="31659172" id="C45267611" label-id="14569764" inwerking="2026-09-01" label="Artikel 8" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">8</nr>
+    <titel status="officieel">Disciplinaire maatregelen voorzitter en andere leden</titel>
+  </kop>
+  <al>De <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46c" label-id="201064" verwijzing-id="2880189" bwb-id="BWBR0008365">artikelen 46c</extref>, met uitzondering van onderdeel b, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46ca" label-id="14707514" verwijzing-id="3453038" bwb-id="BWBR0008365">46ca</extref>, met uitzondering van het eerste lid, onderdeel b, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46d" label-id="201084" verwijzing-id="3453039" bwb-id="BWBR0008365">46d, tweede lid</extref>, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46f" label-id="201134" verwijzing-id="3453040" bwb-id="BWBR0008365">46f</extref>, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46g" label-id="201144" verwijzing-id="3453041" bwb-id="BWBR0008365">46g</extref>, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46i" label-id="201194" verwijzing-id="3453042" bwb-id="BWBR0008365">46i</extref>, met uitzondering van het eerste lid, onderdeel c, en zesde lid, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46j" label-id="201204" verwijzing-id="3453043" bwb-id="BWBR0008365">46j</extref>, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46l" label-id="201234" verwijzing-id="3453044" bwb-id="BWBR0008365">46l, eerste en derde lid</extref>, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46m" label-id="201254" verwijzing-id="3453045" bwb-id="BWBR0008365">46m</extref>, met uitzondering van onderdeel d, <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46n" label-id="201274" verwijzing-id="3453046" bwb-id="BWBR0008365">46n</extref>,<extref doc="jci1.3:c:BWBR0008365&amp;artikel=46o" label-id="201304" verwijzing-id="3453047" bwb-id="BWBR0008365"> 46o</extref> en <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46p" label-id="201314" verwijzing-id="3453048" bwb-id="BWBR0008365">46p van de Wet rechtspositie rechterlijke ambtenaren</extref> zijn van overeenkomstige toepassing op de voorzitter en de andere leden van de Autoriteit persoonsgegevens, met dien verstande dat:</al>
+  <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+    <li bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel8/Onderdeela">
+      <li.nr>a.</li.nr>
+      <al>de disciplinaire maatregel bedoeld in <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46ca" label-id="14707514" verwijzing-id="3453049" bwb-id="BWBR0008365">artikel 46ca, eerste lid, onderdeel a</extref>, ten aanzien van de andere leden van de Autoriteit persoonsgegevens door de voorzitter van de Autoriteit persoonsgegevens wordt opgelegd;</al>
+    <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=8&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+    <li bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel8/Onderdeelb">
+      <li.nr>b.</li.nr>
+      <al>het in <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46c" label-id="201064" verwijzing-id="2880201" bwb-id="BWBR0008365">artikel 46c, onderdeel b</extref>, genoemde verbod zich in een onderhoud of een gesprek in te laten met partijen of hun advocaten of gemachtigden of een bijzondere inlichting of schriftelijk stuk van hen aan te nemen, niet op de voorzitter en de andere leden van de Autoriteit persoonsgegevens van toepassing is;</al>
+    <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=8&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+    <li bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel8/Onderdeelc">
+      <li.nr>c.</li.nr>
+      <al>de disciplinaire maatregel bedoeld in <extref doc="jci1.3:c:BWBR0008365&amp;artikel=46ca" label-id="14707514" verwijzing-id="3453050" bwb-id="BWBR0008365">artikel 46ca, eerste lid, onderdeel a</extref>, ten aanzien van de voorzitter van de Autoriteit persoonsgegevens door de president van het gerechtshof Den Haag wordt opgelegd.</al>
+    <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=8&amp;o=c&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=c"/></jcis></meta-data></li>
+  </lijst>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=8&amp;g=2026-09-01" onderdeel="artikel=8" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=8"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=8&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=8" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=8"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel9" stam-id="14616433" versie-id="25026962" id="C35805831" label-id="14569774" inwerking="2018-05-25" label="Artikel 9" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">9</nr>
+    <titel status="officieel">Rechtspositie voorzitter, andere leden en buitengewone leden</titel>
+  </kop>
+  <al>De rechtspositie van de voorzitter, de andere leden en de buitengewone leden wordt geregeld bij of krachtens algemene maatregel van bestuur.</al>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=9&amp;g=2026-09-01" onderdeel="artikel=9" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=9"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=9&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=9" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=9"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel10" stam-id="14616443" versie-id="25833082" id="C37222461" label-id="14569784" inwerking="2020-01-01" label="Artikel 10" bron="Stb.2019-173" effect="wijziging" ondertekening_bron="2019-04-17" publicatie_bron="2019-05-16" publicatie_iwt="2019-11-06" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">10</nr>
+    <titel status="officieel">Secretariaat</titel>
+  </kop>
+  <al>De Autoriteit persoonsgegevens heeft een secretariaat.</al>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2019-173"><publicatiejaar>2019</publicatiejaar><publicatienr>173</publicatienr><uitgiftedatum isodatum="2019-05-16">16-05-2019</uitgiftedatum><ondertekeningsdatum isodatum="2019-04-17">17-04-2019</ondertekeningsdatum><dossierref dossier="35073">35073</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2019-385"><publicatiejaar>2019</publicatiejaar><publicatienr>385</publicatienr><uitgiftedatum isodatum="2019-11-06">06-11-2019</uitgiftedatum><ondertekeningsdatum isodatum="2019-10-24">24-10-2019</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2020-01-01">01-01-2020</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=10&amp;g=2026-09-01" onderdeel="artikel=10" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=10"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=10&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=10" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=10"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel11" stam-id="14616453" versie-id="25029262" id="C36477841" label-id="14569794" inwerking="2019-01-01" label="Artikel 11" bron="Stb.2018-144" effect="wijziging" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-12-28" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">11</nr>
+    <titel status="officieel">Begroting, verantwoording en vertegenwoordigingsbevoegdheid</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel11/Lid1" label-id="14569794L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens stelt jaarlijks voorafgaand aan het desbetreffende begrotingsjaar een ontwerpbegroting op.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=11&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel11/Lid2" label-id="14569794L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>In de departementale begroting, bedoeld in <extref doc="jci1.3:c:BWBR0039429&amp;artikel=2.1" label-id="13934274" verwijzing-id="2880205" bwb-id="BWBR0039429">artikel 2.1, zesde lid, van de Comptabiliteitswet 2016</extref>, kent Onze Minister jaarlijks aan de Autoriteit persoonsgegevens een budget toe ten laste van de rijksbegroting.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=11&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel11/Lid3" label-id="14569794L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De Autoriteit persoonsgegevens stelt de begroting vast in overeenstemming met het budget, bedoeld in het tweede lid.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=11&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel11/Lid4" label-id="14569794L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>De Autoriteit persoonsgegevens wordt in en buiten rechte vertegenwoordigd door de voorzitter en de andere leden, dan wel door een van hen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=11&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel11/Lid5" label-id="14569794L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>De leden stellen een verdeling van taken vast en betrekken hierbij zoveel mogelijk de buitengewone leden.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=11&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-518"><publicatiejaar>2018</publicatiejaar><publicatienr>518</publicatienr><uitgiftedatum isodatum="2018-12-28">28-12-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-12-19">19-12-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2019-01-01">01-01-2019</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=11&amp;g=2026-09-01" onderdeel="artikel=11" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=11"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=11&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=11" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=11"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel12" stam-id="14616463" versie-id="25026992" id="C35805871" label-id="14569804" inwerking="2018-05-25" label="Artikel 12" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">12</nr>
+    <titel status="officieel">Beperking inlichtingenplicht jegens minister</titel>
+  </kop>
+  <al>
+    <extref doc="jci1.3:c:BWBR0020495&amp;artikel=20" label-id="8725934" verwijzing-id="2880206" bwb-id="BWBR0020495">Artikel 20 van de Kaderwet zelfstandige bestuursorganen</extref> is niet van toepassing indien de Autoriteit persoonsgegevens de informatie van derden heeft verkregen onder de voorwaarde dat het geheime karakter daarvan wordt gehandhaafd.</al>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=12&amp;g=2026-09-01" onderdeel="artikel=12" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=12"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=12&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=12" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=12"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel13" stam-id="14616473" versie-id="25027002" id="C35805881" label-id="14569814" inwerking="2018-05-25" label="Artikel 13" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">13</nr>
+    <titel status="officieel">Uitzonderingen bevoegdheden inzake beleidsregels, vernietiging en taakverwaarlozing</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel13/Lid1" label-id="14569814L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De <extref doc="jci1.3:c:BWBR0020495&amp;artikel=21" label-id="8725944" verwijzing-id="2880207" bwb-id="BWBR0020495">artikelen 21</extref> en <extref doc="jci1.3:c:BWBR0020495&amp;artikel=22" label-id="8725954" verwijzing-id="2880208" bwb-id="BWBR0020495">22 van de Kaderwet zelfstandige bestuursorganen</extref> zijn niet van toepassing op de Autoriteit persoonsgegevens.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=13&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel13/Lid2" label-id="14569814L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>
+      <extref doc="jci1.3:c:BWBR0020495&amp;artikel=23" label-id="8725964" verwijzing-id="2880209" bwb-id="BWBR0020495">Artikel 23 van de Kaderwet zelfstandige bestuursorganen</extref> vindt slechts toepassing ten aanzien van het door de Autoriteit persoonsgegevens gevoerde financiële beheer en de administratieve organisatie.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=13&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=13&amp;g=2026-09-01" onderdeel="artikel=13" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=13"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=13&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=13" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=13"/></jcis></meta-data></artikel><meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;paragraaf=2.1&amp;g=2026-09-01" onderdeel="paragraaf=2.1" korte-verwijzing="1.0:c:BWBR0040940&amp;paragraaf=2.1"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="paragraaf=2.1" korte-verwijzing="jci1.3:c:BWBR0040940&amp;paragraaf=2.1"/></jcis></meta-data></paragraaf><paragraaf bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2" stam-id="14616573" versie-id="31657852" id="C45267721" label-id="14569914" inwerking="2026-09-01" label="Paragraaf 2.2" bron="Stb.2026-154" effect="structuurwijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Paragraaf</label>
+    <nr status="officieel">2.2</nr>
+    <titel status="officieel">De uitoefening van de taken en bevoegdheden van de Autoriteit persoonsgegevens</titel>
+  </kop><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14" stam-id="14616493" versie-id="31659152" id="C45267531" label-id="14569834" inwerking="2026-09-01" label="Artikel 14" bron="Stb.2026-154" effect="wijziging" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">14</nr>
+    <titel status="officieel">Taken en bevoegdheden</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid1" label-id="14569834L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens is bevoegd om de taken uit te voeren en de bevoegdheden uit te oefenen die bij of krachtens de verordening zijn toegekend aan de toezichthoudende autoriteit.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid2" label-id="14569834L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Op de voorbereiding van een besluit omtrent goedkeuring van een gedragscode, dan wel de wijziging of uitbreiding daarvan, als bedoeld in artikel 40, vijfde lid, van de verordening is <extref doc="jci1.3:c:BWBR0005537&amp;afdeling=3.4" label-id="2814354" verwijzing-id="2880210" bwb-id="BWBR0005537">afdeling 3.4 van de Algemene wet bestuursrecht</extref> van toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid3" label-id="14569834L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De Autoriteit persoonsgegevens kan in geval van overtreding van het bepaalde in artikel 83, vierde, vijfde of zesde lid, van de verordening een bestuurlijke boete opleggen van ten hoogste de in deze leden genoemde bedragen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid4" label-id="14569834L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>De <extref doc="jci1.3:c:BWBR0005537&amp;artikel=5:10" label-id="10067254,10067264,10067274,10067284,10067294,10067304,10067314,10067324" verwijzing-id="2880211" bwb-id="BWBR0005537">artikelen 5:4 tot en met 5:10a de Algemene wet bestuursrecht</extref> zijn van overeenkomstige toepassing op corrigerende maatregelen als bedoeld in artikel 58, tweede lid, onderdelen b tot en met j van de verordening.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid5" label-id="14569834L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>Onverminderd <extref doc="jci1.3:c:BWBR0005537&amp;artikel=4:15" label-id="2814874" verwijzing-id="2880212" bwb-id="BWBR0005537">artikel 4:15 van de Algemene wet bestuursrecht</extref> kan de Autoriteit Persoonsgegevens de termijn voor het geven van een beschikking opschorten voor zover dit noodzakelijk is in verband met het naleven van op de Autoriteit Persoonsgegevens rustende verplichtingen op grond van de artikelen 60 tot en met 66 van de verordening. Het derde en vierde lid van artikel 4:15 van de Algemene wet bestuursrecht zijn op deze opschorting van overeenkomstige toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid6" label-id="14569834L6">
+    <lidnr status="officieel">6</lidnr>
+    <al>De bestuurlijke boete komt toe aan de Staat.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=6&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=6"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid7" label-id="14569834L7">
+    <lidnr status="officieel">7</lidnr>
+    <al>Voordat de Autoriteit Persoonsgegevens beleidsregels vaststelt ter bevordering van een consequente toepassing van de verordening of over de uitoefening van haar handhavingsbevoegdheden, dan raadpleegt zij, voor zover passend, belanghebbende partijen. In de onderbouwing van de beleidsregels gaat de Autoriteit Persoonsgegevens in op hetgeen in de consultatie naar voren is gebracht.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=7&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=7"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel14/Lid8" label-id="14569834L8">
+    <lidnr status="officieel">8</lidnr>
+    <al>Bij ministeriële regeling kunnen nadere regels worden gesteld over de gevallen waarin het zevende lid toepassing vindt.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;lid=8&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=8"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=14&amp;g=2026-09-01" onderdeel="artikel=14" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=14"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=14&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=14" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=14"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel15" stam-id="14616503" versie-id="25027032" id="C35805901" label-id="14569844" inwerking="2018-05-25" label="Artikel 15" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">15</nr>
+    <titel status="officieel">Toezicht op de naleving</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel15/Lid1" label-id="14569844L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Met het toezicht op de naleving van de verordening en op de verwerking van persoonsgegevens overeenkomstig het bij of krachtens de wet bepaalde zijn belast de leden en buitengewone leden van de Autoriteit persoonsgegevens, de ambtenaren van het secretariaat van de Autoriteit persoonsgegevens, alsmede de bij besluit van de Autoriteit persoonsgegevens aangewezen personen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=15&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel15/Lid2" label-id="14569844L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>De in het eerste lid bedoelde personen zijn bevoegd een woning te betreden zonder toestemming van de bewoner.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=15&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel15/Lid3" label-id="14569844L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De in het eerste lid bedoelde personen behoeven voor de uitoefening van de in het tweede lid omschreven bevoegdheid de uitdrukkelijke en bijzondere volmacht van de Autoriteit persoonsgegevens, onverminderd het bepaalde in <extref doc="jci1.3:c:BWBR0006763&amp;artikel=2" label-id="1202434" verwijzing-id="2880214" bwb-id="BWBR0006763">artikel 2 van de Algemene wet op het binnentreden</extref>.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=15&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel15/Lid4" label-id="14569844L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>Geen beroep is mogelijk op een geheimhoudingsplicht, voor zover inlichtingen of medewerking wordt verlangd in verband met de eigen betrokkenheid bij de verwerking van persoonsgegevens.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=15&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel15/Lid5" label-id="14569844L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>Dit artikel en <extref doc="jci1.3:c:BWBR0005537&amp;titeldeel=5.2" label-id="10067344" verwijzing-id="2880215" bwb-id="BWBR0005537">titel 5.2 van de Algemene wet bestuursrecht</extref> zijn van overeenkomstige toepassing voor zover dit noodzakelijk is voor een goede uitoefening van de taken die de Autoriteit persoonsgegevens uitvoert in het kader van hoofdstuk VII van de verordening.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=15&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=15&amp;g=2026-09-01" onderdeel="artikel=15" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=15"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=15&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=15" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=15"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel16" stam-id="14616513" versie-id="27628662" id="C39206091" label-id="14569854" inwerking="2021-07-01" label="Artikel 16" bron="Stb.2021-135" effect="wijziging" ondertekening_bron="2021-03-03" publicatie_bron="2021-03-17" publicatie_iwt="2021-06-02" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">16</nr>
+    <titel status="officieel">Last onder bestuursdwang</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel16/Lid1" label-id="14569854L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens kan een last onder bestuursdwang opleggen ter handhaving van de bij of krachtens de verordening of deze wet gestelde verplichtingen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=16&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel16/Lid2" label-id="14569854L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>De te betalen geldsom van een verbeurde dwangsom komt toe aan de Staat.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=16&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2021-135"><publicatiejaar>2021</publicatiejaar><publicatienr>135</publicatienr><uitgiftedatum isodatum="2021-03-17">17-03-2021</uitgiftedatum><ondertekeningsdatum isodatum="2021-03-03">03-03-2021</ondertekeningsdatum><dossierref dossier="35256">35256</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2021-254"><publicatiejaar>2021</publicatiejaar><publicatienr>254</publicatienr><uitgiftedatum isodatum="2021-06-02">02-06-2021</uitgiftedatum><ondertekeningsdatum isodatum="2021-05-18">18-05-2021</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2021-07-01">01-07-2021</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=16&amp;g=2026-09-01" onderdeel="artikel=16" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=16"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=16&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=16" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=16"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel17" stam-id="14616523" versie-id="25553612" id="C36477871" label-id="14569864" inwerking="2019-01-01" label="Artikel 17" bron="Stb.2018-247" effect="wijziging" ondertekening_bron="2018-07-11" publicatie_bron="2018-07-27" publicatie_iwt="2018-12-28" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">17</nr>
+    <titel status="officieel">Boete bij onrechtmatige verwerking persoonsgegevens strafrechtelijke aard</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel17/Lid1" label-id="14569864L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens kan in geval van overtreding van het bepaalde in artikel 10 van de verordening of in <intref doc="jci1.3:c:BWBR0040940&amp;hoofdstuk=3&amp;paragraaf=3.2&amp;artikel=31&amp;z=2026-09-01&amp;g=2026-09-01" label-id="14570034" verwijzing-id="2880258" bwb-id="BWBR0040940" bwb-ng-variabel-deel="/Hoofdstuk3/Paragraaf3.2/Artikel31">artikel 31</intref> van deze wet een bestuurlijke boete opleggen van ten hoogste 20.000.000 euro of, voor een onderneming, ten hoogste 4% van de totale wereldwijde jaaromzet in het voorgaande boekjaar indien dit bedrag hoger is.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=17&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel17/Lid2" label-id="14569864L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Artikel 83, eerste tot en met derde lid, van de verordening zijn van overeenkomstige toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=17&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel17/Lid3" label-id="14569864L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De bestuurlijke boete komt toe aan de Staat.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=17&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-247"><publicatiejaar>2018</publicatiejaar><publicatienr>247</publicatienr><uitgiftedatum isodatum="2018-07-27">27-07-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-07-11">11-07-2018</ondertekeningsdatum><dossierref dossier="34939">34939</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-518"><publicatiejaar>2018</publicatiejaar><publicatienr>518</publicatienr><uitgiftedatum isodatum="2018-12-28">28-12-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-12-19">19-12-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2019-01-01">01-01-2019</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=17&amp;g=2026-09-01" onderdeel="artikel=17" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=17"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=17&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=17" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=17"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel18" stam-id="14616533" versie-id="25553622" id="C36477881" label-id="14569874" inwerking="2019-01-01" label="Artikel 18" bron="Stb.2018-247" effect="wijziging" ondertekening_bron="2018-07-11" publicatie_bron="2018-07-27" publicatie_iwt="2018-12-28" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">18</nr>
+    <titel status="officieel">Bestuurlijke boete aan overheden</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel18/Lid1" label-id="14569874L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens kan in geval van overtreding van het bepaalde in artikel 83, vierde, vijfde of zesde lid, van de verordening door een overheidsinstantie of een overheidsorgaan een bestuurlijke boete opleggen van ten hoogste de in deze leden genoemde bedragen.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=18&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel18/Lid2" label-id="14569874L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Artikel 83, eerste tot en met derde lid, van de verordening zijn van toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=18&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel18/Lid3" label-id="14569874L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De bestuurlijke boete komt toe aan de Staat.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=18&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-247"><publicatiejaar>2018</publicatiejaar><publicatienr>247</publicatienr><uitgiftedatum isodatum="2018-07-27">27-07-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-07-11">11-07-2018</ondertekeningsdatum><dossierref dossier="34939">34939</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="wijziging" soort="Stb" urlidentifier="stb-2018-518"><publicatiejaar>2018</publicatiejaar><publicatienr>518</publicatienr><uitgiftedatum isodatum="2018-12-28">28-12-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-12-19">19-12-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2019-01-01">01-01-2019</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=18&amp;g=2026-09-01" onderdeel="artikel=18" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=18"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=18&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=18" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=18"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel19" stam-id="14616543" versie-id="25027072" id="C35805941" label-id="14569884" inwerking="2018-05-25" label="Artikel 19" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">19</nr>
+    <titel status="officieel">Samenwerking met andere toezichthouders</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel19/Lid1" label-id="14569884L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit persoonsgegevens is bevoegd om in het belang van een efficiënt en effectief toezicht op de verwerking van persoonsgegevens afspraken te maken met andere toezichthouders en daartoe gezamenlijk met deze toezichthouders samenwerkingsprotocollen vast te stellen. Een samenwerkingsprotocol wordt bekendgemaakt in de Staatscourant.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=19&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel19/Lid2" label-id="14569884L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>De Autoriteit persoonsgegevens en de toezichthouders, bedoeld in het eerste lid, zijn bevoegd uit eigen beweging en desgevraagd verplicht aan elkaar de gegevens betreffende de verwerking van persoonsgegevens te verstrekken die noodzakelijk zijn voor de uitvoering van hun taak of om te kunnen voldoen aan een op hen rustende wettelijke verplichting.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=19&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=19&amp;g=2026-09-01" onderdeel="artikel=19" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=19"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=19&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=19" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=19"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20" stam-id="14616553" versie-id="25027082" id="C35805951" label-id="14569894" inwerking="2018-05-25" label="Artikel 20" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">20</nr>
+    <titel status="officieel">In rechte optreden tegen inbreuken op verordening inzake doorgifte naar derde land</titel>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid1" label-id="14569894L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>Indien de Autoriteit persoonsgegevens in een onderzoek betreffende de doorgifte van persoonsgegevens naar een land buiten de Europese Unie of naar een internationale organisatie, ingesteld op verzoek van een belanghebbende, gegronde redenen heeft om aan te nemen dat een door de Europese Commissie ten aanzien van het desbetreffende land of de desbetreffende internationale organisatie genomen adequaatheidsbesluit als bedoeld in artikel 45, eerste lid, van de verordening of een door de Europese Commissie genomen besluit met betrekking tot het vaststellen of goedkeuren van standaardbepalingen als bedoeld in artikel 46, tweede lid, onderdelen c en d, van de verordening onvoldoende waarborgen biedt voor een passend niveau van gegevensbescherming, kan de Autoriteit persoonsgegevens bij de Afdeling bestuursrechtspraak van de Raad van State een verzoek indienen om voor recht te verklaren dat het desbetreffende besluit geldig is.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid2" label-id="14569894L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Het verzoekschrift wordt ondertekend en bevat ten minste:</al>
+    <lijst level="single" nr-sluiting="." start="1" type="expliciet">
+      <li bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid2/Onderdeela">
+        <li.nr>a.</li.nr>
+        <al>de dagtekening;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=2&amp;o=a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=a"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid2/Onderdeelb">
+        <li.nr>b.</li.nr>
+        <al>de gronden van het verzoek;</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=2&amp;o=b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=b"/></jcis></meta-data></li>
+      <li bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid2/Onderdeelc">
+        <li.nr>c.</li.nr>
+        <al>de namen van de belanghebbende en de partij die voorwerp is van het onderzoek, bedoeld in het eerste lid.</al>
+      <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=2&amp;o=c&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="o=c"/></jcis></meta-data></li>
+    </lijst>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid3" label-id="14569894L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>Bij het verzoekschrift wordt een afschrift overgelegd van het verzoek van de belanghebbende om handhaving van bij of krachtens wet bepaalde regels inzake de bescherming van persoonsgegevens, waarop het in het tweede lid bedoelde verzoekschrift van de Autoriteit persoonsgegevens betrekking heeft en worden andere op de zaak betrekking hebbende stukken meegezonden.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid4" label-id="14569894L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>Onverminderd <extref doc="jci1.3:c:BWBR0005537&amp;artikel=4:15" label-id="2814874" verwijzing-id="2880217" bwb-id="BWBR0005537">artikel 4:15 van de Algemene wet bestuursrecht</extref> wordt de termijn voor het geven van een beschikking op het verzoek om handhaving opgeschort gerekend vanaf de dag na die waarop de Autoriteit persoonsgegevens de verzoeker meedeelt dat toepassing is gegeven aan het eerste lid, tot de dag waarop de Afdeling bestuursrechtspraak van de Raad van State een uitspraak als bedoeld in het zesde lid heeft gedaan.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid5" label-id="14569894L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>Op de behandeling van het verzoek zijn de <extref doc="jci1.3:c:BWBR0005537&amp;titeldeel=8.1" label-id="2816044" verwijzing-id="2880218" bwb-id="BWBR0005537">titels 8.1</extref> en <extref doc="jci1.3:c:BWBR0005537&amp;titeldeel=8.2" label-id="2816524" verwijzing-id="2880219" bwb-id="BWBR0005537">8.2 van de Algemene wet bestuursrecht</extref> van overeenkomstige toepassing, met uitzondering van de <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:1" label-id="2815574,2815584,2815594,2815604,2815614,2815624,2815634,2815644,2815654,2815674" verwijzing-id="2880220" bwb-id="BWBR0005537">artikelen 8:1 tot en met 8:10</extref>, <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:41" label-id="2816054" verwijzing-id="2880221" bwb-id="BWBR0005537">8:41</extref>, de <extref doc="jci1.3:c:BWBR0005537&amp;afdeling=8.2.2a" label-id="10321834" verwijzing-id="2880222" bwb-id="BWBR0005537">afdelingen 8.2.2a</extref> en <extref doc="jci1.3:c:BWBR0005537&amp;afdeling=8.2.4a" label-id="10168954" verwijzing-id="2880223" bwb-id="BWBR0005537">8.2.4a</extref> en de <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:70" label-id="2816394" verwijzing-id="2880224" bwb-id="BWBR0005537">artikelen 8:70</extref>, <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:72" label-id="2816414" verwijzing-id="2880225" bwb-id="BWBR0005537">8:72</extref> en <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:74" label-id="2816434" verwijzing-id="2880226" bwb-id="BWBR0005537">8:74</extref>. De in het tweede lid, onderdeel c, bedoelde partijen worden als partijen in het geding aangemerkt.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid6" label-id="14569894L6">
+    <lidnr status="officieel">6</lidnr>
+    <al>Indien de Afdeling bestuursrechtspraak van de Raad van State, al dan niet na prejudiciële verwijzing op grond van artikel 267 van het Verdrag inzake de werking van de Europese Unie aan het Hof van Justitie van de Europese Unie, tot het oordeel komt dat het aan haar voorgelegde besluit van de Europese Commissie geldig is, dan verklaart zij dat voor recht. Komt zij, na prejudiciële verwijzing aan het Hof van Justitie van de Europese Unie, tot het oordeel dat het aan haar voorgelegde besluit ongeldig is, dan wijst zij het verzoek af.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=6&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=6"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid7" label-id="14569894L7">
+    <lidnr status="officieel">7</lidnr>
+    <al>De Afdeling bestuursrechtspraak van de Raad van State kan besluiten het verzoek aan te houden als er bij het Hof van Justitie van de Europese Unie al een prejudiciële vraag omtrent de geldigheid van het desbetreffende besluit aanhangig is.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=7&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=7"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel20/Lid8" label-id="14569894L8">
+    <lidnr status="officieel">8</lidnr>
+    <al>Tegen het aanhouden van het verzoek door de Afdeling bestuursrechtspraak van de Raad van State, staat geen voorziening open.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;lid=8&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=8"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=20&amp;g=2026-09-01" onderdeel="artikel=20" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=20"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=20&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=20" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=20"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21" stam-id="14616563" versie-id="25027092" id="C35805961" label-id="14569904" inwerking="2018-05-25" label="Artikel 21" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">21</nr>
+    <titel status="officieel">Aanwijzing accrediterende instantie</titel>
+  </kop>
+  <al>Bij ministeriële regeling wordt of de Autoriteit persoonsgegevens of de Raad voor Accreditatie of worden zij beide aangewezen als accrediterende instantie als bedoeld in artikel 43 van de verordening.</al>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=21&amp;g=2026-09-01" onderdeel="artikel=21" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=21"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=21" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=21"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21a" stam-id="14945733" versie-id="25601182" id="C36838231" label-id="14895184" inwerking="2019-02-19" label="Artikel 21a" bron="Stb.2018-503" effect="nieuw" ondertekening_bron="2018-12-05" publicatie_bron="2018-12-27" publicatie_iwt="2019-02-18" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">21a</nr>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21a/Lid1" label-id="14895184L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De taak van de Autoriteit persoonsgegevens, bedoeld in <intref doc="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.1&amp;artikel=6&amp;z=2026-09-01&amp;g=2026-09-01" label-id="14569744" verwijzing-id="2924688" bwb-id="BWBR0040940" bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.1/Artikel6">artikel 6, derde lid</intref>, omvat mede het toezicht op de naleving van de krachtens <extref doc="jci1.3:c:BWBR0020368&amp;artikel=3:17" label-id="8658074" verwijzing-id="2924689" bwb-id="BWBR0020368">artikel 3:17, zevende lid, van de Wet op het financieel toezicht</extref> gestelde verplichtingen met betrekking tot de toegang van betaaldienstverleners tot de persoonsgegevens van betaaldienstgebruikers.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21a&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21a/Lid2" label-id="14895184L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>Met betrekking tot het toezicht, bedoeld in het eerste lid, vindt de samenwerking en uitwisseling van informatie met De Nederlandsche Bank N.V. en andere relevante toezichthouders plaats overeenkomstig artikel 26 van de richtlijn betaaldiensten, bedoeld in <extref doc="jci1.3:c:BWBR0020368&amp;artikel=1:1" label-id="8654364" verwijzing-id="2924690" bwb-id="BWBR0020368">artikel 1:1 van de Wet op het financieel toezicht</extref>.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21a&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21a/Lid3" label-id="14895184L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>De Autoriteit persoonsgegevens kan in geval van overtreding van de krachtens <extref doc="jci1.3:c:BWBR0020368&amp;artikel=3:17" label-id="8658074" verwijzing-id="2924691" bwb-id="BWBR0020368">artikel 3.17, zevende lid, van de Wet op het financieel toezicht</extref> gestelde verplichtingen aan de overtreder een last opleggen om waar passend, op een nader bepaalde manier en binnen een nader bepaalde termijn, verwerkingen in overeenstemming te brengen met het daar bepaalde. <intref doc="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=16&amp;z=2026-09-01&amp;g=2026-09-01" label-id="14569854" verwijzing-id="2924692" bwb-id="BWBR0040940" bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel16">Artikel 16</intref> is van overeenkomstige toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21a&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21a/Lid4" label-id="14895184L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>De Autoriteit persoonsgegevens kan in geval van een overtreding van de krachtens <extref doc="jci1.3:c:BWBR0020368&amp;artikel=3:17" label-id="8658074" verwijzing-id="2924693" bwb-id="BWBR0020368">artikel 3.17, zevende lid, van de Wet op het financieel toezicht</extref> gestelde verplichtingen aan de overtreder een bestuurlijke boete opleggen van ten hoogste 20.000.000 euro of, indien dit meer is, ten hoogste 4% van de totale wereldwijde jaaromzet in het voorgaande boekjaar. Artikel 83, tweede en derde lid, van de verordening is van overeenkomstige toepassing.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21a&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21a/Lid5" label-id="14895184L5">
+    <lidnr status="officieel">5</lidnr>
+    <al>De bestuurlijke boete en de te betalen geldsom van een verbeurde dwangsom komen toe aan de Staat.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21a&amp;lid=5&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=5"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuw" soort="Stb" urlidentifier="stb-2018-503"><publicatiejaar>2018</publicatiejaar><publicatienr>503</publicatienr><uitgiftedatum isodatum="2018-12-27">27-12-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-12-05">05-12-2018</ondertekeningsdatum><dossierref dossier="34813">34813</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuw" soort="Stb" urlidentifier="stb-2019-60"><publicatiejaar>2019</publicatiejaar><publicatienr>60</publicatienr><uitgiftedatum isodatum="2019-02-18">18-02-2019</uitgiftedatum><ondertekeningsdatum isodatum="2019-02-08">08-02-2019</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2019-02-19">19-02-2019</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=21a&amp;g=2026-09-01" onderdeel="artikel=21a" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=21a"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21a&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=21a" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=21a"/></jcis></meta-data></artikel><artikel bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21b" stam-id="17898663" versie-id="31657862" id="C45267671" label-id="17794524" inwerking="2026-09-01" label="Artikel 21b" bron="Stb.2026-154" effect="nieuw" ondertekening_bron="2026-06-10" publicatie_bron="2026-06-26" publicatie_iwt="2026-07-13" status="goed">
+  <kop>
+    <label>Artikel</label>
+    <nr status="officieel">21b</nr>
+  </kop>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21b/Lid1" label-id="17794524L1">
+    <lidnr status="officieel">1</lidnr>
+    <al>De Autoriteit Persoonsgegevens maakt een door haar genomen beschikking tot het opleggen van een bestuurlijke sanctie openbaar, behoudens voor zover <extref doc="jci1.3:c:BWBR0045754&amp;artikel=5.1" label-id="16045104" verwijzing-id="3452902" bwb-id="BWBR0045754">artikel 5.1, eerste, tweede en vijfde lid van de Wet open overheid</extref>, aan openbaarmaking in de weg staan.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21b&amp;lid=1&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=1"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21b/Lid2" label-id="17794524L2">
+    <lidnr status="officieel">2</lidnr>
+    <al>De openbaarmaking van de beschikking geschiedt niet eerder dan nadat tien werkdagen zijn verstreken na de dag waarop de beschikking aan de overtreder bekend is gemaakt, tenzij de overtreder de beschikking of de inhoud ervan, zelf heeft openbaar gemaakt, heeft doen openbaar maken of heeft aangegeven geen bedenkingen te hebben tegen eerdere openbaarmaking.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21b&amp;lid=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=2"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21b/Lid3" label-id="17794524L3">
+    <lidnr status="officieel">3</lidnr>
+    <al>Indien wordt verzocht om een voorlopige voorziening als bedoeld in <extref doc="jci1.3:c:BWBR0005537&amp;artikel=8:81" label-id="2816534" verwijzing-id="3452903" bwb-id="BWBR0005537">artikel 8:81 van de Algemene wet bestuursrecht</extref>, wordt de openbaarmaking van de beschikking opgeschort totdat de voorzieningenrechter uitspraak heeft gedaan of het verzoek is ingetrokken.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21b&amp;lid=3&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=3"/></jcis></meta-data></lid>
+  <lid bwb-ng-variabel-deel="/Hoofdstuk2/Paragraaf2.2/Artikel21b/Lid4" label-id="17794524L4">
+    <lidnr status="officieel">4</lidnr>
+    <al>Het eerste tot en met het derde lid zijn mede van toepassing op een door de Autoriteit Persoonsgegevens genomen beslissing op bezwaar strekkend tot het opleggen van een bestuurlijke sanctie.</al>
+  <meta-data><jcis><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21b&amp;lid=4&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="lid=4"/></jcis></meta-data></lid>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuw" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuw" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;artikel=21b&amp;g=2026-09-01" onderdeel="artikel=21b" korte-verwijzing="1.0:c:BWBR0040940&amp;artikel=21b"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;artikel=21b&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="artikel=21b" korte-verwijzing="jci1.3:c:BWBR0040940&amp;artikel=21b"/></jcis></meta-data></artikel><meta-data><brondata><oorspronkelijk><publicatie effect="structuurwijziging" soort="Stb" urlidentifier="stb-2026-154"><publicatiejaar>2026</publicatiejaar><publicatienr>154</publicatienr><uitgiftedatum isodatum="2026-06-26">26-06-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-06-10">10-06-2026</ondertekeningsdatum><dossierref dossier="36264">36264</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="structuurwijziging" soort="Stb" urlidentifier="stb-2026-196"><publicatiejaar>2026</publicatiejaar><publicatienr>196</publicatienr><uitgiftedatum isodatum="2026-07-13">13-07-2026</uitgiftedatum><ondertekeningsdatum isodatum="2026-07-09">09-07-2026</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2026-09-01">01-09-2026</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;paragraaf=2.2&amp;g=2026-09-01" onderdeel="paragraaf=2.2" korte-verwijzing="1.0:c:BWBR0040940&amp;paragraaf=2.2"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;paragraaf=2.2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="paragraaf=2.2" korte-verwijzing="jci1.3:c:BWBR0040940&amp;paragraaf=2.2"/></jcis></meta-data></paragraaf><meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;hoofdstuk=2&amp;g=2026-09-01" onderdeel="hoofdstuk=2" korte-verwijzing="1.0:c:BWBR0040940&amp;hoofdstuk=2"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="hoofdstuk=2" korte-verwijzing="jci1.3:c:BWBR0040940&amp;hoofdstuk=2"/></jcis></meta-data></hoofdstuk>
+      </wettekst>
+    <wetsluiting bwb-ng-variabel-deel="/SlotformulierEnOndertekening" stam-id="14617003" versie-id="25027532" id="C35792581" label-id="14570344" inwerking="2018-05-25" bron="Stb.2018-144" effect="nieuwe-regeling" ondertekening_bron="2018-05-16" publicatie_bron="2018-05-22" publicatie_iwt="2018-05-22" status="goed">
+  <slotformulering>
+    <al>Lasten en bevelen dat deze in het Staatsblad zal worden geplaatst en dat alle ministeries, autoriteiten, colleges en ambtenaren die zulks aangaat, aan de nauwkeurige uitvoering de hand zullen houden.</al>
+  </slotformulering>
+  <gegeven>
+    <label>Gegeven te </label>
+    <dagtekening>
+      <plaats>Wassenaar</plaats>
+      <datum isodatum="2018-05-16">16 mei 2018</datum>
+    </dagtekening>
+    <koning>Willem-Alexander</koning>
+  </gegeven>
+  <ondertekening>
+    <functie>De Minister voor Rechtsbescherming,</functie>
+    <naam>
+      <voornaam>S.</voornaam>
+      <achternaam>Dekker</achternaam>
+    </naam>
+  </ondertekening>
+  <ondertekening>
+    <functie>De Minister van Binnenlandse Zaken en Koninkrijksrelaties,</functie>
+    <naam>
+      <voornaam>K.H.</voornaam>
+      <achternaam>Ollongren</achternaam>
+    </naam>
+  </ondertekening>
+  <ondertekening>
+    <functie>De Staatssecretaris van Binnenlandse Zaken en Koninkrijksrelaties,</functie>
+    <naam>
+      <voornaam>R.W.</voornaam>
+      <achternaam>Knops</achternaam>
+    </naam>
+  </ondertekening>
+  <uitgifte>
+    <datum isodatum="2018-05-22">de <nadruk type="cur">tweeëntwintigste</nadruk> mei 2018</datum>
+    <ondertekening>
+      <functie>De Minister van Justitie en Veiligheid,</functie>
+      <naam>
+        <voornaam>F.B.J.</voornaam>
+        <achternaam>Grapperhaus</achternaam>
+      </naam>
+    </ondertekening>
+  </uitgifte>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata></meta-data></wetsluiting>
+  </wet-besluit>
+<meta-data><brondata><oorspronkelijk><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-144"><publicatiejaar>2018</publicatiejaar><publicatienr>144</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum><dossierref dossier="34851">34851</dossierref></publicatie></oorspronkelijk><inwerkingtreding><publicatie effect="nieuwe-regeling" soort="Stb" urlidentifier="stb-2018-145"><publicatiejaar>2018</publicatiejaar><publicatienr>145</publicatienr><uitgiftedatum isodatum="2018-05-22">22-05-2018</uitgiftedatum><ondertekeningsdatum isodatum="2018-05-16">16-05-2018</ondertekeningsdatum></publicatie><inwerkingtreding.datum isodatum="2018-05-25">25-05-2018</inwerkingtreding.datum></inwerkingtreding></brondata><jcis><jci versie="1.0" verwijzing="1.0:c:BWBR0040940&amp;g=2026-09-01" onderdeel="wetgeving" korte-verwijzing="1.0:c:BWBR0040940"/><jci versie="1.3" verwijzing="jci1.3:c:BWBR0040940&amp;z=2026-09-01&amp;g=2026-09-01" onderdeel="wetgeving" korte-verwijzing="jci1.3:c:BWBR0040940"/></jcis></meta-data></wetgeving></toestand>

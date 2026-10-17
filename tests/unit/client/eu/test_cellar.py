@@ -5,6 +5,8 @@ import os
 from unittest.mock import patch, Mock
 import requests
 import io
+import shutil
+import tempfile
 
 from tests.conftest import locate_data_dir
 from tests.conftest import locate_tests_dir
@@ -17,16 +19,18 @@ class TestCellarClient(unittest.TestCase):
                 
     def test_download(self):
         celex = "32008R1137"
-        
-        # Download the documents                           
+
+        # Download into a scratch directory so the live download never overwrites tracked fixtures
+        download_dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, download_dir, ignore_errors=True)
+        self.downloader.download_dir = download_dir
+
+        # Download the documents
         document_paths = self.downloader.download(celex, format='fmx4')
 
-        data_root = locate_data_dir(__file__)
         expected = [
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_1.xml'),
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_2.xml'),
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_3.xml'),
-            str(data_root / 'formex' / 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04' / 'DOC_4.xml'),
+            os.path.join(download_dir, 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04', f'DOC_{n}.xml')
+            for n in range(1, 5)
         ]
 
         self.assertEqual(document_paths, expected)

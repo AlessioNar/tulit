@@ -3,6 +3,7 @@ from unittest.mock import patch, Mock
 import os
 import tempfile
 from tulit.client.regional.veneto import VenetoClient
+from tulit.parser.exceptions import ContentTypeError
 
 class TestVenetoClient(unittest.TestCase):
     def setUp(self):
@@ -88,7 +89,7 @@ class TestVenetoClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ContentTypeError):
             self.client.download("https://example.com", fmt='html')
 
     @patch('tulit.client.regional.veneto.requests.get')
@@ -101,7 +102,7 @@ class TestVenetoClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ContentTypeError):
             self.client.download("https://example.com", fmt='xml')
 
     @patch('tulit.client.regional.veneto.requests.get')
@@ -114,7 +115,7 @@ class TestVenetoClient(unittest.TestCase):
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
-        with self.assertRaises(SystemExit):
+        with self.assertRaises(ContentTypeError):
             self.client.download("https://example.com", fmt='pdf')
 
     @patch('tulit.client.regional.veneto.requests.get')

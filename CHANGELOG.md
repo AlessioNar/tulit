@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-10-17
+### Added
+
+- **One `fetch` for every jurisdiction**: `tulit.fetch(identifier, jurisdiction=..., version=..., date=..., language=...)` retrieves an act from the official source of the EU or a Member State, addressed by its national identifier or ELI (the jurisdiction is inferred from ELI URIs), in its **original** version (as adopted) or its **consolidated** version (in force on a date). Unsupported versions, languages and options raise `ValueError` before anything is downloaded.
+- **Sources** (`tulit.sources`): one `Source` per jurisdiction with a common interface (`retrieve()` returning a `Retrieval`), a registry (`get_source`, `list_sources`, `source_for_eli`) and the `tulit sources` command. The CLI `get` command takes `-j/--jurisdiction`, `--version` and `--date`.
+- **New jurisdictions**, each with a parser to legalJSON and per-country tests:
+  - Austria: consolidated federal law from RIS (OGD API), parsed from RIS XML.
+  - Denmark: acts and consolidations (lovbekendtgørelser) from Retsinformation, parsed from LexDania XML.
+  - Finland: original and consolidated statutes from the Finlex Akoma Ntoso API, in Finnish or Swedish.
+  - Germany: the version in force of federal acts from Rechtsinformationen des Bundes (test phase), parsed from LegalDocML.de.
+  - Ireland: Acts as enacted from the Irish Statute Book and Revised Acts from the Law Reform Commission, parsed from their XML.
+  - Luxembourg: original and consolidated acts from Legilux, choosing the consolidation in force on a date.
+  - The Netherlands: consolidated acts from the Basiswettenbestand (SRU), parsed from BWB XML.
+  - Slovakia: original and consolidated acts from Slov-Lex, parsed from MetaLex XML.
+  - Spain: original and consolidated acts from the BOE consolidated-legislation API, choosing the version in force on a date.
+- **EU consolidated texts**: `fetch("32016R0679", version="consolidated", date=...)` finds the consolidated version in Cellar. EU ELIs are accepted as identifiers.
+- **FRBR metadata**: `meta` records `jurisdiction`, `language`, `version` and `version_date`, identifying the expression of the act, in preparation for Akoma Ntoso and `.leg` export.
+- **Structure builders** (`tulit.parser.structure`): shared helpers that number divisions, articles and their children with ELI-style eIds, used by the new parsers.
+- **Access to law**: the README explains the basis for reusing legislation retrieved by tulit, and tracks coverage of the 27 Member States and the EU.
+
+### Fixed
+
+- **Clients no longer exit the program**: the Finlex, Normattiva, Veneto, Legilux, Portugal, Irish Statute Book and Malta clients raised `SystemExit` on errors; they now raise `NetworkError`, `FileLoadError` or `ContentTypeError`.
+- **Finlex**: requests send a User-Agent (the API rejects them otherwise); Akoma Ntoso sections and subsections count as divisions only when they contain articles.
+- **Portugal**: the Diário da República HTML is now a JavaScript application with no text, so the client downloads PDF by default and reports the HTML shell as `ContentTypeError`.
+- **German LegalDocML parser**: documents from the federal portal produced no output (the namespace was hard-coded and the document root was never loaded). The parser now reads the namespace from the document, keeps title and short title apart, and returns one child per Absatz with its list items in order.
+- **Akoma Ntoso parser**: a missing preamble no longer raises when the preface is read.
+
+### Known limitations
+
+- Austria, Germany and the Netherlands provide consolidated texts only; original versions (BGBl, Staatsblad) are planned for 0.9.0.
+- Denmark, Finland, Ireland and Germany return the current consolidated version; a date cannot be selected.
+- Italy and France have clients and parsers but are not yet available through `fetch`.
+- In EU consolidated texts, the divisions above article level (chapters, sections) are not yet recognised. The children of annexes and of legacy Cellar HTML documents use positional eIds.
+
 ## [0.7.0] - 2026-10-17
 ### Added
 

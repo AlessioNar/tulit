@@ -46,14 +46,30 @@ def test_parse_unknown_format(akn_file, capsys):
 def test_get_passes_options_to_fetch(tmp_path, capsys):
     with patch('tulit.cli.fetch', return_value={'articles': []}) as mock_fetch:
         code = main(['get', '32024R0903', '-f', 'xhtml', '-l', 'fra', '--no-meta',
-                     '--no-validate', '--download-dir', str(tmp_path)])
+                     '--no-validate', '--download-dir', str(tmp_path),
+                     '--version', 'consolidated', '--date', '2025-01-01'])
 
     assert code == 0
     mock_fetch.assert_called_once_with(
-        '32024R0903', format='xhtml', language='fra', download_dir=str(tmp_path),
-        metadata=False, validate=False,
+        '32024R0903', jurisdiction=None, version='consolidated', date='2025-01-01',
+        language='fra', download_dir=str(tmp_path), metadata=False, validate=False,
+        format='xhtml',
     )
     assert json.loads(capsys.readouterr().out) == {'articles': []}
+
+
+def test_get_national_act_without_format(capsys):
+    with patch('tulit.cli.fetch', return_value={'articles': []}) as mock_fetch:
+        assert main(['get', '10001597', '-j', 'AT']) == 0
+    assert mock_fetch.call_args.kwargs['jurisdiction'] == 'AT'
+    assert 'format' not in mock_fetch.call_args.kwargs
+
+
+def test_sources_lists_jurisdictions(capsys):
+    assert main(['sources']) == 0
+    out = capsys.readouterr().out
+    assert 'EU  European Union' in out
+    assert 'AT  Austria' in out
 
 
 def test_get_reports_errors(capsys):

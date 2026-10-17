@@ -20,6 +20,8 @@ from lxml import etree
 
 # Division elements above article level, mapped to (type, ELI subdivision
 # token) per the EU 'subdivision' authority table used in ELI URIs
+_DIVISION_NUMBER = re.compile(r'\b([0-9]+[a-z]?|[IVXLCDM]+)\b')
+
 _AKN_DIVISIONS = {
     'part': ('part', 'prt'),
     'title': ('title', 'tit'),
@@ -166,7 +168,11 @@ class AkomaNtosoParser(XMLParser):
         local = etree.QName(elem).localname
         if local not in _AKN_DIVISIONS:
             return False
-        if local == 'section' and elem.find('.//akn:article', namespaces=self.namespaces) is None:
+        # Sections and subsections are divisions only when they group articles: some
+        # variants (e.g. Finlex) use section for the article itself and subsection
+        # for its paragraphs
+        if local in ('section', 'subsection') and \
+                elem.find('.//akn:article', namespaces=self.namespaces) is None:
             return False
         return True
 
@@ -207,7 +213,9 @@ class AkomaNtosoParser(XMLParser):
             heading = ''.join(heading_el.itertext()).strip() if heading_el is not None else None
             eid = None
             if num:
-                tail = num.split()[-1].rstrip('.:')
+                # The number, wherever it stands: 'Chapter III', '1 luku', 'Kapitel 2'
+                number = _DIVISION_NUMBER.search(num)
+                tail = number.group(1) if number else num.split()[-1].rstrip('.:')
                 if tail:
                     eid = f"{token}_{tail}"
             if not eid:
@@ -287,7 +295,8 @@ class AkomaNtosoParser(XMLParser):
             native = str(child.get('eId') or '')
             text = child.get('text')
             key = None
-            m = re.search(r'para_0*([0-9A-Za-z.]+)', native)
+            m = re.search(r'para_0*([0-9A-Za-z.]+)', native) or \
+                re.search(r'(?:^|_)abs-z0*([0-9]+[a-z]*)(?:_|$)', native)  # German LegalDocML: Absatz
             if m:
                 token = m.group(1).strip('.').lower()
                 if token:

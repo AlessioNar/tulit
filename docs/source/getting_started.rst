@@ -23,8 +23,8 @@ repository and install it with Poetry:
 Quick start
 -----------
 
-``tulit.fetch`` downloads an EU act from Cellar, parses it and returns
-validated legalJSON with its metadata:
+``tulit.fetch`` downloads an act from its official source, parses it and
+returns validated legalJSON with its metadata:
 
 .. code-block:: python
 
@@ -39,20 +39,57 @@ validated legalJSON with its metadata:
 
 Options:
 
-* ``format``: Cellar format to download, ``'fmx4'`` (Formex 4, default),
-  ``'xhtml'`` or ``'html'``.
-* ``language``: three-letter language code, ``'ENG'`` (default), ``'FRA'``,
-  ``'DEU'``, ...
+* ``jurisdiction``: ``'EU'`` (default) or a Member State code (``'AT'``,
+  ``'ES'``, ...). It is inferred when the identifier is an ELI URI.
+* ``version``: ``'original'`` (the text as adopted) or ``'consolidated'``
+  (the text in force). Defaults to ``'original'`` where the source
+  publishes it.
+* ``date``: ISO date of the consolidated version; defaults to today.
+* ``language``: ISO 639-3 language code (``'eng'``, ``'fra'``, ``'deu'``,
+  ...); defaults to the source's main language.
 * ``download_dir``: keep the source files in this directory. By default they
   go to a temporary directory that is removed afterwards.
-* ``metadata``: attach the Cellar metadata as ``meta`` (default ``True``).
+* ``metadata``: attach the metadata as ``meta`` (default ``True``).
 * ``validate``: validate the result against the legalJSON schema (default
   ``True``); raises ``tulit.parser.exceptions.ValidationError`` otherwise.
+* source-specific options, such as ``format`` for the EU: ``'fmx4'``
+  (Formex 4, default), ``'xhtml'`` or ``'html'``.
 
 .. code-block:: python
 
-    gdpr_fr = tulit.fetch("32016R0679", format="xhtml", language="FRA")
+    gdpr_fr = tulit.fetch("32016R0679", format="xhtml", language="fra")
     gdpr_fr["meta"]["repeals"]   # ['31995L0046']
+
+    # Member States: national identifier or ELI, original or consolidated
+    dsg = tulit.fetch("10001597", jurisdiction="AT")
+    lopd = tulit.fetch("BOE-A-2018-16673", jurisdiction="ES",
+                       version="consolidated", date="2021-01-01")
+    dpa = tulit.fetch("http://www.irishstatutebook.ie/eli/2018/act/7")
+    lopd["meta"]["version_date"]   # '2019-06-25'
+
+
+Sources
+-------
+
+Each jurisdiction has one source: EU (Cellar), Austria (RIS), Denmark
+(Retsinformation), Finland (Finlex), Germany (Rechtsinformationen des
+Bundes), Ireland (Irish Statute Book and Revised Acts), Luxembourg
+(Legilux), the Netherlands (Basiswettenbestand), Slovakia (Slov-Lex) and
+Spain (BOE). ``tulit sources`` lists them with the versions, languages and
+identifiers they accept:
+
+.. code-block:: python
+
+    from tulit.sources import get_source, list_sources
+
+    for code in list_sources():
+        source = get_source(code)
+        print(code, source.name, source.versions)
+    get_source("DK").identifier_help
+
+Some sources publish only one version or cannot select a date; ``fetch``
+raises ``ValueError`` when a request cannot be met. The coverage table in the
+README tracks the progress towards all 27 Member States.
 
 
 Command line
@@ -63,9 +100,11 @@ The same is available from the command line:
 .. code-block:: console
 
     $ tulit get 32024R0903 -o 32024R0903.json
-    $ tulit get 32016R0679 --format xhtml --language FRA
+    $ tulit get 32016R0679 --format xhtml --language fra
+    $ tulit get BOE-A-2018-16673 -j ES --version consolidated --date 2021-01-01
     $ tulit parse --format akn 32014L0092.akn -o 32014L0092.json
     $ tulit formats
+    $ tulit sources
 
 ``tulit get`` writes to standard output unless ``-o`` is given. Run
 ``tulit <command> --help`` for all options, and add ``-v`` to log progress.
@@ -90,9 +129,11 @@ Every parser returns the same structure from ``to_dict()``:
   divisions and articles by ``eId``.
 * ``conclusions``: ``conclusion_text`` and ``signature``.
 * ``annexes``: annexes with ``eId``, ``num``, ``heading`` and ``children``.
-* ``meta`` (added by ``fetch``): ``celex``, ``eli``, ``cellar_uuid``,
-  ``date_document``, ``in_force``, ``amends``, ``repeals``, ``corrects``,
-  ``source`` and ``valid``.
+* ``meta`` (added by ``fetch``): ``jurisdiction``, ``language``,
+  ``version`` and ``version_date`` (the FRBR expression of the text),
+  ``eli``, ``date_document``, ``in_force``, ``source`` and ``valid``; for EU
+  acts also ``celex``, ``cellar_uuid``, ``amends``, ``repeals`` and
+  ``corrects``.
 
 The identifiers follow the EU Publications Office subdivision authority
 table, so ``art_5`` / ``par_2`` can be appended to an act's ELI. The full

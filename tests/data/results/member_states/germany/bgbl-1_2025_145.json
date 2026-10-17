@@ -1,10 +1,339 @@
 {
-  "preface": null,
+  "preface": "Verordnung über die Gewährung von Auslandszuschlägen (Auslandszuschlagsverordnung - AuslZuschlV)",
   "formula": null,
   "citations": [],
   "recitals": [],
   "preamble_final": null,
-  "chapters": [],
-  "articles": [],
+  "chapters": [
+    {
+      "eId": "sct_1",
+      "type": "section",
+      "num": "Abschnitt 1",
+      "heading": "Auslandszuschlag",
+      "parent": null
+    },
+    {
+      "eId": "sct_2",
+      "type": "section",
+      "num": "Abschnitt 2",
+      "heading": "Erhöhter Auslandszuschlag",
+      "parent": null
+    },
+    {
+      "eId": "sbs_1",
+      "type": "subsection",
+      "num": "Unterabschnitt 1",
+      "heading": "Erhöhter Auslandszuschlag für Angehörige des Auswärtigen Dienstes",
+      "parent": "sct_2"
+    },
+    {
+      "eId": "sbs_2",
+      "type": "subsection",
+      "num": "Unterabschnitt 2",
+      "heading": "Erhöhter Auslandszuschlag für berücksichtigungsfähige Personen",
+      "parent": "sct_2"
+    },
+    {
+      "eId": "sct_3",
+      "type": "section",
+      "num": "Abschnitt 3",
+      "heading": "Schlussvorschriften",
+      "parent": null
+    }
+  ],
+  "articles": [
+    {
+      "eId": "art_1",
+      "num": "§ 1",
+      "heading": "Zuteilung der Dienstorte zu Zonenstufen",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Befindet sich an einem Dienstort eine Auslandsvertretung der Bundesrepublik Deutschland, so wird dem Dienstort eine Zonenstufe nach Anlage 1 zugeteilt."
+        },
+        {
+          "eId": "par_2",
+          "text": "Ist ein Dienstort nicht in Anlage 1 aufgeführt, so wird der Dienstort einer Zonenstufe nach Anlage 2 zugeteilt."
+        },
+        {
+          "eId": "par_3",
+          "text": "Ist ein Dienstort weder in Anlage 1 noch in Anlage 2 aufgeführt, so richtet sich die Zuteilung des Dienstortes zu einer Zonenstufe nach der Zonenstufe der Auslandsvertretung der Bundesrepublik Deutschland, in deren Amtsbezirk der Dienstort liegt. Weichen die Lebensverhältnisse am Dienstort erheblich von denen am Ort der Auslandsvertretung ab, so kann die oberste Dienstbehörde die Zonenstufe abweichend von Satz 1 anhand eines Ortes mit vergleichbaren Lebensverhältnissen zuteilen, dessen Zonenstufe nach den Grundsätzen des § 53 Absatz 1 Satz 1 bis 4 des Bundesbesoldungsgesetzes ermittelt wurde."
+        },
+        {
+          "eId": "par_4",
+          "text": "Die Grundgehaltsspannen der Anlage VI Tabelle VI.1 des Bundesbesoldungsgesetzes umfassen auch die Amtszulagen."
+        }
+      ]
+    },
+    {
+      "eId": "art_2",
+      "num": "§ 2",
+      "heading": "Auslandszuschlag bei Arbeitsplatzteilung",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "In Fällen des § 53 Absatz 3 Satz 3 des Bundesbesoldungsgesetzes wird die Grundgehaltsspanne der oder des höher besoldeten Berechtigten zugrunde gelegt."
+        }
+      ]
+    },
+    {
+      "eId": "art_3",
+      "num": "§ 3",
+      "heading": "Zuschlag zur Abgeltung außergewöhnlicher materieller Mehraufwendungen und immaterieller Belastungen",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Als monatlicher Zuschlag zur Abgeltung außergewöhnlicher materieller Mehraufwendungen können zusätzlich zum Auslandszuschlag bis zu 715 Euro gezahlt werden."
+        },
+        {
+          "eId": "par_2",
+          "text": "Als monatlicher Zuschlag zur Abgeltung außergewöhnlicher immaterieller Belastungen können zusätzlich zum Auslandszuschlag gezahlt werden: 1. bis zu 500 Euro, wenn am Dienstort Belastungen auftreten, insbesondere aufgrund von a) Knappheit von Gütern der Grundversorgung, b) außergewöhnlichen Umweltbelastungen oder c) einer hohen Rate an Gewaltdelikten; 2. bis zu 800 Euro, wenn am Dienstort eine abstrakte Gefahr für Leben, Gesundheit oder Eigentum besteht, insbesondere aufgrund von a) Auswirkungen von bewaffneten Konflikten, b) politisch motivierten Gewalttaten oder c) schwerwiegender Beeinträchtigung des Bestands oder der Funktionsfähigkeit des Staates oder seiner Einrichtungen einschließlich der Daseinsvorsorge; 3. bis zu 1 000 Euro, wenn am Dienstort eine konkrete Gefahr für Leben oder Gesundheit besteht, insbesondere aufgrund von a) bewaffneten Konflikten, b) Katastrophen oder c) Epidemien."
+        },
+        {
+          "eId": "par_3",
+          "text": "Der monatliche Zuschlag wird pauschal um einen Anteil gekürzt, der dem Umfang der am jeweiligen Dienstort typischerweise vorkommenden Abwesenheiten entspricht. Der Kürzung wird insbesondere der für jeden vollen Monat zustehende Erholungs- und Zusatzurlaub zugrunde gelegt."
+        },
+        {
+          "eId": "par_4",
+          "text": "Während einer Abwesenheit vom Dienstort von mehr als zwei Wochen wird der Zuschlag nicht gezahlt. Dies gilt nicht für Abwesenheiten wegen Erholungs- und Zusatzurlaubs oder aus sonstigen Gründen, die der pauschalen Kürzung nach Absatz 3 zugrunde gelegt wurden."
+        }
+      ]
+    },
+    {
+      "eId": "art_4",
+      "num": "§ 4",
+      "heading": "Zuschlag zur Sicherstellung einer anforderungsgerechten Besetzung eines Dienstpostens im Ausland",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Kann ein Dienstposten im Ausland wegen außergewöhnlicher materieller Mehraufwendungen oder immaterieller Belastungen nicht mit einer geeigneten Bewerberin oder einem geeigneten Bewerber besetzt werden, so kann für die Sicherstellung einer anforderungsgerechten Besetzung des Dienstpostens zusätzlich zum Auslandszuschlag ein monatlicher Zuschlag von bis zu 715 Euro festgesetzt werden."
+        },
+        {
+          "eId": "par_2",
+          "text": "Der Zuschlag wird so lange gezahlt, wie die Person den Dienstposten innehat, längstens jedoch für vier Jahre."
+        },
+        {
+          "eId": "par_3",
+          "text": "Der Zuschlag wird auch bei vorübergehender Abwesenheit vom Dienstort gezahlt."
+        },
+        {
+          "eId": "par_4",
+          "text": "Die Gründe für die Gewährung des Zuschlags sind zu dokumentieren."
+        }
+      ]
+    },
+    {
+      "eId": "art_5",
+      "num": "§ 5",
+      "heading": "Erhöhung der Zuschläge",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Ein Zuschlag nach § 3 erhöht sich für jede Person, die nach § 53 Absatz 4 des Bundesbesoldungsgesetzes berücksichtigungsfähig ist, um 10 Prozent, sofern sich die Person an dem Dienstort, für den der Zuschlag festgesetzt worden ist, nicht nur vorübergehend aufhält."
+        }
+      ]
+    },
+    {
+      "eId": "art_6",
+      "num": "§ 6",
+      "heading": "Übernahme der Festsetzung einer anderen obersten Dienstbehörde",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Eine oberste Dienstbehörde kann einen Zuschlag nach § 3 übernehmen, den eine andere oberste Dienstbehörde festgesetzt hat. Ein Einvernehmen nach § 53 Absatz 1 Satz 5 des Bundesbesoldungsgesetzes ist bei der Übernahme nicht herzustellen."
+        }
+      ]
+    },
+    {
+      "eId": "art_7",
+      "num": "§ 7",
+      "heading": "Höchstbetrag",
+      "parent": "sct_1",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Die Beträge nach den §§ 3 bis 5 können bis zum gesetzlichen Höchstbetrag nach § 53 Absatz 1 Satz 5 des Bundesbesoldungsgesetzes nebeneinander gewährt werden und unterliegen dem Kaufkraftausgleich (§ 55 des Bundesbesoldungsgesetzes)."
+        }
+      ]
+    },
+    {
+      "eId": "art_8",
+      "num": "§ 8",
+      "heading": "Information über den Ablauf des maßgeblichen Zeitraums bei befristeten Verwendungen im Ausland",
+      "parent": "sbs_1",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Die entsendende Dienststelle informiert die Bezügestelle, wenn der Zeitraum nach § 53 Absatz 6 Satz 2 des Bundesbesoldungsgesetzes abgelaufen ist."
+        }
+      ]
+    },
+    {
+      "eId": "art_9",
+      "num": "§ 9",
+      "heading": "Maßgebliche Dienstbezüge",
+      "parent": "sbs_1",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Maßgebliche Dienstbezüge für die Berechnung des erhöhten Auslandszuschlags nach § 53 Absatz 6 Satz 1 und 2 des Bundesbesoldungsgesetzes sind: 1. das Grundgehalt, 2. Familienzuschlag bis zur Stufe 1, 3. Amts- und Stellenzulagen sowie 4. der Auslandszuschlag für die Empfängerin oder den Empfänger von Auslandsdienstbezügen und für die erste nach § 53 Absatz 4 Nummer 1 oder Nummer 3 des Bundesbesoldungsgesetzes berücksichtigungsfähige Person."
+        }
+      ]
+    },
+    {
+      "eId": "art_10",
+      "num": "§ 10",
+      "heading": "Erhöhter Auslandszuschlag für Verheiratete",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Einen erhöhten Auslandszuschlag erhalten nach Maßgabe der Absätze 2 und 3: 1. verheiratete Empfängerinnen und Empfänger von Auslandsdienstbezügen, für die das Gesetz über den Auswärtigen Dienst gilt, und 2. verheiratete Empfängerinnen und Empfänger von Auslandsdienstbezügen, die dem Geschäftsbereich des Bundesministeriums der Verteidigung angehören, wenn sie zur Sicherstellung der Einsatzbereitschaft im Rahmen der Landes- und Bündnisverteidigung im Ausland soldatische Tätigkeiten wahrnehmen oder unmittelbar unterstützen."
+        },
+        {
+          "eId": "par_2",
+          "text": "Der Auslandszuschlag erhöht sich bis zu einer Höhe von 18,6 Prozent des Grundgehalts zuzüglich Amtszulagen, höchstens jedoch 18,6 Prozent des Grundgehalts aus der Endstufe der Besoldungsgruppe A 14, um den Betrag, der für den Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder des Ehegatten verwendet wird (Erhöhungsbetrag)."
+        },
+        {
+          "eId": "par_3",
+          "text": "Der Erhöhungsbetrag wird gewährt, 1. wenn die Ehegattin oder der Ehegatte a) nach § 53 Absatz 4 Nummer 1 des Bundesbesoldungsgesetzes berücksichtigungsfähig ist oder b) einen Anspruch auf den erhöhten Auslandszuschlag nach § 53 Absatz 3 Satz 3 des Bundesbesoldungsgesetzes hat, und 2. bis die Ehegattin oder der Ehegatte die Regelaltersgrenze nach § 235 des Sechsten Buches Sozialgesetzbuch erreicht hat. Im Falle des Satzes 1 Nummer 1 Buchstabe b bestimmen die Eheleute, wer von ihnen den Erhöhungsbetrag erhält."
+        }
+      ]
+    },
+    {
+      "eId": "art_11",
+      "num": "§ 11",
+      "heading": "Verwendung zum Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder des Ehegatten",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Als Verwendung für den Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder des Ehegatten nach § 10 Absatz 2 gelten: 1. die freiwillige Einzahlung des Erhöhungsbetrags a) in die gesetzliche Rentenversicherung, b) in die landwirtschaftliche Alterskasse oder c) in eine berufsständische Versorgungseinrichtung, die Leistungen erbringt, die denjenigen der gesetzlichen Rentenversicherung vergleichbar sind, 2. die Zahlung des Versorgungszuschlags, 3. der Beitrag für einen Vertrag, der auf eine kapitalgedeckte Altersvorsorge gerichtet und nach § 5 oder § 5a des Altersvorsorgeverträge-Zertifizierungsgesetzes vom 26. Juni 2001 (BGBl. I S. 1310, 1322), das zuletzt durch Artikel 5 des Gesetzes vom 25. Oktober 2023 (BGBl. 2023 I Nr. 294) geändert worden ist, in der jeweils geltenden Fassung zertifiziert worden ist oder 4. der Beitrag für die Fortsetzung einer betrieblichen Altersvorsorge im Sinne des Betriebsrentengesetzes. Eine Aufteilung des Erhöhungsbetrags auf bis zu zwei Verwendungsarten ist zulässig."
+        }
+      ]
+    },
+    {
+      "eId": "art_12",
+      "num": "§ 12",
+      "heading": "Nachweis und Anzeigepflicht",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Die Verwendung zum Aufbau einer eigenständigen Altersvorsorge nach § 10 Absatz 2 kann durch eine schriftliche oder elektronische dienstliche Erklärung nachgewiesen werden, die von der Ehegattin oder dem Ehegatten zu bestätigen ist."
+        },
+        {
+          "eId": "par_2",
+          "text": "Belege über die Verwendung sind bis zum Ablauf der gesetzlichen Verjährungsfrist durch die Empfängerinnen und Empfänger des Auslandszuschlags aufzubewahren und der Bezügestelle auf Verlangen vorzulegen. Die Bezügestelle führt Belegprüfungen stichprobenartig sowie bei Verdacht auf falsche Angaben durch."
+        },
+        {
+          "eId": "par_3",
+          "text": "Die Empfängerin oder der Empfänger des erhöhten Auslandszuschlags hat der Bezügestelle unverzüglich schriftlich oder elektronisch anzuzeigen, wenn eine Verwendung verringert, unterbrochen oder eingestellt wird."
+        }
+      ]
+    },
+    {
+      "eId": "art_13",
+      "num": "§ 13",
+      "heading": "Abweichende Regelungen für bestimmte Personengruppen zu Verwendung und Nachweis",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Hat die Ehegattin oder der Ehegatte das 50. Lebensjahr am 1. Januar 2020 vollendet, so gelten als Verwendung zum Aufbau ihrer oder seiner eigenständigen Altersvorsorge nach § 10 Absatz 2 auch Anlagemöglichkeiten, die nicht in § 11 genannt sind. § 12 Absatz 2 ist nicht anzuwenden."
+        },
+        {
+          "eId": "par_2",
+          "text": "Besitzt die Ehegattin oder der Ehegatte nicht die deutsche Staatsangehörigkeit, so wird der Auslandszuschlag abweichend von § 10 Absatz 2 um einen Erhöhungsbetrag von 6 Prozent der Dienstbezüge im Ausland erhöht, wenn anstelle des Nachweises der Verwendung zum Aufbau einer eigenständigen Altersvorsorge nach § 10 Absatz 2 1. die Empfängerin oder der Empfänger des erhöhten Auslandszuschlags durch eine schriftliche oder elektronische dienstliche Erklärung bestätigt, dass die Ehegattin oder der Ehegatte darüber informiert ist, dass a) der Erhöhungsbetrag gezahlt wird und b) der Zweck des Erhöhungsbetrags der Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder des Ehegatten ist, und 2. die Ehegattin oder der Ehegatte die dienstliche Erklärung nach Nummer 1 bestätigt. Als Dienstbezüge im Ausland gelten die Dienstbezüge nach § 9 zuzüglich des erhöhten Auslandszuschlags nach § 53 Absatz 6 Satz 1 und 2 des Bundesbesoldungsgesetzes."
+        }
+      ]
+    },
+    {
+      "eId": "art_14",
+      "num": "§ 14",
+      "heading": "Erhöhter Auslandszuschlag für weitere berücksichtigungsfähige Personen",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Empfängerinnen und Empfänger von Auslandsdienstbezügen, für die das Gesetz über den Auswärtigen Dienst gilt, erhalten einen um einen Erhöhungsbetrag von 6 Prozent ihrer Dienstbezüge im Ausland erhöhten Auslandszuschlag, wenn 1. der Empfängerin oder dem Empfänger kein erhöhter Auslandszuschlag nach § 10 zusteht und 2. eine nach § 53 Absatz 4 Nummer 3 des Bundesbesoldungsgesetzes berücksichtigungsfähige Person im dienstlichen Interesse bei der Erfüllung der Aufgaben der Auslandsvertretung oder an den Aufgaben der Empfängerin oder des Empfängers mitwirkt."
+        },
+        {
+          "eId": "par_2",
+          "text": "§ 10 Absatz 3 Satz 1 Nummer 2 und § 13 Absatz 2 Satz 2 gelten entsprechend."
+        }
+      ]
+    },
+    {
+      "eId": "art_15",
+      "num": "§ 15",
+      "heading": "Begriff des Nettoerwerbseinkommens",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "unp_1",
+          "text": "Das Nettoerwerbseinkommen ist die Summe der nach Abzug der zu entrichtenden Steuern vom Einkommen und der Arbeitnehmeranteile zur gesetzlichen Sozialversicherung verbleibenden Einkünfte aus: 1. Land- und Forstwirtschaft (§ 2 Absatz 1 Satz 1 Nummer 1 in Verbindung mit § 13 des Einkommensteuergesetzes), 2. Gewerbebetrieb (§ 2 Absatz 1 Satz 1 Nummer 2 in Verbindung mit § 15 des Einkommensteuergesetzes), 3. selbstständiger Arbeit (§ 2 Absatz 1 Satz 1 Nummer 3 in Verbindung mit § 18 des Einkommensteuergesetzes) und 4. nichtselbstständiger Arbeit (§ 2 Absatz 1 Satz 1 Nummer 4 in Verbindung mit § 19 Absatz 1 Satz 1 Nummer 1 und 3 des Einkommensteuergesetzes)."
+        }
+      ]
+    },
+    {
+      "eId": "art_16",
+      "num": "§ 16",
+      "heading": "Anrechnung des Nettoerwerbseinkommens der berücksichtigungsfähigen Person",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Ist die Ehegattin oder der Ehegatte oder eine nach § 53 Absatz 4 Nummer 3 des Bundesbesoldungsgesetzes berücksichtigungsfähige Person in dem Zeitraum, für den ein erhöhter Auslandszuschlag nach diesem Unterabschnitt gewährt wird, erwerbstätig, so wird das in diesem Zeitraum erzielte Nettoerwerbseinkommen nach Maßgabe des Absatzes 3 auf den Erhöhungsbetrag angerechnet. Eine Anrechnung findet nur statt, soweit das monatliche Nettoerwerbseinkommen für diesen Zeitraum das Zweifache der Arbeitsentgeltgrenze bei geringfügiger Beschäftigung (§ 8 Absatz 1a des Vierten Buches Sozialgesetzbuch) oder den entsprechenden Betrag in ausländischer Währung übersteigt."
+        },
+        {
+          "eId": "par_2",
+          "text": "Einkünfte, die ausschließlich durch Tätigkeiten erzielt wurden, die vor dem Beginn oder nach dem Ende des Gewährungszeitraums des erhöhten Auslandszuschlags ausgeübt wurden, bleiben bei der Anrechnung unberücksichtigt."
+        },
+        {
+          "eId": "par_3",
+          "text": "Die Hälfte des Erhöhungsbetrags ist anrechnungsfrei. Auf die andere Hälfte wird das nach Absatz 1 Satz 2 zu berücksichtigende Nettoerwerbseinkommen angerechnet. Die Anrechnung erfolgt getrennt für jedes Kalenderjahr. Bei einem Dienstortwechsel innerhalb eines Kalenderjahres wird das erzielte Nettoerwerbseinkommen getrennt nach Dienstorten betrachtet."
+        }
+      ]
+    },
+    {
+      "eId": "art_17",
+      "num": "§ 17",
+      "heading": "Vorläufige Gewährung und Nachweis bei Nettoerwerbseinkommen der berücksichtigungsfähigen Person",
+      "parent": "sbs_2",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Der erhöhte Auslandszuschlag wird vorläufig auf Basis einer schriftlichen oder elektronischen dienstlichen Erklärung zum Nettoerwerbseinkommen der berücksichtigungsfähigen Person gewährt, die von der berücksichtigungsfähigen Person zu bestätigen ist."
+        },
+        {
+          "eId": "par_2",
+          "text": "Für die endgültige Bestimmung des erhöhten Auslandszuschlags sind auf Verlangen der Bezügestelle geeignete Nachweise zum Nettoerwerbseinkommen vorzulegen. Geeignete Nachweise können insbesondere die Steuerbescheide sein, die den Bezugszeitraum des erhöhten Auslandszuschlags umfassen."
+        }
+      ]
+    },
+    {
+      "eId": "art_18",
+      "num": "§ 18",
+      "heading": "Übergangsregelungen",
+      "parent": "sct_3",
+      "children": [
+        {
+          "eId": "par_1",
+          "text": "Stand Empfängerinnen und Empfängern von Auslandsdienstbezügen schon vor dem 1. Juli 2025 ein erhöhter Auslandszuschlag für Verheiratete zu, so wird der Auslandszuschlag bis einschließlich 30. Juni 2026 abweichend von § 10 Absatz 2 um einen Erhöhungsbetrag von 18,6 Prozent des Grundgehalts zuzüglich Amtszulagen, höchstens jedoch 18,6 Prozent des Grundgehalts aus der Endstufe der Besoldungsgruppe A 14, erhöht, wenn mindestens 90 Prozent des Erhöhungsbetrags für den Aufbau einer eigenständigen Altersvorsorge der Ehegattin oder des Ehegatten verwendet werden. § 11 ist anzuwenden."
+        },
+        {
+          "eId": "par_2",
+          "text": "Bei einer befristeten Verwendung im Ausland wird bei der Berechnung der erforderlichen Mindestdauer der Verwendung nach § 53 Absatz 6 Satz 2 des Bundesbesoldungsgesetzes auch die Zeit berücksichtigt, während der Dienst vor dem 1. Juli 2025 geleistet worden ist."
+        }
+      ]
+    }
+  ],
   "conclusions": null
 }

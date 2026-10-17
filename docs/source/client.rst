@@ -9,19 +9,26 @@ The tulit Client library supports multiple legal document retrieval sources orga
 
 **Member State Clients**
 
+* **Austria (RIS)**: Rechtsinformationssystem des Bundes
+* **Denmark (Retsinformation)**: LexDania XML
 * **Finland (Finlex)**: Finnish legal database
 * **France (Legifrance)**: French legal database  
 * **Germany (RIS)**: German legal information system
 * **Italy (Normattiva)**: Italian legal database
 * **Luxembourg (Legilux)**: Luxembourg legal portal
 * **Malta**: Maltese legal information
+* **Netherlands (BWB)**: Basiswettenbestand, wetten.overheid.nl
 * **Portugal (DRE)**: Portuguese official gazette
-* **Spain (BOE)**: Spanish official gazette
-* **Ireland (Irish Statute Book)**: Irish legal database
+* **Slovakia (Slov-Lex)**: MetaLex XML
+* **Spain (BOE)**: Spanish official gazette and consolidated legislation
+* **Ireland (Irish Statute Book and Revised Acts)**: Irish legal database
 
 **Regional Clients**
 
 * **Veneto**: Italian regional legislation (Veneto region)
+
+``tulit.fetch`` uses these clients through the sources in ``tulit.sources``,
+one per jurisdiction (see :doc:`getting_started`).
 
 .. toctree::
     :maxdepth: 2
@@ -44,6 +51,22 @@ EU Clients
 
 Member State Clients
 --------------------
+
+Austria (RIS)
+~~~~~~~~~~~~~
+
+.. automodule:: tulit.client.state.austria
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Denmark (Retsinformation)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.client.state.denmark
+     :members:
+     :undoc-members:
+     :show-inheritance:
 
 Finland (Finlex)
 ~~~~~~~~~~~~~~~~
@@ -101,10 +124,26 @@ Malta
      :undoc-members:
      :show-inheritance:
 
+Netherlands (BWB)
+~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.client.state.netherlands
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 Portugal (DRE)
 ~~~~~~~~~~~~~~
 
 .. automodule:: tulit.client.state.portugal
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Slovakia (Slov-Lex)
+~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.client.state.slovakia
      :members:
      :undoc-members:
      :show-inheritance:
@@ -124,6 +163,25 @@ Veneto
 ~~~~~~
 
 .. automodule:: tulit.client.regional.veneto
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Sources
+-------
+
+Source framework
+~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.sources.base
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Source registry
+~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.sources.registry
      :members:
      :undoc-members:
      :show-inheritance:

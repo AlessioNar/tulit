@@ -68,7 +68,11 @@ class NormattivaAKNParser(AkomaNtosoParser):
         kind, date, number, title = part('docType'), part('docDate'), part('docNumber'), part('docTitle')
         # The Gazette's code at the end of the title ('(18G00129)') is not part of it
         title = re.sub(r'\s*\(\d{2,3}[A-Z]\d{4,5}\)\s*$', '', title)
-        heading = ' '.join(filter(None, [kind, f'{date}, n. {number}' if number else date]))
+        # The Constitution has neither date nor number ('0')
+        number = '' if number.strip('0 ') == '' else number
+        heading = ' '.join(filter(None, [kind, f'{date}, n. {number}' if number and date else date]))
+        if title.upper().startswith(heading.upper()):
+            heading = ''
         self.preface = ' - '.join(filter(None, [heading, title])) or None
 
     def get_formula(self) -> None:

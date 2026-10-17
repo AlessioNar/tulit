@@ -39,6 +39,8 @@ MONTHS = ('janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout
           'novembre', 'decembre')
 NATURES = {'loi organique': 'LOI_ORGANIQUE', 'loi constitutionnelle': 'LOI_CONSTIT', 'loi': 'LOI',
            'ordonnance': 'ORDONNANCE', 'decret': 'DECRET', 'arrete': 'ARRETE'}
+OPEN = '2999-01-01'
+"""The date the DILA gives what has none."""
 MAX_LEGI_ARCHIVES = 60
 """Daily LEGI archives scanned at most to rebuild a consolidated text; beyond, the global dump is needed."""
 
@@ -90,7 +92,8 @@ def _matcher(ref: dict[str, Optional[str]]) -> Callable[[dict], bool]:
         if ref['nor']:
             return meta.get('nor') == ref['nor']
         if ref['num']:
-            return meta.get('num') == ref['num'] and (not ref['date'] or meta.get('date_texte') == ref['date'])
+            # The DILA leaves the date of some texts open (2999-01-01; loi 2025-1251)
+            return meta.get('num') == ref['num'] and (not ref['date'] or meta.get('date_texte') in (ref['date'], OPEN))
         return (meta.get('date_texte') == ref['date']
                 and (not ref['nature'] or (meta.get('nature') or '').upper() == ref['nature']))
     return match
@@ -144,7 +147,7 @@ class FranceSource(Source):
             folder, meta = self._published(client, ref)
         else:
             folder, meta = self._consolidated(client, ref, target)
-        meta = {key: value for key, value in meta.items() if value}
+        meta = {key: value for key, value in meta.items() if value and value != OPEN}
         version_date = meta.get('date_publi') if version == ORIGINAL else _version_date(folder, target)
         return Retrieval(
             path=folder,

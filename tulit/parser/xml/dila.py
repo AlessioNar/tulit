@@ -23,6 +23,7 @@ The parser reads a folder holding the files of one text (any layout).
 import glob
 import os
 import re
+import unicodedata
 from typing import Any, Optional
 
 from lxml import etree
@@ -35,6 +36,13 @@ OPEN_END = '2999-01-01'
 _DIVISION = re.compile(r'^(?P<kind>Livre|Partie|Titre|Sous-titre|Chapitre|Sous-chapitre|Section|Sous-section|'
                        r'Paragraphe|Sous-paragraphe)\b\s*(?P<num>[^:–-]*?)\s*(?:[:–-]\s*(?P<heading>.*))?$',
                        re.IGNORECASE)
+# 'PREMIÈRE PARTIE : ...' (lois de finances, de financement de la sécurité sociale)
+_ORDINAL_DIVISION = re.compile(r'^(?P<num>\w+?)\s+(?P<kind>partie|livre|titre)\b\s*(?:[:–-]\s*(?P<heading>.*))?$',
+                               re.IGNORECASE)
+ORDINALS = {'premiere': 1, 'premier': 1, 'deuxieme': 2, 'seconde': 2, 'second': 2, 'troisieme': 3, 'quatrieme': 4,
+            'cinquieme': 5, 'sixieme': 6, 'septieme': 7, 'huitieme': 8, 'neuvieme': 9, 'dixieme': 10}
+# The closing formula, printed in the last article of a law
+_CLOSING_FORMULA = re.compile(r"^La présente (loi|ordonnance)( organique)?\b.*\bexécutée comme loi de l.[ÉE]tat\.?$")
 _PARAGRAPH = re.compile(r'^(?P<num>[IVXLC]+|\d+)\s*\.\s*(?:[-–—]\s*)?(?=\S)')
 _POINT = re.compile(r'^(\d+°|[a-z]\)|\d+\)|[-–•])\s?')
 DIVISIONS = {'livre': 'part', 'partie': 'part', 'titre': 'title', 'sous-titre': 'title', 'chapitre': 'chapter',
@@ -53,6 +61,10 @@ ACTIONS = (
 )
 _ACT = re.compile(r"(?:^(?:Le|La|L')\s*|\b(?:du|de la|de l'|des)\s+)((?:code|loi|ordonnance|décret|arrêté)\b"
                   r"[^,;:]*?)(?=\s+(?:est|sont|il est)\b|[,;:]|$)", re.IGNORECASE)
+
+
+def _plain(text: str) -> str:
+    return ''.join(c for c in unicodedata.normalize('NFD', text.lower()) if unicodedata.category(c) != 'Mn')
 
 
 def amendment_action(text: str) -> Optional[str]:
@@ -107,6 +119,7 @@ class DilaParser(Parser):
         super().__init__()
         self.date = date
         self.files: dict[str, etree._Element] = {}
+        self._open_annex: Optional[ChildrenBuilder] = None
 
     def parse(self, file: str, **options) -> 'DilaParser':
         paths = [file] if os.path.isfile(file) else glob.glob(os.path.join(file, '**', '*.xml'), recursive=True)
@@ -165,6 +178,13 @@ class DilaParser(Parser):
         body = BodyBuilder()
         self._walk(struct.find('STRUCT'), body, depth=0, annex=None)
         self.chapters, self.articles, self.structure = body.chapters, body.articles, body.structure
+        last = self.articles[-1]['children'] if self.articles else []
+        if last and _CLOSING_FORMULA.match(last[-1]['text']):
+            # 'La présente loi sera exécutée comme loi de l'Etat.' closes the act, not its last article
+            formula = last.pop()['text']
+            conclusions = self.conclusions or {'conclusion_text': None, 'signature': None}
+            conclusions['conclusion_text'] = ' '.join(filter(None, [formula, conclusions['conclusion_text']]))
+            self.conclusions = conclusions
 
     def _walk(self, container: Optional[etree._Element], body: BodyBuilder, depth: int,
               annex: Optional[ChildrenBuilder]) -> None:
@@ -191,6 +211,14 @@ class DilaParser(Parser):
                     self._walk(inner, body, depth + 1, annex)
                     continue
                 match = _DIVISION.match(title)
+                ordinal = None if match else _ORDINAL_DIVISION.match(title)
+                number = ORDINALS.get(_plain(ordinal.group('num'))) if ordinal else None
+                if number:
+                    kind = ordinal.group('kind').lower()
+                    body.division(DIVISIONS[kind], title.split(':')[0].strip(), heading=ordinal.group('heading'),
+                                  token=str(number), rank=RANKS[kind])
+                    self._walk(inner, body, depth + 1, None)
+                    continue
                 kind = match.group('kind').lower() if match else ''
                 num = f"{match.group('kind')} {match.group('num')}".strip() if match else title
                 heading = (match.group('heading') or None) if match else None
@@ -204,6 +232,19 @@ class DilaParser(Parser):
         lines = _lines(article.find('BLOC_TEXTUEL/CONTENU')) if article is not None else []
         number = (link.get('num') or (article.findtext('.//META_ARTICLE/NUM') if article is not None else '')
                   or '').strip()
+        if annex is None and not number and lines and re.match(r'^ANNEXES?\b', lines[0], re.IGNORECASE):
+            # An annex printed as an unnumbered article (loi 2025-1403, the report on the forecasts)
+            self._open_annex = ChildrenBuilder()
+            heading = lines[1] if len(lines) > 1 and len(lines[1]) < 400 else None
+            self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}', 'num': lines[0], 'heading': heading,
+                                 'children': self._open_annex.children})
+            lines = lines[2 if heading else 1:]
+            annex = self._open_annex
+        elif annex is None and not number and self._open_annex is not None:
+            # ... continued in the unnumbered articles after it
+            annex = self._open_annex
+        elif number:
+            self._open_annex = None
         if annex is not None:
             for line in lines:
                 annex.add(line)
@@ -215,7 +256,7 @@ class DilaParser(Parser):
         for line in lines:
             if quoting or (line.startswith('«') and children.children):
                 current = children.children[-1]
-                if current.get('amendment') is not None:
+                if current.get('amendment') is not None and line.strip('«» '):
                     current['amendment']['quoted'].append({'kind': 'text', 'text': line.strip('«» ')})
                 children.extend(line)
                 quoting = max(quoting + line.count('«') - line.count('»'), 0)

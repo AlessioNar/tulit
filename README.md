@@ -141,7 +141,17 @@ Status levels:
   - Croatia, Czechia, Estonia, Poland, Sweden, Malta and Portugal
 - **0.10.0**: Belgium, Bulgaria, Cyprus, Greece, Hungary, Latvia, Lithuania, Romania and Slovenia
 
-Legislation is public law: tulit treats the texts it retrieves as reusable under CC BY 4.0, with attribution to the official source.
+### Access to law and reuse
+
+Everyone has the right to know the law that binds them. The Union is founded on the rule of law (Article 2 TEU), and legal certainty requires that laws be published and accessible to the people they apply to: the Court of Justice has held that an act not properly published in the Official Journal cannot be enforced against individuals (Case C-161/06, *Skoma-Lux*). EU citizens can live, work, study and do business in any Member State (Articles 20, 21 and 45 TFEU; Article 45 of the Charter of Fundamental Rights), so the laws they need to know are not only their own country's but those of all 27 Member States and of the Union.
+
+That is the basis for tulit's approach to reuse:
+
+- **Official texts are public.** Legislation, as published by the authority that enacted it, is there to be read, quoted and shared. Most Member States exclude official legislative texts from copyright (for example Germany, § 5 UrhG; Austria, § 7 UrhG; Italy, Article 5 of the Copyright Act), as the Berne Convention allows (Article 2(4)). EU legislation may be reused free of charge (Commission Decision 2011/833/EU), and the Open Data Directive ((EU) 2019/1024) encourages the reuse of public-sector data.
+- **tulit only fetches from official sources.** It retrieves each act directly from the publishing authority and changes its form, not its content. Every legalJSON document records where it came from in `meta.source` and `meta.eli`.
+- **Attribution travels with the data.** tulit treats the texts it retrieves as reusable under CC BY 4.0, with attribution to the official source.
+
+The terms of each portal still apply to the portal itself: its database, its editorial additions such as annotations and summaries, and its rate limits. Please use the sources considerately.
 
 ## Documentation
 

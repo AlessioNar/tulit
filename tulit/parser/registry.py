@@ -171,17 +171,63 @@ class ParserRegistry:
 
 # Global registry instance
 _global_registry = ParserRegistry()
+_builtins_registered = False
+
+
+def _create_akn_parser(file_path: Optional[str] = None, format: Optional[str] = None):
+    """Create an Akoma Ntoso parser, detecting the variant from file_path when given."""
+    from tulit.parser.xml.akomantoso import create_akn_parser
+    if format is None and file_path is None:
+        format = 'akn'
+    return create_akn_parser(file_path=file_path, format=format)
+
+
+def _register_builtin_parsers(registry: ParserRegistry) -> None:
+    """
+    Register the parsers shipped with tulit.
+
+    Imports happen here rather than at module level because the parser
+    modules themselves import this module.
+    """
+    from tulit.parser.xml.formex import Formex4Parser
+    from tulit.parser.xml.boe import BOEXMLParser
+    from tulit.parser.xml.akomantoso import (
+        AKN4EUParser, GermanLegalDocMLParser, LuxembourgAKNParser
+    )
+    from tulit.parser.html.cellar import (
+        CellarHTMLParser, CellarStandardHTMLParser, ProposalHTMLParser
+    )
+    from tulit.parser.html.veneto import VenetoHTMLParser
+    from tulit.parser.json.legifrance import LegifranceParser
+
+    registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
+    registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
+    registry.register('akn4eu', AKN4EUParser)
+    registry.register('legaldocml-de', GermanLegalDocMLParser, aliases=['akn-de'])
+    registry.register('akn-lu', LuxembourgAKNParser)
+    registry.register('cellar-xhtml', CellarHTMLParser, aliases=['xhtml'])
+    registry.register('cellar-html', CellarStandardHTMLParser, aliases=['html'])
+    registry.register('eu-proposal', ProposalHTMLParser, aliases=['proposal'])
+    registry.register('boe', BOEXMLParser)
+    registry.register('veneto', VenetoHTMLParser)
+    registry.register('legifrance', LegifranceParser)
 
 
 def get_parser_registry() -> ParserRegistry:
     """
     Get the global parser registry instance.
+
+    The parsers shipped with tulit are registered on first use.
     
     Returns
     -------
     ParserRegistry
         The global parser registry
     """
+    global _builtins_registered
+    if not _builtins_registered:
+        _builtins_registered = True
+        _register_builtin_parsers(_global_registry)
     return _global_registry
 
 
@@ -206,7 +252,13 @@ def register_parser(format_id: str, parser_class: Type = None,
     -------
     >>> register_parser('xml', XMLParser, aliases=['xmldoc'])
     """
-    _global_registry.register(format_id, parser_class, factory, aliases)
+    if (parser_class is None) == (factory is None):
+        raise ParserError("Provide exactly one of parser_class or factory")
+    registry = get_parser_registry()
+    if factory is not None:
+        registry.register_factory(format_id, factory, aliases)
+    else:
+        registry.register(format_id, parser_class, aliases)
 
 
 def get_parser(format_id: str, **kwargs):
@@ -229,4 +281,4 @@ def get_parser(format_id: str, **kwargs):
     -------
     >>> parser = get_parser('xml', schema_path='schema.xsd')
     """
-    return _global_registry.create(format_id, **kwargs)
+    return get_parser_registry().create(format_id, **kwargs)

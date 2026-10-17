@@ -71,16 +71,22 @@ Options:
 Sources
 -------
 
-Each jurisdiction has one source: EU (Cellar), Austria (RIS), Croatia
-(Narodne novine), Czechia (e-Sbírka), Denmark (Retsinformation), Estonia
-(Riigi Teataja), Finland (Finlex), Germany (Rechtsinformationen des Bundes),
-Ireland (Irish Statute Book and Revised Acts), Luxembourg (Legilux), Malta
-(Legislation Malta), the Netherlands (Basiswettenbestand and Staatsblad),
-Poland (Sejm ELI API), Portugal (Diário da República), Slovakia (Slov-Lex),
-Spain (BOE) and Sweden (Riksdagen). ``tulit sources`` lists them with the
-versions, languages and identifiers they accept.
+Each jurisdiction has one source, all official: the EU (Cellar), Austria
+(RIS), Belgium (Moniteur belge and Justel), Bulgaria (Държавен вестник),
+Croatia (Narodne novine), Cyprus (Official Gazette), Czechia (e-Sbírka),
+Denmark (Retsinformation), Estonia (Riigi Teataja), Finland (Finlex), France
+(Journal officiel and Légifrance, from the DILA open data), Germany
+(Rechtsinformationen des Bundes), Greece (ΦΕΚ), Hungary (Nemzeti
+Jogszabálytár), Ireland (Irish Statute Book and Revised Acts), Italy
+(Normattiva), Latvia (Latvijas Vēstnesis and Likumi.lv), Lithuania (Teisės
+aktų registras), Luxembourg (Legilux), Malta (Legislation Malta), the
+Netherlands (Basiswettenbestand and Staatsblad), Poland (Sejm ELI API),
+Portugal (Diário da República), Romania (Portal Legislativ), Slovakia
+(Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden (Riksdagen). ``tulit
+sources`` lists them with the versions, languages and identifiers they
+accept.
 
-Malta and Portugal publish only PDF; reading them needs the ``pdf`` extra:
+Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` extra:
 
 .. code-block:: console
 
@@ -92,6 +98,19 @@ Malta and Portugal publish only PDF; reading them needs the ``pdf`` extra:
     tulit.fetch("Lei n.º 58/2019, de 8 de agosto", jurisdiction="PT")   # act as published
     tulit.fetch("IKS", jurisdiction="EE", version="consolidated", date="2024-06-01")
     tulit.fetch("BGBl. I Nr. 5/2024", jurisdiction="AT")                 # law as adopted
+    tulit.fetch("ν. 4624/2019", jurisdiction="GR")                      # law as published in the ΦΕΚ
+    tulit.fetch("2011. évi CXII. törvény", jurisdiction="HU",
+                version="consolidated", date="2019-01-01")
+    tulit.fetch("https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581")  # Belgium, by ELI
+
+France needs no credentials: texts published since the last global DILA dump
+come from the daily Journal officiel and Légifrance archives. For older texts,
+download and extract the global JORF and LEGI dumps from
+https://echanges.dila.gouv.fr/OPENDATA/ and pass their folder:
+
+.. code-block:: python
+
+    tulit.fetch("Loi n° 2018-493 du 20 juin 2018", jurisdiction="FR", dump_dir="dila")
 
 Some acts exist only as scanned PDFs without text: the Moniteur belge
 before June 1997 and the Cypriot Official Gazette before about 2015.

@@ -5,10 +5,10 @@ The Direction de l'information légale et administrative (DILA) publishes,
 under the Licence Ouverte, the XML of the Journal officiel and of Légifrance's
 consolidated legislation on https://echanges.dila.gouv.fr/OPENDATA/:
 
-- a global dump of each base (Freemium_jorf_global_*.tar.gz,
-  Freemium_legi_global_*.tar.gz, about 1 GB each);
-- daily archives of what changed since (JORF_YYYYMMDD-HHMMSS.tar.gz,
-  LEGI_...), a few MB each, from the date of the last global dump.
+- a global dump of each base (``Freemium_jorf_global_*.tar.gz``,
+  ``Freemium_legi_global_*.tar.gz``, about 1 GB each);
+- daily archives of what changed since (``JORF_YYYYMMDD-HHMMSS.tar.gz``,
+  ``LEGI_...``), a few MB each, from the date of the last global dump.
 
 A text published in the Journal officiel since the last global dump is
 found in the daily archives of the days after it was signed. Anything else

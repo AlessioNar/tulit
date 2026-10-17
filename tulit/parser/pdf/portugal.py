@@ -24,22 +24,32 @@ import re
 from collections import Counter
 from typing import Any, Optional
 
+from tulit.parser.exceptions import FileLoadError
 from tulit.parser.parser import Parser
 from tulit.parser.pdf.layout import Line, frames, join_lines, read_lines
 from tulit.parser.structure import BodyBuilder, ChildrenBuilder
 
 _HEADER = re.compile(r'^(Diário da República, \d\.ª série|N\.º \d+.*Pág\. \d+|www\.dre\.pt|\d{6,})$|'
                      r'DIÁRIO DA REPÚBLICA|^SÉRIE-[AB]\b|^N\.[oº] \d+ — \d+ de \w+ de \d{4}|^\d+ DIÁRIO|'
-                     r'DA REPÚBLICA — I+ SÉRIE')
+                     r'DA REPÚBLICA — I+ SÉRIE|— \d{1,2}-\d{1,2}-\d{4}$|'
+                     # Since 2021: 'Pág. 1/5' as '1/5', '1.ª série', 'N.º 1', '02-01-2025'
+                     r'^(\d+/\d+|\d\.ª série|N\.º \d+(?:-[A-Z])?|\d{2}-\d{2}-\d{4})$')
 _DESIGNATION = re.compile(r'^(Lei|Lei Orgânica|Lei Constitucional|Decreto-Lei|Decreto Legislativo Regional|'
-                          r'Decreto Regulamentar|Decreto|Portaria|Resolução|Despacho|Declaração de Retificação)'
-                          r'(?: n\.[ºo] [\w\-/]+)?$')
+                          r'Decreto Regulamentar(?: Regional)?|Decreto(?: do Presidente da República)?|Portaria|'
+                          r'Resolução(?: da Assembleia da República| do Conselho de Ministros)?|'
+                          r'Despacho(?: Normativo)?|Declaração de Rec?tificação|Rectificação|Aviso|'
+                          r'Acórdão do Tribunal Constitucional)'
+                          r'(?: n\.[ºo] [\w\-/]+)?(?:,? de \d{1,2} de \w+)?$')
+_BACK_COVER = re.compile(r'^(Depósito legal n\.[ºo] \d|INCM$|IMPRENSA NACIONAL-CASA DA MOEDA, S\. ?A\.$)')
 _DATE = re.compile(r'^de \d{1,2} de \w+$', re.IGNORECASE)
 _ARTICLE = re.compile(r'^«?Artigo (?P<num>\d+\.[ºo](?:-[A-Z])?|único)$')
 _DIVISION = re.compile(r'^(?P<kind>TÍTULO|CAPÍTULO|SECÇÃO|SUBSECÇÃO|PARTE|LIVRO)\s+(?P<num>[IVXLC]+|[ÚU]NIC[OA])$')
+_GROUP = re.compile(r'^(?P<num>[IVXL]+) — (?P<heading>[A-ZÁÉÍÓÚ].+)$')
 _PARAGRAPH = re.compile(r'^(?P<num>\d+(?:-[A-Z])?) — ')
 _POINT = re.compile(r'^([a-z]{1,2}|[ivxl]+)\) ')
-_CLOSING = re.compile(r'^(Aprovad[oa] em|Promulgad[oa] em|Referendad[oa] em|Visto e aprovado|Publique-se\.?$)')
+_CLOSING = re.compile(r'^(Aprovad[oa] em|Promulgad[oa] em|Referendad[oa] em|Visto e aprovado|Publique-se\.?$|'
+                      # A minister's signature of a portaria or despacho, with its date
+                      r'(O|A) (Ministr[oa]|Secretári[oa] de Estado)\b[^,]{0,150}, [A-ZÁÉÍÓÚ][^,]+, em \d{1,2} de )')
 _ANNEX = re.compile(r'^(ANEXO|MAPA)(\s+[IVXLC\d]+)?$')
 DIVISIONS = {'LIVRO': 'part', 'PARTE': 'part', 'TÍTULO': 'title', 'CAPÍTULO': 'chapter',
              'SECÇÃO': 'section', 'SUBSECÇÃO': 'subsection'}
@@ -50,6 +60,26 @@ ACTIONS = (
     ('passam a ter a seguinte redação', 'replace'), ('é aditad', 'add'), ('são aditad', 'add'),
     ('é substituíd', 'replace'), ('é alterad', 'amend'), ('são alterad', 'amend'),
 )
+
+
+def _without_back_cover(lines: list[Line]) -> list[Line]:
+    """Leave out the back cover of an issue (legal deposit, notices, price, shops) printed in a column."""
+    cover = {(line.page, line.column) for line in lines if _BACK_COVER.match(line.text)}
+    if not cover:
+        return lines
+    kept, inside = [], set()
+    for line in lines:
+        key = (line.page, line.column)
+        if key in cover and _BACK_COVER.match(line.text):
+            inside.add(key)
+        if key not in inside:
+            kept.append(line)
+    return kept
+
+
+def _quotes(text: str) -> int:
+    """Quotation marks opened and not closed in a line ('««' is a misprint for '«')."""
+    return re.sub('«+', '«', text).count('«') - text.count('»')
 
 
 def amendment_action(text: str) -> Optional[str]:
@@ -71,8 +101,11 @@ class DiarioRepublicaParser(Parser):
 
     def parse(self, file: str, **options) -> 'DiarioRepublicaParser':
         lines, _, width = read_lines(file)
-        lines = [line for line in lines if not _HEADER.search(line.text)]
-        lines = self._own_lines(lines)
+        if not lines:
+            raise FileLoadError(f"{file} has no text layer (a scanned issue); it cannot be read without OCR")
+        # Page furniture, and the reference printed sideways in the margin since 2021
+        lines = [line for line in lines if not _HEADER.search(line.text) and line.size >= 5]
+        lines = self._own_lines(_without_back_cover(lines))
         self.width = width
         self.frames = frames(lines)
         start = self._read_front(lines)
@@ -106,6 +139,11 @@ class DiarioRepublicaParser(Parser):
         return (line.x0 > left + 15 and line.x1 < right - 5
                 and abs((line.x0 + line.x1) / 2 - (left + right) / 2) <= tolerance)
 
+    def _heading(self, line: Line) -> bool:
+        """An article heading: centred, and bold or shorter than a full line of text."""
+        left, right = self.frames.get((line.page, line.column), (0.0, self.width))
+        return self._centred(line) and (line.bold or line.x1 - line.x0 < 0.75 * (right - left))
+
     def _new_paragraph(self, line: Line, previous: Optional[str] = None) -> bool:
         """An indented line after the end of a sentence starts a paragraph (a deeper hanging indent does not)."""
         left, _ = self.frames.get((line.page, line.column), (0.0, self.width))
@@ -115,8 +153,8 @@ class DiarioRepublicaParser(Parser):
 
     def _read_front(self, lines: list[Line]) -> int:
         """Designation, date, summary, long title, preamble and enacting clause; returns where the body starts."""
-        first = next((i for i, line in enumerate(lines) if _ARTICLE.match(line.text) or _DIVISION.match(line.text)),
-                     len(lines))
+        first = next((i for i, line in enumerate(lines) if _ARTICLE.match(line.text) or _DIVISION.match(line.text)
+                      or (line.bold and _GROUP.match(line.text))), len(lines))
         designation = 0 if lines and _DESIGNATION.match(lines[0].text) else None
         start = 0
         if designation is not None:
@@ -131,7 +169,9 @@ class DiarioRepublicaParser(Parser):
         for line in lines[start:first]:
             # The summary, the long title and the preamble differ in size and weight
             new_style = (line.size, line.bold)
-            indented = line.size == body_size and not line.bold and self._new_paragraph(line)
+            # ('Sumário: ...' wraps with a hanging indent: only an indent after a sentence starts a paragraph)
+            indented = (line.size == body_size and not line.bold
+                        and self._new_paragraph(line, paragraphs[-1][-1] if paragraphs else None))
             if not paragraphs or new_style != style or indented:
                 paragraphs.append([line.text])
             else:
@@ -139,7 +179,7 @@ class DiarioRepublicaParser(Parser):
             style = new_style
         texts = [join_lines(paragraph) for paragraph in paragraphs]
         enacting = next((i for i in range(len(texts) - 1, -1, -1)
-                         if re.search(r'\b(decreta|aprova|determina|manda)\b.*o seguinte:?$', texts[i])), None)
+                         if re.search(r'\b(decreta|aprova|determina|manda)\b.*\bseguinte:?$', texts[i])), None)
         if enacting is not None:
             self.formula = texts[enacting]
             texts = texts[:enacting]
@@ -200,7 +240,7 @@ class DiarioRepublicaParser(Parser):
                     flush_paragraph()
                 quoting_paragraph['inside'] = True
                 paragraph.append(text)
-                quoting += text.count('«') - text.count('»')
+                quoting += _quotes(text)
                 if quoting <= 0:
                     quoting = 0
                     flush_paragraph()
@@ -209,26 +249,37 @@ class DiarioRepublicaParser(Parser):
             if text.startswith('«') and article is not None and annex is None:
                 # Text quoted by an amendment, possibly over several lines
                 flush_paragraph()
-                quoting = max(text.count('«') - text.count('»'), 0)
+                quoting = max(_quotes(text), 0)
                 quoting_paragraph['inside'] = True
                 paragraph.append(text)
                 if not quoting:
                     flush_paragraph()
                     quoting_paragraph['inside'] = False
                 continue
+            # A text republished after the signatures without 'ANEXO' ('CONSTITUIÇÃO DA REPÚBLICA PORTUGUESA')
+            republished = (annex is None and closing and line.bold and text.isupper() and len(text) > 15
+                           and ',' not in text)
             if annex is None and (closing or (_CLOSING.match(text) and article is not None)):
-                if not _ANNEX.match(text):
+                if not _ANNEX.match(text) and not republished:
                     closing.append(text)
                     continue
-            if _ANNEX.match(text) and (article is not None or closing):
+            # 'ANEXO' then 'MAPA I' is one annex; a republished act keeps its own annexes
+            inner = annex is not None and (annex['republication'] or (
+                self.annexes[-1]['heading'] is None and not annex['children'].children))
+            if (_ANNEX.match(text) and (article is not None or closing) and not inner) or republished:
                 flush_article()
-                annex = {'num': text, 'heading': None, 'children': ChildrenBuilder()}
+                flush_paragraph()
+                annex = {'num': text, 'heading': None, 'children': ChildrenBuilder(), 'republication': republished}
                 self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}', 'num': text, 'heading': None,
                                      'children': annex['children'].children})
                 continue
+            if annex is not None and text.startswith('Republicação') and not annex['children'].children:
+                annex['republication'] = True
             if annex is not None:
                 if self.annexes[-1]['heading'] is None and self._centred(line) and not annex['children'].children:
                     self.annexes[-1]['heading'] = text
+                    # An approved code ('CÓDIGO DO TRABALHO') keeps its own annexes
+                    annex['republication'] = annex['republication'] or (text.isupper() and len(text) > 10)
                     continue
                 if self._new_paragraph(line, last) or self._centred(line):
                     flush_paragraph()
@@ -238,6 +289,13 @@ class DiarioRepublicaParser(Parser):
             if match:
                 flush_article()
                 division = body.division(DIVISIONS[match.group('kind')], text, token=match.group('num'))
+                continue
+            match = _GROUP.match(text)
+            if match and line.bold:
+                # 'I — Alterações à Constituição': the parts of a revision law
+                flush_article()
+                division = body.division('part', match.group('num'), heading=match.group('heading'),
+                                         token=match.group('num'))
                 continue
             match = _ARTICLE.match(text)
             if match:
@@ -253,7 +311,7 @@ class DiarioRepublicaParser(Parser):
                 continue
             if article is None:
                 continue
-            if expect_heading and self._centred(line) and not _PARAGRAPH.match(text):
+            if expect_heading and self._heading(line) and not _PARAGRAPH.match(text):
                 article['heading'] = f"{article['heading']} {text}" if article['heading'] else text
                 continue
             expect_heading = False

@@ -101,8 +101,14 @@ class PisrsParser(Parser):
         closing: list[str] = []
         quoting = 0
         amended_act: Optional[str] = None
-        # The notice of a consolidated version runs up to the title
+        # The notice of a consolidated version runs up to the title; in an act without one, text above the
+        # title is a preamble ('Izhajajoč iz ... sprejema Skupščina Republike Slovenije USTAVO ...')
         first_title = next((i for i, block in enumerate(blocks) if 'naslov' in _classes(block)), 0)
+        notice = any('obsega:' in _text(block) or 'opozorilo' in _classes(block) for block in blocks[:first_title])
+        preamble = [_text(block) for block in blocks[:first_title] if not notice and _text(block)
+                    and not set(_classes(block)) & {'pravna_podlaga', *EDITORIAL}]
+        if preamble:
+            self.recitals = [{'eId': 'rct_1', 'text': ' '.join(preamble)}]
 
         def flush() -> None:
             nonlocal article
@@ -126,7 +132,13 @@ class PisrsParser(Parser):
                 children.extend(text)
                 quoting = max(quoting + text.count('»') - text.count('«'), 0)
                 continue
-            if 'naslov' in classes and article is None and not body.articles:
+            if 'priloga' in classes:
+                # 'Priloga 1: Oblika knjige pripomb in pohval', a link to the annex's own file
+                flush()
+                number, _, heading = text.partition(':')
+                self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}', 'num': number.strip(),
+                                     'heading': heading.strip() or None, 'children': []})
+            elif 'naslov' in classes and article is None and not body.articles:
                 # A title set with spaced letters ('Z A K O N') reads as one word
                 title.append(re.sub(r'(?<=\b\w) (?=\w\b)', '', text) if re.fullmatch(r'(\w )+\w', text) else text)
             elif 'pravna_podlaga' in classes:

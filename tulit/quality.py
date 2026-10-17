@@ -22,6 +22,7 @@ WARNING = 'warning'
 ACTIONS = {'replace', 'insert', 'add', 'delete', 'amend', 'repeal', 'renumber', 'substitute'}
 _MARKUP = re.compile(r'<\s*/?\s*[a-zA-Z][a-zA-Z0-9:_-]*(\s[^<>]*)?/?>|&(?:[a-zA-Z]{2,8}|#\d{2,5}|#x[0-9a-fA-F]{2,4});')
 _DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+_ABBREVIATION = re.compile(r'\b[^\W\d_]{1,3}\.$')
 _BAD_CHARACTERS = re.compile(r'[�\x00-\x08\x0b\x0c\x0e-\x1f]')
 
 
@@ -135,8 +136,11 @@ def check(doc: dict[str, Any], expect_articles: bool = True) -> list[Problem]:
     for article in articles:
         seen = set()
         for child in article.get('children') or []:
+            cut = False
             for sentence in re.split(r'(?<=[.;:])\s+', child.get('text') or ''):
-                if len(sentence) >= 25 and sentence not in seen:
+                # Pieces cut at an abbreviation ('(Dz.', 'str.', 'Z. z.') are parts of a citation, not a header
+                cut, after_cut = bool(_ABBREVIATION.search(sentence)), cut
+                if len(sentence) >= 25 and sentence not in seen and not cut and not after_cut:
                     seen.add(sentence)
                     lines[sentence] += 1
     threshold = max(5, len(articles) // 4)

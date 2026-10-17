@@ -50,7 +50,8 @@ class IrishStatuteBookClient(Client):
         except ContentTypeError:
             raise
         except requests.HTTPError as e:
-            self.logger.error(f"HTTP error: {e} - {getattr(e.response, 'text', '')}")
+            # The body of an error is a whole HTML page: the status line says enough
+            self.logger.error(f"HTTP error: {e}")
             return None
         except Exception as e:
             self.logger.error(f"Error downloading ISB act: {e}")

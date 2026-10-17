@@ -47,10 +47,10 @@ class LegiluxClient(Client):
         if response.status_code == 200:
             file_paths.append(self.handle_response(response, filename=filename))
             self.logger.info(f"Document downloaded successfully and saved to {file_paths}")
-            print(f"Document downloaded successfully and saved to {file_paths}")
+            self.logger.info(f"Document downloaded successfully and saved to {file_paths}")
             return file_paths
         else:
             self.logger.error(f"Failed to download document. Status code: {response.status_code}")
-            print(f"Failed to download document. Status code: {response.status_code}")
+            self.logger.error(f"Failed to download document. Status code: {response.status_code}")
             sys.exit(1)
             return None

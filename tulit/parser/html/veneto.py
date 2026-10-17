@@ -33,12 +33,12 @@ class VenetoHTMLParser(HTMLParser):
             preface_element = self.root.find('title')
             if preface_element:
                 self.preface = preface_element.get_text(separator=' ', strip=True)
-                print("Preface extracted successfully.")
+                self.logger.info("Preface extracted successfully.")
             else:
                 self.preface = None
-                print("No preface found.")
+                self.logger.warning("No preface found.")
         except Exception as e:
-            print(f"Error extracting preface: {e}")
+            self.logger.error(f"Error extracting preface: {e}")
     
             
     def get_preamble(self):

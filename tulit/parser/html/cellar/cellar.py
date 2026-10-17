@@ -49,9 +49,13 @@ class CellarHTMLParser(HTMLParser):
             The extracted preface is stored in the 'preface' attribute.
         """
         try:
+            # elements consumed by structured components; the attachment
+            # sweep must not capture them a second time
+            self._consumed_ids = set()
             preface_element = self.root.find('div', class_='eli-main-title')
             if preface_element:
                 self.preface = self._normalize_text(preface_element.get_text(separator=' ', strip=True))
+                self._consumed_ids.add(id(preface_element))
                 self.logger.info("Preface extracted successfully")
             else:
                 self.preface = None
@@ -77,6 +81,7 @@ class CellarHTMLParser(HTMLParser):
         self.preamble = self.root.find('div', id=lambda x: bool(x) and x.startswith('pbl'))
         if self.preamble is None:
             return
+        getattr(self, '_consumed_ids', set()).add(id(self.preamble))
         # Footnotes are dropped act-side by design; inline markers (the
         # anchor text) stay with the sentence that carries them
         for note in self.preamble.find_all('p', class_='oj-note'):
@@ -160,6 +165,14 @@ class CellarHTMLParser(HTMLParser):
                     'eId': f'rct_{m.group(1)}',
                     'text': self._normalize_text(m.group(2).strip()),
                 })
+                continue
+            # bare 'whereas …' recitals (agreements, older drafting)
+            m = re.match(r'^whereas[,:]?\s+(.+)', text, re.IGNORECASE | re.DOTALL)
+            if m:
+                self.recitals.append({
+                    'eId': f'rct_{len(self.recitals) + 1}',
+                    'text': self._normalize_text(m.group(1).strip()),
+                })
 
     def get_preamble_final(self) -> None:
         """
@@ -196,12 +209,15 @@ class CellarHTMLParser(HTMLParser):
         if self.body is None:
             self.body = self.root
             self.logger.warning("Body element not found. Using root as fallback")
+        if self.body is not None and str(self.body.get('id') or '').startswith('enc'):
+            getattr(self, '_consumed_ids', set()).add(id(self.body))
 
     # ELI subdivision id prefixes used by OJ HTML for divisions above
     # article level, mapped to their type
     _DIVISION_PREFIXES = {
         'prt': 'part',
         'tit': 'title',
+        'tis': 'title',
         'cpt': 'chapter',
         'sct': 'section',
         'sbs': 'subsection',
@@ -232,12 +248,26 @@ class CellarHTMLParser(HTMLParser):
 
         divisions = self.body.find_all('div', id=self._is_division_id)
         self.chapters = []
+        consumed = getattr(self, '_consumed_ids', set())
         for division in divisions:
+            if 'eli-main-title' in (division.get('class') or []):
+                continue
             eId = division.get('id')
-            num_elem = division.find('p', class_=lambda c: c and c.startswith('oj-ti-section'))
+            section_ps = division.find_all(
+                'p', class_=lambda c: c and c.startswith('oj-ti-section'), limit=2)
             title_elem = division.find('div', class_='eli-title')
-            num = num_elem.get_text(strip=True) if num_elem else None
-            heading = title_elem.get_text(strip=True) if title_elem else None
+            num = section_ps[0].get_text(strip=True) if section_ps else None
+            if title_elem is not None:
+                heading = title_elem.get_text(strip=True)
+                consumed.add(id(title_elem))
+            elif len(section_ps) > 1:
+                # older layouts carry the heading as a second section title
+                heading = section_ps[1].get_text(strip=True)
+                consumed.add(id(section_ps[1]))
+            else:
+                heading = None
+            if section_ps:
+                consumed.add(id(section_ps[0]))
             if num is None and heading is None:
                 continue
             self.chapters.append({
@@ -310,9 +340,15 @@ class CellarHTMLParser(HTMLParser):
         div: attached agreement texts, decision summaries, sequence
         headings. Division numbers/headings (captured as chapters) and
         footnotes are excluded."""
-        if self.body is None or not str(self.body.get('id') or '').startswith('enc'):
-            # only meaningful when the body is a real enacting-terms div —
-            # the whole-container fallback would sweep preamble/annex text
+        if self.body is None:
+            return []
+        if not str(self.body.get('id') or '').startswith('enc'):
+            # no enacting-terms div anywhere (interinstitutional
+            # agreements): the non-structured remainder of the act
+            # container IS the enacting content
+            containers = self._act_containers()
+            if containers:
+                return self._attachment_blocks(containers[0], skip_main_subdivs=True)
             return []
 
         def in_article(el):
@@ -361,6 +397,7 @@ class CellarHTMLParser(HTMLParser):
         self.articles = []
         for article in articles:
             eId = article.get('id')  # Treat the id as the eId
+            getattr(self, '_consumed_ids', set()).add(id(article))
             
             # Try original document format first (oj-ti-art), then consolidated format (title-article-norm)
             article_num_elem = article.find('p', class_='oj-ti-art')
@@ -547,8 +584,18 @@ class CellarHTMLParser(HTMLParser):
         if conclusions_element is None:
             conclusions_element = self.root.find('div', class_='oj-final')
         if conclusions_element:
+            getattr(self, '_consumed_ids', set()).add(id(conclusions_element))
             texts = []
-            for el in conclusions_element.find_all(['p']):
+            for el in conclusions_element.find_all(['p', 'table']):
+                if el.name == 'table':
+                    if el.find_parent('table'):
+                        continue
+                    t = self._table_text(el, keep_notes=False)
+                    if t:
+                        texts.append(t)
+                    continue
+                if el.find_parent('table'):
+                    continue
                 if 'oj-note' in (el.get('class') or []):
                     continue
                 t = ' '.join(el.get_text(separator=' ', strip=True).split())
@@ -586,8 +633,11 @@ class CellarHTMLParser(HTMLParser):
                 classes = [str(c) for c in (child.get('class') or [])]
                 if 'oj-note' in classes or any(c.startswith('oj-hd') for c in classes):
                     continue
-                if skip_main_subdivs and name == 'div' and \
-                        cid.startswith(self._ACT_SUBDIV_PREFIXES):
+                if skip_main_subdivs and \
+                        id(child) in getattr(self, '_consumed_ids', set()):
+                    # this element's text already lives in another
+                    # component (preface, preamble, articles, chapters
+                    # headings, conclusions)
                     continue
                 if name == 'table':
                     if child.find('p', class_=lambda c: bool(c) and str(c).startswith('oj-hd')):
@@ -641,7 +691,7 @@ class CellarHTMLParser(HTMLParser):
         """
         self.annexes = []
         annex_divs = self.root.find_all(
-            'div', id=lambda x: bool(x) and re.fullmatch(r'anx[\w.]*', x) is not None)
+            'div', id=lambda x: bool(x) and x.startswith('anx'))
         # keep only top-level annexes: a nested anx div (annex to an
         # annexed act) is already covered by its enclosing annex
         annex_divs = [a for a in annex_divs if a.find_parent(
@@ -686,10 +736,16 @@ class CellarHTMLParser(HTMLParser):
         # The wrapper level (content between containers, e.g. sequence
         # titles of annex groups) counts as attached material too.
         containers = self._act_containers()
+        first_has_enc = bool(containers) and containers[0].find(
+            'div', id=lambda x: bool(x) and x.startswith('enc')) is not None
         regions = [(c, i == 0) for i, c in enumerate(containers)]
         wrapper = self._wrapper_blocks()
         att = 0
         for container, is_first in regions:
+            if is_first and not first_has_enc:
+                # without an enc div the remainder is enacting content
+                # (captured as a pseudo-article), not an attachment
+                continue
             blocks = self._attachment_blocks(container, skip_main_subdivs=is_first)
             if not blocks:
                 continue

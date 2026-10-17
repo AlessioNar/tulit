@@ -11,6 +11,6 @@ WHERE {
            cdm:manifestation_type ?format.
     ?cellarURIs cdm:item_belongs_to_manifestation ?manif.
 
-    FILTER(str(?format)="xhtml" && str(?langCode)="ENG")
+    FILTER(str(?format)="xhtml" && str(?langCode)="{LANG}")
 }
 ORDER BY ?cellarURIs

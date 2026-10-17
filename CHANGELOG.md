@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-10-17
+### Added
+
+- **`tulit.fetch()`**: one call turns a CELEX number into validated legalJSON. It downloads the act from Cellar in the requested format (`fmx4`, `xhtml`, `html`) and language, parses it with the matching parser, attaches the work metadata as `meta` and validates the result against the legalJSON schema.
+- **Command-line interface**: `tulit get <CELEX>` downloads an act as legalJSON, `tulit parse <path> --format <id>` converts local files, and `tulit formats` lists the available parsers. Also available as `python -m tulit`.
+- **Cellar metadata**: `CellarClient.get_metadata()` returns the legalJSON `meta` object for an act: ELI, Cellar UUID, document date, in-force status and the acts it amends, repeals and corrects.
+- **Language selection**: `CellarClient.download()` takes a `language` argument (three-letter code, default `ENG`) instead of always downloading English.
+
+### Fixed
+
+- **Parser registry**: `get_parser_registry()` returned an empty registry, so `get_parser()` could not work. The built-in parsers are now registered under format ids and aliases (`formex`/`fmx4`, `akn`, `xhtml`, `html`, ...). `register_parser()` no longer raises `TypeError`, and `create_akn_parser()` falls back to the standard parser as intended.
+- **Logging**: clients no longer call `logging.basicConfig`, which printed INFO logs in every application using tulit; the proposal, Veneto and Formex parsers and the Legilux client log through loggers instead of `print()`. `log_dir` is now optional for all clients.
+- **Formex paragraph text**: block elements are separated when article text is flattened, so paragraphs read `1. This Regulation ...` instead of `1.This Regulation ...` and list points `(a) first` instead of `(a)first`.
+
+### Changed
+
+- The getting-started guide is rewritten around `fetch`, the CLI and the legalJSON structure, with examples checked against the current API.
+
 ## [0.6.0] - 2026-10-17
 ### Added
 

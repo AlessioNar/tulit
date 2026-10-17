@@ -18,6 +18,11 @@ beautifulsoup4 = "^4.9.3"
 lxml = "^6.1.0"
 
 jsonschema = "^4.24.0"
+pdfplumber = {version = ">=0.11", optional = true}
+
+[tool.poetry.extras]
+pdf = ["pdfplumber"]
+
 [tool.poetry.scripts]
 tulit = "tulit.cli:main"
 

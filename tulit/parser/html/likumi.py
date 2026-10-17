@@ -36,12 +36,16 @@ SKIP_CLASSES = ('notify-msg', 'labojumu_pamats', 'panta-doc-npk', 'info-icon-wra
                 'p_id')
 _ARTICLE_LINE = re.compile(r'^(?P<num>\d+\.(?:\s?\d+\.?)?\s*pants)\.?\s*(?P<heading>.*)$')
 _PARAGRAPH = re.compile(r'^\((?P<num>\d+(?:\.\d+)?)\)\s')
-_DIVISION = re.compile(r'^(?P<num>[IVXLC]+|\d+)\.?\s*(?P<kind>daļa|nodaļa|apakšnodaļa|iedaļa)\b', re.IGNORECASE)
+ORDINALS = ('pirmā', 'otrā', 'trešā', 'ceturtā', 'piektā', 'sestā', 'septītā', 'astotā', 'devītā', 'desmitā',
+            'vienpadsmitā', 'divpadsmitā', 'trīspadsmitā', 'četrpadsmitā', 'piecpadsmitā')
+_DIVISION = re.compile(r'^(?P<num>[IVXLC]+|\d+|[A-Z]|' + '|'.join(ORDINALS) + r')\.?\s*'
+                       r'(?P<kind>daļa|sadaļa|nodaļa|apakšnodaļa|iedaļa)\b', re.IGNORECASE)
 ANNEX_HEADINGS = ('Pārejas noteikumi', 'Informatīvā atsauce uz Eiropas Savienības direktīvām',
                   'Informatīvā atsauce uz Eiropas Savienības direktīvu', 'Noslēguma jautājumi')
 _POINT = re.compile(r'^(?P<num>\d+(?:\.\d+)?)\.\s+(?P<rest>\S.*)$')
 _AMENDED_ACT = re.compile(r'^Izdarīt (?P<act>.+?)\s*(?:\(.*)?šādu[s]? grozījum', re.IGNORECASE)
-DIVISIONS = {'daļa': 'part', 'nodaļa': 'chapter', 'apakšnodaļa': 'section', 'iedaļa': 'subsection'}
+DIVISIONS = {'daļa': 'part', 'sadaļa': 'title', 'nodaļa': 'chapter', 'apakšnodaļa': 'section',
+             'iedaļa': 'subsection'}
 
 
 # Amending phrases, checked in order
@@ -52,8 +56,16 @@ ACTIONS = (
 
 
 def amendment_action(text: str) -> Optional[str]:
-    """'Izteikt 5. pantu šādā redakcijā:' -> 'replace'; 'Izslēgt 7. pantu.' -> 'delete'."""
-    lowered = text.lower()
+    """
+    'Izteikt 5. pantu šādā redakcijā:' -> 'replace'; 'Izslēgt 7. pantu.' -> 'delete'.
+
+    Only an instruction counts, i.e. a sentence opening with its verb ('papildinātā' in
+    an ordinary sentence is not one).
+    """
+    lowered = re.sub(r'^\d+(\.\d+)*\.\s*', '', text.strip()).lower()
+    if not re.match(r'^(izteikt|papildināt|aizstāt|izslēgt|svītrot|atzīt|grozīt|aizvietot|'
+                    r'(?:[^.:;]{0,120}?)\b(?:izteikt|papildināt|aizstāt|izslēgt|svītrot)\b)', lowered):
+        return None
     for phrase, action in ACTIONS:
         if phrase in lowered:
             return action
@@ -90,6 +102,7 @@ def _classes(element: etree._Element) -> list[str]:
     return (element.get('class') or '').split()
 
 
+_GAZETTE_FORMULA = re.compile(r'(ir pieņēmusi un Valsts prezidents izsludina|Ministru kabinets noteic)')
 _CLOSING = re.compile(r'^(Likums|Grozījumi|Noteikumi) (Saeimā )?pieņemt[si]')
 _REGULATION_CHAPTER = re.compile(r'^(?P<num>[IVXLC]+)\.\s+(?P<heading>\S.*)$')
 
@@ -98,7 +111,10 @@ def _division(number: str, heading: Optional[str]) -> Optional[tuple[str, str, O
     """Kind, number, heading and token of a division heading, or None when it is not one."""
     match = _DIVISION.match(number)
     if match:
-        return DIVISIONS.get(match.group('kind').lower(), 'chapter'), number, heading, match.group('num')
+        token = match.group('num')
+        if token.lower() in ORDINALS:
+            token = str(ORDINALS.index(token.lower()) + 1)
+        return DIVISIONS.get(match.group('kind').lower(), 'chapter'), number, heading, token
     # A regulation's chapter: 'I. Vispārīgie jautājumi'
     match = _REGULATION_CHAPTER.match(number)
     if match and not heading:
@@ -257,6 +273,7 @@ class LikumiParser(Parser):
         recitals: list[str] = []
         amended_act: Optional[str] = None
         quoting = False
+        pending: Optional[dict[str, Any]] = None
 
         def flush() -> None:
             nonlocal article
@@ -290,11 +307,20 @@ class LikumiParser(Parser):
                 target.extend(text)
                 quoting = odd_quotes
                 continue
-            if ('lik_c' in classes or 'lik_noteik' in classes or 'lik_dat' in classes) and not body.articles \
-                    and article is None:
+            if pending is not None and not _ARTICLE_LINE.match(text) and not _DIVISION.match(text) \
+                    and len(text) < 200 and article is None:
+                # The heading of a division, on the line after its number (older issues)
+                pending['heading'] = f"{pending['heading']} {text}" if pending.get('heading') else text
+                continue
+            pending = None
+            if ('lik_c' in classes or 'lik_noteik' in classes or 'lik_dat' in classes
+                    or _GAZETTE_FORMULA.search(text)) and not body.articles and article is None:
                 # The enacting formula, or a regulation's number, place and date
                 self.formula = f'{self.formula} {text}' if self.formula else text
-            elif block.tag == 'h3' and self.preface is None:
+            elif self.preface is None and (block.tag == 'h3' or (
+                    self.formula and not body.articles and not body.chapters and article is None
+                    and not _DIVISION.match(text) and not _ARTICLE_LINE.match(text))):
+                # The title: a heading, or in older issues the line after the enacting formula
                 self.preface = text
             elif 'lik_izd' in classes:
                 # The legal basis of a regulation ('Izdoti saskaņā ar ...')
@@ -314,7 +340,7 @@ class LikumiParser(Parser):
             elif 'lik_paraksts' in classes or signature or (
                     (article is not None or body.articles) and _right_aligned(block)):
                 signature.append(text)
-            elif block.tag == 'h4' or _centred_bold(block):
+            elif block.tag == 'h4' or _centred_bold(block) or (_DIVISION.match(text) and len(text) < 200):
                 flush()
                 number, heading = _split_heading(block, text)
                 division = _division(number, heading)
@@ -325,7 +351,8 @@ class LikumiParser(Parser):
                     continue
                 annex = None
                 kind, number, heading, token = division
-                body.division(kind, number, heading=heading, token=token)
+                chapter = body.division(kind, number, heading=heading, token=token)
+                pending = chapter if not heading else None
             elif annex is not None:
                 if re.match(r'^\d+(\.\d+)*\.\s', text) or not annex.children:
                     annex.add(text)
@@ -337,7 +364,8 @@ class LikumiParser(Parser):
             elif closing or _CLOSING.match(text):
                 closing.append(text)
             elif (match := _ARTICLE_LINE.match(text)) and (block.find('.//b') is not None
-                                                           or 'bold' in (block.get('style') or '')):
+                                                           or 'bold' in (block.get('style') or '')
+                                                           or len(text) < 250):
                 flush()
                 number = re.sub(r'[^\d.]', '', match.group('num')).strip('.')
                 article = {'num': match.group('num'), 'heading': match.group('heading') or None,

@@ -45,7 +45,8 @@ markers = [
     "e2e: End-to-end tests",
     "client: Client download tests",
     "parser: Parser functionality tests",
-    "slow: Slow running tests"
+    "slow: Slow running tests",
+    "corpus: Live corpus of real acts per jurisdiction (run with --corpus)"
 ]
 [build-system]
 requires = ["poetry-core"]

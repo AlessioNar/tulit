@@ -41,13 +41,14 @@ def _register_builtin_sources() -> None:
     from tulit.sources.cy import CyprusSource
     from tulit.sources.bg import BulgariaSource
     from tulit.sources.fr import FranceSource
+    from tulit.sources.ro import RomaniaSource
 
     for source in (EUSource(), AustriaSource(), DenmarkSource(), NetherlandsSource(),
                    SlovakiaSource(), FinlandSource(), SpainSource(), LuxembourgSource(),
                    IrelandSource(), GermanySource(), EstoniaSource(), PolandSource(),
                    SwedenSource(), CroatiaSource(), CzechiaSource(), MaltaSource(),
                    PortugalSource(), LatviaSource(), BelgiumSource(),
-                   CyprusSource(), BulgariaSource(), FranceSource()):
+                   CyprusSource(), BulgariaSource(), FranceSource(), RomaniaSource()):
         _sources.setdefault(source.code, source)
 
 

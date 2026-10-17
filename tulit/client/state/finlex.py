@@ -12,7 +12,7 @@ class FinlexClient(Client):
     """
     BASE_URL = "https://opendata.finlex.fi/finlex/avoindata/v1"
 
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.session = requests.Session()
         self.session.headers.update({

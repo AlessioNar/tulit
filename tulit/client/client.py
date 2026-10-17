@@ -8,7 +8,7 @@ class Client:
     """	
     A generic document downloader class.
     """	
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         """
         Initializes the downloader with directories for downloads and logs.
         
@@ -16,24 +16,36 @@ class Client:
         ----------
         download_dir : str
             Directory where downloaded files will be saved.
-        log_dir : str
-            Directory where log files will be saved.
+        log_dir : str, optional
+            Directory where a ``client.log`` file is written. When omitted,
+            log records go only to the handlers the application configures.
         """
         self.download_dir = download_dir
         self.log_dir = log_dir
         self.proxies = proxies
         self.logger = logging.getLogger(self.__class__.__name__)
         self._ensure_directories()
-        # Set up logging to file and console if not already set
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s %(levelname)s %(name)s %(message)s',
-            handlers=[
-                logging.FileHandler(os.path.join(self.log_dir, 'client.log'), encoding='utf-8'),
-                logging.StreamHandler()
-            ]
-        )
+        if self.log_dir:
+            self._add_file_handler(os.path.join(self.log_dir, 'client.log'))
         self.logger.info('Client initialized with download_dir=%s, log_dir=%s', self.download_dir, self.log_dir)
+
+    def _add_file_handler(self, log_file):
+        """
+        Attach a file handler to this client's logger, once per log file.
+
+        The library never configures the root logger, so applications keep
+        control over console output and log levels.
+        """
+        log_file = os.path.abspath(log_file)
+        for handler in self.logger.handlers:
+            if isinstance(handler, logging.FileHandler) and handler.baseFilename == log_file:
+                return
+        handler = logging.FileHandler(log_file, encoding='utf-8')
+        handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(name)s %(message)s'))
+        handler.setLevel(logging.INFO)
+        self.logger.addHandler(handler)
+        if self.logger.level == logging.NOTSET or self.logger.level > logging.INFO:
+            self.logger.setLevel(logging.INFO)
 
     def _ensure_directories(self):
         """
@@ -42,7 +54,7 @@ class Client:
         if not os.path.exists(self.download_dir):
             os.makedirs(self.download_dir)
             self.logger.info('Created download directory: %s', self.download_dir)
-        if not os.path.exists(self.log_dir):
+        if self.log_dir and not os.path.exists(self.log_dir):
             os.makedirs(self.log_dir)
             self.logger.info('Created log directory: %s', self.log_dir)
     

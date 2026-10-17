@@ -21,7 +21,7 @@ class GermanyClient(Client):
     API Documentation: https://docs.rechtsinformationen.bund.de/
     """
     
-    def __init__(self, download_dir, log_dir, proxies=None):
+    def __init__(self, download_dir, log_dir=None, proxies=None):
         """
         Initialize the Germany RIS client.
         

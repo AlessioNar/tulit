@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
+import logging
 import os
 import shutil
 import tempfile
@@ -15,6 +16,24 @@ class TestClient(unittest.TestCase):
         self.addCleanup(shutil.rmtree, download_dir, ignore_errors=True)
         self.downloader = Client(download_dir=download_dir, log_dir=str(tests_root / 'logs'))
         
+    def test_does_not_configure_root_logging(self):
+        root = logging.getLogger()
+        handlers_before = list(root.handlers)
+        Client(download_dir=self.downloader.download_dir)
+        self.assertEqual(root.handlers, handlers_before)
+
+    def test_log_dir_adds_one_file_handler(self):
+        log_dir = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, log_dir, ignore_errors=True)
+        first = Client(download_dir=self.downloader.download_dir, log_dir=log_dir)
+        Client(download_dir=self.downloader.download_dir, log_dir=log_dir)
+        file_handlers = [h for h in first.logger.handlers if isinstance(h, logging.FileHandler)
+                         and h.baseFilename == os.path.join(os.path.abspath(log_dir), 'client.log')]
+        self.assertEqual(len(file_handlers), 1)
+        for handler in file_handlers:
+            first.logger.removeHandler(handler)
+            handler.close()
+
     def test_get_extension_from_content_type(self):
         content_type_mapping = {
             'text/html': 'html',

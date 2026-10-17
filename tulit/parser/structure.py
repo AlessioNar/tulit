@@ -5,7 +5,7 @@ Parsers that read a document element by element (rather than through a
 format-specific strategy) use ``BodyBuilder`` to get the same output as the
 Formex parser: typed divisions with parent links, the nested ``structure``
 skeleton, and eIds following the EU subdivision authority table used in ELI
-subdivision URIs (prt_, tit_, cpt_, sct_, sbs_, art_, par_, unp_).
+subdivision URIs (``prt_``, ``tit_``, ``cpt_``, ``sct_``, ``sbs_``, ``art_``, ``par_``, ``unp_``).
 """
 import re
 from typing import Any, Iterable, Optional
@@ -22,7 +22,7 @@ DIVISION_TYPES = {
 }
 GENERIC_DIVISION = ('div', 5)
 
-_TOKEN = re.compile(r'[0-9]+[a-zA-Z]*|\b[IVXLCDM]+\b|\b[a-zA-Z]\b')
+_TOKEN = re.compile(r'[0-9]+[a-zA-Z]*|\b[IVXLCDM]+[a-zA-Z]?\b|\b[a-zA-Z]\b')
 
 
 def eid_token(num: Optional[str]) -> Optional[str]:
@@ -77,9 +77,13 @@ class ChildrenBuilder:
         self._used: set[str] = set()
         self._unnumbered = 0
 
-    def add(self, text: str, number: Optional[str] = None) -> dict[str, Any]:
-        """Start a new child; ``number`` is the published paragraph number, if any."""
-        token = eid_token(number)
+    def add(self, text: str, number: Optional[str] = None, token: Optional[str] = None) -> dict[str, Any]:
+        """
+        Start a new child; ``number`` is the published paragraph number, if any.
+
+        ``token`` overrides the number taken from ``number`` for the eId.
+        """
+        token = token or eid_token(number)
         if token:
             eid = self._unique(f'par_{token.lower()}')
         else:
@@ -130,13 +134,17 @@ class BodyBuilder:
         return self._stack[-1][2] if self._stack else None
 
     def division(self, type_: str, num: Optional[str] = None,
-                 heading: Optional[str] = None, token: Optional[str] = None) -> dict[str, Any]:
+                 heading: Optional[str] = None, token: Optional[str] = None,
+                 rank: Optional[int] = None) -> dict[str, Any]:
         """
         Open a division ('part', 'title', 'chapter', 'section', 'subsection').
 
         ``token`` overrides the number taken from ``num`` for the eId.
+        ``rank`` overrides the level of the type, for formats whose nesting
+        is explicit (e.g. its depth in the document tree).
         """
-        prefix, rank = DIVISION_TYPES.get(type_, GENERIC_DIVISION)
+        prefix, type_rank = DIVISION_TYPES.get(type_, GENERIC_DIVISION)
+        rank = type_rank if rank is None else rank
         while self._stack and self._stack[-1][0] >= rank:
             self._stack.pop()
         parent = self.current_division

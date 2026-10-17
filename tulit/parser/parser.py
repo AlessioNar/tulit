@@ -289,6 +289,7 @@ class Parser(ABC):
 
         This version ensures that common non-JSON-native objects are converted to
         JSON-serializable forms. It will:
+
         - Call `.to_dict()` on domain model objects (Citation, Article, etc.) if
           available.
         - Recursively convert lists and dicts.

@@ -200,11 +200,19 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.veneto import VenetoHTMLParser
     from tulit.parser.json.legifrance import LegifranceParser
     from tulit.parser.xml.ris import RISParser
+    from tulit.parser.xml.bgbl_at import BGBlParser
     from tulit.parser.xml.lexdania import LexDaniaParser
     from tulit.parser.xml.bwb import BWBParser
     from tulit.parser.xml.metalex import MetaLexParser
     from tulit.parser.xml.boe_consolidated import BOEConsolidatedParser
     from tulit.parser.xml.irish import IrishActParser
+    from tulit.parser.xml.riigiteataja import RiigiTeatajaParser
+    from tulit.parser.html.sejm import SejmELIParser
+    from tulit.parser.html.riksdagen import RiksdagenSFSParser
+    from tulit.parser.html.narodne_novine import NarodneNovineParser
+    from tulit.parser.json.esbirka import EsbirkaParser
+    from tulit.parser.pdf.malta import MaltaPDFParser
+    from tulit.parser.pdf.portugal import DiarioRepublicaParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -218,11 +226,19 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('veneto', VenetoHTMLParser)
     registry.register('legifrance', LegifranceParser)
     registry.register('ris', RISParser, aliases=['at-ris'])
+    registry.register('ris-bgbl', BGBlParser, aliases=['at-bgbl'])
     registry.register('lexdania', LexDaniaParser, aliases=['dk-lexdania'])
     registry.register('bwb', BWBParser, aliases=['nl-bwb'])
     registry.register('metalex', MetaLexParser, aliases=['sk-metalex'])
     registry.register('boe-consolidated', BOEConsolidatedParser, aliases=['es-boe-consolidated'])
     registry.register('ie-act', IrishActParser, aliases=['isb'])
+    registry.register('riigiteataja', RiigiTeatajaParser, aliases=['ee-rt'])
+    registry.register('pl-eli', SejmELIParser, aliases=['sejm'])
+    registry.register('se-sfs', RiksdagenSFSParser, aliases=['riksdagen'])
+    registry.register('hr-nn', NarodneNovineParser, aliases=['narodne-novine'])
+    registry.register('cz-esbirka', EsbirkaParser, aliases=['esbirka'])
+    registry.register('mt-pdf', MaltaPDFParser, aliases=['malta'])
+    registry.register('pt-dre-pdf', DiarioRepublicaParser, aliases=['dre'])
 
 
 def get_parser_registry() -> ParserRegistry:

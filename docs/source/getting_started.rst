@@ -71,12 +71,29 @@ Options:
 Sources
 -------
 
-Each jurisdiction has one source: EU (Cellar), Austria (RIS), Denmark
-(Retsinformation), Finland (Finlex), Germany (Rechtsinformationen des
-Bundes), Ireland (Irish Statute Book and Revised Acts), Luxembourg
-(Legilux), the Netherlands (Basiswettenbestand), Slovakia (Slov-Lex) and
-Spain (BOE). ``tulit sources`` lists them with the versions, languages and
-identifiers they accept:
+Each jurisdiction has one source: EU (Cellar), Austria (RIS), Croatia
+(Narodne novine), Czechia (e-Sbírka), Denmark (Retsinformation), Estonia
+(Riigi Teataja), Finland (Finlex), Germany (Rechtsinformationen des Bundes),
+Ireland (Irish Statute Book and Revised Acts), Luxembourg (Legilux), Malta
+(Legislation Malta), the Netherlands (Basiswettenbestand and Staatsblad),
+Poland (Sejm ELI API), Portugal (Diário da República), Slovakia (Slov-Lex),
+Spain (BOE) and Sweden (Riksdagen). ``tulit sources`` lists them with the
+versions, languages and identifiers they accept.
+
+Malta and Portugal publish only PDF; reading them needs the ``pdf`` extra:
+
+.. code-block:: console
+
+    $ pip install 'tulit[pdf]'
+
+.. code-block:: python
+
+    tulit.fetch("Cap. 586", jurisdiction="MT")                          # consolidated Chapter
+    tulit.fetch("Lei n.º 58/2019, de 8 de agosto", jurisdiction="PT")   # act as published
+    tulit.fetch("IKS", jurisdiction="EE", version="consolidated", date="2024-06-01")
+    tulit.fetch("BGBl. I Nr. 5/2024", jurisdiction="AT")                 # law as adopted
+
+The sources are listed in code as well:
 
 .. code-block:: python
 

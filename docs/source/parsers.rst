@@ -10,14 +10,20 @@ The formats currently supported are:
   * Formex 4 (EU legislative documents)
   * Akoma Ntoso 3.0 (multiple variants: EU, German LegalDocML, Luxembourg CSD13)
   * BOE XML (Spanish Official Gazette) and BOE consolidated legislation
-  * RIS XML (Austria), LexDania (Denmark), BWB XML (Netherlands),
-    MetaLex (Slovakia) and the Irish Statute Book XML
+  * RIS XML and the Federal Law Gazette (Austria), LexDania (Denmark), BWB
+    and Staatsblad XML (Netherlands), MetaLex (Slovakia), the Irish Statute
+    Book XML and Riigi Teataja XML (Estonia)
+
+* **JSON Formats:** Légifrance, e-Sbírka fragments (Czechia)
+
+* **PDF** (``pdf`` extra): Legislation Malta, Diário da República (Portugal)
 
 * **HTML Formats:**
   
   * Cellar XHTML (semantic structure)
   * Cellar Standard HTML (simple structure)
   * EU Legislative Proposals
+  * Sejm ELI API (Poland), Riksdagen SFS (Sweden), Narodne novine (Croatia)
 
 Core Parser Architecture
 -------------------------
@@ -184,6 +190,22 @@ Structure Builders
      :undoc-members:
      :show-inheritance:
 
+Austrian Federal Law Gazette Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.bgbl_at
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Estonian Riigi Teataja Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.riigiteataja
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 HTML Parsers
 ------------
 
@@ -221,6 +243,70 @@ Other HTML Parsers
     :members:
     :undoc-members:
     :show-inheritance:
+
+Polish Sejm ELI Parser
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.sejm
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Swedish SFS Parser
+~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.riksdagen
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Croatian Narodne Novine Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.narodne_novine
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+JSON Parsers
+------------
+
+Czech e-Sbírka Parser
+~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.json.esbirka
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+PDF Parsers
+-----------
+
+These need the ``pdf`` extra: ``pip install 'tulit[pdf]'``.
+
+PDF Layout
+~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.layout
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Maltese Legislation Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.malta
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Portuguese Diário da República Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.portugal
+     :members:
+     :undoc-members:
+     :show-inheritance:
 
 Article Extraction Strategies
 ------------------------------

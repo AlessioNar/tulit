@@ -111,7 +111,7 @@ class CellarHTMLParser(HTMLParser):
 
     def get_citations(self) -> None:
         """
-        Extracts citations from the HTML: the cit_ subdivisions plus any
+        Extracts citations from the HTML: the ``cit_`` subdivisions plus any
         loose solemn-form paragraphs between them ('Acting in accordance
         with…', 'After consulting…').
         """
@@ -137,7 +137,7 @@ class CellarHTMLParser(HTMLParser):
 
     def get_recitals(self) -> None:
         """
-        Extracts recitals: the rct_ subdivisions plus, for acts with
+        Extracts recitals: the ``rct_`` subdivisions plus, for acts with
         narrative preambles (e.g. State-aid decisions), the loose
         numbered '(N) …' paragraphs. The bare 'Whereas:' line becomes
         recitals_intro.

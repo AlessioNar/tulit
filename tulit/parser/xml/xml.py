@@ -564,8 +564,13 @@ class XMLParser(Parser):
             ('get_conclusions', 'conclusions'),
         ]
         
+        preamble_parts = {'formula', 'citations', 'recitals', 'preamble_final'}
         # Execute each step with standardized error handling
         for method_name, component_name in extraction_steps:
+            if component_name in preamble_parts and getattr(self, 'preamble', None) is None:
+                # Documents without a preamble (e.g. consolidated texts) have none of its parts
+                self.logger.debug("No preamble: skipping %s", component_name)
+                continue
             self._extract_component(method_name, component_name)
     
     def parse(self, file: str, **options) -> 'XMLParser':

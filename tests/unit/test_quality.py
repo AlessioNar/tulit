@@ -46,6 +46,16 @@ def test_markup_and_broken_characters():
     messages = [str(p) for p in _errors(_doc(articles=[article]))]
     assert any('markup left' in m for m in messages)
     assert any('broken or control characters' in m for m in messages)
+    tagged = dict(child, text='A <span class="x">tag</span> with attributes')
+    assert _errors(_doc(articles=[dict(article, children=[tagged])]))
+
+
+def test_angle_bracket_placeholders_are_not_markup():
+    # CLP Annex III: hazard statements with placeholders to fill in
+    child = {'eId': 'par_1', 'amendment': None,
+             'text': 'May damage fertility <state specific effect if known> <state route of exposure>'}
+    article = dict(_doc()['articles'][0], children=[child])
+    assert _errors(_doc(articles=[article])) == []
 
 
 def test_amendments():
@@ -55,6 +65,16 @@ def test_amendments():
     messages = [str(p) for p in _errors(_doc(articles=[article]))]
     assert any("unknown amendment action 'rewrite'" in m for m in messages)
     assert any('no instruction' in m for m in messages)
+
+
+def test_unclassified_amendment_action_is_a_warning():
+    # Quoted text under an instruction whose verb the parser does not know
+    child = {'eId': 'unp_1', 'text': 'In Anhang I wird folgende Nummer angefügt: „68. …“',
+             'amendment': {'action': None, 'instruction': 'In Anhang I wird folgende Nummer angefügt:',
+                           'amended_act': None, 'quoted': [{'kind': 'text', 'text': '68. …'}]}}
+    article = dict(_doc()['articles'][0], children=[child])
+    problems = check(_doc(articles=[article]))
+    assert [(p.severity, p.message) for p in problems] == [(WARNING, 'the amendment action is not identified')]
 
 
 def test_page_header_in_articles():

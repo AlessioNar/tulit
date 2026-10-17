@@ -18,7 +18,7 @@ class PortugalDREClient(Client):
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None, month=None, day=None, region=None, cons_date=None, lang='pt', fmt='html'):
+    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None, month=None, day=None, region=None, cons_date=None, lang='pt', fmt='pdf'):
         """
         Download documents from the Portuguese DRE ELI portal.
         
@@ -47,7 +47,8 @@ class PortugalDREClient(Client):
         lang : str, optional
             Language (default 'pt')
         fmt : str, optional
-            Format: 'html' or 'pdf' (default 'html')
+            Format: 'pdf' (default) or 'html'. The site now renders HTML with
+            JavaScript, so HTML requests fail with ContentTypeError; PDF works.
             
         Returns
         -------
@@ -92,6 +93,12 @@ class PortugalDREClient(Client):
                 raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
             if fmt == 'html' and 'html' not in content_type:
                 raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
+            if fmt in ('html', 'xhtml') and b'OutSystemsApp' in response.content and b'reactContainer' in response.content:
+                # diariodarepublica.pt now renders its pages with JavaScript: the HTML
+                # holds no legal text, only the PDF can be retrieved directly
+                raise ContentTypeError(
+                    "Diário da República returned a JavaScript application page without the text; "
+                    "use fmt='pdf'", content_type)
             if fmt == 'json' and 'json' not in content_type:
                 raise ContentTypeError(f"Expected JSON response but got: {content_type}", content_type)
             if fmt == 'txt' and 'plain' not in content_type:

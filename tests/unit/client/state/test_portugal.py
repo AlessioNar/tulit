@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, Mock
 import os
+import tempfile
 from tulit.client.state.portugal import PortugalDREClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
@@ -69,3 +70,22 @@ class TestPortugalDREClient(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestPortugalJavaScriptShell(unittest.TestCase):
+    @patch('tulit.client.state.portugal.requests.Session.get')
+    def test_html_shell_raises(self, mock_get):
+        from tulit.parser.exceptions import ContentTypeError
+        response = Mock(status_code=200, headers={'Content-Type': 'text/html; charset=utf-8'},
+                        content=b'<html><script>window.OutSystemsApp = {}</script>'
+                                b'<body><div id="reactContainer"></div></body></html>')
+        response.raise_for_status = Mock()
+        mock_get.return_value = response
+        client = PortugalDREClient(download_dir=tempfile.mkdtemp())
+        with self.assertRaises(ContentTypeError):
+            client.download('legal_act', act_type='lei', number='7', year='2009', month='02', day='12',
+                            region='p', fmt='html')
+
+    def test_pdf_is_the_default(self):
+        import inspect
+        assert inspect.signature(PortugalDREClient.download).parameters['fmt'].default == 'pdf'

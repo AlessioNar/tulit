@@ -135,7 +135,7 @@ class BodyBuilder:
 
     def division(self, type_: str, num: Optional[str] = None,
                  heading: Optional[str] = None, token: Optional[str] = None,
-                 rank: Optional[int] = None) -> dict[str, Any]:
+                 rank: Optional[float] = None) -> dict[str, Any]:
         """
         Open a division ('part', 'title', 'chapter', 'section', 'subsection').
 

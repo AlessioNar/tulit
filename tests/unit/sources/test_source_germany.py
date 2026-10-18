@@ -63,11 +63,13 @@ def test_fetch(g115, tmp_path):
     assert [c['eId'] for c in articles['art_1a']['children']][:3] == ['par_1', 'par_2', 'par_3']
 
 
-def test_fetch_rejects_dates_and_originals(tmp_path):
+def test_fetch_rejects_dates(tmp_path):
     with pytest.raises(ValueError):
         tulit.fetch(WORK, jurisdiction='DE', date='2020-01-01', download_dir=str(tmp_path))
+    # An act not promulgated in the Federal Law Gazette has no original version
     with pytest.raises(ValueError):
-        tulit.fetch(WORK, jurisdiction='DE', version='original', download_dir=str(tmp_path))
+        tulit.fetch('eli/bund/hist/1898/0616-403-5', jurisdiction='DE', version='original',
+                    download_dir=str(tmp_path))
 
 
 def test_fetch_unknown_act(tmp_path):

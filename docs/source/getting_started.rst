@@ -76,7 +76,9 @@ Each jurisdiction has one source, all official: the EU (Cellar), Austria
 Croatia (Narodne novine), Cyprus (Official Gazette), Czechia (e-Sbírka),
 Denmark (Retsinformation), Estonia (Riigi Teataja), Finland (Finlex), France
 (Journal officiel and Légifrance, from the DILA open data), Germany
-(Rechtsinformationen des Bundes), Greece (ΦΕΚ), Hungary (Nemzeti
+(Bundesgesetzblatt on recht.bund.de and in the bgbl.de archive for acts as
+promulgated, Rechtsinformationen des Bundes for consolidated law), Greece
+(ΦΕΚ), Hungary (Nemzeti
 Jogszabálytár), Ireland (Irish Statute Book and Revised Acts), Italy
 (Normattiva), Latvia (Latvijas Vēstnesis and Likumi.lv), Lithuania (Teisės
 aktų registras), Luxembourg (Legilux), Malta (Legislation Malta), the
@@ -86,7 +88,8 @@ Legislativ), Slovakia (Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden
 (Svensk författningssamling and the Riksdag open data). ``tulit sources`` lists
 them with the versions, languages and identifiers they accept.
 
-Cyprus, Greece, Malta and Portugal publish PDF, and so does Sweden for acts as
+Cyprus, Greece, Malta and Portugal publish PDF, and so do the German Federal
+Law Gazette (Bundesgesetzblatt) for acts as promulgated and Sweden for acts as
 adopted (the electronic Svensk författningssamling, from SFS 2018:160 of 1 April
 2018; earlier Swedish acts are available only consolidated); reading them needs
 the ``pdf`` extra (Portuguese consolidated texts come as JSON and do not):
@@ -106,6 +109,9 @@ the ``pdf`` extra (Portuguese consolidated texts come as JSON and do not):
     tulit.fetch("ν. 4624/2019", jurisdiction="GR")                      # law as published in the ΦΕΚ
     tulit.fetch("SFS 2018:218", jurisdiction="SE")                      # act as published in the SFS
     tulit.fetch("2018:218", jurisdiction="SE", version="consolidated")  # statute in force today
+    tulit.fetch("BGBl. 2024 I Nr. 149", jurisdiction="DE")              # act as promulgated (since 2023)
+    tulit.fetch("BGBl. 2017 I S. 2097", jurisdiction="DE")              # year, part and first page (1949-2022)
+    tulit.fetch("eli/bund/bgbl-1/2017/s2097", jurisdiction="DE")        # consolidated version in force, by ELI
     tulit.fetch("2011. évi CXII. törvény", jurisdiction="HU",
                 version="consolidated", date="2019-01-01")
     tulit.fetch("https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581")  # Belgium, by ELI
@@ -140,7 +146,8 @@ From Python, ``DilaClient(download_dir).download_dump("LEGI", "dila")`` does the
 same (``tulit.client.state.france_dila``).
 
 Some acts exist only as scanned PDFs without text: the Moniteur belge
-before June 1997 and the Cypriot Official Gazette before about 2015.
+before June 1997, the Cypriot Official Gazette before about 2015 and the
+Bundesgesetzblatt before about 1998.
 ``fetch`` cannot parse them and says so; ``tulit.download`` returns the
 official file of any act, scanned or not, without parsing it:
 

@@ -24,6 +24,7 @@ from pathlib import Path
 import pytest
 
 import tulit
+from tulit.parser.exceptions import NetworkError
 from tulit.quality import ERROR, check, counts
 
 from .conftest import RESULTS
@@ -57,10 +58,19 @@ def test_act(jurisdiction, act, corpus_dir, request):
               'kind': act.get('kind'), 'status': 'error'}
     RESULTS.append(result)
     started = time.monotonic()
+
+    def fetch():
+        return tulit.fetch(act['identifier'], jurisdiction=jurisdiction, version=act.get('version'),
+                           date=act.get('date'), language=act.get('language'),
+                           download_dir=str(corpus_dir / jurisdiction), **(act.get('options') or {}))
+
     try:
-        doc = tulit.fetch(act['identifier'], jurisdiction=jurisdiction, version=act.get('version'),
-                          date=act.get('date'), language=act.get('language'),
-                          download_dir=str(corpus_dir / jurisdiction), **(act.get('options') or {}))
+        try:
+            doc = fetch()
+        except NetworkError:
+            # Some sources (Normattiva, e-seimas) drop connections in bursts: try once more after a pause
+            time.sleep(60)
+            doc = fetch()
     except Exception as e:
         result['failure'] = f'{type(e).__name__}: {e}'
         raise

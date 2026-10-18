@@ -104,6 +104,14 @@ def test_recurring_citation_is_not_a_page_header():
     assert check(_doc(articles=articles, chapters=[])) == []
 
 
+def test_repealed_articles_are_not_a_page_header():
+    articles = [{'eId': f'art_{n}', 'num': f'Art. {n}', 'heading': None, 'parent': None,
+                 'children': [{'eId': 'unp_1', 'text': '((ARTICOLO ABROGATO DAL D.LGS. 10 AGOSTO 2018, N. 101))',
+                               'amendment': None}]}
+                for n in range(1, 9)]
+    assert check(_doc(articles=articles, chapters=[])) == []
+
+
 def test_amending_formulas_are_not_page_headers():
     # An amending act repeats its formulas in every article
     formula = 'alcíme helyébe a következő alcím lép:'

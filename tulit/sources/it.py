@@ -83,10 +83,27 @@ def act_reference(identifier: str) -> dict[str, str]:
 
 
 def _expression_date(path: str) -> Optional[str]:
-    """The date the exported text is in force from (FRBRExpression date)."""
+    """
+    The date the exported text is in force from: the date of its ELI alias ('.../CONSOLIDATED/20260812'),
+    else the FRBRExpression date (which, for a code annexed to its decree, stays the decree's).
+    """
     root = etree.parse(path).getroot()
+    for alias in root.xpath('//*[local-name()="FRBRWork"]/*[local-name()="FRBRalias"][@name="eli"]/@value'):
+        match = re.search(r'/CONSOLIDATED/(\d{4})(\d{2})(\d{2})$', alias)
+        if match:
+            return '-'.join(match.groups())
     found = root.xpath('//*[local-name()="FRBRExpression"]/*[local-name()="FRBRdate"]/@date')
     return found[0] if found else None
+
+
+def _check_kind(urn: str, title: Optional[str]) -> None:
+    """Normattiva answers a URN naming no act with another act of that year and number: refuse it."""
+    kind = urn.split(':')[3] if urn.count(':') >= 4 else ''
+    if not title or kind in ('', 'costituzione'):
+        return
+    expected = kind.replace('.', ' ')
+    if not ' '.join(title.lower().replace('-', ' ').split()).startswith(expected):
+        raise FileLoadError(f"Normattiva has no act {urn} (it answered with '{title}')")
 
 
 class ItalySource(Source):
@@ -117,6 +134,7 @@ class ItalySource(Source):
         client = NormattivaAKNClient(download_dir=download_dir)
         if 'urn' in reference:
             found = client.resolve(reference['urn'])
+            _check_kind(reference['urn'], found.get('title'))
             published, code = found['date'], found['code']
         else:
             published, code = reference['date'], reference['code']

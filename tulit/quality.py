@@ -141,9 +141,14 @@ def check(doc: dict[str, Any], expect_articles: bool = True) -> list[Problem]:
     # Page furniture (running headers, footers) repeated across articles; amending
     # provisions repeat their formulas ('... helyébe a következő alcím lép:')
     lines: Counter = Counter()
+    # Articles whose whole text is the same ('((ARTICOLO ABROGATO DAL ...))') state their repeal
+    whole = Counter(' '.join(c.get('text') or '' for c in a.get('children') or []) for a in articles)
     for article in articles:
         seen = set()
-        for child in article.get('children') or []:
+        children = article.get('children') or []
+        if whole[' '.join(c.get('text') or '' for c in children)] > 1:
+            continue
+        for child in children:
             if child.get('amendment'):
                 continue
             cut = False

@@ -31,7 +31,7 @@ The tulit Client library supports multiple legal document retrieval sources orga
 * **Malta (Legislation Malta)**: Legislation Malta
 * **Netherlands (BWB and Staatsblad)**: Basiswettenbestand, wetten.overheid.nl, and the Staatsblad
 * **Poland (Sejm ELI API)**: Dziennik Ustaw and Monitor Polski
-* **Portugal (Diário da República)**: Diário da República
+* **Portugal (Diário da República)**: Diário da República (PDF by ELI) and its Legislação Consolidada (JSON screen services)
 * **Romania (Portal Legislativ)**: Portal Legislativ web service (Ministry of Justice)
 * **Slovakia (Slov-Lex)**: MetaLex XML
 * **Slovenia (PISRS)**: PISRS (Ministry of Justice)

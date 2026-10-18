@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Live corpus**: 371 real acts across the 28 jurisdictions (at least 11 each), in `tests/corpus/acts/<code>.json`, fetched live with `pytest tests/corpus --corpus [--corpus-jurisdiction XX]` and checked against counts taken from the official texts (articles, divisions, annexes, amendments, recitals, version date). A weekly workflow runs it and keeps `report.json`.
+- **Portuguese consolidated texts**: `version='consolidated'` for Portugal reads the Legislação Consolidada of the Diário da República (the JSON screen services of diariodarepublica.pt), in force today or on a date, by citation with or without its date ('Lei n.º 7/2009'), ELI, consolidated ELI (`https://data.dre.pt/eli/lei/7/2009/p/cons/20250327/pt/html`), page address, or the name of a code ('Código Penal', 'Código do Trabalho'). Books, parts, titles, chapters, sections, divisions and articles with their headings; a code approved in an annex keeps its articles apart (`anx_1__art_5`). A consolidation whose changes enter into force after the date is passed over for the one before. Acts the Diário da República does not consolidate (e.g. Lei n.º 58/2019) raise `FileLoadError`. Originals stay the default.
 - **`tulit.quality`**: `check(doc)` lists what a parser can get wrong while producing schema-valid legalJSON (duplicate or dangling eIds, empty paragraphs, markup or page headers left in the text, malformed amendments, missing or non-ISO metadata); `counts(doc)` gives a document's size.
 
 ### Fixed

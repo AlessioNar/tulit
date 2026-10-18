@@ -36,6 +36,12 @@ def _pdfplumber():
     return pdfplumber
 
 
+def has_text(path: str) -> bool:
+    """Whether a PDF has a text layer: a scanned page holds at most a few characters (a barcode)."""
+    with _pdfplumber().open(path) as pdf:
+        return any(len(page.chars) > 50 for page in pdf.pages[:2])
+
+
 def _lines(page, number: int) -> list[Line]:
     lines = []
     # A tight character tolerance keeps the spaces of narrowly set text

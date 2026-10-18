@@ -4,12 +4,14 @@ Greece: Government Gazette (Εφημερίδα της Κυβερνήσεως, Na
 Laws, presidential decrees and acts of legislative content are published in
 Part A (Τεύχος Α΄) of the Government Gazette; that publication is the
 official text. Greece publishes no official consolidated texts, so only the
-original is available.
+original is available. Older issues, mostly of the 1990s and before, are
+scanned images without text: ``tulit.download`` returns their PDF.
 """
 import re
 from typing import Any, Optional
 
 from tulit.client.state.greece import STORAGE, GovernmentGazetteClient, pdf_url
+from tulit.parser.pdf.layout import has_text
 from tulit.sources.base import ORIGINAL, Retrieval, Source
 
 _LETTERS = {'A': 'Α', 'B': 'Β', 'Γ': 'Γ', 'Δ': 'Δ', 'Α': 'Α', 'Β': 'Β'}
@@ -89,10 +91,14 @@ class GreeceSource(Source):
             'date_publication': issue.get('date_publication'),
             'title': issue.get('title'),
         }
+        # Issues of the 1990s and before are often scanned images without text
+        readable = has_text(path)
+        if not readable:
+            meta['scanned'] = True
         return Retrieval(
             path=path,
-            parser='gr-fek-pdf',
-            parser_options={'number': str(number)} if number else {},
+            parser='gr-fek-pdf' if readable else None,
+            parser_options={'number': str(number)} if number and readable else {},
             version=ORIGINAL,
             language='ell',
             version_date=issue.get('date_publication'),

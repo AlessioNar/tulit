@@ -225,10 +225,12 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.etar import TARParser
     from tulit.parser.pdf.greece import GovernmentGazetteParser
     from tulit.parser.xml.akomantoso.normattiva import NormattivaAKNParser
+    from tulit.parser.xml.akomantoso.leg import LegParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
     registry.register('akn4eu', AKN4EUParser)
+    registry.register('leg', LegParser, aliases=['leos'])
     registry.register('legaldocml-de', GermanLegalDocMLParser, aliases=['akn-de'])
     registry.register('akn-lu', LuxembourgAKNParser)
     registry.register('cellar-xhtml', CellarHTMLParser, aliases=['xhtml'])

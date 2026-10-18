@@ -30,7 +30,7 @@ from tulit.sources.eu import CELLAR_FORMATS
 
 logger = logging.getLogger(__name__)
 
-__all__ = ['fetch', 'download', 'CELLAR_FORMATS']
+__all__ = ['fetch', 'download', 'export', 'CELLAR_FORMATS', 'EXPORT_FORMATS']
 
 META_DEFAULTS = {
     'celex': None,
@@ -109,6 +109,51 @@ def fetch(
     with tempfile.TemporaryDirectory(prefix='tulit-') as tmp_dir:
         return _fetch_into(source, identifier, version, date, language, tmp_dir,
                            metadata, validate, options)
+
+
+EXPORT_FORMATS = ('akn', 'leg')
+
+
+def export(doc: dict[str, Any], to: str = 'akn', path: Optional[str] = None) -> bytes:
+    """
+    Convert a legalJSON document to another legal format.
+
+    Parameters
+    ----------
+    doc : dict
+        A legalJSON document, as ``fetch`` returns it.
+    to : str, optional
+        'akn' for Akoma Ntoso 3.0 XML (default), or 'leg' for a LEOS .leg
+        package: a zip of Akoma Ntoso documents (``main.xml``, the act and
+        one file per annex), as exchanged by LEOS and AKN4EU.
+    path : str, optional
+        Also write the result to this file.
+
+    Returns
+    -------
+    bytes
+        The XML document, or the zip package.
+
+    Raises
+    ------
+    ValueError
+        If ``to`` is not a supported format.
+
+    Examples
+    --------
+    >>> doc = tulit.fetch('32024R0903')
+    >>> xml = tulit.export(doc, to='akn')
+    >>> tulit.export(doc, to='leg', path='32024R0903.leg')
+    """
+    from tulit.exporters import to_akn, to_leg
+    converters = {'akn': to_akn, 'leg': to_leg}
+    if to not in converters:
+        raise ValueError(f"Unknown export format {to!r}; supported: {', '.join(EXPORT_FORMATS)}")
+    content = converters[to](doc)
+    if path:
+        with open(path, 'wb') as f:
+            f.write(content)
+    return content
 
 
 def download(

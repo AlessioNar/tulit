@@ -82,6 +82,7 @@ class FinlexAKNParser(AkomaNtosoParser):
                 self.structure.append({'eId': 'art_1', 'type': 'article'})
 
     def get_annexes(self) -> None:
+        self.annexes = []
         for attachment in self._containers('attachment'):
             lines = self._lines(attachment)
             if lines:

@@ -18,6 +18,12 @@ Parse a local file::
 
     tulit parse --format akn 32014L0092.akn -o 32014L0092.json
 
+Write Akoma Ntoso or a LEOS .leg package instead of legalJSON::
+
+    tulit get 32024R0903 --to akn -o 32024R0903.xml
+    tulit get 300099 -j LV --to leg -o 300099.leg
+    tulit export 32024R0903.json --to leg -o 32024R0903.leg
+
 List the available parser formats::
 
     tulit formats
@@ -29,7 +35,7 @@ import sys
 from typing import Optional, Sequence
 
 from tulit import __version__
-from tulit.api import CELLAR_FORMATS, _validate, fetch
+from tulit.api import CELLAR_FORMATS, EXPORT_FORMATS, _validate, export, fetch
 from tulit.parser.exceptions import ParserError
 from tulit.parser.registry import get_parser, get_parser_registry
 from tulit.sources import VERSIONS, get_source, list_sources
@@ -66,6 +72,12 @@ def build_parser() -> argparse.ArgumentParser:
                        help='parser format id or alias (see "tulit formats")')
     _add_output_arguments(parse)
 
+    convert = commands.add_parser('export', help='convert a legalJSON file to Akoma Ntoso or a LEOS .leg package')
+    convert.add_argument('path', help='legalJSON file')
+    convert.add_argument('--to', required=True, choices=EXPORT_FORMATS,
+                         help='akn (Akoma Ntoso 3.0 XML) or leg (LEOS package)')
+    convert.add_argument('-o', '--output', help='write to this file instead of stdout')
+
     commands.add_parser('formats', help='list the parser formats and their aliases')
     commands.add_parser('sources', help='list the supported jurisdictions and their sources')
     return parser
@@ -76,6 +88,9 @@ def _add_output_arguments(command: argparse.ArgumentParser) -> None:
     command.add_argument('--indent', type=int, default=2, help='JSON indentation (default: 2)')
     command.add_argument('--no-validate', action='store_true',
                          help='skip validation against the legalJSON schema')
+    command.add_argument('--to', choices=('json',) + EXPORT_FORMATS, default='json',
+                         help='output format: json (legalJSON, default), akn (Akoma Ntoso 3.0 XML) '
+                              'or leg (LEOS package)')
 
 
 def _parse_local(path: str, format_id: str) -> dict:
@@ -89,7 +104,15 @@ def _parse_local(path: str, format_id: str) -> dict:
     return parser.to_dict()
 
 
-def _write(doc: dict, output: Optional[str], indent: int) -> None:
+def _write(doc: dict, output: Optional[str], indent: int, to: str = 'json') -> None:
+    if to != 'json':
+        content = export(doc, to=to)
+        if output:
+            with open(output, 'wb') as f:
+                f.write(content)
+        else:
+            sys.stdout.buffer.write(content)
+        return
     text = json.dumps(doc, ensure_ascii=False, indent=indent)
     if output:
         with open(output, 'w', encoding='utf-8') as f:
@@ -130,6 +153,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if args.command == 'sources':
             _list_sources()
             return 0
+        if args.command == 'export':
+            with open(args.path, encoding='utf-8') as f:
+                doc = json.load(f)
+            _write(doc, args.output, 2, args.to)
+            return 0
         if args.command == 'get':
             options = {'format': args.format} if args.format else {}
             doc = fetch(
@@ -147,7 +175,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             doc = _parse_local(args.path, args.format)
             if not args.no_validate:
                 _validate(doc)
-        _write(doc, args.output, args.indent)
+        _write(doc, args.output, args.indent, args.to)
         return 0
     except (ParserError, ValueError, OSError) as e:
         sys.stderr.write(f"tulit: error: {e}\n")

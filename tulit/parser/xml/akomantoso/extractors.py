@@ -31,6 +31,8 @@ class AKNArticleExtractor:
         self.namespaces = namespaces
         self.id_attr = id_attr
     
+    _WITHIN_PARAGRAPH = {'mod', 'quotedStructure', 'quotedText', 'table', 'tr', 'td', 'th'}
+
     def extract_article_metadata(self, article: etree._Element) -> Dict[str, Optional[str]]:
         """
         Extract basic article metadata (eId, num, heading).
@@ -59,21 +61,10 @@ class AKNArticleExtractor:
                 xpath=f"@{self.id_attr}"
             )
         
-        # Extract article number
+        # Article number (an article may have none: an unnumbered single provision)
         num_elem = article.find('akn:num', namespaces=self.namespaces)
-        if num_elem is None:
-            from tulit.parser.exceptions import ElementNotFoundError
-            raise ElementNotFoundError(
-                "Article element missing required <num> element",
-                element_name="num",
-                xpath="akn:num"
-            )
-        
-        num_text = ''.join(num_elem.itertext()).strip()
-        if not num_text:
-            from tulit.parser.exceptions import ExtractionError
-            raise ExtractionError(f"Article number text is empty for article with eId={eId}")
-        
+        num_text = ''.join(num_elem.itertext()).strip() or None if num_elem is not None else None
+
         # Extract article heading/title
         heading_elem = article.find('akn:heading', namespaces=self.namespaces)
         if heading_elem is None:
@@ -106,9 +97,14 @@ class AKNArticleExtractor:
         elements = []
         
         for p in node.findall('.//akn:p', namespaces=self.namespaces):
-            # Find nearest parent with id_attr
+            # A <p> inside another (in quoted text, a table cell) is read with that one
+            if any(etree.QName(a).localname == 'p' for a in p.iterancestors() if isinstance(a.tag, str)
+                   and a is not node and node in a.iterancestors()):
+                continue
+            # Find nearest parent with id_attr, past quotes and tables, which are part of their paragraph
             parent = p.getparent()
-            while parent is not None and self.id_attr not in parent.attrib:
+            while parent is not None and (self.id_attr not in parent.attrib or
+                                          etree.QName(parent).localname in self._WITHIN_PARAGRAPH):
                 parent = parent.getparent()
             
             if parent is not None:

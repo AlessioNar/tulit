@@ -23,9 +23,11 @@ Download and extract a DILA global dump (France: older texts and long consolidat
     tulit dump legi --dir ./dila
     tulit get LEGITEXT000006070721 -j FR --version consolidated --dump-dir ./dila
 
-Write Akoma Ntoso or a LEOS .leg package instead of legalJSON::
+Write Akoma Ntoso or a LEOS .leg package instead of legalJSON, or get the
+official Akoma Ntoso where the source publishes it (IT, FI, LU, DE)::
 
     tulit get 32024R0903 --to akn -o 32024R0903.xml
+    tulit get "L. 160/2019" -j IT --to akn --native -o 160-2019.xml
     tulit get 300099 -j LV --to leg -o 300099.leg
     tulit export 32024R0903.json --to leg -o 32024R0903.leg
 
@@ -37,10 +39,11 @@ import argparse
 import json
 import logging
 import sys
+import warnings
 from typing import Optional, Sequence
 
 from tulit import __version__
-from tulit.api import CELLAR_FORMATS, EXPORT_FORMATS, SCHEMA_VERSION, _validate, export, fetch
+from tulit.api import CELLAR_FORMATS, EXPORT_FORMATS, SCHEMA_VERSION, _validate, export, fetch, native_akn
 from tulit.parser.exceptions import ParserError
 from tulit.parser.registry import get_parser, get_parser_registry
 from tulit.sources import VERSIONS, get_source, list_sources
@@ -83,6 +86,9 @@ def build_parser() -> argparse.ArgumentParser:
     convert.add_argument('--to', required=True, choices=EXPORT_FORMATS,
                          help='akn (Akoma Ntoso 3.0 XML) or leg (LEOS package)')
     convert.add_argument('-o', '--output', help='write to this file instead of stdout')
+    convert.add_argument('--native', action='store_true',
+                         help='with --to akn: the official Akoma Ntoso file, downloaded again, where the source '
+                              'publishes one (IT, FI, LU, DE)')
 
     dump = commands.add_parser('dump', help='France: download and extract a DILA global dump (JORF or LEGI)')
     dump.add_argument('base', choices=('jorf', 'legi'),
@@ -103,6 +109,9 @@ def _add_output_arguments(command: argparse.ArgumentParser) -> None:
     command.add_argument('--to', choices=('json',) + EXPORT_FORMATS, default='json',
                          help='output format: json (legalJSON, default), akn (Akoma Ntoso 3.0 XML) '
                               'or leg (LEOS package)')
+    command.add_argument('--native', action='store_true',
+                         help='with --to akn: the official Akoma Ntoso file, where the source publishes one '
+                              '(IT, FI, LU, DE)')
 
 
 def _parse_local(path: str, format_id: str) -> dict:
@@ -116,14 +125,10 @@ def _parse_local(path: str, format_id: str) -> dict:
     return {'schema_version': SCHEMA_VERSION, **parser.to_dict()}
 
 
-def _write(doc: dict, output: Optional[str], indent: int, to: str = 'json') -> None:
+def _write(doc: dict, output: Optional[str], indent: int, to: str = 'json', native: bool = False) -> None:
     if to != 'json':
-        content = export(doc, to=to)
-        if output:
-            with open(output, 'wb') as f:
-                f.write(content)
-        else:
-            sys.stdout.buffer.write(content)
+        content = export(doc, to=to, native=native)
+        _write_bytes(content, output)
         return
     text = json.dumps(doc, ensure_ascii=False, indent=indent)
     if output:
@@ -131,6 +136,18 @@ def _write(doc: dict, output: Optional[str], indent: int, to: str = 'json') -> N
             f.write(text + '\n')
     else:
         sys.stdout.write(text + '\n')
+
+
+def _show_warning(message, category, filename, lineno, file=None, line=None) -> None:
+    sys.stderr.write(f"tulit: note: {message}\n")
+
+
+def _write_bytes(content: bytes, output: Optional[str]) -> None:
+    if output:
+        with open(output, 'wb') as f:
+            f.write(content)
+    else:
+        sys.stdout.buffer.write(content)
 
 
 def _dump(base: str, directory: str, extract: bool) -> None:
@@ -170,6 +187,7 @@ def _list_sources() -> None:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     args = build_parser().parse_args(argv)
+    warnings.showwarning = _show_warning
     if args.verbose:
         logging.basicConfig(level=logging.INFO, format='%(levelname)s %(name)s %(message)s')
 
@@ -186,12 +204,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if args.command == 'export':
             with open(args.path, encoding='utf-8') as f:
                 doc = json.load(f)
-            _write(doc, args.output, 2, args.to)
+            _write(doc, args.output, 2, args.to, args.native)
             return 0
         if args.command == 'get':
             options = {'format': args.format} if args.format else {}
             if args.dump_dir:
                 options['dump_dir'] = args.dump_dir
+            if args.native:
+                if args.to != 'akn':
+                    raise ValueError('--native goes with --to akn')
+                _write_bytes(native_akn(args.identifier, args.jurisdiction, args.text_version, args.date,
+                                        args.language, args.download_dir, **options), args.output)
+                return 0
             doc = fetch(
                 args.identifier,
                 jurisdiction=args.jurisdiction,
@@ -207,7 +231,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             doc = _parse_local(args.path, args.format)
             if not args.no_validate:
                 _validate(doc)
-        _write(doc, args.output, args.indent, args.to)
+        _write(doc, args.output, args.indent, args.to, args.native)
         return 0
     except (ParserError, ValueError, OSError) as e:
         sys.stderr.write(f"tulit: error: {e}\n")

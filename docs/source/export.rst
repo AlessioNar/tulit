@@ -39,6 +39,47 @@ From the command line
     $ tulit export 32024R0903.json --to leg -o 32024R0903.leg     # from a saved legalJSON file
     $ tulit parse --format leg 32024R0903.leg -o 32024R0903.json  # and back
 
+The official Akoma Ntoso, where there is one
+---------------------------------------------
+
+Four sources publish Akoma Ntoso themselves. ``native=True`` (``--native`` on the
+command line) returns their file unchanged instead of writing one from legalJSON,
+keeping what legalJSON does not hold: inline references, notes, the source's own
+metadata.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 45 30
+
+   * - Jurisdiction
+     - Format of the official file
+     - Akoma Ntoso 3.0 schema
+   * - Italy (Normattiva)
+     - Akoma Ntoso 3.0
+     - valid (a few files carry the date 0000-00-00)
+   * - Finland (Finlex)
+     - Akoma Ntoso 3.0
+     - valid
+   * - Luxembourg (Legilux)
+     - Akoma Ntoso CSD13, an earlier draft of the standard
+     - not valid; a warning says so
+   * - Germany (recht.bund.de)
+     - LegalDocML.de, the German variant of Akoma Ntoso
+     - not valid; a warning says so (the annexes are separate files)
+
+.. code-block:: python
+
+    doc = tulit.fetch("L. 160/2019", jurisdiction="IT")
+    official = tulit.export(doc, native=True)          # downloaded again from doc['meta']
+    official = tulit.native_akn("731/1999", jurisdiction="FI")   # without legalJSON
+
+.. code-block:: console
+
+    $ tulit get "L. 160/2019" -j IT --to akn --native -o 160-2019.xml
+
+Elsewhere ``native`` raises ``UnsupportedError``: the source publishes another
+format, which ``tulit.download`` returns as it is.
+
 What goes where
 ---------------
 

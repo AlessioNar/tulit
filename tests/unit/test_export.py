@@ -1,12 +1,14 @@
 import io
 import json
 import zipfile
+from unittest.mock import patch
 
 import pytest
 from lxml import etree
 
 import tulit
 from tulit.cli import main
+from tulit.errors import UnsupportedError
 from tulit.exporters import leg_files, to_akn, to_leg, validate
 from tulit.parser.registry import get_parser
 from tulit.quality import counts
@@ -144,3 +146,43 @@ def test_cli_export(tmp_path):
 def test_minimal_document_is_valid():
     xml = to_akn({'preface': None, 'preamble': {'citations': [], 'recitals': []}, 'articles': []})
     assert validate(xml) == []
+
+
+STANDARD = b'<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0"><act name="act"/></akomaNtoso>'
+VARIANT = b'<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13"><act/></akomaNtoso>'
+
+
+def _downloaded(tmp_path, name, content, jurisdiction='FI'):
+    path = tmp_path / name
+    path.write_bytes(content)
+    return {'path': str(path), 'parser': 'akn', 'jurisdiction': jurisdiction, 'version': 'original',
+            'language': 'fin', 'version_date': None, 'meta': {}}
+
+
+def test_native_akn(tmp_path):
+    doc = _doc()
+    doc['meta'].update(identifier='731/1999', jurisdiction='FI')
+    with patch('tulit.api.download', return_value=_downloaded(tmp_path, 'act.xml', STANDARD)) as download:
+        assert tulit.export(doc, native=True) == STANDARD
+    assert download.call_args.args[:2] == ('731/1999', 'FI')
+
+
+def test_native_variant_warns(tmp_path):
+    doc = _doc()
+    doc['meta'].update(identifier='etat/leg/loi/2018/08/01/a686/jo', jurisdiction='LU')
+    with patch('tulit.api.download', return_value=_downloaded(tmp_path, 'act.xml', VARIANT, 'LU')):
+        with pytest.warns(UserWarning, match='not in Akoma Ntoso 3.0'):
+            assert tulit.export(doc, native=True) == VARIANT
+
+
+def test_native_needs_akoma_ntoso(tmp_path):
+    doc = _doc()
+    doc['meta'].update(identifier='10000138', jurisdiction='AT')
+    other = b'<risdok><nutzdaten/></risdok>'
+    with patch('tulit.api.download', return_value=_downloaded(tmp_path, 'act.xml', other, 'AT')):
+        with pytest.raises(UnsupportedError, match='does not publish 10000138 in Akoma Ntoso'):
+            tulit.export(doc, native=True)
+    with pytest.raises(UnsupportedError, match='Akoma Ntoso'):
+        tulit.export(doc, to='leg', native=True)
+    with pytest.raises(UnsupportedError, match="needs the act's identifier"):
+        tulit.export({'meta': {}}, native=True)

@@ -14,21 +14,21 @@ from lxml import etree
 class AKN4EUParser(AkomaNtosoParser):
     """
     Parser for AKN4EU (Akoma Ntoso for European Union) documents.
-    
+
     This parser handles EU legal documents that use the AKN4EU variant of
     Akoma Ntoso, which includes EU-specific extensions and conventions.
-    
+
     Key Differences from Standard Akoma Ntoso:
     - Uses XML 'id' attribute instead of 'eId' for element identification
     - Follows EU-specific document structure conventions
-    
+
     Example
     -------
     >>> parser = AKN4EUParser()
     >>> parser.parse('eu_regulation.xml')
     >>> print(parser.preface)
     """
-    
+
     def __init__(self) -> None:
         """Initialize the AKN4EU parser."""
         super().__init__()
@@ -36,17 +36,17 @@ class AKN4EUParser(AkomaNtosoParser):
     def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         """
         Extract element ID from XML 'id' attribute (AKN4EU convention).
-        
+
         AKN4EU documents use the standard XML 'id' attribute from the
         XML namespace instead of the 'eId' attribute.
-        
+
         Parameters
         ----------
         element : lxml.etree._Element
             XML element to extract ID from
         index : int, optional
             Index to use if no ID attribute is found
-        
+
         Returns
         -------
         str

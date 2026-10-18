@@ -25,7 +25,7 @@ from typing import Any, Callable, Optional
 from lxml import etree
 
 from tulit.client.state.france_dila import DilaClient, text_meta
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _TEXT_ID = re.compile(r'^(JORFTEXT|LEGITEXT)\d{12}$')
@@ -81,7 +81,7 @@ def reference(identifier: str) -> dict[str, Optional[str]]:
         found['date'] = datetime.date(int(match.group('year')), MONTHS.index(_plain(match.group('month'))) + 1,
                                       int(match.group('day'))).isoformat()
         return found
-    raise ValueError(f"'{identifier}' is not a French text reference; use {FranceSource.identifier_help}")
+    raise UnsupportedError(f"'{identifier}' is not a French text reference; use {FranceSource.identifier_help}")
 
 
 def _matcher(ref: dict[str, Optional[str]]) -> Callable[[dict], bool]:
@@ -139,7 +139,7 @@ class FranceSource(Source):
         ref = reference(identifier)
         client = DilaClient(download_dir=download_dir)
         if version == ORIGINAL and date:
-            raise ValueError("A date selects a consolidated version; the original version has none")
+            raise UnsupportedError("A date selects a consolidated version; the original version has none")
         target = date or datetime.date.today().isoformat()
         if dump_dir:
             folder, meta = self._from_dump(client, dump_dir, ref, version)
@@ -173,8 +173,8 @@ class FranceSource(Source):
         elif ref['id'] and ref['id'].startswith('JORFTEXT'):
             identifier, files = client.find_by_id(ref['id'])
         else:
-            raise ValueError("Without the global dump, a text is found by its JORFTEXT identifier, its title "
-                             "('Décret n° 2026-959 du 15 octobre 2026') or its ELI, which give its date")
+            raise UnsupportedError("Without the global dump, a text is found by its JORFTEXT identifier, its title "
+                                   "('Décret n° 2026-959 du 15 octobre 2026') or its ELI, which give its date")
         files = client.text_files(identifier, files)
         folder = client.save(identifier, files)
         meta = FranceSource._meta(folder)

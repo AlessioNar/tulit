@@ -11,7 +11,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.belgium import TYPES, EJusticeClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _DUTCH = {dutch: french for french, dutch in TYPES.items()}
@@ -27,7 +27,7 @@ def act_reference(identifier: str) -> tuple[str, str, str, Optional[str]]:
     """
     match = _ELI.match(identifier.strip())
     if not match or (match.group('type') not in TYPES and match.group('type') not in _DUTCH):
-        raise ValueError(f"'{identifier}' is not a Belgian ELI; use {BelgiumSource.identifier_help}")
+        raise UnsupportedError(f"'{identifier}' is not a Belgian ELI; use {BelgiumSource.identifier_help}")
     doc_type = match.group('type')
     language = 'nld' if doc_type in _DUTCH else ('fra' if identifier.strip().startswith('http') else None)
     date = f"{match.group('year')}-{match.group('month')}-{match.group('day')}"
@@ -62,7 +62,7 @@ class BelgiumSource(Source):
 
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             try:
                 path = client.download(doc_type, act_date, numac, language)
                 meta['source'] = client.eli(doc_type, act_date, numac, language, 'publication')

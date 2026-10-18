@@ -1,29 +1,25 @@
 from tulit.parser.html.html_parser import HTMLParser
-import json
 import re
-import argparse
-from typing import Optional, Any
 # LegalJSON validation
-from tulit.parser.parser import LegalJSONValidator
-import logging
+
 
 class VenetoHTMLParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
-    
+
     def get_root(self, file: str) -> None:
         super().get_root(file)
-        
+
         self.root = self.root.find_all('div', class_="row testo")[0]
 
     def get_preface(self) -> None:
         """
         Extracts the preface text from the HTML, if available.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
@@ -39,116 +35,107 @@ class VenetoHTMLParser(HTMLParser):
                 self.logger.warning("No preface found.")
         except Exception as e:
             self.logger.error(f"Error extracting preface: {e}")
-    
-            
+
     def get_preamble(self):
         """
         Extracts the preamble text from the HTML, if available.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted preamble is stored in the 'preamble' attribute.
         """
-        
-        pass
-        # self.preamble = self.root.find('div')        
-        
-            
-    
+
+        # self.preamble = self.root.find('div')
+
     def get_formula(self):
         """
         Extracts the formula from the HTML, if present.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted formula is stored in the 'formula' attribute.
         """
-        pass
         # self.formula = self.preamble.find('p', class_='oj-normal').text
 
-
-    
     def get_citations(self):
         """
         Extracts citations from the HTML.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted citations are stored in the 'citations' attribute
         """
         self.citations = []
-        pass
 
     def get_recitals(self):
         """
         Extracts recitals from the HTML.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted recitals are stored in the 'recitals' attribute.
         """
         self.recitals = []
-        subtitle = self.root.find('b')        
+        subtitle = self.root.find('b')
         self.recitals.append({
                     'eId' : 0,
                     'text' : subtitle.text
                 }
         )
+
     def get_preamble_final(self):
         """
         Extracts the final preamble text from the HTML, if available.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted final preamble is stored in the 'preamble_final' attribute.
         """
-        pass
 
     def get_body(self):
         """
         Extracts the body content from the HTML.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted body content is stored in the 'body' attribute
         """
-        pass
-    
+
     def get_chapters(self):
         """
         Extracts chapters from the HTML, grouping them by their IDs and headings.
         """
-        
+
         chapters = self.root.find_all('h3', class_='TITOLOCAPOTITOLO')
         chapters = self.root.find_all('h4', class_='TITOLOCAPOCAPO')
 
@@ -164,11 +151,10 @@ class VenetoHTMLParser(HTMLParser):
                 'heading': heading
             })
 
-
-
     def get_articles(self):
         """
-        Extracts articles from the HTML. Each <h6> is treated as an article heading, and the next <div> contains the article content.
+        Extracts articles from the HTML. Each <h6> is treated as an article heading, and the next <div>
+        contains the article content.
         Subdivisions are separated by <br> tags and stored as children.
         """
         self.articles = []
@@ -212,7 +198,6 @@ class VenetoHTMLParser(HTMLParser):
                 'heading': heading,
                 'children': children
             })
-
 
     def get_conclusions(self):
         """

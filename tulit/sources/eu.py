@@ -7,7 +7,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.eu.cellar import CellarClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 CELLAR_RESOURCE = 'http://publications.europa.eu/resource/cellar/'
@@ -47,7 +47,7 @@ class EUSource(Source):
         **options: Any,
     ) -> Retrieval:
         if format not in CELLAR_FORMATS:
-            raise ValueError(
+            raise UnsupportedError(
                 f"Unsupported format '{format}'. Choose one of: {', '.join(CELLAR_FORMATS)}"
             )
         language = (language or self.default_language).lower()

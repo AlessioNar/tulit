@@ -10,7 +10,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.latvia import LIKUMI, VESTNESIS, LikumiClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _ID = re.compile(r'^(?:https?://(?:www\.)?(?:likumi\.lv|vestnesis\.lv)/ta/(?:en/en/)?id/)?'
@@ -21,7 +21,7 @@ def act_id(identifier: str) -> str:
     """'300099', 'https://likumi.lv/ta/id/300099-fizisko-...' or a vestnesis.lv link -> '300099'."""
     match = _ID.match(identifier.strip())
     if not match:
-        raise ValueError(f"'{identifier}' is not a likumi.lv identifier; use {LatviaSource.identifier_help}")
+        raise UnsupportedError(f"'{identifier}' is not a likumi.lv identifier; use {LatviaSource.identifier_help}")
     return match.group('id')
 
 
@@ -58,7 +58,7 @@ class LatviaSource(Source):
 
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             try:
                 path = client.download_publication(number)
                 meta['source'] = f'{VESTNESIS}/{number}'

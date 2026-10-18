@@ -9,7 +9,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.bulgaria import DV, StateGazetteClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import ORIGINAL, Retrieval, Source
 
 _MATERIAL = re.compile(r'^(?:https?://dv\.parliament\.bg/DVWeb/showMaterialDV\.jsp\?(?:.*&)?idMat=)?(?P<id>\d{1,7})'
@@ -64,7 +64,7 @@ class BulgariaSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("The State Gazette publishes acts as adopted; a date cannot be selected")
+            raise UnsupportedError("The State Gazette publishes acts as adopted; a date cannot be selected")
         client = StateGazetteClient(download_dir=download_dir)
         text = ' '.join(identifier.split())
         material = _MATERIAL.match(text)
@@ -79,7 +79,7 @@ class BulgariaSource(Source):
                 title = text
                 results = client.search(title=title)
             else:
-                raise ValueError(f"'{identifier}' is not a State Gazette reference; use {self.identifier_help}")
+                raise UnsupportedError(f"'{identifier}' is not a State Gazette reference; use {self.identifier_help}")
             number = _choose(results, title, identifier)['material']
         path = client.download(number)
         found = client.metadata(path)

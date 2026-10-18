@@ -9,7 +9,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.malta import MaltaLegislationClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 LEGISLATION_MT = 'https://legislation.mt/eli'
@@ -43,7 +43,7 @@ def eli_path(identifier: str) -> str:
     match = _LEGAL_NOTICE.match(text)
     if match:
         return f"ln/{match.group('year')}/{match.group('num')}"
-    raise ValueError(f"'{identifier}' is not a Maltese law reference; use e.g. 'Cap. 586' or 'Act XII of 2018'")
+    raise UnsupportedError(f"'{identifier}' is not a Maltese law reference; use e.g. 'Cap. 586' or 'Act XII of 2018'")
 
 
 def _enacting_act(path: str) -> Optional[str]:
@@ -78,7 +78,7 @@ class MaltaSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("Legislation Malta publishes Chapters as in force now; a date cannot be selected")
+            raise UnsupportedError("Legislation Malta publishes Chapters as in force now; a date cannot be selected")
         path = eli_path(identifier)
         language = _LANGUAGES.get((language or 'eng').lower(), 'eng')
         client = MaltaLegislationClient(download_dir=download_dir)
@@ -86,11 +86,11 @@ class MaltaSource(Source):
         version = version or (CONSOLIDATED if chapter else ORIGINAL)
 
         if language == 'mlt' and not chapter:
-            raise ValueError("Acts and Legal Notices are printed in Maltese and English side by side; "
-                             "use language='eng'")
+            raise UnsupportedError("Acts and Legal Notices are printed in Maltese and English side by side; "
+                                   "use language='eng'")
         if version == CONSOLIDATED and not chapter:
-            raise ValueError("Consolidated law is addressed by its Chapter (e.g. 'Cap. 586'), "
-                             "not by the Act or Legal Notice that made it")
+            raise UnsupportedError("Consolidated law is addressed by its Chapter (e.g. 'Cap. 586'), "
+                                   "not by the Act or Legal Notice that made it")
         file = self._download(client, path, language)
         if version == ORIGINAL and chapter:
             act = _enacting_act(file)

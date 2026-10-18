@@ -13,6 +13,7 @@ from typing import Any, Optional
 from tulit.client.state.greece import STORAGE, GovernmentGazetteClient, pdf_url
 from tulit.parser.pdf.layout import has_text
 from tulit.sources.base import ORIGINAL, Retrieval, Source
+from tulit.parser.exceptions import UnsupportedError
 
 _LETTERS = {'A': 'Α', 'B': 'Β', 'Γ': 'Γ', 'Δ': 'Δ', 'Α': 'Α', 'Β': 'Β'}
 _ACT = re.compile(r'^(?:(?P<kind>ν\.?|n\.?|νόμος|νομος|law|π\.?\s?δ\.?|p\.?d\.?|προεδρικό διάταγμα)\s*)?'
@@ -44,7 +45,9 @@ def reference(identifier: str) -> tuple[str, str, str]:
         kind = (match.group('kind') or 'ν').lower().replace(' ', '')
         decree = kind.startswith(('π', 'p'))
         return ('decree' if decree else 'law'), match.group('number'), match.group('year')
-    raise ValueError(f"'{identifier}' is not a Greek act or Gazette reference; use {GreeceSource.identifier_help}")
+    raise UnsupportedError(
+        f"'{identifier}' is not a Greek act or Gazette reference; use {GreeceSource.identifier_help}"
+    )
 
 
 class GreeceSource(Source):
@@ -70,7 +73,7 @@ class GreeceSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("The Government Gazette publishes acts as adopted; a date cannot be selected")
+            raise UnsupportedError("The Government Gazette publishes acts as adopted; a date cannot be selected")
         kind, act, year = reference(identifier)
         client = GovernmentGazetteClient(download_dir=download_dir)
         if kind == 'issue':

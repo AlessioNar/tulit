@@ -2,9 +2,9 @@ import unittest
 from unittest.mock import patch, Mock
 import os
 import tempfile
-from pathlib import Path
 from tulit.client.state.legilux import LegiluxClient
 from tulit.parser.exceptions import NetworkError
+
 
 class TestLegiluxClient(unittest.TestCase):
     def setUp(self):
@@ -116,6 +116,7 @@ class TestLegiluxClient(unittest.TestCase):
         self.assertEqual(dates, ['2004-11-29', '2023-07-01'])
         query = sparql.call_args[0][0]
         self.assertIn(f'isMemberOf> <{base}>', query)
+
 
 if __name__ == "__main__":
     unittest.main()

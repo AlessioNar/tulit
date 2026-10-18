@@ -1,0 +1,143 @@
+{
+ "versionInfo": {
+  "hasModuleVersionChanged": false,
+  "hasApiVersionChanged": false
+ },
+ "data": {
+  "URLPDF": "https://files.diariodarepublica.pt/1s/2004/08/194a00/52515257.pdf",
+  "HasIndice": false,
+  "HasFile": false,
+  "Query": "",
+  "Id": "",
+  "DataUltimaConsolidada": "2019-08-08",
+  "IsVersaoInicial": false,
+  "CurrentConsolidacaoId": "123536792",
+  "LastConsolidacaoId": "123536792",
+  "IsMultipleConsolidation": false,
+  "HasJurisprudenciaAssociada": true,
+  "LegConsBase": {
+   "List": [
+    {
+     "IsHidden": false,
+     "Nivel": 0,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Diploma",
+      "Epigrafe": "",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 15,
+      "Tituo": "Diploma",
+      "Identificacao": "",
+      "Epigrafe": "",
+      "Texto": "Lei n.º 43/2004\nde 18 de Agosto\nLei de organização e funcionamento da Comissão Nacional de Protecção de Dados\nA Assembleia da República decreta, nos termos da alínea c) do artigo 161.º da Constituição, para valer como lei geral da República, o seguinte:              \n",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 1,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Capítulo I",
+      "Epigrafe": "Disposições gerais",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 1,
+      "Tituo": "Capítulo I",
+      "Identificacao": "I",
+      "Epigrafe": "Disposições gerais",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 2,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Artigo 1.º",
+      "Epigrafe": "Âmbito",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 11,
+      "Tituo": "Artigo 1.º",
+      "Identificacao": "1",
+      "Epigrafe": "Âmbito",
+      "Texto": "A presente lei regula a organização e o funcionamento da Comissão Nacional de Protecção de Dados (CNPD), bem como o estatuto pessoal dos seus membros.\r\n",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 2,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Artigo 19.º-A",
+      "Epigrafe": "Fiscal único",
+      "DataVersao": "2019-08-08T01:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 11,
+      "Tituo": "Artigo 19.º-A",
+      "Identificacao": "19.º-A",
+      "Epigrafe": "Fiscal único",
+      "Texto": "1 - O fiscal único é o órgão responsável pelo controlo da legalidade, da regularidade e da boa gestão financeira e patrimonial da CNPD, e de consulta por esta nesse domínio.\n2 - O fiscal único é um revisor oficial de contas, designado pela Assembleia da República, por resolução, e que toma posse perante o Presidente da Assembleia da República.\n3 - O mandato do fiscal único tem a duração de cinco anos, não renovável, permanecendo em exercício de funções até à efetiva substituição.\n4 - O fiscal único é remunerado por valor correspondente a 25 % da remuneração base auferida pelos membros da CNPD.\n5 - Compete, designadamente, ao fiscal único:\na) Acompanhar e controlar a gestão financeira e patrimonial da CNPD;\nb) Examinar periodicamente a situação financeira e económica da CNPD e verificar o cumprimento das normas reguladoras da sua atividade;\nc) Emitir parecer prévio, no prazo máximo de 10 dias, sobre a aquisição, oneração, arrendamento e alienação de bens móveis;\nd) Emitir parecer sobre qualquer assunto que lhe seja submetido pela CNPD;\ne) Participar às entidades competentes as irregularidades que detete.",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "2019-08-09T00:00:00Z",
+      "DataVersao": "2019-08-08T01:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 1,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Assinatura",
+      "Epigrafe": "",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 7,
+      "Tituo": "Assinatura",
+      "Identificacao": "",
+      "Epigrafe": "",
+      "Texto": "Aprovada em 8 de Julho de 2004.\nO Presidente da Assembleia da República, João Bosco Mota Amaral.\nPromulgada em 2 de Agosto de 2004.\nPublique-se.\nO Presidente da República, JORGE SAMPAIO.\nReferendada em 5 de Agosto de 2004.\nO Primeiro-Ministro, Pedro Miguel de Santana Lopes.\r\n",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 1,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Anexo",
+      "Epigrafe": "MAPA I",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 14,
+      "Tituo": "Anexo",
+      "Identificacao": "",
+      "Epigrafe": "MAPA I",
+      "Texto": "(a que se refere o n.º 1 do artigo 32.º)\n(ver mapa no documento original)\r\n",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "2004-08-18T00:00:00Z"
+     }
+    }
+   ]
+  }
+ }
+}

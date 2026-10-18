@@ -12,7 +12,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.poland import ELI_API, SejmELIClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 ELI_PL = 'https://eli.gov.pl/eli'
@@ -37,8 +37,8 @@ def act_eli(identifier: str) -> str:
     match = _ELI.search(text)
     if match:
         return f"{match.group('publisher').upper()}/{match.group('year')}/{int(match.group('position'))}"
-    raise ValueError(f"'{identifier}' is not a Polish act reference; use e.g. 'DU/2018/1000' "
-                     f"or 'Dz.U. 2018 poz. 1000'")
+    raise UnsupportedError(f"'{identifier}' is not a Polish act reference; use e.g. 'DU/2018/1000' "
+                           f"or 'Dz.U. 2018 poz. 1000'")
 
 
 def _references(act: dict[str, Any], kind: str) -> list[str]:
@@ -84,7 +84,7 @@ class PolandSource(Source):
             chosen = act
         elif version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             chosen = base
         else:
             chosen = self._consolidated_text(client, base, date)

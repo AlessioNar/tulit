@@ -1,12 +1,12 @@
 import unittest
-from tulit.parser.xml.akomantoso import AkomaNtosoParser, AKN4EUParser
+from tulit.parser.xml.akomantoso import AkomaNtosoParser
 import os
 import lxml.etree as etree
-from pathlib import Path
 from tests.conftest import locate_data_dir
 
 # Define constants for file paths and directories
 file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "akn" / "32014L0092.akn")
+
 
 class TestAkomaNtosoParser(unittest.TestCase):
     maxDiff = None
@@ -24,13 +24,17 @@ class TestAkomaNtosoParser(unittest.TestCase):
         """Test parsing and root element retrieval from the Akoma Ntoso file."""
         self.assertTrue(os.path.exists(file_path), f"Test file not found at {file_path}")
         self.assertIsNotNone(self.parser.root, "Root element should not be None")
-        
+
     def test_get_preface(self):
         """Test the content extracted from the preface section."""
         self.parser.get_preface()
         self.assertIsNotNone(self.parser.preface, "Preface element not found")
-        
-        expected_preface = "Directive 2014/92/EU of the European Parliament and of the Council of 23 July 2014 on the comparability of fees related to payment accounts, payment account switching and access to payment accounts with basic features (Text with EEA relevance)"
+
+        expected_preface = (
+            "Directive 2014/92/EU of the European Parliament and of the Council of 23 July 2014 on the comparability "
+            "of fees related to payment accounts, payment account switching and access to payment accounts with basic "
+            "features (Text with EEA relevance)"
+        )
 
         self.assertEqual(self.parser.preface, expected_preface)
 
@@ -38,7 +42,6 @@ class TestAkomaNtosoParser(unittest.TestCase):
         """Test retrieval of preamble data from the XML file."""
         self.parser.get_preamble()
         self.assertIsNotNone(self.parser.preamble, "Preamble element not found")
-        
 
     def test_get_formula(self):
         """Test extraction of formula text within the preamble."""
@@ -51,11 +54,13 @@ class TestAkomaNtosoParser(unittest.TestCase):
         """Test citation extraction in the preamble section."""
         self.parser.get_preamble()
         self.parser.get_citations()
-        
+
         self.assertIsNotNone(self.parser.citations, "Citations data not found")
 
         first_citation = self.parser.citations[0]
-        expected_text = "Having regard to the Treaty on the Functioning of the European Union, and in particular Article 114"
+        expected_text = (
+            "Having regard to the Treaty on the Functioning of the European Union, and in particular Article 114"
+        )
         self.assertIn(expected_text, first_citation['text'])
 
     def test_get_recitals(self):
@@ -65,16 +70,46 @@ class TestAkomaNtosoParser(unittest.TestCase):
         self.assertIsNotNone(self.parser.recitals, "Recitals section not found in <preamble>")
         self.assertEqual(len(self.parser.recitals), 58, "Incorrect number of recitals extracted")
         expected_recitals = {
-            1: {'eId': "recs_1__rec_(2)", 'text': "In this respect, Directive 2007/64/EC of the European Parliament and of the Council established basic transparency requirements for fees charged by payment service providers in relation to services offered on payment accounts. This has substantially facilitated the activity of payment service providers, creating uniform rules with respect to the provision of payment services and the information to be provided, reduced the administrative burden and generated cost savings for payment service providers."},
-            2: {'eId': "recs_1__rec_(3)", 'text': "The smooth functioning of the internal market and the development of a modern, socially inclusive economy increasingly depends on the universal provision of payment services. Any new legislation in this regard must be part of a smart economic strategy for the Union, which must effectively take into account the needs of more vulnerable consumers."},
-            15: {'eId': "recs_1__rec_(16)", 'text': "Consumers would benefit most from information that is concise, standardised and easy to compare between different payment service providers. The tools made available to consumers to compare payment account offers would not have a positive impact if the time invested in going through lengthy lists of fees for different offers outweighed the benefit of choosing the offer that represents the best value. Those tools should be multifold and consumer testing should be conducted. At this stage, fee terminology should only be standardised for the most representative terms and definitions within Member States in order to avoid the risk of excessive information and to facilitate swift implementation."}
+            1: {
+                'eId': "recs_1__rec_(2)",
+                'text': (
+                    "In this respect, Directive 2007/64/EC of the European Parliament and of the Council established "
+                    "basic transparency requirements for fees charged by payment service providers in relation to "
+                    "services offered on payment accounts. This has substantially facilitated the activity of payment "
+                    "service providers, creating uniform rules with respect to the provision of payment services and "
+                    "the information to be provided, reduced the administrative burden and generated cost savings for "
+                    "payment service providers."
+                ),
+            },
+            2: {
+                'eId': "recs_1__rec_(3)",
+                'text': (
+                    "The smooth functioning of the internal market and the development of a modern, socially inclusive "
+                    "economy increasingly depends on the universal provision of payment services. Any new legislation "
+                    "in this regard must be part of a smart economic strategy for the Union, which must effectively "
+                    "take into account the needs of more vulnerable consumers."
+                ),
+            },
+            15: {
+                'eId': "recs_1__rec_(16)",
+                'text': (
+                    "Consumers would benefit most from information that is concise, standardised and easy to compare "
+                    "between different payment service providers. The tools made available to consumers to compare "
+                    "payment account offers would not have a positive impact if the time invested in going through "
+                    "lengthy lists of fees for different offers outweighed the benefit of choosing the offer that "
+                    "represents the best value. Those tools should be multifold and consumer testing should be "
+                    "conducted. At this stage, fee terminology should only be standardised for the most representative "
+                    "terms and definitions within Member States in order to avoid the risk of excessive information "
+                    "and to facilitate swift implementation."
+                ),
+            }
         }
         # Iterate over the selected recitals to verify content and ID
         for index, expected_values in expected_recitals.items():
             with self.subTest(recital=index):
-                self.assertEqual(self.parser.recitals[index]['eId'], expected_values['eId'], 
+                self.assertEqual(self.parser.recitals[index]['eId'], expected_values['eId'],
                                  f"Recital {index} ID does not match expected value")
-                self.assertIn(expected_values['text'], self.parser.recitals[index]['text'], 
+                self.assertIn(expected_values['text'], self.parser.recitals[index]['text'],
                               f"Recital {index} text does not match expected content")
 
     def test_get_preamble_final(self):
@@ -82,9 +117,10 @@ class TestAkomaNtosoParser(unittest.TestCase):
         self.parser.get_preamble()
         self.parser.get_preamble_final()
         preamble_final = "HAVE ADOPTED THIS DIRECTIVE:"
-        self.assertEqual(self.parser.preamble_final, preamble_final, "Final preamble text does not match expected content")
-    
-    
+        self.assertEqual(
+            self.parser.preamble_final, preamble_final, "Final preamble text does not match expected content"
+        )
+
     def test_get_body(self):
         """Test retrieval of the body element."""
         self.parser.get_body()
@@ -96,11 +132,15 @@ class TestAkomaNtosoParser(unittest.TestCase):
         self.parser.get_chapters()
 
         expected_chapters = [
-            {'eId': 'cpt_I',   'type': 'chapter', 'num': 'CHAPTER I',   'heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS', 'parent': None},
-            {'eId': 'cpt_II',  'type': 'chapter', 'num': 'CHAPTER II',  'heading': 'COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS', 'parent': None},
+            {'eId': 'cpt_I',   'type': 'chapter', 'num': 'CHAPTER I',
+             'heading': 'SUBJECT MATTER, SCOPE AND DEFINITIONS', 'parent': None},
+            {'eId': 'cpt_II',  'type': 'chapter', 'num': 'CHAPTER II',
+             'heading': 'COMPARABILITY OF FEES CONNECTED WITH PAYMENT ACCOUNTS', 'parent': None},
             {'eId': 'cpt_III', 'type': 'chapter', 'num': 'CHAPTER III', 'heading': 'SWITCHING', 'parent': None},
-            {'eId': 'cpt_IV',  'type': 'chapter', 'num': 'CHAPTER IV',  'heading': 'ACCESS TO PAYMENT ACCOUNTS', 'parent': None},
-            {'eId': 'cpt_V',   'type': 'chapter', 'num': 'CHAPTER V',   'heading': 'COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION', 'parent': None},
+            {'eId': 'cpt_IV',  'type': 'chapter', 'num': 'CHAPTER IV',
+             'heading': 'ACCESS TO PAYMENT ACCOUNTS', 'parent': None},
+            {'eId': 'cpt_V',   'type': 'chapter', 'num': 'CHAPTER V',
+             'heading': 'COMPETENT AUTHORITIES AND ALTERNATIVE DISPUTE RESOLUTION', 'parent': None},
             {'eId': 'cpt_VI',  'type': 'chapter', 'num': 'CHAPTER VI',  'heading': 'SANCTIONS', 'parent': None},
             {'eId': 'cpt_VII', 'type': 'chapter', 'num': 'CHAPTER VII', 'heading': 'FINAL PROVISIONS', 'parent': None}
         ]
@@ -120,7 +160,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
         # structure tree mirrors the chapter/article nesting
         self.assertEqual(self.parser.structure[0]['eId'], 'cpt_I')
         self.assertEqual(self.parser.structure[0]['children'][0], {'eId': 'art_1', 'type': 'article'})
-    
+
     def test_get_conclusions(self):
         # Expected output
         conclusions = {
@@ -133,7 +173,7 @@ class TestAkomaNtosoParser(unittest.TestCase):
         }
         self.parser.get_conclusions()
         self.assertEqual(self.parser.conclusions, conclusions, "Parsed conclusions do not match expected output")
-        
+
 
 if __name__ == '__main__':
     unittest.main()

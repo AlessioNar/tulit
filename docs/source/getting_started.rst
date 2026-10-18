@@ -76,17 +76,23 @@ Each jurisdiction has one source, all official: the EU (Cellar), Austria
 Croatia (Narodne novine), Cyprus (Official Gazette), Czechia (e-Sbírka),
 Denmark (Retsinformation), Estonia (Riigi Teataja), Finland (Finlex), France
 (Journal officiel and Légifrance, from the DILA open data), Germany
-(Rechtsinformationen des Bundes), Greece (ΦΕΚ), Hungary (Nemzeti
+(Bundesgesetzblatt on recht.bund.de and in the bgbl.de archive for acts as
+promulgated, Rechtsinformationen des Bundes for consolidated law), Greece
+(ΦΕΚ), Hungary (Nemzeti
 Jogszabálytár), Ireland (Irish Statute Book and Revised Acts), Italy
 (Normattiva), Latvia (Latvijas Vēstnesis and Likumi.lv), Lithuania (Teisės
 aktų registras), Luxembourg (Legilux), Malta (Legislation Malta), the
 Netherlands (Basiswettenbestand and Staatsblad), Poland (Sejm ELI API),
-Portugal (Diário da República), Romania (Portal Legislativ), Slovakia
-(Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden (Riksdagen). ``tulit
-sources`` lists them with the versions, languages and identifiers they
-accept.
+Portugal (Diário da República and its Legislação Consolidada), Romania (Portal
+Legislativ), Slovakia (Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden
+(Svensk författningssamling and the Riksdag open data). ``tulit sources`` lists
+them with the versions, languages and identifiers they accept.
 
-Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` extra:
+Cyprus, Greece, Malta and Portugal publish PDF, and so do the German Federal
+Law Gazette (Bundesgesetzblatt) for acts as promulgated and Sweden for acts as
+adopted (the electronic Svensk författningssamling, from SFS 2018:160 of 1 April
+2018; earlier Swedish acts are available only consolidated); reading them needs
+the ``pdf`` extra (Portuguese consolidated texts come as JSON and do not):
 
 .. code-block:: console
 
@@ -96,24 +102,52 @@ Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` e
 
     tulit.fetch("Cap. 586", jurisdiction="MT")                          # consolidated Chapter
     tulit.fetch("Lei n.º 58/2019, de 8 de agosto", jurisdiction="PT")   # act as published
+    tulit.fetch("Código Penal", jurisdiction="PT", date="2021-01-01")   # consolidated code in force then
+    tulit.fetch("Lei n.º 7/2009", jurisdiction="PT", version="consolidated")  # Código do Trabalho
     tulit.fetch("IKS", jurisdiction="EE", version="consolidated", date="2024-06-01")
     tulit.fetch("BGBl. I Nr. 5/2024", jurisdiction="AT")                 # law as adopted
     tulit.fetch("ν. 4624/2019", jurisdiction="GR")                      # law as published in the ΦΕΚ
+    tulit.fetch("SFS 2018:218", jurisdiction="SE")                      # act as published in the SFS
+    tulit.fetch("2018:218", jurisdiction="SE", version="consolidated")  # statute in force today
+    tulit.fetch("BGBl. 2024 I Nr. 149", jurisdiction="DE")              # act as promulgated (since 2023)
+    tulit.fetch("BGBl. 2017 I S. 2097", jurisdiction="DE")              # year, part and first page (1949-2022)
+    tulit.fetch("eli/bund/bgbl-1/2017/s2097", jurisdiction="DE")        # consolidated version in force, by ELI
     tulit.fetch("2011. évi CXII. törvény", jurisdiction="HU",
                 version="consolidated", date="2019-01-01")
     tulit.fetch("https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581")  # Belgium, by ELI
+    tulit.fetch("Legea nr. 31/1990", jurisdiction="RO", version="consolidated",
+                date="2016-01-01")                                      # form consolidated on 16.07.2015
+    tulit.fetch("Codul civil", jurisdiction="RO", version="consolidated")  # Civil Code in force today
+
+Romania's original texts come from the Portal Legislativ web service, over
+plain HTTP; its consolidated forms (each dated from the day it applies, the
+official republications among them) come from the portal's pages, which are
+served over HTTPS only and are not reachable from every network.
 
 France needs no credentials: texts published since the last global DILA dump
-come from the daily Journal officiel and Légifrance archives. For older texts,
-download and extract the global JORF and LEGI dumps from
-https://echanges.dila.gouv.fr/OPENDATA/ and pass their folder:
+come from the daily Journal officiel and Légifrance archives. Older texts, and
+consolidated versions that go back further, need the global dumps of the
+Journal officiel (JORF) and of consolidated legislation (LEGI), about 1 GB each.
+``tulit dump`` downloads one (resuming an interrupted download) and extracts it;
+both can share a folder, which is then given as ``dump_dir``:
+
+.. code-block:: console
+
+    $ tulit dump jorf --dir ./dila
+    $ tulit dump legi --dir ./dila
 
 .. code-block:: python
 
     tulit.fetch("Loi n° 2018-493 du 20 juin 2018", jurisdiction="FR", dump_dir="dila")
+    tulit.fetch("LEGITEXT000006070721", jurisdiction="FR", version="consolidated",
+                date="2020-01-01", dump_dir="dila")              # the Code civil
+
+From Python, ``DilaClient(download_dir).download_dump("LEGI", "dila")`` does the
+same (``tulit.client.state.france_dila``).
 
 Some acts exist only as scanned PDFs without text: the Moniteur belge
-before June 1997 and the Cypriot Official Gazette before about 2015.
+before June 1997, the Cypriot Official Gazette before about 2015 and the
+Bundesgesetzblatt before about 1998.
 ``fetch`` cannot parse them and says so; ``tulit.download`` returns the
 official file of any act, scanned or not, without parsing it:
 
@@ -276,10 +310,11 @@ also writes a ``client.log`` file there.
 
 .. code-block:: python
 
-    from tulit.client.state.normattiva import NormattivaClient
+    from tulit.client.state.italy import NormattivaAKNClient
 
-    client = NormattivaClient(download_dir="./database")
-    client.download(dataGU="20241231", codiceRedaz="24G00229", fmt="xml")
+    client = NormattivaAKNClient(download_dir="./database")
+    client.open_act(date="2024-12-31", code="24G00229")
+    path = client.download(date="2024-12-31", code="24G00229")
 
 **Luxembourg (Legilux)**:
 

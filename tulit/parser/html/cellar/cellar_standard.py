@@ -1,11 +1,7 @@
 from tulit.parser.html.html_parser import HTMLParser
-import json
 import re
-import argparse
-from typing import Optional, Any
 from tulit.parser.parser import LegalJSONValidator, create_html_normalizer
 from tulit.parser.strategies.article_extraction import CellarStandardArticleStrategy
-import logging
 
 # Closing formula of a regulation, after its last article
 _BINDING_FORMULA = 'This Regulation shall be binding in its entirety'
@@ -17,18 +13,18 @@ class CellarStandardHTMLParser(HTMLParser):
     This format wraps content in <TXT_TE> tags with simple <p> structure,
     unlike the semantic XHTML format with class-based structure.
     """
-    
+
     def __init__(self) -> None:
         super().__init__()
         # Use HTML-specific normalizer for consolidation markers
         self.normalizer = create_html_normalizer()
         # Initialize article extraction strategy
         self.article_strategy = CellarStandardArticleStrategy()
-    
+
     def _clean_text(self, text: str) -> str:
         """Clean and normalize text content using strategy pattern."""
         return self.normalizer.normalize(text)
-    
+
     def _extract_article_number(self, text):
         """
         Extract article number from text like 'Article 1' or 'Article 2'.
@@ -38,7 +34,7 @@ class CellarStandardHTMLParser(HTMLParser):
         if match:
             return match.group(1), match.group(2)
         return None, text
-    
+
     def get_preface(self) -> None:
         """
         Extract document title/preface.
@@ -70,35 +66,35 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.preface = meta_desc.get('content').strip()
                 self.logger.info("Preface extracted from meta description.")
                 return
-            
+
             # Try to find in h1 or strong tags
             h1 = self.root.find('h1')
             if h1:
                 self.preface = self._clean_text(h1.get_text())
                 self.logger.info("Preface extracted from h1.")
                 return
-            
+
             # Fallback to first strong tag
             strong = self.root.find('strong')
             if strong:
                 self.preface = self._clean_text(strong.get_text())
                 self.logger.info("Preface extracted from strong tag.")
                 return
-            
+
             self.preface = None
             self.logger.warning("No preface found.")
         except Exception as e:
             self.preface = None
             self.logger.error(f"Error extracting preface: {e}")
-    
+
     def get_preamble(self) -> None:
         """
         Extract preamble content.
-        
+
         This parser is specifically designed for EU Cellar Standard HTML format
         with TXT_TE tags. Files without TXT_TE tags are not supported and will
         cause the parser to fail.
-        
+
         Raises:
             ValueError: If no TXT_TE tag is found in the document.
         """
@@ -108,7 +104,7 @@ class CellarStandardHTMLParser(HTMLParser):
             if not txt_te:
                 # Try uppercase
                 txt_te = self.root.find(lambda tag: tag.name and tag.name.upper() == 'TXT_TE')
-            
+
             if txt_te:
                 # Standard HTML format with TXT_TE
                 self.txt_te = txt_te
@@ -124,7 +120,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 )
                 self.logger.error(error_msg)
                 raise ValueError(error_msg)
-                
+
         except ValueError:
             # Re-raise ValueError to signal unsupported format
             raise
@@ -132,7 +128,7 @@ class CellarStandardHTMLParser(HTMLParser):
             self.preamble = None
             self.logger.error(f"Error extracting preamble: {e}")
             raise
-    
+
     def get_formula(self) -> None:
         """
         Extract the formula (decision-making body statement).
@@ -142,7 +138,7 @@ class CellarStandardHTMLParser(HTMLParser):
             if not hasattr(self, 'txt_te') or not self.txt_te:
                 self.formula = None
                 return
-            
+
             paragraphs = self.txt_te.find_all('p')
             for p in paragraphs:
                 text = p.get_text(strip=True)
@@ -151,13 +147,13 @@ class CellarStandardHTMLParser(HTMLParser):
                     self.formula = self._clean_text(text)
                     self.logger.info(f"Formula extracted: {self.formula[:50]}...")
                     return
-            
+
             self.formula = None
             self.logger.warning("No formula found.")
         except Exception as e:
             self.formula = None
             self.logger.error(f"Error extracting formula: {e}")
-    
+
     def get_citations(self):
         """
         Extract citations (legal references).
@@ -167,7 +163,7 @@ class CellarStandardHTMLParser(HTMLParser):
             if not hasattr(self, 'txt_te') or not self.txt_te:
                 self.citations = []
                 return
-            
+
             self.citations = []
             paragraphs = self.txt_te.find_all('p')
             citation_idx = 0
@@ -188,12 +184,12 @@ class CellarStandardHTMLParser(HTMLParser):
                         'eId': f'cit_{citation_idx}',
                         'text': text
                     })
-            
+
             self.logger.info(f"Extracted {len(self.citations)} citations.")
         except Exception as e:
             self.citations = []
             self.logger.error(f"Error extracting citations: {e}")
-    
+
     def _extract_table_recital(self, num_text: str, content_text: str):
         """Extract recital from table row if format matches."""
         if re.match(r'^\(?\d+\)?$', num_text):
@@ -203,7 +199,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 'text': content_text
             }
         return None
-    
+
     def _extract_recitals_from_tables(self):
         """Extract recitals from table format."""
         recitals = []
@@ -215,22 +211,22 @@ class CellarStandardHTMLParser(HTMLParser):
                 if len(cols) == 2:
                     num_text = self._clean_text(cols[0].get_text())
                     content_text = self._clean_text(cols[1].get_text())
-                    
+
                     recital = self._extract_table_recital(num_text, content_text)
                     if recital:
                         recitals.append(recital)
         return recitals
-    
+
     def _is_recitals_start(self, text: str) -> bool:
         """Check if text marks start of recitals section."""
         return text.strip() == 'Whereas:'
-    
+
     def _is_recitals_end(self, text: str) -> bool:
         """Check if text marks end of recitals section."""
         return bool(re.match(r'^(HAS ADOPTED|HAS DECIDED|HAVE ADOPTED|'
                              r'HAVE DECIDED|HAS AGREED|HAVE AGREED|Article|'
                              r'Sole Article|Done at)', text, re.IGNORECASE))
-    
+
     def _extract_numbered_recital(self, text: str):
         """Extract numbered recital from text like '(1) Some text'."""
         match = re.match(r'^\((\d+)\)\s*(.+)$', text)
@@ -240,7 +236,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 'text': match.group(2)
             }
         return None
-    
+
     def _extract_recitals_from_paragraphs(self):
         """Extract recitals from paragraph format: 'Whereas:' followed by
         numbered '(N)' items, or (older acts) bare 'Whereas …' paragraphs.
@@ -299,7 +295,7 @@ class CellarStandardHTMLParser(HTMLParser):
                                      'text': text})
 
         return recitals
-    
+
     def get_recitals(self):
         """
         Extract recitals (whereas clauses).
@@ -309,17 +305,17 @@ class CellarStandardHTMLParser(HTMLParser):
             if not hasattr(self, 'txt_te') or not self.txt_te:
                 self.recitals = []
                 return
-            
+
             self.recitals = self._extract_recitals_from_tables()
-            
+
             if not self.recitals:
                 self.recitals = self._extract_recitals_from_paragraphs()
-            
+
             self.logger.info(f"Extracted {len(self.recitals)} recitals.")
         except Exception as e:
             self.recitals = []
             self.logger.error(f"Error extracting recitals: {e}")
-    
+
     def get_preamble_final(self):
         """
         Extract final preamble statement (e.g., "HAS ADOPTED THIS DECISION:").
@@ -328,7 +324,7 @@ class CellarStandardHTMLParser(HTMLParser):
             if not hasattr(self, 'txt_te') or not self.txt_te:
                 self.preamble_final = None
                 return
-            
+
             paragraphs = self.txt_te.find_all('p')
             for p in paragraphs:
                 text = p.get_text(strip=True)
@@ -336,13 +332,13 @@ class CellarStandardHTMLParser(HTMLParser):
                     self.preamble_final = self._clean_text(text)
                     self.logger.info("Preamble final extracted.")
                     return
-            
+
             self.preamble_final = None
             self.logger.warning("No preamble final found.")
         except Exception as e:
             self.preamble_final = None
             self.logger.error(f"Error extracting preamble final: {e}")
-    
+
     def get_body(self):
         """
         The body is the TXT_TE container itself.
@@ -357,7 +353,7 @@ class CellarStandardHTMLParser(HTMLParser):
         except Exception as e:
             self.body = None
             self.logger.error(f"Error getting body: {e}")
-    
+
     def get_chapters(self):
         """
         Extract chapters. In standard HTML, these might be section headings.
@@ -366,11 +362,11 @@ class CellarStandardHTMLParser(HTMLParser):
         # Standard HTML typically doesn't have explicit chapter structure
         self.chapters = []
         self.logger.info("Chapter extraction not applicable for standard HTML format.")
-    
+
     def get_articles(self):
         """
         Extract articles from the document using CellarStandardArticleStrategy.
-        
+
         This method delegates article extraction to the strategy pattern,
         reducing code duplication and improving testability.
         """
@@ -379,7 +375,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.articles = []
                 self.logger.warning("No container found for article extraction.")
                 return
-            
+
             # Use strategy for extraction. Only 'Done at' reliably marks
             # the signature: 'For the …' / 'Brussels,' openings also occur
             # in ordinary article prose and would truncate extraction
@@ -387,57 +383,57 @@ class CellarStandardHTMLParser(HTMLParser):
                 self.txt_te,
                 stop_markers=['Done at', _BINDING_FORMULA]
             )
-            
+
             self.logger.info(f"Extracted {len(self.articles)} articles.")
-            
+
         except Exception as e:
             self.articles = []
             self.logger.error(f"Error extracting articles: {e}")
-    
+
     def _process_article_start_standard(self, text: str, current_article, article_content):
         """Process start of new article in standard format."""
         article_num, remaining = self._extract_article_number(text)
-        
+
         if article_num:
             if current_article:
                 self._finalize_article(current_article, article_content)
                 article_content.clear()
-            
+
             current_article = {
                 'eId': f'art_{article_num}',
                 'num': f'Article {article_num}',
                 'heading': remaining if remaining else None,
                 'children': []
             }
-        
+
         return current_article, article_content
-    
+
     def _process_article_content_standard(self, text: str, current_article, article_content):
         """Process article content in standard format."""
         if self._should_stop_processing(text):
             if current_article:
                 self._finalize_article(current_article, article_content)
             return None, True
-        
+
         if text:
             article_content.append(text)
-        
+
         return current_article, False
-    
+
     def _extract_articles_standard(self):
         """Extract articles from standard HTML format (with TXT_TE tags)."""
         elements = self.txt_te.find_all(['p', 'table'], recursive=False)
         current_article = None
         article_content = []
-        
+
         for element in elements:
             if element.name == 'table':
                 self._process_table_element(element, current_article, article_content)
                 continue
-            
+
             text = self._clean_text(element.get_text())
             article_num, _ = self._extract_article_number(text)
-            
+
             if article_num:
                 current_article, article_content = self._process_article_start_standard(
                     text, current_article, article_content
@@ -451,10 +447,10 @@ class CellarStandardHTMLParser(HTMLParser):
             else:
                 if self._should_stop_processing(text):
                     break
-        
+
         if current_article:
             self._finalize_article(current_article, article_content)
-    
+
     def _extract_table_text(self, table):
         """Extract text content from a table element."""
         rows = []
@@ -463,7 +459,7 @@ class CellarStandardHTMLParser(HTMLParser):
             if any(cells):  # Only add non-empty rows
                 rows.append(' | '.join(cells))
         return '\n'.join(rows) if rows else None
-    
+
     def _is_signature_section(self, text):
         """Check if text is part of signature/conclusion section."""
         if not text:
@@ -478,29 +474,29 @@ class CellarStandardHTMLParser(HTMLParser):
             r'^Brussels,',
         ]
         return any(re.match(pattern, text, re.IGNORECASE) for pattern in signature_patterns)
-    
+
     def _is_footnote(self, text):
         """Check if text is a footnote reference."""
         if not text:
             return False
         # Footnotes typically start with (1), (2), etc. and contain OJ references
         return bool(re.match(r'^\(\d+\)\s+OJ\s+[A-Z]', text))
-    
+
     def _is_article_number_style(self, style: str) -> bool:
         """Check if style indicates article number (italic, centered)."""
         return 'italic' in style and 'center' in style
-    
+
     def _is_heading_style(self, style: str) -> bool:
         """Check if style indicates article heading (bold, centered)."""
         return 'bold' in style and 'center' in style
-    
+
     def _process_table_element(self, element, current_article, article_content):
         """Process table element and add to article content."""
         if current_article:
             table_text = self._extract_table_text(element)
             if table_text:
                 article_content.append(f"[TABLE]\n{table_text}")
-    
+
     def _extract_article_heading(self, elements, current_index: int):
         """Extract article heading from next element if present."""
         if current_index + 1 < len(elements):
@@ -510,7 +506,7 @@ class CellarStandardHTMLParser(HTMLParser):
                 if self._is_heading_style(next_style):
                     return self._clean_text(next_elem.get_text())
         return None
-    
+
     def _create_new_article(self, article_num: str, heading: str):
         """Create new article dictionary."""
         return {
@@ -519,58 +515,58 @@ class CellarStandardHTMLParser(HTMLParser):
             'heading': heading,
             'children': []
         }
-    
+
     def _should_stop_processing(self, text: str) -> bool:
         """Check if text indicates end of articles section."""
         return self._is_signature_section(text) or self._is_footnote(text)
-    
+
     def _process_article_content(self, text: str, style: str, current_article, article_content):
         """Process paragraph as article content."""
         if current_article['heading'] and text == current_article['heading']:
             return
-        
+
         if text and 'center' not in style and 'italic' not in style:
             article_content.append(text)
-    
+
     def _extract_articles_consolidated(self):
         """Extract articles from consolidated HTML format (styled paragraphs)."""
         elements = self.txt_te.find_all(['p', 'table'], recursive=False)
         current_article = None
         article_content = []
-        
+
         for i, element in enumerate(elements):
             if element.name == 'table':
                 self._process_table_element(element, current_article, article_content)
                 continue
-            
+
             text = self._clean_text(element.get_text())
             style = element.get('style', '')
-            
+
             if self._is_article_number_style(style):
                 article_num, remaining = self._extract_article_number(text)
-                
+
                 if article_num:
                     if current_article:
                         self._finalize_article(current_article, article_content)
                         article_content = []
-                    
+
                     heading = self._extract_article_heading(elements, i)
                     current_article = self._create_new_article(article_num, heading)
-            
+
             elif current_article:
                 if self._should_stop_processing(text):
                     self._finalize_article(current_article, article_content)
                     current_article = None
                     break
-                
+
                 self._process_article_content(text, style, current_article, article_content)
             else:
                 if self._should_stop_processing(text):
                     break
-        
+
         if current_article:
             self._finalize_article(current_article, article_content)
-    
+
     def _finalize_article(self, article, paragraphs):
         """
         Process collected paragraphs for an article and add to articles list.
@@ -580,26 +576,26 @@ class CellarStandardHTMLParser(HTMLParser):
             # No content paragraphs
             self.articles.append(article)
             return
-        
+
         # If first paragraph looks like a title (short and no ending punctuation), use it as heading
         if len(paragraphs) > 0 and len(paragraphs[0]) < 100 and not paragraphs[0][-1] in '.!?':
             if not article['heading']:
                 article['heading'] = paragraphs[0]
                 paragraphs = paragraphs[1:]
-        
+
         # Extract article number from eId (format: art_1 -> 1)
         article_num_match = re.search(r'art_(\d+)', article['eId'])
         article_num = int(article_num_match.group(1)) if article_num_match else 0
-        
+
         # Group paragraphs: combine consecutive lettered/roman points, but keep numbered paragraphs separate
         grouped_paragraphs = []
         current_group = []
-        
+
         for para_text in paragraphs:
             # Check if this is a lettered point: (a), (b), (c) or roman numerals: (i), (ii), (iii)
             is_letter_point = bool(re.match(r'^\s*\([a-z]\)\s+', para_text, re.IGNORECASE))
             is_roman_point = bool(re.match(r'^\s*\([ivxlcdm]+\)\s+', para_text, re.IGNORECASE))
-            
+
             if (is_letter_point or is_roman_point) and current_group:
                 # This is a continuation point - add to current group
                 current_group.append(para_text)
@@ -610,20 +606,20 @@ class CellarStandardHTMLParser(HTMLParser):
                     grouped_paragraphs.append('\n'.join(current_group))
                 # Start new group
                 current_group = [para_text]
-        
+
         # Don't forget the last group
         if current_group:
             grouped_paragraphs.append('\n'.join(current_group))
-        
+
         # Create children from grouped paragraphs
         for idx, para_text in enumerate(grouped_paragraphs, start=1):
             article['children'].append({
                 'eId': f"{article_num:03d}.{idx:03d}",
                 'text': para_text
             })
-        
+
         self.articles.append(article)
-    
+
     def _signature_block(self):
         """Locate the 'Done at …' signature block: returns (start, end)
         indices into the txt_te p/table flow, or (None, None). The block
@@ -722,9 +718,9 @@ class CellarStandardHTMLParser(HTMLParser):
 
         leftovers = []
         for _, block in self._flow_elements():
-            block_lines = [_canon(l) for l in block.split('\n')]
-            block_lines = [l for l in block_lines if l]
-            if block_lines and not all(l in lines or l in joined for l in block_lines):
+            block_lines = [_canon(line) for line in block.split('\n')]
+            block_lines = [line for line in block_lines if line]
+            if block_lines and not all(line in lines or line in joined for line in block_lines):
                 leftovers.append(block)
         if leftovers:
             n = len(self.annexes) + 1
@@ -808,12 +804,12 @@ class CellarStandardHTMLParser(HTMLParser):
                 })
         except Exception as e:
             self.logger.error(f"Error extracting annexes: {e}")
-    
+
     def parse(self, file_path: str, **options) -> 'CellarStandardHTMLParser':
         """
         Parse a standard HTML document and extract all components.
         If the input is a directory, searches for HTML files.
-        
+
         Parameters
         ----------
         file_path : str
@@ -821,7 +817,7 @@ class CellarStandardHTMLParser(HTMLParser):
         **options : dict
             Optional configuration:
             - validate : bool - Whether to validate against LegalJSON schema (default: False)
-        
+
         Returns
         -------
         CellarStandardHTMLParser
@@ -829,13 +825,13 @@ class CellarStandardHTMLParser(HTMLParser):
         """
         validate = options.get('validate', False)
         from pathlib import Path
-        
+
         # Check if input is a directory
         path = Path(file_path)
         if path.is_dir():
             # Search for HTML files in the directory
             html_files = list(path.glob('*.html'))
-            
+
             if html_files:
                 # Use the first HTML file found
                 file_path = str(html_files[0])
@@ -843,14 +839,14 @@ class CellarStandardHTMLParser(HTMLParser):
             else:
                 self.logger.error(f"No HTML files found in directory: {path}")
                 return self
-        
+
         try:
             # Load and parse HTML
             self._flow_cache = None
             self._preface_texts = set()
             self._conclusion_texts = []
             self.get_root(file_path)
-            
+
             # Extract all components
             self.get_preface()
             self.get_preamble()
@@ -890,9 +886,9 @@ class CellarStandardHTMLParser(HTMLParser):
             if validate:
                 if not LegalJSONValidator().validate(self.to_dict()):
                     self.logger.warning("LegalJSON validation failed")
-            
+
             return self
-            
+
         except Exception as e:
             self.logger.error(f"Error parsing document: {e}")
             raise

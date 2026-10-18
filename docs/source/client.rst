@@ -21,23 +21,24 @@ The tulit Client library supports multiple legal document retrieval sources orga
 * **France (DILA open data)**: Journal officiel and consolidated legislation from the DILA open data
 * **France (Légifrance PISTE API)**: Légifrance PISTE API (needs credentials)
 * **Germany (Rechtsinformationen des Bundes)**: Rechtsinformationen des Bundes (test phase)
+* **Germany (Bundesgesetzblatt)**: Federal Law Gazette as promulgated, from recht.bund.de and the bgbl.de archive
 * **Greece (ΦΕΚ)**: Government Gazette (ΦΕΚ), National Printing House
 * **Hungary (Nemzeti Jogszabálytár)**: National Legislation Database
 * **Ireland (Irish Statute Book and Revised Acts)**: Irish Statute Book and Revised Acts
 * **Italy (Normattiva)**: Normattiva, Akoma Ntoso export
-* **Italy (Normattiva, earlier client)**: Normattiva (earlier client)
 * **Latvia (Likumi.lv and Latvijas Vēstnesis)**: Likumi.lv and the Latvijas Vēstnesis gazette
 * **Lithuania (Teisės aktų registras)**: Register of Legal Acts, via e-seimas.lrs.lt
 * **Luxembourg (Legilux)**: Luxembourg legal portal
 * **Malta (Legislation Malta)**: Legislation Malta
 * **Netherlands (BWB and Staatsblad)**: Basiswettenbestand, wetten.overheid.nl, and the Staatsblad
 * **Poland (Sejm ELI API)**: Dziennik Ustaw and Monitor Polski
-* **Portugal (Diário da República)**: Diário da República
-* **Romania (Portal Legislativ)**: Portal Legislativ web service (Ministry of Justice)
+* **Portugal (Diário da República)**: Diário da República (PDF by ELI) and its Legislação Consolidada (JSON screen services)
+* **Romania (Portal Legislativ)**: Portal Legislativ web service and pages of consolidated forms (Ministry of Justice)
 * **Slovakia (Slov-Lex)**: MetaLex XML
 * **Slovenia (PISRS)**: PISRS (Ministry of Justice)
 * **Spain (BOE)**: Spanish official gazette and consolidated legislation
-* **Sweden (Riksdagen)**: consolidated statutes (SFS)
+* **Sweden (Svensk författningssamling and Riksdagen)**: acts as adopted (electronic SFS, PDF, from April 2018)
+  and consolidated statutes (Riksdag open data)
 
 **Regional Clients**
 
@@ -164,6 +165,14 @@ Germany (Rechtsinformationen des Bundes)
      :undoc-members:
      :show-inheritance:
 
+Germany (Bundesgesetzblatt)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.client.state.germany_bgbl
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 Greece (ΦΕΚ)
 ~~~~~~~~~~~~
 
@@ -192,14 +201,6 @@ Italy (Normattiva)
 ~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.client.state.italy
-     :members:
-     :undoc-members:
-     :show-inheritance:
-
-Italy (Normattiva, earlier client)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: tulit.client.state.normattiva
      :members:
      :undoc-members:
      :show-inheritance:
@@ -292,8 +293,8 @@ Spain (BOE)
      :undoc-members:
      :show-inheritance:
 
-Sweden (Riksdagen)
-~~~~~~~~~~~~~~~~~~
+Sweden (Svensk författningssamling and Riksdagen)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.client.state.sweden
      :members:

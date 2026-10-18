@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from tulit.parser.html.veneto import VenetoHTMLParser
 
 
@@ -35,7 +35,7 @@ class TestVenetoHTMLParser:
     def test_get_root_success(self, veneto_parser, sample_html_file):
         """Test get_root successfully extracts div with 'row testo' class."""
         veneto_parser.get_root(sample_html_file)
-        
+
         assert veneto_parser.root is not None
         assert veneto_parser.root.name == 'div'
         # Should have selected first div with class "row testo"
@@ -56,14 +56,14 @@ class TestVenetoHTMLParser:
             '<html><body><div class="other">Content</div></body></html>',
             encoding='utf-8'
         )
-        
+
         with pytest.raises(IndexError):
             veneto_parser.get_root(str(html_file))
 
     def test_get_preface_success(self, parser_with_root):
         """Test get_preface extracts title text successfully."""
         parser_with_root.get_preface()
-        
+
         assert parser_with_root.preface is not None
         assert isinstance(parser_with_root.preface, str)
         assert len(parser_with_root.preface) > 0
@@ -75,10 +75,10 @@ class TestVenetoHTMLParser:
             '<html><body><div class="row testo">No title here</div></body></html>',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_preface()
-        
+
         assert veneto_parser.preface is None
 
     def test_get_preface_exception_handling(self, veneto_parser):
@@ -103,14 +103,14 @@ class TestVenetoHTMLParser:
     def test_get_citations(self, parser_with_root):
         """Test get_citations initializes empty list."""
         parser_with_root.get_citations()
-        
+
         assert parser_with_root.citations == []
         assert isinstance(parser_with_root.citations, list)
 
     def test_get_recitals_success(self, parser_with_root):
         """Test get_recitals extracts bold subtitle text."""
         parser_with_root.get_recitals()
-        
+
         assert parser_with_root.recitals is not None
         assert isinstance(parser_with_root.recitals, list)
         assert len(parser_with_root.recitals) > 0
@@ -125,10 +125,10 @@ class TestVenetoHTMLParser:
             '<html><body><div class="row testo"><b>This is bold text</b></div></body></html>',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_recitals()
-        
+
         assert len(veneto_parser.recitals) == 1
         assert veneto_parser.recitals[0]['text'] == 'This is bold text'
 
@@ -154,10 +154,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_chapters()
-        
+
         # Note: The code finds h3 then h4, so h4 result overwrites h3
         assert veneto_parser.chapters is not None
         assert isinstance(veneto_parser.chapters, list)
@@ -172,10 +172,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_chapters()
-        
+
         assert len(veneto_parser.chapters) == 2
         assert veneto_parser.chapters[0]['eId'] == 0
         assert veneto_parser.chapters[0]['num'] == '1'
@@ -189,20 +189,20 @@ class TestVenetoHTMLParser:
             '<html><body><div class="row testo">No chapters here</div></body></html>',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_chapters()
-        
+
         assert veneto_parser.chapters == []
 
     def test_get_articles_success(self, parser_with_root):
         """Test get_articles extracts article h6 elements."""
         parser_with_root.get_articles()
-        
+
         assert parser_with_root.articles is not None
         assert isinstance(parser_with_root.articles, list)
         assert len(parser_with_root.articles) > 0
-        
+
         # Check first article structure
         first_article = parser_with_root.articles[0]
         assert 'eId' in first_article
@@ -220,10 +220,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         assert len(veneto_parser.articles) == 1
         assert veneto_parser.articles[0]['num'] == 'Art. 1'
         assert veneto_parser.articles[0]['heading'] == 'Purpose'
@@ -238,10 +238,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         assert len(veneto_parser.articles) == 1
         assert veneto_parser.articles[0]['num'] == 'Art. 2'
         assert veneto_parser.articles[0]['heading'] == 'Definitions'
@@ -256,10 +256,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         assert len(veneto_parser.articles) == 1
         assert veneto_parser.articles[0]['num'] == '1'
         assert veneto_parser.articles[0]['heading'] == 'Just a heading'
@@ -274,10 +274,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         assert len(veneto_parser.articles) == 1
         children = veneto_parser.articles[0]['children']
         assert len(children) == 3
@@ -295,10 +295,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         assert len(veneto_parser.articles) == 1
         assert veneto_parser.articles[0]['children'] == []
 
@@ -312,10 +312,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         children = veneto_parser.articles[0]['children']
         assert len(children) >= 1
         # Should have stripped tags but kept text
@@ -332,10 +332,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         children = veneto_parser.articles[0]['children']
         # Multiple spaces should be reduced to single space
         assert '   ' not in children[0]['text']
@@ -351,10 +351,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_articles()
-        
+
         children = veneto_parser.articles[0]['children']
         # Empty parts should be filtered out
         for child in children:
@@ -369,10 +369,10 @@ class TestVenetoHTMLParser:
             </div></body></html>''',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
         veneto_parser.get_conclusions()
-        
+
         assert veneto_parser.conclusions == 'Final conclusions text'
 
     def test_get_conclusions_no_element(self, veneto_parser, tmp_path):
@@ -382,9 +382,9 @@ class TestVenetoHTMLParser:
             '<html><body><div class="row testo">No conclusions here</div></body></html>',
             encoding='utf-8'
         )
-        
+
         veneto_parser.get_root(str(html_file))
-        
+
         with pytest.raises(AttributeError):
             veneto_parser.get_conclusions()
 
@@ -398,11 +398,11 @@ class TestVenetoHTMLParser:
     def test_full_parse_workflow(self, veneto_parser, sample_html_file):
         """Test complete parse workflow with real test file."""
         result = veneto_parser.parse(sample_html_file)
-        
+
         # parse() returns the parser object itself
         assert result is not None
         assert result == veneto_parser
-        
+
         # Verify parser populated attributes
         assert veneto_parser.root is not None
         assert veneto_parser.articles is not None

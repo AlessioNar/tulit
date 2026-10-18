@@ -1,11 +1,8 @@
 from tulit.parser.html.html_parser import HTMLParser
-import json
 import re
-import argparse
 # LegalJSON validation
-from tulit.parser.parser import LegalJSONValidator
 import logging
-from typing import Optional, Any
+from typing import Optional
 
 # Publication footer of an OJ piece: 'ELI: http://data.europa.eu/eli/...'
 # and 'ISSN 1977-0677 (electronic edition)', in every language
@@ -19,12 +16,12 @@ class CellarHTMLParser(HTMLParser):
     def _normalize_text(self, text: str) -> str:
         """
         Normalize Unicode quotation marks and other special characters to ASCII equivalents.
-        
+
         Parameters
         ----------
         text : str
             The text to normalize
-            
+
         Returns
         -------
         str
@@ -42,11 +39,11 @@ class CellarHTMLParser(HTMLParser):
     def get_preface(self) -> None:
         """
         Extracts the preface text from the HTML, if available.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
@@ -66,22 +63,21 @@ class CellarHTMLParser(HTMLParser):
                 self.logger.warning("No preface found")
         except Exception as e:
             self.logger.error(f"Error extracting preface: {e}", exc_info=True)
-    
-            
+
     def get_preamble(self) -> None:
         """
         Extracts the preamble text from the HTML, if available.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted preamble is stored in the 'preamble' attribute.
         """
-        
+
         self.preamble = self.root.find('div', id=lambda x: bool(x) and x.startswith('pbl'))
         if self.preamble is None:
             return
@@ -190,25 +186,25 @@ class CellarHTMLParser(HTMLParser):
     def get_body(self) -> None:
         """
         Extracts the body content from the HTML.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
             The extracted body content is stored in the 'body' attribute
         """
-        
+
         # Try to find body with enc_ prefix
         self.body = self.root.find('div', id=lambda x: x and x.startswith('enc_'))
-        
+
         # If no explicit body found, use eli-container as fallback
         if self.body is None:
             self.body = self.root.find('div', class_='eli-container')
             self.logger.warning("Body element not found. Using eli-container as fallback")
-        
+
         # If still no body, use root itself
         if self.body is None:
             self.body = self.root
@@ -399,40 +395,40 @@ class CellarHTMLParser(HTMLParser):
         Returns:
             list[dict]: List of articles, each containing its eId and associated content.
         """
-        
+
         if self.body is None:
             self.articles = []
             self.logger.warning("No body element to extract articles from")
             return
-        
+
         # Find all article divs: either id="art" (sole article) or id="art_X" (numbered articles)
         articles = self.body.find_all('div', id=lambda x: x and (x == 'art' or (x.startswith('art_') and '.' not in x)))
         self.articles = []
         for article in articles:
             eId = article.get('id')  # Treat the id as the eId
             getattr(self, '_consumed_ids', set()).add(id(article))
-            
+
             # Try original document format first (oj-ti-art), then consolidated format (title-article-norm)
             article_num_elem = article.find('p', class_='oj-ti-art')
             if article_num_elem is None:
                 article_num_elem = article.find('p', class_='title-article-norm')
-            
+
             if article_num_elem is None:
                 self.logger.warning(f"Article {eId} has no article title element, skipping")
                 continue
-            
+
             article_num = self._normalize_text(article_num_elem.get_text(strip=True))
-            
+
             # Try original document format first (oj-sti-art), then consolidated format (stitle-article-norm)
             article_title_element = article.find('p', class_='oj-sti-art')
             if article_title_element is None:
                 article_title_element = article.find('p', class_='stitle-article-norm')
-            
+
             if article_title_element is not None:
                 article_title = self._normalize_text(article_title_element.get_text(strip=True))
             else:
                 article_title = None
-            
+
             # Extract paragraphs and lists within the article. OJ xhtml
             # (oj-* classes) goes through a generic document-order block
             # walk; consolidated formats keep their dedicated branches.
@@ -474,7 +470,7 @@ class CellarHTMLParser(HTMLParser):
                                     'eId': idx,
                                     'text': text
                                 })
-                
+
                 # Also check for simple <p class="norm"> paragraphs (single paragraph articles)
                 if not children:
                     norm_paragraphs = article.find_all('p', class_='norm', recursive=False)
@@ -487,15 +483,17 @@ class CellarHTMLParser(HTMLParser):
                                 'eId': idx,
                                 'text': text
                             })
-            
+
             # Generic fallback: if no specific pattern matched, extract all text content
             # This handles articles with complex tables or other structures not covered by specific patterns
             if not children:
                 # Skip title elements to avoid duplicate content
                 article_copy = article.__copy__()
-                for title_elem in article_copy.find_all(['p'], class_=['oj-ti-art', 'oj-sti-art', 'title-article-norm', 'stitle-article-norm']):
+                for title_elem in article_copy.find_all(
+                    ['p'], class_=['oj-ti-art', 'oj-sti-art', 'title-article-norm', 'stitle-article-norm']
+                ):
                     title_elem.decompose()
-                
+
                 text = ' '.join(article_copy.get_text(separator=' ', strip=True).split())
                 text = re.sub(r'\s+([.,!?;:\\''])', r'\1', text)
                 text = self._normalize_text(text)
@@ -530,7 +528,6 @@ class CellarHTMLParser(HTMLParser):
         # ELI-style child eIds (par_N / unp_N)
         self._standardize_children_numbering()
         self._build_structure()
-
 
     def _standardize_children_numbering(self) -> None:
         """
@@ -586,7 +583,7 @@ class CellarHTMLParser(HTMLParser):
                 attach(div, node)
             elif an_id in article_ids:
                 attach(div, {'eId': an_id, 'type': 'article'})
-    
+
     def get_conclusions(self) -> None:
         """
         Extracts conclusions: the final-provisions div (fnp_*) when
@@ -812,27 +809,27 @@ class CellarHTMLParser(HTMLParser):
     def parse(self, file: str, **options) -> "CellarHTMLParser":
         """
         Parses an XHTML document. If the input is a directory, searches for XHTML files.
-        
+
         Parameters
         ----------
         file : str
             Path to the XHTML file or directory containing XHTML files.
         **options : dict
             Optional configuration options
-        
+
         Returns
         -------
         CellarHTMLParser
             Self for method chaining with extracted content.
         """
         from pathlib import Path
-        
+
         # Check if input is a directory
         file_path = Path(file)
         if file_path.is_dir():
             # Search for XHTML files in the directory
             xhtml_files = list(file_path.glob('*.xhtml')) + list(file_path.glob('*.html'))
-            
+
             if xhtml_files:
                 # Use the first XHTML/HTML file found
                 file = str(xhtml_files[0])
@@ -840,5 +837,5 @@ class CellarHTMLParser(HTMLParser):
             else:
                 logging.error(f"No XHTML/HTML files found in directory: {file_path}")
                 return self
-        
+
         return super().parse(file)

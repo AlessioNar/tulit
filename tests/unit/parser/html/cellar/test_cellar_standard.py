@@ -1,6 +1,5 @@
 import pytest
-from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from tulit.parser.html.cellar.cellar_standard import CellarStandardHTMLParser
 
 
@@ -82,10 +81,10 @@ class TestCellarStandardHTMLParser:
             '<html><head><meta name="DC.description" content="Test preface"/></head><body></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preface()
-        
+
         assert parser.preface == "Test preface"
 
     def test_get_preface_from_h1(self, parser, tmp_path):
@@ -95,10 +94,10 @@ class TestCellarStandardHTMLParser:
             '<html><body><h1>Test heading</h1></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preface()
-        
+
         assert parser.preface == "Test heading"
 
     def test_get_preface_from_strong(self, parser, tmp_path):
@@ -108,10 +107,10 @@ class TestCellarStandardHTMLParser:
             '<html><body><strong>Strong text</strong></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preface()
-        
+
         assert parser.preface == "Strong text"
 
     def test_get_preface_none_found(self, parser, tmp_path):
@@ -121,10 +120,10 @@ class TestCellarStandardHTMLParser:
             '<html><body><p>Just text</p></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preface()
-        
+
         assert parser.preface is None
 
     def test_get_preface_exception_handling(self, parser):
@@ -140,10 +139,10 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te>Preamble content</txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
-        
+
         assert parser.preamble is not None
         assert parser.txt_te is not None
         assert parser.is_consolidated is False
@@ -155,10 +154,10 @@ class TestCellarStandardHTMLParser:
             '<html><body><TXT_TE>Preamble content</TXT_TE></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
-        
+
         assert parser.txt_te is not None
         assert parser.is_consolidated is False
 
@@ -169,7 +168,7 @@ class TestCellarStandardHTMLParser:
             '<html><body><p>Consolidated content</p></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         with pytest.raises(ValueError, match="No TXT_TE tag found"):
             parser.get_preamble()
@@ -178,7 +177,7 @@ class TestCellarStandardHTMLParser:
         """Test get_preamble raises ValueError when no TXT_TE container found."""
         html_file = tmp_path / "no_container.html"
         html_file.write_text('<html><div></div></html>', encoding='utf-8')
-        
+
         parser.get_root(str(html_file))
         with pytest.raises(ValueError, match="No TXT_TE tag found"):
             parser.get_preamble()
@@ -197,11 +196,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>THE COUNCIL HAS ADOPTED</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_formula()
-        
+
         assert parser.formula is not None
         assert "COUNCIL" in parser.formula
 
@@ -212,11 +211,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>THE COMMISSION HAS DECIDED</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_formula()
-        
+
         assert "COMMISSION" in parser.formula
 
     def test_get_formula_no_container(self, parser):
@@ -231,11 +230,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>Random text</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_formula()
-        
+
         assert parser.formula is None
 
     def test_get_citations_success(self, parser, tmp_path):
@@ -248,11 +247,11 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_citations()
-        
+
         assert len(parser.citations) == 2
         assert parser.citations[0]['eId'] == 'cit_1'
         assert 'regard' in parser.citations[0]['text']
@@ -269,11 +268,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>Random text</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_citations()
-        
+
         assert parser.citations == []
 
     def test_extract_table_recital(self, parser):
@@ -300,11 +299,11 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         recitals = parser._extract_recitals_from_tables()
-        
+
         assert len(recitals) == 2
         assert recitals[0]['eId'] == 'rct_1'
 
@@ -344,11 +343,11 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         recitals = parser._extract_recitals_from_paragraphs()
-        
+
         assert len(recitals) == 2
         assert recitals[0]['text'] == "First recital"
 
@@ -361,11 +360,11 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_recitals()
-        
+
         assert len(parser.recitals) > 0
 
     def test_get_recitals_from_paragraphs_fallback(self, parser, tmp_path):
@@ -378,11 +377,11 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_recitals()
-        
+
         assert len(parser.recitals) > 0
 
     def test_get_recitals_no_container(self, parser):
@@ -397,11 +396,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>HAS ADOPTED THIS DECISION:</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_preamble_final()
-        
+
         assert "ADOPTED" in parser.preamble_final
 
     def test_get_preamble_final_not_found(self, parser, tmp_path):
@@ -411,11 +410,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>Other text</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_preamble_final()
-        
+
         assert parser.preamble_final is None
 
     def test_get_body_success(self, parser, tmp_path):
@@ -425,11 +424,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te>Body content</txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_body()
-        
+
         assert parser.body is not None
 
     def test_get_body_no_txt_te(self, parser):
@@ -452,10 +451,10 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
-        
+
         with patch.object(parser.article_strategy, 'extract_articles', return_value=[]) as mock_extract:
             parser.get_articles()
             mock_extract.assert_called_once()
@@ -488,11 +487,11 @@ class TestCellarStandardHTMLParser:
             </table></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         table = parser.root.find('table')
         text = parser._extract_table_text(table)
-        
+
         assert "Cell 1 | Cell 2" in text
         assert "Cell 3 | Cell 4" in text
 
@@ -503,11 +502,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><table></table></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         table = parser.root.find('table')
         text = parser._extract_table_text(table)
-        
+
         assert text is None
 
     def test_finalize_article_with_heading(self, parser):
@@ -520,9 +519,9 @@ class TestCellarStandardHTMLParser:
             'children': []
         }
         paragraphs = ["Short title", "First paragraph.", "Second paragraph."]
-        
+
         parser._finalize_article(article, paragraphs)
-        
+
         assert len(parser.articles) == 1
         assert parser.articles[0]['heading'] == "Short title"
         assert len(parser.articles[0]['children']) == 2
@@ -542,9 +541,9 @@ class TestCellarStandardHTMLParser:
             "(b) Second point",
             "Second paragraph."
         ]
-        
+
         parser._finalize_article(article, paragraphs)
-        
+
         # Should have 2 children: first para, grouped (a)+(b), second para
         assert len(parser.articles[0]['children']) >= 2
 
@@ -559,11 +558,11 @@ class TestCellarStandardHTMLParser:
             </txt_te></body></html>''',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_conclusions()
-        
+
         assert parser.conclusions is not None
         assert "Done at Brussels" in parser.conclusions
 
@@ -574,11 +573,11 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>Article content</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         parser.get_root(str(html_file))
         parser.get_preamble()
         parser.get_conclusions()
-        
+
         assert parser.conclusions is None
 
     def test_parse_directory_input(self, parser, tmp_path):
@@ -590,7 +589,7 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>Test</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         result = parser.parse(str(test_dir))
         assert result == parser
 
@@ -598,7 +597,7 @@ class TestCellarStandardHTMLParser:
         """Test parse handles directory with no HTML files."""
         test_dir = tmp_path / "empty_dir"
         test_dir.mkdir()
-        
+
         result = parser.parse(str(test_dir))
         # Returns the parser itself with nothing extracted
         assert result is parser
@@ -607,7 +606,7 @@ class TestCellarStandardHTMLParser:
     def test_parse_full_workflow(self, parser, sample_standard_html):
         """Test complete parse workflow."""
         result = parser.parse(sample_standard_html)
-        
+
         assert result == parser
         assert parser.root is not None
 
@@ -618,7 +617,7 @@ class TestCellarStandardHTMLParser:
             '<html><body><txt_te><p>Test</p></txt_te></body></html>',
             encoding='utf-8'
         )
-        
+
         result = parser.parse(str(html_file), validate=False)
         assert result == parser
 
@@ -636,7 +635,8 @@ def test_legacy_regulation_headings_formula_and_merged_points(parser, tmp_path):
             <p> Article 4</p>
             <p> Notification of new agreements, decisions and practices </p>
             <p> 2. Paragraph 1 shall not apply where:    (1) the only parties are from one Member State; </p>
-            <p>      (2) not more than two undertakings are party thereto, and the agreements only:      (a) restrict prices ; or </p>
+            <p>      (2) not more than two undertakings are party thereto, and the agreements only:      (a) restrict \
+prices ; or </p>
             <p>          (b) impose restrictions on industrial property rights; </p>
             <p> Article 5</p>
             <p> Final provision </p>

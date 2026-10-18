@@ -17,12 +17,15 @@ Example
 instance a scanned PDF that has no text to parse.
 """
 import logging
+import os
 import tempfile
+import warnings
 from typing import Any, Optional
 
 import jsonschema
+from lxml import etree
 
-from tulit.parser.exceptions import FileLoadError, ValidationError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError, ValidationError
 from tulit.parser.parser import LegalJSONValidator
 from tulit.parser.registry import get_parser
 from tulit.sources import VERSIONS, Source, get_source, source_for_eli
@@ -30,7 +33,7 @@ from tulit.sources.eu import CELLAR_FORMATS
 
 logger = logging.getLogger(__name__)
 
-__all__ = ['fetch', 'download', 'CELLAR_FORMATS']
+__all__ = ['fetch', 'download', 'export', 'native_akn', 'CELLAR_FORMATS', 'EXPORT_FORMATS', 'SCHEMA_VERSION']
 
 META_DEFAULTS = {
     'celex': None,
@@ -111,6 +114,112 @@ def fetch(
                            metadata, validate, options)
 
 
+EXPORT_FORMATS = ('akn', 'leg')
+# Version of the legalJSON schema the documents follow (tulit/parser/legaljson_schema.json)
+SCHEMA_VERSION = '1.0'
+AKN_NAMESPACE = 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0'
+
+
+def export(doc: dict[str, Any], to: str = 'akn', path: Optional[str] = None, native: bool = False,
+           download_dir: Optional[str] = None) -> bytes:
+    """
+    Convert a legalJSON document to another legal format.
+
+    Parameters
+    ----------
+    doc : dict
+        A legalJSON document, as ``fetch`` returns it.
+    to : str, optional
+        'akn' for Akoma Ntoso 3.0 XML (default), or 'leg' for a LEOS .leg
+        package: a zip of Akoma Ntoso documents (``main.xml``, the act and
+        one file per annex), as exchanged by LEOS and AKN4EU.
+    path : str, optional
+        Also write the result to this file.
+    native : bool, optional
+        With ``to='akn'``: instead of writing Akoma Ntoso from the legalJSON,
+        return the official Akoma Ntoso file of the act, where its source
+        publishes one (Italy, Finland, Luxembourg, Germany), unchanged. It keeps
+        what legalJSON does not hold (inline references, notes, the source's
+        metadata). Luxembourg publishes an earlier draft of Akoma Ntoso (CSD13)
+        and Germany its own variant (LegalDocML.de): a warning says so. The act
+        is downloaded again from the identifier, jurisdiction, version and date
+        in ``doc['meta']``.
+    download_dir : str, optional
+        With ``native``: where to keep the downloaded file.
+
+    Returns
+    -------
+    bytes
+        The XML document, or the zip package.
+
+    Raises
+    ------
+    UnsupportedError
+        If ``to`` is not a supported format, or with ``native`` when the
+        source does not publish the act in Akoma Ntoso.
+
+    Examples
+    --------
+    >>> doc = tulit.fetch('32024R0903')
+    >>> xml = tulit.export(doc, to='akn')
+    >>> tulit.export(doc, to='leg', path='32024R0903.leg')
+    >>> official = tulit.export(tulit.fetch('L. 160/2019', jurisdiction='IT'), native=True)
+    """
+    from tulit.exporters import to_akn, to_leg
+    converters = {'akn': to_akn, 'leg': to_leg}
+    if to not in converters:
+        raise UnsupportedError(f"Unknown export format {to!r}; supported: {', '.join(EXPORT_FORMATS)}")
+    if native:
+        if to != 'akn':
+            raise UnsupportedError("native is available for Akoma Ntoso (to='akn') only")
+        meta = doc.get('meta') or {}
+        if not (meta.get('identifier') and meta.get('jurisdiction')):
+            raise UnsupportedError("native needs the act's identifier and jurisdiction in doc['meta'] "
+                                   "(documents fetched with tulit 1.0 have them)")
+        content = native_akn(meta['identifier'], meta['jurisdiction'], meta.get('version'),
+                             meta.get('version_date') if meta.get('version') == 'consolidated' else None,
+                             meta.get('language'), download_dir)
+    else:
+        content = converters[to](doc)
+    if path:
+        with open(path, 'wb') as f:
+            f.write(content)
+    return content
+
+
+def native_akn(identifier: str, jurisdiction: Optional[str] = None, version: Optional[str] = None,
+               date: Optional[str] = None, language: Optional[str] = None, download_dir: Optional[str] = None,
+               **options: Any) -> bytes:
+    """
+    The official Akoma Ntoso file of an act, unchanged, where its source publishes one.
+
+    Takes the same arguments as ``fetch``. Warns when the file is not in the
+    Akoma Ntoso 3.0 namespace (Luxembourg's CSD13 draft, Germany's
+    LegalDocML.de). Raises ``UnsupportedError`` when the source publishes
+    the act in another format.
+    """
+    found = download(identifier, jurisdiction, version, date, language, download_dir, **options)
+    path = found['path']
+    source = get_source(found['jurisdiction'])
+    if os.path.isdir(path) or not path.lower().endswith(('.xml', '.akn')):
+        raise UnsupportedError(f"{source.source_name} does not publish {identifier} in Akoma Ntoso; "
+                               f"export it without native")
+    with open(path, 'rb') as f:
+        content = f.read()
+    try:
+        root = etree.fromstring(content, etree.XMLParser(resolve_entities=False, no_network=True, huge_tree=True))
+    except etree.XMLSyntaxError as e:
+        raise FileLoadError(f"The file {source.source_name} returned for {identifier} is not XML: {e}") from e
+    if etree.QName(root).localname != 'akomaNtoso':
+        raise UnsupportedError(f"{source.source_name} does not publish {identifier} in Akoma Ntoso; "
+                               f"export it without native")
+    namespace = etree.QName(root).namespace
+    if namespace != AKN_NAMESPACE:
+        warnings.warn(f"{source.source_name} publishes {identifier} in a variant of Akoma Ntoso ({namespace}), "
+                      f"not in Akoma Ntoso 3.0; returned unchanged", stacklevel=2)
+    return content
+
+
 def download(
     identifier: str,
     jurisdiction: Optional[str] = None,
@@ -162,20 +271,20 @@ def _check(identifier, jurisdiction, version, language, options):
         version = source.default_version
     if version is not None:
         if version not in VERSIONS:
-            raise ValueError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
+            raise UnsupportedError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
         if version not in source.versions:
-            raise ValueError(
+            raise UnsupportedError(
                 f"{source.name} ({source.source_name}) does not publish the {version} version; "
                 f"available: {', '.join(source.versions)}"
             )
 
     if language and source.languages and language.lower() not in source.languages:
-        raise ValueError(
+        raise UnsupportedError(
             f"{source.name} publishes in {', '.join(source.languages)}, not '{language}'"
         )
     unknown = sorted(set(options) - set(source.options))
     if unknown:
-        raise ValueError(f"Unsupported option(s) for {source.name}: {', '.join(unknown)}")
+        raise UnsupportedError(f"Unsupported option(s) for {source.name}: {', '.join(unknown)}")
     return source, identifier, version
 
 
@@ -185,11 +294,11 @@ def _resolve(identifier: str, jurisdiction: Optional[str]) -> tuple[Source, str]
             source = get_source(jurisdiction)
             resolved = source.identifier_from_eli(identifier)
             if resolved is None:
-                raise ValueError(f"{identifier} is not an ELI of {source.name}")
+                raise UnsupportedError(f"{identifier} is not an ELI of {source.name}")
             return source, resolved
         found = source_for_eli(identifier)
         if found is None:
-            raise ValueError(f"No supported source recognises the ELI {identifier}")
+            raise UnsupportedError(f"No supported source recognises the ELI {identifier}")
         return found
     return get_source(jurisdiction or 'EU'), identifier
 
@@ -211,6 +320,7 @@ def _fetch_into(source, identifier, version, date, language, download_dir,
         meta = {key: (list(value) if isinstance(value, list) else value)
                 for key, value in META_DEFAULTS.items()}
         meta.update(retrieval.meta)
+        meta.setdefault('identifier', identifier)
         meta.update({
             'jurisdiction': source.code,
             'language': retrieval.language,
@@ -222,6 +332,7 @@ def _fetch_into(source, identifier, version, date, language, download_dir,
             meta['valid'] = parser.valid
         doc['meta'] = meta
 
+    doc = {'schema_version': SCHEMA_VERSION, **doc}
     if validate:
         _validate(doc)
     return doc

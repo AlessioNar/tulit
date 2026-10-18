@@ -15,10 +15,12 @@ The formats currently supported are:
     Book XML, Riigi Teataja XML (Estonia), JORF and LEGI XML (France, DILA)
     and the Portal Legislativ XML (Romania)
 
-* **JSON Formats:** Légifrance, e-Sbírka fragments (Czechia)
+* **JSON Formats:** Légifrance, e-Sbírka fragments (Czechia), Legislação Consolidada of the
+  Diário da República (Portugal)
 
 * **PDF** (``pdf`` extra): Legislation Malta, Diário da República (Portugal),
-  the Official Gazette of Cyprus and the Greek Government Gazette (ΦΕΚ)
+  the Official Gazette of Cyprus, the Greek Government Gazette (ΦΕΚ) and
+  Svensk författningssamling (Sweden)
 
 * **HTML Formats:**
 
@@ -246,6 +248,14 @@ Base HTML Parser
     :undoc-members:
     :show-inheritance:
 
+Romanian Portal Legislativ HTML Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.legislatie_ro
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Cellar HTML Parsers
 ~~~~~~~~~~~~~~~~~~~
 
@@ -356,6 +366,14 @@ Czech e-Sbírka Parser
      :undoc-members:
      :show-inheritance:
 
+Portuguese Legislação Consolidada Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.json.dre_consolidated
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 PDF Parsers
 -----------
 
@@ -397,6 +415,22 @@ Greek Government Gazette Parser
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.parser.pdf.greece
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Svensk författningssamling Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.sweden
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+German Federal Law Gazette Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.germany
      :members:
      :undoc-members:
      :show-inheritance:

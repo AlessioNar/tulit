@@ -25,7 +25,7 @@ Member State Clients:
     - GermanyClient: German legal information system
     - LegiluxClient: Luxembourg legal database
     - MaltaClient: Maltese legal database
-    - NormattivaClient: Italian legal database
+    - NormattivaAKNClient: Italian legal database (Akoma Ntoso)
     - PortugalClient: Portuguese legal database
     - IrishStatuteBookClient: Irish legal database
 

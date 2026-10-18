@@ -1,4 +1,3 @@
-from tests.conftest import locate_data_dir
 from pathlib import Path
 import pytest
 

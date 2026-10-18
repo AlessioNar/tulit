@@ -1,7 +1,5 @@
 import pytest
 import os
-from pathlib import Path
-from unittest.mock import patch, MagicMock
 from tulit.parser.html.cellar import CellarHTMLParser
 from tests.conftest import locate_data_dir
 
@@ -148,7 +146,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_preamble()
         cellar_parser.get_citations()
-        
+
         assert len(cellar_parser.citations) == 2
         assert cellar_parser.citations[0]['eId'] == 'cit_1'
         assert 'First citation' in cellar_parser.citations[0]['text']
@@ -166,7 +164,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_preamble()
         cellar_parser.get_citations()
-        
+
         assert cellar_parser.citations == []
 
     def test_get_recitals_success(self, parser_with_root):
@@ -190,7 +188,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_preamble()
         cellar_parser.get_recitals()
-        
+
         assert len(cellar_parser.recitals) == 2
         assert cellar_parser.recitals[0]['text'] == 'First recital'
         assert cellar_parser.recitals[1]['text'] == 'Second recital'
@@ -209,7 +207,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_preamble()
         cellar_parser.get_recitals()
-        
+
         assert '   ' not in cellar_parser.recitals[0]['text']
 
     def test_get_preamble_final_success(self, parser_with_root):
@@ -228,7 +226,7 @@ class TestCellarHTMLParser:
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
-        
+
         assert cellar_parser.body is not None
         assert cellar_parser.body.get('id') == 'enc_1'
 
@@ -241,7 +239,7 @@ class TestCellarHTMLParser:
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
-        
+
         assert cellar_parser.body is not None
         assert "Using eli-container as fallback" in caplog.text
 
@@ -254,7 +252,7 @@ class TestCellarHTMLParser:
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
-        
+
         assert cellar_parser.body is not None
         assert "Using root as fallback" in caplog.text
 
@@ -281,7 +279,7 @@ class TestCellarHTMLParser:
         """Test get_chapters with None body."""
         cellar_parser.body = None
         cellar_parser.get_chapters()
-        
+
         assert cellar_parser.chapters == []
         assert "No body element to extract chapters from" in caplog.text
 
@@ -306,7 +304,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_chapters()
-        
+
         assert len(cellar_parser.chapters) == 2
         assert cellar_parser.chapters[0]['eId'] == 'cpt_1'
         assert cellar_parser.chapters[0]['num'] == 'Chapter I'
@@ -333,7 +331,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_chapters()
-        
+
         # Only cpt_1 should be extracted, not cpt_1.1
         assert len([c for c in cellar_parser.chapters if c['eId'] == 'cpt_1']) == 1
         assert not any('cpt_1.1' in c['eId'] for c in cellar_parser.chapters)
@@ -375,7 +373,7 @@ class TestCellarHTMLParser:
         """Test get_articles with None body."""
         cellar_parser.body = None
         cellar_parser.get_articles()
-        
+
         assert cellar_parser.articles == []
         assert "No body element to extract articles from" in caplog.text
 
@@ -394,7 +392,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         assert len(cellar_parser.articles) >= 1
         # Should find article with id='art'
         article_ids = [a['eId'] for a in cellar_parser.articles]
@@ -412,7 +410,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         assert "has no article title element, skipping" in caplog.text
 
     def test_get_articles_consolidated_format(self, cellar_parser, tmp_path):
@@ -431,7 +429,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         assert len(cellar_parser.articles) >= 1
         article = cellar_parser.articles[0]
         assert article['num'] == 'Article 1'
@@ -452,7 +450,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         assert len(cellar_parser.articles) >= 1
         assert cellar_parser.articles[0]['heading'] is None
 
@@ -472,7 +470,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         article = cellar_parser.articles[0]
         assert len(article['children']) == 2
 
@@ -495,7 +493,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         article = cellar_parser.articles[0]
         children = article['children']
         assert len(children) > 0
@@ -521,7 +519,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         article = cellar_parser.articles[0]
         # Intro block plus the table folded into one block with both rows
         assert len(article['children']) == 2
@@ -544,7 +542,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         article = cellar_parser.articles[0]
         assert len(article['children']) == 2
 
@@ -566,7 +564,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         article = cellar_parser.articles[0]
         assert len(article['children']) >= 1
         assert 'First paragraph' in article['children'][0]['text']
@@ -586,7 +584,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         article = cellar_parser.articles[0]
         assert len(article['children']) >= 1
 
@@ -605,7 +603,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         # Fallback should extract something
         article = cellar_parser.articles[0]
         assert len(article['children']) >= 1
@@ -626,7 +624,7 @@ class TestCellarHTMLParser:
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_body()
         cellar_parser.get_articles()
-        
+
         # Unnumbered paragraphs get ELI-style unp_N eIds
         article = cellar_parser.articles[0]
         assert article['children'][0]['eId'] == 'unp_1'
@@ -641,7 +639,7 @@ class TestCellarHTMLParser:
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_conclusions()
-        
+
         assert cellar_parser.conclusions == 'Final text'
 
     def test_get_conclusions_no_element(self, cellar_parser, tmp_path):
@@ -653,7 +651,7 @@ class TestCellarHTMLParser:
         )
         cellar_parser.get_root(str(html_file))
         cellar_parser.get_conclusions()
-        
+
         assert cellar_parser.conclusions is None
 
     def test_parse_with_directory_xhtml(self, cellar_parser, tmp_path):
@@ -665,7 +663,7 @@ class TestCellarHTMLParser:
             '<html><body><div class="eli-main-title">Test</div></body></html>',
             encoding='utf-8'
         )
-        
+
         result = cellar_parser.parse(str(dir_path))
         assert result is not None
 
@@ -678,7 +676,7 @@ class TestCellarHTMLParser:
             '<html><body><div class="eli-main-title">Test</div></body></html>',
             encoding='utf-8'
         )
-        
+
         result = cellar_parser.parse(str(dir_path))
         assert result is not None
 
@@ -686,17 +684,17 @@ class TestCellarHTMLParser:
         """Test parse with directory containing no XHTML/HTML files."""
         dir_path = tmp_path / "empty_dir"
         dir_path.mkdir()
-        
+
         with caplog.at_level("ERROR"):
-            result = cellar_parser.parse(str(dir_path))
-        
+            cellar_parser.parse(str(dir_path))
+
         assert "No XHTML/HTML files found" in caplog.text
 
     def test_parse_calls_parent(self, cellar_parser):
         """Test parse calls parent's parse method."""
         if not os.path.exists(FILE_PATH):
             pytest.skip(f"Test file not found at {FILE_PATH}")
-        
+
         result = cellar_parser.parse(FILE_PATH)
         assert result is not None
         assert result == cellar_parser
@@ -705,9 +703,9 @@ class TestCellarHTMLParser:
         """Test complete parse workflow."""
         if not os.path.exists(FILE_PATH):
             pytest.skip(f"Test file not found at {FILE_PATH}")
-        
-        result = cellar_parser.parse(FILE_PATH)
-        
+
+        cellar_parser.parse(FILE_PATH)
+
         # Verify all attributes populated
         assert cellar_parser.root is not None
         assert cellar_parser.body is not None

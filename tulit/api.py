@@ -22,7 +22,7 @@ from typing import Any, Optional
 
 import jsonschema
 
-from tulit.parser.exceptions import FileLoadError, ValidationError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError, ValidationError
 from tulit.parser.parser import LegalJSONValidator
 from tulit.parser.registry import get_parser
 from tulit.sources import VERSIONS, Source, get_source, source_for_eli
@@ -30,7 +30,7 @@ from tulit.sources.eu import CELLAR_FORMATS
 
 logger = logging.getLogger(__name__)
 
-__all__ = ['fetch', 'download', 'export', 'CELLAR_FORMATS', 'EXPORT_FORMATS']
+__all__ = ['fetch', 'download', 'export', 'CELLAR_FORMATS', 'EXPORT_FORMATS', 'SCHEMA_VERSION']
 
 META_DEFAULTS = {
     'celex': None,
@@ -112,6 +112,8 @@ def fetch(
 
 
 EXPORT_FORMATS = ('akn', 'leg')
+# Version of the legalJSON schema the documents follow (tulit/parser/legaljson_schema.json)
+SCHEMA_VERSION = '1.0'
 
 
 def export(doc: dict[str, Any], to: str = 'akn', path: Optional[str] = None) -> bytes:
@@ -148,7 +150,7 @@ def export(doc: dict[str, Any], to: str = 'akn', path: Optional[str] = None) -> 
     from tulit.exporters import to_akn, to_leg
     converters = {'akn': to_akn, 'leg': to_leg}
     if to not in converters:
-        raise ValueError(f"Unknown export format {to!r}; supported: {', '.join(EXPORT_FORMATS)}")
+        raise UnsupportedError(f"Unknown export format {to!r}; supported: {', '.join(EXPORT_FORMATS)}")
     content = converters[to](doc)
     if path:
         with open(path, 'wb') as f:
@@ -207,20 +209,20 @@ def _check(identifier, jurisdiction, version, language, options):
         version = source.default_version
     if version is not None:
         if version not in VERSIONS:
-            raise ValueError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
+            raise UnsupportedError(f"Unknown version '{version}'. Choose one of: {', '.join(VERSIONS)}")
         if version not in source.versions:
-            raise ValueError(
+            raise UnsupportedError(
                 f"{source.name} ({source.source_name}) does not publish the {version} version; "
                 f"available: {', '.join(source.versions)}"
             )
 
     if language and source.languages and language.lower() not in source.languages:
-        raise ValueError(
+        raise UnsupportedError(
             f"{source.name} publishes in {', '.join(source.languages)}, not '{language}'"
         )
     unknown = sorted(set(options) - set(source.options))
     if unknown:
-        raise ValueError(f"Unsupported option(s) for {source.name}: {', '.join(unknown)}")
+        raise UnsupportedError(f"Unsupported option(s) for {source.name}: {', '.join(unknown)}")
     return source, identifier, version
 
 
@@ -230,11 +232,11 @@ def _resolve(identifier: str, jurisdiction: Optional[str]) -> tuple[Source, str]
             source = get_source(jurisdiction)
             resolved = source.identifier_from_eli(identifier)
             if resolved is None:
-                raise ValueError(f"{identifier} is not an ELI of {source.name}")
+                raise UnsupportedError(f"{identifier} is not an ELI of {source.name}")
             return source, resolved
         found = source_for_eli(identifier)
         if found is None:
-            raise ValueError(f"No supported source recognises the ELI {identifier}")
+            raise UnsupportedError(f"No supported source recognises the ELI {identifier}")
         return found
     return get_source(jurisdiction or 'EU'), identifier
 
@@ -256,6 +258,7 @@ def _fetch_into(source, identifier, version, date, language, download_dir,
         meta = {key: (list(value) if isinstance(value, list) else value)
                 for key, value in META_DEFAULTS.items()}
         meta.update(retrieval.meta)
+        meta.setdefault('identifier', identifier)
         meta.update({
             'jurisdiction': source.code,
             'language': retrieval.language,
@@ -267,6 +270,7 @@ def _fetch_into(source, identifier, version, date, language, download_dir,
             meta['valid'] = parser.valid
         doc['meta'] = meta
 
+    doc = {'schema_version': SCHEMA_VERSION, **doc}
     if validate:
         _validate(doc)
     return doc

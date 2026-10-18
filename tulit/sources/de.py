@@ -5,7 +5,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.germany import GermanyClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, Retrieval, Source
 
 PORTAL = 'https://testphase.rechtsinformationen.bund.de'
@@ -16,7 +16,7 @@ def work_eli(identifier: str) -> str:
     """'eli/bund/bgbl-1/2009/s2704', a portal URL or an expression ELI -> 'eli/bund/bgbl-1/2009/s2704'."""
     match = _WORK.search(identifier)
     if not match:
-        raise ValueError(
+        raise UnsupportedError(
             f"'{identifier}' is not a German federal ELI; use e.g. 'eli/bund/bgbl-1/2009/s2704'")
     return match.group(1)
 
@@ -43,7 +43,7 @@ class GermanySource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("The federal portal currently publishes only the version in force; "
+            raise UnsupportedError("The federal portal currently publishes only the version in force; "
                              "a date cannot be selected")
         work = work_eli(identifier)
         client = GermanyClient(download_dir=download_dir)

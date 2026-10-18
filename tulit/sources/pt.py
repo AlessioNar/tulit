@@ -10,7 +10,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.portugal import PortugalDREClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import ORIGINAL, Retrieval, Source
 
 DRE_ELI = 'https://data.dre.pt/eli'
@@ -41,7 +41,7 @@ def act_reference(identifier: str) -> dict[str, str]:
         return {'type': TYPES[match.group('type').lower()], 'number': match.group('number'),
                 'year': year, 'month': f"{MONTHS.index(match.group('month').lower()) + 1:02d}",
                 'day': f"{int(match.group('day')):02d}", 'region': 'p'}
-    raise ValueError(f"'{identifier}' is not a Portuguese act reference; use its ELI or a citation such as "
+    raise UnsupportedError(f"'{identifier}' is not a Portuguese act reference; use its ELI or a citation such as "
                      f"'Lei n.º 58/2019, de 8 de agosto'")
 
 
@@ -67,7 +67,7 @@ class PortugalSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("Diário da República acts are retrieved as published; a date cannot be selected")
+            raise UnsupportedError("Diário da República acts are retrieved as published; a date cannot be selected")
         parts = act_reference(identifier)
         client = PortugalDREClient(download_dir=download_dir)
         path = client.download('legal_act', act_type=parts['type'], number=parts['number'], year=parts['year'],

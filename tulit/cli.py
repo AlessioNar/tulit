@@ -35,7 +35,7 @@ import sys
 from typing import Optional, Sequence
 
 from tulit import __version__
-from tulit.api import CELLAR_FORMATS, EXPORT_FORMATS, _validate, export, fetch
+from tulit.api import CELLAR_FORMATS, EXPORT_FORMATS, SCHEMA_VERSION, _validate, export, fetch
 from tulit.parser.exceptions import ParserError
 from tulit.parser.registry import get_parser, get_parser_registry
 from tulit.sources import VERSIONS, get_source, list_sources
@@ -101,7 +101,7 @@ def _parse_local(path: str, format_id: str) -> dict:
     else:
         parser = get_parser(format_id)
     parser.parse(path)
-    return parser.to_dict()
+    return {'schema_version': SCHEMA_VERSION, **parser.to_dict()}
 
 
 def _write(doc: dict, output: Optional[str], indent: int, to: str = 'json') -> None:

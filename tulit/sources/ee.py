@@ -8,7 +8,7 @@ from typing import Any, Optional
 from lxml import etree
 
 from tulit.client.state.estonia import RIIGI_TEATAJA, RiigiTeatajaClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _GLOBAL_ID = re.compile(r'^(?:https?://www\.riigiteataja\.ee/(?:en/)?akt/)?(\d{5,12})(?:[/?#.].*)?$')
@@ -75,7 +75,7 @@ class EstoniaSource(Source):
             elif _ABBREVIATION.match(identifier.strip()):
                 texts = self._texts_by_abbreviation(client, identifier.strip())
             else:
-                raise ValueError(f"'{identifier}' is not a Riigi Teataja text id or act abbreviation; "
+                raise UnsupportedError(f"'{identifier}' is not a Riigi Teataja text id or act abbreviation; "
                                  f"use {self.identifier_help}")
             version = version or CONSOLIDATED
             text = self._choose(texts, version, date, identifier)
@@ -119,7 +119,7 @@ class EstoniaSource(Source):
     def _choose(texts: list[dict[str, Any]], version: str, date: Optional[str], identifier: str) -> dict[str, Any]:
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             original = next((t for t in texts if 'algtekst' in (t.get('tekst') or '')), None)
             if original is None:
                 raise FileLoadError(f"Riigi Teataja has no original text of {identifier}")

@@ -11,6 +11,7 @@ from typing import Any, Optional
 
 from tulit.client.state.romania import PortalLegislativClient
 from tulit.sources.base import ORIGINAL, Retrieval, Source
+from tulit.parser.exceptions import UnsupportedError
 
 # Citation forms of each type of act, as the database names the type
 KINDS = (
@@ -44,7 +45,7 @@ def act_reference(identifier: str) -> tuple[str, str, str]:
         for pattern, kind in KINDS:
             if re.fullmatch(pattern, match.group('kind'), re.IGNORECASE):
                 return kind, match.group('number'), match.group('year') or match.group('year2')
-    raise ValueError(f"'{identifier}' is not a citation of a Romanian act; use {RomaniaSource.identifier_help}")
+    raise UnsupportedError(f"'{identifier}' is not a citation of a Romanian act; use {RomaniaSource.identifier_help}")
 
 
 class RomaniaSource(Source):
@@ -67,7 +68,7 @@ class RomaniaSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("The Portal Legislativ web service gives acts as published; a date cannot be selected")
+            raise UnsupportedError("The Portal Legislativ web service gives acts as published; a date cannot be selected")
         kind, number, year = act_reference(identifier)
         client = PortalLegislativClient(download_dir=download_dir)
         path = client.download(kind, number, year, title='Constitutia' if kind == 'CONSTITUȚIE' else '')

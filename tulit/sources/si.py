@@ -11,7 +11,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.slovenia import PISRS, PisrsClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _ID = re.compile(r'^(?:https?://(?:www\.)?pisrs\.si/\S*?[?&/]id=)?(?P<id>[A-Z]{4}\d{1,6})(?:[&#].*)?$')
@@ -86,7 +86,7 @@ class SloveniaSource(Source):
 
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             chosen = versions[0]
             version_date = details.get('objavljeno') or details.get('sprejeto')
         else:
@@ -138,7 +138,7 @@ class SloveniaSource(Source):
             if not found:
                 raise FileLoadError(f"PISRS has no act published in {identifier}")
             listed = '; '.join(f"{x['zunanjiId']}: {x['nazivAkta']}" for x in found[:12])
-            raise ValueError(f"{identifier} published {len(found)} acts; give the PISRS id of one: {listed}")
+            raise UnsupportedError(f"{identifier} published {len(found)} acts; give the PISRS id of one: {listed}")
         if _ABBREVIATION.match(identifier):
             found = [x for x in client.search(title=identifier)
                      if (x.get('nazivAkta') or '').lower().endswith(f'({identifier.lower()})')]
@@ -147,4 +147,4 @@ class SloveniaSource(Source):
             # Prefer the act in force
             found.sort(key=lambda x: 'Veljaven' not in ((x.get('semafor') or {}).get('naziv') or ''))
             return found[0]['zunanjiId']
-        raise ValueError(f"'{identifier}' is not a Slovenian act identifier; use {SloveniaSource.identifier_help}")
+        raise UnsupportedError(f"'{identifier}' is not a Slovenian act identifier; use {SloveniaSource.identifier_help}")

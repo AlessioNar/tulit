@@ -276,10 +276,11 @@ also writes a ``client.log`` file there.
 
 .. code-block:: python
 
-    from tulit.client.state.normattiva import NormattivaClient
+    from tulit.client.state.italy import NormattivaAKNClient
 
-    client = NormattivaClient(download_dir="./database")
-    client.download(dataGU="20241231", codiceRedaz="24G00229", fmt="xml")
+    client = NormattivaAKNClient(download_dir="./database")
+    client.open_act(date="2024-12-31", code="24G00229")
+    path = client.download(date="2024-12-31", code="24G00229")
 
 **Luxembourg (Legilux)**:
 

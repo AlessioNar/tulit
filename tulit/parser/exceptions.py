@@ -8,7 +8,19 @@ allows for better exception handling patterns.
 
 
 class ParserError(Exception):
-    """Base exception for all parser-related errors."""
+    """Base exception for all errors raised by tulit (also available as ``TulitError``)."""
+    pass
+
+
+TulitError = ParserError
+
+
+class UnsupportedError(ParserError, ValueError):
+    """
+    Raised when a request is not supported: an unknown jurisdiction, version,
+    language, option, export format, or an identifier a source does not
+    recognise. A ``ValueError`` too, as tulit raised before 1.0.
+    """
     pass
 
 

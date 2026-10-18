@@ -7,6 +7,7 @@ from typing import Any, Optional
 
 from tulit.client.state.sweden import RIKSDAGEN, RiksdagenClient
 from tulit.sources.base import CONSOLIDATED, Retrieval, Source
+from tulit.parser.exceptions import UnsupportedError
 
 _SFS = re.compile(r'(?:^|SFS\s*|sfs-|/)(?P<year>\d{4})[:-](?P<number>\d+(?:\s?[a-z])?)\b', re.IGNORECASE)
 
@@ -15,7 +16,7 @@ def document_id(identifier: str) -> str:
     """'2018:218', 'SFS 2018:218' or 'sfs-2018-218' -> 'sfs-2018-218'."""
     match = _SFS.search(identifier.strip())
     if not match:
-        raise ValueError(f"'{identifier}' is not an SFS number; use e.g. '2018:218'")
+        raise UnsupportedError(f"'{identifier}' is not an SFS number; use e.g. '2018:218'")
     return f"sfs-{match.group('year')}-{match.group('number').replace(' ', '')}"
 
 
@@ -40,7 +41,7 @@ class SwedenSource(Source):
     ) -> Retrieval:
         today = datetime.date.today().isoformat()
         if date and date < today:
-            raise ValueError("The Riksdag publishes only the statute as in force now; a past date cannot be selected")
+            raise UnsupportedError("The Riksdag publishes only the statute as in force now; a past date cannot be selected")
         doc_id = document_id(identifier)
         client = RiksdagenClient(download_dir=download_dir)
         path = client.download(doc_id)

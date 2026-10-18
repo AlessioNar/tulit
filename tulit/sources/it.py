@@ -13,7 +13,7 @@ from typing import Any, Optional
 from lxml import etree
 
 from tulit.client.state.italy import NORMATTIVA, NormattivaAKNClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 MONTHS = ('gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre',
@@ -45,7 +45,7 @@ def _urn_kind(kind: str) -> str:
     for pattern, name in KINDS:
         if re.fullmatch(pattern, kind.strip(), re.IGNORECASE):
             return name
-    raise ValueError(f"'{kind}' is not a kind of act Normattiva knows")
+    raise UnsupportedError(f"'{kind}' is not a kind of act Normattiva knows")
 
 
 def act_reference(identifier: str) -> dict[str, str]:
@@ -72,14 +72,14 @@ def act_reference(identifier: str) -> dict[str, str]:
     match = _LONG.match(text)
     if match:
         if match.group('month').lower() not in MONTHS:
-            raise ValueError(f"'{identifier}': unknown month '{match.group('month')}'")
+            raise UnsupportedError(f"'{identifier}': unknown month '{match.group('month')}'")
         date = datetime.date(int(match.group('year')), MONTHS.index(match.group('month').lower()) + 1,
                              int(match.group('day')))
         return {'urn': f"urn:nir:stato:{_urn_kind(match.group('kind'))}:{date.isoformat()};{match.group('number')}"}
     match = _SHORT.match(text)
     if match:
         return {'urn': f"urn:nir:stato:{_urn_kind(match.group('kind'))}:{match.group('year')};{match.group('number')}"}
-    raise ValueError(f"'{identifier}' is not an Italian act reference; use {ItalySource.identifier_help}")
+    raise UnsupportedError(f"'{identifier}' is not an Italian act reference; use {ItalySource.identifier_help}")
 
 
 def _expression_date(path: str) -> Optional[str]:
@@ -146,7 +146,7 @@ class ItalySource(Source):
 
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             path = client.download(published, code, published)
             meta['source'] = f"{NORMATTIVA}/eli/id/{published.replace('-', '/')}/{code}/ORIGINAL"
             return Retrieval(path=path, parser='it-normattiva', version=ORIGINAL, language='ita',

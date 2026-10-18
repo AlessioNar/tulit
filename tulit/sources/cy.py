@@ -13,7 +13,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.cyprus import GAZETTE, CyprusGazetteClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.parser.pdf.cyprus import normalise_number
 from tulit.parser.pdf.layout import has_text as _has_text
 from tulit.sources.base import ORIGINAL, Retrieval, Source
@@ -48,7 +48,7 @@ class CyprusSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("The Official Gazette publishes laws as adopted; a date cannot be selected")
+            raise UnsupportedError("The Official Gazette publishes laws as adopted; a date cannot be selected")
         client = CyprusGazetteClient(download_dir=download_dir)
         text = identifier.strip()
         issue = _ISSUE.match(text)
@@ -65,7 +65,7 @@ class CyprusSource(Source):
             try:
                 number = normalise_number(text)
             except ValueError:
-                raise ValueError(f"'{identifier}' is neither a Cypriot law number nor a Gazette issue; "
+                raise UnsupportedError(f"'{identifier}' is neither a Cypriot law number nor a Gazette issue; "
                                  f"use {self.identifier_help}") from None
             law, part, year = re.match(r'^(\w+)\((I+)\)/(\d{4})$', number).groups()
             try:

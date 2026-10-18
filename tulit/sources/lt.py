@@ -10,7 +10,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.lithuania import ESEIMAS, EseimasClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _TAR = re.compile(r'^(?:TAR\s*,?\s*|i\.\s*k\.\s*)?(?P<code>\d{4}-\d{5})$', re.IGNORECASE)
@@ -57,7 +57,7 @@ class LithuaniaSource(Source):
 
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             meta['source'] = f'{ESEIMAS}/portal/legalAct/lt/TAD/{document}'
             return Retrieval(path=client.download(document), parser='lt-tar', version=ORIGINAL, language='lit',
                              version_date=found.get('date_document'), meta=meta)
@@ -95,4 +95,4 @@ class LithuaniaSource(Source):
         match = _NUMBER.match(identifier)
         if match:
             return client.find('number', match.group('number'))['id'], None
-        raise ValueError(f"'{identifier}' is not a Lithuanian act identifier; use {self.identifier_help}")
+        raise UnsupportedError(f"'{identifier}' is not a Lithuanian act identifier; use {self.identifier_help}")

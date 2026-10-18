@@ -9,7 +9,7 @@ import re
 from typing import Any, Optional
 
 from tulit.client.state.hungary import NJT, NJTClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.parser.html.njt import _ADOPTED, _PROMULGATED, _hungarian_date, roman
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
@@ -87,14 +87,14 @@ class HungarySource(Source):
             eli = _ELI.match(text)
             path = eli.group('path') if eli else eli_path(text)
             if path is None:
-                raise ValueError(f"'{identifier}' is not a Hungarian act reference; use {self.identifier_help}")
+                raise UnsupportedError(f"'{identifier}' is not a Hungarian act reference; use {self.identifier_help}")
             # A date or 'kozlony' at the end of an ELI selects a version; the request decides here
             path = re.sub(r'/(kozlony|\d{4}-\d{2}-\d{2})$', '', path)
             document_id, _ = client.resolve(path)
 
         if version == ORIGINAL:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             path = client.download(document_id, 0)
             version_date = None
         else:

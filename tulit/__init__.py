@@ -7,6 +7,7 @@ jurisdictions and formats, with support for EU Cellar, Legifrance, and other leg
 
 __version__ = "0.10.0"
 
+from tulit import errors
 from tulit.api import download, export, fetch
 
-__all__ = ["fetch", "download", "export", "__version__"]
+__all__ = ["fetch", "download", "export", "errors", "__version__"]

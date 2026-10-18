@@ -25,7 +25,6 @@ The tulit Client library supports multiple legal document retrieval sources orga
 * **Hungary (Nemzeti Jogszabálytár)**: National Legislation Database
 * **Ireland (Irish Statute Book and Revised Acts)**: Irish Statute Book and Revised Acts
 * **Italy (Normattiva)**: Normattiva, Akoma Ntoso export
-* **Italy (Normattiva, earlier client)**: Normattiva (earlier client)
 * **Latvia (Likumi.lv and Latvijas Vēstnesis)**: Likumi.lv and the Latvijas Vēstnesis gazette
 * **Lithuania (Teisės aktų registras)**: Register of Legal Acts, via e-seimas.lrs.lt
 * **Luxembourg (Legilux)**: Luxembourg legal portal
@@ -192,14 +191,6 @@ Italy (Normattiva)
 ~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.client.state.italy
-     :members:
-     :undoc-members:
-     :show-inheritance:
-
-Italy (Normattiva, earlier client)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: tulit.client.state.normattiva
      :members:
      :undoc-members:
      :show-inheritance:

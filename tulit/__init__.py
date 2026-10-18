@@ -1,11 +1,12 @@
 """
 TULIT - The Universal Legal Informatics Toolkit
 
-A comprehensive Python library for retrieving and parsing legal documents from various
-jurisdictions and formats, with support for EU Cellar, Legifrance, and other legal databases.
+Retrieves the legislation of the EU and its 27 Member States from their official
+sources, as adopted and as in force on any date, as legalJSON; exports it to
+Akoma Ntoso 3.0 and LEOS packages.
 """
 
-__version__ = "0.10.0"
+__version__ = "1.0.0"
 
 from tulit import errors
 from tulit.api import download, export, fetch, native_akn

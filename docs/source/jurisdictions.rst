@@ -68,13 +68,13 @@ Czechia (CZ)
 Germany (DE)
 ------------
 
-**Source**: Rechtsinformationen des Bundes (test phase)
+**Source**: Rechtsinformationen des Bundes (test phase) for consolidated law; Bundesgesetzblatt (recht.bund.de, bgbl.de archive) for acts as promulgated
 
-**Versions**: ``consolidated`` (default ``consolidated``)
+**Versions**: ``original``, ``consolidated`` (default ``original``)
 
 **Languages**: German (``deu``)
 
-**Identifiers**: the ELI of a federal act (e.g. 'eli/bund/bgbl-1/2009/s2704')
+**Identifiers**: the ELI of a federal act for the consolidated version in force (e.g. 'eli/bund/bgbl-1/2009/s2704'), or its Federal Law Gazette citation for the act as promulgated: 'BGBl. 2024 I Nr. 149' since 2023, 'BGBl. 2017 I S. 2097' (year, part and first page) for 1949-2022; recht.bund.de and bgbl.de links work too, and an ELI with version='original'
 
 Denmark (DK)
 ------------
@@ -274,33 +274,33 @@ Portugal (PT)
 
 **Source**: Diário da República (Imprensa Nacional-Casa da Moeda)
 
-**Versions**: ``original`` (default ``original``)
+**Versions**: ``original``, ``consolidated`` (default ``original``)
 
 **Languages**: Portuguese (``por``)
 
-**Identifiers**: the citation of an act with its date (e.g. 'Lei n.º 58/2019, de 8 de agosto'; laws, organic and constitutional laws, decree-laws and portarias) or its ELI (https://data.dre.pt/eli/lei/58/2019/08/08/p/dre/pt/html)
+**Identifiers**: the citation of an act (e.g. 'Lei n.º 58/2019, de 8 de agosto'; laws, organic and constitutional laws, decree-laws and portarias) or its ELI (https://data.dre.pt/eli/lei/58/2019/08/08/p/dre/pt/html) for the act as published; for the consolidated version (Legislação Consolidada), also a citation without its date ('Lei n.º 7/2009'), a consolidated ELI (https://data.dre.pt/eli/lei/7/2009/p/cons/20250327/pt/html), the address of its page on diariodarepublica.pt or the name of a code ('Código Penal', 'Código do Trabalho')
 
 Romania (RO)
 ------------
 
 **Source**: Portal Legislativ (Ministry of Justice)
 
-**Versions**: ``original`` (default ``original``)
+**Versions**: ``original``, ``consolidated`` (default ``original``)
 
 **Languages**: Romanian (``ron``)
 
-**Identifiers**: the citation of an act: its type, number and year, e.g. 'Legea nr. 190/2018', 'OUG nr. 57/2019', 'Ordonanța nr. 1/2016', 'HG nr. 677/2017', or 'Constituția'
+**Identifiers**: the citation of an act: its type, number and year, e.g. 'Legea nr. 190/2018', 'OUG nr. 57/2019', 'Ordonanța nr. 1/2016', 'HG nr. 677/2017', 'Constituția', or the name of a code ('Codul civil', 'Codul penal', 'Codul de procedură civilă', ...); version='consolidated' gives the form in force on a date (default today)
 
 Sweden (SE)
 -----------
 
-**Source**: Svensk författningssamling (Government Offices, via the Riksdag open data)
+**Source**: Svensk författningssamling (Government Offices: svenskforfattningssamling.se as adopted, the Riksdag open data consolidated)
 
-**Versions**: ``consolidated`` (default ``consolidated``)
+**Versions**: ``original``, ``consolidated`` (default ``original``)
 
 **Languages**: Swedish (``swe``)
 
-**Identifiers**: the SFS number of a statute (e.g. '2018:218' for the Data Protection Act)
+**Identifiers**: the SFS number of an act (e.g. '2018:218' or 'SFS 2018:218' for the Data Protection Act): the act as published in Svensk författningssamling, from SFS 2018:160 (1 April 2018) on, or with version='consolidated' the statute as in force now; a Riksdag document id or URL ('sfs-2018-218') names the consolidated statute
 
 Slovenia (SI)
 -------------

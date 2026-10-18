@@ -12,6 +12,7 @@
 - **Parse** Formex 4, Akoma Ntoso, EUR-Lex HTML and national formats into the same structure: preface, preamble (citations and recitals), divisions, articles, paragraphs, conclusions and annexes.
 - **Address** divisions, articles, paragraphs and annexes with ELI-resolvable identifiers (`cpt_II`, `art_5`, `par_2`, `anx_1`), so a JSON fragment maps directly onto its ELI subdivision URI.
 - **Capture amendments** as structured objects (action, target act, quoted text or structure) instead of plain prose.
+- **Export** any act to Akoma Ntoso 3.0 or a LEOS `.leg` package, or get the official Akoma Ntoso where the source publishes it.
 
 The Formex parser has been verified against the complete corpus of in-force EU legislation (29,790 documents): every act keeps between 97% and 103% of the source text, with no parse errors and 100% schema-valid output.
 
@@ -19,7 +20,7 @@ The Formex parser has been verified against the complete corpus of in-force EU l
 
 ```console
 pip install tulit
-pip install 'tulit[pdf]'   # also read sources published as PDF (Cyprus, Greece, Malta, Portugal)
+pip install 'tulit[pdf]'   # also read sources published as PDF (Cyprus, Greece, Malta, Portugal; German and Swedish originals)
 ```
 
 `tulit` requires Python 3.11 or later.
@@ -55,6 +56,16 @@ scan = tulit.download("constitution/1994/02/17/1994021048", jurisdiction="BE")
 scan["path"], scan["meta"]["source"]
 ```
 
+Any act converts to Akoma Ntoso 3.0 or a LEOS `.leg` package (a zip of Akoma Ntoso documents, as exchanged by LEOS and AKN4EU), both valid against the Akoma Ntoso schema and readable back by tulit; where the source publishes Akoma Ntoso itself (Italy, Finland, Luxembourg, Germany), `native=True` returns its file unchanged:
+
+```python
+xml = tulit.export(dsgvo_at, to="akn")
+tulit.export(lopd, to="leg", path="lopd.leg")
+official = tulit.export(tulit.fetch("L. 160/2019", jurisdiction="IT"), native=True)
+```
+
+Every error derives from `tulit.errors.TulitError` (`UnsupportedError` for a jurisdiction, version or identifier a source does not support, `FileLoadError` when it has no such act, `NetworkError` when it cannot be reached).
+
 From the command line:
 
 ```console
@@ -62,6 +73,9 @@ tulit get 32024R0903 -o 32024R0903.json
 tulit get 32016R0679 --format xhtml --language fra
 tulit get BOE-A-2018-16673 -j ES --version consolidated --date 2021-01-01
 tulit sources
+tulit get 300099 -j LV --to leg -o 300099.leg
+tulit export 32024R0903.json --to akn -o 32024R0903.xml
+tulit dump legi --dir ./dila                     # France: the DILA dump for older texts
 tulit parse --format akn 32014L0092.akn
 tulit formats
 ```
@@ -160,10 +174,14 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
   - original versions for Austria and the Netherlands
   - optional `pdf` extra for sources published only as PDF
   - structured amendments in the new parsers
-- **0.10.0** (this release):
+- **0.10.0**:
   - Belgium, Bulgaria, Cyprus, France, Greece, Hungary, Italy, Latvia, Lithuania, Romania and Slovenia: all 28 jurisdictions in `fetch`
   - `tulit.download()` for the official file of an act, including scanned PDFs tulit cannot parse
-- **1.0.0**: export to Akoma Ntoso 3.0 and LEOS `.leg` packages (and the official Akoma Ntoso where a source publishes it); original versions for Germany and Sweden; consolidated texts for Portugal and Romania; `tulit dump` for the French DILA dumps
+- **1.0.0** (this release):
+  - export to Akoma Ntoso 3.0 and LEOS `.leg` packages, and the official Akoma Ntoso where a source publishes it
+  - original versions for Germany and Sweden; consolidated texts for Portugal and Romania
+  - `tulit dump` for the French DILA dumps
+  - a stable API and legalJSON schema (1.0), `tulit.errors`, and a live corpus of 397 real acts checked weekly
 
 ### Access to law and reuse
 

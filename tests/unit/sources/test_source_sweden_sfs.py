@@ -220,9 +220,18 @@ class TestSwedenOriginal:
     @pytest.mark.parametrize('identifier', ['1974:152', 'SFS 2018:159'])
     def test_printed_acts(self, identifier, tmp_path):
         with pytest.raises(UnsupportedError, match='printed Svensk författningssamling'):
-            tulit.fetch(identifier, jurisdiction='SE', download_dir=str(tmp_path))
+            tulit.fetch(identifier, jurisdiction='SE', version='original', download_dir=str(tmp_path))
 
     def test_date_is_rejected(self, tmp_path):
         with pytest.raises(UnsupportedError, match='consolidated'):
             tulit.fetch('2018:218', jurisdiction='SE', version='original', date='2020-01-01',
                         download_dir=str(tmp_path))
+
+
+def test_default_version_before_the_electronic_sfs(tmp_path):
+    # Acts published only on paper come consolidated when no version is asked for, as before 1.0
+    from tulit.sources.se import SwedenSource
+    with patch.object(SwedenSource, '_consolidated', return_value='consolidated') as consolidated:
+        assert SwedenSource().retrieve('1962:700', None, None, None, str(tmp_path)) == 'consolidated'
+        assert SwedenSource().retrieve('2018:218', None, '2020-01-01', None, str(tmp_path)) == 'consolidated'
+    assert consolidated.call_count == 2

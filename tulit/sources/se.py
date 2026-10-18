@@ -63,7 +63,13 @@ class SwedenSource(Source):
         **options: Any,
     ) -> Retrieval:
         year, number = sfs_number(identifier)
-        version = version or (CONSOLIDATED if _RIKSDAGEN_ID.search(identifier.strip()) else ORIGINAL)
+        if version is None:
+            # The act as adopted where the electronic SFS has it; before it (April 2018), or for a Riksdag
+            # document, or with a date, the consolidated text as before 1.0
+            digits = re.match(r'\d+', number)
+            electronic = number.isdigit() and (int(year), int(digits.group(0))) >= FIRST_ELECTRONIC
+            version = ORIGINAL if electronic and not date and not _RIKSDAGEN_ID.search(identifier.strip()) \
+                else CONSOLIDATED
         if version == CONSOLIDATED:
             return self._consolidated(f'sfs-{year}-{number}', date, download_dir, metadata)
         return self._original(int(year), number, date, download_dir, metadata)

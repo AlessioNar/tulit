@@ -8,7 +8,8 @@ pytest.importorskip('pdfplumber')
 import tulit  # noqa: E402
 from tulit.client.state.cyprus import CyprusGazetteClient  # noqa: E402
 from tulit.parser.exceptions import FileLoadError  # noqa: E402
-from tulit.parser.pdf.cyprus import CyprusGazetteParser, amendment_action, normalise_number  # noqa: E402
+from tulit.parser.pdf.cyprus import (  # noqa: E402
+    _SECTION, CyprusGazetteParser, _Line, amendment_action, normalise_number, read_lines)
 
 ISSUE_PAGE = '''<html><body><a href="../5601BC24BB819A11C2258E750053FF80/$file/5096 17 9 2026 PARARTΗMA 1o MEROS I.pdf">
 5096</a><p>Αριθμός Εφημερίδας: 5096 Σελίδες: 1069-1070 Ημερομηνία: 17/09/2026</p></body></html>'''
@@ -71,6 +72,125 @@ class TestCyprusGazetteParser:
         section = parser.articles[-1]
         assert (section['num'], section['heading'], section['parent']) == ('37.', 'Μεταβατικές διατάξεις.', 'prt_XII')
         assert [c['eId'] for c in section['children']] == ['par_1', 'par_2', 'par_3']
+
+
+def row(top, *runs, size=9.0, bold=False):
+    """A row of text: runs of (x0, text), each character 5pt wide."""
+    chars = [{'text': c, 'x0': x0 + 5 * i, 'x1': x0 + 5 * i + 5, 'size': size,
+              'fontname': 'Bold' if bold else 'Regular'} for x0, text in runs for i, c in enumerate(text)]
+    return {'top': top, 'chars': chars}
+
+
+def issue(*pages):
+    """A mocked pdfplumber document whose pages hold rows."""
+    mocked = []
+    for rows in pages:
+        page = Mock(chars=[c for r in rows for c in r['chars']])
+        page.dedupe_chars.return_value = page
+        page.extract_text_lines.return_value = rows
+        mocked.append(page)
+    pdf = Mock(pages=mocked)
+    pdf.__enter__ = Mock(return_value=pdf)
+    pdf.__exit__ = Mock(return_value=False)
+    return patch('tulit.parser.pdf.cyprus._pdfplumber', return_value=Mock(open=Mock(return_value=pdf)))
+
+
+def lines_of(*specs):
+    """Body lines (page, x0, text) of a law, all on one page unless given."""
+    return [_Line(page, 10.0 * n, x0, text, 9.0, False) for n, (page, x0, text) in enumerate(specs)]
+
+
+class TestCyprusLayout:
+    def test_margin_note_running_past_the_gutter(self):
+        # 44(I)/2019, section 5: the note ends 3pt past the gutter, the section starts 28pt after it
+        rows = [row(100, (57, 'Αρχές που διέπουν'), (162, '5.-(1) Ο υπεύθυνος επεξεργασίας')),
+                row(110, (57, 'την επεξεργασία'), (146, 'διασφαλίζει ότι τα δεδομένα'))]
+        with issue(rows):
+            lines, gutter = read_lines('issue.pdf')
+        assert [(line.margin, line.text) for line in lines][:2] == [
+            (True, 'Αρχές που διέπουν'), (False, '5.-(1) Ο υπεύθυνος επεξεργασίας')]
+
+    def test_page_without_margin_notes(self):
+        # A treaty in the schedule of a ratifying law is set across the page in 11pt, from right of the margin
+        # notes' column; it is text, not notes nor masthead
+        notes = [row(100 + 10 * n, (57, 'Σημείωση.'), (163, 'Κείμενο του νόμου που συνεχίζεται.')) for n in range(4)]
+        treaty = [row(100, (106, 'The'), (128, 'Republic of Cyprus, represented by'), size=11.0)]
+        with issue(notes, treaty):
+            lines, gutter = read_lines('issue.pdf')
+        last = lines[-1]
+        assert (last.margin, last.text) == (False, 'The Republic of Cyprus, represented by')
+        assert not CyprusGazetteParser._skip(last)
+
+    def test_garbled_facsimile_left_out(self):
+        # 6(III)/2026: the treaty as signed, in fonts read as Cyrillic, Hebrew and Latin letters
+        with issue([row(100, (163, 'Κείμενο του νόμου.'))], [row(100, (106, 'ʈŰ8ĬˠÚבȼϦֆçНΥКОØqבʐŊŌŗĭĮ'))]):
+            lines, gutter = read_lines('issue.pdf')
+        assert [line.text for line in lines] == ['Κείμενο του νόμου.']
+        # Issue 4670: the page header of a law set in such a font is legible, and ends the law before it
+        with issue([row(100, (163, 'Κείμενο του νόμου.'))],
+                   [row(60, (57, 'Ε.Ε. Παρ. Ι(Ι)'), (470, 'Ν. 127(Ι)/2018')),
+                    row(100, (106, 'ǹȓĲȘıȘȖȚĮȠįȘȖȓİȢȖȚĮĲȘȞȣʌȠȤȡȑȦıȘ'))]):
+            lines, gutter = read_lines('issue.pdf')
+        assert [line.text for line in lines] == ['Κείμενο του νόμου.', 'Ν. 127(Ι)/2018']
+
+    def test_unreadable_characters_of_a_scanned_treaty(self):
+        with issue([row(100, (163, 'll be calculate� by adding up'))]):
+            lines, gutter = read_lines('issue.pdf')
+        assert lines[0].text == 'll be calculate by adding up'
+
+    def test_greek_words_with_latin_capitals(self):
+        with issue([row(100, (163, 'NΟΜΟΣ ΠΟΥ ΤΡΟΠΟΠΟΙΕΙ (EE) 125(I)'))]):
+            lines, gutter = read_lines('issue.pdf')
+        assert lines[-1].text == 'ΝΟΜΟΣ ΠΟΥ ΤΡΟΠΟΠΟΙΕΙ (EE) 125(I)'
+
+    def test_section_number_set_apart(self):
+        # 45(I)/2019, section 25
+        assert _SECTION.match('25 . Ιδρύεται Σύλλογος Ορκωτών Μεταφραστών').group('num') == '25'
+
+
+class TestCyprusLawBoundaries:
+    def test_contents_of_the_next_law(self):
+        # 45(I)/2019 opens with its table of contents, under its header, before its notice of publication
+        lines = lines_of((0, 163, 'Ο περί Προστασίας Νόμος του 2019 εκδίδεται με δημοσίευση'),
+                         (0, 259, 'Αριθμός 44(Ι) του 2019'), (0, 163, '57. Οι διεθνείς συμφωνίες ισχύουν.'),
+                         (1, 470, 'Ν. 45(Ι)/2019'), (1, 300, 'ΜΕΡΟΣ Ι'), (1, 76, '1. Συνοπτικός τίτλος.'),
+                         (2, 71, 'Ο περί Ορκωτού Μεταφραστή Νόμος του 2019 εκδίδεται με δημοσίευση'),
+                         (2, 259, 'Αριθμός 45(Ι) του 2019'))
+        own = CyprusGazetteParser('44(I)/2019')._own_lines(lines)
+        assert own[-1].text == '57. Οι διεθνείς συμφωνίες ισχύουν.'
+        assert [line.text for line in CyprusGazetteParser('45(I)/2019')._own_lines(lines)][0] == 'ΜΕΡΟΣ Ι'
+
+    def test_next_law_illegible(self):
+        # Issue 4670: 127(I)/2018 is set in a font read as Latin letters; only its page header is legible
+        lines = lines_of((0, 163, 'Ο περί Ευρωπόλ Νόμος του 2018 εκδίδεται με δημοσίευση'),
+                         (0, 259, 'Αριθμός 126(Ι) του 2018'), (0, 163, '22. Ο Νόμος του 2011 καταργείται.'),
+                         (1, 470, 'Ν. 127(Ι)/2018'), (2, 300, 'ΠΡΩΤΟ ΠΑΡΑΡΤΗΜΑ'), (2, 163, 'Έργα και δραστηριότητες'))
+        assert CyprusGazetteParser('126(I)/2018')._own_lines(lines)[-1].text == '22. Ο Νόμος του 2011 καταργείται.'
+
+    def test_only_amendments_of_other_laws(self):
+        parser = CyprusGazetteParser()
+        parser.gutter, parser.left, parser.notes = 131.0, 146.0, []
+        parser._read_body(lines_of(
+            # 45(I)/2019: struck off the register of this law, a member replaced, a definition quoting 'amended'
+            (0, 163, '31. Κάθε καταχώριση στο Μητρώο που επιτεύχθηκε με δόλο διαγράφεται.'),
+            (0, 163, '32. Στον παρόντα Νόμο- «τροποποίηση» σημαίνει τη μεταβολή κειμένου.'),
+            (0, 163, '33. Το άρθρο 5 του βασικού νόμου τροποποιείται με την προσθήκη νέου εδαφίου.'),
+            (0, 163, '34. Ο περί Ευρωπόλ Νόμος του 2011 καταργείται.')))
+        assert [(a['num'], (a['children'][0]['amendment'] or {}).get('action')) for a in parser.articles] == [
+            ('31.', None), ('32.', None), ('33.', 'add'), ('34.', 'delete')]
+
+    def test_schedule_with_a_treaty(self):
+        # 4(III)/2026: the treaty's text is the schedule, its parts in English, French and Greek are not divisions
+        parser = CyprusGazetteParser()
+        parser.gutter, parser.left, parser.notes = 115.0, 120.0, []
+        parser._read_body(lines_of(
+            (0, 134, '3.-(1) Η Συμφωνία κυρώνεται με τον παρόντα Νόμο.'), (1, 278, 'ΠΙΝΑΚΑΣ'),
+            (1, 273, '[άρθρο 3(2)]'), (1, 279, 'ΜΕΡΟΣ Ι'), (1, 204, '(Κείμενο της Συμφωνίας στην αγγλική γλώσσα)'),
+            (2, 106, 'The Republic of Cyprus, represented by the Deputy Minister,')))
+        assert parser.chapters == []
+        assert [a['num'] for a in parser.articles] == ['3.']
+        assert parser.annexes[0]['num'] == 'ΠΙΝΑΚΑΣ'
+        assert 'The Republic of Cyprus' in ' '.join(c['text'] for c in parser.annexes[0]['children'])
 
 
 class TestCyprusGazetteClient:

@@ -18,7 +18,9 @@ EU acts it refers to:
   Official Journal of the EU) are left out;
 - text quoted by an amendment («...») stays in the amending section, which
   carries a structured ``amendment``;
-- annexes (ΠΑΡΑΡΤΗΜΑ) become the annexes.
+- annexes (ΠΑΡΑΡΤΗΜΑ), and the schedule (ΠΙΝΑΚΑΣ) giving the text of a
+  treaty a law ratifies, become the annexes; pages of a treaty reproduced
+  as signed, whose fonts carry no character codes, are left out.
 
 An issue may hold several laws: ``number`` ('125(I)/2018') picks one.
 Needs the ``pdf`` extra.
@@ -34,17 +36,21 @@ from tulit.parser.pdf.layout import _pdfplumber, join_lines
 from tulit.parser.structure import BodyBuilder, ChildrenBuilder
 
 _LATIN = str.maketrans({'Ι': 'I', 'Χ': 'X', 'Α': 'A', 'Β': 'B'})
-_HEADER = re.compile(r'^N\.\s*(?P<number>\d+[A-ZΑ-Ω]?\([IΙ]+\)/\d{4})$')
+# Latin capitals set by mistake in Greek words ('NΟΜΟΣ', 'EΓΓΡΑΦΗ')
+_LOOKALIKES = str.maketrans('ABEHIKMNOPTXYZ', 'ΑΒΕΗΙΚΜΝΟΡΤΧΥΖ')
+_MIXED = re.compile(r'\S*[Α-Ωα-ωΆ-Ώά-ώ]\S*')
+_HEADER = re.compile(r'^[NΝ]\.\s*(?P<number>\d+[A-ZΑ-Ω]?\([IΙ]+\)/\d{4})$')
 _NOTICE = re.compile(r'εκδίδεται με δημοσίευση')
 _NUMBER = re.compile(r'^Αριθμός\s+(?P<num>\d+[A-ZΑ-Ω]?)\((?P<part>[IΙ]+)\)\s+του\s+(?P<year>\d{4})$')
 _FOOTER = re.compile(r'^(Τυπώθηκε στο Τυπογραφείο|Τηλ\.:|Αντίτυπα της Επίσημης|_{3,}$|\d{1,5}$)')
 _MASTHEAD = re.compile(r'^(ΕΠΙΣΗΜΗ ΕΦΗΜΕΡΙΔΑ|ΤΗΣ ΚΥΠΡΙΑΚΗΣ ΔΗΜΟΚΡΑΤΙΑΣ|ΠΑΡΑΡΤΗΜΑ ΠΡΩΤΟ$|ΝΟΜΟΘΕΣΙΑ - ΜΕΡΟΣ|'
                        r'Αριθμός \d+[A-ZΑ-Ω]? \w+, \d)')
 _FORMULA = re.compile(r'^Η Βουλή των Αντιπροσώπων ψηφίζει ως ακολούθως:?$')
-_SECTION = re.compile(r'^(?P<num>\d+[Α-ΩA-Z]?)\.(?:-|\s)\s*(?P<rest>.*)$')
+_SECTION = re.compile(r'^(?P<num>\d+[Α-ΩA-Z]?) ?\.(?:-|\s)\s*(?P<rest>.*)$')
 _SUBSECTION = re.compile(r'^\((?P<num>\d+[Α-ΩA-Z]?)\)\s')
 _DIVISION = re.compile(r'^(?P<kind>ΜΕΡΟΣ|ΚΕΦΑΛΑΙΟ|ΤΜΗΜΑ|ΤΙΤΛΟΣ|ΥΠΟΤΜΗΜΑ)\s+(?P<num>[IVXΙΧ]+|\d+[Α-Ω]?|[Α-Ω]{1,2}΄?)$')
-_ANNEX = re.compile(r'^([Α-Ω]+ )?ΠΑΡΑΡΤΗΜΑ( [Α-ΩIVXΙΧ]+)?$')
+# Annexes, and the schedule (Πίνακας) giving the text of the treaty a law ratifies
+_ANNEX = re.compile(r'^([Α-Ω]+ )?(ΠΑΡΑΡΤΗΜΑ|ΠΙΝΑΚΑΣ)( [Α-ΩIVXΙΧ]+)?$')
 _REFERENCE = re.compile(r'(\d+[A-ZΑ-Ω]?\([IΙ]+\)\s+του\s+\d{4}|του \d{4}|Επίσημη|Εφημερίδα|L\.?\s?\d|C\.?\s?\d|σ\. \d|'
                         r'Ε\.Ε\.|ΕΕ:|Κ\.Δ\.Π\.|Κ\.Δ\.Π|\d+\.\d+\.\d{4}|^\d+[,.]?$|^Παράρτημα [ΙΙΙ]+)')
 DIVISIONS = {'ΜΕΡΟΣ': 'part', 'ΤΙΤΛΟΣ': 'title', 'ΚΕΦΑΛΑΙΟ': 'chapter', 'ΤΜΗΜΑ': 'section', 'ΥΠΟΤΜΗΜΑ': 'subsection'}
@@ -95,7 +101,9 @@ def _text(chars: list[dict]) -> str:
             parts.append(' ')
         parts.append(char['text'])
         previous = char
-    return ' '.join(''.join(parts).split())
+    # A treaty's scanned pages carry a recognised text with the characters it could not read marked '\ufffd'
+    text = ' '.join(''.join(parts).replace('\ufffd', '').split())
+    return _MIXED.sub(lambda word: word.group(0).translate(_LOOKALIKES), text)
 
 
 def _gutter(pdf) -> float:
@@ -121,18 +129,33 @@ def read_lines(path: str) -> tuple[list[_Line], float]:
     with pdf:
         gutter = _gutter(pdf)
         for number, page in enumerate(pdf.pages):
+            if sum(1 for c in page.chars if c['text'].startswith('(cid:') or '\u00c0' <= c['text'] <= '\u02ff'
+                   or '\u0400' <= c['text'] <= '\u05ff') > len(page.chars) / 10:
+                # A facsimile (a treaty as signed) in fonts without their characters' codes: the text is garbled.
+                # Its page header, naming the law it carries, may be legible
+                for found in page.dedupe_chars().extract_text_lines(return_chars=True, x_tolerance=1.5):
+                    header = re.search(_HEADER.pattern.lstrip('^'), _text(found['chars']))
+                    if header:
+                        lines.append(_Line(number, found['top'], 0.0, header.group(0), 9.0, True))
+                continue
+            # Headings set in bold by overprinting carry each character twice ('AGREEMEMENT')
+            page = page.dedupe_chars()
             for found in page.extract_text_lines(return_chars=True, x_tolerance=1.5):
                 chars = sorted((c for c in found['chars'] if c['text'].strip()), key=lambda c: c['x0'])
                 if not chars:
                     continue
                 size = Counter(round(c['size'], 1) for c in chars).most_common(1)[0][0]
                 bold = 'Bold' in Counter(c['fontname'] for c in chars).most_common(1)[0][0]
-                # Split a row where the margin note ends and the body begins
-                split = next((i for i in range(1, len(chars))
-                              if chars[i - 1]['x1'] <= gutter + 2 and chars[i]['x0'] >= gutter - 2
-                              and chars[i]['x0'] - chars[i - 1]['x1'] >= 6), None)
-                if split is None and chars[-1]['x1'] <= gutter + 2:
-                    split = len(chars)
+                # Split a row where the margin note ends and the body begins; a long note may run a little past
+                # the gutter. A margin note starts well left of it, unlike the text of a page without margin notes
+                # (a treaty in a schedule)
+                split = None
+                if chars[0]['x0'] < gutter - 30:
+                    split = next((i for i in range(1, len(chars))
+                                  if chars[i - 1]['x1'] <= gutter + 8 and chars[i]['x0'] >= gutter - 2
+                                  and chars[i]['x0'] - chars[i - 1]['x1'] >= 6), None)
+                    if split is None and chars[-1]['x1'] <= gutter + 2:
+                        split = len(chars)
                 if split:
                     lines.append(_Line(number, found['top'], chars[0]['x0'], _text(chars[:split]), size, bold, True))
                 rest = chars[split or 0:]
@@ -183,7 +206,11 @@ class CyprusGazetteParser(Parser):
                     if not lines[j].margin and re.match(r'^Οι? ', lines[j].text):
                         notice = j
                         break
-                starts.append((notice, number))
+                # A law with a table of contents opens with it, under the header naming the law
+                previous = starts[-1][0] if starts else 0
+                header = next((j for j in range(previous, notice) if (found := _HEADER.match(lines[j].text))
+                               and found.group('number').translate(_LATIN) == number), None)
+                starts.append((notice if header is None else header, number))
         if not starts:
             return [line for line in lines if not self._skip(line)]
         index = 0
@@ -193,11 +220,16 @@ class CyprusGazetteParser(Parser):
                 return []
         begin = starts[index][0]
         end = starts[index + 1][0] if index + 1 < len(starts) else len(lines)
+        # The pages of the next law are headed with its number, though its own number may not be legible
+        number = starts[index][1]
+        end = next((j for j in range(begin + 1, end) if (found := _HEADER.match(lines[j].text))
+                    and found.group('number').translate(_LATIN) != number), end)
         return [line for line in lines[begin:end] if not self._skip(line)]
 
     @staticmethod
     def _skip(line: _Line) -> bool:
-        return bool(_HEADER.match(line.text) or _FOOTER.match(line.text) or line.size > 10.5
+        # The masthead is set large on the issue's first page
+        return bool(_HEADER.match(line.text) or _FOOTER.match(line.text) or (line.size > 10.5 and line.page == 0)
                     or (_MASTHEAD.match(line.text) and line.bold))
 
     def _read_front(self, lines: list[_Line]) -> int:
@@ -286,8 +318,10 @@ class CyprusGazetteParser(Parser):
                               r'νόμος»\)', text)
             if found:
                 basic_act = found.group(1)
-            action = amendment_action(text) if annex is None else None
-            if action:
+            # An amendment changes another law: its instruction (before any quotation) names the action and the law
+            instruction = re.sub(r'παρόντ\w* Νόμ\w*', '', text.split('«')[0])
+            action = amendment_action(instruction) if annex is None else None
+            if action and re.search(r'[Νν]όμ(?:ος|ου|ο|οι|ων|ους)\b|Κανονισμ|Διάταγμ', instruction):
                 quoted = [{'kind': 'text', 'text': q} for q in re.findall(r'«([^«»]{20,})»', text)]
                 act = basic_act if 'βασικού νόμου' in text or 'βασικός νόμος' in text else None
                 child['amendment'] = {'action': action, 'instruction': text, 'amended_act': act, 'quoted': quoted}

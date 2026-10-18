@@ -248,6 +248,14 @@ Base HTML Parser
     :undoc-members:
     :show-inheritance:
 
+Romanian Portal Legislativ HTML Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.legislatie_ro
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Cellar HTML Parsers
 ~~~~~~~~~~~~~~~~~~~
 

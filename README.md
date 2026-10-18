@@ -141,7 +141,7 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 | 🇳🇱 | Netherlands | wetten.overheid.nl (BWB) / Staatsblad | BWB XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇵🇱 | Poland | Dziennik Ustaw (Sejm ELI API) | HTML | ✅ | ✅ | 🟢 Parsed | 0.9.0 |
 | 🇵🇹 | Portugal | Diário da República (gazette and Legislação Consolidada) | PDF, JSON | ✅ | ✅ | 🟢 Parsed (originals: `pdf` extra) | 0.9.0 |
-| 🇷🇴 | Romania | Portal Legislativ (Ministry of Justice) | XML (SOAP) | ✅ | ⏳ | 🟢 Parsed | 0.10.0 |
+| 🇷🇴 | Romania | Portal Legislativ (Ministry of Justice) | XML (SOAP), HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇸🇮 | Slovenia | PISRS (Ministry of Justice) | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
@@ -163,7 +163,7 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 - **0.10.0** (this release):
   - Belgium, Bulgaria, Cyprus, France, Greece, Hungary, Italy, Latvia, Lithuania, Romania and Slovenia: all 28 jurisdictions in `fetch`
   - `tulit.download()` for the official file of an act, including scanned PDFs tulit cannot parse
-- **Next**: original versions for Germany, consolidated texts for Romania
+- **Next**: original versions for Germany
 - **1.0.0**: export of every legalJSON document to Akoma Ntoso and `.leg` packages
 
 ### Access to law and reuse

@@ -221,6 +221,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.darzhaven_vestnik import DarzhavenVestnikParser
     from tulit.parser.xml.dila import DilaParser
     from tulit.parser.xml.legislatie_ro import LegislatieParser
+    from tulit.parser.html.legislatie_ro import LegislatieHtmlParser
     from tulit.parser.html.pisrs import PisrsParser
     from tulit.parser.html.njt import NJTParser
     from tulit.parser.html.etar import TARParser
@@ -264,6 +265,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('bg-dv', DarzhavenVestnikParser, aliases=['darzhaven-vestnik'])
     registry.register('fr-dila', DilaParser, aliases=['dila', 'legi', 'jorf'])
     registry.register('ro-legislatie', LegislatieParser, aliases=['legislatie-just'])
+    registry.register('ro-legislatie-html', LegislatieHtmlParser, aliases=['legislatie-just-html'])
     registry.register('si-pisrs', PisrsParser, aliases=['pisrs'])
     registry.register('hu-njt', NJTParser, aliases=['njt'])
     registry.register('lt-tar', TARParser, aliases=['tar'])

@@ -35,8 +35,9 @@ def test_download_and_extract(tmp_path):
     response.iter_content.return_value = [archive[:100], archive[100:]]
     response.__enter__.return_value = response
     seen = []
+    head = MagicMock(headers={'Content-Length': str(len(archive))})
     with patch.object(client, '_get', return_value=LISTING), \
-            patch.object(client.session, 'head', return_value=MagicMock(headers={'Content-Length': str(len(archive))})), \
+            patch.object(client.session, 'head', return_value=head), \
             patch.object(client.session, 'get', return_value=response) as get:
         root = client.download_dump('LEGI', str(tmp_path), progress=lambda done, total: seen.append((done, total)))
         assert root.endswith('legi/global')

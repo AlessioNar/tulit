@@ -132,9 +132,14 @@ def check(doc: dict[str, Any], expect_articles: bool = True) -> list[Problem]:
 
     # Page furniture (running headers, footers) repeated across articles
     lines: Counter = Counter()
+    # Articles whose whole text is the same ('((ARTICOLO ABROGATO DAL ...))') state their repeal
+    whole = Counter(' '.join(c.get('text') or '' for c in a.get('children') or []) for a in articles)
     for article in articles:
         seen = set()
-        for child in article.get('children') or []:
+        children = article.get('children') or []
+        if whole[' '.join(c.get('text') or '' for c in children)] > 1:
+            continue
+        for child in children:
             for sentence in re.split(r'(?<=[.;:])\s+', child.get('text') or ''):
                 if len(sentence) >= 25 and sentence not in seen:
                     seen.add(sentence)

@@ -87,9 +87,9 @@ class TestNormattivaAKNParser:
         assert parser.preface.startswith('LEGGE 14 maggio 2024, n. 66 - Ratifica ed esecuzione')
         assert parser.preamble_final == 'Promulga la seguente legge:'
         assert [a['eId'] for a in parser.articles] == ['art_1', 'art_2', 'art_3', 'art_4']
-        # The ratified Agreement, article by article
-        assert len(parser.annexes) == 21
-        assert parser.annexes[0]['num'] == 'Accordo-art. 1'
+        # The ratified Agreement, exported article by article, is one annex
+        assert [a['num'] for a in parser.annexes] == ['Accordo', 'Agreement', 'Allegato', 'Annex']
+        assert len(parser.annexes[0]['children']) == 18
         assert parser.annexes[0]['children'][0]['text'].startswith('ACCORDO IN MATERIA DI COPRODUZIONE')
 
     def test_code_with_titles(self, italy):
@@ -99,6 +99,54 @@ class TestNormattivaAKNParser:
                                   "diritti connessi al suo esercizio.")
         assert parser.chapters[0]['num'] == 'TITOLO I'
         assert len(parser.articles) > 300
+
+    def test_flattened_headings_and_commi(self, tmp_path):
+        # Shaped on the Constitution and the Codice privacy: Normattiva puts the headings starting at one
+        # place in one chapter, and unnumbered commi in one paragraph
+        akn = 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0'
+
+        def chapter(num, heading, *articles):
+            return f'<chapter><num>{num}</num><heading>{heading}</heading>{"".join(articles)}</chapter>'
+
+        def article(n, text):
+            return (f'<article eId="art_{n}"><num>Art. {n}.</num><heading/><paragraph><content><p>{text}</p>'
+                    '</content></paragraph></article>')
+
+        body = ''.join([
+            chapter('COSTITUZIONE DELLA REPUBBLICA ITALIANA', 'PRINCIPI FONDAMENTALI - - - -',
+                    article(1, "L'Italia e' una Repubblica.\n La sovranita' appartiene al popolo.")),
+            chapter('-', 'PARTE II ORDINAMENTO TITOLO I IL PARLAMENTO SEZIONE I Le Camere.',
+                    article(55, 'Il Parlamento si compone della Camera e del Senato.')),
+            chapter('-', 'TITOLO II DIRITTI &lt;br&gt; ((TITOLO ABROGATO))',
+                    article(56, 'La Regione emana norme per le seguenti materie:\n fiere e mercati;\n caccia.\n'
+                                'Altre materie.')),
+            chapter('-', 'TITOLO III TRATTAMENTI DA PARTE DI FORZE DI POLIZIA CAPO I PROFILI GENERALI',
+                    article(57, 'Il Consiglio regionale puo\' sostituire la Giunta.')),
+            chapter('Capo II', 'Modifiche alla parte I del codice', article(58, 'Testo.')),
+        ])
+        path = tmp_path / 'act.xml'
+        path.write_text(f'<akomaNtoso xmlns="{akn}"><act name="x"><meta/><body>{body}</body></act></akomaNtoso>',
+                        encoding='utf-8')
+        parser = NormattivaAKNParser().parse(str(path))
+        assert [(c['eId'], c['num'], c['heading'], c['parent']) for c in parser.chapters] == [
+            ('prt_1', None, 'PRINCIPI FONDAMENTALI', None),
+            ('prt_II', 'PARTE II', 'ORDINAMENTO', None),
+            ('tit_I', 'TITOLO I', 'IL PARLAMENTO', 'prt_II'),
+            ('sct_I', 'SEZIONE I', 'Le Camere', 'tit_I'),
+            ('tit_II', 'TITOLO II', 'DIRITTI TITOLO ABROGATO', 'prt_II'),
+            ('tit_III', 'TITOLO III', 'TRATTAMENTI DA PARTE DI FORZE DI POLIZIA', 'prt_II'),
+            ('cpt_I', 'CAPO I', 'PROFILI GENERALI', 'tit_III'),
+            ('cpt_II', 'Capo II', 'Modifiche alla parte I del codice', 'tit_III'),
+        ]
+        articles = {a['eId']: a for a in parser.articles}
+        assert [a['parent'] for a in parser.articles] == ['prt_1', 'sct_I', 'tit_II', 'cpt_I', 'cpt_II']
+        assert [c['text'] for c in articles['art_1']['children']] == [
+            "L'Italia e' una Repubblica.", "La sovranita' appartiene al popolo."]
+        # an unmarked list stays in its paragraph
+        assert [c['text'] for c in articles['art_56']['children']] == [
+            'La Regione emana norme per le seguenti materie: fiere e mercati; caccia.', 'Altre materie.']
+        # 'sostituire la Giunta' amends nothing
+        assert articles['art_57']['children'][0]['amendment'] is None
 
 
 class TestNormattivaAKNClient:
@@ -170,3 +218,20 @@ class TestItalySource:
             with pytest.raises(FileLoadError, match='published on 2018-09-04'):
                 tulit.fetch('2018-09-04/18G00129', jurisdiction='IT', version='consolidated', date='2018-01-01',
                             download_dir=str(tmp_path))
+
+
+def test_version_date_of_an_annexed_code(tmp_path):
+    from tulit.sources.it import _expression_date
+    path = tmp_path / 'code.xml'
+    path.write_text('<akomaNtoso><meta><FRBRWork><FRBRalias name="eli" '
+                    'value="eli/id/1942/04/04/042U0262/CONSOLIDATED/20260812"/></FRBRWork>'
+                    '<FRBRExpression><FRBRdate date="1944-11-10"/></FRBRExpression></meta></akomaNtoso>')
+    assert _expression_date(str(path)) == '2026-08-12'
+
+
+def test_urn_answered_with_another_act():
+    from tulit.parser.exceptions import FileLoadError
+    from tulit.sources.it import _check_kind
+    _check_kind('urn:nir:stato:decreto.legge:2025;1', 'DECRETO-LEGGE 3 gennaio 2025, n. 1')
+    with pytest.raises(FileLoadError, match='no act'):
+        _check_kind('urn:nir:stato:decreto.legge:2026;1', 'LEGGE 7 gennaio 2026, n. 1 (Raccolta 2026)(1)')

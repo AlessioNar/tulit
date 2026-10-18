@@ -153,7 +153,8 @@ class VenetoHTMLParser(HTMLParser):
 
     def get_articles(self):
         """
-        Extracts articles from the HTML. Each <h6> is treated as an article heading, and the next <div> contains the article content.
+        Extracts articles from the HTML. Each <h6> is treated as an article heading, and the next <div>
+        contains the article content.
         Subdivisions are separated by <br> tags and stored as children.
         """
         self.articles = []

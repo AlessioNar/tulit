@@ -241,7 +241,10 @@ class TestGermanyClient:
 
     def test_download_from_eli_url(self, client):
         """Test downloading from a full ELI URL with mock."""
-        eli_url = "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.html"
+        eli_url = (
+            "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/"
+            "2020-06-19/2/deu/2020-06-19/regelungstext-1.html"
+        )
 
         with patch('tulit.client.state.germany.requests.get') as mock_get:
             mock_response = Mock()
@@ -279,7 +282,10 @@ class TestGermanyClient:
             # Verify the URL was constructed correctly
             call_args = mock_get.call_args
             called_url = call_args[0][0]
-            assert called_url == "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.html"
+            assert called_url == (
+                "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/"
+                "2020-06-19/2/deu/2020-06-19/regelungstext-1.html"
+            )
             os.remove(file_path)
 
     def test_download_from_eli_with_version_prefix(self, client):
@@ -301,7 +307,10 @@ class TestGermanyClient:
             # Verify the URL was constructed correctly (no double v1/)
             call_args = mock_get.call_args
             called_url = call_args[0][0]
-            assert called_url == "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/2020-06-19/2/deu/2020-06-19/regelungstext-1.xml"
+            assert called_url == (
+                "https://testphase.rechtsinformationen.bund.de/v1/legislation/eli/bund/bgbl-1/1979/s1325/"
+                "2020-06-19/2/deu/2020-06-19/regelungstext-1.xml"
+            )
             os.remove(file_path)
 
     def test_download_from_eli_format_override(self, client):

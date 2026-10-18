@@ -147,4 +147,6 @@ class SloveniaSource(Source):
             # Prefer the act in force
             found.sort(key=lambda x: 'Veljaven' not in ((x.get('semafor') or {}).get('naziv') or ''))
             return found[0]['zunanjiId']
-        raise UnsupportedError(f"'{identifier}' is not a Slovenian act identifier; use {SloveniaSource.identifier_help}")
+        raise UnsupportedError(
+            f"'{identifier}' is not a Slovenian act identifier; use {SloveniaSource.identifier_help}"
+        )

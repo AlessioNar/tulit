@@ -45,7 +45,9 @@ def reference(identifier: str) -> tuple[str, str, str]:
         kind = (match.group('kind') or 'ν').lower().replace(' ', '')
         decree = kind.startswith(('π', 'p'))
         return ('decree' if decree else 'law'), match.group('number'), match.group('year')
-    raise UnsupportedError(f"'{identifier}' is not a Greek act or Gazette reference; use {GreeceSource.identifier_help}")
+    raise UnsupportedError(
+        f"'{identifier}' is not a Greek act or Gazette reference; use {GreeceSource.identifier_help}"
+    )
 
 
 class GreeceSource(Source):

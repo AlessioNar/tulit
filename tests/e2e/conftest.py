@@ -107,7 +107,8 @@ def sample_files(db_paths):
             <PREAMBLE>
                 <TI>Laying down harmonised rules on artificial intelligence</TI>
                 <STI>THE EUROPEAN PARLIAMENT AND THE COUNCIL OF THE EUROPEAN UNION,</STI>
-                <P>Having regard to the Treaty on the Functioning of the European Union, and in particular Article 114 thereof,</P>
+                <P>Having regard to the Treaty on the Functioning of the European Union, and in particular Article 114 \
+thereof,</P>
                 <P>Having regard to the proposal from the European Commission,</P>
             </PREAMBLE>
             <BODY>
@@ -120,7 +121,9 @@ def sample_files(db_paths):
                         <PARA>
                             <NUM>1.</NUM>
                             <CONTENT>
-                                <P>The purpose of this Regulation is to improve the functioning of the internal market by laying down a uniform legal framework for the development, placing on the market and use of artificial intelligence systems in the Union.</P>
+                                <P>The purpose of this Regulation is to improve the functioning of the internal market \
+by laying down a uniform legal framework for the development, placing on the market and use of artificial intelligence \
+systems in the Union.</P>
                             </CONTENT>
                         </PARA>
                     </DIVISION>

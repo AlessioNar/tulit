@@ -135,7 +135,9 @@ class AkomaNtosoParser(XMLParser):
             if recitals_intro is None:
                 return None, None
             intro_eId = self.extract_eId(recitals_intro, 'eId')
-            intro_text = ''.join(p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text)
+            intro_text = ''.join(
+                p.text.strip() for p in recitals_intro.findall('.//akn:p', namespaces=self.namespaces) if p.text
+            )
             return intro_eId, intro_text
 
         return super().get_recitals(

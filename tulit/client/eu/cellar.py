@@ -134,7 +134,8 @@ class CellarClient(Client):
         Notes
         -----
         The request is sent with the following headers:
-        - Accept: application/zip;mtype=fmx4, application/xml;mtype=fmx4, application/xhtml+xml, text/html, text/html;type=simplified, application/msword, text/plain, application/xml;notice=object
+        - Accept: application/zip;mtype=fmx4, application/xml;mtype=fmx4, application/xhtml+xml, text/html,
+          text/html;type=simplified, application/msword, text/plain, application/xml;notice=object
         - Accept-Language: eng
         - Content-Type: application/x-www-form-urlencoded
         - Host: publications.europa.eu
@@ -153,12 +154,19 @@ class CellarClient(Client):
         try:
             self.logger.info(f"Fetching content from URL: {url}")
             headers = {
-                'Accept': "*, application/zip, application/zip;mtype=fmx4, application/xml;mtype=fmx4, application/xhtml+xml, text/html, text/html;type=simplified, application/msword, text/plain, application/xml, application/xml;notice=object",
+                'Accept': (
+                    "*, application/zip, application/zip;mtype=fmx4, application/xml;mtype=fmx4, "
+                    "application/xhtml+xml, text/html, text/html;type=simplified, application/msword, text/plain, "
+                    "application/xml, application/xml;notice=object"
+                ),
                 'Accept-Language': "eng",
                 'Content-Type': "application/x-www-form-urlencoded",
                 'Host': "publications.europa.eu",
                 # EU server blocks bot traffic - use browser User-Agent
-                'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                'User-Agent': (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/91.0.4472.124 Safari/537.36"
+                )
             }
             if self.proxies is not None:
                 response = requests.request("GET", url, headers=headers, proxies=self.proxies)

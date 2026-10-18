@@ -423,7 +423,8 @@ class XMLParser(Parser):
         Parameters
         ----------
         body_xpath : str
-            XPath expression to locate the body element. For Akoma Ntoso, this is usually './/akn:body', while for Formex it is './/ENACTING.TERMS'.
+            XPath expression to locate the body element. For Akoma Ntoso, this is usually
+            './/akn:body', while for Formex it is './/ENACTING.TERMS'.
 
         Returns
         -------
@@ -439,7 +440,8 @@ class XMLParser(Parser):
             # Restore namespaces
             self._extractor.namespaces = self.namespaces
 
-    def get_chapters(self, chapter_xpath: str, num_xpath: str, heading_xpath: str, extract_eId=None, get_headings=None) -> None:
+    def get_chapters(self, chapter_xpath: str, num_xpath: str, heading_xpath: str,
+                     extract_eId=None, get_headings=None) -> None:
         """
         Extracts chapter information from the document.
 
@@ -457,7 +459,8 @@ class XMLParser(Parser):
         Returns
         -------
         None
-            Updates the instance's chapters attribute with the found chapter data. Each chapter is a dictionary with keys:
+            Updates the instance's chapters attribute with the found chapter data.
+            Each chapter is a dictionary with keys:
             - 'eId': Chapter identifier
             - 'chapter_num': Chapter number
             - 'chapter_heading': Chapter heading text

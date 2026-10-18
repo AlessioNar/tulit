@@ -574,7 +574,10 @@ class Formex4Parser(XMLParser):
 
             if text is not None and text != '' and text != ';':
                 child = {
-                    "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or (str(len(children)+1).zfill(3)) or str(index).zfill(3),
+                    "eId": (
+                        element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P")
+                        or (str(len(children)+1).zfill(3)) or str(index).zfill(3)
+                    ),
                     "text": text,
                     "amendment": False
                 }
@@ -686,7 +689,8 @@ class Formex4Parser(XMLParser):
         if article_elem.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
             return article_elem.xpath(
                 './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
-                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG)'
+                ' and not(ancestor::ALINEA) and not(descendant::PARAG)]'
                 ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
         return article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)] | .//SUBDIV/TITLE')
@@ -861,7 +865,8 @@ class Formex4Parser(XMLParser):
                 included_root.tail = incl.tail
                 parent[parent.index(incl)] = included_root
 
-    def _extract_annex(self, annex_root: etree._Element, index: int, base_dir: Optional[str] = None) -> Optional[dict[str, Any]]:
+    def _extract_annex(self, annex_root: etree._Element, index: int,
+                       base_dir: Optional[str] = None) -> Optional[dict[str, Any]]:
         """
         Extracts a single annex from an ANNEX root element.
 

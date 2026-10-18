@@ -118,7 +118,8 @@ class HTMLParser(Parser):
 
     def parse(self, file: str, **options) -> 'HTMLParser':
         """
-        Parses an HTML file and extracts the preface, preamble, formula, citations, recitals, preamble final, body, chapters, articles, and conclusions.
+        Parses an HTML file and extracts the preface, preamble, formula, citations, recitals, preamble final,
+        body, chapters, articles, and conclusions.
 
         Parameters
         ----------
@@ -185,7 +186,9 @@ class HTMLParser(Parser):
         try:
             self.get_articles()
             self.logger.info(f"Articles parsed successfully. Number of articles: {len(self.articles)}")
-            self.logger.debug(f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}")
+            self.logger.debug(
+                f"Total number of children in articles: {sum([len(list(article)) for article in self.articles])}"
+            )
 
         except Exception as e:
             self.logger.error(f"Error in get_articles: {e}", exc_info=True)

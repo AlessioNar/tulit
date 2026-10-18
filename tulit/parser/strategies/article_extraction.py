@@ -397,7 +397,8 @@ class FormexArticleStrategy(XMLArticleExtractionStrategy):
         elif article.xpath('.//PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'):
             parags = article.xpath(
                 './/PARAG[not(ancestor::QUOT.S) and not(ancestor::PARAG)]'
-                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG) and not(ancestor::ALINEA) and not(descendant::PARAG)]'
+                ' | .//ALINEA[not(ancestor::QUOT.S) and not(ancestor::PARAG)'
+                ' and not(ancestor::ALINEA) and not(descendant::PARAG)]'
                 ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
             for idx, parag in enumerate(parags):
@@ -713,7 +714,8 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
             # Update quote state
             if starts_quote:
                 in_quoted_content = True
-            if ends_quote and not starts_quote:  # Only if it ends but doesn't start (to avoid single-line quotes closing immediately)
+            # Only if it ends but doesn't start (to avoid single-line quotes closing immediately)
+            if ends_quote and not starts_quote:
                 in_quoted_content = False
             elif ends_quote and starts_quote:
                 # Both start and end - check if there are more quotes in between

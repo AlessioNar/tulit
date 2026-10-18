@@ -356,7 +356,10 @@ class Parser(ABC):
                 return obj
             except Exception:
                 # For truly unknown types, log a warning but return string representation
-                self.logger.warning(f"Unknown object type {type(obj)} encountered during serialization, converting to string")
+                self.logger.warning(
+                    f"Unknown object type {type(obj)} encountered during serialization, "
+                    "converting to string"
+                )
                 return str(obj)
 
         # Some HTML parsers store conclusions as a bare string; legalJSON

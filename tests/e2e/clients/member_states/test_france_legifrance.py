@@ -24,7 +24,10 @@ class TestFranceLegifranceClient:
         client_secret = os.environ.get('LEGIFRANCE_CLIENT_SECRET')
 
         if not client_id or not client_secret:
-            pytest.skip("Legifrance API credentials not available (set LEGIFRANCE_CLIENT_ID and LEGIFRANCE_CLIENT_SECRET)")
+            pytest.skip(
+                "Legifrance API credentials not available "
+                "(set LEGIFRANCE_CLIENT_ID and LEGIFRANCE_CLIENT_SECRET)"
+            )
 
         try:
             from tulit.client.state.legifrance import LegifranceClient

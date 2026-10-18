@@ -15,7 +15,9 @@ class TestCellarClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
         data_root = locate_data_dir(__file__)
-        self.downloader = CellarClient(download_dir=str(data_root / 'formex'), log_dir=str(data_root.parent / 'logs'), proxies=None)
+        self.downloader = CellarClient(
+            download_dir=str(data_root / 'formex'), log_dir=str(data_root.parent / 'logs'), proxies=None
+        )
 
     def test_download(self):
         celex = "32008R1137"
@@ -46,7 +48,10 @@ class TestCellarClient(unittest.TestCase):
         # Test for formex format
         extracted_ids = self.downloader.get_cellar_ids_from_json_results(cellar_results, 'fmx4')
         expected = [
-            'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1', 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_2', 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_3', 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_4'
+            'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1',
+            'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_2',
+            'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_3',
+            'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_4'
             ]
 
         self.assertEqual(extracted_ids, expected)
@@ -54,7 +59,10 @@ class TestCellarClient(unittest.TestCase):
     def test_build_request_url(self):
 
         params = {'cellar': 'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1'}
-        expected_url = 'http://publications.europa.eu/resource/cellar/e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1'
+        expected_url = (
+            'http://publications.europa.eu/resource/cellar/'
+            'e115172d-3ab3-4b14-b0a4-dfdcc9871793.0006.04/DOC_1'
+        )
         actual_url = self.downloader.build_request_url(params)
         self.assertEqual(actual_url, expected_url)
 
@@ -165,7 +173,8 @@ class TestCellarClient(unittest.TestCase):
             'inForce': {'value': '1'},
         }
         bindings = [
-            {**base, 'rel': {'value': cdm + 'resource_legal_repeals_resource_legal'}, 'target': {'value': '32009R0714'}},
+            {**base, 'rel': {'value': cdm + 'resource_legal_repeals_resource_legal'},
+             'target': {'value': '32009R0714'}},
             {**base, 'rel': {'value': cdm + 'resource_legal_amends_resource_legal'}, 'target': {'value': '32013R0543'}},
             {**base, 'rel': {'value': cdm + 'resource_legal_amends_resource_legal'}, 'target': {'value': '32013R0347'}},
         ]

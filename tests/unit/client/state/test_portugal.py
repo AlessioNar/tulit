@@ -24,7 +24,9 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
-        file_path = self.client.download('journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html')
+        file_path = self.client.download(
+            'journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html'
+        )
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -39,7 +41,10 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
-        file_path = self.client.download('legal_act', act_type='lei', number='39', year='2016', month='12', day='19', region='p', lang='pt', fmt='html')
+        file_path = self.client.download(
+            'legal_act', act_type='lei', number='39', year='2016', month='12', day='19',
+            region='p', lang='pt', fmt='html'
+        )
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -54,7 +59,10 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response.headers = {'Content-Type': 'text/html'}
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
-        file_path = self.client.download('consolidated', act_type='lei', number='7', year='2009', region='p', cons_date='20171002', lang='pt', fmt='html')
+        file_path = self.client.download(
+            'consolidated', act_type='lei', number='7', year='2009', region='p',
+            cons_date='20171002', lang='pt', fmt='html'
+        )
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, 'rb') as f:
             content = f.read()
@@ -66,7 +74,9 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_response = Mock()
         mock_response.raise_for_status.side_effect = Exception('HTTP error')
         mock_get.return_value = mock_response
-        file_path = self.client.download('journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html')
+        file_path = self.client.download(
+            'journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html'
+        )
         self.assertIsNone(file_path)
 
 

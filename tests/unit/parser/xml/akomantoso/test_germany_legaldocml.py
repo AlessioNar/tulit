@@ -19,7 +19,10 @@ def test_parse_german_legislation():
 
     # Input and output paths
     data_root = locate_data_dir(__file__)
-    input_file = data_root / 'sources' / 'member_states' / 'germany' / 'legislation' / 'bgbl-1_2025_145_2025-06-17_1_deu_2025-10-20_regelungstext-verkuendung-1.xml'
+    input_file = (
+        data_root / 'sources' / 'member_states' / 'germany' / 'legislation'
+        / 'bgbl-1_2025_145_2025-06-17_1_deu_2025-10-20_regelungstext-verkuendung-1.xml'
+    )
     output_file = data_root / 'results' / 'member_states' / 'germany' / 'bgbl-1_2025_145.json'
 
     if not input_file.exists():

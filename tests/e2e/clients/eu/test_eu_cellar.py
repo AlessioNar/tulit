@@ -111,7 +111,8 @@ class TestEUCellarClient:
             }
             LIMIT 5
             """
-            results = client.send_sparql_query(sparql_query, celex="32024R0903")  # Pass celex to trigger query execution
+            # Pass celex to trigger query execution
+            results = client.send_sparql_query(sparql_query, celex="32024R0903")
         except Exception as e:
             pytest.skip(f"SPARQL endpoint unavailable: {e}")
 
@@ -174,9 +175,13 @@ class TestEUCellarClient:
                     assert '<?xml' in content, f"File {path_obj.name} doesn't contain XML"
                     assert 'fmx4' in content.lower(), f"File {path_obj.name} doesn't appear to be FORMEX format"
                 elif expected_format == 'xhtml':
-                    assert '<?xml' in content or '<!DOCTYPE html' in content, f"File {path_obj.name} doesn't contain XHTML/HTML"
+                    assert '<?xml' in content or '<!DOCTYPE html' in content, (
+                        f"File {path_obj.name} doesn't contain XHTML/HTML"
+                    )
                 elif expected_format == 'html':
-                    assert '<!DOCTYPE html' in content or '<html' in content, f"File {path_obj.name} doesn't contain HTML"
+                    assert '<!DOCTYPE html' in content or '<html' in content, (
+                        f"File {path_obj.name} doesn't contain HTML"
+                    )
 
             elif path_obj.is_dir():
                 # Check for files in the directory based on format

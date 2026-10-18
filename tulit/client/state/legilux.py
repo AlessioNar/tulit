@@ -9,7 +9,9 @@ from tulit.parser.exceptions import FileLoadError, NetworkError
 LEGILUX_DATA = 'https://data.legilux.public.lu'
 SPARQL_ENDPOINT = f'{LEGILUX_DATA}/sparqlendpoint'
 JOLUX = 'http://data.legilux.public.lu/resource/ontology/jolux#'
-_ACT_PATH = re.compile(r'^(?:https?://(?:data\.)?legilux\.public\.lu/)?(?:eli/)?(etat/[a-z]+/[a-z]+/\d{4}/\d{2}/\d{2}/[\w-]+)')
+_ACT_PATH = re.compile(
+    r'^(?:https?://(?:data\.)?legilux\.public\.lu/)?(?:eli/)?(etat/[a-z]+/[a-z]+/\d{4}/\d{2}/\d{2}/[\w-]+)'
+)
 
 
 def act_path(identifier):

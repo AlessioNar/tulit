@@ -958,12 +958,18 @@ class ProposalHTMLParser(HTMLParser):
         # Check document type element
         doc_type = self.root.find('p', class_='Typedudocument_cp')
         if doc_type and doc_type.get_text(strip=True).upper() == 'ANNEX':
-            raise ValueError("This document is an annex (document_type is 'ANNEX'). Only main proposal documents should be parsed.")
+            raise ValueError(
+                "This document is an annex (document_type is 'ANNEX'). "
+                "Only main proposal documents should be parsed."
+            )
 
         # Check for annex title class
         annex_title = self.root.find('p', class_='Annexetitre')
         if annex_title:
-            raise ValueError("This document is an annex (detected 'Annexetitre' class). Only main proposal documents should be parsed.")
+            raise ValueError(
+                "This document is an annex (detected 'Annexetitre' class). "
+                "Only main proposal documents should be parsed."
+            )
 
         try:
             self.get_metadata()

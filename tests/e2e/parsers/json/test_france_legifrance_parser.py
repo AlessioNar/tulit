@@ -60,7 +60,9 @@ class TestFranceLegifranceParser:
 
             # Optional fields
             if 'heading' in article:
-                assert isinstance(article['heading'], str) or article['heading'] is None, f"Article heading should be string or None: {article}"
+                assert isinstance(article['heading'], str) or article['heading'] is None, (
+                    f"Article heading should be string or None: {article}"
+                )
 
         # Save results
         output_data = {

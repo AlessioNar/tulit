@@ -28,7 +28,8 @@ class LegifranceClient(Client):
     - Chrono: versioned content
     """
 
-    def __init__(self, client_id, client_secret, download_dir='./data/france/legifrance', log_dir='./data/logs', proxies=None):
+    def __init__(self, client_id, client_secret, download_dir='./data/france/legifrance',
+                 log_dir='./data/logs', proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.client_id = client_id
         self.client_secret = client_secret
@@ -1560,7 +1561,8 @@ class LegifranceClient(Client):
 
         return obj
 
-    def download_law_decree(self, text_id: str, date: Optional[str] = None, searched_string: Optional[str] = None) -> str:
+    def download_law_decree(self, text_id: str, date: Optional[str] = None,
+                            searched_string: Optional[str] = None) -> str:
         """
         Download a law or decree (LODA) and save to file.
 

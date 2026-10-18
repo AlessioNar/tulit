@@ -635,7 +635,8 @@ def test_legacy_regulation_headings_formula_and_merged_points(parser, tmp_path):
             <p> Article 4</p>
             <p> Notification of new agreements, decisions and practices </p>
             <p> 2. Paragraph 1 shall not apply where:    (1) the only parties are from one Member State; </p>
-            <p>      (2) not more than two undertakings are party thereto, and the agreements only:      (a) restrict prices ; or </p>
+            <p>      (2) not more than two undertakings are party thereto, and the agreements only:      (a) restrict \
+prices ; or </p>
             <p>          (b) impose restrictions on industrial property rights; </p>
             <p> Article 5</p>
             <p> Final provision </p>

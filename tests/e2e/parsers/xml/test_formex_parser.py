@@ -68,7 +68,9 @@ class TestFormexParser:
 
             # Optional fields
             if 'heading' in article:
-                assert isinstance(article['heading'], (str, type(None))), f"Article heading should be string or None: {article}"
+                assert isinstance(article['heading'], (str, type(None))), (
+                    f"Article heading should be string or None: {article}"
+                )
 
         # Save results
         output_data = {

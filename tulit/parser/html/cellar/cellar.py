@@ -489,7 +489,9 @@ class CellarHTMLParser(HTMLParser):
             if not children:
                 # Skip title elements to avoid duplicate content
                 article_copy = article.__copy__()
-                for title_elem in article_copy.find_all(['p'], class_=['oj-ti-art', 'oj-sti-art', 'title-article-norm', 'stitle-article-norm']):
+                for title_elem in article_copy.find_all(
+                    ['p'], class_=['oj-ti-art', 'oj-sti-art', 'title-article-norm', 'stitle-article-norm']
+                ):
                     title_elem.decompose()
 
                 text = ' '.join(article_copy.get_text(separator=' ', strip=True).split())

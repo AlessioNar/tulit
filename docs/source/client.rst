@@ -21,6 +21,7 @@ The tulit Client library supports multiple legal document retrieval sources orga
 * **France (DILA open data)**: Journal officiel and consolidated legislation from the DILA open data
 * **France (Légifrance PISTE API)**: Légifrance PISTE API (needs credentials)
 * **Germany (Rechtsinformationen des Bundes)**: Rechtsinformationen des Bundes (test phase)
+* **Germany (Bundesgesetzblatt)**: Federal Law Gazette as promulgated, from recht.bund.de and the bgbl.de archive
 * **Greece (ΦΕΚ)**: Government Gazette (ΦΕΚ), National Printing House
 * **Hungary (Nemzeti Jogszabálytár)**: National Legislation Database
 * **Ireland (Irish Statute Book and Revised Acts)**: Irish Statute Book and Revised Acts
@@ -159,6 +160,14 @@ Germany (Rechtsinformationen des Bundes)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.client.state.germany
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Germany (Bundesgesetzblatt)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.client.state.germany_bgbl
      :members:
      :undoc-members:
      :show-inheritance:

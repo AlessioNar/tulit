@@ -224,6 +224,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.njt import NJTParser
     from tulit.parser.html.etar import TARParser
     from tulit.parser.pdf.greece import GovernmentGazetteParser
+    from tulit.parser.pdf.germany import BundesgesetzblattParser
     from tulit.parser.xml.akomantoso.normattiva import NormattivaAKNParser
     from tulit.parser.xml.akomantoso.leg import LegParser
 
@@ -264,6 +265,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('hu-njt', NJTParser, aliases=['njt'])
     registry.register('lt-tar', TARParser, aliases=['tar'])
     registry.register('gr-fek-pdf', GovernmentGazetteParser, aliases=['fek'])
+    registry.register('de-bgbl-pdf', BundesgesetzblattParser, aliases=['bgbl-de'])
     registry.register('it-normattiva', NormattivaAKNParser, aliases=['normattiva'])
 
 

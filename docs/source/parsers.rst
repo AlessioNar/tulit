@@ -401,6 +401,14 @@ Greek Government Gazette Parser
      :undoc-members:
      :show-inheritance:
 
+German Federal Law Gazette Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.germany
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 Article Extraction Strategies
 ------------------------------
 

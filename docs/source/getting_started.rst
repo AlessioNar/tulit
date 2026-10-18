@@ -102,6 +102,14 @@ Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` e
     tulit.fetch("2011. évi CXII. törvény", jurisdiction="HU",
                 version="consolidated", date="2019-01-01")
     tulit.fetch("https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581")  # Belgium, by ELI
+    tulit.fetch("Legea nr. 31/1990", jurisdiction="RO", version="consolidated",
+                date="2016-01-01")                                      # form consolidated on 16.07.2015
+    tulit.fetch("Codul civil", jurisdiction="RO", version="consolidated")  # Civil Code in force today
+
+Romania's original texts come from the Portal Legislativ web service, over
+plain HTTP; its consolidated forms (each dated from the day it applies, the
+official republications among them) come from the portal's pages, which are
+served over HTTPS only and are not reachable from every network.
 
 France needs no credentials: texts published since the last global DILA dump
 come from the daily Journal officiel and Légifrance archives. For older texts,

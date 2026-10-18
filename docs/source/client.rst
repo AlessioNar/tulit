@@ -32,7 +32,7 @@ The tulit Client library supports multiple legal document retrieval sources orga
 * **Netherlands (BWB and Staatsblad)**: Basiswettenbestand, wetten.overheid.nl, and the Staatsblad
 * **Poland (Sejm ELI API)**: Dziennik Ustaw and Monitor Polski
 * **Portugal (Diário da República)**: Diário da República
-* **Romania (Portal Legislativ)**: Portal Legislativ web service (Ministry of Justice)
+* **Romania (Portal Legislativ)**: Portal Legislativ web service and pages of consolidated forms (Ministry of Justice)
 * **Slovakia (Slov-Lex)**: MetaLex XML
 * **Slovenia (PISRS)**: PISRS (Ministry of Justice)
 * **Spain (BOE)**: Spanish official gazette and consolidated legislation

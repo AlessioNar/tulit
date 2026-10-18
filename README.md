@@ -145,9 +145,9 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 | 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇸🇮 | Slovenia | PISRS (Ministry of Justice) | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇸🇪 | Sweden | Svensk författningssamling (Riksdagen) | HTML | ⏳ | ✅ | 🟢 Parsed | 0.9.0 |
+| 🇸🇪 | Sweden | Svensk författningssamling (Government Offices) / Riksdagen open data | PDF, HTML | ✅ | ✅ | 🟢 Parsed (`pdf` extra for originals) | 0.9.0 |
 
-**Progress: 28 of 28 parsed.** Every Member State and the EU is available through `tulit.fetch()`. Regional legislation is also available for Veneto (Italy). Cyprus, Greece, Malta and Portugal publish PDF and need the optional `pdf` extra (`pip install 'tulit[pdf]'`); Portuguese consolidated texts (the codes, the Constitution and the laws the Diário da República consolidates) come as JSON and need no extra. Some acts exist only as scanned PDFs without text (the Moniteur belge before June 1997, the Cypriot Gazette before about 2015); `tulit.download()` returns their official file. `tulit sources` lists what the installed version supports.
+**Progress: 28 of 28 parsed.** Every Member State and the EU is available through `tulit.fetch()`. Regional legislation is also available for Veneto (Italy). Cyprus, Greece, Malta and Portugal publish PDF, and so does Sweden for acts as adopted (Svensk författningssamling, electronic since 1 April 2018: earlier acts are available only consolidated); they need the optional `pdf` extra (`pip install 'tulit[pdf]'`). Portuguese consolidated texts (the codes, the Constitution and the laws the Diário da República consolidates) come as JSON and need no extra. Some acts exist only as scanned PDFs without text (the Moniteur belge before June 1997, the Cypriot Gazette before about 2015); `tulit.download()` returns their official file. `tulit sources` lists what the installed version supports.
 
 ### Roadmap
 
@@ -163,7 +163,7 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 - **0.10.0** (this release):
   - Belgium, Bulgaria, Cyprus, France, Greece, Hungary, Italy, Latvia, Lithuania, Romania and Slovenia: all 28 jurisdictions in `fetch`
   - `tulit.download()` for the official file of an act, including scanned PDFs tulit cannot parse
-- **Next**: original versions for Germany and Sweden, consolidated texts for Romania, an easier workflow for the French DILA dumps
+- **Next**: original versions for Germany, consolidated texts for Romania
 - **1.0.0**: export of every legalJSON document to Akoma Ntoso and `.leg` packages
 
 ### Access to law and reuse

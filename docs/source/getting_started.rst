@@ -81,13 +81,15 @@ Jogszabálytár), Ireland (Irish Statute Book and Revised Acts), Italy
 (Normattiva), Latvia (Latvijas Vēstnesis and Likumi.lv), Lithuania (Teisės
 aktų registras), Luxembourg (Legilux), Malta (Legislation Malta), the
 Netherlands (Basiswettenbestand and Staatsblad), Poland (Sejm ELI API),
-Portugal (Diário da República and its Legislação Consolidada), Romania (Portal Legislativ), Slovakia
-(Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden (Riksdagen). ``tulit
-sources`` lists them with the versions, languages and identifiers they
-accept.
+Portugal (Diário da República and its Legislação Consolidada), Romania (Portal
+Legislativ), Slovakia (Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden
+(Svensk författningssamling and the Riksdag open data). ``tulit sources`` lists
+them with the versions, languages and identifiers they accept.
 
-Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` extra
-(Portuguese consolidated texts come as JSON and do not):
+Cyprus, Greece, Malta and Portugal publish PDF, and so does Sweden for acts as
+adopted (the electronic Svensk författningssamling, from SFS 2018:160 of 1 April
+2018; earlier Swedish acts are available only consolidated); reading them needs
+the ``pdf`` extra (Portuguese consolidated texts come as JSON and do not):
 
 .. code-block:: console
 
@@ -102,6 +104,8 @@ Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` e
     tulit.fetch("IKS", jurisdiction="EE", version="consolidated", date="2024-06-01")
     tulit.fetch("BGBl. I Nr. 5/2024", jurisdiction="AT")                 # law as adopted
     tulit.fetch("ν. 4624/2019", jurisdiction="GR")                      # law as published in the ΦΕΚ
+    tulit.fetch("SFS 2018:218", jurisdiction="SE")                      # act as published in the SFS
+    tulit.fetch("2018:218", jurisdiction="SE", version="consolidated")  # statute in force today
     tulit.fetch("2011. évi CXII. törvény", jurisdiction="HU",
                 version="consolidated", date="2019-01-01")
     tulit.fetch("https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581")  # Belgium, by ELI

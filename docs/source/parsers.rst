@@ -19,7 +19,8 @@ The formats currently supported are:
   Diário da República (Portugal)
 
 * **PDF** (``pdf`` extra): Legislation Malta, Diário da República (Portugal),
-  the Official Gazette of Cyprus and the Greek Government Gazette (ΦΕΚ)
+  the Official Gazette of Cyprus, the Greek Government Gazette (ΦΕΚ) and
+  Svensk författningssamling (Sweden)
 
 * **HTML Formats:**
 
@@ -406,6 +407,14 @@ Greek Government Gazette Parser
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.parser.pdf.greece
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Svensk författningssamling Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.sweden
      :members:
      :undoc-members:
      :show-inheritance:

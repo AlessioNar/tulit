@@ -36,7 +36,8 @@ The tulit Client library supports multiple legal document retrieval sources orga
 * **Slovakia (Slov-Lex)**: MetaLex XML
 * **Slovenia (PISRS)**: PISRS (Ministry of Justice)
 * **Spain (BOE)**: Spanish official gazette and consolidated legislation
-* **Sweden (Riksdagen)**: consolidated statutes (SFS)
+* **Sweden (Svensk författningssamling and Riksdagen)**: acts as adopted (electronic SFS, PDF, from April 2018)
+  and consolidated statutes (Riksdag open data)
 
 **Regional Clients**
 
@@ -283,8 +284,8 @@ Spain (BOE)
      :undoc-members:
      :show-inheritance:
 
-Sweden (Riksdagen)
-~~~~~~~~~~~~~~~~~~
+Sweden (Svensk författningssamling and Riksdagen)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.client.state.sweden
      :members:

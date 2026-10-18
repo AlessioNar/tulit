@@ -225,6 +225,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.html.njt import NJTParser
     from tulit.parser.html.etar import TARParser
     from tulit.parser.pdf.greece import GovernmentGazetteParser
+    from tulit.parser.pdf.sweden import SFSPDFParser
     from tulit.parser.xml.akomantoso.normattiva import NormattivaAKNParser
     from tulit.parser.xml.akomantoso.leg import LegParser
 
@@ -251,6 +252,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('riigiteataja', RiigiTeatajaParser, aliases=['ee-rt'])
     registry.register('pl-eli', SejmELIParser, aliases=['sejm'])
     registry.register('se-sfs', RiksdagenSFSParser, aliases=['riksdagen'])
+    registry.register('se-sfs-pdf', SFSPDFParser, aliases=['sfs-pdf'])
     registry.register('hr-nn', NarodneNovineParser, aliases=['narodne-novine'])
     registry.register('cz-esbirka', EsbirkaParser, aliases=['esbirka'])
     registry.register('mt-pdf', MaltaPDFParser, aliases=['malta'])

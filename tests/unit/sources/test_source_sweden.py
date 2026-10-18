@@ -67,14 +67,22 @@ class TestSwedenSource:
     def test_fetch(self, statute, tmp_path):
         with patch.object(RiksdagenClient, 'download', return_value=statute) as download, \
                 patch.object(RiksdagenClient, 'metadata', return_value={'datum': '2018-04-19 00:00:00'}):
-            doc = tulit.fetch('SFS 2018:218', jurisdiction='SE', download_dir=str(tmp_path))
+            doc = tulit.fetch('SFS 2018:218', jurisdiction='SE', version='consolidated', download_dir=str(tmp_path))
         download.assert_called_once_with('sfs-2018-218')
         meta = doc['meta']
         assert (meta['jurisdiction'], meta['version'], meta['date_document']) == ('SE', 'consolidated', '2018-04-19')
 
+    @pytest.mark.parametrize('identifier', ['sfs-2018-218', 'https://data.riksdagen.se/dokument/sfs-2018-218.html'])
+    def test_riksdag_document_names_the_consolidated_statute(self, statute, tmp_path, identifier):
+        with patch.object(RiksdagenClient, 'download', return_value=statute), \
+                patch.object(RiksdagenClient, 'metadata', return_value={}):
+            doc = tulit.fetch(identifier, jurisdiction='SE', download_dir=str(tmp_path))
+        assert doc['meta']['version'] == 'consolidated'
+
     def test_past_dates_are_rejected(self, tmp_path):
         with pytest.raises(ValueError, match='past date'):
-            tulit.fetch('2018:218', jurisdiction='SE', date='2020-01-01', download_dir=str(tmp_path))
+            tulit.fetch('2018:218', jurisdiction='SE', version='consolidated', date='2020-01-01',
+                        download_dir=str(tmp_path))
 
 
 class TestRiksdagenClient:

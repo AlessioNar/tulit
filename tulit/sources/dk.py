@@ -73,6 +73,10 @@ class DenmarkSource(Source):
         }
         version_date = (_meta(root, 'StartDate') or _meta(root, 'DiesEdicti')) if version == CONSOLIDATED \
             else _meta(root, 'DiesSigni')
+        if root.find('DokumentIndhold') is None:
+            # An older act whose XML holds only metadata: its text is in the HTML
+            return Retrieval(path=client.download_html(path), parser='retsinformation-html', version=version,
+                             language='dan', version_date=version_date, meta=meta)
         return Retrieval(
             path=client.download(path),
             parser='lexdania',

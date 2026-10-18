@@ -12,6 +12,9 @@ Parser for consolidated Dutch legislation in the BWB toestand XML format.
   conclusions, and ``bijlage`` elements the annexes;
 - ``meta-data`` blocks are left out.
 
+A ministeriële regeling has the same parts under other names (``regeling``,
+``wie``, ``regeling-tekst``, ``regeling-sluiting``).
+
 The same parser reads acts as published in the Staatsblad (officiele-
 publicatie XML), which share the vocabulary. Their amending articles
 (``wijzig-artikel``) become articles whose lettered parts (``wijzig-lid``)
@@ -28,16 +31,16 @@ from tulit.parser.parser import Parser
 from tulit.parser.structure import BodyBuilder, ChildrenBuilder, element_text, eid_token
 
 BLOCK_TAGS = ('al', 'lid', 'lidnr', 'lijst', 'li', 'li.nr', 'kop', 'label', 'nr', 'titel', 'wat', 'wijziging',
-              'tabel', 'row', 'entry', 'considerans.al', 'ondertekening', 'functie', 'naam')
+              'tabel', 'row', 'entry', 'considerans.al', 'ondertekening', 'functie', 'naam', 'voornaam')
 SKIP_TAGS = ('meta-data', 'jcis', 'jci')
 # Elements holding text quoted by an amendment, not part of the act itself
 QUOTED_TAGS = ('wijziging', 'wijzig-divisie')
 
-# Amending verbs, checked in order
+# Amending verbs, checked in order ('komt de zinsnede ... te luiden' splits its verb)
 ACTIONS = (
-    ('vervalt', 'delete'), ('vervallen', 'delete'), ('komt te luiden', 'replace'),
-    ('komen te luiden', 'replace'), ('vervangen', 'replace'), ('ingevoegd', 'insert'),
-    ('toegevoegd', 'add'), ('gewijzigd', 'amend'),
+    (r'\bvervalt\b', 'delete'), (r'\bvervallen\b', 'delete'), (r'\bkom(?:t|en)\b.*\bte luiden\b', 'replace'),
+    (r'\bvervangen\b', 'replace'), (r'\bingevoegd\b', 'insert'), (r'\btoegevoegd\b', 'add'),
+    (r'\bgewijzigd\b', 'amend'), (r'\bingetrokken\b', 'repeal'), (r'\bveranderingen?\b', 'amend'),
 )
 
 
@@ -45,9 +48,10 @@ def amendment_action(instruction: str) -> Optional[str]:
     """'In artikel 6 wordt «a» vervangen door «b».' -> 'replace'; '... komt te luiden:' -> 'replace'."""
     lowered = instruction.lower()
     for verb, action in ACTIONS:
-        if verb in lowered:
+        if re.search(verb, lowered):
             return action
     return None
+
 
 DIVISIONS = {
     'boek': 'part',
@@ -78,7 +82,8 @@ class BWBParser(Parser):
         self.get_preface()
         self._read_preamble()
         body = BodyBuilder()
-        text = self.root.find('.//wettekst')
+        # a ministeriële regeling has its own regeling-tekst, aanhef and regeling-sluiting
+        text = _first(self.root, './/wettekst', './/regeling-tekst')
         if text is not None:
             self._walk(text, body)
         self.chapters, self.articles, self.structure = body.chapters, body.articles, body.structure
@@ -94,10 +99,10 @@ class BWBParser(Parser):
         return self.articles
 
     def _read_preamble(self) -> None:
-        opening = self.root.find('.//wet-besluit/aanhef')
+        opening = _first(self.root, './/wet-besluit/aanhef', './/regeling/aanhef')
         if opening is None:
             return
-        self.formula = _text(opening.find('wij')) or None
+        self.formula = _text(opening.find('wij')) or _text(opening.find('wie')) or None
         self.recitals = [
             {'eId': f'rct_{position}', 'text': _text(paragraph)}
             for position, paragraph in enumerate(opening.iter('considerans.al'), start=1)
@@ -124,15 +129,34 @@ class BWBParser(Parser):
                 self._read_amending_article(child, body)
 
     def _read_amending_article(self, article: etree._Element, body: BodyBuilder) -> None:
-        """An article amending another act: the introduction names the act, each part amends it."""
+        """
+        An article amending another act: the introduction names the act, each part amends it.
+
+        An article without parts ('Artikel II. In artikel 1.1 van ... vervallen ...') is a single
+        amendment, whose own instruction may be followed by the quoted text.
+        """
         children = ChildrenBuilder()
+        blocks = [block for block in article
+                  if isinstance(block.tag, str) and block.tag not in ('kop',) + SKIP_TAGS and _text(block)]
+        if not any(block.tag in ('wijziging', 'wijzig-lid') and block.find('wat') is not None for block in blocks):
+            quoted = [{'kind': 'text', 'text': _text(block)} for block in blocks if block.tag == 'wijziging']
+            for block in blocks:
+                if block.tag == 'wijziging':
+                    continue
+                text = _text(block)
+                child = children.add(text)
+                # a transitional provision marked up as amending (stb-2010-1, Artikel X) amends nothing
+                if block.tag == 'wat' and amendment_action(text):
+                    amended_act = None
+                    if block.get('type') == 'ingetrokken':
+                        amended_act = re.sub(r'\s+(wordt|worden)\s+ingetrokken\.?$', '', text) or None
+                    child['amendment'] = {'action': amendment_action(text), 'instruction': text,
+                                          'amended_act': amended_act, 'quoted': quoted}
+                    quoted = []
+            blocks = []
         amended_act = None
-        for block in article:
-            if not isinstance(block.tag, str) or block.tag in ('kop',) + SKIP_TAGS:
-                continue
+        for block in blocks:
             text = _text(block)
-            if not text:
-                continue
             if block.tag == 'wat' and not children.children:
                 children.add(text)
                 amended_act = re.sub(r'\s+(wordt|worden)\s+als volgt gewijzigd:?$', '', text) or None
@@ -170,15 +194,17 @@ class BWBParser(Parser):
             else:
                 children.add(text)
         heading = article.find('kop')
+        num = article.get('label') or _text(heading, skip=('titel',)) or None
         body.article(
-            article.get('label') or _text(heading, skip=('titel',)) or None,
+            num,
             (_text(heading.find('titel')) or None) if heading is not None else None,
             children.children,
-            token=_number(article),
+            # an unnumbered article (the Grondwet's 'Algemene bepaling') must not take art_1 from Artikel 1
+            token=_number(article) or (None if num else 'unnumbered'),
         )
 
     def _read_conclusions(self) -> None:
-        closing = self.root.find('.//wet-besluit/wetsluiting')
+        closing = _first(self.root, './/wet-besluit/wetsluiting', './/regeling/regeling-sluiting')
         if closing is None:
             self.conclusions = None
             return
@@ -217,6 +243,15 @@ class BWBParser(Parser):
                 'heading': (_text(heading.find('titel')) or None) if heading is not None else None,
                 'children': children.children,
             })
+
+
+def _first(root: etree._Element, *paths: str) -> Optional[etree._Element]:
+    """The first element found at one of the paths."""
+    for path in paths:
+        found = root.find(path)
+        if found is not None:
+            return found
+    return None
 
 
 def _number(element: etree._Element) -> Optional[str]:

@@ -1,0 +1,36 @@
+{
+ "data": [
+  {
+   "comingIntoForce": "3000-01-01T00:00:00+01:00",
+   "expiresOn": null,
+   "version": 55
+  },
+  {
+   "comingIntoForce": "2026-10-01T00:00:00+02:00",
+   "expiresOn": "3000-01-01T00:00:00+01:00",
+   "version": 54,
+   "current": true
+  },
+  {
+   "comingIntoForce": "2026-08-26T00:00:00+02:00",
+   "expiresOn": "2026-10-01T00:00:00+02:00",
+   "version": 52
+  },
+  {
+   "comingIntoForce": "2012-01-01T00:00:00+01:00",
+   "expiresOn": "2012-01-02T00:00:00+01:00",
+   "version": 2
+  },
+  {
+   "comingIntoForce": "2011-07-27T00:00:00+02:00",
+   "expiresOn": "2012-01-01T00:00:00+01:00",
+   "version": 1
+  },
+  {
+   "comingIntoForce": "2011-07-27T00:00:00+02:00",
+   "expiresOn": "2011-07-27T00:00:00+02:00",
+   "gazetteState": true,
+   "version": 0
+  }
+ ]
+}

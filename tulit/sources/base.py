@@ -23,8 +23,9 @@ class Retrieval:
     path: str
     """File, or folder for multi-file documents, to hand to the parser."""
 
-    parser: str
-    """Format id of the parser in the parser registry."""
+    parser: Optional[str]
+    """Format id of the parser in the parser registry; None for a document tulit cannot read, such as a
+    scanned PDF without text, which ``tulit.download`` still returns."""
 
     version: str
     """'original' or 'consolidated'."""

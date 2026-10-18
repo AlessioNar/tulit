@@ -51,6 +51,7 @@ class GermanySource(Source):
         if expression is None:
             raise FileLoadError(f"{work} is not available on the federal legal information portal")
         path = client.download_expression_xml(expression)
+        client.download_attachments(path)
         version_date = re.search(r'/(\d{4}-\d{2}-\d{2})/\d+/deu', expression.get('legislationIdentifier', ''))
         return Retrieval(
             path=path,

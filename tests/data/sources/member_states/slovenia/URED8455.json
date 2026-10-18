@@ -1,0 +1,114 @@
+{
+ "data": {
+  "evidencniPodatki": {
+   "naslov": "Uredba o pomožni policiji",
+   "citat": "Uradni list RS, št. <a target=\"_blank\" href=\"https://pisrs.si/pregledPredpisa?sop&#61;2022-01-1632\" title=\"Uredba o pomožni policiji\">70/22</a>, <a target=\"_blank\" href=\"https://pisrs.si/pregledPredpisa?sop&#61;2025-01-0367\" title=\"Uredba o spremembah Uredbe o pomožni policiji\">11/25</a> in <a target=\"_blank\" href=\"https://pisrs.si/pregledPredpisa?sop&#61;2026-01-1457\" title=\"Uredba o spremembah Uredbe o pomožni policiji\">797/26</a>",
+   "zunanjiID": "URED8455",
+   "kratica": null,
+   "vrstaAkta": "Uredba",
+   "ulStLeto": "70/22",
+   "sprejeto": "2022-05-18",
+   "objavljeno": "2022-05-20",
+   "veljaOd": "2022-06-04",
+   "veljaDo": null,
+   "organSprejetja": "Vlada Republike Slovenije"
+  },
+  "datoteke": [
+   {
+    "npbVerzija": {
+     "id": 18837073,
+     "naziv": "Osnovni",
+     "komentiranjeDatumOd": null,
+     "komentiranjeDatumDo": null,
+     "datumZacetkaUporabe": null
+    },
+    "datoteke": [
+     {
+      "tip": "HTML_DOCUMENT",
+      "id": 355193883
+     },
+     {
+      "tip": "WORD_DOCUMENT_DOCX",
+      "id": 355193886
+     },
+     {
+      "tip": "PDF_DOCUMENT",
+      "id": 355193889
+     }
+    ]
+   },
+   {
+    "npbVerzija": {
+     "id": 219011957,
+     "naziv": "NPB 1",
+     "komentiranjeDatumOd": null,
+     "komentiranjeDatumDo": null,
+     "datumZacetkaUporabe": null
+    },
+    "datoteke": [
+     {
+      "tip": "HTML_DOCUMENT",
+      "id": 576757515
+     },
+     {
+      "tip": "WORD_DOCUMENT_DOCX",
+      "id": 576757518
+     },
+     {
+      "tip": "PDF_DOCUMENT",
+      "id": 576757521
+     }
+    ]
+   },
+   {
+    "npbVerzija": {
+     "id": 575952253,
+     "naziv": "NPB 2",
+     "komentiranjeDatumOd": null,
+     "komentiranjeDatumDo": null,
+     "datumZacetkaUporabe": null
+    },
+    "datoteke": [
+     {
+      "tip": "HTML_DOCUMENT",
+      "id": 576760328
+     },
+     {
+      "tip": "WORD_DOCUMENT_DOCX",
+      "id": 576760331
+     },
+     {
+      "tip": "PDF_DOCUMENT",
+      "id": 576760334
+     }
+    ]
+   }
+  ],
+  "besedilo": {
+   "npbVerzije": [
+    {
+     "id": 18837073,
+     "naziv": "Osnovni",
+     "komentiranjeDatumOd": null,
+     "komentiranjeDatumDo": null,
+     "datumZacetkaUporabe": null
+    },
+    {
+     "id": 219011957,
+     "naziv": "NPB 1",
+     "komentiranjeDatumOd": null,
+     "komentiranjeDatumDo": null,
+     "datumZacetkaUporabe": "2025-02-22"
+    },
+    {
+     "id": 575952253,
+     "naziv": "NPB 2",
+     "komentiranjeDatumOd": null,
+     "komentiranjeDatumDo": null,
+     "datumZacetkaUporabe": "2026-06-13"
+    }
+   ],
+   "besediloZunanjiUrl": null
+  }
+ }
+}

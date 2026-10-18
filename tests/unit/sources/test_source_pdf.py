@@ -127,3 +127,44 @@ class TestPDFSources:
         meta = doc['meta']
         assert (meta['version'], meta['version_date']) == ('original', '2019-08-08')
         assert meta['eli'] == 'https://data.dre.pt/eli/lei/58/2019/08/08/p'
+
+
+def _lines(texts):
+    from tulit.parser.pdf.layout import Line
+    return [Line(page=page, text=text, x0=70, x1=400, top=100 + 12 * n, size=10)
+            for n, (page, text) in enumerate(texts)]
+
+
+def test_malta_code_with_long_arrangement_and_books():
+    # Civil Code (Cap. 16), trimmed: a multi-page arrangement listing schedules, BOOK and Title headings
+    from tulit.parser.pdf.malta import MaltaPDFParser
+    lines = _lines([(0, 'CHAPTER 16'), (0, 'CIVIL CODE'), (1, 'ARRANGEMENT OF CODE'),
+                    (1, 'Title I. Of the Rights and Duties Arising from Marriage 2-66N'),
+                    (2, 'FIRST SCHEDULE'), (3, '1. The title of this Code is the Civil Code.'),
+                    (3, 'BOOK FIRST'), (3, 'OF PERSONS'), (3, 'Title I'), (3, 'OF THE RIGHTS AND DUTIES'),
+                    (3, 'Sub-title I A'), (3, 'OF GUARDIANSHIP'), (3, '2. (1) Spouses owe each other fidelity.'),
+                    (4, 'FIRST SCHEDULE'), (4, 'Fees for acts.')])
+    with patch('tulit.parser.pdf.malta.read_lines', return_value=(lines, [], None)):
+        doc = MaltaPDFParser().parse('cap_16.pdf').to_dict()
+    assert doc['preface'] == 'CIVIL CODE'
+    assert [(c['type'], c['num'], c['parent']) for c in doc['chapters']] == [
+        ('book', 'BOOK FIRST', None), ('title', 'Title I', 'div_first'), ('chapter', 'Sub-title I A', 'tit_I')]
+    assert [a['num'] for a in doc['articles']] == ['1.', '2.']
+    assert doc['articles'][1]['parent'] == 'cpt_IA'
+    assert [a['num'] for a in doc['annexes']] == ['FIRST SCHEDULE']
+
+
+def test_malta_legal_notice_title_and_formula():
+    from tulit.parser.pdf.malta import MaltaPDFParser
+    lines = _lines([(0, 'L.N. 1 of 2026'), (0, 'DEVELOPMENT PLANNING ACT'), (0, '(CAP. 552)'),
+                    (0, 'Development Planning (Procedure for Applications and their'),
+                    (0, 'Determination) (Amendment) Regulations, 2026'),
+                    (0, 'IN EXERCISE of the powers conferred by articles 84 and 85 of'),
+                    (0, 'the Development Planning Act, the Minister has made the following regulations:-'),
+                    (0, '1. The title of these regulations is the Development Planning Regulations.')])
+    with patch('tulit.parser.pdf.malta.read_lines', return_value=(lines, [], None)):
+        doc = MaltaPDFParser().parse('ln_2026_1.pdf').to_dict()
+    assert doc['preface'] == ('Development Planning (Procedure for Applications and their Determination) '
+                              '(Amendment) Regulations, 2026')
+    assert doc['preamble']['formula'].startswith('IN EXERCISE of the powers')
+    assert len(doc['articles']) == 1

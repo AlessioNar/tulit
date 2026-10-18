@@ -338,6 +338,33 @@ class TestCellarHTMLParser:
         assert len([c for c in cellar_parser.chapters if c['eId'] == 'cpt_1']) == 1
         assert not any('cpt_1.1' in c['eId'] for c in cellar_parser.chapters)
 
+    def test_get_chapters_keeps_sections_nested_in_chapters(self, cellar_parser, tmp_path):
+        """Sections carry chained ids ('cpt_III.sct_1'); their title blocks ('.tit_1') are not divisions."""
+        html_file = tmp_path / "sections.html"
+        html_file.write_text(
+            '''<html><body>
+                <div id="enc_1">
+                    <div id="cpt_III">
+                        <p class="oj-ti-section-1">CHAPTER III</p>
+                        <div id="cpt_III.tit_1" class="eli-title">Rights of the data subject</div>
+                        <div id="cpt_III.sct_1">
+                            <p class="oj-ti-section-1">Section 1</p>
+                            <div id="cpt_III.sct_1.tit_1" class="eli-title">Transparency</div>
+                            <div id="art_12"><p class="oj-ti-art">Article 12</p><p>Text.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        cellar_parser.get_root(str(html_file))
+        cellar_parser.get_body()
+        cellar_parser.get_chapters()
+
+        assert [(c['eId'], c['type'], c['parent']) for c in cellar_parser.chapters] == [
+            ('cpt_III', 'chapter', None), ('cpt_III.sct_1', 'section', 'cpt_III')]
+        assert cellar_parser.chapters[1]['heading'] == 'Transparency'
+
     def test_get_articles_success(self, parser_with_root, caplog):
         """Test get_articles extracts articles."""
         parser_with_root.get_body()
@@ -685,3 +712,20 @@ class TestCellarHTMLParser:
         assert cellar_parser.root is not None
         assert cellar_parser.body is not None
         assert cellar_parser.articles is not None
+
+    def test_publication_footer_is_not_an_attachment(self, cellar_parser, tmp_path):
+        """The ELI and ISSN lines closing an OJ piece are not attached material."""
+        html_file = tmp_path / "footer.html"
+        html_file.write_text(
+            '''<html><body>
+                <div id="anx_I"><p class="oj-doc-ti">ANNEX I</p><p class="oj-normal">Body.</p></div>
+                <hr class="oj-separator"/>
+                <p class="oj-normal">ELI: http://data.europa.eu/eli/reg/2024/1689/oj</p>
+                <p class="oj-normal">ISSN 1977-0677 (electronic edition)</p>
+            </body></html>''',
+            encoding='utf-8'
+        )
+        cellar_parser.get_root(str(html_file))
+        cellar_parser.get_annexes()
+
+        assert [a['eId'] for a in cellar_parser.annexes] == ['anx_I']

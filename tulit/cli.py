@@ -18,6 +18,11 @@ Parse a local file::
 
     tulit parse --format akn 32014L0092.akn -o 32014L0092.json
 
+Download and extract a DILA global dump (France: older texts and long consolidations)::
+
+    tulit dump legi --dir ./dila
+    tulit get LEGITEXT000006070721 -j FR --version consolidated --dump-dir ./dila
+
 Write Akoma Ntoso or a LEOS .leg package instead of legalJSON::
 
     tulit get 32024R0903 --to akn -o 32024R0903.xml
@@ -64,6 +69,7 @@ def build_parser() -> argparse.ArgumentParser:
     get.add_argument('--download-dir',
                      help='keep the downloaded source files in this directory')
     get.add_argument('--no-meta', action='store_true', help='do not attach document metadata')
+    get.add_argument('--dump-dir', help='France: directory of an extracted DILA dump (see "tulit dump")')
     _add_output_arguments(get)
 
     parse = commands.add_parser('parse', help='convert a local file or folder to legalJSON')
@@ -77,6 +83,12 @@ def build_parser() -> argparse.ArgumentParser:
     convert.add_argument('--to', required=True, choices=EXPORT_FORMATS,
                          help='akn (Akoma Ntoso 3.0 XML) or leg (LEOS package)')
     convert.add_argument('-o', '--output', help='write to this file instead of stdout')
+
+    dump = commands.add_parser('dump', help='France: download and extract a DILA global dump (JORF or LEGI)')
+    dump.add_argument('base', choices=('jorf', 'legi'),
+                      help='jorf (Journal officiel) or legi (consolidated legislation), about 1 GB each')
+    dump.add_argument('--dir', required=True, help='directory to keep the dump in (give it as dump_dir)')
+    dump.add_argument('--no-extract', action='store_true', help='only download the archive')
 
     commands.add_parser('formats', help='list the parser formats and their aliases')
     commands.add_parser('sources', help='list the supported jurisdictions and their sources')
@@ -121,6 +133,21 @@ def _write(doc: dict, output: Optional[str], indent: int, to: str = 'json') -> N
         sys.stdout.write(text + '\n')
 
 
+def _dump(base: str, directory: str, extract: bool) -> None:
+    from tulit.client.state.france_dila import DilaClient
+
+    def progress(done: int, total: Optional[int]) -> None:
+        share = f' of {total / 2 ** 20:,.0f} MB ({100 * done / total:.0f}%)' if total else ' MB'
+        sys.stderr.write(f'\rtulit: {done / 2 ** 20:,.0f}{share}')
+
+    client = DilaClient(download_dir=directory)
+    name, date = client.global_dump(base)
+    sys.stderr.write(f'tulit: downloading {name} (global {base.upper()} dump of {date})\n')
+    path = client.download_dump(base, directory, extract=extract, progress=progress)
+    sys.stderr.write(f'\ntulit: {"extracted to" if extract else "saved as"} {path}\n')
+    sys.stdout.write(path + '\n')
+
+
 def _list_formats() -> None:
     registry = get_parser_registry()
     aliases: dict = {}
@@ -153,6 +180,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if args.command == 'sources':
             _list_sources()
             return 0
+        if args.command == 'dump':
+            _dump(args.base, args.dir, not args.no_extract)
+            return 0
         if args.command == 'export':
             with open(args.path, encoding='utf-8') as f:
                 doc = json.load(f)
@@ -160,6 +190,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return 0
         if args.command == 'get':
             options = {'format': args.format} if args.format else {}
+            if args.dump_dir:
+                options['dump_dir'] = args.dump_dir
             doc = fetch(
                 args.identifier,
                 jurisdiction=args.jurisdiction,

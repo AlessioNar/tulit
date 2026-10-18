@@ -104,13 +104,25 @@ Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` e
     tulit.fetch("https://www.ejustice.just.fgov.be/eli/loi/2018/07/30/2018040581")  # Belgium, by ELI
 
 France needs no credentials: texts published since the last global DILA dump
-come from the daily Journal officiel and Légifrance archives. For older texts,
-download and extract the global JORF and LEGI dumps from
-https://echanges.dila.gouv.fr/OPENDATA/ and pass their folder:
+come from the daily Journal officiel and Légifrance archives. Older texts, and
+consolidated versions that go back further, need the global dumps of the
+Journal officiel (JORF) and of consolidated legislation (LEGI), about 1 GB each.
+``tulit dump`` downloads one (resuming an interrupted download) and extracts it;
+both can share a folder, which is then given as ``dump_dir``:
+
+.. code-block:: console
+
+    $ tulit dump jorf --dir ./dila
+    $ tulit dump legi --dir ./dila
 
 .. code-block:: python
 
     tulit.fetch("Loi n° 2018-493 du 20 juin 2018", jurisdiction="FR", dump_dir="dila")
+    tulit.fetch("LEGITEXT000006070721", jurisdiction="FR", version="consolidated",
+                date="2020-01-01", dump_dir="dila")              # the Code civil
+
+From Python, ``DilaClient(download_dir).download_dump("LEGI", "dila")`` does the
+same (``tulit.client.state.france_dila``).
 
 Some acts exist only as scanned PDFs without text: the Moniteur belge
 before June 1997 and the Cypriot Official Gazette before about 2015.

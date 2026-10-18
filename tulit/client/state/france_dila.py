@@ -29,7 +29,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 from tulit.client.client import Client
-from tulit.parser.exceptions import FileLoadError, NetworkError
+from tulit.parser.exceptions import FileLoadError, NetworkError, UnsupportedError
 
 OPENDATA = 'https://echanges.dila.gouv.fr/OPENDATA'
 USER_AGENT = 'tulit (+https://github.com/AlessioNar/tulit)'
@@ -57,6 +57,19 @@ def text_meta(root: etree._Element) -> dict[str, Optional[str]]:
     return {'id': find('META_COMMUN/ID'), 'cid': find('CID'), 'eli': find('META_COMMUN/ID_ELI'),
             'nature': find('META_COMMUN/NATURE'), 'nor': find('NOR'), 'num': find('NUM'),
             'date_texte': find('DATE_TEXTE'), 'date_publi': find('DATE_PUBLI'), 'title': find('TITREFULL')}
+
+
+def _safe_extract(tar: tarfile.TarFile, target: str) -> None:
+    """Extract an archive into ``target`` only: no absolute paths, '..', links or devices."""
+    if hasattr(tarfile, 'data_filter'):
+        tar.extractall(target, filter='data')
+        return
+    root = os.path.realpath(target)
+    for member in tar.getmembers():
+        path = os.path.realpath(os.path.join(target, member.name))
+        if not (path == root or path.startswith(root + os.sep)) or not (member.isfile() or member.isdir()):
+            raise FileLoadError(f"Unsafe member in the DILA archive: {member.name}")
+    tar.extractall(target)
 
 
 class DilaClient(Client):
@@ -157,6 +170,60 @@ class DilaClient(Client):
         raise FileLoadError(f"{identifier} is not in the Journal officiel daily archives")
 
     # Local global dump
+
+    def global_dump(self, fund: str) -> tuple[str, str]:
+        """The latest global dump of a base ('JORF' or 'LEGI'): (file name, date 'YYYY-MM-DD')."""
+        listing = self._get(f'{OPENDATA}/{fund.upper()}/').decode('utf-8', errors='replace')
+        found = sorted((m.group('date'), m.group('name')) for m in _GLOBAL.finditer(listing)
+                       if m.group('fund') == fund.lower())
+        if not found:
+            raise FileLoadError(f"DILA publishes no global {fund.upper()} dump at {OPENDATA}/{fund.upper()}/")
+        date, name = found[-1]
+        return name, f'{date[:4]}-{date[4:6]}-{date[6:]}'
+
+    def download_dump(self, fund: str, dump_dir: str, extract: bool = True,
+                      progress: Optional[Callable[[int, Optional[int]], None]] = None) -> str:
+        """
+        Download the latest global dump of a base ('JORF' or 'LEGI', about 1 GB) into ``dump_dir`` and
+        extract it there; returns the dump's root folder ('<fund>/global'), or the archive's path when
+        ``extract`` is False. A download already complete is not repeated; ``progress(done, total)`` is
+        called as the archive arrives.
+        """
+        fund = fund.upper()
+        if fund not in ('JORF', 'LEGI'):
+            raise UnsupportedError(f"Unknown DILA base '{fund}': choose JORF or LEGI")
+        name, _ = self.global_dump(fund)
+        os.makedirs(dump_dir, exist_ok=True)
+        archive = os.path.join(dump_dir, name)
+        url = f'{OPENDATA}/{fund}/{name}'
+        try:
+            total = int(self.session.head(url, timeout=60).headers.get('Content-Length') or 0) or None
+        except requests.RequestException:
+            total = None
+        if not (os.path.exists(archive) and total and os.path.getsize(archive) == total):
+            partial = f'{archive}.part'
+            done = os.path.getsize(partial) if os.path.exists(partial) else 0
+            headers = {'Range': f'bytes={done}-'} if done else {}
+            try:
+                with self.session.get(url, stream=True, timeout=600, headers=headers) as response:
+                    if response.status_code not in (200, 206):
+                        raise NetworkError(f"DILA returned HTTP {response.status_code} for {url}")
+                    if response.status_code == 200:
+                        done = 0
+                    with open(partial, 'ab' if done else 'wb') as f:
+                        for chunk in response.iter_content(chunk_size=1 << 20):
+                            f.write(chunk)
+                            done += len(chunk)
+                            if progress:
+                                progress(done, total)
+            except requests.RequestException as e:
+                raise NetworkError(f"DILA download failed for {url} (run again to resume): {e}") from e
+            os.replace(partial, archive)
+        if not extract:
+            return archive
+        with tarfile.open(archive, 'r:gz') as tar:
+            _safe_extract(tar, dump_dir)
+        return self.dump_root(dump_dir, fund)
 
     @staticmethod
     def dump_root(dump_dir: str, fund: str) -> str:

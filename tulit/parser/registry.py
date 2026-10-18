@@ -12,29 +12,29 @@ from tulit.parser.exceptions import ParserError
 class ParserRegistry:
     """
     Registry for managing parser implementations.
-    
+
     This class implements the Registry pattern to allow dynamic parser
     discovery and instantiation. Parsers can be registered with format
     identifiers and aliases, and then retrieved by format name.
-    
+
     Example
     -------
     >>> registry = ParserRegistry()
     >>> registry.register('xml', XMLParser)
     >>> parser = registry.create('xml')
     """
-    
+
     def __init__(self):
         """Initialize an empty parser registry."""
         self._parsers: Dict[str, Type] = {}
         self._aliases: Dict[str, str] = {}
         self._factory_functions: Dict[str, Callable] = {}
-    
-    def register(self, format_id: str, parser_class: Type, 
-                aliases: Optional[List[str]] = None) -> None:
+
+    def register(self, format_id: str, parser_class: Type,
+                 aliases: Optional[List[str]] = None) -> None:
         """
         Register a parser class for a given format.
-        
+
         Parameters
         ----------
         format_id : str
@@ -43,7 +43,7 @@ class ParserRegistry:
             The parser class to register
         aliases : List[str], optional
             Alternative names for this format
-        
+
         Raises
         ------
         ParserError
@@ -51,23 +51,23 @@ class ParserRegistry:
         """
         if format_id in self._parsers:
             raise ParserError(f"Parser for format '{format_id}' is already registered")
-        
+
         self._parsers[format_id] = parser_class
-        
+
         if aliases:
             for alias in aliases:
                 if alias in self._aliases:
                     raise ParserError(f"Alias '{alias}' is already registered")
                 self._aliases[alias] = format_id
-    
+
     def register_factory(self, format_id: str, factory_func: Callable,
-                        aliases: Optional[List[str]] = None) -> None:
+                         aliases: Optional[List[str]] = None) -> None:
         """
         Register a factory function for creating parser instances.
-        
+
         This is useful when parser instantiation requires special logic
         or when dealing with parser variants.
-        
+
         Parameters
         ----------
         format_id : str
@@ -79,31 +79,31 @@ class ParserRegistry:
         """
         if format_id in self._factory_functions:
             raise ParserError(f"Factory for format '{format_id}' is already registered")
-        
+
         self._factory_functions[format_id] = factory_func
-        
+
         if aliases:
             for alias in aliases:
                 if alias in self._aliases:
                     raise ParserError(f"Alias '{alias}' is already registered")
                 self._aliases[alias] = format_id
-    
+
     def create(self, format_id: str, *args, **kwargs):
         """
         Create a parser instance for the given format.
-        
+
         Parameters
         ----------
         format_id : str
             Format identifier or alias
         *args, **kwargs
             Arguments to pass to parser constructor
-        
+
         Returns
         -------
         Parser
             An instance of the requested parser
-        
+
         Raises
         ------
         ParserError
@@ -111,25 +111,25 @@ class ParserRegistry:
         """
         # Resolve aliases
         actual_format = self._aliases.get(format_id, format_id)
-        
+
         # Try factory function first
         if actual_format in self._factory_functions:
             return self._factory_functions[actual_format](*args, **kwargs)
-        
+
         # Fall back to direct class instantiation
         if actual_format not in self._parsers:
             raise ParserError(
                 f"No parser registered for format '{format_id}'. "
                 f"Available formats: {', '.join(self.list_formats())}"
             )
-        
+
         parser_class = self._parsers[actual_format]
         return parser_class(*args, **kwargs)
-    
+
     def list_formats(self) -> List[str]:
         """
         List all registered format identifiers.
-        
+
         Returns
         -------
         List[str]
@@ -138,34 +138,34 @@ class ParserRegistry:
         formats = set(self._parsers.keys())
         formats.update(self._factory_functions.keys())
         return sorted(formats)
-    
+
     def list_aliases(self) -> Dict[str, str]:
         """
         Get mapping of aliases to their primary format identifiers.
-        
+
         Returns
         -------
         Dict[str, str]
             Mapping of alias -> format_id
         """
         return self._aliases.copy()
-    
+
     def is_registered(self, format_id: str) -> bool:
         """
         Check if a format or alias is registered.
-        
+
         Parameters
         ----------
         format_id : str
             Format identifier or alias to check
-        
+
         Returns
         -------
         bool
             True if format is registered
         """
         actual_format = self._aliases.get(format_id, format_id)
-        return (actual_format in self._parsers or 
+        return (actual_format in self._parsers or
                 actual_format in self._factory_functions)
 
 
@@ -214,6 +214,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.json.esbirka import EsbirkaParser
     from tulit.parser.pdf.malta import MaltaPDFParser
     from tulit.parser.pdf.portugal import DiarioRepublicaParser
+    from tulit.parser.json.dre_consolidated import DREConsolidatedParser
     from tulit.parser.html.likumi import LikumiParser
     from tulit.parser.html.ejustice import EJusticeParser
     from tulit.parser.pdf.cyprus import CyprusGazetteParser
@@ -254,6 +255,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('cz-esbirka', EsbirkaParser, aliases=['esbirka'])
     registry.register('mt-pdf', MaltaPDFParser, aliases=['malta'])
     registry.register('pt-dre-pdf', DiarioRepublicaParser, aliases=['dre'])
+    registry.register('pt-dre-consolidated', DREConsolidatedParser, aliases=['dre-consolidated'])
     registry.register('lv-likumi', LikumiParser, aliases=['likumi'])
     registry.register('be-ejustice', EJusticeParser, aliases=['ejustice', 'justel'])
     registry.register('cy-gazette-pdf', CyprusGazetteParser, aliases=['cy-gazette'])
@@ -272,7 +274,7 @@ def get_parser_registry() -> ParserRegistry:
     Get the global parser registry instance.
 
     The parsers shipped with tulit are registered on first use.
-    
+
     Returns
     -------
     ParserRegistry
@@ -285,12 +287,12 @@ def get_parser_registry() -> ParserRegistry:
     return _global_registry
 
 
-def register_parser(format_id: str, parser_class: Type = None, 
-                   factory: Callable = None, 
-                   aliases: Optional[List[str]] = None) -> None:
+def register_parser(format_id: str, parser_class: Type = None,
+                    factory: Callable = None,
+                    aliases: Optional[List[str]] = None) -> None:
     """
     Convenience function to register a parser in the global registry.
-    
+
     Parameters
     ----------
     format_id : str
@@ -301,7 +303,7 @@ def register_parser(format_id: str, parser_class: Type = None,
         Factory function that returns a parser instance
     aliases : List[str], optional
         Alternative names for the parser
-        
+
     Example
     -------
     >>> register_parser('xml', XMLParser, aliases=['xmldoc'])
@@ -318,19 +320,19 @@ def register_parser(format_id: str, parser_class: Type = None,
 def get_parser(format_id: str, **kwargs):
     """
     Convenience function to get a parser from the global registry.
-    
+
     Parameters
     ----------
     format_id : str
         Parser format identifier or alias
     **kwargs : dict
         Arguments to pass to parser constructor/factory
-        
+
     Returns
     -------
     Parser
         Instantiated parser
-        
+
     Example
     -------
     >>> parser = get_parser('xml', schema_path='schema.xsd')

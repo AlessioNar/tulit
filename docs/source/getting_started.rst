@@ -81,12 +81,13 @@ Jogszabálytár), Ireland (Irish Statute Book and Revised Acts), Italy
 (Normattiva), Latvia (Latvijas Vēstnesis and Likumi.lv), Lithuania (Teisės
 aktų registras), Luxembourg (Legilux), Malta (Legislation Malta), the
 Netherlands (Basiswettenbestand and Staatsblad), Poland (Sejm ELI API),
-Portugal (Diário da República), Romania (Portal Legislativ), Slovakia
+Portugal (Diário da República and its Legislação Consolidada), Romania (Portal Legislativ), Slovakia
 (Slov-Lex), Slovenia (PISRS), Spain (BOE) and Sweden (Riksdagen). ``tulit
 sources`` lists them with the versions, languages and identifiers they
 accept.
 
-Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` extra:
+Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` extra
+(Portuguese consolidated texts come as JSON and do not):
 
 .. code-block:: console
 
@@ -96,6 +97,8 @@ Cyprus, Greece, Malta and Portugal publish PDF; reading them needs the ``pdf`` e
 
     tulit.fetch("Cap. 586", jurisdiction="MT")                          # consolidated Chapter
     tulit.fetch("Lei n.º 58/2019, de 8 de agosto", jurisdiction="PT")   # act as published
+    tulit.fetch("Código Penal", jurisdiction="PT", date="2021-01-01")   # consolidated code in force then
+    tulit.fetch("Lei n.º 7/2009", jurisdiction="PT", version="consolidated")  # Código do Trabalho
     tulit.fetch("IKS", jurisdiction="EE", version="consolidated", date="2024-06-01")
     tulit.fetch("BGBl. I Nr. 5/2024", jurisdiction="AT")                 # law as adopted
     tulit.fetch("ν. 4624/2019", jurisdiction="GR")                      # law as published in the ΦΕΚ

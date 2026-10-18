@@ -15,7 +15,8 @@ The formats currently supported are:
     Book XML, Riigi Teataja XML (Estonia), JORF and LEGI XML (France, DILA)
     and the Portal Legislativ XML (Romania)
 
-* **JSON Formats:** Légifrance, e-Sbírka fragments (Czechia)
+* **JSON Formats:** Légifrance, e-Sbírka fragments (Czechia), Legislação Consolidada of the
+  Diário da República (Portugal)
 
 * **PDF** (``pdf`` extra): Legislation Malta, Diário da República (Portugal),
   the Official Gazette of Cyprus and the Greek Government Gazette (ΦΕΚ)
@@ -352,6 +353,14 @@ Czech e-Sbírka Parser
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.parser.json.esbirka
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Portuguese Legislação Consolidada Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.json.dre_consolidated
      :members:
      :undoc-members:
      :show-inheritance:

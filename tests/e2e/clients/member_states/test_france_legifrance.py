@@ -5,9 +5,6 @@ Tests the complete download pipeline from Legifrance API to local storage.
 
 import pytest
 import os
-import json
-from pathlib import Path
-import logging
 
 
 @pytest.mark.e2e
@@ -19,7 +16,7 @@ class TestFranceLegifranceClient:
     def test_france_legifrance_download(self, db_paths):
         """Test downloading documents from France Legifrance."""
         sources_dir = db_paths['sources'] / 'member_states' / 'france' / 'legifrance'
-        results_dir = db_paths['results'] / 'member_states' / 'france'
+        db_paths['results'] / 'member_states' / 'france'
         logs_dir = db_paths['logs']
 
         # Check if Legifrance credentials are available

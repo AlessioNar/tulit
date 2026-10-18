@@ -4,6 +4,7 @@ from tulit.client.client import Client
 from tulit.parser.exceptions import ContentTypeError
 import os
 
+
 class MaltaLegislationClient(Client):
     """
     Client for retrieving legal documents from the Maltese ELI portal.
@@ -66,4 +67,3 @@ class MaltaLegislationClient(Client):
         except Exception as e:
             self.logger.error(f"Error downloading Malta legislation: {e}")
             return None
-

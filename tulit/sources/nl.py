@@ -72,7 +72,7 @@ class NetherlandsSource(Source):
         if version == CONSOLIDATED:
             if publication:
                 raise UnsupportedError("Consolidated law is addressed by its BWB identifier (e.g. 'BWBR0040940'), "
-                                 "not by a Staatsblad identifier")
+                                       "not by a Staatsblad identifier")
             return self._consolidated(client, bwb_id, date, version)
 
         if date:

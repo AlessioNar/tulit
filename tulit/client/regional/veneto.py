@@ -2,7 +2,7 @@ import logging
 import requests
 from tulit.client.client import Client
 from tulit.parser.exceptions import ContentTypeError
-import os
+
 
 class VenetoClient(Client):
     def __init__(self, download_dir, log_dir=None, proxies=None):

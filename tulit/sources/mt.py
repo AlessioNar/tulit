@@ -87,10 +87,10 @@ class MaltaSource(Source):
 
         if language == 'mlt' and not chapter:
             raise UnsupportedError("Acts and Legal Notices are printed in Maltese and English side by side; "
-                             "use language='eng'")
+                                   "use language='eng'")
         if version == CONSOLIDATED and not chapter:
             raise UnsupportedError("Consolidated law is addressed by its Chapter (e.g. 'Cap. 586'), "
-                             "not by the Act or Legal Notice that made it")
+                                   "not by the Act or Legal Notice that made it")
         file = self._download(client, path, language)
         if version == ORIGINAL and chapter:
             act = _enacting_act(file)

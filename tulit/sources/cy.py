@@ -66,7 +66,7 @@ class CyprusSource(Source):
                 number = normalise_number(text)
             except ValueError:
                 raise UnsupportedError(f"'{identifier}' is neither a Cypriot law number nor a Gazette issue; "
-                                 f"use {self.identifier_help}") from None
+                                       f"use {self.identifier_help}") from None
             law, part, year = re.match(r'^(\w+)\((I+)\)/(\d{4})$', number).groups()
             try:
                 path, details = client.download(law, part, year)

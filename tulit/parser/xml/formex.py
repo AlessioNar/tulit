@@ -1,7 +1,5 @@
 import os
 import re
-import json
-import argparse
 import logging
 from copy import deepcopy
 from typing import Optional, Any
@@ -74,8 +72,9 @@ _CITED_ACT_RE = re.compile(
 )
 
 from tulit.parser.xml.xml import XMLParser
-from tulit.parser.parser import LegalJSONValidator, create_formex_normalizer
+from tulit.parser.parser import create_formex_normalizer
 from tulit.parser.strategies.article_extraction import FormexArticleStrategy
+
 
 class Formex4Parser(XMLParser):
     """
@@ -97,10 +96,10 @@ class Formex4Parser(XMLParser):
         self.namespaces = {
             'fmx': 'http://formex.publications.europa.eu/schema/formex-05.56-20160701.xd'
         }
-        
+
         # Initialize article extraction strategy
         self.article_strategy = FormexArticleStrategy()
-    
+
     def get_preface(self) -> None:
         """
         Extracts the preface from the document title. Only top-level
@@ -139,12 +138,12 @@ class Formex4Parser(XMLParser):
         self.preamble = preamble
         if self.preamble is not None:
             self.preamble = self.remove_node(self.preamble, './/NOTE')
-    
+
     def get_formula(self) -> None:
         """
         Extracts the formula from the preamble. The formula is assumed to be contained within the
         PREAMBLE.INIT element.
-        
+
         Returns
         -------
         str
@@ -173,7 +172,6 @@ class Formex4Parser(XMLParser):
             self.formula = None
         return self.formula
 
-    
     def get_citations(self) -> None:
         """
         Extracts citations from the preamble. Citations are assumed to be contained within the GR.VISA
@@ -210,7 +208,7 @@ class Formex4Parser(XMLParser):
 
         self.citations = citations
         return self.citations
-    
+
     def get_recitals(self) -> None:
         """
         Extracts recitals from the preamble. Recitals are assumed to be contained within the GR.CONSID
@@ -361,7 +359,7 @@ class Formex4Parser(XMLParser):
                                          'text': text})
 
         self.recitals = recitals
-    
+
     def get_preamble_final(self) -> None:
         """
         Extracts the final preamble text from the document. The final preamble text is assumed to be
@@ -377,7 +375,7 @@ class Formex4Parser(XMLParser):
         ENACTING.TERMS element.
         """
         return super().get_body('.//ENACTING.TERMS')
-    
+
     def get_chapters(self) -> None:
         """
         Extracts chapter information from the document. Chapter numbers and headings are assumed to be
@@ -463,12 +461,11 @@ class Formex4Parser(XMLParser):
                 'parent': None,
             })
         return self.chapters
-        
-            
+
     def get_articles(self) -> None:
         """
         Extracts articles from the ENACTING.TERMS section using FormexArticleStrategy.
-        
+
         This method delegates article extraction to the strategy pattern,
         reducing code duplication and improving testability.
 
@@ -556,7 +553,7 @@ class Formex4Parser(XMLParser):
         else:
             self.logger.warning('No enacting terms XML tag has been found')
             return []
-            
+
     def _extract_elements(self, parent: etree._Element, xpath: str, children: list[dict[str, Any]]) -> None:
         """
         Helper method to extract text and metadata from elements.
@@ -572,17 +569,17 @@ class Formex4Parser(XMLParser):
         """
         elements = parent.findall(xpath)
         for index, element in enumerate(elements):
-            
+
             text = self.clean_text(element)
-            
+
             if text is not None and text != '' and text != ';':
                 child = {
                     "eId": element.get("IDENTIFIER") or element.get("ID") or element.get("NO.P") or (str(len(children)+1).zfill(3)) or str(index).zfill(3),
-                    "text": text, 
-                    "amendment": False                  
+                    "text": text,
+                    "amendment": False
                 }
                 children.append(child)
-    
+
     def _build_structure(self) -> None:
         """
         Builds the nested skeleton of the enacting terms: division nodes
@@ -693,12 +690,12 @@ class Formex4Parser(XMLParser):
                 ' | .//SUBDIV/TITLE[not(ancestor::QUOT.S)]'
             )
         return article_elem.xpath('.//ALINEA[not(ancestor::ALINEA)] | .//SUBDIV/TITLE')
-    
+
     def get_conclusions(self) -> None:
         """
         Extracts conclusions from the document. The conclusion text is assumed to be contained within the FINAL
         section of the document. The signature details are assumed to be contained within the SIGNATURE element.
-        
+
 
         Returns
         -------
@@ -739,7 +736,6 @@ class Formex4Parser(XMLParser):
                 if len(lines) > 2:
                     self.conclusions['signature']['signatories'] = lines
         return self.conclusions
-        
 
     def get_annexes(self, annex_files: list[str]) -> list[dict[str, Any]]:
         """
@@ -1367,18 +1363,17 @@ class Formex4Parser(XMLParser):
     def clean_text(self, element: etree._Element) -> str:
         # Replace QUOT.START and QUOT.END elements with proper quotes
         for sub_element in element.iter():
-            if sub_element.tag == 'QUOT.START':                    
-                sub_element.text = "'"                    
-            elif sub_element.tag == 'QUOT.END':                    
+            if sub_element.tag == 'QUOT.START':
                 sub_element.text = "'"
-                
+            elif sub_element.tag == 'QUOT.END':
+                sub_element.text = "'"
+
         # Extract text and normalize using strategy
         text = "".join(element.itertext())
         text = self.normalizer.normalize(text)
-        
+
         return text
 
-    
     def parse(self, file: str, **options) -> "Formex4Parser":
         """
         Parses a FORMEX XML document to extract its components, which are inherited from the XMLParser class.

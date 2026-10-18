@@ -3,8 +3,6 @@ Shared fixtures and configuration for end-to-end tests.
 """
 
 import pytest
-import tempfile
-import shutil
 import os
 from pathlib import Path
 import logging
@@ -12,11 +10,12 @@ import logging
 # Configure logging for tests
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
+
 @pytest.fixture(scope="session")
 def temp_db_base():
     """Create a persistent database directory structure for e2e tests."""
     db_dir = Path.cwd() / "database" / "e2e_results"
-    
+
     # Create directory structure
     dirs = [
         db_dir / 'sources' / 'eu' / 'eurlex' / 'formex',

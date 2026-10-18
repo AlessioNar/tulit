@@ -1,24 +1,22 @@
 import logging
-import argparse
 import requests
 from tulit.client.client import Client
 from SPARQLWrapper import SPARQLWrapper, JSON, POST
-import sys
 
 from importlib.resources import files
 
 
-
 logger = logging.getLogger(__name__)
 
+
 class CellarClient(Client):
-    
+
     def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.endpoint = 'http://publications.europa.eu/resource/cellar/'
         self.sparql_endpoint = "http://publications.europa.eu/webapi/rdf/sparql"
         self.logger = logging.getLogger(self.__class__.__name__)
-    
+
     def send_sparql_query(self, sparql_query, celex=None):
         """
         Sends a SPARQL query to the EU SPARQL endpoint and stores the results in a JSON file.
@@ -60,7 +58,7 @@ class CellarClient(Client):
             results = self.get_results_table(sparql_query)
 
             return results
-    
+
         except FileNotFoundError as e:
             self.logger.error(f"SPARQL query file not found: {e}")
             from tulit.parser.exceptions import FileLoadError
@@ -94,7 +92,7 @@ class CellarClient(Client):
         This function uses the SPARQLWrapper library to send the query and retrieve the results.
         The results are returned in JSON format.
 
-        """        
+        """
 
         try:
             self.logger.info("Getting results table from SPARQL query")
@@ -118,7 +116,7 @@ class CellarClient(Client):
             self.logger.error(f"Error retrieving SPARQL results: {e}")
             from tulit.parser.exceptions import SPARQLError
             raise SPARQLError(f"Failed to retrieve SPARQL results: {e}") from e
-    
+
     def fetch_content(self, url) -> requests.Response:
         """
         Send a GET request to download a file
@@ -172,16 +170,16 @@ class CellarClient(Client):
             self.logger.error(f"Error sending GET request: {e}")
             from tulit.parser.exceptions import NetworkError
             raise NetworkError(f"Network request failed: {e}") from e
-             
+
     def build_request_url(self, params):
         """
         Build the request URL based on the source and parameters.
         """
         self.logger.info(f"Building request URL with params: {params}")
         url = f"{self.endpoint}{params['cellar']}"
-        
+
         return url
-    
+
     def get_cellar_ids_from_json_results(self, results, format):
         """
         Extract CELLAR ids from a JSON dictionary.
@@ -380,27 +378,27 @@ class CellarClient(Client):
         else:
             self.logger.error('No valid format provided. Please choose one between fmx4, xhtml, or html')
             return None
-            
+
         sparql_query = sparql_query.replace("{LANG}", language)
         results = self.send_sparql_query(sparql_query, celex)
         cellar_ids = self.get_cellar_ids_from_json_results(results, format=format)
-        
+
         try:
             document_paths = []
-            
+
             for id in cellar_ids:
                 # Build the request URL
-                url = self.build_request_url(params={'cellar': id})                
+                url = self.build_request_url(params={'cellar': id})
                 # Send the GET request
                 response = self.fetch_content(url)
                 # Handle the response
                 file_path = self.handle_response(response=response, filename=id)
                 # Append the file path to the list
                 document_paths.append(file_path)
-                
+
             return document_paths
 
         except Exception as e:
             self.logger.error(f"Error processing range: {e}")
-        
+
         return document_paths

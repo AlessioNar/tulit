@@ -174,7 +174,7 @@ class FranceSource(Source):
             identifier, files = client.find_by_id(ref['id'])
         else:
             raise UnsupportedError("Without the global dump, a text is found by its JORFTEXT identifier, its title "
-                             "('Décret n° 2026-959 du 15 octobre 2026') or its ELI, which give its date")
+                                   "('Décret n° 2026-959 du 15 octobre 2026') or its ELI, which give its date")
         files = client.text_files(identifier, files)
         folder = client.save(identifier, files)
         meta = FranceSource._meta(folder)

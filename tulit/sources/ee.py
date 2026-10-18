@@ -76,7 +76,7 @@ class EstoniaSource(Source):
                 texts = self._texts_by_abbreviation(client, identifier.strip())
             else:
                 raise UnsupportedError(f"'{identifier}' is not a Riigi Teataja text id or act abbreviation; "
-                                 f"use {self.identifier_help}")
+                                       f"use {self.identifier_help}")
             version = version or CONSOLIDATED
             text = self._choose(texts, version, date, identifier)
             global_id = str(text['globaalID'])

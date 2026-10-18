@@ -5,10 +5,7 @@ Tests all supported formats: fmx4, xhtml, html with both CELEX and ELI identifie
 """
 
 import pytest
-import os
 from pathlib import Path
-import json
-import time
 
 
 @pytest.mark.e2e

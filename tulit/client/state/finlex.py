@@ -12,6 +12,7 @@ def _number_key(number):
     """'39-001' -> (39, 1), for comparing statute numbers as the API sorts them."""
     return tuple(int(part) for part in str(number).split('-') if part.isdigit())
 
+
 class FinlexClient(Client):
     """
     Client for retrieving legal documents from the Finlex Open Data REST API.
@@ -137,4 +138,3 @@ class FinlexClient(Client):
         except Exception as e:
             self.logger.error(f"Error downloading Finlex statute: {e}")
             return None
-

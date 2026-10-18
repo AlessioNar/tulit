@@ -53,7 +53,7 @@ def item_reference(identifier: str) -> tuple[str, str, str]:
             year = ('19' if int(year) >= 90 else '20') + year
         return year, str(int(match.group('issue'))), match.group('item')
     raise UnsupportedError(f"'{identifier}' is not a Narodne novine reference; use year/issue/item, "
-                     f"e.g. '2018/42/805', or 'NN 42/2018, 805'")
+                           f"e.g. '2018/42/805', or 'NN 42/2018, 805'")
 
 
 class CroatiaSource(Source):

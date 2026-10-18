@@ -38,7 +38,7 @@ def act_eli(identifier: str) -> str:
     if match:
         return f"{match.group('publisher').upper()}/{match.group('year')}/{int(match.group('position'))}"
     raise UnsupportedError(f"'{identifier}' is not a Polish act reference; use e.g. 'DU/2018/1000' "
-                     f"or 'Dz.U. 2018 poz. 1000'")
+                           f"or 'Dz.U. 2018 poz. 1000'")
 
 
 def _references(act: dict[str, Any], kind: str) -> list[str]:

@@ -1,10 +1,8 @@
 import pytest
 import os
 from tulit.parser.xml.formex import Formex4Parser
-from pathlib import Path
 from tests.conftest import locate_data_dir
-import tempfile
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import builtins
 from lxml import etree
 
@@ -303,6 +301,7 @@ def test_parse_single_annex_document_extracts_annex(tmp_path):
 
 def test_parse_non_annex_root_keeps_articles(tmp_path):
     """Test parse() keeps articles when the document root is not an annex."""
+
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX VII TO'
         self.articles = ['kept']
@@ -319,6 +318,7 @@ def test_parse_non_annex_root_keeps_articles(tmp_path):
 
 def test_parse_non_annex_preface_keeps_articles(tmp_path):
     """Test parse() keeps articles when preface is not a short annex reference."""
+
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX I contains provisions for implementation'
         self.articles = ['kept']
@@ -488,9 +488,9 @@ def test_clean_text_replaces_quot_start():
     """Test clean_text() replaces QUOT.START with single quote."""
     p = Formex4Parser()
     element = etree.fromstring('<P>before<QUOT.START/>quoted</P>')
-    
+
     text = p.clean_text(element)
-    
+
     assert "'" in text
     assert 'quoted' in text
 
@@ -499,9 +499,9 @@ def test_clean_text_replaces_quot_end():
     """Test clean_text() replaces QUOT.END with single quote."""
     p = Formex4Parser()
     element = etree.fromstring('<P>quoted<QUOT.END/>after</P>')
-    
+
     text = p.clean_text(element)
-    
+
     assert "'" in text
     assert 'after' in text
 
@@ -510,9 +510,9 @@ def test_clean_text_replaces_both_quot_tags():
     """Test clean_text() replaces both QUOT.START and QUOT.END."""
     p = Formex4Parser()
     element = etree.fromstring('<P>hello<QUOT.START/>quoted<QUOT.END/>world</P>')
-    
+
     text = p.clean_text(element)
-    
+
     assert text.count("'") >= 2
     assert 'quoted' in text
 
@@ -539,9 +539,9 @@ def test_get_conclusions_no_final_section():
     """Test get_conclusions() returns empty dict when no FINAL section."""
     p = Formex4Parser()
     p.root = etree.fromstring('<ROOT></ROOT>')
-    
+
     conclusions = p.get_conclusions()
-    
+
     assert conclusions == {}
 
 
@@ -556,9 +556,9 @@ def test_get_conclusions_final_without_signature():
       </ROOT>
     ''')
     p.root = root
-    
+
     conclusions = p.get_conclusions()
-    
+
     assert conclusions['conclusion_text'] == 'Conclusion only'
     assert 'signature' not in conclusions
 
@@ -584,9 +584,9 @@ def test_get_conclusions_with_full_signature():
       </ROOT>
     ''')
     p.root = root
-    
+
     conclusions = p.get_conclusions()
-    
+
     assert conclusions['conclusion_text'] == 'Final text'
     assert conclusions['signature']['place'] == 'Brussels,'
     assert conclusions['signature']['date'] == '2024-12-20'

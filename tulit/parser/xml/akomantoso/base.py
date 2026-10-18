@@ -10,11 +10,9 @@ import re
 
 from tulit.parser.xml.xml import XMLParser
 from tulit.parser.xml.akomantoso.extractors import (
-    AKNArticleExtractor,
-    AKNParseOrchestrator,
-    AKNContentProcessor
+    AKNArticleExtractor
 )
-from typing import Optional, Any
+from typing import Optional
 from lxml import etree
 
 
@@ -44,23 +42,23 @@ class AkomaNtosoParser(XMLParser):
     The parser handles XML documents following the Akoma Ntoso 3.0 schema for legal documents.
     It provides methods to extract various components like preface, preamble, chapters,
     articles, and conclusions.
-    
+
     Attributes
     ----------
     namespaces : dict
         Dictionary mapping namespace prefixes to their URIs.
-        
+
     Example
     -------
     >>> parser = AkomaNtosoParser()
     >>> parser.parse('document.xml')
     >>> articles = parser.get_articles()
     """
-    
+
     def __init__(self) -> None:
         """Initialize the Akoma Ntoso parser with standard namespaces."""
         super().__init__()
-                
+
         # Define the namespace mapping for Akoma Ntoso 3.0
         self.namespaces = {
             'akn': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0',
@@ -71,33 +69,33 @@ class AkomaNtosoParser(XMLParser):
             # Luxembourg and other CSD variations (for compatibility)
             'akn-csd13': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13'
         }
-    
+
     def get_preface(self) -> None:
         """
         Extract preface information from the document.
-        
+
         The preface is contained within the 'preface' element in the XML file.
         """
         return super().get_preface(
             preface_xpath='.//akn:preface',
             paragraph_xpath='.//akn:p'
         )
-    
+
     def get_preamble(self) -> None:
         """
         Extract preamble information from the document.
-        
+
         The preamble is contained within the 'preamble' element in the XML file.
         """
         return super().get_preamble(
             preamble_xpath='.//akn:preamble',
             notes_xpath='.//akn:authorialNote'
         )
-    
+
     def get_formula(self) -> None:
         """
         Extract formula from the preamble.
-        
+
         The formula is contained within the 'formula' element in the XML file.
         The formula text is extracted from all paragraphs within the formula element.
 
@@ -111,11 +109,11 @@ class AkomaNtosoParser(XMLParser):
             formula_xpath='.//akn:formula',
             paragraph_xpath='akn:p'
         )
-    
+
     def get_citations(self) -> None:
         """
         Extract citations from the preamble.
-        
+
         The citations are contained within the 'citations' element. Each citation
         is extracted from the 'citation' element, with text from all paragraphs.
         """
@@ -124,11 +122,11 @@ class AkomaNtosoParser(XMLParser):
             citation_xpath='.//akn:citation',
             extract_eId=self.extract_eId
         )
-    
+
     def get_recitals(self) -> None:
         """
         Extract recitals from the preamble.
-        
+
         Recitals are contained within the 'recitals' element. Each recital
         is extracted from the 'recital' element, with text from all paragraphs.
         """
@@ -147,26 +145,26 @@ class AkomaNtosoParser(XMLParser):
             extract_intro=extract_intro,
             extract_eId=self.extract_eId
         )
-    
+
     def get_preamble_final(self) -> None:
         """
         Extract the final part of the preamble.
-        
+
         This is typically the text after citations and recitals, contained
         in the 'preamble.final' block.
         """
         return super().get_preamble_final(
             preamble_final_xpath='.//akn:block[@name="preamble.final"]'
         )
-    
+
     def get_body(self) -> None:
         """
         Extract the body section from the document.
-        
+
         The body contains the main content including articles, chapters, etc.
         """
         return super().get_body('.//akn:body')
-    
+
     def _is_division(self, elem: etree._Element) -> bool:
         """True if elem is a division above article level (a section counts
         only when it groups articles; article-like sections are handled by
@@ -257,21 +255,21 @@ class AkomaNtosoParser(XMLParser):
                 'heading': heading,
                 'parent': self._division_parent_eid(elem),
             })
-    
+
     def extract_eId(self, element: etree._Element, index: Optional[int] = None) -> str:
         """
         Extract the element ID (eId) from an XML element.
-        
+
         The standard Akoma Ntoso format uses 'eId' attribute for element identification.
         Subclasses may override this for format-specific ID extraction.
-        
+
         Parameters
         ----------
         element : lxml.etree._Element
             XML element to extract ID from
         index : int, optional
             Index to use if no ID attribute is found
-        
+
         Returns
         -------
         str
@@ -281,7 +279,7 @@ class AkomaNtosoParser(XMLParser):
         if eid is None and index is not None:
             return f"art_{index}"
         return eid
-    
+
     # Native id attribute passed to AKNArticleExtractor; variants override
     # (AKN4EU uses xml:id, Luxembourg uses id)
     _extractor_id_attr = 'eId'
@@ -438,11 +436,11 @@ class AkomaNtosoParser(XMLParser):
                 attach(elem, node)
             elif elem in article_map:
                 attach(elem, {'eId': article_map[elem], 'type': 'article'})
-    
+
     def get_conclusions(self) -> None:
         """
         Extract conclusions from the document.
-        
+
         Conclusions contain closing text and signatures.
         """
         conclusions_section = self.root.find('.//akn:conclusions', namespaces=self.namespaces)
@@ -485,26 +483,26 @@ class AkomaNtosoParser(XMLParser):
         }
         if closing_text:
             self.conclusions = {'conclusion_text': closing_text, **self.conclusions}
-    
+
     def parse(self, file: str, **options) -> 'AkomaNtosoParser':
         """
         Parse an Akoma Ntoso document to extract all components.
-        
+
         This method validates the document against the Akoma Ntoso 3.0 schema
         and extracts all content using the orchestrator pattern.
-        
+
         Parameters
         ----------
         file : str
             Path to the Akoma Ntoso XML file to parse
         **options : dict
             Additional parsing options passed to the orchestrator
-            
+
         Returns
         -------
         AkomaNtosoParser
             Self for method chaining
-            
+
         Example
         -------
         >>> parser = AkomaNtosoParser()

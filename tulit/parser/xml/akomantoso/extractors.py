@@ -12,15 +12,15 @@ from lxml import etree
 class AKNArticleExtractor:
     """
     Extracts article information from Akoma Ntoso documents.
-    
+
     Centralizes common article extraction logic used across different
     AKN parser variants (standard, AKN4EU, German, Luxembourg).
     """
-    
+
     def __init__(self, namespaces: Dict[str, str], id_attr: str = 'eId'):
         """
         Initialize with namespace configuration.
-        
+
         Parameters
         ----------
         namespaces : dict
@@ -30,23 +30,23 @@ class AKNArticleExtractor:
         """
         self.namespaces = namespaces
         self.id_attr = id_attr
-    
+
     _WITHIN_PARAGRAPH = {'mod', 'quotedStructure', 'quotedText', 'table', 'tr', 'td', 'th'}
 
     def extract_article_metadata(self, article: etree._Element) -> Dict[str, Optional[str]]:
         """
         Extract basic article metadata (eId, num, heading).
-        
+
         Parameters
         ----------
         article : etree._Element
             The article XML element.
-        
+
         Returns
         -------
         dict
             Dictionary with 'eId', 'num', and 'heading' keys.
-        
+
         Raises
         ------
         ElementNotFoundError
@@ -60,7 +60,7 @@ class AKNArticleExtractor:
                 element_name="article",
                 xpath=f"@{self.id_attr}"
             )
-        
+
         # Article number (an article may have none: an unnumbered single provision)
         num_elem = article.find('akn:num', namespaces=self.namespaces)
         num_text = ''.join(num_elem.itertext()).strip() or None if num_elem is not None else None
@@ -71,31 +71,31 @@ class AKNArticleExtractor:
             # Fallback: use second <num> if exists
             num_elems = article.findall('akn:num', namespaces=self.namespaces)
             heading_elem = num_elems[1] if len(num_elems) > 1 else None
-        
+
         heading_text = ''.join(heading_elem.itertext()).strip() if heading_elem is not None else None
-        
+
         return {
             'eId': eId,
             'num': num_text,
             'heading': heading_text
         }
-    
+
     def extract_paragraphs_by_eid(self, node: etree._Element) -> List[Dict[str, str]]:
         """
         Extract paragraph text grouped by nearest parent eId.
-        
+
         Parameters
         ----------
         node : etree._Element
             XML node to process for text extraction.
-        
+
         Returns
         -------
         list
             List of dicts with 'eId' and 'text' keys.
         """
         elements = []
-        
+
         for p in node.findall('.//akn:p', namespaces=self.namespaces):
             # A <p> inside another (in quoted text, a table cell) is read with that one
             if any(etree.QName(a).localname == 'p' for a in p.iterancestors() if isinstance(a.tag, str)
@@ -106,7 +106,7 @@ class AKNArticleExtractor:
             while parent is not None and (self.id_attr not in parent.attrib or
                                           etree.QName(parent).localname in self._WITHIN_PARAGRAPH):
                 parent = parent.getparent()
-            
+
             if parent is not None:
                 parent_eId = parent.get(self.id_attr, '')
                 text = ''.join(p.itertext()).strip()
@@ -117,38 +117,38 @@ class AKNArticleExtractor:
                         existing['text'] += ' ' + text
                     else:
                         elements.append({'eId': parent_eId, 'text': text})
-        
+
         return elements
-    
+
     def extract_content_with_chained_intro(self, node: etree._Element) -> List[Dict[str, str]]:
         """
         Extract content as a flat list where intro and all points are combined together.
-        
+
         For each list structure, the intro (subparagraph) text and all points
         are concatenated into a single text entry.
-        
+
         Parameters
         ----------
         node : etree._Element
             XML node (article) to process.
-        
+
         Returns
         -------
         list
             Flat list of dicts with 'eId' and 'text' keys.
         """
         result = []
-        
+
         # Process each paragraph in the article
         paragraphs = node.findall('akn:paragraph', namespaces=self.namespaces)
-        
+
         for para in paragraphs:
             para_eId = para.get(self.id_attr, '')
-            
+
             # Get paragraph number
             num_elem = para.find('akn:num', namespaces=self.namespaces)
-            para_num = ''.join(num_elem.itertext()).strip() if num_elem is not None else ''
-            
+            ''.join(num_elem.itertext()).strip() if num_elem is not None else ''
+
             # Process lists within the paragraph
             lst = para.find('akn:list', namespaces=self.namespaces)
             if lst is not None:
@@ -163,7 +163,7 @@ class AKNArticleExtractor:
                     text = self._get_p_text(content)
                     if text:
                         result.append({'eId': para_eId, 'text': text})
-        
+
         # If no paragraphs found, check for direct lists
         if not paragraphs:
             lists = node.findall('akn:list', namespaces=self.namespaces)
@@ -172,64 +172,64 @@ class AKNArticleExtractor:
                 combined_text = self._combine_list_content(lst)
                 if combined_text:
                     result.append({'eId': lst_eId, 'text': combined_text})
-        
+
         return result
-    
+
     def _combine_list_content(self, lst: etree._Element) -> str:
         """
         Combine intro and all points from a list into a single text string.
-        
+
         Parameters
         ----------
         lst : etree._Element
             List element to process.
-        
+
         Returns
         -------
         str
             Combined text with intro and all points.
         """
         parts = []
-        
+
         # Get intro text from subparagraph(s)
         intros = lst.findall('akn:subparagraph', namespaces=self.namespaces)
         for intro in intros:
             intro_text = self._get_p_text(intro)
             if intro_text:
                 parts.append(intro_text)
-        
+
         # Process points
         points = lst.findall('akn:point', namespaces=self.namespaces)
         for point in points:
             point_text = self._combine_point_content(point)
             if point_text:
                 parts.append(point_text)
-        
+
         return ' '.join(parts)
-    
+
     def _combine_point_content(self, point: etree._Element) -> str:
         """
         Combine point number and content (including nested lists) into text.
-        
+
         Parameters
         ----------
         point : etree._Element
             Point element to process.
-        
+
         Returns
         -------
         str
             Combined text for this point.
         """
         parts = []
-        
+
         # Get point number
         num_elem = point.find('akn:num', namespaces=self.namespaces)
         if num_elem is not None:
             num_text = ''.join(num_elem.itertext()).strip()
             if num_text:
                 parts.append(num_text)
-        
+
         # Check for nested list
         nested_list = point.find('akn:list', namespaces=self.namespaces)
         if nested_list is not None:
@@ -243,18 +243,18 @@ class AKNArticleExtractor:
                 text = self._get_p_text(content)
                 if text:
                     parts.append(text)
-        
+
         return ' '.join(parts)
-    
+
     def _get_p_text(self, elem: etree._Element) -> str:
         """
         Get concatenated text from all <p> elements within an element.
-        
+
         Parameters
         ----------
         elem : etree._Element
             Element to extract text from.
-        
+
         Returns
         -------
         str
@@ -262,7 +262,7 @@ class AKNArticleExtractor:
         """
         if elem is None:
             return ''
-        
+
         p_elements = elem.findall('.//akn:p', namespaces=self.namespaces)
         if p_elements:
             texts = []
@@ -271,27 +271,25 @@ class AKNArticleExtractor:
                 if text:
                     texts.append(text)
             return ' '.join(texts)
-        
+
         return ''
-        
-        return elements
-    
+
     def extract_hierarchical_content(self, node: etree._Element) -> List[Dict]:
         """
         Extract content preserving the hierarchical structure of lists.
-        
+
         Properly chains intro (subparagraph) with points, and handles
         nested lists within points.
-        
+
         Structure:
         - paragraph → list → subparagraph (intro) + points
         - point → num + (content | nested list)
-        
+
         Parameters
         ----------
         node : etree._Element
             XML node (article, paragraph, etc.) to process.
-        
+
         Returns
         -------
         list
@@ -300,10 +298,10 @@ class AKNArticleExtractor:
             - For simple content: {'eId': str, 'text': str}
         """
         result = []
-        
+
         # Find direct paragraph children
         paragraphs = node.findall('akn:paragraph', namespaces=self.namespaces)
-        
+
         if paragraphs:
             for para in paragraphs:
                 para_data = self._extract_paragraph_structure(para)
@@ -319,29 +317,29 @@ class AKNArticleExtractor:
             else:
                 # Fallback to simple extraction
                 result = self.extract_paragraphs_by_eid(node)
-        
+
         return result
-    
+
     def _extract_paragraph_structure(self, para: etree._Element) -> Optional[Dict]:
         """
         Extract structure from a paragraph element.
-        
+
         Parameters
         ----------
         para : etree._Element
             Paragraph element.
-        
+
         Returns
         -------
         dict or None
             Paragraph structure with num, intro, and children.
         """
         para_eId = para.get(self.id_attr, '')
-        
+
         # Get paragraph number
         num_elem = para.find('akn:num', namespaces=self.namespaces)
         num_text = ''.join(num_elem.itertext()).strip() if num_elem is not None else None
-        
+
         # Check for list structure
         lst = para.find('akn:list', namespaces=self.namespaces)
         if lst is not None:
@@ -351,7 +349,7 @@ class AKNArticleExtractor:
                 'num': num_text,
                 'children': list_content
             }
-        
+
         # Check for direct content
         content = para.find('akn:content', namespaces=self.namespaces)
         if content is not None:
@@ -362,7 +360,7 @@ class AKNArticleExtractor:
                     'num': num_text,
                     'text': text
                 }
-        
+
         # Fallback: extract all text
         text = self._extract_element_text(para)
         if text:
@@ -371,25 +369,25 @@ class AKNArticleExtractor:
                 'num': num_text,
                 'text': text
             }
-        
+
         return None
-    
+
     def _extract_list_structure(self, lst: etree._Element) -> List[Dict]:
         """
         Extract structure from a list element with intro and points.
-        
+
         Parameters
         ----------
         lst : etree._Element
             List element.
-        
+
         Returns
         -------
         list
             List of items (intro + points).
         """
         items = []
-        
+
         # Extract intro (subparagraph with refersTo="~INP")
         intros = lst.findall('akn:subparagraph', namespaces=self.namespaces)
         for intro in intros:
@@ -401,36 +399,36 @@ class AKNArticleExtractor:
                     'text': intro_text,
                     'type': 'intro'
                 })
-        
+
         # Extract points
         points = lst.findall('akn:point', namespaces=self.namespaces)
         for point in points:
             point_data = self._extract_point_structure(point)
             if point_data:
                 items.append(point_data)
-        
+
         return items
-    
+
     def _extract_point_structure(self, point: etree._Element) -> Optional[Dict]:
         """
         Extract structure from a point element.
-        
+
         Parameters
         ----------
         point : etree._Element
             Point element.
-        
+
         Returns
         -------
         dict or None
             Point structure with num and content/children.
         """
         point_eId = point.get(self.id_attr, '')
-        
+
         # Get point number (a), (b), (i), (ii), etc.
         num_elem = point.find('akn:num', namespaces=self.namespaces)
         num_text = ''.join(num_elem.itertext()).strip() if num_elem is not None else None
-        
+
         # Check for nested list
         nested_list = point.find('akn:list', namespaces=self.namespaces)
         if nested_list is not None:
@@ -441,7 +439,7 @@ class AKNArticleExtractor:
                 'type': 'point',
                 'children': children
             }
-        
+
         # Check for direct content
         content = point.find('akn:content', namespaces=self.namespaces)
         if content is not None:
@@ -453,18 +451,18 @@ class AKNArticleExtractor:
                     'type': 'point',
                     'text': text
                 }
-        
+
         return None
-    
+
     def _extract_element_text(self, elem: etree._Element) -> str:
         """
         Extract all text from an element, excluding nested structural elements.
-        
+
         Parameters
         ----------
         elem : etree._Element
             Element to extract text from.
-        
+
         Returns
         -------
         str
@@ -479,7 +477,7 @@ class AKNArticleExtractor:
                 if text:
                     texts.append(text)
             return ' '.join(texts)
-        
+
         # Fallback to all text
         return ''.join(elem.itertext()).strip()
 
@@ -487,15 +485,15 @@ class AKNArticleExtractor:
 class AKNParseOrchestrator:
     """
     Orchestrates the parsing workflow for Akoma Ntoso documents.
-    
+
     Implements Template Method pattern to reduce parse() method duplication
     across different AKN parser variants.
     """
-    
+
     def __init__(self, parser):
         """
         Initialize with reference to parser instance.
-        
+
         Parameters
         ----------
         parser : AkomaNtosoParser
@@ -503,16 +501,16 @@ class AKNParseOrchestrator:
         """
         self.parser = parser
         self.logger = self._setup_logger()
-    
+
     def _setup_logger(self):
         """Setup logger for parse operations."""
         import logging
         return logging.getLogger(__name__)
-    
+
     def execute_parse_step(self, method_name: str, description: str) -> None:
         """
         Execute a single parsing step with error handling and logging.
-        
+
         Parameters
         ----------
         method_name : str
@@ -526,11 +524,11 @@ class AKNParseOrchestrator:
             self.logger.info(f"{description} parsed.")
         except Exception as e:
             self.logger.error(f"Error in {method_name}: {e}")
-    
+
     def execute_standard_workflow(self) -> None:
         """
         Execute standard AKN parsing workflow.
-        
+
         This is the common sequence used by most AKN parsers:
         preface -> preamble -> formula -> citations -> recitals ->
         preamble_final -> body -> chapters -> articles -> conclusions
@@ -547,7 +545,7 @@ class AKNParseOrchestrator:
             ('get_articles', 'Articles'),
             ('get_conclusions', 'Conclusions'),
         ]
-        
+
         for method_name, description in steps:
             self.execute_parse_step(method_name, description)
 
@@ -555,55 +553,55 @@ class AKNParseOrchestrator:
 class AKNContentProcessor:
     """
     Processes complex content structures in Akoma Ntoso documents.
-    
+
     Handles lists, tables, and nested structures common across
     different AKN document types.
     """
-    
+
     def __init__(self, namespaces: Dict[str, str]):
         """
         Initialize with namespace configuration.
-        
+
         Parameters
         ----------
         namespaces : dict
             XML namespace mapping for XPath queries.
         """
         self.namespaces = namespaces
-    
+
     def extract_list_items(self, parent: etree._Element) -> List[Dict[str, str]]:
         """
         Extract list items from an AKN element.
-        
+
         Parameters
         ----------
         parent : etree._Element
             Parent element containing list items.
-        
+
         Returns
         -------
         list
             List of dicts with 'eId' and 'text' keys.
         """
         items = []
-        
+
         for item in parent.findall('.//akn:item', namespaces=self.namespaces):
             eId = item.get('eId', '')
             text = ''.join(item.itertext()).strip()
             if text:
                 items.append({'eId': eId, 'text': text})
-        
+
         return items
-    
+
     def extract_table_content(self, table: etree._Element) -> Dict[str, any]:
         """
         Extract table content from an AKN table element.
-        
+
         Parameters
         ----------
         table : etree._Element
             Table element to process.
-        
+
         Returns
         -------
         dict
@@ -611,12 +609,12 @@ class AKNContentProcessor:
         """
         eId = table.get('eId', '')
         rows = []
-        
+
         for row in table.findall('.//akn:tr', namespaces=self.namespaces):
             cells = []
             for cell in row.findall('.//akn:td', namespaces=self.namespaces):
                 cells.append(''.join(cell.itertext()).strip())
             if cells:
                 rows.append(cells)
-        
+
         return {'eId': eId, 'rows': rows}

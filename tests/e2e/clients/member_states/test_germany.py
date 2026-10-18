@@ -6,9 +6,6 @@ Tests all document types: legislation, case_law, literature, eli with all suppor
 
 import pytest
 import os
-from pathlib import Path
-import json
-import time
 
 
 @pytest.mark.e2e
@@ -50,7 +47,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<!DOCTYPE html' in content or '<html' in content, "File doesn't contain HTML"
 
     @pytest.mark.slow
@@ -87,7 +84,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<?xml' in content, "File doesn't contain XML"
 
     @pytest.mark.slow
@@ -116,7 +113,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<!DOCTYPE html' in content or '<html' in content, "File doesn't contain HTML"
 
     @pytest.mark.slow
@@ -145,7 +142,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<?xml' in content, "File doesn't contain XML"
 
     @pytest.mark.slow
@@ -174,7 +171,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<!DOCTYPE html' in content or '<html' in content, "File doesn't contain HTML"
 
     @pytest.mark.slow
@@ -203,7 +200,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<?xml' in content, "File doesn't contain XML"
 
     @pytest.mark.slow
@@ -232,7 +229,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<!DOCTYPE html' in content or '<html' in content, "File doesn't contain HTML"
 
     @pytest.mark.slow
@@ -261,7 +258,7 @@ class TestGermanyClient:
         # Verify file content
         with open(result, 'r', encoding='utf-8') as f:
             content = f.read()
-            assert len(content) > 100, f"Downloaded file seems too small"
+            assert len(content) > 100, "Downloaded file seems too small"
             assert '<?xml' in content, "File doesn't contain XML"
 
     def test_germany_invalid_document_type(self, db_paths):

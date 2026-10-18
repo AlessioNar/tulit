@@ -5,6 +5,7 @@ import tempfile
 from tulit.client.regional.veneto import VenetoClient
 from tulit.parser.exceptions import ContentTypeError
 
+
 class TestVenetoClient(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.mkdtemp()
@@ -141,6 +142,7 @@ class TestVenetoClient(unittest.TestCase):
 
         self.assertIsNone(result)
         mock_get.assert_called_once_with("https://example.com")
+
 
 if __name__ == "__main__":
     unittest.main()

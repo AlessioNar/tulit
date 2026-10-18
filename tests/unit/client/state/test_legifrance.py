@@ -1,6 +1,4 @@
 import pytest
-import os
-import json
 from unittest.mock import Mock, patch, MagicMock
 from tulit.client.state.legifrance import LegifranceClient
 from tests.conftest import locate_data_dir, locate_tests_dir
@@ -115,7 +113,7 @@ class TestLegifranceClient:
         """Test code consultation without date."""
         mock_request.return_value = mock_code_response
 
-        result = client.consult_code("LEGITEXT000006070721")
+        client.consult_code("LEGITEXT000006070721")
 
         mock_request.assert_called_once_with(
             '/consult/code',
@@ -178,7 +176,7 @@ class TestLegifranceClient:
         mock_list = {"results": [], "totalResults": 0}
         mock_request.return_value = mock_list
 
-        result = client.list_loda(page_number=1, page_size=50, date="2024-01-01")
+        client.list_loda(page_number=1, page_size=50, date="2024-01-01")
 
         mock_request.assert_called_once_with(
             '/list/loda',
@@ -209,7 +207,7 @@ class TestLegifranceClient:
         mock_request.return_value = mock_search
 
         filters = {"dateDebut": "2020-01-01", "dateFin": "2024-01-01"}
-        result = client.search("test", page_number=1, page_size=10, filters=filters)
+        client.search("test", page_number=1, page_size=10, filters=filters)
 
         expected_payload = {
             'search': 'test',
@@ -258,7 +256,7 @@ class TestLegifranceClient:
         """Test code download convenience method."""
         mock_download.return_value = "/path/to/code.json"
 
-        result = client.download_code("LEGITEXT000006070721", date="2024-01-01")
+        client.download_code("LEGITEXT000006070721", date="2024-01-01")
 
         mock_download.assert_called_once()
         call_args = mock_download.call_args
@@ -271,7 +269,7 @@ class TestLegifranceClient:
         """Test dossier download convenience method."""
         mock_download.return_value = "/path/to/dossier.json"
 
-        result = client.download_dossier_legislatif("JORFTEXT123")
+        client.download_dossier_legislatif("JORFTEXT123")
 
         mock_download.assert_called_once()
         call_args = mock_download.call_args
@@ -285,7 +283,7 @@ class TestLegifranceClient:
         mock_jorf = {"textId": "JORFTEXT123", "title": "JORF test"}
         mock_request.return_value = mock_jorf
 
-        result = client.consult_jorf("JORFTEXT123")
+        client.consult_jorf("JORFTEXT123")
 
         mock_request.assert_called_once_with(
             '/consult/jorf',
@@ -298,7 +296,7 @@ class TestLegifranceClient:
         mock_toc = {"sections": [{"title": "Section 1"}]}
         mock_request.return_value = mock_toc
 
-        result = client.consult_table_matieres("LEGITEXT000006070721", date="2024-01-01")
+        client.consult_table_matieres("LEGITEXT000006070721", date="2024-01-01")
 
         mock_request.assert_called_once_with(
             '/consult/legi/tableMatieres',
@@ -311,7 +309,7 @@ class TestLegifranceClient:
         mock_list = {"results": [], "totalResults": 0}
         mock_request.return_value = mock_list
 
-        result = client.list_dossiers_legislatifs(page_number=2, page_size=25)
+        client.list_dossiers_legislatifs(page_number=2, page_size=25)
 
         mock_request.assert_called_once_with(
             '/list/dossiersLegislatifs',
@@ -324,173 +322,173 @@ class TestLegifranceClient:
         mock_list = {"results": [], "totalResults": 0}
         mock_request.return_value = mock_list
 
-        result = client.list_conventions()
+        client.list_conventions()
 
         mock_request.assert_called_once_with(
             '/list/conventions',
             {'pageNumber': 1, 'pageSize': 100}
         )
-    
+
     # ==================== NEW TESTS FOR EXPANDED FUNCTIONALITY ====================
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_legi_part(self, mock_request, client):
         """Test partial LEGI content consultation."""
         mock_response = {"textId": "LEGITEXT123", "partial": True}
         mock_request.return_value = mock_response
 
-        result = client.consult_legi_part("LEGITEXT123", searched_string="test", date="2024-01-01")
+        client.consult_legi_part("LEGITEXT123", searched_string="test", date="2024-01-01")
 
         mock_request.assert_called_once_with(
             '/consult/legiPart',
             {'textId': 'LEGITEXT123', 'searchedString': 'test', 'date': '2024-01-01'}
         )
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_article_by_cid(self, mock_request, client):
         """Test article versions by CID."""
         mock_response = {"versions": []}
         mock_request.return_value = mock_response
 
-        result = client.consult_article_by_cid("CID123")
+        client.consult_article_by_cid("CID123")
 
         mock_request.assert_called_once_with('/consult/getArticleByCid', {'cid': 'CID123'})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_tables(self, mock_request, client):
         """Test annual tables consultation."""
         mock_response = {"tables": []}
         mock_request.return_value = mock_response
 
-        result = client.consult_tables(2020, 2024)
+        client.consult_tables(2020, 2024)
 
         mock_request.assert_called_once_with(
             '/consult/getTables',
             {'startYear': 2020, 'endYear': 2024}
         )
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_list_docs_admins(self, mock_request, client):
         """Test listing administrative documents."""
         mock_response = {"results": [], "totalResults": 0}
         mock_request.return_value = mock_response
 
-        result = client.list_docs_admins(2020, 2024, page_number=1, page_size=50)
+        client.list_docs_admins(2020, 2024, page_number=1, page_size=50)
 
         mock_request.assert_called_once_with(
             '/list/docsAdmins',
             {'startYear': 2020, 'endYear': 2024, 'pageNumber': 1, 'pageSize': 50}
         )
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_list_legislatures(self, mock_request, client):
         """Test listing legislatures."""
         mock_response = {"legislatures": []}
         mock_request.return_value = mock_response
 
-        result = client.list_legislatures()
+        client.list_legislatures()
 
         mock_request.assert_called_once_with('/list/legislatures', {})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_search_canonical_version(self, mock_request, client):
         """Test canonical version search."""
         mock_response = {"version": "1.0"}
         mock_request.return_value = mock_response
 
-        result = client.search_canonical_version("LEGITEXT123", date="2024-01-01")
+        client.search_canonical_version("LEGITEXT123", date="2024-01-01")
 
         mock_request.assert_called_once_with(
             '/search/canonicalVersion',
             {'textId': 'LEGITEXT123', 'date': '2024-01-01'}
         )
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_search_nearest_version(self, mock_request, client):
         """Test nearest version search."""
         mock_response = {"nearestVersion": "2023-12-01"}
         mock_request.return_value = mock_response
 
-        result = client.search_nearest_version("LEGITEXT123", "2024-01-15")
+        client.search_nearest_version("LEGITEXT123", "2024-01-15")
 
         mock_request.assert_called_once_with(
             '/search/nearestVersion',
             {'textId': 'LEGITEXT123', 'date': '2024-01-15'}
         )
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_chrono_text_version(self, mock_request, client):
         """Test text version retrieval."""
         mock_response = {"version": "current"}
         mock_request.return_value = mock_response
 
-        result = client.chrono_text_version("CID123", date="2024-01-01")
+        client.chrono_text_version("CID123", date="2024-01-01")
 
         mock_request.assert_called_once_with(
             '/chrono/textCid',
             {'textCid': 'CID123', 'date': '2024-01-01'}
         )
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_suggest_acco(self, mock_request, client):
         """Test company agreement suggestions."""
         mock_response = {"suggestions": ["Company A", "Company B"]}
         mock_request.return_value = mock_response
 
-        result = client.suggest_acco("company")
+        client.suggest_acco("company")
 
         mock_request.assert_called_once_with('/suggest/acco', {'query': 'company'})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_misc_commit_id(self, mock_request, client):
         """Test deployment info retrieval."""
         mock_response = {"commitId": "abc123", "version": "2.4.2"}
         mock_request.return_value = mock_response
 
-        result = client.misc_commit_id()
+        client.misc_commit_id()
 
         mock_request.assert_called_once_with('/misc/commitId', {}, method='GET')
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_acco(self, mock_request, client):
         """Test company agreement consultation."""
         mock_response = {"textId": "ACCO123", "content": "Agreement content"}
         mock_request.return_value = mock_response
 
-        result = client.consult_acco("ACCO123")
+        client.consult_acco("ACCO123")
 
         mock_request.assert_called_once_with('/consult/acco', {'textId': 'ACCO123'})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_last_n_jo(self, mock_request, client):
         """Test last N official journals."""
         mock_response = {"journals": []}
         mock_request.return_value = mock_response
 
-        result = client.consult_last_n_jo(5)
+        client.consult_last_n_jo(5)
 
         mock_request.assert_called_once_with('/consult/lastNJo', {'n': 5})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_same_num_article(self, mock_request, client):
         """Test articles with same number."""
         mock_response = {"articles": []}
         mock_request.return_value = mock_response
 
-        result = client.consult_same_num_article("LEGIARTI123")
+        client.consult_same_num_article("LEGIARTI123")
 
         mock_request.assert_called_once_with('/consult/sameNumArticle', {'id': 'LEGIARTI123'})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_consult_concordance_links(self, mock_request, client):
         """Test article concordance links."""
         mock_response = {"links": []}
         mock_request.return_value = mock_response
 
-        result = client.consult_concordance_links_article("LEGIARTI123")
+        client.consult_concordance_links_article("LEGIARTI123")
 
         mock_request.assert_called_once_with('/consult/concordanceLinksArticle', {'id': 'LEGIARTI123'})
-    
+
     @patch.object(LegifranceClient, '_make_request')
     def test_ping_endpoints(self, mock_request, client):
         """Test all ping endpoints."""
@@ -500,19 +498,19 @@ class TestLegifranceClient:
         # Test consult ping
         client.consult_ping()
         assert any('/consult/ping' in str(call) for call in mock_request.call_args_list)
-        
+
         # Test list ping
         client.list_ping()
         assert any('/list/ping' in str(call) for call in mock_request.call_args_list)
-        
+
         # Test search ping
         client.search_ping()
         assert any('/search/ping' in str(call) for call in mock_request.call_args_list)
-        
+
         # Test suggest ping
         client.suggest_ping()
         assert any('/suggest/ping' in str(call) for call in mock_request.call_args_list)
-        
+
         # Test chrono ping
         client.chrono_ping()
         assert any('/chrono/ping' in str(call) for call in mock_request.call_args_list)

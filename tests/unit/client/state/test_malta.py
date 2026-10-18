@@ -4,6 +4,7 @@ import os
 from tulit.client.state.malta import MaltaLegislationClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
+
 class TestMaltaLegislationClient(unittest.TestCase):
     def setUp(self):
         data_root = locate_data_dir(__file__)
@@ -37,6 +38,7 @@ class TestMaltaLegislationClient(unittest.TestCase):
         mock_get.return_value = mock_response
         file_path = self.client.download('ln/2015/999999', lang='mlt', fmt='pdf')
         self.assertIsNone(file_path)
+
 
 if __name__ == "__main__":
     unittest.main()

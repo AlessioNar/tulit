@@ -157,7 +157,7 @@ class PortalLegislativClient(Client):
                  f'<a:SearchNumar>{escape(number)}</a:SearchNumar><a:SearchText>{escape(text)}</a:SearchText>'
                  f'<a:SearchTitlu>{escape(title)}</a:SearchTitlu></SearchModel>')
         root = self._call('Search', f'<Search xmlns="http://tempuri.org/">{model}'
-                                    f'<tokenKey>{self.token()}</tokenKey></Search>')
+                          f'<tokenKey>{self.token()}</tokenKey></Search>')
         return root.findall(f'.//{{{NS}}}Legi')
 
     def find(self, kind: str, number: str, year: str, pages: int = 10, title: str = '') -> etree._Element:

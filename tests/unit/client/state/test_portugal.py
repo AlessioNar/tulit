@@ -5,6 +5,7 @@ import tempfile
 from tulit.client.state.portugal import PortugalDREClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
+
 class TestPortugalDREClient(unittest.TestCase):
     def setUp(self):
         data_root = locate_data_dir(__file__)
@@ -67,6 +68,7 @@ class TestPortugalDREClient(unittest.TestCase):
         mock_get.return_value = mock_response
         file_path = self.client.download('journal', series='1a', number='1', year='1991', supplement=0, lang='pt', fmt='html')
         self.assertIsNone(file_path)
+
 
 if __name__ == "__main__":
     unittest.main()

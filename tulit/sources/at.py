@@ -71,13 +71,13 @@ class AustriaSource(Source):
         gazette = gazette_reference(identifier)
         if gazette is None and not _GESETZESNUMMER.match(identifier.strip()):
             raise UnsupportedError(f"'{identifier}' is not a RIS Gesetzesnummer or a BGBl. reference; "
-                             f"use {self.identifier_help}")
+                                   f"use {self.identifier_help}")
         version = version or (ORIGINAL if gazette else CONSOLIDATED)
 
         if version == CONSOLIDATED:
             if gazette:
                 raise UnsupportedError("Consolidated law is addressed by its RIS Gesetzesnummer "
-                                 "(e.g. '10001597'), not by a gazette reference")
+                                       "(e.g. '10001597'), not by a gazette reference")
             return self._consolidated(client, identifier.strip(), date, version)
 
         if date:

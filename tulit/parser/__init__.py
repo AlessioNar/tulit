@@ -21,11 +21,11 @@ Example Usage
 -------------
 >>> from tulit.parser.xml.akomantoso import AkomaNtosoParser
 >>> from tulit.parser.registry import get_parser_registry
->>> 
+>>>
 >>> # Direct instantiation
 >>> parser = AkomaNtosoParser()
 >>> parser.parse('document.xml')
->>> 
+>>>
 >>> # Via registry
 >>> registry = get_parser_registry()
 >>> parser = registry.create('akomantoso')
@@ -33,10 +33,10 @@ Example Usage
 
 # Core modules
 from tulit.parser.exceptions import (
-    ParserError, ParseError, ValidationError, 
+    ParserError, ParseError, ValidationError,
     ExtractionError, FileLoadError, NetworkError,
     AuthenticationError, RateLimitError, SPARQLError,
-    SchemaValidationError, ContentTypeError, 
+    SchemaValidationError, ContentTypeError,
     ElementNotFoundError, ParserConfigurationError
 )
 from tulit.parser.models import (

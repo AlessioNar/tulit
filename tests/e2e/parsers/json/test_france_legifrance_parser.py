@@ -7,8 +7,6 @@ Uses files downloaded by France Legifrance client e2e tests as fixtures.
 import pytest
 
 import json
-from pathlib import Path
-
 
 
 @pytest.mark.e2e
@@ -21,7 +19,6 @@ class TestFranceLegifranceParser:
         """Test parsing France Legifrance XML documents."""
         sources_dir = db_paths['sources'] / 'member_states' / 'france' / 'legifrance'
         results_dir = db_paths['results'] / 'member_states' / 'france'
-
 
         # Find downloaded XML files
         xml_files = list(sources_dir.glob('*.xml'))
@@ -53,14 +50,14 @@ class TestFranceLegifranceParser:
             assert 'num' in article, f"Article missing num: {article}"
             assert 'children' in article, f"Article missing children: {article}"
             assert isinstance(article['children'], list), f"Article children should be a list: {article}"
-            
+
             # Validate article children structure
             for child in article['children']:
                 assert 'eId' in child, f"Article child missing eId: {child}"
                 assert 'text' in child, f"Article child missing text: {child}"
                 assert isinstance(child['text'], str), f"Article child text should be string: {child}"
                 assert len(child['text'].strip()) > 0, f"Article child text should not be empty: {child}"
-            
+
             # Optional fields
             if 'heading' in article:
                 assert isinstance(article['heading'], str) or article['heading'] is None, f"Article heading should be string or None: {article}"

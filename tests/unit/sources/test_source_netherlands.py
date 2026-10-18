@@ -31,6 +31,9 @@ def test_staatsblad_id_rejects_bwb_identifiers():
     ('Aan artikel 5 wordt een lid toegevoegd, luidende:', 'add'),
     ('Artikel 7 vervalt.', 'delete'),
     ('Artikel 6a wordt als volgt gewijzigd:', 'amend'),
+    ('In artikel 7 komt de zinsnede betreffende de Instellingswet te luiden:', 'replace'),
+    ('De Wet bescherming persoonsgegevens wordt ingetrokken.', 'repeal'),
+    ('De Grondwet ondergaat de in artikel II omschreven veranderingen.', 'amend'),
 ])
 def test_amendment_action(instruction, action):
     assert amendment_action(instruction) == action

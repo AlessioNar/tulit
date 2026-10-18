@@ -56,7 +56,7 @@ def element_text(element: etree._Element, block_tags: Iterable[str],
             parts.append(node.text)
         for child in node:
             if isinstance(child.tag, str):
-                name = etree.QName(child).localname
+                name = child.tag.rsplit('}', 1)[-1]  # not QName: HTML tags like o:p are not valid XML names
                 if name not in skip:
                     walk(child)
                     tail = (child.tail or '').lstrip()
@@ -135,7 +135,7 @@ class BodyBuilder:
 
     def division(self, type_: str, num: Optional[str] = None,
                  heading: Optional[str] = None, token: Optional[str] = None,
-                 rank: Optional[int] = None) -> dict[str, Any]:
+                 rank: Optional[float] = None) -> dict[str, Any]:
         """
         Open a division ('part', 'title', 'chapter', 'section', 'subsection').
 

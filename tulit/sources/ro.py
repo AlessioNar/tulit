@@ -27,8 +27,18 @@ _CITATION = re.compile(r'^(?P<kind>.+?)\s+(?:nr\.?\s*)?(?P<number>\d+)\s*'
                        r'\s*$', re.IGNORECASE)
 
 
+_CONSTITUTION = re.compile(r'^Constitu[țţt]ia(?: Rom[âa]niei)?(?: din (?:\d{1,2} \w+ )?(?P<year>\d{4}))?$',
+                           re.IGNORECASE)
+
+
 def act_reference(identifier: str) -> tuple[str, str, str]:
-    """'Legea nr. 190/2018', 'OUG 57/2019', 'HG nr. 677 din 21 septembrie 2017' -> ('LEGE', '190', '2018')."""
+    """
+    'Legea nr. 190/2018', 'OUG 57/2019', 'HG nr. 677 din 21 septembrie 2017' -> ('LEGE', '190', '2018');
+    'Constituția' (of 1991, or 'Constituția din 1923') -> ('CONSTITUȚIE', '0', '1991').
+    """
+    constitution = _CONSTITUTION.match(' '.join(identifier.split()))
+    if constitution:
+        return 'CONSTITUȚIE', '0', constitution.group('year') or '1991'
     match = _CITATION.match(' '.join(identifier.split()))
     if match:
         for pattern, kind in KINDS:
@@ -44,7 +54,7 @@ class RomaniaSource(Source):
     versions = (ORIGINAL,)
     languages = ('ron',)
     identifier_help = ("the citation of an act: its type, number and year, e.g. 'Legea nr. 190/2018', "
-                       "'OUG nr. 57/2019', 'Ordonanța nr. 1/2016', 'HG nr. 677/2017'")
+                       "'OUG nr. 57/2019', 'Ordonanța nr. 1/2016', 'HG nr. 677/2017', or 'Constituția'")
 
     def retrieve(
         self,
@@ -60,7 +70,7 @@ class RomaniaSource(Source):
             raise ValueError("The Portal Legislativ web service gives acts as published; a date cannot be selected")
         kind, number, year = act_reference(identifier)
         client = PortalLegislativClient(download_dir=download_dir)
-        path = client.download(kind, number, year)
+        path = client.download(kind, number, year, title='Constitutia' if kind == 'CONSTITUȚIE' else '')
         found = client.metadata(path)
         return Retrieval(
             path=path,

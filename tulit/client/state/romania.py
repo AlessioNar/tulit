@@ -101,28 +101,35 @@ class PortalLegislativClient(Client):
                                     f'<tokenKey>{self.token()}</tokenKey></Search>')
         return root.findall(f'.//{{{NS}}}Legi')
 
-    def find(self, kind: str, number: str, year: str, pages: int = 10) -> etree._Element:
-        """The act of a type ('LEGE', 'HOTĂRÂRE', ...) with a number, adopted in a year."""
+    def find(self, kind: str, number: str, year: str, pages: int = 10, title: str = '') -> etree._Element:
+        """
+        The act of a type ('LEGE', 'HOTĂRÂRE', ...) with a number, adopted in a year.
+
+        An act without a number (the Constitution) has number '0' and is
+        searched by words of its ``title``.
+        """
         wanted = fold(kind)
+        numbered = number != '0'
+        dated = (rf'\bnr\.\s*{re.escape(number)}\s+din\s+[^\n]*?\b{year}\b' if numbered
+                 else rf'\bdin\s+[^\n]*?\b{year}\b')
         for page in range(pages):
-            acts = self.search(year=year, number=number, page=page)
+            acts = self.search(year=year, number=number if numbered else '', title=title, page=page)
             for act in acts:
-                title = act.findtext(f'{{{NS}}}Titlu') or ''
                 if fold(act.findtext(f'{{{NS}}}TipAct') or '') == wanted and \
-                        re.search(rf'\bnr\.\s*{re.escape(number)}\s+din\s+[^\n]*?\b{year}\b', title):
+                        re.search(dated, act.findtext(f'{{{NS}}}Titlu') or ''):
                     return act
             if len(acts) < 10:
                 break
         raise FileLoadError(f"Portal Legislativ has no {kind} nr. {number}/{year}")
 
-    def download(self, kind: str, number: str, year: str) -> str:
+    def download(self, kind: str, number: str, year: str, title: str = '') -> str:
         """Download an act and return the path of its record (metadata and text, as XML)."""
         ascii_kind = unicodedata.normalize('NFKD', fold(kind)).encode('ascii', 'ignore').decode()
         name = re.sub(r'\W+', '_', ascii_kind).lower()
         target = os.path.join(self.download_dir, 'RO', f'{name}_{number}_{year}.xml')
         if os.path.exists(target):
             return target
-        act = self.find(kind, number, year)
+        act = self.find(kind, number, year, title=title)
         os.makedirs(os.path.dirname(target), exist_ok=True)
         with open(target, 'wb') as f:
             f.write(etree.tostring(act, xml_declaration=True, encoding='utf-8'))

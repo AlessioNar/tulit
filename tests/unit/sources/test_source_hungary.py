@@ -10,6 +10,9 @@ from tulit.parser.html.njt import NJTParser, amendment_action, roman
 from tulit.sources.hu import eli_path
 
 
+PAGE = '<html><head><meta charset="utf-8"></head><body><div id="jogszab">%s</div></body></html>'
+
+
 @pytest.fixture
 def hungary(data_root):
     return data_root / 'sources' / 'member_states' / 'hungary'
@@ -103,6 +106,60 @@ class TestNJTParser:
         # The act amended is named by the decree's title
         assert added['amended_act'] == 'a bírósági végrehajtás szervezetéről szóló 16/2001. (X. 26.) IM rendelet'
 
+    def test_civil_code_books_and_section_titles(self, tmp_path):
+        # Trimmed from the Polgári Törvénykönyv (2013. évi V. törvény)
+        page = tmp_path / 'ptk.html'
+        page.write_text(PAGE % '''
+            <h1>2013. évi V. törvény</h1><h2>a Polgári Törvénykönyvről</h2>
+            <div class="konyv">MÁSODIK KÖNYV</div><div class="konyvcim">AZ EMBER MINT JOGALANY</div>
+            <div class="resz">ELSŐ RÉSZ</div><div class="reszcim">A JOGKÉPESSÉG</div>
+            <div class="focim">I. CÍM</div><div class="focimCim">A JOGKÉPESSÉG KEZDETE</div>
+            <span class="jhId" id="SZ2:1"></span><div class="szakasz">2:1. § [Jogképesség]</div>
+            <span class="jhId" id="SZ2:1@BE1"></span><div class="bekezdesNyito">(1) Minden ember jogképes.</div>
+            <span class="jhId" id="SZ2:1@BE2"></span>
+            <div class="bekezdesNyito">(2) A végrendelet hatályát veszti, ha azt visszavonják.</div>''',
+                        encoding='utf-8')
+        parser = NJTParser().parse(str(page))
+        assert [(c['eId'], c['type'], c['heading'], c['parent']) for c in parser.chapters] == [
+            ('div_2', 'book', 'AZ EMBER MINT JOGALANY', None), ('prt_1', 'part', 'A JOGKÉPESSÉG', 'div_2'),
+            ('tit_I', 'title', 'A JOGKÉPESSÉG KEZDETE', 'prt_1')]
+        article = parser.articles[0]
+        assert (article['eId'], article['num'], article['heading'], article['parent']) == (
+            'art_2-1', '2:1. §', 'Jogképesség', 'tit_I')
+        # A will that loses effect amends no legislation
+        assert [c['amendment'] for c in article['children']] == [None, None]
+
+    def test_fundamental_law(self, tmp_path):
+        # Trimmed from Magyarország Alaptörvénye
+        page = tmp_path / 'alaptv.html'
+        page.write_text(PAGE % '''
+            <h1>Magyarország Alaptörvénye</h1><h2></h2>
+            <span class="jhId" id="PR"></span><div class="szoveg"><p>Isten, áldd meg a magyart!</p></div>
+            <div class="alaptorvenyFejezet">NEMZETI HITVALLÁS</div><!-- -->
+            <div class="szoveg"><p>MI, A MAGYAR NEMZET TAGJAI</p><p>Büszkék vagyunk.</p></div>
+            <div class="alaptorvenyFejezet">ALAPVETÉS</div>
+            <span class="jhId" id="CBA"></span><div class="cikkBetu">A) cikk</div>
+            <div class="bekezdesNyito">HAZÁNK neve Magyarország.</div>
+            <div class="alaptorvenyFejezet">SZABADSÁG ÉS FELELŐSSÉG</div>
+            <span class="jhId" id="CRI"></span><div class="cikkRomai">I. cikk</div>
+            <span class="jhId" id="CRI@BE1"></span><div class="bekezdesNyito">(1) Az ember jogai.</div>
+            <span class="jhId" id="CRI@BE2"></span><div class="szelet">(2) A címer.</div>
+            <div class="alaptorvenyFejezet">AZ ÁLLAM</div><div class="alaptorvenyFejezet">Az Országgyűlés</div>
+            <span class="jhId" id="CA1"></span><div class="cikkArab">1. cikk</div>
+            <div class="bekezdesNyito">Az Országgyűlés a legfelsőbb népképviseleti szerv.</div>
+            <span class="jhId" id="RR1"></span><div class="szelet">*Mi, az Országgyűlés képviselői.</div>
+            <span class="jhId" id="RR2"></span><div class="szelet">Kövér László s. k.</div>''', encoding='utf-8')
+        parser = NJTParser().parse(str(page))
+        assert parser.preface == 'Magyarország Alaptörvénye'
+        assert [r['text'] for r in parser.recitals] == [
+            'Isten, áldd meg a magyart!', 'MI, A MAGYAR NEMZET TAGJAI', 'Büszkék vagyunk.']
+        assert [(c['eId'], c['type'], c['heading']) for c in parser.chapters] == [
+            ('prt_1', 'part', 'ALAPVETÉS'), ('prt_2', 'part', 'SZABADSÁG ÉS FELELŐSSÉG'),
+            ('prt_3', 'part', 'AZ ÁLLAM'), ('cpt_1', 'chapter', 'Az Országgyűlés')]
+        assert [(a['eId'], a['num'], a['parent'], len(a['children'])) for a in parser.articles] == [
+            ('art_A', 'A) cikk', 'prt_1', 1), ('art_I', 'I. cikk', 'prt_2', 2), ('art_1', '1. cikk', 'cpt_1', 1)]
+        assert parser.conclusions['signature'] == 'Mi, az Országgyűlés képviselői. Kövér László s. k.'
+
     def test_page_without_act(self, tmp_path):
         page = tmp_path / 'page.html'
         page.write_text('<html><body><div id="kereso">Keresés</div></body></html>')
@@ -136,6 +193,24 @@ class TestNJTClient:
         with patch.object(client.session, 'request', return_value=search):
             with pytest.raises(FileLoadError, match='no act for the ELI'):
                 client.resolve('R/2016/KORM/403')
+
+    def test_lazy_blocks_are_filled(self, tmp_path):
+        # A long act's page leaves its later sections in empty blocks the browser loads while scrolling
+        client = NJTClient(download_dir=str(tmp_path))
+        page = (PAGE % '''
+            <span class="jhId" id="SZ1"></span><div class="szakasz">1. §</div>
+            <div class="pH borderStart" data-show-order="10" data-b-n="1">
+              <div class="pH" data-b-n="1"><span id="SZ2"></span></div>
+              <div class="pH" data-b-n="1"><span id="SZ2@BE0"></span></div></div>''').encode('utf-8')
+        block = ('<!--n-->\n<span class="jhId" id="SZ2"></span><div class="szakasz">2. §</div>'
+                 '<span class="jhId" id="SZ2@BE0"></span><div class="bekezdesNyito">Második.</div>').encode('utf-8')
+        responses = [Mock(status_code=200, content=page), Mock(status_code=200, content=block)]
+        with patch.object(client.session, 'request', side_effect=responses) as request:
+            path = client.download('2013-5-00-00', 0)
+        assert request.call_args.kwargs['json'] == {'documentId': '2013-5-00-00.0', 'data': [{'start': 10}]}
+        parser = NJTParser().parse(path)
+        assert [(a['num'], [c['text'] for c in a['children']]) for a in parser.articles] == [
+            ('1. §', []), ('2. §', ['Második.'])]
 
     def test_eli_of_page(self, hungary):
         assert NJTClient.eli(str(hungary / '2005-335-20-22.55.html')) == 'https://njt.jog.gov.hu/eli/R/2005/Korm/335'

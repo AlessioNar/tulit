@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+
+- **Live corpus**: 371 real acts across the 28 jurisdictions (at least 11 each), in `tests/corpus/acts/<code>.json`, fetched live with `pytest tests/corpus --corpus [--corpus-jurisdiction XX]` and checked against counts taken from the official texts (articles, divisions, annexes, amendments, recitals, version date). A weekly workflow runs it and keeps `report.json`.
+- **`tulit.quality`**: `check(doc)` lists what a parser can get wrong while producing schema-valid legalJSON (duplicate or dangling eIds, empty paragraphs, markup or page headers left in the text, malformed amendments, missing or non-ISO metadata); `counts(doc)` gives a document's size.
+
+### Fixed
+
+- Parser and client bugs found by the corpus in every jurisdiction, each with a unit test: lost or misnested divisions, articles and annexes, false or missing amendments, quotations swallowing the rest of an act, consolidated versions chosen for the wrong date, page furniture and markup in the text, and long acts saved only in part. Highlights: Finland's consolidated texts (the current version, not the first), Hungary's long acts (the whole Civil Code), Lithuania's codes, Denmark's older acts (from the HTML), Germany's annexes, the EU's consolidated annexes and nested sections, Luxembourg's full article text, Malta's Civil Code, Belgium's consolidated Constitution, Greek ratifying laws and codes, Italian nested headings.
+
 ## [0.10.0] - 2026-10-17
 ### Added
 

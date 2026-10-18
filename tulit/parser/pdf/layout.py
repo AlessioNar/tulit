@@ -36,6 +36,12 @@ def _pdfplumber():
     return pdfplumber
 
 
+def has_text(path: str) -> bool:
+    """Whether a PDF has a text layer: a scanned page holds at most a few characters (a barcode)."""
+    with _pdfplumber().open(path) as pdf:
+        return any(len(page.chars) > 50 for page in pdf.pages[:2])
+
+
 def _lines(page, number: int) -> list[Line]:
     lines = []
     # A tight character tolerance keeps the spaces of narrowly set text
@@ -62,26 +68,45 @@ def _column(lines: list[Line]) -> tuple[float, float]:
             float(max(shared_right)) if shared_right else max(line.x1 for line in lines))
 
 
-def _two_columns(page, width: float) -> bool:
-    """Whether a page is set in two columns: next to no characters in the gutter down its middle."""
+def _gutter(page, width: float) -> Optional[float]:
+    """
+    Where a page set in two columns splits: a gutter next to no characters,
+    down its middle or, on pages whose margins differ, near it. None for a
+    page in one column.
+    """
     chars = [c for c in page.chars if c.get('text', '').strip()]
     if len(chars) < 500:
-        return False
+        return None
+    limit = len(chars) * 0.003
+
+    def crossing(x: float) -> int:
+        return sum(1 for c in chars if c['x0'] < x + 3 and c['x1'] > x - 3)
+
     middle = width / 2
-    in_gutter = sum(1 for c in chars if c['x0'] < middle + 3 and c['x1'] > middle - 3)
-    return in_gutter < len(chars) * 0.003
+    if crossing(middle) < limit:
+        return middle
+    # How many characters cover each point near the middle, from their extents
+    low, high = int(width * 0.42), int(width * 0.58)
+    cover = [0] * (high - low + 8)
+    for c in chars:
+        start, end = max(int(c['x0']) - low, 0), min(int(c['x1']) - low + 1, len(cover))
+        for x in range(start, end):
+            cover[x] += 1
+    best = min(range(3, high - low + 4), key=lambda x: (sum(cover[x - 3:x + 4]), abs(x + low - middle)))
+    return float(best + low) if crossing(best + low) < limit else None
 
 
 def _page_lines(page, number: int, width: float) -> list[Line]:
-    if not _two_columns(page, width):
+    split = _gutter(page, width)
+    if split is None:
         return _lines(page, number)
-    left = _lines(page.crop((0, 0, width / 2, page.height)), number)
-    right = _lines(page.crop((width / 2, 0, width, page.height)), number)
+    left = _lines(page.crop((0, 0, split, page.height)), number)
+    right = _lines(page.crop((split, 0, width, page.height)), number)
     # Positions are kept relative to the column
     for line in left:
-        line.width = width / 2
+        line.width = split
     for line in right:
-        line.x0, line.x1, line.width, line.column = line.x0 - width / 2, line.x1 - width / 2, width / 2, 1
+        line.x0, line.x1, line.width, line.column = line.x0 - split, line.x1 - split, width - split, 1
     return left + right
 
 
@@ -173,7 +198,9 @@ def frames(lines: list[Line]) -> dict[tuple[int, int], tuple[float, float]]:
     for key, group in grouped.items():
         lefts = Counter(round(line.x0) for line in group)
         rights = Counter(round(line.x1) for line in group)
-        left = lefts.most_common(1)[0][0]
+        # The leftmost edge shared by many lines: indented quotations can outnumber the body lines
+        most = lefts.most_common(1)[0][1]
+        left = min(x for x, count in lefts.items() if count >= min(most, max(3, most * 0.3)))
         shared = [x for x, count in rights.items() if count >= 2]
         result[key] = (float(left), float(max(shared) if shared else max(line.x1 for line in group)))
     return result

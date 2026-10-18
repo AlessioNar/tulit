@@ -26,12 +26,14 @@ from typing import Optional
 
 from lxml import etree
 
+from tulit.parser.structure import BodyBuilder
 from tulit.parser.xml.akomantoso.base import AkomaNtosoParser
 
 # Amending phrases, checked in order
 ACTIONS = (
     (r"\b(?:e'|è|sono) (?:abrogat[oaie]|soppress[oaie])\b", 'delete'),
-    (r"\b(?:e'|è|sono) (?:sostituit[oaie])\b|\bsostituire\b", 'replace'),
+    # ('sostituire' alone only when it quotes the new text: 'sostituire la Giunta' is no amendment)
+    (r"\b(?:e'|è|sono) (?:sostituit[oaie])\b|\bsostituire\b[^.;]*«", 'replace'),
     (r"\b(?:e'|è|sono) (?:inserit[oaie]|premess[oaie])\b", 'insert'),
     (r"\b(?:e'|è|sono) (?:aggiunt[oaie])\b", 'add'),
     (r"\b(?:e'|è|sono) (?:modificat[oaie])\b|\bapportate le seguenti modificazioni\b", 'amend'),
@@ -39,6 +41,17 @@ ACTIONS = (
 _ACT = re.compile(r"((?:decreto legislativo|decreto-legge|decreto del Presidente della Repubblica|legge costituzionale|"
                   r"legge|regio decreto|decreto ministeriale)\s+\d{1,2}[°º]?\s+\w+\s+\d{4},\s*n\.\s*\d+\w*)",
                   re.IGNORECASE)
+
+# The divisions of a heading Normattiva flattens into one chapter ('PARTE I ... TITOLO I ... CAPO I ...'):
+# their type and level
+_LEVELS = {'LIBRO': ('part', 0), 'PARTE': ('part', 1), 'TITOLO': ('title', 2), 'CAPO': ('chapter', 3),
+           'SEZIONE': ('section', 4), 'PARAGRAFO': ('subsection', 5)}
+_DIVISION = re.compile(r'\b(LIBRO|PARTE|TITOLO|CAPO|SEZIONE|PARAGRAFO)\s+'
+                       r'((?:\d+\.)?(?:L?X{0,3}(?:IX|IV|V?I{1,3}|V|X)|\d+|UNIC[OA]|PRELIMINARE|PRIM[OA]|'
+                       r'SECOND[OA]|TERZ[OA]|QUART[OA]|QUINT[OA]|SEST[OA]|SETTIM[OA]|OTTAV[OA]|NON[OA]|DECIM[OA])'
+                       r'(?:[ -](?:BIS|TER|QUATER))?)\b', re.IGNORECASE)
+# A list item continues the paragraph above it
+_ITEM = re.compile(r'^(?:\(\()?\s*(?:[a-z]{1,2}(?:-[a-z]+)?|\d+(?:-[a-z]+)?)\)\s')
 
 
 def amendment_action(text: str) -> Optional[str]:
@@ -120,6 +133,8 @@ class NormattivaAKNParser(AkomaNtosoParser):
 
     def get_articles(self) -> None:
         super().get_articles()
+        self._split_commi()
+        self._read_divisions()
         act: Optional[str] = None
         for article in self.articles:
             for child in article['children']:
@@ -140,6 +155,82 @@ class NormattivaAKNParser(AkomaNtosoParser):
                         'amended_act': act,
                         'quoted': [{'kind': 'text', 'text': q.strip()} for q in re.findall(r'«([^«»]+)»', text)],
                     }
+
+    def _split_commi(self) -> None:
+        """Unnumbered commi exported as lines of one paragraph (the Constitution) become paragraphs."""
+        for article in self.articles:
+            children = []
+            for child in article['children']:
+                lines = [' '.join(line.split()) for line in (child.get('text') or '').split('\n')]
+                lines = [line for line in lines if line]
+                if len(lines) < 2 or not child['eId'].startswith('unp_'):
+                    child['text'] = ' '.join(lines)
+                    children.append(child)
+                    continue
+                parts: list[str] = []
+                for line in lines:
+                    # List items, marked ('a) ...') or not (after 'per le seguenti materie:')
+                    if parts and (_ITEM.match(line) or parts[-1].endswith((':', ';'))):
+                        parts[-1] = f'{parts[-1]} {line}'
+                    else:
+                        parts.append(line)
+                children.extend({**child, 'text': part} for part in parts)
+            unnumbered = 0
+            for child in children:
+                if child['eId'].startswith('unp_'):
+                    unnumbered += 1
+                    child['eId'] = f'unp_{unnumbered}'
+            article['children'] = children
+
+    def _read_divisions(self) -> None:
+        """
+        Normattiva puts every heading that starts at the same place in one
+        chapter ('PARTE I DIRITTI E DOVERI DEI CITTADINI TITOLO I RAPPORTI
+        CIVILI', number '-'): split them into nested divisions.
+        """
+        if self.body is None:
+            return
+        chapter_tag = f'{{{self.namespaces["akn"]}}}chapter'
+        if not any(True for _ in self.body.iter(chapter_tag)):
+            return
+        body = BodyBuilder()
+        article_map = getattr(self, '_article_map', {})
+        articles = {a['eId']: a for a in self.articles}
+        for element in self.body.iter():
+            if element.tag == chapter_tag:
+                num = element.find('akn:num', namespaces=self.namespaces)
+                heading = element.find('akn:heading', namespaces=self.namespaces)
+                num_text, heading_text = _text(num) if num is not None else '', \
+                    _text(heading) if heading is not None else ''
+                if not _DIVISION.match(num_text):
+                    num_text = ''  # '-', or the title of the act
+                self._divisions(body, f'{num_text} {heading_text}')
+            elif element in article_map:
+                article = articles[article_map[element]]
+                parent = body.current_division
+                article['parent'] = parent['eId'] if parent else None
+                container = body._stack[-1][1]['children'] if body._stack else body.structure
+                container.append({'eId': article['eId'], 'type': 'article'})
+        self.chapters, self.structure = body.chapters, body.structure
+
+    @staticmethod
+    def _divisions(body: BodyBuilder, text: str) -> None:
+        # '<br>' as text, the '((...))' marks of amended text and ' - - ' fillers are not headings
+        text = ' '.join(re.sub(r'<br\s*/?>|\(\(|\)\)|(?:^|\s)-(?=\s|$)', ' ', text).split())
+        # 'Capo I' opens the heading; inside it only capitals ('... alla parte I del codice' is no division)
+        found = [m for m in _DIVISION.finditer(text) if m.start() == 0 or m.group(1).isupper()]
+        if not found:
+            if text:
+                body.division('part', None, heading=text, rank=1)
+            return
+        for n, match in enumerate(found):
+            end = found[n + 1].start() if n + 1 < len(found) else len(text)
+            heading = text[match.end():end].strip(' .-') or None
+            if n == 0 and text[:match.start()].strip():
+                heading = ' '.join(filter(None, [text[:match.start()].strip(' .-'), heading]))
+            kind, rank = _LEVELS[match.group(1).upper()]
+            body.division(kind, f'{match.group(1)} {match.group(2)}', heading=heading,
+                          token=match.group(2).replace(' ', '-'), rank=rank)
 
     def get_conclusions(self) -> None:
         conclusions = self.root.find('.//akn:conclusions', namespaces=self.namespaces)
@@ -168,7 +259,13 @@ class NormattivaAKNParser(AkomaNtosoParser):
             if body is None:
                 continue
             paragraphs = [_text(p) for p in body.iter(f'{{{self.namespaces["akn"]}}}p')]
-            children = [{'eId': f'unp_{n}', 'text': text, 'amendment': None}
-                        for n, text in enumerate((t for t in paragraphs if t), start=1)]
-            self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}', 'num': doc.get('name'), 'heading': None,
-                                 'children': children})
+            # An annexed code is exported one article per document ('Allegato A.1 ...-art. 2'): one annex
+            name = re.sub(r'-(?:art\.?\s.*|Allegato\b.*)$', '', doc.get('name') or '').strip() or None
+            if self.annexes and name and self.annexes[-1]['num'] == name:
+                children = self.annexes[-1]['children']
+            else:
+                children = []
+                self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}', 'num': name, 'heading': None,
+                                     'children': children})
+            children.extend({'eId': f'unp_{len(children) + 1}', 'text': text, 'amendment': None}
+                            for text in paragraphs if text)

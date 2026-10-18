@@ -33,8 +33,10 @@ from tulit.parser.exceptions import FileLoadError
 from tulit.parser.parser import Parser
 from tulit.parser.structure import BodyBuilder, ChildrenBuilder
 
-_TITLE = re.compile(r'^(ЗАКОН|КОДЕКС|КОНСТИТУЦИЯ|НАРЕДБА|ПОСТАНОВЛЕНИЕ|ПРАВИЛНИК|УСТРОЙСТВЕН ПРАВИЛНИК|ТАРИФА|'
-                    r'ИНСТРУКЦИЯ|РЕШЕНИЕ|УКАЗ|ПРАВИЛА|МЕТОДИКА|ЗАПОВЕД|РЕГЛАМЕНТ)\b', re.IGNORECASE)
+# Codes are titled by an adjective ('АДМИНИСТРАТИВНОПРОЦЕСУАЛЕН КОДЕКС', 'ИЗБОРЕН КОДЕКС')
+_TITLE = re.compile(r'^(ЗАКОН|(?:[\w-]+\s+)?КОДЕКС|КОНСТИТУЦИЯ|НАРЕДБА|ПОСТАНОВЛЕНИЕ|ПРАВИЛНИК|'
+                    r'УСТРОЙСТВЕН ПРАВИЛНИК|ТАРИФА|ИНСТРУКЦИЯ|РЕШЕНИЕ|УКАЗ|ПРАВИЛА|'
+                    r'МЕТОДИКА|ЗАПОВЕД|РЕГЛАМЕНТ)\b', re.IGNORECASE)
 _DECREE = re.compile(r'^УКАЗ\s+№')
 _FORMULA = re.compile(r'(ПОСТАНОВИ|РЕШИ|ПОСТАНОВЯВАМ|УКАЗВАМ|НАРЕЖДАМ)\s*:?$')
 _DIVISION = re.compile(r'^(?P<kind>Част|Глава|Раздел|Подраздел)\s+(?P<num>[IVXLC]+|\d+[а-я]?|[а-я]+)\.?'
@@ -85,6 +87,14 @@ def _token(number: str) -> str:
 def _division_token(number: str) -> str:
     return str(_ORDINALS.get(number.lower(), number.upper() if re.fullmatch(r'[ivxlc]+', number, re.I)
                              else _token(number)))
+
+
+def _next_provision(num: str, text: str) -> bool:
+    """Whether a line starts the provision after the current one ('§ 4. ...' after '§ 3.')."""
+    current = re.match(r'^(Чл\.|§)\s*(\d+)\.$', num)
+    following = re.match(r'^(Чл\.|§)\s*(\d+)\.\s', text)
+    return bool(current and following and current.group(1) == following.group(1)
+                and int(following.group(2)) == int(current.group(2)) + 1)
 
 
 def _quote_depth(depth: int, text: str) -> int:
@@ -258,6 +268,10 @@ class DarzhavenVestnikParser(Parser):
                 elif article is not None:
                     article['children'].extend(' '.join(block.rows))
                 continue
+            if quoting and article is not None and (_next_provision(article['num'], text)
+                                                    or (block.align == 'center' and _PROVISIONS.match(text))):
+                # A quotation left open (its end is in a table or a separate annex) ends at the next provision
+                quoting = 0
             if article is not None and (quoting or text.startswith('„')):
                 # Text quoted by an amendment ('„Задължения при идентификация', then 'Чл. 5. ...')
                 children = article['children']
@@ -286,7 +300,9 @@ class DarzhavenVestnikParser(Parser):
                 flush()
                 closing.append(text)
                 continue
-            if block.align == 'right' and (article is not None or body.articles or closing):
+            # A quoted annex heading ('„Приложение № 1 ...') is text of the amendment above, not a signature
+            if block.align == 'right' and (article is not None or body.articles or closing) \
+                    and not (article is not None and text.startswith(('„', '"', '“'))):
                 flush()
                 signatures.append(text)
                 continue

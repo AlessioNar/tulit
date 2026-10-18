@@ -12,8 +12,12 @@ Parser for Danish legislation in the LexDania XML schema (Retsinformation).
 - annexes (``Bilag``) become annexes, and the entry-into-force provisions
   of amending acts that consolidations reproduce (``Ikraft``) become
   attachments (att_N);
+- an amending act's §§ (``AendringCentreretParagraf``) become articles whose
+  numbered amendments (``AendringsNummer``) carry the instruction, its action
+  and the new text;
 - footnotes (``Nota``) are left out of the text.
 """
+import re
 from typing import Any, Optional
 
 from lxml import etree
@@ -27,6 +31,24 @@ BLOCK_TAGS = ('Linea', 'Exitus', 'Explicatus', 'Indentatio', 'Index', 'Stk', 'Ru
 SKIP_TAGS = ('Nota',)
 
 DIVISIONS = {'Afsnit': 'part', 'Kapitel': 'chapter', 'Afdeling': 'section'}
+
+# Amending verbs, checked in order
+ACTIONS = tuple((re.compile(pattern), action) for pattern, action in (
+    (r'\bophæves\b', 'repeal'), (r'\budgår\b', 'delete'), (r'\b(ny)?affattes\b', 'replace'),
+    (r'\bændres\b.*\btil\b', 'replace'), (r'\berstattes\b', 'replace'), (r'\bindsættes\b', 'insert'),
+    (r'\btilføjes\b', 'add'), (r'\bbliver\b.*\b(stk|nr|§)', 'renumber'),
+))
+_AMENDED_ACT = re.compile(r'(?:lov|lovbekendtgørelse|bekendtgørelse)\s+nr\.\s*\d+\s+af\s+\d{1,2}\.\s*\w+\s+\d{4}',
+                          re.IGNORECASE)
+
+
+def amendment_action(instruction: str) -> str:
+    """'§ 13, stk. 1-3, ophæves.' -> 'repeal', '§ 7 affattes således:' -> 'replace'."""
+    lowered = instruction.lower()
+    for pattern, action in ACTIONS:
+        if pattern.search(lowered):
+            return action
+    return 'amend'
 
 
 def _text(element: Optional[etree._Element], skip: tuple = ()) -> str:
@@ -83,17 +105,20 @@ class LexDaniaParser(Parser):
             if not isinstance(child.tag, str):
                 continue
             if child.tag in DIVISIONS:
-                body.division(DIVISIONS[child.tag], _label(child),
-                              heading=_text(child.find('Rubrica')) or None,
-                              token=child.get('localId') or eid_token(_label(child)))
+                label, heading = _label(child), _text(child.find('Rubrica')) or None
+                if label or heading:  # some consolidations wrap the body in an empty Afsnit
+                    body.division(DIVISIONS[child.tag], label, heading=heading,
+                                  token=child.get('localId') or eid_token(label))
                 self._walk(child, body)
             elif child.tag == 'ParagrafGruppe':
                 rubrica = child.find('Rubrica')
                 if rubrica is not None and _text(rubrica):
                     body.division('group', None, heading=_text(rubrica))
                 self._walk(child, body)
-            elif child.tag == 'Paragraf':
+            elif child.tag in ('Paragraf', 'IkraftCentreretParagraf'):
                 self._read_article(child, body)
+            elif child.tag == 'AendringCentreretParagraf':
+                self._read_amending_article(child, body)
             elif child.tag in ('Bog', 'Del'):
                 self._walk(child, body)
 
@@ -114,6 +139,27 @@ class LexDaniaParser(Parser):
                         children.add(text)
         body.article(_label(paragraph), _text(paragraph.find('Rubrica')) or None,
                      children.children, token=paragraph.get('localId'))
+
+    def _read_amending_article(self, paragraph: etree._Element, body: BodyBuilder) -> None:
+        """An amending §: its introduction naming the amended act, then one child per numbered amendment."""
+        children = ChildrenBuilder()
+        intro = _text(paragraph.find('Exitus'))
+        amended = _AMENDED_ACT.search(intro)
+        if intro:
+            children.add(intro)
+        for item in paragraph.findall('AendringsNummer'):
+            label = _label(item)
+            instruction = ' '.join(_text(d) for d in item.iter('AendringDefinition'))
+            quoted = [{'kind': 'text', 'text': text} for text in
+                      (_text(new) for new in item.iter('AendringNyTekst')) if text]
+            child = children.add(_text(item), number=eid_token(label) if label else None)
+            child['amendment'] = {
+                'action': amendment_action(instruction),
+                'instruction': instruction or _text(item),
+                'amended_act': amended.group(0) if amended else None,
+                'quoted': quoted,
+            }
+        body.article(_label(paragraph), None, children.children, token=paragraph.get('localId'))
 
     def _read_annexes(self) -> None:
         self.annexes = []
@@ -166,5 +212,3 @@ class LexDaniaParser(Parser):
         }
         if len(signatories) > 1:
             self.conclusions['signature']['signatories'] = signatories
-
-

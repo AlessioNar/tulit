@@ -32,6 +32,9 @@ def test_gazette_reference_rejects_law_numbers():
     ('3. Nach Art. 22 wird folgender Art. 22a eingefügt:', 'insert'),
     ('4. Art. 30 wird folgender Abs. 7 angefügt:', 'add'),
     ('8. In Art. 131 wird der Ausdruck „14a“ durch den Ausdruck „14b“ ersetzt.', 'replace'),
+    ('30. In § 70 erhalten die Abs. 1 und 2 die Absatzbezeichnungen „(7)“ und „(8)“.', 'renumber'),
+    ('31. Die Abs. 2 bis 7 des § 60 werden nach § 70 eingereiht.', 'renumber'),
+    ('32. § 5 wird wie folgt geändert:', 'amend'),
 ])
 def test_amendment_action(instruction, action):
     assert amendment_action(instruction) == action
@@ -74,6 +77,56 @@ class TestBGBlParser:
         children = parser.articles[0]['children']
         assert children[0]['amendment'] is None
         assert all(c['amendment']['amended_act'] == 'BGBl. I Nr. 165/1999' for c in children[1:])
+
+    def test_agreement_with_art_headings(self, tmp_path):
+        """A 15a agreement (BGBl. I Nr. 1/2025): table of contents, preamble, 'art' headings, line breaks."""
+        issue = tmp_path / 'BGBLA_2025_I_1.xml'
+        issue.write_text(
+            '<risdok xmlns="http://www.bka.gv.at"><nutzdaten><abschnitt>'
+            '<ueberschrift typ="titel">1. Vereinbarung gemäß Art. 15a B-VG</ueberschrift>'
+            '<absatz typ="promkleinlsatz">Der Nationalrat hat beschlossen:</absatz>'
+            '<absatz typ="promkleinlsatz">Der Abschluss der Vereinbarung wird genehmigt.</absatz>'
+            '<table title="Inhaltsverzeichnis"><tr><td><inhaltsvz typ="spalte">Art. 1</inhaltsvz></td></tr></table>'
+            '<ueberschrift typ="g1">PRÄAMBEL</ueberschrift>'
+            '<absatz typ="erltext">Im Interesse der Menschen.</absatz>'
+            '<ueberschrift typ="g1min">1. Abschnitt<br />Allgemeine Bestimmungen</ueberschrift>'
+            '<ueberschrift typ="art">Art. 1<br />Gegenstand</ueberschrift>'
+            '<absatz typ="abs">(1) Erster Absatz.</absatz><absatz typ="abs">(2) Zweiter Absatz.</absatz>'
+            '<ueberschrift typ="art">Art. 2<br />Geltungsbereich</ueberschrift>'
+            '<absatz typ="abs">Text.</absatz>'
+            '<ueberschrift typ="anlage">Anlage</ueberschrift>'
+            '<ueberschrift typ="erll">DSFA-A01 Kundenverwaltung</ueberschrift><absatz typ="abs">Zweck.</absatz>'
+            '</abschnitt></nutzdaten></risdok>', encoding='utf-8')
+        parser = BGBlParser().parse(str(issue))
+        assert parser.formula == 'Der Nationalrat hat beschlossen: Der Abschluss der Vereinbarung wird genehmigt.'
+        assert parser.recitals == [{'eId': 'rct_1', 'text': 'Im Interesse der Menschen.'}]
+        assert [(c['eId'], c['num'], c['heading']) for c in parser.chapters] == [
+            ('sct_1', '1. Abschnitt', 'Allgemeine Bestimmungen')]
+        assert [(a['eId'], a['num'], a['heading'], a['parent']) for a in parser.articles] == [
+            ('art_1', 'Art. 1', 'Gegenstand', 'sct_1'), ('art_2', 'Art. 2', 'Geltungsbereich', 'sct_1')]
+        assert [c['eId'] for c in parser.articles[0]['children']] == ['par_1', 'par_2']
+        annex = parser.annexes[0]
+        assert (annex['num'], annex['heading']) == ('Anlage', None)
+        assert [c['text'] for c in annex['children']] == ['DSFA-A01 Kundenverwaltung', 'Zweck.']
+
+    def test_amending_agreement_quotes_headings(self, tmp_path):
+        """BGBl. I Nr. 1/2026: quoted 'art' and 'anlage' headings belong to the amendments."""
+        issue = tmp_path / 'BGBLA_2026_I_1.xml'
+        issue.write_text(
+            '<risdok xmlns="http://www.bka.gv.at"><nutzdaten><abschnitt>'
+            '<ueberschrift typ="titel">Vereinbarung gemäß Art. 15a B-VG</ueberschrift>'
+            '<absatz typ="promkleinlsatz">Der Nationalrat hat beschlossen:</absatz>'
+            '<absatz typ="promkleinlsatz">Die Vereinbarung wird wie folgt geändert:</absatz>'
+            '<absatz typ="novao1">1. Die Überschrift des Art. II lautet:</absatz>'
+            '<ueberschrift typ="art">„Nationalparkflächen“</ueberschrift>'
+            '<absatz typ="novao1">2. Die Anlage 1 lautet:</absatz>'
+            '<ueberschrift typ="anlage">„Anlage 1</ueberschrift><absatz typ="abs">Karte.“</absatz>'
+            '</abschnitt></nutzdaten></risdok>', encoding='utf-8')
+        parser = BGBlParser().parse(str(issue))
+        assert len(parser.articles) == 1 and parser.annexes == []
+        children = parser.articles[0]['children']
+        assert [c['amendment']['action'] for c in children[1:]] == ['replace', 'replace']
+        assert children[1]['amendment']['quoted'] == [{'kind': 'text', 'text': 'Nationalparkflächen'}]
 
     def test_unreadable_file(self, tmp_path):
         broken = tmp_path / 'broken.xml'

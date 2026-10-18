@@ -15,19 +15,12 @@ from typing import Any, Optional
 from tulit.client.state.cyprus import GAZETTE, CyprusGazetteClient
 from tulit.parser.exceptions import FileLoadError
 from tulit.parser.pdf.cyprus import normalise_number
+from tulit.parser.pdf.layout import has_text as _has_text
 from tulit.sources.base import ORIGINAL, Retrieval, Source
 
 _ISSUE = re.compile(r'^(?:Αρ\.?\s*|Ε\.Ε\..*?Αρ\.\s*|issue\s+)?(?P<issue>\d{3,5})\s*(?:/|,)\s*'
                     r'(?:(?P<day>\d{1,2})[./](?P<month>\d{1,2})[./])?(?P<year>\d{4})$', re.IGNORECASE)
 _LINK = re.compile(r'^https?://www\.mof\.gov\.cy/mof/gpo/gazette\.nsf/All/[0-9A-F]{32}')
-
-
-def _has_text(path: str) -> bool:
-    """Whether a PDF has a text layer (issues before about 2015 are scanned images)."""
-    from tulit.parser.pdf.layout import _pdfplumber
-
-    with _pdfplumber().open(path) as pdf:
-        return any(len(page.chars) > 50 for page in pdf.pages[:2])
 
 
 class CyprusSource(Source):

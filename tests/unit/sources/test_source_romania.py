@@ -35,6 +35,8 @@ def romania(data_root):
     ('O.G. nr. 1/2016', ('ORDONANȚĂ', '1', '2016')),
     ('HG nr. 677 din 21 septembrie 2017', ('HOTĂRÂRE', '677', '2017')),
     ('Hotărârea Guvernului nr. 677/2017', ('HOTĂRÂRE', '677', '2017')),
+    ('Constituția', ('CONSTITUȚIE', '0', '1991')),
+    ('Constituţia din 1923', ('CONSTITUȚIE', '0', '1923')),
 ])
 def test_act_reference(identifier, expected):
     assert act_reference(identifier) == expected
@@ -130,6 +132,34 @@ class TestLegislatieParser:
         assert [c['eId'] for c in parser.articles[0]['children']] == ['par_1', 'par_2']
         assert parser.annexes[0]['num'] == 'ANEXĂ'
 
+    def test_code_layout_glitches(self, tmp_path):
+        # Trimmed from the Codul penal and Codul civil: an editor's note, the table of contents after a
+        # part's heading, an article run into a section's heading, and a heading-like paragraph ending ':'
+        sep = '\n\t\t\t\t\xa0+\xa0\n\t\t\t  '
+        text = sep.join([
+            ' LEGE nr. 286 din 17 iulie 2009  privind Codul penal     EMITENT     PARLAMENTUL       Publicat în'
+            '\xa0\n\t\t\t  MONITORUL OFICIAL nr. 510 din 24 iulie 2009     ----------  NOTĂ C.T.C.E. S.A.:  '
+            'Potrivit art. 446 din prezentul cod:  "(1) Prezentul cod intră în vigoare."  ',
+            'Partea GENERALĂ     \n\t\t\t\t  Titlul I - Legea penală  art. 1-2    ',
+            'Partea GENERALĂ     ',
+            'Articolul 1      Legalitatea   (1) Legea penală prevede faptele.    (2) Dacă s-au stabilit mai multe '
+            'pedepse de acelaşi conţinut:  \xa0...\xa0    a) se aplică una.  ',
+            'Capitolul VI   Autorul',
+            'Articolul 2      Autorul   Autor este persoana care săvârșește fapta, „direct“.  ',
+            'Secţiunea a 3-a   Cecul   ART 3  Legea aplicabilă  Legea statului unde cecul este plătibil.   ',
+        ])
+        record = tmp_path / 'code.xml'
+        record.write_text(f'<a:Legi xmlns:a="{NS}"><a:Text>{text}</a:Text></a:Legi>', encoding='utf-8')
+        parser = LegislatieParser().parse(str(record))
+        assert parser.recitals == []
+        assert [(c['num'], c['heading'], c['parent']) for c in parser.chapters] == [
+            ('Partea GENERALĂ', None, None), ('Capitolul VI', 'Autorul', 'prt_GENERALĂ'),
+            ('Secţiunea a 3-a', 'Cecul', 'cpt_VI')]
+        assert [(a['num'], a['heading'], a['parent']) for a in parser.articles] == [
+            ('Articolul 1', 'Legalitatea', 'prt_GENERALĂ'), ('Articolul 2', 'Autorul', 'cpt_VI'),
+            ('Articolul 3', 'Legea aplicabilă', 'sct_3')]
+        assert parser.articles[2]['children'][0]['text'] == 'Legea statului unde cecul este plătibil.'
+
     def test_record_without_text(self, tmp_path):
         record = tmp_path / 'empty.xml'
         record.write_text(f'<a:Legi xmlns:a="{NS}"><a:Text></a:Text></a:Legi>')
@@ -174,7 +204,7 @@ class TestRomaniaSource:
         with patch.object(PortalLegislativClient, 'download',
                           return_value=str(romania / 'lege_190_2018.xml')) as download:
             doc = tulit.fetch('Legea nr. 190/2018', jurisdiction='RO', download_dir=str(tmp_path))
-        download.assert_called_once_with('LEGE', '190', '2018')
+        download.assert_called_once_with('LEGE', '190', '2018', title='')
         meta = doc['meta']
         assert (meta['jurisdiction'], meta['version'], meta['language'], meta['version_date']) == (
             'RO', 'original', 'ron', '2018-07-18')

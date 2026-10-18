@@ -12,6 +12,10 @@ and in each of its time states (időállapot), addressed by its NJT id
 
 ELI (https://njt.jog.gov.hu/eli/TV/2011/112[/kozlony|/YYYY-MM-DD]) redirects
 to the matching NJT page, so citations are resolved through it.
+
+The page of a long act holds only its beginning: the rest is in empty
+blocks (``div.pH.borderStart``) that the browser fills while scrolling,
+from /ajax/njtGetBlock.json; the client fills them before saving the page.
 """
 import datetime
 import os
@@ -19,6 +23,7 @@ import re
 from typing import Any, Optional
 
 import requests
+from lxml import etree, html
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -28,6 +33,7 @@ from tulit.parser.exceptions import FileLoadError, NetworkError
 NJT = 'https://njt.jog.gov.hu'
 USER_AGENT = 'tulit (+https://github.com/AlessioNar/tulit)'
 _DOCUMENT = re.compile(r'/jogszabaly/(?P<id>\d{4}-\d+-\d{2}-\d{2})(?:\.(?P<version>\d+))?')
+BLOCKS_PER_REQUEST = 10
 UNKNOWN = '3000-01-01'
 """NJT's date for a time state whose coming into force is not yet known."""
 
@@ -92,10 +98,39 @@ class NJTClient(Client):
         response = self._request('GET', f'{NJT}/jogszabaly/{document_id}.{version}')
         if b'id="jogszab"' not in response.content:
             raise FileLoadError(f"The Nemzeti Jogszabálytár has no text for {document_id}.{version}")
+        content = response.content
+        if b'borderStart' in content:
+            content = self._fill_blocks(content, f'{document_id}.{version}')
         os.makedirs(os.path.dirname(target), exist_ok=True)
         with open(target, 'wb') as f:
-            f.write(response.content)
+            f.write(content)
         return target
+
+    def _fill_blocks(self, content: bytes, document: str) -> bytes:
+        """The page with its empty blocks filled with their text."""
+        root = html.fromstring(content, parser=html.HTMLParser(encoding='utf-8'))
+        starts = root.xpath('//div[contains(concat(" ", @class, " "), " borderStart ")]')
+        for first in range(0, len(starts), BLOCKS_PER_REQUEST):
+            batch = starts[first:first + BLOCKS_PER_REQUEST]
+            data = [{'start': int(start.get('data-show-order')),
+                     **({'last': int(start.get('data-last-show-order'))} if start.get('data-last-show-order') else {})}
+                    for start in batch]
+            response = self._request('POST', f'{NJT}/ajax/njtGetBlock.json',
+                                     json={'documentId': document, 'data': data})
+            fragments = html.fragments_fromstring(response.content.decode('utf-8'))
+            expected = [span.get('id') for start in batch for span in start.xpath('.//span[@id]')]
+            found = [element.get('id') for element in fragments
+                     if isinstance(element, etree._Element) and 'jhId' in (element.get('class') or '')]
+            if found != expected:
+                raise FileLoadError(f"The Nemzeti Jogszabálytár returned other units than expected for {document}")
+            # The text of all the blocks goes where the first one is
+            parent = batch[0].getparent()
+            position = parent.index(batch[0])
+            for offset, element in enumerate(f for f in fragments if not isinstance(f, str)):
+                parent.insert(position + offset, element)
+            for start in batch:
+                start.getparent().remove(start)
+        return etree.tostring(root.getroottree(), encoding='utf-8', method='html')
 
     @staticmethod
     def eli(path: str) -> Optional[str]:

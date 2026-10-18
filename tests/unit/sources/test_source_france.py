@@ -10,7 +10,7 @@ import tulit
 from tulit.client.state.france_dila import DilaClient, id_path
 from tulit.parser.exceptions import FileLoadError
 from tulit.parser.xml.dila import DilaParser, amendment_action
-from tulit.sources.fr import reference
+from tulit.sources.fr import _matcher, reference
 
 DECREE = 'JORFTEXT000054988304'
 
@@ -55,6 +55,13 @@ def test_reference_rejects_other_text():
         reference('the data protection law')
 
 
+def test_matcher_accepts_an_open_date():
+    # loi 2025-1251: the DILA gives it no date (2999-01-01)
+    match = _matcher(reference('LOI n° 2025-1251 du 22 décembre 2025'))
+    assert match({'num': '2025-1251', 'date_texte': '2999-01-01'})
+    assert not match({'num': '2025-1251', 'date_texte': '2024-01-01'})
+
+
 def test_id_path():
     assert id_path('JORFTEXT000054988304') == 'JORF/TEXT/00/00/54/98/83/JORFTEXT000054988304'
 
@@ -91,7 +98,8 @@ class TestDilaParser:
         amendment = parser.articles[0]['children'][0]['amendment']
         assert amendment['action'] == 'amend'
         assert amendment['amended_act'] == 'code général des collectivités territoriales'
-        assert len(amendment['quoted']) == 20
+        # the table's cells, without the lone guillemet opening it
+        assert len(amendment['quoted']) == 19 and all(q['text'] for q in amendment['quoted'])
 
     def test_consolidated_on_a_date(self, france):
         assert len(DilaParser(date='2026-10-17').parse(str(france / f'{DECREE}_LEGI')).articles) == 10
@@ -101,6 +109,37 @@ class TestDilaParser:
     def test_folder_without_text(self, tmp_path):
         with pytest.raises(FileLoadError, match='no DILA text'):
             DilaParser().parse(str(tmp_path))
+
+    def test_parts_annex_and_closing_formula(self, tmp_path):
+        # loi 2025-1403 (LFSS 2026): 'PREMIÈRE PARTIE', an annex printed as unnumbered articles, and the
+        # closing formula printed in the last article
+        files = {
+            'version': '<TEXTE_VERSION><META><META_COMMUN><ID>JORFTEXT1</ID></META_COMMUN></META><TITREFULL>LOI n° '
+                       '2025-1403</TITREFULL><SIGNATAIRES><CONTENU><p>Fait le 30 décembre 2025.</p></CONTENU>'
+                       '</SIGNATAIRES></TEXTE_VERSION>',
+            'struct': '<TEXTELR><META><META_COMMUN><ID>JORFTEXT1</ID></META_COMMUN></META><STRUCT>'
+                      '<LIEN_SECTION_TA id="S1">PREMIÈRE PARTIE : DISPOSITIONS RELATIVES AUX RECETTES</LIEN_SECTION_TA>'
+                      '<LIEN_ART id="A3" num=""/><LIEN_ART id="A4" num=""/></STRUCT></TEXTELR>',
+            'section': '<SECTION_TA><ID>S1</ID><STRUCTURE_TA><LIEN_ART id="A1" num="1"/><LIEN_ART id="A2" num="2"/>'
+                       '</STRUCTURE_TA></SECTION_TA>',
+        }
+        articles = {'A1': 'I. - Le code est ainsi modifié :', 'A2': "L'objectif est fixé à 43,6 milliards d'euros."
+                    "</p><p>La présente loi entrera en vigueur immédiatement et sera exécutée comme loi de l'Etat.",
+                    'A3': 'ANNEXE</p><p>RAPPORT DÉCRIVANT LES PRÉVISIONS</p><p>I. - Situation',
+                    'A4': 'II. - Prévisions'}
+        for name, content in files.items():
+            (tmp_path / f'{name}.xml').write_text(content, encoding='utf-8')
+        for ident, text in articles.items():
+            (tmp_path / f'{ident}.xml').write_text(
+                f'<ARTICLE><META><META_COMMUN><ID>{ident}</ID></META_COMMUN></META><BLOC_TEXTUEL><CONTENU><p>{text}'
+                '</p></CONTENU></BLOC_TEXTUEL></ARTICLE>', encoding='utf-8')
+        parser = DilaParser().parse(str(tmp_path))
+        assert [(c['eId'], c['type'], c['num']) for c in parser.chapters] == [('prt_1', 'part', 'PREMIÈRE PARTIE')]
+        assert [a['num'] for a in parser.articles] == ['Article 1', 'Article 2']
+        assert [c['text'] for c in parser.articles[1]['children']] == ["L'objectif est fixé à 43,6 milliards d'euros."]
+        assert parser.conclusions['conclusion_text'].startswith('La présente loi entrera en vigueur')
+        assert [(a['num'], a['heading']) for a in parser.annexes] == [('ANNEXE', 'RAPPORT DÉCRIVANT LES PRÉVISIONS')]
+        assert [c['text'] for c in parser.annexes[0]['children']] == ['I. - Situation', 'II. - Prévisions']
 
 
 class TestDilaClient:

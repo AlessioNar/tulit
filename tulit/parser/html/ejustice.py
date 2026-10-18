@@ -31,20 +31,25 @@ from lxml import etree, html
 
 from tulit.parser.exceptions import FileLoadError
 from tulit.parser.parser import Parser
-from tulit.parser.structure import BodyBuilder, ChildrenBuilder
+from tulit.parser.structure import BodyBuilder, ChildrenBuilder, eid_token
 
 ROW = '\u2063'
 """Marks a line that is a table row."""
+ANCHOR = '\u2064'
+"""Marks a line that starts at one of Justel's anchors (an article or a heading of the act itself)."""
 _BLOCKS = ('p', 'div', 'tr', 'li', 'table', 'h1', 'h2', 'h3', 'h4')
 _DIVISION = re.compile(
-    r'^(?P<kind>LIVRE|TITRE|CHAPITRE|SECTION|SOUS-SECTION|PARTIE|BOEK|TITEL|HOOFDSTUK|AFDELING|ONDERAFDELING|DEEL)'
+    r'^(?P<kind>LIVRE|TITRE|SOUS-TITRE|CHAPITRE|SECTION|SOUS-SECTION|PARTIE|BOEK|TITEL|ONDERTITEL|HOOFDSTUK|AFDELING|'
+    r'ONDERAFDELING|DEEL)'
     r'(?:\s+(?P<num>[IVXLC]+|\d+)(?:er|re|e|ste|de)?(?P<suffix>\s*(?:/\d+|bis|ter|quater|[A-Z]\b))?'
     r'|\s+(?P<special>PRELIMINAIRE|PREMIER|PREMIERE|VOORAFGAAND|VOORAFGAANDE|INLEIDEND|INLEIDENDE))?'
     r'\s*\.?\s*(?:-|–)\s*(?P<heading>.+)$', re.IGNORECASE)
 _PRELIMINARY = re.compile(r'^(?P<kind>TITRE|CHAPITRE|VOORAFGAANDE TITEL|VOORAFGAAND HOOFDSTUK|INLEIDENDE TITEL|'
                           r'INLEIDEND HOOFDSTUK)(?:\s+PRELIMINAIRE)?\.?\s*(?:-|–)\s*(?P<heading>.+)$')
 _ARTICLE = re.compile(
-    r'^(?:Article|Art\.|Artikel)\s+(?P<num>(?:[IVXLC]+[.:])?\d+(?:er|re|e)?(?:[.:/]\d+)*(?:\s?(?:bis|ter|quater|'
+    # 'Art. I.' (the Constitution's transitional articles), 'Article 1er.', 'Art. I.2.', 'Art. 7bis.', 'Art. 51/1.'
+    r'^(?:Article|Art\.|Artikel)\s+(?P<num>[IVXLC]+(?=\s*\.\s)|'
+    r'(?:[IVXLC]+[.:])?\d+(?:er|re|e)?(?:[.:/]\d+)*(?:\s?(?:bis|ter|quater|'
     r'quinquies|sexies|septies|octies|novies|decies))?(?:/\d+)?)\s*\.\s*(?P<rest>.*)$')
 _SOLE_ARTICLE = re.compile(r'^(?:Article unique|Enig artikel)\s*\.\s*(?P<rest>.*)$', re.IGNORECASE)
 _PARAGRAPH = re.compile(r'^§\s*(?P<num>\d+(?:er|e)?(?:/\d+)?(?:bis|ter|quater)?)\.\s')
@@ -57,25 +62,45 @@ _CLOSING = re.compile(r'^(Promulguons|Kondigen|Donné à|Gegeven te|Fait à|Brux
                       r'Namen, \d|Eupen, den|Gedaan te)')
 _NOTES = re.compile(r'^(_{3,}|Note$|Nota$|Notes$|Nota\'s$)')
 _ANNEX = re.compile(r'^(Annexe|ANNEXE|Bijlage|BIJLAGE)(\s+[\w/.-]+)?\.?(\s*(?:-|–).*|[.:]?\s+[A-Z].*)?$')
+# Justel numbers the annexes as articles N1, N2, ... under a heading 'ANNEXES.' / 'BIJLAGEN.'
+_JUSTEL_ANNEX = re.compile(r'^Art\.\s*N\d*\s*\.\s*(?P<rest>.*)$')
+_JUSTEL_ANNEXES = re.compile(r'^(ANNEXES|Annexes|BIJLAGEN|Bijlagen)\s*\.?$')
+# 'Bijlage 1 bij het decreet van 7 december 2018 ...', after the parliamentary references
+_ANNEX_AFTER_NOTES = re.compile(r'^(Annexe|ANNEXE|Bijlage|BIJLAGE)\s+\S+\s+(bij|à|au|aux|de|van)\b')
 _JUSTEL_NOTE = re.compile(r'^(\(\d+\)\s*<|\(NOTE|\(NOTA|-{5,})')
 _INLINE_NOTE = re.compile(r'\s*<[^<>]{0,400}?(?:En vigueur|In werking|Inséré|Ingevoegd|Abrogé|Opgeheven|Remplacé|'
                           r'Vervangen|L \d{4}-|W \d{4}-|AR \d{4}-|KB \d{4}-|DCFR|DVR)[^<>]*>')
 
 # Amending phrases, checked in order; Dutch puts the participle at the end ('wordt een lid toegevoegd')
+# The Dutch participle comes at the end of the sentence ('wordt een lid toegevoegd'); a dot inside a number
+# ('artikel I.2') does not end it
+_SENTENCE = r'(?:[^.;:]|\.(?=\S))*'
 ACTIONS = (
-    (r'\b(est|sont) abrogée?s?\b|\b(wordt|worden)\b.*\bopgeheven\b', 'delete'),
-    (r'\b(est|sont) insérée?s?\b|\bil est inséré\b|\b(wordt|worden)\b.*\bingevoegd\b', 'insert'),
-    (r'\b(est|sont) (complétée?s?|ajoutée?s?)\b|\b(wordt|worden)\b.*\b(aangevuld|toegevoegd)\b', 'add'),
-    (r'\b(est|sont) remplacée?s?\b|\b(wordt|worden)\b.*\bvervangen\b', 'replace'),
+    (rf'\b(est|sont) (chaque fois )?(abrogée?s?|supprimée?s?)\b|\b(wordt|worden)\b{_SENTENCE}\bopgeheven\b', 'delete'),
+    (rf'\b(est|sont) insérée?s?\b|\bil est inséré\b|\b(wordt|worden)\b{_SENTENCE}\bingevoegd\b', 'insert'),
+    (r'\b(est|sont) (chaque fois )?(complétée?s?|ajoutée?s?)\b'
+     rf'|\b(wordt|worden)\b{_SENTENCE}\b(aangevuld|toegevoegd)\b(?=\s*([,.:;]|$|luidende|als volgt|met|die|dat))',
+     'add'),
+    (rf'\b(est|sont) (chaque fois )?remplacée?s?\b|\b(wordt|worden)\b{_SENTENCE}\bvervangen\b', 'replace'),
     (r'\b(est|sont) modifiée?s?\b|modifications suivantes|volgende wijzigingen|\b(wordt|worden) gewijzigd\b', 'amend'),
 )
+# A general repeal of whatever is contrary ('... qui y sont contraires sont abrogés') amends no act
+_DEROGATION = re.compile(r'\bcontraires?\b.*\babrogée?s?\b|\bstrijdig\w*\b.*\bopgeheven\b', re.IGNORECASE)
+SUBTITLE_RANK = 1.5
+# ... nor after a modal verb ('kunnen niet worden gewijzigd dan bij een wet')
+_SUBORDINATE = re.compile(r"\b(lorsque|lorsqu'|quand|totdat|zodra|wanneer|indien|tenzij|kan|kunnen|mag|mogen|moet|"
+                          r"moeten)\b[^,.;:]*", re.IGNORECASE)
 DIVISIONS = {'livre': 'part', 'boek': 'part', 'partie': 'part', 'deel': 'part', 'titre': 'title', 'titel': 'title',
-             'chapitre': 'chapter', 'hoofdstuk': 'chapter', 'section': 'section', 'afdeling': 'section',
-             'sous-section': 'subsection', 'onderafdeling': 'subsection'}
+             'sous-titre': 'subtitle', 'ondertitel': 'subtitle', 'chapitre': 'chapter', 'hoofdstuk': 'chapter',
+             'section': 'section', 'afdeling': 'section', 'sous-section': 'subsection', 'onderafdeling': 'subsection'}
 
 
 def amendment_action(text: str) -> Optional[str]:
     """'L'article 3 ... est remplacé par ce qui suit :' -> 'replace'; '... wordt opgeheven.' -> 'delete'."""
+    if _DEROGATION.search(text):
+        return None
+    # Not in quoted words, nor in a subordinate clause ('lorsque celle-ci est abrogée', 'totdat zij worden gewijzigd')
+    text = _SUBORDINATE.sub('', re.sub(r'"[^"]*"|«[^»]*»|“[^”]*”', '""', text))
     for pattern, action in ACTIONS:
         if re.search(pattern, text, re.IGNORECASE):
             return action
@@ -144,8 +169,12 @@ def _is_marker(sup: etree._Element) -> bool:
     return bool(sup.xpath('.//font[@color="red"] | .//a[@href="#t"] | .//span[contains(@style, "red")]'))
 
 
-def _lines(element: etree._Element) -> list[str]:
-    """The text of an element as lines, at line breaks and block ends, without Justel's markers."""
+def _lines(element: etree._Element, anchors: bool = False) -> list[str]:
+    """
+    The text of an element as lines, at line breaks and block ends, without Justel's markers.
+
+    ``anchors``: mark the lines that start at an anchor of Justel with ANCHOR.
+    """
     copy = html.fromstring(html.tostring(element, encoding='unicode'))
     for sup in copy.xpath('.//sup'):
         if not _is_marker(sup):
@@ -176,7 +205,7 @@ def _lines(element: etree._Element) -> list[str]:
             return
         if node.tag == 'br' or (node.tag == 'a' and re.match(r'^(Art|LNK)', node.get('name') or '')):
             # Justel anchors each article and heading: they start a line
-            parts.append('\n')
+            parts.append('\n' + (ANCHOR if anchors and node.tag == 'a' else ''))
         if node.text and node.tag != 'br':
             parts.append(node.text)
         for child in node:
@@ -189,9 +218,10 @@ def _lines(element: etree._Element) -> list[str]:
     walk(copy)
     lines = []
     for line in ''.join(parts).split('\n'):
-        line = ' '.join(_INLINE_NOTE.sub('', line).split())
+        anchored = line.startswith(ANCHOR)
+        line = ' '.join(_INLINE_NOTE.sub('', line.lstrip(ANCHOR)).split())
         if line and line != ROW and not _IMAGE.match(line):
-            lines.append(line)
+            lines.append(ANCHOR + line if anchored else line)
     return lines
 
 
@@ -228,7 +258,7 @@ class EJusticeParser(Parser):
         preamble = root.xpath('//div[@id="list-title-sw_prev"]')
         if preamble:
             self._read_opening(_lines(preamble[0])[1:])
-        lines = _lines(text)[1:]
+        lines = _lines(text, anchors=True)[1:]
         self._read_body(lines, justel=True)
         signatures = root.xpath('//div[@id="list-title-sw_sign"]')
         if signatures:
@@ -250,6 +280,27 @@ class EJusticeParser(Parser):
     def _starts_body(line: str) -> bool:
         return bool(_ARTICLE.match(line) or _SOLE_ARTICLE.match(line) or _DIVISION.match(line)
                     or _PRELIMINARY.match(line))
+
+    @staticmethod
+    def _ends_quotation(line: str, article: Optional[dict[str, Any]], body: BodyBuilder) -> bool:
+        """Whether a line in quoted text is the act's own: its closing formula, its next article or division."""
+        if line.startswith(QUOTES):
+            return False
+        if _CLOSING.match(line) and line.startswith(('Promulguons', 'Kondigen')):
+            return True
+
+        def follows(number: Optional[str], last: Optional[str]) -> bool:
+            return bool(number and last and number.isdigit() and last.isdigit() and int(number) == int(last) + 1)
+
+        match = _ARTICLE.match(line)
+        if match:
+            return article is not None and follows(match.group('num'), article['token'])
+        match = _DIVISION.match(line)
+        if match:
+            kind = DIVISIONS.get(match.group('kind').lower())
+            last = next((c for c in reversed(body.chapters) if c['type'] == kind), None)
+            return last is not None and follows(match.group('num'), eid_token(last['num']))
+        return False
 
     def _read_opening(self, lines: list[str]) -> None:
         """The report to the King, the citations and the enacting formula."""
@@ -292,6 +343,7 @@ class EJusticeParser(Parser):
         closing: list[str] = []
         quoting = 0
         in_note = False
+        after_notes = False
         paragraphs = False
         last_act: list[Optional[str]] = [None]
 
@@ -321,6 +373,11 @@ class EJusticeParser(Parser):
                 child['amendment'] = {'action': action, 'instruction': text, 'amended_act': act, 'quoted': []}
 
         for line in lines:
+            if line.startswith(ANCHOR):
+                # Justel anchors only the act's own articles and headings: a quotation
+                # left open (a straight quote never closed) ends there
+                line = line[len(ANCHOR):]
+                quoting = 0
             if line.startswith(ROW):
                 # A table row joins the child (or the annex) above it
                 row = line[len(ROW):].strip()
@@ -331,6 +388,10 @@ class EJusticeParser(Parser):
                 elif closing:
                     closing.append(row)
                 continue
+            if quoting and self._ends_quotation(line, article, body):
+                # A quotation left open (decret/2025/01/23/2025000875, article 31) ends at the closing
+                # formula or at the act's next article or division
+                quoting = 0
             if quoting:
                 # Text quoted by an amendment, up to the closing guillemet
                 children = article['children']
@@ -347,7 +408,32 @@ class EJusticeParser(Parser):
                 continue
             in_note = False
             if closing and _NOTES.match(line):
-                break
+                # The parliamentary references; annexes may still follow them
+                after_notes = True
+                continue
+            if after_notes:
+                if annex is None and not (_ANNEX.match(line) or _ANNEX_AFTER_NOTES.match(line)):
+                    continue
+                if annex is None or _ANNEX_AFTER_NOTES.match(line):
+                    annex = ChildrenBuilder()
+                    self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}', **_annex_title(line),
+                                         'children': annex.children})
+                    continue
+            if justel and _JUSTEL_ANNEX.match(line):
+                flush()
+                rest = _JUSTEL_ANNEX.match(line).group('rest')
+                if annex is not None and not annex.children and self.annexes[-1]['heading'] is None:
+                    # the annex a heading 'ANNEXE.' just opened
+                    if rest:
+                        self.annexes[-1].update(_annex_title(rest))
+                    continue
+                annex = ChildrenBuilder()
+                self.annexes.append({'eId': f'anx_{len(self.annexes) + 1}',
+                                     **(_annex_title(rest) if rest else {'num': None, 'heading': None}),
+                                     'children': annex.children})
+                continue
+            if justel and annex is None and _JUSTEL_ANNEXES.match(line) and (article is not None or body.articles):
+                continue
             if annex is not None:
                 if _ANNEX.match(line):
                     annex = ChildrenBuilder()
@@ -387,7 +473,10 @@ class EJusticeParser(Parser):
                 token = groups.get('num') and groups['num'] + re.sub(r'[\s/]', '', groups.get('suffix') or '').lower()
                 preliminary = groups.get('special') or re.search(r'PRELIMINAIRE|VOORAFGAAND|INLEIDEND', line.upper())
                 token = token or ('0' if preliminary else None)
-                body.division(DIVISIONS.get(kind, 'chapter'), number, heading=match.group('heading'), token=token)
+                type_ = DIVISIONS.get(kind, 'chapter')
+                # a sub-title (loi 2018/07/30/2018040581, titre 3) sits between the title and its chapters
+                body.division(type_, number, heading=match.group('heading'), token=token,
+                              rank=SUBTITLE_RANK if type_ == 'subtitle' else None)
                 continue
             match = _ARTICLE.match(line) or _SOLE_ARTICLE.match(line)
             if match:

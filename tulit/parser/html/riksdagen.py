@@ -14,6 +14,8 @@ statute (SFST) as flat HTML with anchors:
   version in force on the requested date (default today) is kept, and
   sections entering into force on a date the government has yet to decide
   are left out;
+- two headings in a row: the first heads a group of sections (an
+  unnumbered division), the second the section;
 - the transitional provisions (övergångsbestämmelser) become an annex, one
   child per amending act.
 """
@@ -156,7 +158,7 @@ class RiksdagenSFSParser(Parser):
             elif kind == 'stycke':
                 flush_stycke()
             elif kind == 'marker' and article is not None:
-                article['marker'] = (event[1], event[2])
+                article['markers'].append((event[1], event[2]))
             elif kind == 'section':
                 flush_article()
                 match = _SECTION_NAME.match(event[2].replace(' ', ''))
@@ -164,7 +166,7 @@ class RiksdagenSFSParser(Parser):
                 chapter = match.group('chapter') if match and match.group('chapter') else chapter_token
                 token = '-'.join(t for t in (chapter, section) if t) or None
                 article = {'num': event[1], 'heading': heading, 'token': token,
-                           'children': ChildrenBuilder(), 'marker': None}
+                           'children': ChildrenBuilder(), 'markers': []}
                 heading = None
             elif kind == 'heading':
                 flush_article()
@@ -173,7 +175,10 @@ class RiksdagenSFSParser(Parser):
                     part['heading'] = event[1]
                     part.pop('_open', None)
                 else:
-                    heading = f'{heading} {event[1]}' if heading else event[1]
+                    if heading is not None:
+                        # Two headings in a row: the first heads a group of sections
+                        body.division('group', None, heading=heading)
+                    heading = event[1]
             elif kind == 'part':
                 flush_article()
                 if event[1] == self.preface and not body.chapters and not body.articles:
@@ -204,12 +209,13 @@ class RiksdagenSFSParser(Parser):
         self.chapters, self.articles, self.structure = body.chapters, body.articles, body.structure
 
     def _in_force(self, article: dict[str, Any]) -> bool:
-        """Whether a section is in force on the parser's date, from its validity marker."""
-        if article['marker'] is None:
-            return True
-        kind, when = article['marker']
-        found = _DATE.search(when)
-        if kind == 'I':
-            # Enters into force on a date, or on a day the government is yet to decide
-            return bool(found) and found.group(0) <= self.date
-        return not found or self.date < found.group(0)
+        """Whether a section is in force on the parser's date, from its validity markers (all must hold)."""
+        for kind, when in article['markers']:
+            found = _DATE.search(when)
+            if kind == 'I':
+                # Enters into force on a date, or on a day the government is yet to decide
+                if not (found and found.group(0) <= self.date):
+                    return False
+            elif found and self.date >= found.group(0):
+                return False
+        return True

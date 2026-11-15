@@ -4,6 +4,7 @@ import os
 from tulit.client.state.irishstatutebook import IrishStatuteBookClient
 from tests.conftest import locate_data_dir, locate_tests_dir
 
+
 class TestIrishStatuteBookClient(unittest.TestCase):
     def setUp(self):
         data_root = locate_data_dir(__file__)

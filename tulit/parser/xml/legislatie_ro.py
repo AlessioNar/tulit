@@ -226,7 +226,7 @@ class LegislatieParser(Parser):
                 if run_in:
                     # Read the article as a block of its own, after the division
                     blocks.insert(index + 1, f"Articolul {run_in.group('num').replace('.', '')}     "
-                                             f"{block[run_in.end():]}")
+                                  f"{block[run_in.end():]}")
                     block = block[:run_in.start()]
                     tokens = [token for item in _ITEM.split(block) for token in _tokens(item)]
                     following = (_tokens(blocks[index + 1]) or [''])[0]

@@ -25,4 +25,3 @@ def locate_tests_dir(start: Path | str | None = None) -> Path:
 @pytest.fixture(scope="session")
 def data_root() -> Path:
     return locate_data_dir()
-

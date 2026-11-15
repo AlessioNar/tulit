@@ -113,7 +113,7 @@ class TestAkomaNtosoUtilsAndExtractors(unittest.TestCase):
         self.assertIn('1', meta['num'])
         # extract paragraphs by eId
         elems = extractor.extract_paragraphs_by_eid(article)
-        self.assertTrue(any('par_1' in e['eId'] or e['eId']=='par_1' for e in elems))
+        self.assertTrue(any('par_1' in e['eId'] or e['eId'] == 'par_1' for e in elems))
 
     def test_content_processor_lists_and_tables(self):
         ns = {'akn': 'http://docs.oasis-open.org/legaldocml/ns/akn/3.0'}

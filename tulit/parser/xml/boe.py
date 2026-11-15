@@ -1,20 +1,16 @@
-import os
-import json
-import argparse
-from typing import Optional, Any
-from lxml import etree
-from tulit.parser.parser import LegalJSONValidator, Parser
+from typing import Optional
 from tulit.parser.xml.xml import XMLParser
 from tulit.parser.strategies.article_extraction import BOEArticleStrategy
-import logging
+
 
 class BOEXMLParser(XMLParser):
     """
     Parser for BOE XML documents to LegalJSON.
-    
+
     Uses BOEArticleStrategy to extract articles, reducing code duplication
     and improving maintainability.
     """
+
     def __init__(self) -> None:
         super().__init__()
         self.namespaces = {}
@@ -24,7 +20,7 @@ class BOEXMLParser(XMLParser):
         # Get all <p> elements in the document and filter by those under <texto>
         all_p_elements = self.root.findall('.//p')
         texto_p_elements = [p for p in all_p_elements if p.getparent() is not None and p.getparent().tag == 'texto']
-        
+
         preface_paragraphs = []
         for p in texto_p_elements:
             p_class = p.get('class')
@@ -39,7 +35,7 @@ class BOEXMLParser(XMLParser):
     def get_articles(self) -> None:
         """
         Extract articles using BOEArticleStrategy.
-        
+
         This method delegates article extraction to the strategy pattern,
         reducing code duplication and improving testability.
         """
@@ -77,14 +73,14 @@ class BOEXMLParser(XMLParser):
     def parse(self, file: str, **options) -> "BOEXMLParser":
         """
         Parse a BOE XML document.
-        
+
         Parameters
         ----------
         file : str
             Path to the BOE XML file
         **options : dict
             Optional configuration options
-            
+
         Returns
         -------
         BOEXMLParser
@@ -92,7 +88,7 @@ class BOEXMLParser(XMLParser):
         """
         # Use secure parser from parent class
         self.get_root(file)
-        
+
         self.get_preface()
         self.get_articles()
         self.get_chapters()

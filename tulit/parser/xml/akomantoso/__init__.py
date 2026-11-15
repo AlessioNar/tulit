@@ -13,11 +13,11 @@ instantiating the appropriate parser based on document type.
 Example Usage
 -------------
 >>> from tulit.parser.xml.akomantoso import create_akn_parser
->>> 
+>>>
 >>> # Automatic format detection
 >>> parser = create_akn_parser(file_path='document.xml')
 >>> parser.parse('document.xml')
->>> 
+>>>
 >>> # Explicit format specification
 >>> from tulit.parser.xml.akomantoso import GermanLegalDocMLParser
 >>> parser = GermanLegalDocMLParser()

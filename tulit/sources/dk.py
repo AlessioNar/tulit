@@ -9,7 +9,7 @@ from lxml import etree
 from tulit.client.state.denmark import (
     RETSINFORMATION, RetsinformationClient, consolidated_act, normalise_eli_path
 )
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 
@@ -35,7 +35,7 @@ class DenmarkSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError(
+            raise UnsupportedError(
                 "Retsinformation is retrieved by document: an act (lov) or its current "
                 "consolidation (lovbekendtgørelse); a date cannot be selected"
             )

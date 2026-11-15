@@ -4,10 +4,7 @@ Tests the complete download pipeline from external APIs to local storage.
 """
 
 import pytest
-import os
 from pathlib import Path
-import json
-import time
 
 
 @pytest.mark.e2e

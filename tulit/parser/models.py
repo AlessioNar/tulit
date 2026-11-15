@@ -15,7 +15,7 @@ class Citation:
     """Represents a citation in a legal document."""
     eId: str
     text: str
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert citation to dictionary format."""
         return {'eId': self.eId, 'text': self.text}
@@ -26,7 +26,7 @@ class Recital:
     """Represents a recital (whereas clause) in a legal document."""
     eId: str
     text: str
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert recital to dictionary format."""
         return {'eId': self.eId, 'text': self.text}
@@ -36,7 +36,7 @@ class Recital:
 class ArticleChild:
     """
     Represents a child element of an article (paragraph, point, etc.).
-    
+
     Attributes
     ----------
     eId : str
@@ -49,7 +49,7 @@ class ArticleChild:
     eId: str
     text: str
     amendment: Optional[bool] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert article child to dictionary format."""
         result = {'eId': self.eId, 'text': self.text}
@@ -62,7 +62,7 @@ class ArticleChild:
 class Article:
     """
     Represents an article in a legal document.
-    
+
     Attributes
     ----------
     eId : str
@@ -78,18 +78,18 @@ class Article:
     num: str
     heading: Optional[str] = None
     children: List[ArticleChild] = None
-    
+
     def __post_init__(self):
         if self.children is None:
             self.children = []
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert article to dictionary format."""
         result = {
             'eId': self.eId,
             'num': self.num,
-            'children': [child.to_dict() if isinstance(child, ArticleChild) else child 
-                        for child in self.children]
+            'children': [child.to_dict() if isinstance(child, ArticleChild) else child
+                         for child in self.children]
         }
         if self.heading:
             result['heading'] = self.heading
@@ -100,7 +100,7 @@ class Article:
 class Chapter:
     """
     Represents a chapter in a legal document.
-    
+
     Attributes
     ----------
     eId : str
@@ -113,7 +113,7 @@ class Chapter:
     eId: str
     num: str
     heading: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert chapter to dictionary format."""
         result = {'eId': self.eId, 'num': self.num}

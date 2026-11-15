@@ -4,6 +4,7 @@ from tulit.client.client import Client
 from tulit.parser.exceptions import ContentTypeError
 import os
 
+
 class IrishStatuteBookClient(Client):
     """
     Client for retrieving legal documents from the Irish Statute Book (ISB).

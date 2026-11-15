@@ -2,16 +2,17 @@ import os
 import io
 import logging
 import zipfile
-import requests
+
 
 class Client:
-    """	
+    """
     A generic document downloader class.
-    """	
+    """
+
     def __init__(self, download_dir, log_dir=None, proxies=None):
         """
         Initializes the downloader with directories for downloads and logs.
-        
+
         Parameters
         ----------
         download_dir : str
@@ -57,7 +58,7 @@ class Client:
         if self.log_dir and not os.path.exists(self.log_dir):
             os.makedirs(self.log_dir)
             self.logger.info('Created log directory: %s', self.log_dir)
-    
+
     def handle_response(self, response, filename):
         """
         Handle a server response by saving or extracting its content.
@@ -105,12 +106,12 @@ class Client:
     def get_extension_from_content_type(self, content_type):
         """
         Map Content-Type to a file extension.
-        
+
         Parameters
         ----------
         content_type : str
             The Content-Type header from the server response.
-        
+
         Returns
         -------
         str or None
@@ -135,7 +136,7 @@ class Client:
     def extract_zip(self, response, folder_path):
         """
         Extracts the content of a zip file.
-        
+
         Parameters
         ----------
         response : requests.Response
@@ -149,4 +150,3 @@ class Client:
             self.logger.info(f"Extracted ZIP to {folder_path}")
         except Exception as e:
             self.logger.error(f"Failed to extract ZIP file to {folder_path}: {e}")
-

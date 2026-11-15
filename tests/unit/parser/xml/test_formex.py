@@ -1,20 +1,30 @@
 import pytest
 import os
 from tulit.parser.xml.formex import Formex4Parser
-from pathlib import Path
 from tests.conftest import locate_data_dir
-import tempfile
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 import builtins
 from lxml import etree
 
-file_path = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05" / "DOC_2.xml")
+file_path = str(
+    locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex"
+    / "5cca93ee-e193-46bf-8416-c2f57cbc34c9.0004.05" / "DOC_2.xml"
+)
 
-iopa = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.000101.fmx.xml")
+iopa = str(
+    locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex"
+    / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.000101.fmx.xml"
+)
 
-iopa_dir = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1")
+iopa_dir = str(
+    locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex"
+    / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1"
+)
 
-iopa_annex = str(locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex" / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.002601.fmx.xml")
+iopa_annex = str(
+    locate_data_dir(__file__) / "sources" / "eu" / "eurlex" / "formex"
+    / "c008bcb6-e7ec-11ee-9ea8-01aa75ed71a1.0006.02" / "DOC_1" / "L_202400903EN.002601.fmx.xml"
+)
 
 
 @pytest.fixture
@@ -41,7 +51,10 @@ def test_get_root(parser):
 
 def test_get_preface(parser):
     parser.get_preface()
-    preface = "Commission Implementing Regulation (EU) No 1319/2011 of 15 December 2011 fixing representative prices in the poultrymeat and egg sectors and for egg albumin, and amending Regulation (EC) No 1484/95"
+    preface = (
+        "Commission Implementing Regulation (EU) No 1319/2011 of 15 December 2011 fixing representative prices in the "
+        "poultrymeat and egg sectors and for egg albumin, and amending Regulation (EC) No 1484/95"
+    )
     assert parser.preface == preface
 
 
@@ -62,8 +75,15 @@ def test_get_citations(parser):
     parser.get_citations()
     citations = [
         {'eId': "cit_1", 'text': "Having regard to the Treaty on the Functioning of the European Union,"},
-        {"eId": "cit_2", 'text': "Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common organisation of agricultural markets and on specific provisions for certain agricultural products (Single CMO Regulation), and in particular Article 143 thereof,"},
-        {"eId": "cit_3", 'text': "Having regard to Council Regulation (EC) No 614/2009 of 7 July 2009 on the common system of trade for ovalbumin and lactalbumin, and in particular Article 3(4) thereof,"},
+        {"eId": "cit_2", 'text': (
+            "Having regard to Council Regulation (EC) No 1234/2007 of 22 October 2007 establishing a common "
+            "organisation of agricultural markets and on specific provisions for certain agricultural products (Single "
+            "CMO Regulation), and in particular Article 143 thereof,"
+        )},
+        {"eId": "cit_3", 'text': (
+            "Having regard to Council Regulation (EC) No 614/2009 of 7 July 2009 on the common system of trade for "
+            "ovalbumin and lactalbumin, and in particular Article 3(4) thereof,"
+        )},
     ]
     assert parser.citations == citations
 
@@ -72,10 +92,23 @@ def test_get_recitals(parser):
     parser.get_preamble()
     parser.get_recitals()
     recitals = [
-        {"eId": "rct_1", "text": "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."},
-        {"eId": "rct_2", "text": "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products and for egg albumin shows that the representative import prices for certain products should be amended to take account of variations in price according to origin. The representative prices should therefore be published."},
-        {"eId": "rct_3", "text": "In view of the situation on the market, this amendment should be applied as soon as possible."},
-        {"eId": "rct_4", "text": "The measures provided for in this Regulation are in accordance with the opinion of the Management Committee for the Common Organisation of Agricultural Markets,"},
+        {"eId": "rct_1", "text": (
+            "Commission Regulation (EC) No 1484/95 lays down detailed rules for implementing the system of additional "
+            "import duties and fixes representative prices for poultrymeat and egg products and for egg albumin."
+        )},
+        {"eId": "rct_2", "text": (
+            "Regular monitoring of the data used to determine representative prices for poultrymeat and egg products "
+            "and for egg albumin shows that the representative import prices for certain products should be amended to "
+            "take account of variations in price according to origin. The representative prices should therefore be "
+            "published."
+        )},
+        {"eId": "rct_3", "text": (
+            "In view of the situation on the market, this amendment should be applied as soon as possible."
+        )},
+        {"eId": "rct_4", "text": (
+            "The measures provided for in this Regulation are in accordance with the opinion of the Management "
+            "Committee for the Common Organisation of Agricultural Markets,"
+        )},
     ]
     assert parser.recitals == recitals
 
@@ -113,10 +146,13 @@ def test_get_articles(parser):
             "heading": None,
             "parent": None,
             "children": [
-                {"eId": 'unp_1', "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                {"eId": 'unp_1',
+                 "text": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
                  "amendment": {
                      "action": "replace",
-                     "instruction": "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation.",
+                     "instruction": (
+                         "Annex I to Regulation (EC) No 1484/95 is replaced by the Annex to this Regulation."
+                     ),
                      "amended_act": "Regulation (EC) No 1484/95",
                      "quoted": []
                  }}
@@ -128,7 +164,12 @@ def test_get_articles(parser):
             "heading": None,
             "parent": None,
             "children": [
-                {"eId": "unp_1", "text": "This Regulation shall enter into force on the day of its publication in the Official Journal of the European Union.", "amendment": None}
+                {"eId": "unp_1",
+                 "text": (
+                     "This Regulation shall enter into force on the day of its publication in the Official Journal of "
+                     "the European Union."
+                 ),
+                 "amendment": None}
             ]
         }
     ]
@@ -303,6 +344,7 @@ def test_parse_single_annex_document_extracts_annex(tmp_path):
 
 def test_parse_non_annex_root_keeps_articles(tmp_path):
     """Test parse() keeps articles when the document root is not an annex."""
+
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX VII TO'
         self.articles = ['kept']
@@ -319,6 +361,7 @@ def test_parse_non_annex_root_keeps_articles(tmp_path):
 
 def test_parse_non_annex_preface_keeps_articles(tmp_path):
     """Test parse() keeps articles when preface is not a short annex reference."""
+
     def fake_super_parse(self, file, **opts):
         self.preface = 'ANNEX I contains provisions for implementation'
         self.articles = ['kept']
@@ -488,9 +531,9 @@ def test_clean_text_replaces_quot_start():
     """Test clean_text() replaces QUOT.START with single quote."""
     p = Formex4Parser()
     element = etree.fromstring('<P>before<QUOT.START/>quoted</P>')
-    
+
     text = p.clean_text(element)
-    
+
     assert "'" in text
     assert 'quoted' in text
 
@@ -499,9 +542,9 @@ def test_clean_text_replaces_quot_end():
     """Test clean_text() replaces QUOT.END with single quote."""
     p = Formex4Parser()
     element = etree.fromstring('<P>quoted<QUOT.END/>after</P>')
-    
+
     text = p.clean_text(element)
-    
+
     assert "'" in text
     assert 'after' in text
 
@@ -510,9 +553,9 @@ def test_clean_text_replaces_both_quot_tags():
     """Test clean_text() replaces both QUOT.START and QUOT.END."""
     p = Formex4Parser()
     element = etree.fromstring('<P>hello<QUOT.START/>quoted<QUOT.END/>world</P>')
-    
+
     text = p.clean_text(element)
-    
+
     assert text.count("'") >= 2
     assert 'quoted' in text
 
@@ -539,9 +582,9 @@ def test_get_conclusions_no_final_section():
     """Test get_conclusions() returns empty dict when no FINAL section."""
     p = Formex4Parser()
     p.root = etree.fromstring('<ROOT></ROOT>')
-    
+
     conclusions = p.get_conclusions()
-    
+
     assert conclusions == {}
 
 
@@ -556,9 +599,9 @@ def test_get_conclusions_final_without_signature():
       </ROOT>
     ''')
     p.root = root
-    
+
     conclusions = p.get_conclusions()
-    
+
     assert conclusions['conclusion_text'] == 'Conclusion only'
     assert 'signature' not in conclusions
 
@@ -584,9 +627,9 @@ def test_get_conclusions_with_full_signature():
       </ROOT>
     ''')
     p.root = root
-    
+
     conclusions = p.get_conclusions()
-    
+
     assert conclusions['conclusion_text'] == 'Final text'
     assert conclusions['signature']['place'] == 'Brussels,'
     assert conclusions['signature']['date'] == '2024-12-20'

@@ -7,6 +7,7 @@ import tempfile
 from tulit.client.client import Client
 from tests.conftest import locate_tests_dir
 
+
 class TestClient(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
@@ -15,7 +16,7 @@ class TestClient(unittest.TestCase):
         download_dir = tempfile.mkdtemp()
         self.addCleanup(shutil.rmtree, download_dir, ignore_errors=True)
         self.downloader = Client(download_dir=download_dir, log_dir=str(tests_root / 'logs'))
-        
+
     def test_does_not_configure_root_logging(self):
         root = logging.getLogger()
         handlers_before = list(root.handlers)
@@ -64,7 +65,7 @@ class TestClient(unittest.TestCase):
         args, kwargs = mock_zipfile.call_args
         self.assertEqual(args[0].getvalue(), response.content)
         mock_zip.extractall.assert_called_once_with(folder_path)
-    
+
     @patch('tulit.client.client.Client.extract_zip')
     def test_handle_response(self, mock_extract_zip):
         # Mock response object
@@ -86,7 +87,6 @@ class TestClient(unittest.TestCase):
         result = self.downloader.handle_response(response, cellar_id)
         expected_file_path = os.path.normpath(f"{target_path}.xml")
         self.assertEqual(os.path.normpath(result), expected_file_path)
-
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@ from typing import Any, Optional
 from lxml import etree
 
 from tulit.client.state.austria import AustriaRISClient, law_eli
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 _GAZETTE = re.compile(
@@ -70,18 +70,18 @@ class AustriaSource(Source):
         client = AustriaRISClient(download_dir=download_dir)
         gazette = gazette_reference(identifier)
         if gazette is None and not _GESETZESNUMMER.match(identifier.strip()):
-            raise ValueError(f"'{identifier}' is not a RIS Gesetzesnummer or a BGBl. reference; "
-                             f"use {self.identifier_help}")
+            raise UnsupportedError(f"'{identifier}' is not a RIS Gesetzesnummer or a BGBl. reference; "
+                                   f"use {self.identifier_help}")
         version = version or (ORIGINAL if gazette else CONSOLIDATED)
 
         if version == CONSOLIDATED:
             if gazette:
-                raise ValueError("Consolidated law is addressed by its RIS Gesetzesnummer "
-                                 "(e.g. '10001597'), not by a gazette reference")
+                raise UnsupportedError("Consolidated law is addressed by its RIS Gesetzesnummer "
+                                       "(e.g. '10001597'), not by a gazette reference")
             return self._consolidated(client, identifier.strip(), date, version)
 
         if date:
-            raise ValueError("A date selects a consolidated version; the original version has none")
+            raise UnsupportedError("A date selects a consolidated version; the original version has none")
         if gazette is None:
             gazette = client.gazette_reference(identifier.strip())
             if gazette is None:

@@ -1,0 +1,26 @@
+{
+ "versionInfo": {
+  "hasModuleVersionChanged": false,
+  "hasApiVersionChanged": false
+ },
+ "data": {
+  "ConsolidadaConteudoDetalhe": {
+   "DiplomaFrag": {
+    "ConteudoTitle": "Lei n.º 43/2004 ",
+    "Designacao": "Lei de organização e funcionamento da Comissão Nacional de Protecção de Dados",
+    "ELI": "https://data.dre.pt/eli/lei/43/2004/p/cons/20190808/pt/html",
+    "DiplomaLegisId": "480712"
+   },
+   "DiplomaLegis": {
+    "ConteudoTitle": "Lei n.º 43/2004 ",
+    "Numero": "43/2004",
+    "Sumario": "Lei de organização e funcionamento da Comissão Nacional de Protecção de Dados",
+    "DataPublicacao": "2004-08-18T00:00:00Z"
+   },
+   "TipoDiploma": {
+    "Acronimo": "lei",
+    "Tipo": "Lei"
+   }
+  }
+ }
+}

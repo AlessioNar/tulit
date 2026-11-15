@@ -1,10 +1,11 @@
-[tool.poetry]
+[project]
 name = "tulit"
-version = "0.10.0"
+version = "1.0.0"
 description = "TULIT - The Universal Legal Informatics Toolkit, is a set of legal informatics utilities collected in a Python package that focuses on the retrieval of legal data and metadata from official sources in the EU, and their transformation in legalJSON, a pythonic data structure for legal documents"
-authors = ["AlessioNar <alessio.nardin@gmail.com>"]
+authors = [{ name = "AlessioNar", email = "alessio.nardin@gmail.com" }]
 license = "EUPL-1.2"
 readme = "README.md"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
@@ -13,32 +14,34 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+    "requests>=2.32.3,<3",
+    "sparqlwrapper>=2.0.0,<3",
+    "beautifulsoup4>=4.9.3,<5",
+    "lxml>=6.1.0,<7",
+    "jsonschema>=4.24.0,<5",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-requests = "^2.32.3"
-sparqlwrapper = "^2.0.0"
-beautifulsoup4 = "^4.9.3"
-lxml = "^6.1.0"
+[project.optional-dependencies]
+pdf = ["pdfplumber>=0.11"]
 
-jsonschema = "^4.24.0"
-pdfplumber = {version = ">=0.11", optional = true}
-
-[tool.poetry.extras]
-pdf = ["pdfplumber"]
-
-[tool.poetry.scripts]
+[project.scripts]
 tulit = "tulit.cli:main"
 
-[[tool.poetry.include]]
-path = "tulit/client/eu/queries/*.rq"
+[project.urls]
+Homepage = "https://github.com/AlessioNar/tulit"
+Documentation = "https://tulit-docs.readthedocs.io/en/latest/"
+Issues = "https://github.com/AlessioNar/tulit/issues"
+
+[tool.poetry]
+include = [{ path = "tulit/client/eu/queries/*.rq", format = ["sdist", "wheel"] }]
 
 [tool.poetry.group.dev.dependencies]
 sphinx = ">=6,<9"
 sphinx-rtd-theme = "^3.0.2"
-
 pytest-cov = "^7.0.0"
 pytest = "^8.3.3"
+flake8 = "^7.1"
 
 [tool.pytest.ini_options]
 markers = [
@@ -48,10 +51,7 @@ markers = [
     "slow: Slow running tests",
     "corpus: Live corpus of real acts per jurisdiction (run with --corpus)"
 ]
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.urls]
-Homepage = "https://github.com/AlessioNar/tulit"
-Issues = "https://github.com/AlessioNar/tulit/issues"
+[build-system]
+requires = ["poetry-core>=2.0,<3"]
+build-backend = "poetry.core.masonry.api"

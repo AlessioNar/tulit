@@ -52,9 +52,11 @@ def test_portugal_act_reference(identifier):
                                          'day': '08', 'region': 'p'}
 
 
-def test_portugal_rejects_citation_without_date():
+def test_portugal_citation_without_date():
+    # Enough for the consolidated version; the act as published needs its date
+    assert (act_reference('Lei n.º 58/2019')['month'], act_reference('Lei n.º 58/2019')['day']) == (None, None)
     with pytest.raises(ValueError):
-        act_reference('Lei n.º 58/2019')
+        act_reference('Lei n.º 58/2019, de 8 de agostro')
 
 
 def test_portugal_amendment_action():

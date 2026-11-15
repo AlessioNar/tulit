@@ -5,6 +5,7 @@ from tulit.client.state.finlex import FinlexClient
 from tulit.parser.exceptions import ContentTypeError
 from tests.conftest import locate_data_dir, locate_tests_dir
 
+
 class TestFinlexClient(unittest.TestCase):
     def setUp(self):
         data_root = locate_data_dir(__file__)
@@ -115,13 +116,14 @@ class TestFinlexClient(unittest.TestCase):
 
         # Test with proxies
         client_with_proxies = FinlexClient(
-            download_dir=self.download_dir, 
-            log_dir=self.log_dir, 
+            download_dir=self.download_dir,
+            log_dir=self.log_dir,
             proxies={'http': 'http://proxy.example.com:8080'}
         )
         file_path = client_with_proxies.download(year=2024, number=123)
         self.assertTrue(os.path.exists(file_path))
         os.remove(file_path)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -5,15 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2026-10-18
+
+tulit 1.0 freezes the public API (`fetch`, `download`, `export`, `native_akn`, `tulit.errors`, `tulit.quality`, `tulit.sources`, the `tulit` command) and the legalJSON schema (version 1.0) under semantic versioning. See the migration notes in the documentation.
+
 ### Added
 
-- **Live corpus**: 371 real acts across the 28 jurisdictions (at least 11 each), in `tests/corpus/acts/<code>.json`, fetched live with `pytest tests/corpus --corpus [--corpus-jurisdiction XX]` and checked against counts taken from the official texts (articles, divisions, annexes, amendments, recitals, version date). A weekly workflow runs it and keeps `report.json`.
+- **Export to Akoma Ntoso 3.0 and LEOS packages**: `tulit.export(doc, to='akn'|'leg')`, `tulit get ... --to akn|leg` and `tulit export file.json --to ...`. The act becomes an Akoma Ntoso `<act>` (FRBR identification, preface, preamble, nested body, conclusions, annexes as attachments, structured amendments as `<mod>` with `quotedText` and `quotedStructure` and textual modifications); a `.leg` package holds `main.xml` (a `documentCollection`), the act and one file per annex, as in AKN4EU. Every corpus act exports to documents valid against the bundled Akoma Ntoso 3.0 schema, and reads back with every division, article, paragraph, annex and amendment.
+- **The official Akoma Ntoso, where a source publishes it**: `tulit.export(doc, native=True)`, `tulit.native_akn(identifier, ...)` and `--native` return the file of Italy, Finland, Luxembourg (CSD13) and Germany (LegalDocML.de) unchanged, with a warning for the two variants that are not Akoma Ntoso 3.0.
+- **LEOS packages as input**: the `leg` parser (`tulit parse --format leg act.leg`).
+- **German acts as promulgated**: `version='original'` for Germany reads the Bundesgesetzblatt, from recht.bund.de since 2023 and the bgbl.de archive for 1949-2022 (authentic PDF, `pdf` extra), by citation ('BGBl. 2024 I Nr. 149', 'BGBl. 2017 I S. 2097', Teil II), recht.bund.de or bgbl.de link, or ELI. Laws enacted inside an omnibus act become parts holding their sections; amending articles carry structured amendments; annexes are kept. Issues before about 1998 are scans: `tulit.download` returns them. Citations and gazette links default to the original, ELIs and portal links to the consolidated text as before.
+- **Swedish acts as adopted**: `version='original'` for Sweden reads the official electronic Svensk författningssamling (signed PDF, from SFS 2018:160 of 1 April 2018, `pdf` extra), by SFS number ('SFS 2018:218'); amending acts carry structured amendments. It is the default for those numbers; earlier acts, and requests with a date, give the consolidated text as before.
+- **Portuguese consolidated texts**: `version='consolidated'` for Portugal reads the Legislação Consolidada of the Diário da República (the JSON screen services of diariodarepublica.pt), in force today or on a date, by citation with or without its date ('Lei n.º 7/2009'), ELI, consolidated ELI (`https://data.dre.pt/eli/lei/7/2009/p/cons/20250327/pt/html`), page address, or the name of a code ('Código Penal', 'Código do Trabalho'). Books, parts, titles, chapters, sections, divisions and articles with their headings; a code approved in an annex keeps its articles apart (`anx_1__art_5`). A consolidation whose changes enter into force after the date is passed over for the one before. Acts the Diário da República does not consolidate (e.g. Lei n.º 58/2019) raise `FileLoadError`. Originals stay the default.
+- **Romania's consolidated texts**: `version='consolidated'` gives the form of an act in force today or on a date ("forma consolidată", the official republications among them), chosen among those the Portal Legislativ lists for the act, each dated from the day it applies, and read from the portal's page of the form (new `ro-legislatie-html` parser: divisions as nested on the page, marginal titles as article headings, structured amendments; the database's notes and records of changes left out). The Constitution in force is its 2003 republication; codes are addressed by name ('Codul civil', 'Codul penal', 'Codul de procedură civilă', ...), the original version included. The pages are served over HTTPS only, which some networks do not reach; the original version still comes from the web service.
+- **French DILA dumps**: `tulit dump {jorf,legi} --dir DIR` (and `DilaClient.download_dump`) downloads the latest global dump, resuming an interrupted download, and extracts it safely; `tulit get ... --dump-dir DIR` uses it.
+- **`tulit.errors`**: every error derives from `TulitError`; unsupported requests raise `UnsupportedError`, which is also a `ValueError`.
+- **legalJSON `schema_version`** ('1.0') and **`meta.identifier`** (the identifier the act was fetched by); the schema has a versioned `$id`.
 - **`tulit.quality`**: `check(doc)` lists what a parser can get wrong while producing schema-valid legalJSON (duplicate or dangling eIds, empty paragraphs, markup or page headers left in the text, malformed amendments, missing or non-ISO metadata); `counts(doc)` gives a document's size.
+- **Live corpus**: 397 real acts across the 28 jurisdictions (at least 11 each), in `tests/corpus/acts/<code>.json`, fetched live with `pytest tests/corpus --corpus [--corpus-jurisdiction XX]` and checked against counts taken from the official texts (articles, divisions, annexes, amendments, recitals, version date). A weekly workflow runs it and keeps `report.json`.
+- **Documentation**: a page per jurisdiction (generated from the source registry), a legalJSON reference, an export guide, the Python API and its stability policy, and migration notes.
+
+### Changed
+
+- The Akoma Ntoso parser reads annexes (`attachments`), amendments (`mod`), unnumbered articles, `book`, `division` and `subtitle` divisions and the closing text of the conclusions; a `section` in a document that has `article` elements is a division.
+- `pyproject.toml` uses the standard `[project]` table (PEP 621); the `pdf` extra is unchanged.
+
+### Removed
+
+- `tulit.client.state.normattiva.NormattivaClient`, superseded by `NormattivaAKNClient` (and `tulit.fetch(..., jurisdiction='IT')`).
 
 ### Fixed
 
 - Parser and client bugs found by the corpus in every jurisdiction, each with a unit test: lost or misnested divisions, articles and annexes, false or missing amendments, quotations swallowing the rest of an act, consolidated versions chosen for the wrong date, page furniture and markup in the text, and long acts saved only in part. Highlights: Finland's consolidated texts (the current version, not the first), Hungary's long acts (the whole Civil Code), Lithuania's codes, Denmark's older acts (from the HTML), Germany's annexes, the EU's consolidated annexes and nested sections, Luxembourg's full article text, Malta's Civil Code, Belgium's consolidated Constitution, Greek ratifying laws and codes, Italian nested headings.
+- Lint: trailing whitespace, unused imports and variables, an unreachable statement; a flake8 configuration (120 characters).
 
 ## [0.10.0] - 2026-10-17
 ### Added

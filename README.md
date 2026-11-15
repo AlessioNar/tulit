@@ -12,6 +12,7 @@
 - **Parse** Formex 4, Akoma Ntoso, EUR-Lex HTML and national formats into the same structure: preface, preamble (citations and recitals), divisions, articles, paragraphs, conclusions and annexes.
 - **Address** divisions, articles, paragraphs and annexes with ELI-resolvable identifiers (`cpt_II`, `art_5`, `par_2`, `anx_1`), so a JSON fragment maps directly onto its ELI subdivision URI.
 - **Capture amendments** as structured objects (action, target act, quoted text or structure) instead of plain prose.
+- **Export** any act to Akoma Ntoso 3.0 or a LEOS `.leg` package, or get the official Akoma Ntoso where the source publishes it.
 
 The Formex parser has been verified against the complete corpus of in-force EU legislation (29,790 documents): every act keeps between 97% and 103% of the source text, with no parse errors and 100% schema-valid output.
 
@@ -19,7 +20,7 @@ The Formex parser has been verified against the complete corpus of in-force EU l
 
 ```console
 pip install tulit
-pip install 'tulit[pdf]'   # also read sources published as PDF (Cyprus, Greece, Malta, Portugal)
+pip install 'tulit[pdf]'   # also read sources published as PDF (Cyprus, Greece, Malta, Portugal; German and Swedish originals)
 ```
 
 `tulit` requires Python 3.11 or later.
@@ -55,6 +56,16 @@ scan = tulit.download("constitution/1994/02/17/1994021048", jurisdiction="BE")
 scan["path"], scan["meta"]["source"]
 ```
 
+Any act converts to Akoma Ntoso 3.0 or a LEOS `.leg` package (a zip of Akoma Ntoso documents, as exchanged by LEOS and AKN4EU), both valid against the Akoma Ntoso schema and readable back by tulit; where the source publishes Akoma Ntoso itself (Italy, Finland, Luxembourg, Germany), `native=True` returns its file unchanged:
+
+```python
+xml = tulit.export(dsgvo_at, to="akn")
+tulit.export(lopd, to="leg", path="lopd.leg")
+official = tulit.export(tulit.fetch("L. 160/2019", jurisdiction="IT"), native=True)
+```
+
+Every error derives from `tulit.errors.TulitError` (`UnsupportedError` for a jurisdiction, version or identifier a source does not support, `FileLoadError` when it has no such act, `NetworkError` when it cannot be reached).
+
 From the command line:
 
 ```console
@@ -62,6 +73,9 @@ tulit get 32024R0903 -o 32024R0903.json
 tulit get 32016R0679 --format xhtml --language fra
 tulit get BOE-A-2018-16673 -j ES --version consolidated --date 2021-01-01
 tulit sources
+tulit get 300099 -j LV --to leg -o 300099.leg
+tulit export 32024R0903.json --to akn -o 32024R0903.xml
+tulit dump legi --dir ./dila                     # France: the DILA dump for older texts
 tulit parse --format akn 32014L0092.akn
 tulit formats
 ```
@@ -129,7 +143,7 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 | 🇪🇪 | Estonia | Riigi Teataja | Riigi Teataja XML | ✅ | ✅ | 🟢 Parsed | 0.9.0 |
 | 🇫🇮 | Finland | Finlex | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇫🇷 | France | Journal officiel and Légifrance (DILA open data) | JORF / LEGI XML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
-| 🇩🇪 | Germany | Rechtsinformationen des Bundes (test phase) | LegalDocML.de | ⏳ | ✅ | 🟢 Parsed | 0.8.0 |
+| 🇩🇪 | Germany | Bundesgesetzblatt (recht.bund.de, bgbl.de archive); Rechtsinformationen des Bundes (test phase) | PDF (original); LegalDocML.de (consolidated) | ✅ | ✅ | 🟢 Parsed (`pdf` extra for originals) | 0.8.0 |
 | 🇬🇷 | Greece | Εθνικό Τυπογραφείο (ΦΕΚ) | PDF | ✅ | — | 🟢 Parsed (`pdf` extra) | 0.10.0 |
 | 🇭🇺 | Hungary | Nemzeti Jogszabálytár | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇮🇪 | Ireland | Irish Statute Book / Revised Acts | ISB XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
@@ -140,14 +154,14 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 | 🇲🇹 | Malta | Legislation Malta | PDF | ✅ | ✅ | 🟢 Parsed (`pdf` extra) | 0.9.0 |
 | 🇳🇱 | Netherlands | wetten.overheid.nl (BWB) / Staatsblad | BWB XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇵🇱 | Poland | Dziennik Ustaw (Sejm ELI API) | HTML | ✅ | ✅ | 🟢 Parsed | 0.9.0 |
-| 🇵🇹 | Portugal | Diário da República | PDF | ✅ | ⏳ | 🟢 Parsed (`pdf` extra) | 0.9.0 |
-| 🇷🇴 | Romania | Portal Legislativ (Ministry of Justice) | XML (SOAP) | ✅ | ⏳ | 🟢 Parsed | 0.10.0 |
+| 🇵🇹 | Portugal | Diário da República (gazette and Legislação Consolidada) | PDF, JSON | ✅ | ✅ | 🟢 Parsed (originals: `pdf` extra) | 0.9.0 |
+| 🇷🇴 | Romania | Portal Legislativ (Ministry of Justice) | XML (SOAP), HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇸🇮 | Slovenia | PISRS (Ministry of Justice) | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇸🇪 | Sweden | Svensk författningssamling (Riksdagen) | HTML | ⏳ | ✅ | 🟢 Parsed | 0.9.0 |
+| 🇸🇪 | Sweden | Svensk författningssamling (Government Offices) / Riksdagen open data | PDF, HTML | ✅ | ✅ | 🟢 Parsed (`pdf` extra for originals) | 0.9.0 |
 
-**Progress: 28 of 28 parsed.** Every Member State and the EU is available through `tulit.fetch()`. Regional legislation is also available for Veneto (Italy). Cyprus, Greece, Malta and Portugal publish PDF and need the optional `pdf` extra (`pip install 'tulit[pdf]'`). Some acts exist only as scanned PDFs without text (the Moniteur belge before June 1997, the Cypriot Gazette before about 2015); `tulit.download()` returns their official file. `tulit sources` lists what the installed version supports.
+**Progress: 28 of 28 parsed.** Every Member State and the EU is available through `tulit.fetch()`. Regional legislation is also available for Veneto (Italy). Cyprus, Greece, Malta and Portugal publish PDF, and so do the German Bundesgesetzblatt (German acts as promulgated) and Svensk författningssamling (Swedish acts as adopted, electronic since 1 April 2018: earlier acts are available only consolidated); they need the optional `pdf` extra (`pip install 'tulit[pdf]'`). Portuguese consolidated texts (the codes, the Constitution and the laws the Diário da República consolidates) come as JSON and need no extra. Some acts exist only as scanned PDFs without text (the Moniteur belge before June 1997, the Cypriot Gazette before about 2015, the Bundesgesetzblatt before about 1998); `tulit.download()` returns their official file. `tulit sources` lists what the installed version supports.
 
 ### Roadmap
 
@@ -160,11 +174,14 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
   - original versions for Austria and the Netherlands
   - optional `pdf` extra for sources published only as PDF
   - structured amendments in the new parsers
-- **0.10.0** (this release):
+- **0.10.0**:
   - Belgium, Bulgaria, Cyprus, France, Greece, Hungary, Italy, Latvia, Lithuania, Romania and Slovenia: all 28 jurisdictions in `fetch`
   - `tulit.download()` for the official file of an act, including scanned PDFs tulit cannot parse
-- **Next**: original versions for Germany and Sweden, consolidated texts for Portugal and Romania, an easier workflow for the French DILA dumps
-- **1.0.0**: export of every legalJSON document to Akoma Ntoso and `.leg` packages
+- **1.0.0** (this release):
+  - export to Akoma Ntoso 3.0 and LEOS `.leg` packages, and the official Akoma Ntoso where a source publishes it
+  - original versions for Germany and Sweden; consolidated texts for Portugal and Romania
+  - `tulit dump` for the French DILA dumps
+  - a stable API and legalJSON schema (1.0), `tulit.errors`, and a live corpus of 397 real acts checked weekly
 
 ### Access to law and reuse
 

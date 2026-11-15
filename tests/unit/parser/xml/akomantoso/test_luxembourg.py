@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch, MagicMock
 from lxml import etree
 from tulit.parser.xml.akomantoso.luxembourg import LuxembourgAKNParser
 

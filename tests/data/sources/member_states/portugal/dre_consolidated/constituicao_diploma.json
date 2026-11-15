@@ -1,0 +1,26 @@
+{
+ "versionInfo": {
+  "hasModuleVersionChanged": false,
+  "hasApiVersionChanged": false
+ },
+ "data": {
+  "ConsolidadaConteudoDetalhe": {
+   "DiplomaFrag": {
+    "ConteudoTitle": "Decreto de Aprovação da Constituição ",
+    "Designacao": "Constituição da República Portuguesa - CRP",
+    "ELI": "https://data.dre.pt/eli",
+    "DiplomaLegisId": "502635"
+   },
+   "DiplomaLegis": {
+    "ConteudoTitle": "Decreto de Aprovação da Constituição ",
+    "Numero": "",
+    "Sumario": "Aprova a Constituição da República Portuguesa",
+    "DataPublicacao": "1976-04-10T00:00:00Z"
+   },
+   "TipoDiploma": {
+    "Acronimo": "decapconst",
+    "Tipo": "Decreto de Aprovação da Constituição"
+   }
+  }
+ }
+}

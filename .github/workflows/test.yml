@@ -29,6 +29,8 @@ jobs:
       run: poetry config virtualenvs.create false
     - name: Install dependencies
       run: poetry install --no-interaction --no-ansi --all-extras
+    - name: Lint
+      run: poetry run flake8 tulit tests docs/generate_jurisdictions.py
     - name: Run tests
       run: poetry run pytest ./tests/unit --cov=tulit --cov-report=xml
 

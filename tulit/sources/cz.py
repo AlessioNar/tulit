@@ -6,6 +6,7 @@ from typing import Any, Optional
 
 from tulit.client.state.czechia import ESBIRKA, EsbirkaClient
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
+from tulit.parser.exceptions import UnsupportedError
 
 _CITATION = re.compile(r'^(?:zákon\s+)?(?:č\.\s*)?(?P<number>\d+)\s*/\s*(?P<year>\d{4})(?:\s*Sb\.?)?$', re.IGNORECASE)
 _PATH = re.compile(r'(?:^|/)(?:eli/cz/)?sb/(?P<year>\d{4})/(?P<number>\d+)(?:/(?P<date>\d{4}-\d{2}-\d{2}))?')
@@ -20,7 +21,7 @@ def act_path(identifier: str) -> tuple[str, Optional[str]]:
     match = _PATH.search(text)
     if match:
         return f"/sb/{match.group('year')}/{match.group('number')}", match.group('date')
-    raise ValueError(f"'{identifier}' is not a Collection of Laws reference; use e.g. '110/2019 Sb.'")
+    raise UnsupportedError(f"'{identifier}' is not a Collection of Laws reference; use e.g. '110/2019 Sb.'")
 
 
 class CzechiaSource(Source):
@@ -58,7 +59,7 @@ class CzechiaSource(Source):
             version = version or ORIGINAL
             if version == ORIGINAL:
                 if date:
-                    raise ValueError("A date selects a consolidated version; the original version has none")
+                    raise UnsupportedError("A date selects a consolidated version; the original version has none")
                 when = first
             else:
                 when = date

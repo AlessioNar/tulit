@@ -5,10 +5,7 @@ Uses files downloaded by EU Cellar client e2e tests as fixtures.
 """
 
 import pytest
-import os
 import json
-from pathlib import Path
-import logging
 
 
 @pytest.mark.e2e
@@ -21,7 +18,7 @@ class TestCellarHTMLParsers:
         """Test parsing Cellar HTML documents."""
         sources_dir = db_paths['sources'] / 'eu' / 'cellar'
         results_dir = db_paths['results'] / 'eu' / 'cellar'
-        logs_dir = db_paths['logs']
+        db_paths['logs']
 
         # Find downloaded HTML files
         html_files = list(sources_dir.glob('*.html'))
@@ -56,7 +53,7 @@ class TestCellarHTMLParsers:
         """Test parsing Cellar standard HTML documents."""
         sources_dir = db_paths['sources'] / 'eu' / 'cellar'
         results_dir = db_paths['results'] / 'eu' / 'cellar'
-        logs_dir = db_paths['logs']
+        db_paths['logs']
 
         # Find downloaded HTML files
         html_files = list(sources_dir.glob('*.html'))
@@ -90,7 +87,7 @@ class TestCellarHTMLParsers:
         """Test parsing proposal HTML documents."""
         sources_dir = db_paths['sources'] / 'eu' / 'cellar'
         results_dir = db_paths['results'] / 'eu' / 'cellar'
-        logs_dir = db_paths['logs']
+        db_paths['logs']
 
         # Find downloaded HTML files
         html_files = list(sources_dir.glob('*.html'))

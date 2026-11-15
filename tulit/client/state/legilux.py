@@ -9,7 +9,9 @@ from tulit.parser.exceptions import FileLoadError, NetworkError
 LEGILUX_DATA = 'https://data.legilux.public.lu'
 SPARQL_ENDPOINT = f'{LEGILUX_DATA}/sparqlendpoint'
 JOLUX = 'http://data.legilux.public.lu/resource/ontology/jolux#'
-_ACT_PATH = re.compile(r'^(?:https?://(?:data\.)?legilux\.public\.lu/)?(?:eli/)?(etat/[a-z]+/[a-z]+/\d{4}/\d{2}/\d{2}/[\w-]+)')
+_ACT_PATH = re.compile(
+    r'^(?:https?://(?:data\.)?legilux\.public\.lu/)?(?:eli/)?(etat/[a-z]+/[a-z]+/\d{4}/\d{2}/\d{2}/[\w-]+)'
+)
 
 
 def act_path(identifier):
@@ -26,17 +28,17 @@ def act_path(identifier):
             f"'{identifier}' is not a Legilux ELI; use e.g. 'etat/leg/loi/2016/07/23/n21'")
     return match.group(1)
 
+
 class LegiluxClient(Client):
     def __init__(self, download_dir, log_dir=None, proxies=None):
         super().__init__(download_dir, log_dir, proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
-        #self.endpoint = "https://legilux.public.lu/eli/etat/leg/loi"
 
     def build_request_url(self, eli) -> str:
         self.logger.info(f"Building request URL for ELI: {eli}")
         # The data API endpoint returns XML by default
         return eli
-    
+
     def fetch_content(self, url):
         self.logger.info(f"Fetching content from URL: {url}")
         headers = {
@@ -64,7 +66,7 @@ class LegiluxClient(Client):
         else:
             # Fallback: use last parts of ELI
             filename = '_'.join(eli_parts[-4:])
-        
+
         # Clean filename
         filename = filename.replace('/', '_').replace('?', '_').replace('&', '_')
         if response.status_code == 200:
@@ -132,4 +134,3 @@ class LegiluxClient(Client):
             with open(target, 'wb') as f:
                 f.write(response.content)
         return target
-

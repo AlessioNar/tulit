@@ -1,19 +1,22 @@
 Welcome to tulit's documentation!
 ===================================
 
-**tulit** is a comprehensive Python library for retrieving and parsing legal documents from various jurisdictions and formats.
+**tulit** retrieves the legislation of the European Union and of its 27 Member
+States from their official sources, as adopted and as in force on any date, and
+converts it to one format, legalJSON, whatever the source publishes (XML, HTML,
+JSON or PDF). It also writes Akoma Ntoso 3.0 and LEOS packages.
 
-The library provides:
+.. code-block:: python
 
-* **Clients** for downloading documents from official legal databases (EU Cellar and the official portals of the Member States)
-* **Parsers** for converting legal documents into structured JSON (Akoma Ntoso, Formex, HTML formats)
-* **Modern architecture** following best practices and design patterns
+    import tulit
 
-Check out the :doc:`getting_started` section for installation and basic usage, or :doc:`architecture` for details about the library's design.
+    doc = tulit.fetch("32016R0679")                                   # GDPR, from EUR-Lex
+    doc = tulit.fetch("10001597", jurisdiction="AT", version="consolidated")
+    xml = tulit.export(doc, to="akn")
 
-.. note::
-
-   This project is under active development.
+Start with :doc:`getting_started`; :doc:`jurisdictions` lists what each country
+offers, :doc:`legaljson` describes the output, and :doc:`export` the Akoma Ntoso
+and LEOS formats.
 
 Contents
 --------
@@ -23,12 +26,17 @@ Contents
    :caption: User Guide
 
    getting_started
+   jurisdictions
+   legaljson
+   export
+   migration
    architecture
 
 .. toctree::
    :maxdepth: 2
    :caption: API Reference
 
+   api
    client
    parsers
 

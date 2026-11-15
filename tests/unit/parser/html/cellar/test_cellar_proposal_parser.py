@@ -1,7 +1,6 @@
 import pytest
 import os
-from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from tulit.parser.html.cellar.proposal import ProposalHTMLParser
 from tests.conftest import locate_data_dir
 
@@ -53,7 +52,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'institution' in proposal_parser.metadata
         assert proposal_parser.metadata['institution'] == 'EUROPEAN COMMISSION'
 
@@ -66,7 +65,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'emission_date' in proposal_parser.metadata
         assert 'Brussels' in proposal_parser.metadata['emission_date']
 
@@ -79,7 +78,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'com_reference' in proposal_parser.metadata
         assert 'COM(2025)' in proposal_parser.metadata['com_reference']
 
@@ -92,7 +91,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'interinstitutional_reference' in proposal_parser.metadata
 
     def test_get_metadata_status(self, proposal_parser, tmp_path):
@@ -104,7 +103,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'status' in proposal_parser.metadata
         assert proposal_parser.metadata['status'] == 'Proposal for a'
 
@@ -117,7 +116,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'document_type' in proposal_parser.metadata
         assert proposal_parser.metadata['document_type'] == 'COUNCIL DECISION'
 
@@ -130,7 +129,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_metadata()
-        
+
         assert 'title' in proposal_parser.metadata
         assert 'Digital Decade' in proposal_parser.metadata['title']
 
@@ -187,9 +186,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('div')
-        
+
         result = proposal_parser._process_heading_level1_em(element, None, [])
-        
+
         assert result['level'] == 1
         assert result['number'] == '1.'
         assert 'Introduction' in result['heading']
@@ -203,9 +202,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('div')
-        
+
         result = proposal_parser._process_heading_level1_em(element, None, [])
-        
+
         assert result['number'] is None
         assert 'Unnumbered Section' in result['heading']
 
@@ -218,9 +217,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('div')
-        
+
         result = proposal_parser._process_heading_level2_em(element)
-        
+
         assert result['level'] == 2
         assert result['number'] == '1.1'
         assert 'Background' in result['heading']
@@ -234,9 +233,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('div')
-        
+
         result = proposal_parser._process_heading_level3_em(element)
-        
+
         assert result['level'] == 3
         assert result['number'] == '1.1.1'
 
@@ -249,9 +248,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('p')
-        
+
         result = proposal_parser._process_numbered_paragraph_em(element)
-        
+
         assert result['type'] == 'numbered_paragraph'
         assert result['number'] == '(1)'
         assert 'First paragraph' in result['text']
@@ -265,9 +264,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('p')
-        
+
         result = proposal_parser._process_numbered_paragraph_em(element)
-        
+
         assert result['number'] is None
         assert 'Paragraph without number' in result['text']
 
@@ -280,9 +279,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('p')
-        
+
         result = proposal_parser._process_normal_paragraph_em(element)
-        
+
         assert result['type'] == 'paragraph'
         assert 'Normal paragraph' in result['text']
 
@@ -295,9 +294,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('p')
-        
+
         result = proposal_parser._process_normal_paragraph_em(element)
-        
+
         assert result is None
 
     def test_process_table_em(self, proposal_parser, tmp_path):
@@ -312,9 +311,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('table')
-        
+
         result = proposal_parser._process_table_em(element)
-        
+
         assert result['type'] == 'table'
         assert len(result['data']) == 2
         assert result['data'][0] == ['Cell 1', 'Cell 2']
@@ -328,18 +327,18 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('table')
-        
+
         result = proposal_parser._process_table_em(element)
-        
+
         assert result is None
 
     def test_add_content_to_section_em(self, proposal_parser):
         """Test _add_content_to_section_em adds content."""
         section = {'level': 1, 'content': []}
         content_item = {'type': 'paragraph', 'text': 'Test'}
-        
+
         proposal_parser._add_content_to_section_em(section, content_item)
-        
+
         assert len(section['content']) == 1
         assert section['content'][0] == content_item
 
@@ -382,7 +381,7 @@ class TestProposalHTMLParser:
             '<html><body><p class="Logo">TEST</p></body></html>',
             encoding='utf-8'
         )
-        
+
         with patch.object(proposal_parser, 'get_metadata') as mock_metadata:
             proposal_parser.parse(str(html_file))
             mock_metadata.assert_called_once()
@@ -391,7 +390,7 @@ class TestProposalHTMLParser:
         """Test parse calls get_preface."""
         html_file = tmp_path / "simple.html"
         html_file.write_text('<html><body></body></html>', encoding='utf-8')
-        
+
         with patch.object(proposal_parser, 'get_preface') as mock_preface:
             proposal_parser.parse(str(html_file))
             mock_preface.assert_called_once()
@@ -405,7 +404,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_explanatory_memorandum()
-        
+
         assert 'title' in proposal_parser.explanatory_memorandum
         assert 'EXPLANATORY' in proposal_parser.explanatory_memorandum['title']
 
@@ -424,7 +423,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_explanatory_memorandum()
-        
+
         assert 'sections' in proposal_parser.explanatory_memorandum
         assert len(proposal_parser.explanatory_memorandum['sections']) > 0
 
@@ -448,7 +447,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_preface()
-        
+
         assert 'Second status' in proposal_parser.preface
 
     def test_get_preface_single_status(self, proposal_parser, tmp_path):
@@ -463,7 +462,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_preface()
-        
+
         assert 'Only status' in proposal_parser.preface
         assert 'REGULATION' in proposal_parser.preface
 
@@ -473,7 +472,7 @@ class TestProposalHTMLParser:
         html_file.write_text('<html><body></body></html>', encoding='utf-8')
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_preface()
-        
+
         assert proposal_parser.preface is None
 
     def test_get_preamble_success(self, proposal_parser, tmp_path):
@@ -502,7 +501,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_preamble()
-        
+
         assert proposal_parser.preamble is None
 
     def test_get_formula_success(self, proposal_parser, tmp_path):
@@ -517,7 +516,7 @@ class TestProposalHTMLParser:
         proposal_parser.get_root(str(html_file))
         proposal_parser.preamble = proposal_parser.root.find('div', class_='content')
         proposal_parser.get_formula()
-        
+
         assert proposal_parser.formula is not None
         assert 'EUROPEAN PARLIAMENT' in proposal_parser.formula
 
@@ -525,7 +524,7 @@ class TestProposalHTMLParser:
         """Test get_formula with no preamble."""
         proposal_parser.preamble = None
         proposal_parser.get_formula()
-        
+
         assert proposal_parser.formula is None
 
     def test_get_citations_success(self, proposal_parser, tmp_path):
@@ -542,7 +541,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_citations()
-        
+
         assert len(proposal_parser.citations) == 2
         assert 'Treaty' in proposal_parser.citations[0]['text']
 
@@ -552,7 +551,7 @@ class TestProposalHTMLParser:
         html_file.write_text('<html><body><p>No formula here</p></body></html>', encoding='utf-8')
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_citations()
-        
+
         assert proposal_parser.citations == []
 
     def test_get_citations_stops_at_whereas(self, proposal_parser, tmp_path):
@@ -569,7 +568,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_citations()
-        
+
         assert len(proposal_parser.citations) == 1
 
     def test_get_recitals_success(self, proposal_parser, tmp_path):
@@ -584,7 +583,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_recitals()
-        
+
         assert len(proposal_parser.recitals) == 2
         assert proposal_parser.recitals[0]['num'] == '(1)'
         assert 'First recital' in proposal_parser.recitals[0]['text']
@@ -598,7 +597,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_recitals()
-        
+
         assert len(proposal_parser.recitals) == 1
         assert proposal_parser.recitals[0]['num'] is None
 
@@ -614,14 +613,14 @@ class TestProposalHTMLParser:
         proposal_parser.get_root(str(html_file))
         proposal_parser.preamble = proposal_parser.root.find('div', class_='content')
         proposal_parser.get_preamble_final()
-        
+
         assert 'HAS ADOPTED' in proposal_parser.preamble_final
 
     def test_get_preamble_final_no_preamble(self, proposal_parser):
         """Test get_preamble_final with no preamble."""
         proposal_parser.preamble = None
         proposal_parser.get_preamble_final()
-        
+
         assert proposal_parser.preamble_final is None
 
     def test_get_body_success(self, proposal_parser, tmp_path):
@@ -637,14 +636,14 @@ class TestProposalHTMLParser:
         proposal_parser.get_root(str(html_file))
         proposal_parser.preamble = proposal_parser.root.find('div', class_='content')
         proposal_parser.get_body()
-        
+
         assert proposal_parser.body is not None
 
     def test_get_body_no_preamble(self, proposal_parser):
         """Test get_body with no preamble."""
         proposal_parser.preamble = None
         proposal_parser.get_body()
-        
+
         assert proposal_parser.body is None
 
     def test_is_after_fait_true(self, proposal_parser, tmp_path):
@@ -660,7 +659,7 @@ class TestProposalHTMLParser:
         proposal_parser.get_root(str(html_file))
         fait_elem = proposal_parser.root.find('p', id='fait')
         article_elem = proposal_parser.root.find('p', id='article')
-        
+
         result = proposal_parser._is_after_fait(article_elem, fait_elem)
         assert result is True
 
@@ -677,7 +676,7 @@ class TestProposalHTMLParser:
         proposal_parser.get_root(str(html_file))
         fait_elem = proposal_parser.root.find('p', id='fait')
         article_elem = proposal_parser.root.find('p', id='article')
-        
+
         result = proposal_parser._is_after_fait(article_elem, fait_elem)
         assert result is False
 
@@ -690,9 +689,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('p')
-        
+
         num, heading = proposal_parser._extract_article_number_and_heading(element)
-        
+
         assert 'Article 1' in num
         assert heading == 'Scope'
 
@@ -705,9 +704,9 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         element = proposal_parser.root.find('p')
-        
+
         num, heading = proposal_parser._extract_article_number_and_heading(element)
-        
+
         assert 'Article 2' in num
         assert heading is None
 
@@ -776,7 +775,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_articles()
-        
+
         assert len(proposal_parser.articles) == 2
         assert proposal_parser.articles[0]['eId'] == '001'
 
@@ -794,14 +793,14 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_articles()
-        
+
         assert len(proposal_parser.articles) == 1
 
     def test_get_articles_exception(self, proposal_parser):
         """Test get_articles handles exception."""
         proposal_parser.root = None
         proposal_parser.get_articles()
-        
+
         assert proposal_parser.articles == []
 
     def test_get_conclusions_with_fait_and_signature(self, proposal_parser, tmp_path):
@@ -816,7 +815,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_conclusions()
-        
+
         assert 'Done at Brussels' in proposal_parser.conclusions
         assert 'For the Council' in proposal_parser.conclusions
 
@@ -829,7 +828,7 @@ class TestProposalHTMLParser:
         )
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_conclusions()
-        
+
         assert 'Done at Brussels' in proposal_parser.conclusions
 
     def test_get_conclusions_none(self, proposal_parser, tmp_path):
@@ -838,5 +837,5 @@ class TestProposalHTMLParser:
         html_file.write_text('<html><body></body></html>', encoding='utf-8')
         proposal_parser.get_root(str(html_file))
         proposal_parser.get_conclusions()
-        
+
         assert proposal_parser.conclusions is None

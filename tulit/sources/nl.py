@@ -11,7 +11,7 @@ from typing import Any, Optional
 from lxml import etree
 
 from tulit.client.state.netherlands import BWB_ID, BWBClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
 OFFICIAL_PUBLICATIONS = 'https://zoek.officielebekendmakingen.nl'
@@ -66,17 +66,17 @@ class NetherlandsSource(Source):
         publication = staatsblad_id(identifier)
         bwb_id = identifier.strip()
         if publication is None and not BWB_ID.match(bwb_id):
-            raise ValueError(f"'{identifier}' is not a BWB or Staatsblad identifier; use {self.identifier_help}")
+            raise UnsupportedError(f"'{identifier}' is not a BWB or Staatsblad identifier; use {self.identifier_help}")
         version = version or (ORIGINAL if publication else CONSOLIDATED)
 
         if version == CONSOLIDATED:
             if publication:
-                raise ValueError("Consolidated law is addressed by its BWB identifier (e.g. 'BWBR0040940'), "
-                                 "not by a Staatsblad identifier")
+                raise UnsupportedError("Consolidated law is addressed by its BWB identifier (e.g. 'BWBR0040940'), "
+                                       "not by a Staatsblad identifier")
             return self._consolidated(client, bwb_id, date, version)
 
         if date:
-            raise ValueError("A date selects a consolidated version; the original version has none")
+            raise UnsupportedError("A date selects a consolidated version; the original version has none")
         if publication is None:
             publication = client.original_publication(bwb_id)
             if publication is None:

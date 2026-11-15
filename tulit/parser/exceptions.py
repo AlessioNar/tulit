@@ -8,7 +8,19 @@ allows for better exception handling patterns.
 
 
 class ParserError(Exception):
-    """Base exception for all parser-related errors."""
+    """Base exception for all errors raised by tulit (also available as ``TulitError``)."""
+    pass
+
+
+TulitError = ParserError
+
+
+class UnsupportedError(ParserError, ValueError):
+    """
+    Raised when a request is not supported: an unknown jurisdiction, version,
+    language, option, export format, or an identifier a source does not
+    recognise. A ``ValueError`` too, as tulit raised before 1.0.
+    """
     pass
 
 
@@ -54,6 +66,7 @@ class SPARQLError(ParserError):
 
 class SchemaValidationError(ValidationError):
     """Raised when XML document fails schema validation."""
+
     def __init__(self, message, validation_errors=None):
         super().__init__(message)
         self.validation_errors = validation_errors
@@ -61,6 +74,7 @@ class SchemaValidationError(ValidationError):
 
 class ContentTypeError(ParserError):
     """Raised when unexpected content type is received."""
+
     def __init__(self, message, content_type=None):
         super().__init__(message)
         self.content_type = content_type
@@ -68,6 +82,7 @@ class ContentTypeError(ParserError):
 
 class ElementNotFoundError(ExtractionError):
     """Raised when expected XML/HTML element is not found."""
+
     def __init__(self, message, element_name=None, xpath=None):
         super().__init__(message)
         self.element_name = element_name

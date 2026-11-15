@@ -13,20 +13,20 @@ from abc import ABC, abstractmethod
 import jsonschema
 import json
 import logging
-from typing import Any, Optional, List, Dict
+from typing import Any, Optional
 from logging import Logger
 
-# Import from organized modules
-from tulit.parser.exceptions import (
+# Re-exported: modules and users import these from tulit.parser.parser
+from tulit.parser.exceptions import (  # noqa: F401
     ParserError, ParseError, ValidationError, ExtractionError, FileLoadError
 )
-from tulit.parser.models import (
+from tulit.parser.models import (  # noqa: F401
     Citation, Recital, Article, ArticleChild, Chapter
 )
-from tulit.parser.registry import (
+from tulit.parser.registry import (  # noqa: F401
     ParserRegistry, get_parser_registry, register_parser, get_parser
 )
-from tulit.parser.normalization import (
+from tulit.parser.normalization import (  # noqa: F401
     TextNormalizationStrategy,
     WhitespaceNormalizer,
     UnicodeNormalizer,
@@ -37,6 +37,8 @@ from tulit.parser.normalization import (
     create_formex_normalizer,
 )
 
+# Import from organized modules
+
 
 # ============================================================================
 # Parser Abstract Base Class
@@ -46,12 +48,12 @@ from tulit.parser.normalization import (
 class Parser(ABC):
     """
     Abstract base class for legal document parsers.
-    
+
     All subclasses must implement:
     - get_preface()
     - get_articles()
     - parse()
-    
+
     Optional methods with default implementations:
     - get_preamble()
     - get_formula()
@@ -61,7 +63,7 @@ class Parser(ABC):
     - get_body()
     - get_chapters()
     - get_conclusions()
-    
+
     Attributes
     ----------
     root : lxml.etree._Element or bs4.BeautifulSoup
@@ -90,7 +92,7 @@ class Parser(ABC):
     conclusions : None or dict
         Extracted conclusions from the body.
     """
-    
+
     def __init__(self) -> None:
         """
         Initializes the Parser object.
@@ -101,7 +103,7 @@ class Parser(ABC):
         """
         # Initialize logger with fully qualified class name
         self.logger: Logger = logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
-       
+
         self.root: Any = None  # Can be lxml.etree._Element or bs4.BeautifulSoup
         self.preface: Optional[str] = None
 
@@ -111,7 +113,7 @@ class Parser(ABC):
         self.recitals_init: Optional[str] = None
         self.recitals: list[dict[str, str]] = []
         self.preamble_final: Optional[str] = None
-    
+
         self.body: Any = None  # Can be lxml.etree.Element or bs4.Tag
         self.chapters: list[dict[str, Any]] = []
         self.articles: list[dict[str, Any]] = []
@@ -123,61 +125,58 @@ class Parser(ABC):
     def get_preface(self) -> Optional[str]:
         """
         Extract document preface/title.
-        
+
         MUST be implemented by all subclasses.
-        
+
         Returns
         -------
         str or None
             Document title/preface text
         """
-        pass
 
     @abstractmethod
     def get_articles(self) -> None:
         """
         Extract articles from document body.
-        
+
         MUST be implemented by all subclasses.
         Extracts articles and stores them in self.articles as a list of dictionaries.
-        
+
         Returns
         -------
         None
             Articles are stored in self.articles attribute
         """
-        pass
 
     @abstractmethod
     def parse(self, file: str, **options) -> 'Parser':
         """
         Parse document and extract all components.
-        
+
         MUST be implemented by all subclasses.
-        
+
         Parameters
         ----------
         file : str
             Path to document file
         **options : dict
             Optional parser-specific configuration options
-            
+
         Returns
         -------
         Parser
             Self (for method chaining)
         """
-        pass
 
     # Optional methods with default implementations
 
     def get_preamble(self) -> Optional[Any]:
         """
         Extract preamble section.
-        
+
         Override in subclass if format has preamble.
         Default returns None.
-        
+
         Returns
         -------
         Any or None
@@ -188,10 +187,10 @@ class Parser(ABC):
     def get_formula(self) -> Optional[str]:
         """
         Extract formula (enacting clause).
-        
+
         Override in subclass if format has formula.
         Default returns None.
-        
+
         Returns
         -------
         str or None
@@ -202,10 +201,10 @@ class Parser(ABC):
     def get_citations(self) -> list[dict[str, str]]:
         """
         Extract citations/references.
-        
+
         Override in subclass if format has citations.
         Default returns empty list.
-        
+
         Returns
         -------
         list[dict[str, str]]
@@ -216,10 +215,10 @@ class Parser(ABC):
     def get_recitals(self) -> list[dict[str, str]]:
         """
         Extract recitals (whereas clauses).
-        
+
         Override in subclass if format has recitals.
         Default returns empty list.
-        
+
         Returns
         -------
         list[dict[str, str]]
@@ -230,10 +229,10 @@ class Parser(ABC):
     def get_preamble_final(self) -> Optional[str]:
         """
         Extract final preamble text.
-        
+
         Override in subclass if format has final preamble.
         Default returns None.
-        
+
         Returns
         -------
         str or None
@@ -244,10 +243,10 @@ class Parser(ABC):
     def get_body(self) -> Optional[Any]:
         """
         Extract body section.
-        
+
         Override in subclass if needed.
         Default returns None.
-        
+
         Returns
         -------
         Any or None
@@ -258,10 +257,10 @@ class Parser(ABC):
     def get_chapters(self) -> list[dict[str, Any]]:
         """
         Extract chapters.
-        
+
         Override in subclass if format has chapters.
         Default returns empty list.
-        
+
         Returns
         -------
         list[dict[str, Any]]
@@ -272,10 +271,10 @@ class Parser(ABC):
     def get_conclusions(self) -> Optional[dict[str, Any]]:
         """
         Extract conclusions section.
-        
+
         Override in subclass if format has conclusions.
         Default returns None.
-        
+
         Returns
         -------
         dict[str, Any] or None
@@ -301,7 +300,7 @@ class Parser(ABC):
         dict
             A dictionary containing all extracted elements from the document
             with JSON-serializable values.
-        
+
         Raises
         ------
         ParseError
@@ -357,7 +356,10 @@ class Parser(ABC):
                 return obj
             except Exception:
                 # For truly unknown types, log a warning but return string representation
-                self.logger.warning(f"Unknown object type {type(obj)} encountered during serialization, converting to string")
+                self.logger.warning(
+                    f"Unknown object type {type(obj)} encountered during serialization, "
+                    "converting to string"
+                )
                 return str(obj)
 
         # Some HTML parsers store conclusions as a bare string; legalJSON
@@ -385,13 +387,14 @@ class Parser(ABC):
                 'annexes': _serialize(self.annexes)
             }
         except Exception as e:
-            from tulit.parser.exceptions import ParseError
             raise ParseError(f"Failed to convert parser data to dictionary: {e}") from e
+
 
 class LegalJSONValidator:
     """
     Validator for LegalJSON output using the LegalJSON schema.
     """
+
     def __init__(self, schema_path: Optional[str] = None) -> None:
         if schema_path is None:
             import os

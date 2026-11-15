@@ -5,12 +5,15 @@ from tulit.client.client import Client
 from tulit.parser.exceptions import ContentTypeError
 import os
 
-_LISTED = re.compile(r'/statute-consolidated/(?P<year>\d{4})/(?P<number>[\d-]+)/(?P<language>[a-z]{3})@(?P<version>\w*)$')
+_LISTED = re.compile(
+    r'/statute-consolidated/(?P<year>\d{4})/(?P<number>[\d-]+)/(?P<language>[a-z]{3})@(?P<version>\w*)$'
+)
 
 
 def _number_key(number):
     """'39-001' -> (39, 1), for comparing statute numbers as the API sorts them."""
     return tuple(int(part) for part in str(number).split('-') if part.isdigit())
+
 
 class FinlexClient(Client):
     """
@@ -112,7 +115,9 @@ class FinlexClient(Client):
         kind = 'statute-consolidated' if consolidated else 'statute'
         url = f"{self.BASE_URL}/akn/{lang}/{doc_type}/{kind}/{year}/{number}/{language}%40{version}"
         try:
-            self.logger.info(f"Requesting Finlex statute: year={year}, number={number}, lang={lang}, doc_type={doc_type}")
+            self.logger.info(
+                f"Requesting Finlex statute: year={year}, number={number}, lang={lang}, doc_type={doc_type}"
+            )
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
             content_type = response.headers.get('Content-Type', '')
@@ -137,4 +142,3 @@ class FinlexClient(Client):
         except Exception as e:
             self.logger.error(f"Error downloading Finlex statute: {e}")
             return None
-

@@ -65,7 +65,7 @@ class MaltaPDFParser(Parser):
         first_page = lines[arrangement].page + 1 if arrangement is not None else 0
         start = next((i for i, line in enumerate(lines)
                       if line.page >= first_page and (_DIVISION.match(line.text)
-                                                       or re.match(r'^1\.\s+\S', line.text))), len(lines))
+                                                      or re.match(r'^1\.\s+\S', line.text))), len(lines))
         if arrangement is not None:
             # The arrangement of a code runs over several pages: the body opens with article 1,
             # after the headings printed above it on its page

@@ -8,7 +8,7 @@ from typing import Any, Optional
 from lxml import etree
 
 from tulit.client.state.irishstatutebook import IrishStatuteBookClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, Retrieval, Source
 
 ISB_ELI = 'http://www.irishstatutebook.ie/eli'
@@ -25,7 +25,7 @@ def act_number(identifier: str) -> tuple[str, str]:
     match = re.search(r'(?:^|/)(\d{4})/act/(\d+)', text)
     if match:
         return match.group(1), match.group(2)
-    raise ValueError(f"'{identifier}' is not an Irish Act number; use number/year, e.g. '7/2018'")
+    raise UnsupportedError(f"'{identifier}' is not an Irish Act number; use number/year, e.g. '7/2018'")
 
 
 def _iso(text: Optional[str]) -> Optional[str]:
@@ -61,7 +61,7 @@ class IrelandSource(Source):
         **options: Any,
     ) -> Retrieval:
         if date:
-            raise ValueError("Revised Acts are kept up to date as a single version; a date cannot be selected")
+            raise UnsupportedError("Revised Acts are kept up to date as a single version; a date cannot be selected")
         year, number = act_number(identifier)
         consolidated = version == CONSOLIDATED
         client = IrishStatuteBookClient(download_dir=download_dir)

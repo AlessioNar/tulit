@@ -4,6 +4,7 @@ Registry of the jurisdictions tulit supports.
 from typing import Dict, List, Optional, Tuple
 
 from tulit.sources.base import Source
+from tulit.parser.exceptions import UnsupportedError
 
 _sources: Dict[str, Source] = {}
 _builtins_registered = False
@@ -71,7 +72,7 @@ def get_source(code: str) -> Source:
     _register_builtin_sources()
     source = _sources.get(code.upper())
     if source is None:
-        raise ValueError(
+        raise UnsupportedError(
             f"Unsupported jurisdiction '{code}'. Available: {', '.join(list_sources())}"
         )
     return source

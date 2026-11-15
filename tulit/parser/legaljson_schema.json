@@ -1,70 +1,126 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/AlessioNar/tulit/blob/main/tulit/parser/legaljson_schema.json?v=1.0",
     "title": "LegalJSON",
     "type": "object",
     "properties": {
+        "schema_version": {
+            "type": "string",
+            "description": "Version of the legalJSON schema this document follows, e.g. '1.0'. Minor versions add optional fields; a new major version may change or remove them."
+        },
         "meta": {
             "type": "object",
             "description": "Document-level metadata, external to the text: identifiers, dates, status and work-level relations (from the Cellar/ELI metadata record).",
             "properties": {
                 "celex": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "CELEX number, e.g. 32019R0943."
                 },
                 "eli": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "European Legislation Identifier URI, e.g. http://data.europa.eu/eli/reg/2019/943/oj."
                 },
                 "cellar_uuid": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Cellar work UUID."
                 },
                 "date_document": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Document date (ISO 8601)."
                 },
                 "in_force": {
-                    "type": ["boolean", "string", "null"]
+                    "type": [
+                        "boolean",
+                        "string",
+                        "null"
+                    ]
                 },
                 "amends": {
                     "type": "array",
-                    "items": {"type": "string"},
+                    "items": {
+                        "type": "string"
+                    },
                     "description": "CELEX numbers of acts this act amends."
                 },
                 "repeals": {
                     "type": "array",
-                    "items": {"type": "string"},
+                    "items": {
+                        "type": "string"
+                    },
                     "description": "CELEX numbers of acts this act repeals."
                 },
                 "corrects": {
                     "type": "array",
-                    "items": {"type": "string"},
+                    "items": {
+                        "type": "string"
+                    },
                     "description": "CELEX numbers of acts this act corrects."
                 },
                 "source": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Path or URI of the source document(s) this JSON was parsed from."
                 },
                 "valid": {
-                    "type": ["boolean", "null"],
+                    "type": [
+                        "boolean",
+                        "null"
+                    ],
                     "description": "Whether the source XML validated against its schema (e.g. formex4.xsd)."
                 },
                 "jurisdiction": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Jurisdiction of the act: 'EU' or the ISO 3166-1 alpha-2 code of a Member State (FRBR work country)."
                 },
                 "language": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Language of this text as an ISO 639-3 code, e.g. 'eng', 'deu' (FRBR expression language)."
                 },
                 "version": {
-                    "type": ["string", "null"],
-                    "enum": ["original", "consolidated", null],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "original",
+                        "consolidated",
+                        null
+                    ],
                     "description": "'original' for the text as adopted, 'consolidated' for the text in force at version_date (FRBR expression)."
                 },
                 "version_date": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "ISO date of this version: the adoption or publication date for originals, the date a consolidated text applies from (FRBR expression date)."
+                },
+                "identifier": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "The identifier the act was fetched by, as given to tulit.fetch (after resolving an ELI)."
                 }
             }
         },

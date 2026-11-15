@@ -15,7 +15,7 @@ from typing import Any, Optional
 from lxml import etree
 
 from tulit.client.state.finlex import FinlexClient
-from tulit.parser.exceptions import FileLoadError
+from tulit.parser.exceptions import FileLoadError, UnsupportedError
 from tulit.sources.base import CONSOLIDATED, Retrieval, Source
 
 FINLEX_ELI = 'http://data.finlex.fi/eli/sd'
@@ -33,7 +33,7 @@ def statute_number(identifier: str) -> tuple[str, str]:
     match = re.search(r'(?:^|/)sd/(\d{4})/(\d+(?:-\d+)?)(?:/\w+)?$', text)
     if match:
         return match.group(1), match.group(2)
-    raise ValueError(f"'{identifier}' is not a Finnish statute number; use number/year, e.g. '1050/2018'")
+    raise UnsupportedError(f"'{identifier}' is not a Finnish statute number; use number/year, e.g. '1050/2018'")
 
 
 class FinlandSource(Source):
@@ -63,7 +63,7 @@ class FinlandSource(Source):
             path, version_date, number = self._consolidated(client, year, numbers, language, date)
         else:
             if date:
-                raise ValueError("A date selects a consolidated version; the original version has none")
+                raise UnsupportedError("A date selects a consolidated version; the original version has none")
             path = None
             for candidate in numbers:
                 path = client.download(year, candidate, consolidated=False, language=language)

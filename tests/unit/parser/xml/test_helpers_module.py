@@ -76,7 +76,8 @@ class TestXMLHelpersAndParser(unittest.TestCase):
 
     def test_validator_load_schema_and_errors(self):
         # locate the packaged schema and ensure it can be loaded
-        import importlib, os
+        import importlib
+        import os
         pkg = importlib.import_module('tulit.parser')
         schema = os.path.join(os.path.dirname(pkg.__file__), 'xml', 'assets', 'xml.xsd')
         self.assertTrue(os.path.exists(schema), f"Schema not found: {schema}")
@@ -92,7 +93,8 @@ class TestXMLHelpersAndParser(unittest.TestCase):
         self.assertIsInstance(errors, list)
 
     def test_load_relaxng_and_unknown_type(self):
-        import tempfile, os
+        import tempfile
+        import os
         # create a small RelaxNG that only accepts <root/>
         rng = b"""
         <grammar xmlns='http://relaxng.org/ns/structure/1.0'>

@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 120
+# E203: slices formatted with spaces around ':'
+extend-ignore = E203
+exclude = .git,__pycache__,.venv,build,dist,.claude,docs/build
+per-file-ignores =
+    # Imports after a module-level pattern or a skip check
+    tulit/parser/xml/formex.py: E402
+    tests/*: E402

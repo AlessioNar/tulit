@@ -4,10 +4,7 @@ Tests the complete download pipeline from external APIs to local storage.
 """
 
 import pytest
-import os
 from pathlib import Path
-import json
-import time
 
 
 @pytest.mark.e2e
@@ -44,5 +41,5 @@ class TestPortugalDREClient:
 
         # Check file content
         content = Path(result).read_text()
-        assert len(content) > 100, f"Downloaded file seems too small"
+        assert len(content) > 100, "Downloaded file seems too small"
         assert '<html' in content.lower(), "File doesn't contain HTML"

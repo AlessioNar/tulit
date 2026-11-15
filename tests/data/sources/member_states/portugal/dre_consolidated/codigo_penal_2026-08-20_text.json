@@ -1,0 +1,283 @@
+{
+ "versionInfo": {
+  "hasModuleVersionChanged": false,
+  "hasApiVersionChanged": false
+ },
+ "data": {
+  "URLPDF": "https://files.diariodarepublica.pt/1s/1995/03/063a00/13501416.pdf",
+  "HasIndice": false,
+  "HasFile": false,
+  "Query": "",
+  "Id": "",
+  "DataUltimaConsolidada": "2026-08-19",
+  "IsVersaoInicial": false,
+  "CurrentConsolidacaoId": "1160368775",
+  "LastConsolidacaoId": "1160368775",
+  "IsMultipleConsolidation": false,
+  "HasJurisprudenciaAssociada": true,
+  "LegConsBase": {
+   "List": [
+    {
+     "IsHidden": false,
+     "Nivel": 0,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Diploma",
+      "Epigrafe": "",
+      "DataVersao": "1995-06-14T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 15,
+      "Tituo": "Diploma",
+      "Identificacao": "",
+      "Epigrafe": "",
+      "Texto": "1. A tendência cada vez mais universalizante para a afirmação dos direitos do homem como princípio basilar das sociedades modernas, bem como o reforço da dimensão ética do Estado, imprimem à justiça o estatuto de primeiro garante da consolidação dos valores fundamentais reconhecidos pela comunidade, com especial destaque para a dignidade da pessoa humana.                          \nCiente de que ao Estado cumpre construir os mecanismos que garantam a liberdade dos cidadãos, o programa do Governo para a justiça, no capítulo do combate à criminalidade, elegeu como objectivos fundamentais a segurança dos cidadãos, a prevenção e repressão do crime e a recuperação do delinquente como forma de defesa social.                                                   \nNo uso da autorização legislativa concedida pelo artigo 1.º da Lei n.º 35/94, de 15 de Setembro, rectificada pela Declaração de rectificação n.º 17/94, de 13 de Dezembro, e nos termos da alínea b) do n.º 1 do artigo 201.º da Constituição, o Governo decreta o seguinte:                                   ",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1995-10-01T00:00:00Z",
+      "DataVersao": "1995-06-14T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 1,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Artigo 1.º",
+      "Epigrafe": "",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 11,
+      "Tituo": "Artigo 1.º",
+      "Identificacao": "1",
+      "Epigrafe": "",
+      "Texto": "O Código Penal, aprovado pelo Decreto-Lei n.º 400/82, de 23 de Setembro, é revisto e publicado em anexo.\n",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 1,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Assinatura",
+      "Epigrafe": "",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 7,
+      "Tituo": "Assinatura",
+      "Identificacao": "",
+      "Epigrafe": "",
+      "Texto": "Visto e aprovado em Conselho de Ministros de 5 de Janeiro de 1995. - Aníbal António Cavaco Silva - Álvaro José Brilhante Laborinho Lúcio.                 \nPromulgado em 17 de Fevereiro de 1995.\nPublique-se.\nO Presidente da República, MÁRIO SOARES.\nReferendado em 20 de Fevereiro de 1995.\nO Primeiro-Ministro, Aníbal António Cavaco Silva.",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 1,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "CÓDIGO PENAL",
+      "Epigrafe": "",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 14,
+      "Tituo": "CÓDIGO PENAL",
+      "Identificacao": "CÓDIGO PENAL",
+      "Epigrafe": "",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 2,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "I",
+      "Epigrafe": "Introdução (*)",
+      "DataVersao": "1995-06-14T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 4,
+      "Tituo": "I",
+      "Identificacao": "I",
+      "Epigrafe": "Introdução (*)",
+      "Texto": "1. O presente Código Penal baseia-se fundamentalmente nos projectos elaborados em 1963 («Parte geral») e em 1966 («Parte especial»), da autoria de Eduardo Correia.                                                            \nAquele texto («Parte geral»), correspondendo a uma visão unitária, coerente, marcadamente humanista e em muitos aspectos profundamente inovadora, foi saudado pelos mais proeminentes cultores da ciência do direito penal nacional e estrangeira. Destes salientem-se, a título exemplificativo, os nomes de Hans-Heinrich Jescheck, presidente da Associação Internacional de Direito Penal, Marc Ancel, presidente da Sociedade Internacional de Defesa Social, e Pierre Canat.                                                                 ",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1995-10-01T00:00:00Z",
+      "DataVersao": "1995-06-14T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 2,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Livro I",
+      "Epigrafe": "Parte geral",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 12,
+      "Tituo": "Livro I",
+      "Identificacao": "I",
+      "Epigrafe": "Parte geral",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 3,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Título I",
+      "Epigrafe": "Da lei criminal",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 13,
+      "Tituo": "Título I",
+      "Identificacao": "I",
+      "Epigrafe": "Da lei criminal",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 4,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Capítulo único",
+      "Epigrafe": "Princípios gerais",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 1,
+      "Tituo": "Capítulo único",
+      "Identificacao": "único",
+      "Epigrafe": "Princípios gerais",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 5,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Artigo 1.º",
+      "Epigrafe": "Princípio da legalidade",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 11,
+      "Tituo": "Artigo 1.º",
+      "Identificacao": "1",
+      "Epigrafe": "Princípio da legalidade",
+      "Texto": "1 - Só pode ser punido criminalmente o facto descrito e declarado passível de pena por lei anterior ao momento da sua prática.                              \n2 - A medida de segurança só pode ser aplicada a estados de perigosidade cujos pressupostos estejam fixados em lei anterior ao seu preenchimento.       \n3 - Não é permitido o recurso à analogia para qualificar um facto como crime, definir um estado de perigosidade ou determinar a pena ou medida de segurança que lhes corresponde.\n",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 5,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Artigo 5.º",
+      "Epigrafe": "Factos praticados fora do território português",
+      "DataVersao": "2026-08-19T01:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 11,
+      "Tituo": "Artigo 5.º",
+      "Identificacao": "5.º",
+      "Epigrafe": "Factos praticados fora do território português",
+      "Texto": "1 - Salvo tratado ou convenção internacional em contrário, a lei penal portuguesa é ainda aplicável a factos cometidos fora do território nacional:<br/>a) Quando constituírem os crimes previstos nos artigos 221.º, 262.º a 271.º, 308.º a 321.º, 325.º a 334.º, 336.º a 345.º;<br/>b) Contra portugueses, por portugueses que viverem habitualmente em Portugal ao tempo da sua prática e aqui forem encontrados.<br/>c) Quando constituírem os crimes previstos nos artigos 144.º-A, 144.º-B, 154.º-B e 154.º-C, 159.º, 161.º, 278.º a 280.º, 335.º, 372.º a 374.º, desde que o agente seja encontrado em Portugal e não possa ser extraditado ou entregue em resultado de execução de mandado de detenção europeu ou de outro instrumento de cooperação internacional que vincule o Estado Português;<br/>d) Quando constituírem os crimes previstos nos artigos 160.º, 171.º, 172.º, 174.º, 175.º e 176.º a 176.º-B e, sendo a vítima menor, os crimes previstos nos artigos 144.º, 163.º e 164.º:<br/>i) Desde que o agente seja encontrado em Portugal e não possa ser extraditado ou entregue em resultado de execução de mandado de detenção europeu ou de outro instrumento de cooperação internacional que vincule o Estado Português; ou<br/>ii) Quando cometidos por portugueses ou por quem resida habitualmente em Portugal; ou<br/>iii) Contra menor que resida habitualmente em Portugal;<br/>e) Por Portugueses, ou por estrangeiros contra Portugueses, sempre que:<br/>i) Os agentes forem encontrados em Portugal;<br/>ii) Forem também puníveis pela legislação do lugar em que tiverem sido praticados, salvo quando nesse lugar não se exercer poder punitivo; e<br/>iii) Constituírem crime que admita extradição e esta não possa ser concedida ou seja decidida a não entrega do agente em execução de mandado de detenção europeu ou de outro instrumento de cooperação internacional que vincule o Estado Português;<br/>f) Por estrangeiros que forem encontrados em Portugal e cuja extradição haja sido requerida, quando constituírem crimes que admitam a extradição e esta não possa ser concedida ou seja decidida a não entrega do agente em execução de mandado de detenção europeu ou de outro instrumento de cooperação internacional que vincule o Estado Português;<br/>g) Por pessoa colectiva ou contra pessoa colectiva que tenha sede em território português.<br/>2 - A lei penal portuguesa é ainda aplicável a factos cometidos fora do território nacional que o Estado Português se tenha obrigado a julgar por tratado ou convenção internacional.<br/> <br/><br/>",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "2026-08-24T00:00:00Z",
+      "DataVersao": "2026-08-19T01:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 2,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Livro II",
+      "Epigrafe": "Parte especial",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 12,
+      "Tituo": "Livro II",
+      "Identificacao": "II",
+      "Epigrafe": "Parte especial",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "1900-01-01T00:00:00",
+      "DataVersao": "1995-03-15T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 3,
+     "HasFilhos": true,
+     "ConsolidacaoFragmento": {
+      "Name": "Título III",
+      "Epigrafe": "Dos crimes contra a identidade cultural e integridade pessoal",
+      "DataVersao": "2007-09-04T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 13,
+      "Tituo": "Título III",
+      "Identificacao": "III",
+      "Epigrafe": "Dos crimes contra a identidade cultural e integridade pessoal",
+      "Texto": "",
+      "VersaoEstadoId": 6,
+      "DataEntradaVigor": "2007-09-15T00:00:00Z",
+      "DataVersao": "2007-09-04T00:00:00Z"
+     }
+    },
+    {
+     "IsHidden": false,
+     "Nivel": 4,
+     "HasFilhos": false,
+     "ConsolidacaoFragmento": {
+      "Name": "Artigo 236.º",
+      "Epigrafe": "Incitamento à guerra",
+      "DataVersao": "2007-09-04T00:00:00Z"
+     },
+     "FragmentoVersao": {
+      "TipoFragmentoId": 11,
+      "Tituo": "Artigo 236.º",
+      "Identificacao": "236",
+      "Epigrafe": "Incitamento à guerra",
+      "Texto": "Quem, pública e repetidamente, incitar ao ódio contra um povo, com intenção de desencadear uma guerra, é punido com pena de prisão de 6 meses a 3 anos.",
+      "VersaoEstadoId": 4,
+      "DataEntradaVigor": "2007-09-15T00:00:00Z",
+      "DataVersao": "2007-09-04T00:00:00Z"
+     }
+    }
+   ]
+  }
+ }
+}

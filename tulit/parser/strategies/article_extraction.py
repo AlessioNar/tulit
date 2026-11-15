@@ -609,6 +609,14 @@ class CellarStandardArticleStrategy(HTMLArticleExtractionStrategy):
         articles : list
             List to append finalized article to
         """
+        # The article heading is a paragraph of its own after 'Article N':
+        # short, unpunctuated, not a numbered paragraph or point
+        if (not article.get('heading') and len(content) > 1 and len(content[0]) < 150
+                and not re.search(r'[.;:,]$', content[0].strip())
+                and not re.match(r'^\s*(\(?\w{1,4}[.)]\s|[-–—]\s)', content[0])):
+            article['heading'] = content[0].strip()
+            content = content[1:]
+
         if content:
             # Group content into logical paragraphs by concatenating list items
             grouped_content = self._group_list_items(content)

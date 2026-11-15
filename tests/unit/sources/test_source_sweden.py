@@ -90,3 +90,27 @@ class TestRiksdagenClient:
         with patch.object(client.session, 'get', return_value=Mock(status_code=200, content=b'  ')):
             with pytest.raises(FileLoadError):
                 client.download('sfs-1800-1')
+
+
+SECTIONS = """<h2>Förvaltningslag (2017:900)</h2><hr />
+<h4 name="Lagens tillämpningsområde">Lagens tillämpningsområde</h4>
+<h4 name="Lagen gäller">Lagen gäller i förvaltningsverksamhet</h4>
+<a class="paragraf" name="P1"><b>1 §</b></a> Denna lag gäller.
+<a class="paragraf" name="P2"><b>2 §</b></a> <i>/Upphör att gälla U:2027-01-01/</i> Nuvarande lydelse.
+<a class="paragraf" name="P2"><b>2 §</b></a> <i>/Träder i kraft I:2027-01-01/</i>
+<i><i>/Upphör att gälla U:2027-01-02/</i></i>
+ Lydelse för en dag.
+<a class="paragraf" name="P2"><b>2 §</b></a> <i>/Träder i kraft I:2027-01-02/</i> Ny lydelse.
+"""
+
+
+@pytest.mark.parametrize('date, text', [
+    ('2026-10-17', 'Nuvarande lydelse.'), ('2027-01-01', 'Lydelse för en dag.'), ('2027-06-01', 'Ny lydelse.')])
+def test_group_headings_and_versions_valid_for_a_period(tmp_path, date, text):
+    path = tmp_path / 'sfs-2017-900.html'
+    path.write_text(SECTIONS, encoding='utf-8')
+    doc = RiksdagenSFSParser(date=date).parse(str(path)).to_dict()
+    assert [(c['eId'], c['heading']) for c in doc['chapters']] == [('div_1', 'Lagens tillämpningsområde')]
+    first, second = doc['articles']
+    assert (first['heading'], first['parent']) == ('Lagen gäller i förvaltningsverksamhet', 'div_1')
+    assert [c['text'] for c in second['children']] == [text]

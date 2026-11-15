@@ -107,5 +107,15 @@ class TestLegiluxClient(unittest.TestCase):
         cleaned = test_filename.replace('/', '_').replace('?', '_').replace('&', '_')
         self.assertEqual(cleaned, "loi_2006_07_31_jo_param=value_other=test")
 
+    def test_consolidation_dates_asks_for_members_of_the_act(self):
+        base = 'http://data.legilux.public.lu/eli/etat/leg/constitution/1868/10/17/n1'
+        rows = [{'s': {'value': f'{base}/consolide/20230701'}}, {'s': {'value': f'{base}/consolide/20041129'}},
+                {'s': {'value': f'{base}/consolide/20041129/fr'}}]
+        with patch.object(LegiluxClient, '_sparql', return_value=rows) as sparql:
+            dates = self.client.consolidation_dates('etat/leg/constitution/1868/10/17/n1')
+        self.assertEqual(dates, ['2004-11-29', '2023-07-01'])
+        query = sparql.call_args[0][0]
+        self.assertIn(f'isMemberOf> <{base}>', query)
+
 if __name__ == "__main__":
     unittest.main()

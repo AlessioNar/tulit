@@ -917,6 +917,60 @@ def test_titleless_annex_wrapper_adopts_included_title(tmp_path):
     assert p.annexes[0]['children'][0]['text'] == 'Part 1 requirements.'
 
 
+def test_consolidated_act_inline_annexes_are_extracted(tmp_path):
+    """A consolidated act (CONS.ACT) keeps its annexes inline as CONS.ANNEX."""
+    (tmp_path / "DOC_5.xml").write_text(
+        '<CONS.ACT><CONS.DOC><ENACTING.TERMS><ARTICLE IDENTIFIER="001"><TI.ART>Article 1</TI.ART>'
+        '<ALINEA>Text.</ALINEA></ARTICLE></ENACTING.TERMS>'
+        '<CONS.ANNEX><TITLE><TI><P>ANNEX I</P></TI></TITLE><CONTENTS>'
+        '<GR.SEQ LEVEL="1"><TITLE><TI><P>SPECIFIC DEFINITIONS</P></TI></TITLE>'
+        '<P>Fat means total lipids.</P></GR.SEQ></CONTENTS></CONS.ANNEX>'
+        '<CONS.ANNEX><TITLE><TI><P>ANNEX II</P></TI><STI><P>SUBSTANCES</P></STI></TITLE>'
+        '<CONTENTS><P>Cereals containing gluten.</P></CONTENTS></CONS.ANNEX>'
+        '</CONS.DOC></CONS.ACT>'
+    )
+
+    p = Formex4Parser().parse(str(tmp_path))
+
+    assert [a['num'] for a in p.annexes] == ['ANNEX I', 'ANNEX II']
+    assert p.annexes[1]['heading'] == 'SUBSTANCES'
+    assert any('Fat means total lipids.' in c['text'] for c in p.annexes[0]['children'])
+
+
+def test_divisions_are_typed_in_other_languages(tmp_path):
+    """German 'KAPITEL'/'ABSCHNITT' are chapters and sections, like 'CHAPTER'/'SECTION'."""
+    (tmp_path / "act.xml").write_text(
+        '<ACT><ENACTING.TERMS><DIVISION><TITLE><TI><P>KAPITEL III</P></TI><STI><P>Pflichten</P></STI></TITLE>'
+        '<DIVISION><TITLE><TI><P>ABSCHNITT 1</P></TI><STI><P>Alle Anbieter</P></STI></TITLE>'
+        '<ARTICLE IDENTIFIER="011"><TI.ART>Artikel 11</TI.ART><ALINEA>Text.</ALINEA></ARTICLE>'
+        '</DIVISION></DIVISION></ENACTING.TERMS></ACT>'
+    )
+
+    p = Formex4Parser().parse(str(tmp_path / "act.xml"))
+
+    assert [(c['eId'], c['type'], c['parent']) for c in p.chapters] == [
+        ('cpt_III', 'chapter', None), ('sct_1', 'section', 'cpt_III')]
+
+
+def test_annex_files_follow_official_journal_sequence(tmp_path):
+    """Cellar item names do not follow OJ order; BIB.INSTANCE/NO.SEQ does."""
+    (tmp_path / "DOC_5.xml").write_text(
+        '<ACT><ENACTING.TERMS><ARTICLE IDENTIFIER="001"><TI.ART>Article 1</TI.ART>'
+        '<ALINEA>Text.</ALINEA></ARTICLE></ENACTING.TERMS></ACT>'
+    )
+    for name, no_seq, title in (('DOC_3.xml', '0004.0001.0001', 'Appendix 1'),
+                                ('DOC_6.xml', '0004.0001', 'ANNEX'),
+                                ('DOC_7.xml', '0004.0001.0002', 'Appendix 2')):
+        (tmp_path / name).write_text(
+            f'<ANNEX><BIB.INSTANCE><NO.SEQ>{no_seq}</NO.SEQ></BIB.INSTANCE>'
+            f'<TITLE><TI><P>{title}</P></TI></TITLE><CONTENTS><P>Body.</P></CONTENTS></ANNEX>'
+        )
+
+    p = Formex4Parser().parse(str(tmp_path))
+
+    assert [a['num'] for a in p.annexes] == ['ANNEX', 'Appendix 1', 'Appendix 2']
+
+
 def test_table_block_titles_are_extracted():
     """BLK groups in a table contribute their TI.BLK titles as rows."""
     p = Formex4Parser()

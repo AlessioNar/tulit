@@ -4,6 +4,7 @@ from tulit.parser.exceptions import ContentTypeError
 import os
 import logging
 
+
 class PortugalDREClient(Client):
     """
     Client for retrieving legal documents from the Portuguese DRE ELI portal.
@@ -18,10 +19,11 @@ class PortugalDREClient(Client):
             self.session.proxies.update(proxies)
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None, month=None, day=None, region=None, cons_date=None, lang='pt', fmt='pdf'):
+    def download(self, document_type, series=None, number=None, year=None, supplement=0, act_type=None,
+                 month=None, day=None, region=None, cons_date=None, lang='pt', fmt='pdf'):
         """
         Download documents from the Portuguese DRE ELI portal.
-        
+
         Parameters
         ----------
         document_type : str
@@ -49,7 +51,7 @@ class PortugalDREClient(Client):
         fmt : str, optional
             Format: 'pdf' (default) or 'html'. The site now renders HTML with
             JavaScript, so HTML requests fail with ContentTypeError; PDF works.
-            
+
         Returns
         -------
         str or None
@@ -60,25 +62,29 @@ class PortugalDREClient(Client):
                 raise ValueError("Journal downloads require series, number, and year")
             url = f"{self.BASE_URL}/diario/{series}/{number}/{year}/{supplement}/{lang}/{fmt}"
             filename = f"dre_journal_{series}_{number}_{year}_{supplement}_{lang}.{fmt}"
-            self.logger.info(f"Requesting journal: series={series}, number={number}, year={year}, supplement={supplement}, lang={lang}, fmt={fmt}")
-            
+            self.logger.info(f"Requesting journal: series={series}, number={number}, year={year}, "
+                             f"supplement={supplement}, lang={lang}, fmt={fmt}")
+
         elif document_type == 'legal_act':
             if not all([act_type, number, year, month, day, region]):
                 raise ValueError("Legal act downloads require act_type, number, year, month, day, and region")
             url = f"{self.BASE_URL}/{act_type}/{number}/{year}/{month}/{day}/{region}/dre/{lang}/{fmt}"
             filename = f"dre_act_{act_type}_{number}_{year}_{month}_{day}_{region}_{lang}.{fmt}"
-            self.logger.info(f"Requesting legal act: type={act_type}, number={number}, year={year}, month={month}, day={day}, region={region}, lang={lang}, fmt={fmt}")
-            
+            self.logger.info(f"Requesting legal act: type={act_type}, number={number}, year={year}, "
+                             f"month={month}, day={day}, region={region}, lang={lang}, fmt={fmt}")
+
         elif document_type == 'consolidated':
             if not all([act_type, number, year, region, cons_date]):
                 raise ValueError("Consolidated act downloads require act_type, number, year, region, and cons_date")
             url = f"{self.BASE_URL}/{act_type}/{number}/{year}/{region}/cons/{cons_date}/{lang}/{fmt}"
             filename = f"dre_cons_{act_type}_{number}_{year}_{region}_{cons_date}_{lang}.{fmt}"
-            self.logger.info(f"Requesting consolidated act: type={act_type}, number={number}, year={year}, region={region}, cons_date={cons_date}, lang={lang}, fmt={fmt}")
-            
+            self.logger.info(f"Requesting consolidated act: type={act_type}, number={number}, year={year}, "
+                             f"region={region}, cons_date={cons_date}, lang={lang}, fmt={fmt}")
+
         else:
-            raise ValueError(f"Unknown document_type: {document_type}. Must be 'journal', 'legal_act', or 'consolidated'")
-            
+            raise ValueError(f"Unknown document_type: {document_type}. Must be 'journal', 'legal_act', or "
+                             f"'consolidated'")
+
         return self._download(url, filename, fmt)
 
     def _download(self, url, filename, fmt=None):
@@ -86,6 +92,10 @@ class PortugalDREClient(Client):
         try:
             response = self.session.get(url, timeout=30)
             response.raise_for_status()
+            if '/dr/error' in str(response.url):
+                # An unknown ELI (or an act older than the ELI register) redirects to an error page
+                self.logger.error(f"Diário da República has no document at {url}")
+                return None
             content_type = response.headers.get('Content-Type', '')
             if fmt == 'pdf' and 'pdf' not in content_type:
                 raise ContentTypeError(f"Expected PDF response but got: {content_type}", content_type)
@@ -93,7 +103,8 @@ class PortugalDREClient(Client):
                 raise ContentTypeError(f"Expected XML response but got: {content_type}", content_type)
             if fmt == 'html' and 'html' not in content_type:
                 raise ContentTypeError(f"Expected HTML response but got: {content_type}", content_type)
-            if fmt in ('html', 'xhtml') and b'OutSystemsApp' in response.content and b'reactContainer' in response.content:
+            if (fmt in ('html', 'xhtml') and b'OutSystemsApp' in response.content
+                    and b'reactContainer' in response.content):
                 # diariodarepublica.pt now renders its pages with JavaScript: the HTML
                 # holds no legal text, only the PDF can be retrieved directly
                 raise ContentTypeError(

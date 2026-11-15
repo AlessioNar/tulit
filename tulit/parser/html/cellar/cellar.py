@@ -7,6 +7,10 @@ from tulit.parser.parser import LegalJSONValidator
 import logging
 from typing import Optional, Any
 
+# Publication footer of an OJ piece: 'ELI: http://data.europa.eu/eli/...'
+# and 'ISSN 1977-0677 (electronic edition)', in every language
+_PUBLICATION_FOOTER = re.compile(r'^(ELI:\s*https?://\S+|ISSN\s+\d{4}-\d{3}[\dX]\b.*)$')
+
 
 class CellarHTMLParser(HTMLParser):
     def __init__(self) -> None:
@@ -224,8 +228,17 @@ class CellarHTMLParser(HTMLParser):
     }
 
     def _is_division_id(self, an_id: Optional[str]) -> bool:
-        return bool(an_id) and '.' not in an_id and \
-            an_id.split('_')[0] in self._DIVISION_PREFIXES
+        # Nested divisions chain their ids ('cpt_III.sct_1'); a trailing
+        # 'tit_1' inside a division is that division's title block, not a Title
+        if not an_id:
+            return False
+        segments = an_id.split('.')
+        if len(segments) > 1 and segments[-1].startswith('tit_'):
+            return False
+        return all(seg.split('_')[0] in self._DIVISION_PREFIXES for seg in segments)
+
+    def _division_type(self, an_id: str) -> str:
+        return self._DIVISION_PREFIXES[an_id.split('.')[-1].split('_')[0]]
 
     def _division_parent(self, element) -> Optional[str]:
         """eId of the nearest enclosing division div, if any."""
@@ -272,7 +285,7 @@ class CellarHTMLParser(HTMLParser):
                 continue
             self.chapters.append({
                 'eId': eId,
-                'type': self._DIVISION_PREFIXES[eId.split('_')[0]],
+                'type': self._division_type(eId),
                 'num': num,
                 'heading': heading,
                 'parent': self._division_parent(division),
@@ -791,7 +804,8 @@ class CellarHTMLParser(HTMLParser):
             else:
                 text = ' '.join(el.get_text(separator=' ', strip=True).split())
             text = self._normalize_text(text)
-            if text:
+            # The OJ piece ends with its ELI and the journal's ISSN
+            if text and not _PUBLICATION_FOOTER.match(text):
                 blocks.append(text)
         return blocks
 

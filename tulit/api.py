@@ -12,6 +12,9 @@ Example
 >>> doc["meta"]["eli"]
 'http://data.europa.eu/eli/reg/2024/903/oj'
 >>> doc = tulit.fetch("10001597", jurisdiction="AT", version="consolidated")
+
+``download`` stops before parsing and returns the official file itself, for
+instance a scanned PDF that has no text to parse.
 """
 import logging
 import tempfile
@@ -19,7 +22,7 @@ from typing import Any, Optional
 
 import jsonschema
 
-from tulit.parser.exceptions import ValidationError
+from tulit.parser.exceptions import FileLoadError, ValidationError
 from tulit.parser.parser import LegalJSONValidator
 from tulit.parser.registry import get_parser
 from tulit.sources import VERSIONS, Source, get_source, source_for_eli
@@ -27,7 +30,7 @@ from tulit.sources.eu import CELLAR_FORMATS
 
 logger = logging.getLogger(__name__)
 
-__all__ = ['fetch', 'CELLAR_FORMATS']
+__all__ = ['fetch', 'download', 'CELLAR_FORMATS']
 
 META_DEFAULTS = {
     'celex': None,
@@ -99,6 +102,61 @@ def fetch(
         If ``validate`` is True and the result does not conform to the
         legalJSON schema.
     """
+    source, identifier, version = _check(identifier, jurisdiction, version, language, options)
+    if download_dir is not None:
+        return _fetch_into(source, identifier, version, date, language, download_dir,
+                           metadata, validate, options)
+    with tempfile.TemporaryDirectory(prefix='tulit-') as tmp_dir:
+        return _fetch_into(source, identifier, version, date, language, tmp_dir,
+                           metadata, validate, options)
+
+
+def download(
+    identifier: str,
+    jurisdiction: Optional[str] = None,
+    version: Optional[str] = None,
+    date: Optional[str] = None,
+    language: Optional[str] = None,
+    download_dir: Optional[str] = None,
+    **options: Any,
+) -> dict[str, Any]:
+    """
+    Download an act from its official source without parsing it.
+
+    Takes the same arguments as ``fetch``. Useful for keeping the official
+    file, and for acts published only as scanned PDFs, which ``fetch``
+    cannot turn into legalJSON.
+
+    Parameters
+    ----------
+    download_dir : str, optional
+        Directory to keep the file in; a new temporary directory (which is
+        not removed) when omitted.
+
+    Returns
+    -------
+    dict
+        ``path`` (the downloaded file), ``parser`` (the parser that reads it,
+        None when tulit cannot), ``jurisdiction``, ``version``, ``language``,
+        ``version_date`` and ``meta`` (what the source knows about the act,
+        including its ``source`` URL).
+    """
+    source, identifier, version = _check(identifier, jurisdiction, version, language, options)
+    download_dir = download_dir or tempfile.mkdtemp(prefix='tulit-')
+    retrieval = source.retrieve(identifier, version, date, language, download_dir, metadata=True, **options)
+    return {
+        'path': retrieval.path,
+        'parser': retrieval.parser,
+        'jurisdiction': source.code,
+        'version': retrieval.version,
+        'language': retrieval.language,
+        'version_date': retrieval.version_date,
+        'meta': dict(retrieval.meta),
+    }
+
+
+def _check(identifier, jurisdiction, version, language, options):
+    """The source and identifier, with the version and options checked against what the source offers."""
     source, identifier = _resolve(identifier, jurisdiction)
     if version is None and not source.version_from_identifier:
         version = source.default_version
@@ -118,13 +176,7 @@ def fetch(
     unknown = sorted(set(options) - set(source.options))
     if unknown:
         raise ValueError(f"Unsupported option(s) for {source.name}: {', '.join(unknown)}")
-
-    if download_dir is not None:
-        return _fetch_into(source, identifier, version, date, language, download_dir,
-                           metadata, validate, options)
-    with tempfile.TemporaryDirectory(prefix='tulit-') as tmp_dir:
-        return _fetch_into(source, identifier, version, date, language, tmp_dir,
-                           metadata, validate, options)
+    return source, identifier, version
 
 
 def _resolve(identifier: str, jurisdiction: Optional[str]) -> tuple[Source, str]:
@@ -146,6 +198,11 @@ def _fetch_into(source, identifier, version, date, language, download_dir,
                 metadata, validate, options):
     retrieval = source.retrieve(identifier, version, date, language, download_dir,
                                 metadata=metadata, **options)
+    if retrieval.parser is None:
+        raise FileLoadError(
+            f"{source.name} publishes {identifier} only as a scanned document without text "
+            f"({retrieval.meta.get('source') or retrieval.path}); tulit.download returns the file"
+        )
     parser = get_parser(retrieval.parser, **retrieval.parser_options)
     parser.parse(retrieval.path)
     doc = parser.to_dict()

@@ -3,11 +3,12 @@ Spain: Boletín Oficial del Estado (BOE).
 """
 import datetime
 import os
+import re
 from typing import Any, Optional
 
 from lxml import etree
 
-from tulit.client.state.boe import BOEClient
+from tulit.client.state.boe import BOEClient, is_eli
 from tulit.parser.exceptions import FileLoadError
 from tulit.sources.base import CONSOLIDATED, ORIGINAL, Retrieval, Source
 
@@ -19,12 +20,18 @@ def _iso(stamp: Optional[str]) -> Optional[str]:
     return None
 
 
+def _fields(metadata: Optional[etree._Element]) -> dict[str, str]:
+    return {c.tag: (c.text or '').strip() for c in metadata if isinstance(c.tag, str)} if metadata is not None else {}
+
+
 class SpainSource(Source):
     code = 'ES'
     name = 'Spain'
     source_name = 'Boletín Oficial del Estado (BOE)'
     languages = ('spa',)
-    identifier_help = "a BOE identifier (e.g. 'BOE-A-2018-16673' for Ley Orgánica 3/2018)"
+    identifier_help = ("a BOE identifier (e.g. 'BOE-A-2018-16673' for Ley Orgánica 3/2018) "
+                       "or its ELI ('https://www.boe.es/eli/es/lo/2018/12/05/3')")
+    eli_patterns = (re.compile(r'^(?P<id>https?://www\.boe\.es/eli/es/.+)$'),)
 
     def retrieve(
         self,
@@ -37,23 +44,30 @@ class SpainSource(Source):
         **options: Any,
     ) -> Retrieval:
         client = BOEClient(download_dir=download_dir)
-        boe_id = identifier.strip()
+        boe_id = client.resolve_eli(identifier) if is_eli(identifier) else identifier.strip()
         try:
             folder = client.download_consolidated(boe_id)
         except FileLoadError:
             if version == CONSOLIDATED:
                 raise
             # Acts outside the consolidated database: the gazette text as published
+            path = client.download_gazette(boe_id)
+            gazette = _fields(etree.parse(path).getroot().find('metadatos'))
             return Retrieval(
-                path=client.download_gazette(boe_id),
-                parser='boe',
+                path=path,
+                parser='boe-consolidated',
+                parser_options={'version': ORIGINAL},
                 version=ORIGINAL,
                 language='spa',
-                meta={'source': f'https://www.boe.es/diario_boe/txt.php?id={boe_id}'},
+                version_date=_iso(gazette.get('fecha_publicacion')),
+                meta={
+                    'eli': gazette.get('url_eli') or None,
+                    'date_document': _iso(gazette.get('fecha_disposicion')),
+                    'source': f'https://www.boe.es/diario_boe/txt.php?id={boe_id}',
+                },
             )
 
-        meta_root = etree.parse(os.path.join(folder, 'metadatos.xml')).getroot().find('.//metadatos')
-        fields = {c.tag: (c.text or '').strip() for c in meta_root} if meta_root is not None else {}
+        fields = _fields(etree.parse(os.path.join(folder, 'metadatos.xml')).getroot().find('.//metadatos'))
         target = (date or datetime.date.today().isoformat()).replace('-', '')
         text = etree.parse(os.path.join(folder, 'texto.xml')).getroot()
         if version == CONSOLIDATED:
@@ -61,7 +75,9 @@ class SpainSource(Source):
                        if (v.get('fecha_vigencia') or '') <= target]
             version_date = _iso(max(applied)) if applied else None
             if version_date is None:
-                raise FileLoadError(f"{boe_id} was not in force on {date}")
+                start = _iso(min((v.get('fecha_vigencia') or '' for v in text.iter('version')), default=''))
+                raise FileLoadError(f"{boe_id} was not yet in force on {date or 'today'}"
+                                    + (f" (it applies from {start})" if start else ''))
         else:
             version_date = _iso(fields.get('fecha_publicacion'))
 

@@ -10,7 +10,8 @@ Ustaw) as HTML whose ``div.unit`` elements mirror the structure of the act
   such as a preamble, gives the recitals;
 - divisions keep their nesting: księga and część become parts, tytuł a
   title, dział a section, rozdział a chapter and oddział a subsection;
-- each article (art.) becomes an article; its paragraphs (ust., §) become
+- each article (art.), or each § of a regulation without articles, becomes
+  an article; the paragraphs of an article (ust., §) become
   par_N with points and letters folded into them;
 - quoted text (``cite-box``) belongs to an amendment: the child holding it
   carries a structured ``amendment`` with the quoted wording;
@@ -161,13 +162,18 @@ class SejmELIParser(Parser):
                 continue
             kind = _kind(child)
             if kind in DIVISIONS:
-                lines = [_text(p) for p in child.findall('p')]
-                heading = _text(child.find('.//span[@class="pro-title-unit"]')) or None
-                number = next((line for line in lines if line and line != heading), None)
-                body.division(DIVISIONS[kind], number, heading=heading, token=_token(child), rank=depth)
-                self._walk(child.find('div[@class="unit-inner"]'), body, depth + 1)
-            elif kind == 'arti':
+                self._division(child, body, depth)
+            elif kind == 'arti' or kind == 'para':
+                # A regulation is divided into §§ instead of articles. A division the markup misplaces
+                # inside an article (e.g. a repealed chapter after its last point) follows the article.
+                misplaced = [unit for unit in child.xpath('.//div[contains(@class, "unit_")]'
+                                                          '[not(ancestor::div[contains(@class, "cite-box")])]')
+                             if _kind(unit) in DIVISIONS]
+                for unit in misplaced:
+                    unit.getparent().remove(unit)
                 self._read_article(child, body)
+                for unit in misplaced:
+                    self._division(unit, body, depth)
             elif kind is not None:
                 inner = child.find('div[@class="unit-inner"]')
                 if inner is not None:
@@ -176,6 +182,15 @@ class SejmELIParser(Parser):
                 text = _text(child)
                 if text:
                     self.recitals.append({'eId': f'rct_{len(self.recitals) + 1}', 'text': text})
+
+    def _division(self, unit: etree._Element, body: BodyBuilder, depth: int) -> None:
+        lines = [_text(p) for p in unit.findall('p')]
+        heading = _text(unit.find('.//span[@class="pro-title-unit"]')) or None
+        number = next((line for line in lines if line and line != heading), None)
+        body.division(DIVISIONS[_kind(unit)], number, heading=heading, token=_token(unit), rank=depth)
+        inner = unit.find('div[@class="unit-inner"]')
+        if inner is not None:
+            self._walk(inner, body, depth + 1)
 
     def _read_article(self, article: etree._Element, body: BodyBuilder) -> None:
         children = ChildrenBuilder()
@@ -242,15 +257,36 @@ class SejmELIParser(Parser):
         if text:
             amendment['quoted'].append({'kind': 'text', 'text': text})
 
+    def _annex_texts(self, container: Optional[etree._Element]) -> list[str]:
+        """The texts of an annex: paragraphs, numbered units with their number, and table rows (forms, figures)."""
+        texts: list[str] = []
+        for element in (container if container is not None else []):
+            if not isinstance(element.tag, str):
+                continue
+            if element.get('data-template') == 'xText':
+                texts.append(_text(element))
+            elif _kind(element) is not None:
+                body = element.find('div[@class="unit-inner"]')
+                inner = self._annex_texts(body)
+                # The number, and a title the HTML parser may have moved out of the h3
+                heading = ' '.join(_text(part) for part in element if isinstance(part.tag, str) and part is not body)
+                heading = ' '.join(heading.split())
+                if heading and inner:
+                    inner[0] = f'{heading} {inner[0]}'
+                texts.extend(inner or [heading])
+            elif element.xpath('.//tr'):
+                texts.extend(_text(row) for row in element.xpath('descendant-or-self::tr[not(.//tr)]'))
+            else:
+                texts.append(_text(element))
+        return [text for text in texts if text]
+
     def _read_annexes(self, sections: list[etree._Element]) -> None:
         self.annexes = []
         for position, section in enumerate(sections, start=1):
             title = _text(section.find('.//h2'))
             children = ChildrenBuilder()
-            for block in section.xpath('.//div[@data-template="xText"]'):
-                text = _text(block)
-                if text:
-                    children.add(text)
+            for text in self._annex_texts(section.find('.//div[@class="block"]')):
+                children.add(text)
             match = re.match(r'^(Załącznik[^-–]*?)\s*[-–]\s*(.*)$', title)
             self.annexes.append({
                 'eId': f'anx_{position}',

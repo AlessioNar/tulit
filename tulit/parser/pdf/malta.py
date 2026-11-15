@@ -29,13 +29,17 @@ _HEADER = re.compile(r'(\[(CAP|KAP)\.\s*\d+|^VERŻJONI ELETTRONIKA$|^A\s?\d+$|^B
 # The full stop is sometimes missing before a first sub-article ('27 (1) ...')
 _ARTICLE = re.compile(r'^(?P<num>\d+[A-Z]*)(?:\.\s+|\s+(?=\(1\)\s))(?P<rest>\S.*)$')
 _SUBARTICLE = re.compile(r'^\((?P<num>\d+[A-Za-z]*)\)\s')
-_DIVISION = re.compile(r'^(?P<kind>PART|SUB-PART|TITLE|SUB-TITLE|TAQSIMA|SUB-TAQSIMA|TITOLU)\s+'
-                       r'(?P<num>[IVXLC]+[A-Z]?|\d+)$')
+# The codes write 'BOOK FIRST', 'Title IV', 'Sub-title I A' in mixed case
+_DIVISION = re.compile(r'^(?P<kind>PART|SUB-PART|TITLE|SUB-TITLE|TAQSIMA|SUB-TAQSIMA|TITOLU|SUB-TITOLU'
+                       r'|Title|Sub-title|Sub-Title|Titolu|Sub-titolu|Sub-Titolu)\s+'
+                       r'(?P<num>[IVXLC]+(?:\s?[A-Z])?|\d+)$'
+                       r'|^(?P<book>BOOK|KTIEB)\s+(?P<ordinal>[A-Z]+)$')
 _SCHEDULE = re.compile(r'^(?:[A-Z\-]+\s+)?(SCHEDULE|SKEDA)(?:\s+[IVXLC\d]+)?$')
 _NOTE_SKIP = re.compile(r'^(Amended by|Added by|Substituted by|Renumbered by|Deleted by|Cap\.|L\.N\.|'
                         r'Act [IVXLC]+|[IVXLC]+\.\s*\d{4}|\d{4}\.\d+)')
 DIVISIONS = {'PART': 'part', 'SUB-PART': 'title', 'TITLE': 'title', 'SUB-TITLE': 'chapter',
-             'TAQSIMA': 'part', 'SUB-TAQSIMA': 'title', 'TITOLU': 'title'}
+             'TAQSIMA': 'part', 'SUB-TAQSIMA': 'title', 'TITOLU': 'title', 'SUB-TITOLU': 'chapter'}
+_ARRANGEMENT = re.compile(r'^(ARRANGEMENT OF (THE )?(ACT|CODE|ORDINANCE|REGULATIONS|RULES)|TAQSIM TAL-(ATT|KODIĊI))$')
 
 
 class MaltaPDFParser(Parser):
@@ -57,12 +61,19 @@ class MaltaPDFParser(Parser):
 
     def _read_front(self, lines: list[Line]) -> int:
         """Title, long title and enacting clause; returns where the body starts."""
-        arrangement = next((i for i, line in enumerate(lines)
-                            if line.text.upper() in ('ARRANGEMENT OF THE ACT', 'TAQSIM TAL-ATT')), None)
+        arrangement = next((i for i, line in enumerate(lines) if _ARRANGEMENT.match(line.text.upper())), None)
         first_page = lines[arrangement].page + 1 if arrangement is not None else 0
         start = next((i for i, line in enumerate(lines)
                       if line.page >= first_page and (_DIVISION.match(line.text)
                                                        or re.match(r'^1\.\s+\S', line.text))), len(lines))
+        if arrangement is not None:
+            # The arrangement of a code runs over several pages: the body opens with article 1,
+            # after the headings printed above it on its page
+            first = next((i for i in range(arrangement, len(lines)) if re.match(r'^1\.\s+\S', lines[i].text)), None)
+            if first is not None and lines[first].page > first_page:
+                start = first
+                while start - 1 > arrangement and lines[start - 1].page == lines[first].page:
+                    start -= 1
         front = lines[:arrangement if arrangement is not None else start]
         texts = [line.text for line in front]
         chapter = next((i for i, text in enumerate(texts) if re.match(r'^(CHAPTER|KAPITOLU)\s+\d+', text)), None)
@@ -79,6 +90,16 @@ class MaltaPDFParser(Parser):
             self.preface = ' '.join(title) or None
         elif act is not None:
             self.preface = texts[act]
+        elif any(re.match(r'^L\.N\.\s*\d+\s+of\s+\d{4}$', text) for text in texts):
+            # A Legal Notice: 'L.N. 1 of 2026', the parent Act '(CAP. 552)', the title of the
+            # regulations, then 'IN EXERCISE of the powers conferred by ...' up to article 1
+            exercise = next((i for i, text in enumerate(texts) if text.startswith(('IN EXERCISE', 'BIS-SAĦĦA'))),
+                            len(texts))
+            cap = next((i for i, text in enumerate(texts[:exercise]) if re.match(r'^\((CAP|KAP)\.\s*\d', text)), None)
+            if cap is not None:
+                self.preface = join_lines(texts[cap + 1:exercise]) or None
+            if exercise < len(texts):
+                self.formula = join_lines(texts[exercise:])
         if long_title is not None:
             end = next((i for i in range(long_title + 1, len(texts))
                         if texts[i].endswith('.') is False and re.match(r'^\d|^ACT|^BE IT', texts[i])),
@@ -157,7 +178,11 @@ class MaltaPDFParser(Parser):
             match = _DIVISION.match(text)
             if match:
                 flush_article()
-                division = body.division(DIVISIONS[match.group('kind')], text, token=match.group('num'))
+                if match.group('book'):
+                    division = body.division('book', text, token=match.group('ordinal').lower(), rank=-1)
+                else:
+                    kind = match.group('kind').upper()
+                    division = body.division(DIVISIONS[kind], text, token=match.group('num').replace(' ', ''))
                 continue
             match = _ARTICLE.match(text)
             if match:

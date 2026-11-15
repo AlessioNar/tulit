@@ -15,16 +15,27 @@ _GLOBAL_ID = re.compile(r'^(?:https?://www\.riigiteataja\.ee/(?:en/)?akt/)?(\d{5
 _ABBREVIATION = re.compile(r'^[A-ZÕÄÖÜŠŽ][A-Za-zÕÄÖÜŠŽõäöüšž]{1,15}$')
 
 
+_ISO_DATE = re.compile(r'^\d{4}-\d{2}-\d{2}')
+
+
+def _date(value: Optional[str]) -> Optional[str]:
+    """'2002-03-27+02:00' -> '2002-03-27'."""
+    match = _ISO_DATE.match((value or '').strip())
+    return match.group(0) if match else None
+
+
 def _validity(text: dict[str, Any]) -> tuple[str, Optional[str]]:
     period = text.get('kehtivus') or {}
-    return period.get('algus') or '', period.get('lopp')
+    return _date(period.get('algus')) or '', _date(period.get('lopp'))
 
 
-def _act_date(path: str) -> Optional[str]:
-    """Adoption date of the act (vastuvoetud/aktikuupaev)."""
+def _act_dates(path: str) -> tuple[Optional[str], Optional[str]]:
+    """Adoption date (vastuvoetud/aktikuupaev) and publication date (avaldamineKuupaev) of the act."""
     root = etree.parse(path).getroot()
     adopted = root.find('.//{*}vastuvoetud/{*}aktikuupaev')
-    return adopted.text.strip() if adopted is not None and adopted.text else None
+    published = root.find('.//{*}avaldamismarge/{*}avaldamineKuupaev')
+    return (_date(adopted.text) if adopted is not None else None,
+            _date(published.text) if published is not None else None)
 
 
 class EstoniaSource(Source):
@@ -73,15 +84,17 @@ class EstoniaSource(Source):
         path = client.download(global_id)
         start, end = _validity(text)
         today = datetime.date.today().isoformat()
-        adopted = _act_date(path)
+        adopted, published = _act_dates(path)
         return Retrieval(
             path=path,
             parser='riigiteataja',
             version=version,
             language='est',
-            version_date=adopted if version == ORIGINAL else (start or None),
+            # Old texts (the 1992 Constitution) give no adoption date, only the publication date
+            version_date=(adopted or published) if version == ORIGINAL else (start or None),
             meta={
                 'date_document': adopted,
+                'date_publication': published,
                 'in_force': bool(start) and start <= today and (end is None or end >= today),
                 'source': f'{RIIGI_TEATAJA}/akt/{global_id}',
             },

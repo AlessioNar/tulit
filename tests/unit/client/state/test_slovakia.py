@@ -20,6 +20,8 @@ LISTING = b'''<html><body>
     ('460/1992 Zb.', 'SK/ZZ/1992/460'),
     ('2018/18', 'SK/ZZ/2018/18'),
     ('SK/ZZ/2018/18', 'SK/ZZ/2018/18'),
+    ('https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2018/18/20180525', 'SK/ZZ/2018/18'),
+    ('https://www.slov-lex.sk/pravne-predpisy/SK/ZZ/2018/18/', 'SK/ZZ/2018/18'),
 ])
 def test_act_path(identifier, path):
     assert act_path(identifier) == path
@@ -46,7 +48,8 @@ def test_versions_and_version_on(client):
 
 
 def test_download_original_and_version(client):
-    client.session.get.return_value = Mock(status_code=200, content=b'<root xmlns="http://www.metalex.eu/metalex/1.0"/>')
+    client.session.get.return_value = Mock(status_code=200,
+                                           content=b'<root xmlns="http://www.metalex.eu/metalex/1.0"/>')
     original = client.download('18/2018')
     consolidated = client.download('18/2018', '2026-08-18')
     urls = [call.args[0] for call in client.session.get.call_args_list]
@@ -87,6 +90,21 @@ class TestSlovakiaSource:
         download.assert_called_once_with('SK/ZZ/2018/18', '2026-08-18')
         assert doc['meta']['version_date'] == '2026-08-18'
         assert doc['meta']['source'].endswith('/SK/ZZ/2018/18/20260818')
+
+    def test_url_naming_a_version(self, fixture, tmp_path):
+        url = 'https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2018/18/20180525'
+        with patch.object(SlovLexClient, 'version_on', return_value='2018-05-25') as version_on, \
+                patch.object(SlovLexClient, 'download', return_value=fixture) as download:
+            doc = tulit.fetch(url, download_dir=str(tmp_path))
+        version_on.assert_called_once_with('SK/ZZ/2018/18', '2018-05-25')
+        download.assert_called_once_with('SK/ZZ/2018/18', '2018-05-25')
+        assert (doc['meta']['jurisdiction'], doc['meta']['version']) == ('SK', 'consolidated')
+
+    def test_url_of_the_act(self, fixture, tmp_path):
+        with patch.object(SlovLexClient, 'download', return_value=fixture) as download:
+            doc = tulit.fetch('https://www.slov-lex.sk/pravne-predpisy/SK/ZZ/2018/18/', download_dir=str(tmp_path))
+        download.assert_called_once_with('SK/ZZ/2018/18')
+        assert doc['meta']['version'] == 'original'
 
     def test_no_version_on_date(self, tmp_path):
         with patch.object(SlovLexClient, 'version_on', return_value=None):

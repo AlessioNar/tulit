@@ -75,3 +75,48 @@ def test_signature(act, consolidation):
 def test_valid_legaljson(act, consolidation):
     assert LegalJSONValidator().validate(act)
     assert LegalJSONValidator().validate(consolidation)
+
+
+def _line(text):
+    return f'<Exitus><Linea><Char>{text}</Char></Linea></Exitus>'
+
+
+AMENDING = f"""<Dokument><Meta><DocumentTitle>Lov om ændring af databeskyttelsesloven</DocumentTitle></Meta>
+<DokumentIndhold>
+ <Afsnit><Kapitel>
+ <AendringCentreretParagraf localId="1"><Explicatus>§ 1</Explicatus>
+  {_line('I databeskyttelsesloven, lov nr. 502 af 23. maj 2018, foretages følgende ændringer:')}
+  <AendringsNummer><Explicatus>1.</Explicatus><Aendring>
+   <AendringDefinition>{_line('§ 13, stk. 1-3, ophæves.')}</AendringDefinition>
+   <AendringAktion><AendringNyTekst/></AendringAktion></Aendring>
+   <Rykningsklausul>{_line('Stk. 4 bliver herefter stk. 1.')}</Rykningsklausul></AendringsNummer>
+  <AendringsNummer><Explicatus>2.</Explicatus><Aendring>
+   <AendringDefinition>{_line('I § 22 indsættes som stk. 7:')}</AendringDefinition>
+   <AendringAktion><AendringNyTekst><Stk>{_line('»Stk. 7. Ny tekst.«')}</Stk></AendringNyTekst></AendringAktion>
+  </Aendring></AendringsNummer>
+  <AendringsNummer><Explicatus>3.</Explicatus><Aendring>
+   <AendringDefinition>{_line('I § 41 ændres »§ 13, stk. 1-7« til: »§ 13«.')}</AendringDefinition>
+  </Aendring></AendringsNummer>
+ </AendringCentreretParagraf>
+ <IkraftCentreretParagraf localId="2"><Explicatus>§ 2</Explicatus>
+  <Stk>{_line('Loven træder i kraft den 1. januar 2024.')}</Stk></IkraftCentreretParagraf>
+ </Kapitel></Afsnit>
+</DokumentIndhold></Dokument>"""
+
+
+def test_amending_act(tmp_path):
+    """An amending act (lov nr. 1784 af 28/12/2023): amending § with numbered amendments, entry into force."""
+    path = tmp_path / 'lta_2023_1784.xml'
+    path.write_text(AMENDING, encoding='utf-8')
+    doc = LexDaniaParser().parse(str(path)).to_dict()
+    assert doc['chapters'] == []  # an Afsnit and a Kapitel without number or heading are no divisions
+    amending, in_force = doc['articles']
+    assert (amending['num'], in_force['num']) == ('§ 1', '§ 2')
+    intro, *items = amending['children']
+    assert intro['text'].startswith('I databeskyttelsesloven') and not intro.get('amendment')
+    assert [c['eId'] for c in items] == ['par_1', 'par_2', 'par_3']
+    assert [c['amendment']['action'] for c in items] == ['repeal', 'insert', 'replace']
+    assert {c['amendment']['amended_act'] for c in items} == {'lov nr. 502 af 23. maj 2018'}
+    assert items[0]['text'].endswith('Stk. 4 bliver herefter stk. 1.')
+    assert items[1]['amendment']['quoted'] == [{'kind': 'text', 'text': '»Stk. 7. Ny tekst.«'}]
+    assert in_force['children'][0]['text'] == 'Loven træder i kraft den 1. januar 2024.'

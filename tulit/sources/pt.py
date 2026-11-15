@@ -16,10 +16,12 @@ from tulit.sources.base import ORIGINAL, Retrieval, Source
 DRE_ELI = 'https://data.dre.pt/eli'
 MONTHS = ('janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro',
           'outubro', 'novembro', 'dezembro')
-TYPES = {'lei': 'lei', 'decreto-lei': 'dec-lei'}
+TYPES = {'lei': 'lei', 'decreto-lei': 'dec-lei', 'lei orgânica': 'leiorg', 'lei constitucional': 'leiconst',
+         'portaria': 'port'}
 _ELI = re.compile(r'(?:^|eli/)(?P<type>[a-z][a-z\-]*)/(?P<number>[\w\-]+)/(?P<year>\d{4})/(?P<month>\d{2})/'
                   r'(?P<day>\d{2})(?:/(?P<region>[pma]))?(?:/|$)')
-_CITATION = re.compile(r'^(?P<type>Lei|Decreto-Lei)\s+n\.[ºo°]\s*(?P<number>[\w\-]+)/(?P<year>\d{4}),?\s+'
+_CITATION = re.compile(r'^(?P<type>Lei(?: Orgânica| Constitucional)?|Decreto-Lei|Portaria)\s+n\.[ºo°]\s*'
+                       r'(?P<number>[\w\-]+)/(?P<year>\d{4}|\d{2})(?:/\d+)?,?\s+'
                        r'de\s+(?P<day>\d{1,2})\s+de\s+(?P<month>\w+)$', re.IGNORECASE)
 
 
@@ -33,8 +35,11 @@ def act_reference(identifier: str) -> dict[str, str]:
         return parts
     match = _CITATION.match(text)
     if match and match.group('month').lower() in MONTHS:
+        year = match.group('year')
+        if len(year) == 2:  # 'Lei n.º 67/98'
+            year = f"{'19' if int(year) >= 50 else '20'}{year}"
         return {'type': TYPES[match.group('type').lower()], 'number': match.group('number'),
-                'year': match.group('year'), 'month': f"{MONTHS.index(match.group('month').lower()) + 1:02d}",
+                'year': year, 'month': f"{MONTHS.index(match.group('month').lower()) + 1:02d}",
                 'day': f"{int(match.group('day')):02d}", 'region': 'p'}
     raise ValueError(f"'{identifier}' is not a Portuguese act reference; use its ELI or a citation such as "
                      f"'Lei n.º 58/2019, de 8 de agosto'")
@@ -46,7 +51,8 @@ class PortugalSource(Source):
     source_name = 'Diário da República (Imprensa Nacional-Casa da Moeda)'
     versions = (ORIGINAL,)
     languages = ('por',)
-    identifier_help = ("the citation of an act with its date (e.g. 'Lei n.º 58/2019, de 8 de agosto') "
+    identifier_help = ("the citation of an act with its date (e.g. 'Lei n.º 58/2019, de 8 de agosto'; laws, "
+                       "organic and constitutional laws, decree-laws and portarias) "
                        "or its ELI (https://data.dre.pt/eli/lei/58/2019/08/08/p/dre/pt/html)")
     eli_patterns = (re.compile(r'^(?P<id>https?://data\.dre\.pt/eli/[a-z\-]+/[\w\-]+/\d{4}/\d{2}/\d{2}/[pma])(/.*)?$'),)
 
@@ -67,7 +73,8 @@ class PortugalSource(Source):
         path = client.download('legal_act', act_type=parts['type'], number=parts['number'], year=parts['year'],
                                month=parts['month'], day=parts['day'], region=parts['region'], fmt='pdf')
         if path is None:
-            raise FileLoadError(f"Diário da República has no PDF for {identifier}")
+            raise FileLoadError(f"Diário da República has no PDF for {identifier} (its ELI register starts "
+                                f"in the 1990s; older acts are not reachable)")
         eli = (f"{DRE_ELI}/{parts['type']}/{parts['number']}/{parts['year']}/{parts['month']}/{parts['day']}/"
                f"{parts['region']}")
         published = f"{parts['year']}-{parts['month']}-{parts['day']}"

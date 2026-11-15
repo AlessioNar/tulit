@@ -5,8 +5,8 @@ A comprehensive Python library for retrieving and parsing legal documents from v
 jurisdictions and formats, with support for EU Cellar, Legifrance, and other legal databases.
 """
 
-__version__ = "0.9.0"
+__version__ = "0.10.0"
 
-from tulit.api import fetch
+from tulit.api import download, fetch
 
-__all__ = ["fetch", "__version__"]
+__all__ = ["fetch", "download", "__version__"]

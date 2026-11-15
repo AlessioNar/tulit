@@ -82,6 +82,46 @@ class TestSejmELIParser:
         # The announcement itself is not part of the act
         assert not any('ogłasza się' in c['text'] for a in parser.articles for c in a['children'])
 
+    def test_regulation_divided_into_paragraphs(self, poland):
+        parser = SejmELIParser().parse(str(poland / 'DU_2024_1973_trimmed.html'))
+        # Each § of a regulation without articles is an article; the enacting formula is not
+        assert [(a['eId'], a['num']) for a in parser.articles] == [('art_1', '§ 1.'), ('art_2', '§ 2.')]
+        assert parser.articles[0]['children'][0]['text'] == (
+            'Rozporządzenie określa: 1) wzory banderol; 2) wysokość kwot stanowiących wartość banderol.')
+        assert [r['text'] for r in parser.recitals] == [
+            'Na podstawie art. 125 ustawy z dnia 6 grudnia 2008 r. o podatku akcyzowym zarządza się, co następuje:']
+
+    def test_annex_points_and_tables(self, poland):
+        parser = SejmELIParser().parse(str(poland / 'DU_2024_1973_trimmed.html'))
+        points, table = parser.annexes
+        assert [c['text'] for c in points['children']] == [
+            'Banderole są:', '1) pokrojone według ustalonych wymiarów;']
+        # A table title and its rows are kept
+        assert (table['num'], table['heading']) == (
+            'Załącznik nr 2', 'Wysokość kwot stanowiących wartość banderol podatkowych')
+        assert [c['text'] for c in table['children']] == [
+            'Tabela 1. Wyroby tytoniowe Lp. Rodzaj wyrobów Kwota w zł', '1 Papierosy 0,15']
+
+    def test_division_misplaced_inside_an_article(self, tmp_path):
+        # Kodeks pracy: the repealed chapter II of dział XIII sits inside the last point of art. 283
+        page = tmp_path / 'kp.html'
+        page.write_text(
+            '<html><body><section><h1><span>Ustawa</span><span>Kodeks pracy</span></h1><div class="block">'
+            '<div class="unit unit_bran" data-id="bran_TRZYNASTY"><p>Dział TRZYNASTY</p>'
+            '<div class="unit-inner">'
+            '<div class="unit unit_arti" data-id="arti_283"><h3>Art. 283.</h3><div class="unit-inner">'
+            '<div class="unit unit_pint" data-id="pint_9"><h3>9)</h3><div class="unit-inner">'
+            '<div data-template="xText">dopuszcza dziecko do pracy.</div>'
+            '<div class="unit unit_chpt" data-id="chpt_II"><h3></h3><p>Rozdział II</p><div class="unit-inner">'
+            '<div data-template="xText">(uchylony)</div></div></div>'
+            '</div></div></div></div>'
+            '</div></div></div></section></body></html>', encoding='utf-8')
+        parser = SejmELIParser().parse(str(page))
+        article = parser.articles[0]
+        assert [c['text'] for c in article['children']] == ['9) dopuszcza dziecko do pracy.']
+        assert [(c['eId'], c['num'], c['parent']) for c in parser.chapters] == [
+            ('sct_TRZYNASTY', 'Dział TRZYNASTY', None), ('cpt_II', 'Rozdział II', 'sct_TRZYNASTY')]
+
     def test_not_an_act(self, tmp_path):
         page = tmp_path / 'page.html'
         page.write_text('<html><body><p>Nothing</p></body></html>')

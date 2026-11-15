@@ -69,6 +69,63 @@ class TestRiigiTeatajaParser:
         assert first['amendment']['quoted'][0]['text'] == '§ 14. Juriidilise isiku vastutus'
         assert '§ 37¹' in second['text']
 
+    def test_plain_amendment(self, estonia):
+        # § 2 holds one amendment as plain text, not as numbered points in HTML
+        article = RiigiTeatajaParser().parse(str(estonia / '111032023001.xml')).articles[1]
+        assert len(article['children']) == 1
+        amendment = article['children'][0]['amendment']
+        assert (amendment['action'], amendment['amended_act']) == ('add', 'Isikuandmete kaitse seaduse')
+        assert amendment['quoted'][0]['text'].startswith('(1) Käesolevas peatükis')
+
+    @staticmethod
+    def _act(tmp_path, content):
+        path = tmp_path / 'act.xml'
+        path.write_text(f'<?xml version="1.0" encoding="UTF-8"?><oigusakt xmlns="tyviseadus_1_10.02.2010">'
+                        f'<aktinimi><nimi><pealkiri>Seadus</pealkiri></nimi></aktinimi>'
+                        f'<sisu>{content}</sisu></oigusakt>', encoding='utf-8')
+        return RiigiTeatajaParser().parse(str(path))
+
+    def test_html_in_subsection(self, tmp_path):
+        parser = self._act(tmp_path, """
+            <sisuTekst><tavatekst>Kõikumatus usus ja vankumatus tahtes</tavatekst></sisuTekst>
+            <paragrahv><paragrahvNr>170</paragrahvNr><kuvatavNr><![CDATA[§ 170.]]></kuvatavNr>
+              <loige><sisuTekst><tavatekst>Käesolev seadus jõustub.</tavatekst></sisuTekst>
+                <sisuTekst><HTMLKonteiner><![CDATA[<hr/><p>Jõustumise kuupäev on <a href="x">märgitud</a>.</p>]]>
+                </HTMLKonteiner></sisuTekst>
+                <sisuTekst><HTMLKonteiner><![CDATA[<p><table summary="allkiri"><tr><td><b>Riigikogu esimees
+                  Toomas SAVI</b></td></tr></table></p>]]></HTMLKonteiner></sisuTekst></loige>
+              <loige><sisuTekst><tavatekst>Õiend<reavahetus/>Käesolev tekst vastab eelnõu tekstile.</tavatekst>
+                </sisuTekst></loige>
+              <veaparandus><veaparandusTekst>Veaparandus: parandatud</veaparandusTekst></veaparandus>
+            </paragrahv>""")
+        [article] = parser.articles
+        assert [c['text'] for c in article['children']] == [
+            'Käesolev seadus jõustub. Jõustumise kuupäev on märgitud.']
+        assert parser.conclusions == {'conclusion_text': 'Õiend Käesolev tekst vastab eelnõu tekstile.',
+                                      'signature': 'Riigikogu esimees Toomas SAVI'}
+        # The consolidated text sets the preamble as plain text before the paragraphs
+        assert parser.recitals == [{'eId': 'rct_1', 'text': 'Kõikumatus usus ja vankumatus tahtes'}]
+
+    def test_embedded_files_and_legal_basis(self, tmp_path):
+        parser = self._act(tmp_path, """
+            <preambul><tavatekst>Määrus kehtestatakse «</tavatekst><viide><kuvatavTekst>Lennundusseaduse</kuvatavTekst>
+              <viideURID><viideURI>./dyn=1&amp;id=2</viideURI></viideURID></viide>
+              <tavatekst>» § 57<sup>2</sup> lõike 8 alusel.</tavatekst></preambul>
+            <paragrahv><paragrahvNr>1</paragrahvNr><kuvatavNr><![CDATA[§ 1.]]></kuvatavNr>
+              <loige><sisuTekst><tavatekst>(1) Eelarve</tavatekst>
+                <fail failNimi="tabel.png" failVorming="png">iVBORw0KGgoAAAANSUhEUg</fail></sisuTekst></loige>
+            </paragrahv>""")
+        assert parser.citations == [
+            {'eId': 'cit_1', 'text': 'Määrus kehtestatakse «Lennundusseaduse» § 57² lõike 8 alusel.'}]
+        assert parser.articles[0]['children'][0]['text'] == '(1) Eelarve'
+
+    def test_text_without_paragraphs(self, tmp_path):
+        parser = self._act(tmp_path, """<sisuTekst><HTMLKonteiner><![CDATA[<p align="center">OTSUS</p>
+            <p>1. Lugeda põhiseadus vastuvõetuks.</p><p></p>]]></HTMLKonteiner></sisuTekst>""")
+        [article] = parser.articles
+        assert article['num'] is None
+        assert [c['text'] for c in article['children']] == ['OTSUS', '1. Lugeda põhiseadus vastuvõetuks.']
+
     def test_unreadable_file(self, tmp_path):
         broken = tmp_path / 'broken.xml'
         broken.write_text('<oigusakt')
@@ -103,6 +160,26 @@ class TestEstoniaSource:
         doc = self._fetch(estonia, tmp_path, 'IKS', '104012019011', jurisdiction='EE', version='original')
         assert doc['meta']['version'] == 'original'
         assert doc['meta']['version_date'] == '2018-12-12'
+
+    def test_dates_without_time_zone(self, tmp_path):
+        path = tmp_path / '24304.xml'
+        path.write_text('<?xml version="1.0" encoding="UTF-8"?><oigusakt xmlns="tyviseadus_1_10.02.2010">'
+                        '<metaandmed><avaldamismarge><avaldamineKuupaev>1992-07-06+03:00</avaldamineKuupaev>'
+                        '</avaldamismarge></metaandmed><aktinimi><nimi><pealkiri>Eesti Vabariigi põhiseadus</pealkiri>'
+                        '</nimi></aktinimi><sisu><paragrahv><paragrahvNr>1</paragrahvNr><loige><sisuTekst>'
+                        '<tavatekst>Eesti on iseseisev.</tavatekst></sisuTekst></loige></paragrahv></sisu></oigusakt>',
+                        encoding='utf-8')
+        texts = [{'globaalID': 24304, 'terviktekstID': 1, 'tekst': 'algtekst-terviktekst', 'lyhend': 'PS',
+                  'kehtivus': {'algus': '1992-07-03+03:00', 'lopp': '2003-01-01+02:00'}}]
+        with patch.object(RiigiTeatajaClient, 'search', return_value=texts), \
+                patch.object(RiigiTeatajaClient, 'download', return_value=str(path)):
+            original = tulit.fetch('PS', jurisdiction='EE', version='original', download_dir=str(tmp_path))
+            consolidated = tulit.fetch('PS', jurisdiction='EE', version='consolidated', date='2000-01-01',
+                                       download_dir=str(tmp_path))
+        # No adoption date: the publication date stands in
+        assert original['meta']['version_date'] == '1992-07-06'
+        assert original['meta']['date_publication'] == '1992-07-06'
+        assert consolidated['meta']['version_date'] == '1992-07-03'
 
     def test_text_id_url(self, estonia, tmp_path):
         doc = self._fetch(estonia, tmp_path, 'https://www.riigiteataja.ee/akt/104012019011', '104012019011')

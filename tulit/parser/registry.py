@@ -202,6 +202,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.xml.ris import RISParser
     from tulit.parser.xml.bgbl_at import BGBlParser
     from tulit.parser.xml.lexdania import LexDaniaParser
+    from tulit.parser.html.retsinformation import RetsinformationHTMLParser
     from tulit.parser.xml.bwb import BWBParser
     from tulit.parser.xml.metalex import MetaLexParser
     from tulit.parser.xml.boe_consolidated import BOEConsolidatedParser
@@ -213,6 +214,17 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     from tulit.parser.json.esbirka import EsbirkaParser
     from tulit.parser.pdf.malta import MaltaPDFParser
     from tulit.parser.pdf.portugal import DiarioRepublicaParser
+    from tulit.parser.html.likumi import LikumiParser
+    from tulit.parser.html.ejustice import EJusticeParser
+    from tulit.parser.pdf.cyprus import CyprusGazetteParser
+    from tulit.parser.html.darzhaven_vestnik import DarzhavenVestnikParser
+    from tulit.parser.xml.dila import DilaParser
+    from tulit.parser.xml.legislatie_ro import LegislatieParser
+    from tulit.parser.html.pisrs import PisrsParser
+    from tulit.parser.html.njt import NJTParser
+    from tulit.parser.html.etar import TARParser
+    from tulit.parser.pdf.greece import GovernmentGazetteParser
+    from tulit.parser.xml.akomantoso.normattiva import NormattivaAKNParser
 
     registry.register('formex', Formex4Parser, aliases=['fmx4', 'formex4'])
     registry.register_factory('akn', _create_akn_parser, aliases=['akomantoso', 'akoma-ntoso'])
@@ -228,6 +240,7 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('ris', RISParser, aliases=['at-ris'])
     registry.register('ris-bgbl', BGBlParser, aliases=['at-bgbl'])
     registry.register('lexdania', LexDaniaParser, aliases=['dk-lexdania'])
+    registry.register('retsinformation-html', RetsinformationHTMLParser)
     registry.register('bwb', BWBParser, aliases=['nl-bwb'])
     registry.register('metalex', MetaLexParser, aliases=['sk-metalex'])
     registry.register('boe-consolidated', BOEConsolidatedParser, aliases=['es-boe-consolidated'])
@@ -239,6 +252,17 @@ def _register_builtin_parsers(registry: ParserRegistry) -> None:
     registry.register('cz-esbirka', EsbirkaParser, aliases=['esbirka'])
     registry.register('mt-pdf', MaltaPDFParser, aliases=['malta'])
     registry.register('pt-dre-pdf', DiarioRepublicaParser, aliases=['dre'])
+    registry.register('lv-likumi', LikumiParser, aliases=['likumi'])
+    registry.register('be-ejustice', EJusticeParser, aliases=['ejustice', 'justel'])
+    registry.register('cy-gazette-pdf', CyprusGazetteParser, aliases=['cy-gazette'])
+    registry.register('bg-dv', DarzhavenVestnikParser, aliases=['darzhaven-vestnik'])
+    registry.register('fr-dila', DilaParser, aliases=['dila', 'legi', 'jorf'])
+    registry.register('ro-legislatie', LegislatieParser, aliases=['legislatie-just'])
+    registry.register('si-pisrs', PisrsParser, aliases=['pisrs'])
+    registry.register('hu-njt', NJTParser, aliases=['njt'])
+    registry.register('lt-tar', TARParser, aliases=['tar'])
+    registry.register('gr-fek-pdf', GovernmentGazetteParser, aliases=['fek'])
+    registry.register('it-normattiva', NormattivaAKNParser, aliases=['normattiva'])
 
 
 def get_parser_registry() -> ParserRegistry:

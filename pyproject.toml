@@ -1,12 +1,16 @@
 [tool.poetry]
 name = "tulit"
-version = "0.9.0"
+version = "0.10.0"
 description = "TULIT - The Universal Legal Informatics Toolkit, is a set of legal informatics utilities collected in a Python package that focuses on the retrieval of legal data and metadata from official sources in the EU, and their transformation in legalJSON, a pythonic data structure for legal documents"
 authors = ["AlessioNar <alessio.nardin@gmail.com>"]
-license = "EUPL 1.2"
+license = "EUPL-1.2"
 readme = "README.md"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Operating System :: OS Independent",
 ]
 
@@ -41,7 +45,8 @@ markers = [
     "e2e: End-to-end tests",
     "client: Client download tests",
     "parser: Parser functionality tests",
-    "slow: Slow running tests"
+    "slow: Slow running tests",
+    "corpus: Live corpus of real acts per jurisdiction (run with --corpus)"
 ]
 [build-system]
 requires = ["poetry-core"]

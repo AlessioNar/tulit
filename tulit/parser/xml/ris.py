@@ -29,7 +29,7 @@ RIS_NS = 'http://www.bka.gv.at'
 _N = '{%s}' % RIS_NS
 
 BLOCK_TAGS = ('absatz', 'ueberschrift', 'liste', 'aufzaehlung', 'listelem', 'symbol',
-              'schlussteil', 'table', 'tr', 'td', 'zeile', 'zelle')
+              'schlussteil', 'table', 'tr', 'td', 'zeile', 'zelle', 'br')
 
 # Division keywords, most specific first
 DIVISION_KEYWORDS = (
@@ -39,6 +39,8 @@ DIVISION_KEYWORDS = (
     ('hauptstueck', 'chapter'),
     ('abtheilung', 'title'),
     ('abteilung', 'title'),
+    ('schlußteil', 'part'),
+    ('schlussteil', 'part'),
     ('theil', 'part'),
     ('teil', 'part'),
     ('artikel', 'part'),
@@ -54,6 +56,14 @@ _TENS = {'zwanzig': 20, 'dreissig': 30, 'vierzig': 40, 'fünfzig': 50,
          'sechzig': 60, 'siebzig': 70, 'achtzig': 80, 'neunzig': 90}
 
 _PARAGRAPH_NUMBER = re.compile(r'^\((\d+[a-z]*)\)\s*')
+# Lettered (or Roman) and numbered headings below the named divisions
+# ('A. Nationalrat', 'II. Vertretung', '1. Bundespräsident')
+_LETTERED = re.compile(r'^([A-Z]|[IVXLC]+)\.\s+(\S.*)$')
+_NUMBERED = re.compile(r'^(\d+[a-z]?)\.\s+(\S.*)$')
+_PARENTHESISED = re.compile(r'^([a-z])\)\s+(\S.*)$')
+_SUBDIVISION_RANK = 5
+_SUBDIVISIONS = ((_LETTERED, 'section', _SUBDIVISION_RANK), (_NUMBERED, 'subsection', _SUBDIVISION_RANK + 1),
+                 (_PARENTHESISED, 'subsection', _SUBDIVISION_RANK + 2))
 _DIVISION_NUMBER = re.compile(r'\b([0-9]+[a-z]?|[IVXLC]+)\b')
 
 
@@ -193,12 +203,40 @@ class RISParser(Parser):
                 if typ in ('g1', 'g1min'):
                     division = classify_division(text)
                     if division:
-                        opened = builder.division(division[0], text, token=division[1])
+                        opened = _open(builder, division, text)
+                        last_was_division = True
+                        continue
+                    if _subdivision(builder, text):
+                        opened = builder.current_division
                         last_was_division = True
                         continue
                     if opened is not None:
                         _append_heading(opened, text)
                         continue
+                    if not children.children and _subdivision(builder, text, group=True):
+                        opened = builder.current_division
+                        last_was_division = True
+                        continue
+                if typ == 'art' and not children.children and _subdivision(builder, text, group=True):
+                    # A group heading above the § headings ('Erwerbung des Besitzes.')
+                    opened = builder.current_division
+                    last_was_division = True
+                    continue
+                if typ == 'g2' and last_was_division:
+                    division = classify_division(text)
+                    if division and division[1] and opened is not None and division[0] != opened['type'] \
+                            and len(text.split()) <= 3:
+                        # 'Allgemeiner Teil' / 'Erster Abschnitt': a numbered division on the second line
+                        opened = _open(builder, division, text)
+                        continue
+                    if _subdivision(builder, text):
+                        opened = builder.current_division
+                        continue
+                if typ == 'para' and not children.children and _LETTERED.match(text) \
+                        and _subdivision(builder, text):
+                    # The B-VG prints some of its lettered sections as article headings
+                    opened = builder.current_division
+                    continue
                 if typ in ('g2', 'g1', 'g1min') and opened is not None and last_was_division:
                     _append_heading(opened, text)
                     continue
@@ -267,5 +305,44 @@ def _article_number(label: str) -> tuple[Optional[str], Optional[str]]:
     return (label or None), eid_token(label)
 
 
+def _open(builder: BodyBuilder, division: tuple[str, Optional[str]], text: str) -> dict[str, Any]:
+    """
+    Open a division, or return the open one it repeats: RIS repeats the
+    heading of the enclosing part in a later unit ('Zweyter Theil' before
+    'Zweyte Abtheilung').
+    """
+    type_, token = division
+    chapters = {c['eId']: c for c in builder.chapters}
+    current = builder.current_division
+    while current is not None:
+        if token and current['type'] == type_ and eid_token(current['eId'].split('_', 1)[1]) == token:
+            return current
+        current = chapters.get(current['parent'])
+    return builder.division(type_, text, token=token)
+
+
+def _subdivision(builder: BodyBuilder, text: str, group: bool = False) -> bool:
+    """
+    Open a division below the named ones: a lettered or Roman section
+    ('A. Nationalrat', 'II. Vertretung'), a numbered subsection
+    ('1. Bundespräsident'), a lettered one ('b) Abstammung von der Mutter'),
+    or with ``group`` an unnumbered group heading ('Erwerbung des Besitzes.').
+    """
+    if classify_division(text):
+        return False
+    for pattern, type_, rank in _SUBDIVISIONS:
+        match = pattern.match(text)
+        if match:
+            builder.division(type_, match.group(1) + text[len(match.group(1))], match.group(2),
+                             token=match.group(1), rank=rank)
+            return True
+    if group:
+        builder.division('section', None, text, rank=_SUBDIVISION_RANK)
+        return True
+    return False
+
+
 def _append_heading(division: dict[str, Any], text: str) -> None:
+    if text in (division.get('heading') or ''):
+        return  # a repeated division heading
     division['heading'] = f"{division['heading']} {text}" if division.get('heading') else text

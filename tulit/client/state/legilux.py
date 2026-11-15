@@ -86,9 +86,12 @@ class LegiluxClient(Client):
 
     def consolidation_dates(self, identifier):
         """ISO dates of the consolidated versions of an act, oldest first."""
-        prefix = f'http://data.legilux.public.lu/eli/{act_path(identifier)}/consolide/'
+        work = f'http://data.legilux.public.lu/eli/{act_path(identifier)}'
+        prefix = f'{work}/consolide/'
+        # Consolidations are members of the act ('jolux:isMemberOf'); scanning every
+        # subject for the prefix instead takes the endpoint some 40 seconds
         rows = self._sparql(
-            'SELECT DISTINCT ?s WHERE { ?s ?p ?o . '
+            f'SELECT DISTINCT ?s WHERE {{ ?s <{JOLUX}isMemberOf> <{work}> . '
             f'FILTER(STRSTARTS(STR(?s), "{prefix}")) }}'
         )
         stamps = {m.group(1) for r in rows

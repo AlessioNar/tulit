@@ -28,8 +28,10 @@ class CzechiaSource(Source):
     name = 'Czechia'
     source_name = 'e-Sbírka (Collection of Laws, Ministry of the Interior)'
     languages = ('ces',)
-    identifier_help = "the Collection of Laws number of an act (e.g. '110/2019 Sb.' for the Act on Personal Data Processing)"
-    eli_patterns = (re.compile(r'^(?P<id>https?://(www\.)?e-sbirka\.(gov\.)?cz/(eli/cz/)?sb/\d{4}/\d+(/\d{4}-\d{2}-\d{2})?)(/.*)?$'),)
+    identifier_help = ("the Collection of Laws number of an act "
+                       "(e.g. '110/2019 Sb.' for the Act on Personal Data Processing)")
+    eli_patterns = (re.compile(
+        r'^(?P<id>https?://(www\.)?e-sbirka\.(gov\.)?cz/(eli/cz/)?sb/\d{4}/\d+(/\d{4}-\d{2}-\d{2})?)(/.*)?$'),)
     version_from_identifier = True
 
     def retrieve(
@@ -61,6 +63,10 @@ class CzechiaSource(Source):
             else:
                 when = date
 
+        if act.get('typZneni') == 'VYHLASENE' and version == ORIGINAL:
+            # Published without versions (a communication, a treaty): its only text, whatever the date
+            # it takes effect from
+            when = None
         chosen = client.metadata(f'{path}/{when}') if when else act
         version_path = chosen['staleUrl']
         file = client.download(version_path)

@@ -15,6 +15,7 @@ from tulit.parser.xml.akomantoso.base import AkomaNtosoParser
 from tulit.parser.xml.akomantoso.akn4eu import AKN4EUParser
 from tulit.parser.xml.akomantoso.german import GermanLegalDocMLParser
 from tulit.parser.xml.akomantoso.luxembourg import LuxembourgAKNParser
+from tulit.parser.xml.akomantoso.finlex import FinlexAKNParser
 
 
 # Create Akoma Ntoso parser registry
@@ -59,6 +60,9 @@ def detect_akn_format(file_path: str) -> str:
             elif 'CSD13' in namespace or 'CSD' in namespace:
                 # Luxembourg and other jurisdictions using Committee Specification Drafts
                 return 'luxembourg'
+            elif 'http://data.finlex.fi/schema/finlex' in elem.nsmap.values():
+                # Finlex (Finland), with its own containers for conclusions and amendments
+                return 'finlex'
             elif elem.get('{http://www.w3.org/XML/1998/namespace}id'):
                 # AKN4EU uses xml:id attribute
                 return 'akn4eu'
@@ -135,6 +139,9 @@ def register_akn_parsers() -> None:
     
     # Register Luxembourg parser
     _akn_registry.register('luxembourg', LuxembourgAKNParser, aliases=['lu', 'csd13'])
+
+    # Register Finlex parser
+    _akn_registry.register('finlex', FinlexAKNParser, aliases=['fi'])
 
 
 # Auto-register parsers on module import

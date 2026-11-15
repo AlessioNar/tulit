@@ -15,6 +15,7 @@ per gazette issue, in the same ``risdok`` format as consolidated RIS law
 - each § becomes an article, its subsections '(1)', '(2)' children par_N;
 - annexes (Anlage) become annexes and the signatures the conclusions.
 """
+import copy
 import re
 from typing import Any, Optional
 
@@ -30,6 +31,8 @@ _SUBSECTION = re.compile(r'^\((\d+[a-z]*)\)\s*')
 _INSTRUCTION = re.compile(r'^(\d+[a-z]*)\.\s')
 _ARTIKEL = re.compile(r'^Artikel\s+([0-9]+[a-z]?|[IVXLC]+)$')
 _ANNEX = re.compile(r'^Anlage\b')
+_PREAMBLE = re.compile(r'^Präambel\.?$', re.IGNORECASE)
+_LINE = '\ue000'
 _CITATION = re.compile(r'BGBl\.\s*(?:I{1,3}\s*)?Nr\.\s*\d+/\d{4}')
 _SKIP = ('kzinhalt', 'fzinhalt', 'ausgabe', 'inhaltsvz', 'layoutdaten', 'metadaten')
 
@@ -38,16 +41,26 @@ ACTIONS = (
     ('entfällt', 'delete'), ('entfallen', 'delete'), ('aufgehoben', 'delete'),
     ('eingefügt', 'insert'), ('angefügt', 'add'),
     ('ersetzt', 'replace'), ('lautet', 'replace'), ('lauten', 'replace'),
+    ('bezeichnung', 'renumber'), ('eingereiht', 'renumber'), ('umnummeriert', 'renumber'),
 )
 
 
-def amendment_action(instruction: str) -> Optional[str]:
+def amendment_action(instruction: str) -> str:
     """'Art. 15 Abs. 7 lautet:' -> 'replace', '... wird folgender Abs. 7 angefügt:' -> 'add'."""
     lowered = instruction.lower()
     for verb, action in ACTIONS:
         if verb in lowered:
             return action
-    return None
+    # Any other change to the text ('wird geändert', 'tritt an die Stelle')
+    return 'amend'
+
+
+def _lines(element: etree._Element) -> list[str]:
+    """The lines of a heading ('Art. 1<br/>Gegenstand' -> ['Art. 1', 'Gegenstand'])."""
+    element = copy.deepcopy(element)
+    for br in element.iter('{*}br'):
+        br.tail = _LINE + (br.tail or '')
+    return [line.strip() for line in element_text(element, BLOCK_TAGS).split(_LINE) if line.strip()]
 
 
 def _strip_quotes(text: str) -> str:
@@ -64,7 +77,8 @@ class BGBlParser(Parser):
             raise FileLoadError(f"Cannot read BGBl document {file}: {e}") from e
 
         elements = [e for section in root.iter('{*}abschnitt') for e in section
-                    if isinstance(e.tag, str) and etree.QName(e).localname not in _SKIP]
+                    if isinstance(e.tag, str) and etree.QName(e).localname not in _SKIP
+                    and e.find('.//{*}inhaltsvz') is None]  # nor a table of contents
         self._read_front(elements)
         self._read_body(elements)
         return self
@@ -88,7 +102,9 @@ class BGBlParser(Parser):
         signatures: list[str] = []
         state: dict[str, Any] = {'article': None, 'children': None, 'heading': None,
                                  'division': None, 'amending': None, 'annex': None,
-                                 'started': False, 'pending': None}
+                                 'started': False, 'pending': None, 'preamble': False}
+        # A treaty or agreement numbers its articles in 'art' headings ('Art. 1<br/>Gegenstand')
+        has_art = any(etree.QName(e).localname == 'ueberschrift' and e.get('typ') == 'art' for e in elements)
 
         def flush() -> None:
             if state['article'] is not None:
@@ -114,41 +130,77 @@ class BGBlParser(Parser):
                     state['started'] = True
                 continue
 
-            if state['annex'] is not None and not (name == 'ueberschrift' and _ARTIKEL.match(text)):
+            # Headings quoted by an amending instruction ('„Anlage 1') stay in the amendment
+            quoted = state['amending'] or text.startswith('„')
+            if name == 'ueberschrift' and typ == 'anlage' and _ANNEX.match(text) and not quoted:
+                flush()
+                self._close_annex(state)
+                state['annex'] = {'num': text, 'heading': None, 'children': ChildrenBuilder()}
+                continue
+
+            if state['annex'] is not None and not (name == 'ueberschrift' and _ARTIKEL.match(_lines(element)[0])):
                 annex = state['annex']
-                if name == 'ueberschrift' and annex['heading'] is None and not annex['children'].children:
+                if name == 'ueberschrift' and typ in ('g1', 'g1min', 'g2') and annex['heading'] is None \
+                        and not annex['children'].children:
                     annex['heading'] = text
                 else:
                     annex['children'].add(text)
                 continue
 
+            if name == 'ueberschrift':
+                state['preamble'] = False
+            if name == 'ueberschrift' and typ == 'art' and not quoted:
+                flush()
+                lines = _lines(element)
+                state['article'] = (lines[0], eid_token(lines[0]), ' '.join(lines[1:]) or None)
+                state['children'] = ChildrenBuilder()
+                state['amending'] = False
+                state['pending'] = None
+                continue
+            if name == 'ueberschrift' and typ == 'g1' and _PREAMBLE.match(text):
+                flush()
+                state['preamble'] = True
+                continue
+            if state['preamble'] and name == 'absatz':
+                self.recitals.append({'eId': f'rct_{len(self.recitals) + 1}', 'text': text})
+                continue
+            if name == 'absatz' and typ == 'promkleinlsatz' and has_art and state['article'] is None \
+                    and not self._amends(elements[position + 1:]):
+                # The approval clause and the parties of an agreement, before its articles
+                self.formula = f'{self.formula} {text}'
+                continue
+
             if name == 'ueberschrift' and typ in ('g1', 'g1min', 'g2'):
-                artikel = _ARTIKEL.match(text) if typ == 'g1' else None
+                lines = _lines(element)
+                artikel = _ARTIKEL.match(lines[0]) if typ == 'g1' else None
                 if artikel:
                     flush()
                     self._close_annex(state)
                     if self._amends(elements[position + 1:]):
                         # The Artikel is an amending article: its instructions are the children
                         builder.close_divisions()
-                        state['article'] = (text, artikel.group(1), None)
+                        state['article'] = (lines[0], artikel.group(1), ' '.join(lines[1:]) or None)
                         state['children'] = ChildrenBuilder()
                         state['amending'] = True
                         state['amended_act'] = None
                         state['division'] = None
                     else:
-                        state['division'] = builder.division('part', text, token=artikel.group(1))
+                        state['division'] = builder.division(
+                            'part', lines[0], ' '.join(lines[1:]) or None, token=artikel.group(1))
                         state['amending'] = False
                     continue
                 if typ == 'g1' and _ANNEX.match(text):
                     flush()
                     state['annex'] = {'num': text, 'heading': None, 'children': ChildrenBuilder()}
                     continue
-                division = classify_division(text) if typ == 'g1' else None
+                # '1. Abschnitt<br/>Allgemeine Bestimmungen': number and heading in one element
+                division = classify_division(lines[0]) if typ == 'g1' or len(lines) > 1 else None
                 if division and state['amending'] is not False and state['article'] is None:
                     state['amending'] = False
                 if division and state['amending'] is False:
                     flush()
-                    state['division'] = builder.division(division[0], text, token=division[1])
+                    state['division'] = builder.division(division[0], lines[0], ' '.join(lines[1:]) or None,
+                                                         token=division[1])
                     continue
                 if state['article'] is not None and state['children'].children:
                     state['children'].extend(text)
@@ -255,7 +307,7 @@ class BGBlParser(Parser):
         for element in following:
             name = etree.QName(element).localname
             if name == 'ueberschrift' and element.get('typ') == 'g1' and \
-                    _ARTIKEL.match(element_text(element, BLOCK_TAGS)):
+                    _ARTIKEL.match((_lines(element) or [''])[0]):
                 return False
             if name == 'absatz' and element.get('typ') in ('novao1', 'novao2'):
                 return True

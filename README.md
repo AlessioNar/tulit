@@ -19,7 +19,7 @@ The Formex parser has been verified against the complete corpus of in-force EU l
 
 ```console
 pip install tulit
-pip install 'tulit[pdf]'   # also read sources published only as PDF (Malta, Portugal)
+pip install 'tulit[pdf]'   # also read sources published as PDF (Cyprus, Greece, Malta, Portugal)
 ```
 
 `tulit` requires Python 3.11 or later.
@@ -49,6 +49,10 @@ lopd = tulit.fetch("BOE-A-2018-16673", jurisdiction="ES",
 dpa_ie = tulit.fetch("http://www.irishstatutebook.ie/eli/2018/act/7")  # jurisdiction inferred from the ELI
 
 print(lopd["meta"]["jurisdiction"], lopd["meta"]["version"], lopd["meta"]["version_date"])
+
+# The official file itself, without parsing (also for scanned PDFs tulit cannot read)
+scan = tulit.download("constitution/1994/02/17/1994021048", jurisdiction="BE")
+scan["path"], scan["meta"]["source"]
 ```
 
 From the command line:
@@ -116,34 +120,34 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
 |---|---|---|---|---|---|---|---|
 | 🇪🇺 | European Union | Cellar (Publications Office) | Formex 4, XHTML | ✅ | ✅ | 🟢 Parsed | 0.7.0 |
 | 🇦🇹 | Austria | RIS | RIS XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇧🇪 | Belgium | Justel / Moniteur belge | HTML | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
-| 🇧🇬 | Bulgaria | Държавен вестник | HTML | ⏳ | — | ⚪ Planned | 0.10.0 |
+| 🇧🇪 | Belgium | Moniteur belge / Justel (FPS Justice) | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
+| 🇧🇬 | Bulgaria | Държавен вестник (National Assembly) | HTML | ✅ | — | 🟢 Parsed | 0.10.0 |
 | 🇭🇷 | Croatia | Narodne novine | HTML + ELI RDF | ✅ | — | 🟢 Parsed | 0.9.0 |
-| 🇨🇾 | Cyprus | Official Gazette | PDF | ⏳ | — | ⚪ Planned | 0.10.0 |
+| 🇨🇾 | Cyprus | Official Gazette (Government Printing Office) | PDF | ✅ | — | 🟢 Parsed (`pdf` extra) | 0.10.0 |
 | 🇨🇿 | Czechia | e-Sbírka | JSON | ✅ | ✅ | 🟢 Parsed | 0.9.0 |
 | 🇩🇰 | Denmark | Retsinformation | LexDania XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇪🇪 | Estonia | Riigi Teataja | Riigi Teataja XML | ✅ | ✅ | 🟢 Parsed | 0.9.0 |
 | 🇫🇮 | Finland | Finlex | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇫🇷 | France | Légifrance (DILA) | LEGI XML, JSON | ⏳ | ⏳ | 🟡 Partial (client and parser; needs PISTE API credentials) | 0.10.0 |
+| 🇫🇷 | France | Journal officiel and Légifrance (DILA open data) | JORF / LEGI XML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇩🇪 | Germany | Rechtsinformationen des Bundes (test phase) | LegalDocML.de | ⏳ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇬🇷 | Greece | Εθνικό Τυπογραφείο (ΦΕΚ) | PDF | ⏳ | — | ⚪ Planned | 0.10.0 |
-| 🇭🇺 | Hungary | Nemzeti Jogszabálytár | HTML | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇬🇷 | Greece | Εθνικό Τυπογραφείο (ΦΕΚ) | PDF | ✅ | — | 🟢 Parsed (`pdf` extra) | 0.10.0 |
+| 🇭🇺 | Hungary | Nemzeti Jogszabálytár | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇮🇪 | Ireland | Irish Statute Book / Revised Acts | ISB XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇮🇹 | Italy | Normattiva | Akoma Ntoso | ⏳ | ⏳ | 🟡 Partial (client and parser) | 0.10.0 |
-| 🇱🇻 | Latvia | Likumi.lv | HTML | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
-| 🇱🇹 | Lithuania | Teisės aktų registras / e-seimas | Text, DOCX | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇮🇹 | Italy | Normattiva | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
+| 🇱🇻 | Latvia | Latvijas Vēstnesis / Likumi.lv | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
+| 🇱🇹 | Lithuania | Teisės aktų registras (e-seimas) | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇱🇺 | Luxembourg | Legilux | Akoma Ntoso | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇲🇹 | Malta | Legislation Malta | PDF | ✅ | ✅ | 🟢 Parsed (`pdf` extra) | 0.9.0 |
 | 🇳🇱 | Netherlands | wetten.overheid.nl (BWB) / Staatsblad | BWB XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇵🇱 | Poland | Dziennik Ustaw (Sejm ELI API) | HTML | ✅ | ✅ | 🟢 Parsed | 0.9.0 |
 | 🇵🇹 | Portugal | Diário da República | PDF | ✅ | ⏳ | 🟢 Parsed (`pdf` extra) | 0.9.0 |
-| 🇷🇴 | Romania | Portal Legislativ | Text | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇷🇴 | Romania | Portal Legislativ (Ministry of Justice) | XML (SOAP) | ✅ | ⏳ | 🟢 Parsed | 0.10.0 |
 | 🇸🇰 | Slovakia | Slov-Lex | MetaLex XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
-| 🇸🇮 | Slovenia | PISRS | HTML (JS only) | ⏳ | ⏳ | ⚪ Planned | 0.10.0 |
+| 🇸🇮 | Slovenia | PISRS (Ministry of Justice) | HTML | ✅ | ✅ | 🟢 Parsed | 0.10.0 |
 | 🇪🇸 | Spain | BOE | BOE XML | ✅ | ✅ | 🟢 Parsed | 0.8.0 |
 | 🇸🇪 | Sweden | Svensk författningssamling (Riksdagen) | HTML | ⏳ | ✅ | 🟢 Parsed | 0.9.0 |
 
-**Progress: 17 of 28 parsed, 2 partial, 9 planned.** Regional legislation is also available for Veneto (Italy). Malta and Portugal publish only PDF and need the optional `pdf` extra (`pip install 'tulit[pdf]'`). `tulit sources` lists what the installed version supports.
+**Progress: 28 of 28 parsed.** Every Member State and the EU is available through `tulit.fetch()`. Regional legislation is also available for Veneto (Italy). Cyprus, Greece, Malta and Portugal publish PDF and need the optional `pdf` extra (`pip install 'tulit[pdf]'`). Some acts exist only as scanned PDFs without text (the Moniteur belge before June 1997, the Cypriot Gazette before about 2015); `tulit.download()` returns their official file. `tulit sources` lists what the installed version supports.
 
 ### Roadmap
 
@@ -151,12 +155,15 @@ In the *Original* and *Consolidated* columns, ✅ means tulit retrieves that ver
   - one `tulit.fetch()` for every jurisdiction, addressed by ELI or national identifier, with a choice of original or consolidated text
   - FRBR metadata in `meta` (`jurisdiction`, `language`, `version`, `version_date`)
   - Austria, Denmark, Finland, Germany, Ireland, Luxembourg, the Netherlands, Slovakia and Spain; EU consolidated texts
-- **0.9.0** (this release):
+- **0.9.0**:
   - Croatia, Czechia, Estonia, Malta, Poland, Portugal and Sweden
   - original versions for Austria and the Netherlands
   - optional `pdf` extra for sources published only as PDF
   - structured amendments in the new parsers
-- **0.10.0**: Belgium, Bulgaria, Cyprus, Greece, Hungary, Latvia, Lithuania, Romania and Slovenia; Italy and France in `fetch`; a browser extra for sources that are JavaScript applications
+- **0.10.0** (this release):
+  - Belgium, Bulgaria, Cyprus, France, Greece, Hungary, Italy, Latvia, Lithuania, Romania and Slovenia: all 28 jurisdictions in `fetch`
+  - `tulit.download()` for the official file of an act, including scanned PDFs tulit cannot parse
+- **Next**: original versions for Germany and Sweden, consolidated texts for Portugal and Romania, an easier workflow for the French DILA dumps
 - **1.0.0**: export of every legalJSON document to Akoma Ntoso and `.leg` packages
 
 ### Access to law and reuse

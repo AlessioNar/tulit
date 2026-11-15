@@ -1,0 +1,45 @@
+name: Corpus
+
+# Fetches every act of the corpus (tests/corpus/acts) from its official source, weekly
+# and on demand, to notice when a source or its format changes.
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      jurisdiction:
+        description: 'Only this jurisdiction (e.g. LV); empty for all'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  corpus:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-python@v6
+      with:
+        python-version: "3.13"
+    - name: Install Poetry
+      run: curl -sSL https://install.python-poetry.org | python3 -
+    - name: Install dependencies
+      run: |
+        poetry config virtualenvs.create false
+        poetry install --no-interaction --no-ansi --all-extras
+    - name: Run the corpus
+      env:
+        TULIT_CORPUS_DIR: corpus-results
+        ONLY: ${{ github.event.inputs.jurisdiction }}
+      run: poetry run pytest tests/corpus --corpus -q -p no:cacheprovider ${ONLY:+--corpus-jurisdiction $ONLY}
+    - name: Keep the report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: corpus-report
+        path: corpus-results/report.json
+        if-no-files-found: ignore

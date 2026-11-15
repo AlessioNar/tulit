@@ -1,5 +1,5 @@
 import pytest
-from lxml import etree
+from lxml import etree, html
 
 from tulit.parser.structure import BodyBuilder, ChildrenBuilder, eid_token, element_text
 
@@ -26,6 +26,12 @@ def test_element_text_separates_blocks_only():
 def test_element_text_skips_tags_but_keeps_tail():
     xml = '<a><num>§ 6.</num> (1) Text</a>'
     assert element_text(etree.fromstring(xml), block_tags=(), skip_tags=('num',)) == '(1) Text'
+
+
+def test_element_text_reads_prefixed_html_tags():
+    # Word-generated HTML has tags like <o:p>, which are not valid XML names
+    page = html.fromstring('<p class="MsoNormal">Članak 1.<o:p></o:p></p>')
+    assert element_text(page, block_tags=('br',)) == 'Članak 1.'
 
 
 def test_children_builder_numbers_and_extends():

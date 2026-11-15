@@ -6,24 +6,29 @@ This subpackage contains modules for parsing legal documents in various formats 
 The formats currently supported are:
 
 * **XML Formats:**
-  
+
   * Formex 4 (EU legislative documents)
-  * Akoma Ntoso 3.0 (multiple variants: EU, German LegalDocML, Luxembourg CSD13)
+  * Akoma Ntoso 3.0 (multiple variants: EU, German LegalDocML, Luxembourg CSD13, Normattiva)
   * BOE XML (Spanish Official Gazette) and BOE consolidated legislation
   * RIS XML and the Federal Law Gazette (Austria), LexDania (Denmark), BWB
     and Staatsblad XML (Netherlands), MetaLex (Slovakia), the Irish Statute
-    Book XML and Riigi Teataja XML (Estonia)
+    Book XML, Riigi Teataja XML (Estonia), JORF and LEGI XML (France, DILA)
+    and the Portal Legislativ XML (Romania)
 
 * **JSON Formats:** Légifrance, e-Sbírka fragments (Czechia)
 
-* **PDF** (``pdf`` extra): Legislation Malta, Diário da República (Portugal)
+* **PDF** (``pdf`` extra): Legislation Malta, Diário da República (Portugal),
+  the Official Gazette of Cyprus and the Greek Government Gazette (ΦΕΚ)
 
 * **HTML Formats:**
-  
+
   * Cellar XHTML (semantic structure)
   * Cellar Standard HTML (simple structure)
   * EU Legislative Proposals
-  * Sejm ELI API (Poland), Riksdagen SFS (Sweden), Narodne novine (Croatia)
+  * Sejm ELI API (Poland), Riksdagen SFS (Sweden), Narodne novine (Croatia),
+    Moniteur belge and Justel (Belgium), Държавен вестник (Bulgaria),
+    Nemzeti Jogszabálytár (Hungary), Likumi.lv and Latvijas Vēstnesis
+    (Latvia), Teisės aktų registras (Lithuania) and PISRS (Slovenia)
 
 Core Parser Architecture
 -------------------------
@@ -206,6 +211,30 @@ Estonian Riigi Teataja Parser
      :undoc-members:
      :show-inheritance:
 
+Italian Normattiva Akoma Ntoso Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.akomantoso.normattiva
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+French DILA Parser (JORF and LEGI)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.dila
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Romanian Portal Legislativ Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.xml.legislatie_ro
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 HTML Parsers
 ------------
 
@@ -268,6 +297,54 @@ Croatian Narodne Novine Parser
      :undoc-members:
      :show-inheritance:
 
+Belgian eJustice Parser
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.ejustice
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Bulgarian State Gazette Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.darzhaven_vestnik
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Hungarian NJT Parser
+~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.njt
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Latvian Likumi Parser
+~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.likumi
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Lithuanian Register of Legal Acts Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.etar
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Slovenian PISRS Parser
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.html.pisrs
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
 JSON Parsers
 ------------
 
@@ -304,6 +381,22 @@ Portuguese Diário da República Parser
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: tulit.parser.pdf.portugal
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Cypriot Official Gazette Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.cyprus
+     :members:
+     :undoc-members:
+     :show-inheritance:
+
+Greek Government Gazette Parser
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: tulit.parser.pdf.greece
      :members:
      :undoc-members:
      :show-inheritance:

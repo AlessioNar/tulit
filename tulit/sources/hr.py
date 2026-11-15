@@ -19,13 +19,19 @@ _CITATION = re.compile(r'^NN\s*(?P<issue>\d+)\s*/\s*(?P<year>\d{2,4})\s*[,(]?\s*
 MONTHS = ('siječnja', 'veljače', 'ožujka', 'travnja', 'svibnja', 'lipnja', 'srpnja', 'kolovoza',
           'rujna', 'listopada', 'studenoga', 'prosinca')
 _DATE = re.compile(r'(\d{1,2})\.\s*(%s|studenog)\s+(\d{4})' % '|'.join(MONTHS))
+# A place and a date, as the adopting body signs an act
+_SIGNED = re.compile(r'[A-ZČĆŠŽĐ][a-zčćšžđ]+,\s*' + _DATE.pattern)
 
 
 def adoption_date(path: str) -> Optional[str]:
-    """The last date in the act ('Zagreb, 14. prosinca 2018.'), when the adopting body signed it."""
+    """
+    The last place and date in the act ('Zagreb, 14. prosinca 2018.'), when the adopting body signed it.
+
+    None when the act is not signed with a place and date (dates in its text are not its own).
+    """
     with open(path, encoding='utf-8', errors='replace') as f:
         text = f.read()
-    found = _DATE.findall(text)
+    found = _SIGNED.findall(text)
     if not found:
         return None
     day, month, year = found[-1]
